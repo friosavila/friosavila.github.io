@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.335">
+<meta name="generator" content="quarto-1.3.287">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -17,9 +17,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -46,48 +47,19 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -101,8 +73,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -167,50 +138,50 @@ gtag('config', 'G-LCL2C8L3JH', { 'anonymize_ip': true});
     <span class="navbar-title">Playing With Stata</span>
     </a>
   </div>
+            <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html">
+    <a class="nav-link" href="./index.html" rel="" target="">
  <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./stataviz/index.html">
+    <a class="nav-link" href="./stataviz/index.html" rel="" target="">
  <span class="menu-text">Stata Viz</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./stata_do/index.html">
+    <a class="nav-link" href="./stata_do/index.html" rel="" target="">
  <span class="menu-text">Stata Do’s Ado’s</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./app_metrics/index.html">
+    <a class="nav-link" href="./app_metrics/index.html" rel="" target="">
  <span class="menu-text">Applied econometrics</span></a>
   </li>  
   <li class="dropdown-header">
  <span class="menu-text">Odds and Ends</span></li>
   <li class="nav-item">
-    <a class="nav-link" href="./chatgpt.html">
+    <a class="nav-link" href="./chatgpt.html" rel="" target="">
  <span class="menu-text">Fun with ChatGPT</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./about.html">
+    <a class="nav-link" href="./about.html" rel="" target="">
  <span class="menu-text">about</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./cv.html" aria-current="page">
+    <a class="nav-link active" href="./cv.html" rel="" target="" aria-current="page">
  <span class="menu-text">cv &amp; Papers</span></a>
   </li>  
 </ul>
-              <div class="quarto-toggle-container">
-                  <a href="" class="quarto-reader-toggle nav-link" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
   </div>
 </a>
-              </div>
-              <div id="quarto-search" class="" title="Search"></div>
+</div>
           </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
@@ -238,7 +209,7 @@ gtag('config', 'G-LCL2C8L3JH', { 'anonymize_ip': true});
 </nav>
     </div>
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content" id="quarto-document-content"><div class="quarto-title-block"><div class="quarto-title-tools-only"><h1></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 
 
 
@@ -283,107 +254,107 @@ gtag('config', 'G-LCL2C8L3JH', { 'anonymize_ip': true});
 <h3 class="anchored" data-anchor-id="publications-and-research"><strong>PUBLICATIONS AND RESEARCH:</strong></h3>
 <section id="refereed-publications" class="level4">
 <h4 class="anchored" data-anchor-id="refereed-publications">Refereed Publications</h4>
-<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
-<div id="ref-aristizabal-ramirez_revisiting_2015" class="csl-entry" role="doc-biblioentry">
+<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-aristizabal-ramirez_revisiting_2015" class="csl-entry" role="listitem">
 Aristizabal-Ramirez, Maria, Gustavo Canavire-Bacarreza, and Fernando Rios-Avila. 2015. <span>“Revisiting the Effects of Innovation on Growth: A Threshold Analysis.”</span> <em>Applied Economics Letters</em> 22 (18): 1474–79. <a href="https://doi.org/10.1080/13504851.2015.1039699">https://doi.org/10.1080/13504851.2015.1039699</a>.
 </div>
-<div id="ref-canavire-bacarreza_will_2020" class="csl-entry" role="doc-biblioentry">
+<div id="ref-canavire-bacarreza_will_2020" class="csl-entry" role="listitem">
 Canavire-Bacarreza, Gustavo, Alberto Chong, Fernando Ríos-Avila, and Mónica Yáñez-Pagans. 2020. <span>“Will Elders Provide for Their Grandchildren? <span>Unconditional</span> Cash Transfers and Educational Expenditures in <span>Bolivia</span>.”</span> <em>Review of Development Economics</em> 24 (2): 424–47. <a href="https://doi.org/10.1111/rode.12647">https://doi.org/10.1111/rode.12647</a>.
 </div>
-<div id="ref-canavire-bacarreza_determinants_2017" class="csl-entry" role="doc-biblioentry">
+<div id="ref-canavire-bacarreza_determinants_2017" class="csl-entry" role="listitem">
 Canavire-Bacarreza, Gustavo, and Fernando Rios-Avila. 2017. <span>“On the <span>Determinants</span> of <span>Changes</span> in <span>Wage</span> <span>Inequality</span> in <span>Urban</span> <span>Bolivia</span>.”</span> <em>Journal of Human Development and Capabilities</em> 18 (4): 464–96. <a href="https://doi.org/10.1080/19452829.2017.1353350">https://doi.org/10.1080/19452829.2017.1353350</a>.
 </div>
-<div id="ref-hotchkiss_assessing_2012" class="csl-entry" role="doc-biblioentry">
+<div id="ref-hotchkiss_assessing_2012" class="csl-entry" role="listitem">
 Hotchkiss, Julie L., Robert E. Moore, and Fernando Rios-Avila. 2012. <span>“Assessing the <span>Welfare</span> <span>Impact</span> of <span>Tax</span> <span>Reform</span>: <span>A</span> <span>Case</span> <span>Study</span> of the 2001 <span>U</span>.s. <span>Tax</span> <span>Cut</span>.”</span> <em>Review of Income and Wealth</em> 58 (2): 233–56. <a href="https://doi.org/10.1111/j.1475-4991.2012.00493.x">https://doi.org/10.1111/j.1475-4991.2012.00493.x</a>.
 </div>
-<div id="ref-hotchkiss_assessing_2014" class="csl-entry" role="doc-biblioentry">
+<div id="ref-hotchkiss_assessing_2014" class="csl-entry" role="listitem">
 ———. 2014. <span>“Assessing the <span>Welfare</span> <span>Impact</span> of <span>Tax</span> <span>Reform</span>: <span>A</span> <span>Case</span> <span>Study</span> of the 2001 <span>U</span>.<span>S</span>. <span>Tax</span> <span>Cut</span>.”</span> <em>Review of Income and Wealth</em> 60 (2): 404–4. <a href="https://doi.org/10.1111/roiw.12113">https://doi.org/10.1111/roiw.12113</a>.
 </div>
-<div id="ref-hotchkiss_reevaluation_2015" class="csl-entry" role="doc-biblioentry">
+<div id="ref-hotchkiss_reevaluation_2015" class="csl-entry" role="listitem">
 ———. 2015. <span>“Reevaluation of the <span>Employment</span> <span>Impact</span> of the 1996 <span>Summer</span> <span>Olympic</span> <span>Games</span>.”</span> <em>Southern Economic Journal</em> 81 (3): 619–32. <a href="https://doi.org/10.4284/0038-4038-2013.063">https://doi.org/10.4284/0038-4038-2013.063</a>.
 </div>
-<div id="ref-hotchkiss_cost_2020" class="csl-entry" role="doc-biblioentry">
+<div id="ref-hotchkiss_cost_2020" class="csl-entry" role="listitem">
 ———. 2020. <span>“Cost of Policy Choices: <span>A</span> Microsimulation Analysis of the Impact on Family Welfare of Unemployment and Price Changes.”</span> <em>Journal of Macroeconomics</em> 63 (March): 103167. <a href="https://doi.org/10.1016/j.jmacro.2019.103167">https://doi.org/10.1016/j.jmacro.2019.103167</a>.
 </div>
-<div id="ref-hotchkiss_tale_2017" class="csl-entry" role="doc-biblioentry">
+<div id="ref-hotchkiss_tale_2017" class="csl-entry" role="listitem">
 Hotchkiss, Julie L., Robert E. Moore, Fernando Rios-Avila, and Melissa R. Trussell. 2017. <span>“A Tale of Two Decades: <span>Relative</span> Intra-Family Earning Capacity and Changes in Family Welfare over Time.”</span> <em>Review of Economics of the Household</em> 15 (3): 707–37. <a href="https://doi.org/10.1007/s11150-016-9354-9">https://doi.org/10.1007/s11150-016-9354-9</a>.
 </div>
-<div id="ref-hotchkiss_search_2014" class="csl-entry" role="doc-biblioentry">
+<div id="ref-hotchkiss_search_2014" class="csl-entry" role="listitem">
 Hotchkiss, Julie L., Melinda M. Pitts, and Fernando Rios-Avila. 2014. <span>“A Search for Evidence of Skill Mismatch in the Aftermath of the Great Recession.”</span> <em>Applied Economics Letters</em> 21 (9): 587–92. <a href="https://doi.org/10.1080/13504851.2013.870645">https://doi.org/10.1080/13504851.2013.870645</a>.
 </div>
-<div id="ref-hotchkiss_wage_2015" class="csl-entry" role="doc-biblioentry">
+<div id="ref-hotchkiss_wage_2015" class="csl-entry" role="listitem">
 Hotchkiss, Julie L., Myriam Quispe-Agnoli, and Fernando Rios-Avila. 2015. <span>“The <span>Wage</span> <span>Impact</span> of <span>Undocumented</span> <span>Workers</span>: <span>Evidence</span> from <span>Administrative</span> <span>Data</span>.”</span> <em>Southern Economic Journal</em> 81 (4): 874–906. <a href="https://www.jstor.org/stable/26160583">https://www.jstor.org/stable/26160583</a>.
 </div>
-<div id="ref-hotchkiss_identifying_2013" class="csl-entry" role="doc-biblioentry">
+<div id="ref-hotchkiss_identifying_2013" class="csl-entry" role="listitem">
 Hotchkiss, Julie L., and Fernando Rios-Avila. 2013. <span>“Identifying <span>Factors</span> Behind the <span>Decline</span> in the <span>U</span>.<span>S</span>. <span>Labor</span> <span>Force</span> <span>Participation</span> <span>Rate</span>.”</span> <em>Business and Economic Research</em> 3 (1): 257–75. <a href="https://doi.org/10.5296/ber.v3i1.3370">https://doi.org/10.5296/ber.v3i1.3370</a>.
 </div>
-<div id="ref-jenkins_modelling_2020" class="csl-entry" role="doc-biblioentry">
+<div id="ref-jenkins_modelling_2020" class="csl-entry" role="listitem">
 Jenkins, Stephen P., and Fernando Rios-Avila. 2020. <span>“Modelling Errors in Survey and Administrative Data on Employment Earnings: <span>Sensitivity</span> to the Fraction Assumed to Have Error-Free Earnings.”</span> <em>Economics Letters</em> 192 (July): 109253. <a href="https://doi.org/10.1016/j.econlet.2020.109253">https://doi.org/10.1016/j.econlet.2020.109253</a>.
 </div>
-<div id="ref-jenkins_measurement_2021" class="csl-entry" role="doc-biblioentry">
+<div id="ref-jenkins_measurement_2021" class="csl-entry" role="listitem">
 ———. 2021. <span>“Measurement Error in Earnings Data: <span>Replication</span> of <span>Meijer</span>, <span>Rohwedder</span>, and <span>Wansbeek</span>’s Mixture Model Approach to Combining Survey and Register Data.”</span> <em>Journal of Applied Econometrics</em> 36 (4): 474–83. <a href="https://doi.org/10.1002/jae.2811">https://doi.org/10.1002/jae.2811</a>.
 </div>
-<div id="ref-jenkins_reconciling_2023" class="csl-entry" role="doc-biblioentry">
+<div id="ref-jenkins_reconciling_2023" class="csl-entry" role="listitem">
 Jenkins, Stephen P, and Fernando Rios-Avila. 2023. <span>“Reconciling Reports: Modelling Employment Earnings and Measurement Errors Using Linked Survey and Administrative Data.”</span> <em>Journal of the Royal Statistical Society Series A: Statistics in Society</em> 186 (1): 110–36. <a href="https://doi.org/10.1093/jrsssa/qnac003">https://doi.org/10.1093/jrsssa/qnac003</a>.
 </div>
-<div id="ref-masterson_great_2019" class="csl-entry" role="doc-biblioentry">
+<div id="ref-masterson_great_2019" class="csl-entry" role="listitem">
 Masterson, Thomas, Ajit Zacharias, Fernando Rios-Avila, and Edward N. Wolff. 2019. <span>“The <span>Great</span> <span>Recession</span> and <span>Racial</span> <span>Inequality</span>: <span>Evidence</span> from <span>Measures</span> of <span>Economic</span> <span>Well</span>-<span>Being</span>.”</span> <em>Journal of Economic Issues</em> 53 (4): 1048–69. <a href="https://doi.org/10.1080/00213624.2019.1664240">https://doi.org/10.1080/00213624.2019.1664240</a>.
 </div>
-<div id="ref-mercado_segmentacion_2004" class="csl-entry" role="doc-biblioentry">
+<div id="ref-mercado_segmentacion_2004" class="csl-entry" role="listitem">
 Mercado, Alejandro F., Jorge Leitón, and Fernando Rios-Avila. 2004. <span>“Segmentación En El Mercado Matrimonial.”</span> <em>Revista Latinoamericana de Desarrollo Económico</em>, no. 3 (October): 49–76. <a href="http://www.scielo.org.bo/scielo.php?script=sci_abstract&amp;pid=S2074-47062004000200003&amp;lng=es&amp;nrm=iso&amp;tlng=es">http://www.scielo.org.bo/scielo.php?script=sci_abstract&amp;pid=S2074-47062004000200003&amp;lng=es&amp;nrm=iso&amp;tlng=es</a>.
 </div>
-<div id="ref-morrar_discrimination_2020" class="csl-entry" role="doc-biblioentry">
+<div id="ref-morrar_discrimination_2020" class="csl-entry" role="listitem">
 Morrar, Rabeh, and Fernando Rios-Avila. 2020. <span>“Discrimination Against Refugees in the <span>Palestinian</span> Labor Market.”</span> <em>International Journal of Manpower</em> 42 (6): 1002–24. <a href="https://doi.org/10.1108/IJM-08-2019-0396">https://doi.org/10.1108/IJM-08-2019-0396</a>.
 </div>
-<div id="ref-mundra_using_2021" class="csl-entry" role="doc-biblioentry">
+<div id="ref-mundra_using_2021" class="csl-entry" role="listitem">
 Mundra, Kusum, and Fernando Rios-Avila. 2021. <span>“Using Repeated Cross-Sectional Data to Examine the Role of Immigrant Birth-Country Networks on Unemployment Duration: An Application of <span>Guell</span> and <span>Hu</span> (2006) Approach.”</span> <em>Empirical Economics</em> 61 (1): 389–415. <a href="https://doi.org/10.1007/s00181-020-01855-x">https://doi.org/10.1007/s00181-020-01855-x</a>.
 </div>
-<div id="ref-rioja_persistent_2014" class="csl-entry" role="doc-biblioentry">
+<div id="ref-rioja_persistent_2014" class="csl-entry" role="listitem">
 Rioja, Felix, Fernando Rios-Avila, and Neven Valev. 2014a. <span>“The Persistent Effect of Banking Crises on Investment and the Role of Financial Markets.”</span> <em>Journal of Financial Economic Policy</em> 6 (1): 64–77. <a href="https://doi.org/10.1108/JFEP-08-2013-0035">https://doi.org/10.1108/JFEP-08-2013-0035</a>.
 </div>
-<div id="ref-rioja_serial_2014" class="csl-entry" role="doc-biblioentry">
+<div id="ref-rioja_serial_2014" class="csl-entry" role="listitem">
 ———. 2014b. <span>“Serial <span>Banking</span> <span>Crises</span> and <span>Capital</span> <span>Investment</span>.”</span> <em>Emerging Markets Finance and Trade</em> 50 (6): 193–208. <a href="https://doi.org/10.1080/1540496X.2014.1013866">https://doi.org/10.1080/1540496X.2014.1013866</a>.
 </div>
-<div id="ref-rioja_productivity_2017" class="csl-entry" role="doc-biblioentry">
+<div id="ref-rioja_productivity_2017" class="csl-entry" role="listitem">
 ———. 2017. <span>“Productivity During Recessions with Banking Crises: <span>Inter</span>-<span>Industry</span> Evidence.”</span> <em>Economics Letters</em> 152 (March): 50–53. <a href="https://doi.org/10.1016/j.econlet.2016.12.028">https://doi.org/10.1016/j.econlet.2016.12.028</a>.
 </div>
-<div id="ref-rios-avila_feasible_2015" class="csl-entry" role="doc-biblioentry">
+<div id="ref-rios-avila_feasible_2015" class="csl-entry" role="listitem">
 Rios-Avila, Fernando. 2015. <span>“Feasible <span>Fitting</span> of <span>Linear</span> <span>Models</span> with <span>N</span> <span>Fixed</span> <span>Effects</span>.”</span> <em>The Stata Journal</em> 15 (3): 881–98. <a href="https://doi.org/10.1177/1536867X1501500318">https://doi.org/10.1177/1536867X1501500318</a>.
 </div>
-<div id="ref-rios-avila_unions_2017" class="csl-entry" role="doc-biblioentry">
+<div id="ref-rios-avila_unions_2017" class="csl-entry" role="listitem">
 ———. 2017. <span>“Unions and <span>Economic</span> <span>Performance</span> in Developing Countries: Case Studies from Latin America.”</span> <em>Ecos de Economía</em> 21 (44): 4–36. <a href="https://doi.org/10.17230/ecos.2017.44.1">https://doi.org/10.17230/ecos.2017.44.1</a>.
 </div>
-<div id="ref-rios-avila_semi-parametric_2019" class="csl-entry" role="doc-biblioentry">
+<div id="ref-rios-avila_semi-parametric_2019" class="csl-entry" role="listitem">
 ———. 2019. <span>“A <span>Semi</span>-<span>Parametric</span> <span>Approach</span> to the <span>Oaxaca</span>–<span>Blinder</span> <span>Decomposition</span> with <span>Continuous</span> <span>Group</span> <span>Variable</span> and <span>Self</span>-<span>Selection</span>.”</span> <em>Econometrics</em> 7 (2): 28. <a href="https://doi.org/10.3390/econometrics7020028">https://doi.org/10.3390/econometrics7020028</a>.
 </div>
-<div id="ref-rios-avila_recentered_2020" class="csl-entry" role="doc-biblioentry">
+<div id="ref-rios-avila_recentered_2020" class="csl-entry" role="listitem">
 ———. 2020a. <span>“Recentered Influence Functions (<span>RIFs</span>) in <span>Stata</span>: <span>RIF</span> Regression and <span>RIF</span> Decomposition.”</span> <em>The Stata Journal</em> 20 (1): 51–94. <a href="https://doi.org/10.1177/1536867X20909690">https://doi.org/10.1177/1536867X20909690</a>.
 </div>
-<div id="ref-rios-avila_smooth_2020" class="csl-entry" role="doc-biblioentry">
+<div id="ref-rios-avila_smooth_2020" class="csl-entry" role="listitem">
 ———. 2020b. <span>“Smooth Varying-Coefficient Models in <span>Stata</span>.”</span> <em>The Stata Journal</em> 20 (3): 647–79. <a href="https://doi.org/10.1177/1536867X20953574">https://doi.org/10.1177/1536867X20953574</a>.
 </div>
-<div id="ref-rios-avila_estimation_2021" class="csl-entry" role="doc-biblioentry">
+<div id="ref-rios-avila_estimation_2021" class="csl-entry" role="listitem">
 ———. 2021. <span>“Estimation of Marginal Effects for Models with Alternative Variable Transformations.”</span> <em>The Stata Journal</em> 21 (1): 81–96. <a href="https://doi.org/10.1177/1536867X211000005">https://doi.org/10.1177/1536867X211000005</a>.
 </div>
-<div id="ref-rios-avila_effect_2017" class="csl-entry" role="doc-biblioentry">
+<div id="ref-rios-avila_effect_2017" class="csl-entry" role="listitem">
 Rios-Avila, Fernando, and Gustavo Canavire-Bacarreza. 2017. <span>“The Effect of Intimate Partner Violence on Labor Market Decisions: <span>Evidence</span> from a Multi-Ethnic Country.”</span> <em>International Journal of Social Economics</em> 44 (1): 75–92. <a href="https://doi.org/10.1108/IJSE-12-2014-0258">https://doi.org/10.1108/IJSE-12-2014-0258</a>.
 </div>
-<div id="ref-rios-avila_standard-error_2018" class="csl-entry" role="doc-biblioentry">
+<div id="ref-rios-avila_standard-error_2018" class="csl-entry" role="listitem">
 ———. 2018. <span>“Standard-Error <span>Correction</span> in <span>Two</span>-Stage <span>Optimization</span> <span>Models</span>: <span>A</span> <span>Quasi</span>–Maximum <span>Likelihood</span> <span>Estimation</span> <span>Approach</span>.”</span> <em>The Stata Journal</em> 18 (1): 206–22. <a href="https://doi.org/10.1177/1536867X1801800113">https://doi.org/10.1177/1536867X1801800113</a>.
 </div>
-<div id="ref-rios-avila_effect_2020" class="csl-entry" role="doc-biblioentry">
+<div id="ref-rios-avila_effect_2020" class="csl-entry" role="listitem">
 ———. 2020. <span>“The <span>Effect</span> of <span>Immigration</span> on <span>Labor</span> <span>Market</span> <span>Transitions</span> of <span>Native</span>-<span>Born</span> <span>Unemployed</span> in the <span>United</span> <span>States</span>.”</span> <em>Journal of Labor Research</em> 41 (3): 295–331. <a href="https://doi.org/10.1007/s12122-020-09304-5">https://doi.org/10.1007/s12122-020-09304-5</a>.
 </div>
-<div id="ref-rios-avila_unions_2014" class="csl-entry" role="doc-biblioentry">
+<div id="ref-rios-avila_unions_2014" class="csl-entry" role="listitem">
 Rios-Avila, Fernando, and Barry T. Hirsch. 2014. <span>“Unions, <span>Wage</span> <span>Gaps</span>, and <span>Wage</span> <span>Dispersion</span>: <span>New</span> <span>Evidence</span> from the <span>Americas</span>.”</span> <em>Industrial Relations: A Journal of Economy and Society</em> 53 (1): 1–27. <a href="https://doi.org/10.1111/irel.12044">https://doi.org/10.1111/irel.12044</a>.
 </div>
-<div id="ref-rios-avila_moving_2022" class="csl-entry" role="doc-biblioentry">
+<div id="ref-rios-avila_moving_2022" class="csl-entry" role="listitem">
 Rios-Avila, Fernando, and Michelle Lee Maroto. 2022. <span>“Moving <span>Beyond</span> <span>Linear</span> <span>Regression</span>: <span>Implementing</span> and <span>Interpreting</span> <span>Quantile</span> <span>Regression</span> <span>Models</span> <span>With</span> <span>Fixed</span> <span>Effects</span>.”</span> <em>Sociological Methods &amp; Research</em>, February, 00491241211036165. <a href="https://doi.org/10.1177/00491241211036165">https://doi.org/10.1177/00491241211036165</a>.
 </div>
-<div id="ref-saravia_intellectual_2017" class="csl-entry" role="doc-biblioentry">
+<div id="ref-saravia_intellectual_2017" class="csl-entry" role="listitem">
 Saravia, Antonio, Gustavo Canavire-Bacarreza, and Fernando Rios-Avila. 2017. <span>“Intellectual <span>Property</span> <span>Rights</span>, <span>Foreign</span> <span>Direct</span> <span>Investment</span> and <span>Economic</span> <span>Freedom</span>.”</span> <em>Global Economy Journal</em> 17 (2). <a href="https://doi.org/10.1515/gej-2017-0017">https://doi.org/10.1515/gej-2017-0017</a>.
 </div>
-<div id="ref-searing_impact_2013" class="csl-entry" role="doc-biblioentry">
+<div id="ref-searing_impact_2013" class="csl-entry" role="listitem">
 Searing, Elizabeth A. M., Fernando Rios-Avila, and Jesse D. Lecy. 2013. <span>“The Impact of Psychological Trauma on Wages in Post-Conflict <span>Bosnia</span> and <span>Herzegovina</span>.”</span> <em>Social Science &amp; Medicine</em> 96 (November): 165–73. <a href="https://doi.org/10.1016/j.socscimed.2013.07.020">https://doi.org/10.1016/j.socscimed.2013.07.020</a>.
 </div>
 </div>
@@ -450,9 +421,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -568,6 +553,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
