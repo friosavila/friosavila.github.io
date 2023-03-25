@@ -2,7 +2,7 @@
 title: "About the Site"
 about:
   template: solana
-  image: weemee.jpg
+  image: WeeMee.jpg
   image-shape: round
   links:
     - icon: twitter
