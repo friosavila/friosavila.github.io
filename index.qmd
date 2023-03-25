@@ -12,6 +12,9 @@ about:
     - icon: envelope 
       text: Email
       href: f.rios.a@gmail.com
+format:
+  html:
+    code-tools: false  
 ---
 
 #### Hi, my name is Fernando. I am a Research Scholar at the Levy Economics Institute, who works on a variarety of applied microeconomic topics. 
