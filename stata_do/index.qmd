@@ -1,0 +1,15 @@
+---
+title: "Stata Programming"
+---
+
+Welcome to the Stata programming section! As a "*seasoned*" (just another word for oldish)  Stata user, I have developed quite few tricks of knowledge and experience in programming with Stata and Mata. I am excited to share my insights with you.
+
+Stata programming is a powerful tool that can enhance your data analysis and streamline your research workflows. For instance, if you do the same thing over and over, why not write a program that will replicate it as well!. Of course, it can be daunting for beginners, and even experienced users may encounter challenges and roadblocks in their programming endeavors (The more skillful you become, the harder the problems you face!).
+
+In this section, I provide hints and suggestions for programming, some times replicating simulation excercises, some times for making examples statistical methods, and some times just for fun.
+
+Here, I will try to cover a wide range of programming topics, from basic syntax and functions to advanced techniques (depending on my own skills), providing  examples and code snippets to demonstrate how the code works.
+
+My main goal is to help you and myself becoming a more proficient Stata programmer. I hope you find this section informative and useful, and I look forward to helping you advance your Stata programming skills!
+
+Comments and suggestions are always welcome.

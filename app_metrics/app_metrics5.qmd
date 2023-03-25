@@ -1,0 +1,22 @@
+---
+title: "2x2 DID: Sant'Anna and Zhao (2020) "
+subtitle: "The not so simple approach"
+bibliography: references.bib
+nocite: |
+    @santanna_doubly_2020
+---
+
+## Introduction
+
+## Simple 2x2 DID
+
+## Level up: Adding controls
+
+## Going Doubly Robust
+
+## `drdid`: The `Stata` way
+
+## References
+
+::: {#refs}
+:::

@@ -1,0 +1,11 @@
+{
+  "hash": "58351907141d315edcfb7f732b43555b",
+  "result": {
+    "markdown": "---\ntitle: \"DRDID/CSDID in Stata\"\nsubtitle: \"The Beamer\"\n---\n\n<iframe style=\"border:none;height: 80vh\" width=100% \n src=\"raw_articles\\drdid_csdid_sj.pdf\"></iframe>\t\n\n\n\n```{html}\n<iframe style=\"border:none;height: 80vh\" width=100% \n src=\"raw_articles\\drdid_csdid_sj.pdf\"></iframe>\t\n``` \n\n",
+    "supporting": [
+      "app_metrics2_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

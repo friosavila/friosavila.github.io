@@ -1,0 +1,107 @@
+---
+format: 
+  html:
+    theme: cosmo   
+    page-layout: article
+bibliography: mywork.bib
+nocite: |
+  @*
+---
+
+# **Fernando Rios-Avila** 
+
+1 Dewey Ave • Troy, NY, 12180 • (404) 924-5176 • <friosa@gmail.com>
+
+----
+
+### **RESEARCH INTERESTS:** 
+
+Labor Economics, Applied Microeconomics, Applied Econometrics, Poverty and Inequality
+
+----
+
+### **EDUCATION:**
+
+PhD in Economics, Georgia State University, 2008-2013
+
+Advanced Studies (M.Sc) International Economics, Kiel University - Germany, 2007-2008
+
+Licenciatura en Economia (5 yr program, BS equivalent), Universidad Católica Boliviana, 2000-2004
+
+----
+
+### **PROFESSIONAL EXPERIENCE:**
+
+Levy Economics Institute of Bard College, Research Scholar, August 2013 – Present
+
+World Bank, Consultant, 2022-Present 
+
+Federal Reserve Bank of Atlanta, Research Assistant, August 2010 – June 2013
+
+Georgia State University, Graduate Research Assistant, August 2008 – December 2013
+
+Economic and Social Policy Analysis Unit (UDAPE), Consultant (UNICEF Project), July 2005 – June 2007
+
+----
+
+### **TEACHING EXPERIENCE:**
+
+Levy Economics Institute, Master on Economic Policy
+
+- Intersecting Inequalities: Labor Market Institutions
+- Intersecting Inequalities: Decompositions Methods in Economics
+- Econometrics of Poverty, Inequality and Social Science Research
+- Applied Econometric Methods for Empirical Research & Policy Evaluation
+- Research Methods: Econometrics I
+
+---- 
+
+### **PUBLICATIONS AND RESEARCH:**
+
+#### Refereed Publications
+
+:::{#refs}
+:::
+		
+#### Non-refereed publications
+
+Zacharias, A., T. Masterson, F. Rios-Avila, K. Kim, and T. Khitarishvili. 2018. “The Measurement of Time and Consumption Poverty in Ghana and Tanzania.” Research Project Report, August. Annandale-on-Hudson, NY: Levy Economics Institute of Bard College.
+
+Rios Avila, F. (2016) “Losing Ground: Demographic Trends in US Labor Force Participation”. Policy Note 2015-7. Levy Economics Institute of Bard College
+
+Rios Avila, F. (2015) “A Decade of Declining Wages: From Bad to Worse”. Policy Note 2015-3. Levy Economics Institute of Bard College
+
+Rios Avila, F.& Hotchkiss, J. L. (2014) “A Decade of Flat Wages?” Policy Note 2014-4. Levy Economics Institute of Bard College.
+
+Yañez Pagans, P. & Rios-Avila, F. (2009). Bolivia-Derechos e Igualdad de Genero en la Niñez y Adolescencia, La Paz-Bolivia: UDAPE-UNICEF.
+
+Czerniewicz-Kempff, N., Yañez Pagans, P., Rios-Avila, F., & Salinas Quiroga, B. (2008). Bolivia-Inversion Social en la Niñez y Adolescencia: Un Analisis del Gasto Publico Social en niveles Subnacionales, La Paz-Bolivia: UDAPE-UNICEF.
+
+Meave Idiaquez, E., Figueroa Cardenas, M., & Rios-Avila, F. (2008). Bolivia-El Gasto de los Hogares en Educacion, La Paz-Bolivia: UDAPE-UNICEF.
+
+Loayza, M.,Cuarite, R., Rios-Avila, F. (2006). Bolivia: Gasto Social Funcional y Gasto Social para la Niñez: 2000 – 2004, La Paz-Bolivia: UDAPE-UNICEF.
+
+----
+
+### **THESIS ADVISOR:**
+
+María Aristizábal-Ramírez (Undergraduate Thesis)
+
+Ian Bowen (Master Thesis)
+
+Alejandra Montoya (Master Thesis)
+
+Daniella Medina (Master Thesis)
+
+Rhett Maiorama (Master Thesis)
+
+Esteban Rivera (Master Thesis)
+
+----
+
+### **LANGUAGES AND SOFTWARE:**
+
+Statistical software with programming experience: Stata, R, Eviews.
+
+Languages: Spanish (Native), English (Fluent)
+

@@ -1,0 +1,71 @@
+{
+  "index.qmd": {
+    "index.html": "4165ccfe"
+  },
+  "about.qmd": {
+    "about.html": "981d1d1a"
+  },
+  "404.qmd": {
+    "404.html": "7f156337"
+  },
+  "posts.qmd": {
+    "posts.html": "ae0bf937"
+  },
+  "cv.qmd": {
+    "cv.html": "ebc08b4b"
+  },
+  "chatgpt/erbh_03_12_2023/index.qmd": {
+    "index.html": "7197272a"
+  },
+  "chatgpt.qmd": {
+    "chatgpt.html": "edf203c0"
+  },
+  "stataviz/index.qmd": {
+    "index.html": "f5b5fb2c"
+  },
+  "stataviz/stataviz1.qmd": {
+    "stataviz1.html": "401bfdfb"
+  },
+  "app_metrics/app_metrics2.qmd": {
+    "app_metrics2.html": "dac41253"
+  },
+  "app_metrics/index.qmd": {
+    "index.html": "d2d0688b"
+  },
+  "app_metrics/app_metrics3.qmd": {
+    "app_metrics3.html": "ce354bbe"
+  },
+  "app_metrics/app_metrics1.qmd": {
+    "app_metrics1.html": "c99cd2c7"
+  },
+  "stata_do/index.qmd": {
+    "index.html": "4c450ccb"
+  },
+  "stata_do/stata_do2.qmd": {
+    "stata_do2.html": "b9ac1c24"
+  },
+  "stata_do/stata_do3.qmd": {
+    "stata_do3.html": "8436c92b"
+  },
+  "stata_do/stata_do1.qmd": {
+    "stata_do1.html": "c3085e37"
+  },
+  "stata_do/stata_do4.qmd": {
+    "stata_do4.html": "44392176"
+  },
+  "stataviz/stataviz2.qmd": {
+    "stataviz2.html": "b051d5b9"
+  },
+  "app_metrics/app_metrics5.qmd": {
+    "app_metrics5.html": "ad80b436"
+  },
+  "app_metrics/app_metrics4.qmd": {
+    "app_metrics4.html": "ba23f17e"
+  },
+  "chatgpt/R_vs_Stata_3_18_2023/index.qmd": {
+    "index.html": "63573d93"
+  },
+  "matching.qmd": {
+    "matching.html": "a1e4c88a"
+  }
+}
