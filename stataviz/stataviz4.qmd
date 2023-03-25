@@ -1,0 +1,7 @@
+---
+title: "Make Scatters more Colorful: `mscatter`"
+subtitle: "Scatters across groups"
+code-fold: false
+execute:
+  freeze: auto
+---

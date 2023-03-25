@@ -1,0 +1,7 @@
+---
+title: "How to make Waffles: `waffle_plot`"
+subtitle: "Alternative to Pies"
+code-fold: false
+execute:
+  freeze: auto
+---

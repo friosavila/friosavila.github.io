@@ -128,5 +128,3 @@ This should help providing replication packages with code and data, improving th
 
 ::: {#refs}
 :::
-
-Jenkins, SP, Rios‐Avila, F, 2021. "Measurement error in earnings data: replication of Meijer, Rohwedder, and Wansbeek's mixture model approach to combining survey and register data." J Appl Econ. 2021. Accepted Author Manuscript. https://doi.org/10.1002/jae.2811 (with Rep Files here)
