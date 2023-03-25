@@ -1,0 +1,17 @@
+Sepal_Length  Sepal_Width   Petal_Length  Petal_Width   Species
+
+Contains data from iris.dta
+ Observations:           150                  Data downloaded from R base
+    Variables:             5                  
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+sepal_length    double  %9.0g                 Sepal.Length
+sepal_width     double  %9.0g                 Sepal.Width
+petal_length    double  %9.0g                 Petal.Length
+petal_width     double  %9.0g                 Petal.Width
+species         long    %9.0g      Species    Species
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Sorted by: 
+     Note: Dataset has changed since last saved.

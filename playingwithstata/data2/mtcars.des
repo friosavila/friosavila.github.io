@@ -1,0 +1,22 @@
+mpg   cyl   disp  hp    drat  wt    qsec  vs    am    gear  carb car_name
+
+
+Contains data from mtcars.dta
+ Observations:            32                  Data downloaded from R base
+    Variables:            12                  5 Oct 2022 07:53
+
+Variable      Storage   Display    Value
+    name         type    format    label      Variable label
+
+mpg             double  %9.0g                 mpg
+cyl             byte    %9.0g                 Number of cylinders
+disp            double  %9.0g                 Displacement (cu.in.)
+hp              int     %9.0g                 Gross horsepower
+drat            double  %9.0g                 Rear axle ratio
+wt              double  %9.0g                 Weight (1000 lbs)
+qsec            double  %9.0g                 1/4 mile time
+vs              byte    %9.0g                 Engine (0 = V-shaped, 1 = straight)
+am              byte    %9.0g                 Transmission (0 = automatic, 1 = manual)
+gear            byte    %9.0g                 Number of forward gears
+carb            byte    %9.0g                 Number of carburetors
+car_name        str19   %19s                  
