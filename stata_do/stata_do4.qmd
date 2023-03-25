@@ -361,7 +361,7 @@ margins, dydx(*) predict(pr2) force
 
 You will see output from margins also include `male_educ` in the list of exogenous variables. This happens because it is an explanatory variable for at least one equation in the model (first). However, because this variable is not included in the second equation, it has a no effect on it.
 
-## Stata 14.1
+### Stata 14.1
 
 When we reached Stata 14.1, a change was introduced in how probabilities were calculated after ivprobit. As it says in the "whatsnew" material, the new formulation would take into account endogeneity.
 
@@ -424,7 +424,7 @@ est restore myivp
 margins, dydx(*) predict(pr1) force nochain
 ```
 
-## Stata 16
+### Stata 16
 
 The earlier version of Stata 16 came with very similar problems as the ones mentioned above. However, due in part to an earlier version of this article, in November of 2020, Stata made a correction in how marginal effects were estimated for `ivprobit` as well as other related commands (see update 19nov2020).
 
