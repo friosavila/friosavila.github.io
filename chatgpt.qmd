@@ -1,5 +1,6 @@
 ---
 title: "Odds and Ends + ChatGPT"
+subtitle: "Just some extra tips, and short stories"
 listing:
   contents: chatgpt #This should match the post Directory
   sort: true
@@ -8,6 +9,7 @@ listing:
   max-description-length: 175
   date-format: medium
   categories: true
+  feed: true  
 page-layout: full
 title-block-banner: false
 #    - "date desc"

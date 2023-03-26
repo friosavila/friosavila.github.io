@@ -7,7 +7,7 @@ website:
   google-analytics:  "G-LCL2C8L3JH"    
   reader-mode: true
   page-navigation: true
-
+  site-url: https://friosavila.github.io/
   navbar: 
     
     search: true
