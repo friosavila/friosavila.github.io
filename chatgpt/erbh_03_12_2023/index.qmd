@@ -3,6 +3,9 @@ title: "Tech Titans Rap Battle"
 description: "Chat-GPT creates a rap battle between Siri, Alexa and Cortana. Who wins?"
 author: "ChatGPT and Fernando Rios-Avila"
 date: "3/12/2023"
+categories: 
+    - ChatGPT
+    - Rap Battle
 draft: false
 ---
 

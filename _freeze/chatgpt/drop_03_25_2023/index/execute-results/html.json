@@ -1,0 +1,11 @@
+{
+  "hash": "3b89e6634e90b73b3a22d6dceed04560",
+  "result": {
+    "markdown": "---\ntitle: \"Drop 2.0: Small Stata Programming\"\ndescription: \"I describe and introduce the program `drop2`, for more flexible data dropping\"\nauthor: \"Fernando Rios-Avila\"\ndate: \"3/25/2023\"\ncategories: \n    - Stata\n    - Programming\ndraft: true\n---\n\n## `drop2`: Upgrade\n\nIf you are an avid `Stata` user, who works extensively either using the command window, or dofiles, and who does lots of data-management, you are probably used to create large number of new variables, as well as delete an equally long lists of variables.\n\nIf you are like me, however, you probably get frustrated when the following happens:\n\n- You drop variables by mistake, because they start with the same name as the one you aim to delete.\n\n- A `drop` statement gives you an error, because a variable in the varlist does not exist.\n\nYes, both scenarios are easy to fix. \n\n- One can avoid the first problem using `set varabbrev off`.\n\n- The second problem can be partially partially fixed using `capture` in front of `drop`.\n\nWell, today I bring you `drop2`. This small program should fix the problems above, with a very simple code:\n\n```stata\nprogram drop2\n\tnovarabbrev {\n\t\tsyntax anything \n\t\tforeach i in `anything' {\n\t\t\tcapture noisily fvexpand `i'\t\t\t\n\t\t\tif _rc == 0 {\n\t\t\t\tdrop `r(varlist)' \n\t\t\t}\n\t\t}\n\t}\nend\n```\n\nIt handles the first problem by forcing you to use full variable names, rather than abreviations. And it handles the second problem by going over your list of variables one by one, dropping only the ones in your dataset, giving you a warning if a variable does not exists.\n\nTo use this, you can run this code, create an `ado` file with the name `drop2.ado`, and save it in your personal ado folder^[To see where your personal ado folder is, just type `sysdir`. ], or save it in the `plus\\d` folder. You can also download the file from [here](drop2.ado)\n\nSo, just for fun, a quick example!. You can run the following code to test if you get the same output\n\n\n\n<iframe src=drop2log.log height=100% width=100% font-size=1em></iframe>\n\n",
+    "supporting": [
+      "index_files"
+    ],
+    "filters": [],
+    "includes": {}
+  }
+}

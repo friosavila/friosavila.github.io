@@ -14,18 +14,19 @@ website:
     right:
     - text: "Home"      
       file: index.qmd
+    - text: "my CV and Research"      
+      file: cv.qmd  
     - text: "Stata Viz"
       file: "stataviz/index.qmd"  
     - text: "Stata Do's Ado's"
       file: "stata_do/index.qmd"
     - text: "Applied econometrics"  
       file: "app_metrics/index.qmd"
-    - text: "Fun with ChatGPT"      
+    - text: "Odds and Ends"      
       file: chatgpt.qmd
     - text: "about"      
       file: about.qmd
-    - text: "cv & Papers"      
-      file: cv.qmd  
+
 
   sidebar:
   - title: "Stata Viz"

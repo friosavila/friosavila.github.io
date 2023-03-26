@@ -3,6 +3,9 @@ title: "Stata vs R: The battle"
 description: "Chat-GPT creates a high fantasy battle between this titans"
 author: "ChatGPT and Fernando Rios-Avila"
 date: "3/18/2023"
+categories: 
+    - ChatGPT
+    - Stories
 draft: false
 ---
 
