@@ -26,16 +26,15 @@ Overall, there are three types of elements:
 
 r-class: These elements are produced by non-estimation commands. For example, after `summarize`, you can see what information is stored by the command by typing `return list`. They can store locals, scalars and matrices.
 
-```{stata}
-*| echo: false
-%%echo
+```stata
+*| code-fold: false 
 summarize mpg
 return list
 ```
 
 e-class: These elements are typically produced after estimation commands. At the minimum, it will contain information of estimated coefficients, variance covariance matrix, and the estimation command that was used. To see the information left behind, you just need to type `ereturn list`. They can store locals, scalars and matrices.
 
-```{stata}
+```stata
 *| code-fold: false 
 qui:reg price mpg
 ereturn list
@@ -91,7 +90,7 @@ return list
 
 ## Installation
 
-To install this programs, simply create ado files with the names `addr.ado` and `adde.ado`, and save them in your personal ado folder. otherwise, just copy the versions I provide you here: [`adde`](adde.ado) and [`addr`](addr.ado)
+To install these programs, simply create ado files with the names `addr.ado` and `adde.ado`, and save them in your personal ado folder. Otherwise, just copy the versions I provide you here: [`adde`](adde.ado) and [`addr`](addr.ado)
 
 
 
