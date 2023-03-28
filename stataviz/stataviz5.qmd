@@ -1,0 +1,7 @@
+---
+title: "Making Spirograph! `spirograph`"
+subtitle: "The `ado` Way"
+code-fold: false
+execute:
+  freeze: auto
+---

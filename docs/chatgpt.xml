@@ -10,7 +10,119 @@
 <atom:link href="https://friosavila.github.io/chatgpt.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.3.287</generator>
-<lastBuildDate>Sat, 25 Mar 2023 04:00:00 GMT</lastBuildDate>
+<lastBuildDate>Mon, 27 Mar 2023 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>Loading Large Datasets</title>
+  <dc:creator>Fernando Rios-Avila</dc:creator>
+  <link>https://friosavila.github.io/chatgpt/use_03_27_2023/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>If you ever wanted to work with very large datasets, you will find that doing may be difficult, if not impossible, due to memory limitations, or at the very least time costly.</p>
+<p>One option you may want to try when doing this, however, is to use the options <code>if</code> <code>in</code> and/or using <code>varlists</code>.</p>
+<p>For example, say that you want to work with the dataset <code>oaxaxa</code> which is located in your working directory. You can load only a subset of the data typing:</p>
+<div class="cell" data-execution_count="1">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1">cd c:\ado\<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">personal</span></span></code></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<style>div.jp-Notebook .datagrid-container {min-height: 448px; }</style>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>c:\ado\personal</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">use</span> oaxaca <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> female ==1, <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">clear</span></span>
+<span id="cb3-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">sum</span> female age</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Excerpt from the Swiss Labor Market Survey 1998)
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+      female |        888           1           0          1          1
+         age |        888    39.88401    10.72665         18         62</code></pre>
+</div>
+</div>
+<p>you could alternatively load only few variables in the dataset:</p>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">use</span> female age educ <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">using</span> oaxaca , <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">clear</span></span>
+<span id="cb5-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">sum</span> *</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Excerpt from the Swiss Labor Market Survey 1998)
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+        educ |      1,647    11.40134    2.374952          5       17.5
+      female |      1,647    .5391621    .4986154          0          1
+         age |      1,647    39.25379    11.03187         18         62</code></pre>
+</div>
+</div>
+<p>or use a combination of both. Now, if your dataset is really large, i suggest you to use <code>in</code>, which will do the task much faster than using <code>if</code>. Why? because using <code>if</code> you still need to go over every observation of your dataset. However using <code>in</code> only goes over the pre-specified number of observations.</p>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">use</span> female age educ <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">using</span> oaxaca <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> 1/10, <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">clear</span></span>
+<span id="cb7-2"><span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">list</span> , sep(0)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Excerpt from the Swiss Labor Market Survey 1998)
+
+     +---------------------+
+     | educ   female   age |
+     |---------------------|
+  1. |    9        1    37 |
+  2. |    9        0    62 |
+  3. | 10.5        1    40 |
+  4. |   12        0    55 |
+  5. |   12        0    36 |
+  6. | 10.5        0    31 |
+  7. | 10.5        0    50 |
+  8. | 17.5        0    42 |
+  9. | 17.5        0    36 |
+ 10. | 10.5        0    30 |
+     +---------------------+</code></pre>
+</div>
+</div>
+
+
+<!-- -->
+
+
+ ]]></description>
+  <category>Stata</category>
+  <category>tips</category>
+  <guid>https://friosavila.github.io/chatgpt/use_03_27_2023/index.html</guid>
+  <pubDate>Mon, 27 Mar 2023 04:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Adding info to e() and r()</title>
   <dc:creator>Fernando Rios-Avila</dc:creator>

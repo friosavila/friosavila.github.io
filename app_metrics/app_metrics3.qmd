@@ -27,7 +27,7 @@ In the second period, one of the groups receives a treatment, such as a training
 
 To analyze the data, a simple 2x2 matrix can be designed after the experiment is finalized, which helps to quantify the impact of the treatment.
 
-| Time \Treatment | TR=0   | TR=1  |
+| Time Treatment | TR=0   | TR=1  |
 |-----------------|--------|------ |
 | T=0             | $Y(0,0)$ | $Y(1,0)$|
 | T=1             | $Y(0,1)$ | $Y(1,1)$|
@@ -35,7 +35,7 @@ To analyze the data, a simple 2x2 matrix can be designed after the experiment is
 
 To simplify notation, I’ll assume that all the $Y(TR,T)$ represent the average outcome for the group -TR- (treated or untreated) at time T (Pre=0 and Post =1).
 
-### How are treatetment effects estimated?
+### How are treatment effects estimated?
 
 We can begin by noting that the treatment occurred in T=1. One naive estimator that we could use to estimate the treatment effect (TE) would be to simply obtain the difference in outcome between the treated and untreated groups, which is expressed as “$Y(1,1)-Y(0,1)$” (First D).
 
@@ -218,7 +218,7 @@ two (line trt_dtrt t if trt==1 & gv==2, sort) ///
     (line trt_dtrt t if trt==1 & gv==5, sort), legend(order(1 "G=2" 2 "G=3" 3 "G=4" 4 "G=5"))
 ```
 
-## This were the problems, but solutions?
+## These were the problems, but solutions?
 
 What I provided you here was a brief review of DID, with some of the intution on why TWFE fails. Now, it doesn't mean there is no
 solutions moving forward. In fact, by the time you are reading it, you will probaly be aware of many of them.

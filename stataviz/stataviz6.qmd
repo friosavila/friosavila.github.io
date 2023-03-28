@@ -1,0 +1,7 @@
+---
+title: "Making Sankey plots! `sanekey_plot`"
+subtitle: "Connecting groups and flows"
+code-fold: false
+execute:
+  freeze: auto
+---

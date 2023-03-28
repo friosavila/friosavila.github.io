@@ -82,7 +82,8 @@ format:
       gutter-width: 1.5rem
     toc: true
     fontsize: 1.1em
-    
+  pdf: default  
+  docx: default
 execute:
   freeze: auto  # re-render only when source changes
   
