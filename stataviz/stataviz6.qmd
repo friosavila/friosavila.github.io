@@ -1,5 +1,5 @@
 ---
-title: "Making Sankey plots! `sanekey_plot`"
+title: "Making Sankey plots! `sankey_plot`"
 subtitle: "Connecting groups and flows"
 code-fold: false
 execute:
