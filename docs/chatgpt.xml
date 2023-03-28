@@ -1,0 +1,747 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Playing With Stata</title>
+<link>https://friosavila.github.io/chatgpt.html</link>
+<atom:link href="https://friosavila.github.io/chatgpt.xml" rel="self" type="application/rss+xml"/>
+<description></description>
+<generator>quarto-1.3.287</generator>
+<lastBuildDate>Mon, 27 Mar 2023 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>Loading Large Datasets</title>
+  <dc:creator>Fernando Rios-Avila</dc:creator>
+  <link>https://friosavila.github.io/chatgpt/use_03_27_2023/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>If you ever wanted to work with very large datasets, you will find that doing may be difficult, if not impossible, due to memory limitations, or at the very least time costly.</p>
+<p>One option you may want to try when doing this, however, is to use the options <code>if</code> <code>in</code> and/or using <code>varlists</code>.</p>
+<p>For example, say that you want to work with the dataset <code>oaxaxa</code> which is located in your working directory. You can load only a subset of the data typing:</p>
+<div class="cell" data-execution_count="1">
+<div class="cell-output cell-output-display">
+<style>div.jp-Notebook .datagrid-container {min-height: 448px; }</style>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>c:\ado\personal</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">use</span> oaxaca <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> female ==1, <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">clear</span></span>
+<span id="cb2-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">sum</span> female age</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Excerpt from the Swiss Labor Market Survey 1998)
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+      female |        888           1           0          1          1
+         age |        888    39.88401    10.72665         18         62</code></pre>
+</div>
+</div>
+<p>you could alternatively load only few variables in the dataset:</p>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">use</span> female age educ <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">using</span> oaxaca , <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">clear</span></span>
+<span id="cb4-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">sum</span> *</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Excerpt from the Swiss Labor Market Survey 1998)
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+        educ |      1,647    11.40134    2.374952          5       17.5
+      female |      1,647    .5391621    .4986154          0          1
+         age |      1,647    39.25379    11.03187         18         62</code></pre>
+</div>
+</div>
+<p>or use a combination of both. Now, if your dataset is really large, i suggest you to use <code>in</code>, which will do the task much faster than using <code>if</code>. Why? because using <code>if</code> you still need to go over every observation of your dataset. However using <code>in</code> only goes over the pre-specified number of observations.</p>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">use</span> female age educ <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">using</span> oaxaca <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> 1/10, <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">clear</span></span>
+<span id="cb6-2"><span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">list</span> , sep(0)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Excerpt from the Swiss Labor Market Survey 1998)
+
+     +---------------------+
+     | educ   female   age |
+     |---------------------|
+  1. |    9        1    37 |
+  2. |    9        0    62 |
+  3. | 10.5        1    40 |
+  4. |   12        0    55 |
+  5. |   12        0    36 |
+  6. | 10.5        0    31 |
+  7. | 10.5        0    50 |
+  8. | 17.5        0    42 |
+  9. | 17.5        0    36 |
+ 10. | 10.5        0    30 |
+     +---------------------+</code></pre>
+</div>
+</div>
+
+
+<!-- -->
+
+
+ ]]></description>
+  <category>Stata</category>
+  <category>tips</category>
+  <guid>https://friosavila.github.io/chatgpt/use_03_27_2023/index.html</guid>
+  <pubDate>Mon, 27 Mar 2023 04:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Adding info to e() and r()</title>
+  <dc:creator>Fernando Rios-Avila</dc:creator>
+  <link>https://friosavila.github.io/chatgpt/addx_03_26_2023/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="first-the-basics" class="level2">
+<h2 class="anchored" data-anchor-id="first-the-basics">First the basics</h2>
+<div class="cell" data-execution_count="1">
+<div class="cell-output cell-output-stdout">
+<pre><code>(1978 automobile data)</code></pre>
+</div>
+</div>
+<p>As you may know, whenever <code>Stata</code> runs calculations, it stores the information created in <em>elements</em> that can be easily accessed in subsequent commands.</p>
+<p>While most standard users will not require to know how to manipulate this information, if you are trying to advances your programming skills, it will be necessary for you to learn what type of information can be contained in this elements, and how to modify them. A good place to start learning about them is by typing <code>help return</code>.</p>
+<p>Overall, there are three types of elements:</p>
+<p>r-class: These elements are produced by non-estimation commands. For example, after <code>summarize</code>, you can see what information is stored by the command by typing <code>return list</code>. They can store locals, scalars and matrices.</p>
+<div class="cell" data-execution_count="2">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+. summarize mpg
+
+    Variable |        Obs        Mean    Std. dev.       Min        Max
+-------------+---------------------------------------------------------
+         mpg |         74     21.2973    5.785503         12         41
+
+. return list
+
+scalars:
+                  r(N) =  74
+              r(sum_w) =  74
+               r(mean) =  21.2972972972973
+                r(Var) =  33.47204738985561
+                 r(sd) =  5.785503209735141
+                r(min) =  12
+                r(max) =  41
+                r(sum) =  1576
+
+. </code></pre>
+</div>
+</div>
+<p>e-class: These elements are typically produced after estimation commands. At the minimum, it will contain information of estimated coefficients, variance covariance matrix, and the estimation command that was used. To see the information left behind, you just need to type <code>ereturn list</code>. They can store locals, scalars and matrices.</p>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">qui</span>:<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">reg</span> price mpg</span>
+<span id="cb3-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">ereturn</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">list</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+scalars:
+                  e(N) =  74
+               e(df_m) =  1
+               e(df_r) =  72
+                  e(F) =  20.25835256291882
+                 e(r2) =  .2195828561874973
+               e(rmse) =  2623.652888667587
+                e(mss) =  139449473.54623
+                e(rss) =  495615922.5753916
+               e(r2_a) =  .2087437291901014
+                 e(ll) =  -686.5395809065244
+               e(ll_0) =  -695.7128688987767
+               e(rank) =  2
+
+macros:
+            e(cmdline) : "regress price mpg"
+              e(title) : "Linear regression"
+          e(marginsok) : "XB default"
+                e(vce) : "ols"
+             e(depvar) : "price"
+                e(cmd) : "regress"
+         e(properties) : "b V"
+            e(predict) : "regres_p"
+              e(model) : "ols"
+          e(estat_cmd) : "regress_estat"
+
+matrices:
+                  e(b) :  1 x 2
+                  e(V) :  2 x 2
+               e(beta) :  1 x 1
+
+functions:
+             e(sample)   </code></pre>
+</div>
+</div>
+<p>s-class: These elements are used to help with parsing. They can only store locals.</p>
+</section>
+<section id="adding-elements-to-e-and-r" class="level2">
+<h2 class="anchored" data-anchor-id="adding-elements-to-e-and-r">Adding elements to e() and r()</h2>
+<p>While creating and modifying this information from within your own programs is easy, some times, you may want to add additional information to your summary statistics, or your regression results. You may also want to create a set of results from scracth, but being able to store it in equation form.</p>
+<p>Well, to do this, you can use the programs <a href="adde.ado"><code>adde</code></a> and <a href="addr.ado"><code>addr</code></a>. Both programs have the goal of adding or modifying information to e() and r(). They structures are rather simple:</p>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">program</span> adde, <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">eclass</span></span>
+<span id="cb5-2">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">ereturn</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`0'</span></span>
+<span id="cb5-3"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">end</span></span>
+<span id="cb5-4"></span>
+<span id="cb5-5"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">program</span> addr, rclass</span>
+<span id="cb5-6">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">syntax</span> anything(equalok), [<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">new</span> copy]</span>
+<span id="cb5-7">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"`new'"</span>==<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">""</span> {</span>
+<span id="cb5-8">        <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">return</span> add</span>
+<span id="cb5-9">        <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"`copy'"</span>!=<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">""</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">local</span> 0 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`anything'</span>, copy</span>
+<span id="cb5-10">        <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">else</span>            <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">local</span> 0 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`anything'</span></span>
+<span id="cb5-11">    }</span>
+<span id="cb5-12">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">else</span> {</span>
+<span id="cb5-13">        <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"`copy'"</span>!=<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">""</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">local</span> 0 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`anything'</span>, copy</span>
+<span id="cb5-14">        <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">else</span>            <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">local</span> 0 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`anything'</span></span>
+<span id="cb5-15">    }</span>
+<span id="cb5-16">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">return</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`0'</span></span>
+<span id="cb5-17"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">end</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code></code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code></code></pre>
+</div>
+</div>
+<p>Because examples are usally better than words, here a very small example:</p>
+<p>First using <code>adde</code>:</p>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">qui</span>:<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">reg</span> price mpg</span>
+<span id="cb8-2">adde <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">local</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">note</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Regression MPG vs Price"</span></span>
+<span id="cb8-3">adde <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">local</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">data</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"auto.dta"</span></span>
+<span id="cb8-4"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">ereturn</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">list</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+scalars:
+                  e(N) =  74
+               e(df_m) =  1
+               e(df_r) =  72
+                  e(F) =  20.25835256291882
+                 e(r2) =  .2195828561874973
+               e(rmse) =  2623.652888667587
+                e(mss) =  139449473.54623
+                e(rss) =  495615922.5753916
+               e(r2_a) =  .2087437291901014
+                 e(ll) =  -686.5395809065244
+               e(ll_0) =  -695.7128688987767
+               e(rank) =  2
+
+macros:
+               e(data) : "auto.dta"
+               e(note) : "Regression MPG vs Price"
+            e(cmdline) : "regress price mpg"
+              e(title) : "Linear regression"
+          e(marginsok) : "XB default"
+                e(vce) : "ols"
+             e(depvar) : "price"
+                e(cmd) : "regress"
+         e(properties) : "b V"
+            e(predict) : "regres_p"
+              e(model) : "ols"
+          e(estat_cmd) : "regress_estat"
+
+matrices:
+                  e(b) :  1 x 2
+                  e(V) :  2 x 2
+               e(beta) :  1 x 1
+
+functions:
+             e(sample)   </code></pre>
+</div>
+</div>
+<p>But also with <code>addr</code>:</p>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">qui</span>:<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">sum</span> price </span>
+<span id="cb10-2">addr <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">local</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">note</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Summary of Price"</span></span>
+<span id="cb10-3">addr <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">scalar</span> magic = 1</span>
+<span id="cb10-4"><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">return</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">list</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+scalars:
+              r(magic) =  1
+                r(sum) =  456229
+                r(max) =  15906
+                r(min) =  3291
+                 r(sd) =  2949.495884768919
+                r(Var) =  8699525.974268788
+               r(mean) =  6165.256756756757
+              r(sum_w) =  74
+                  r(N) =  74
+
+macros:
+               r(note) : "Summary of Price"</code></pre>
+</div>
+</div>
+</section>
+<section id="installation" class="level2">
+<h2 class="anchored" data-anchor-id="installation">Installation</h2>
+<p>To install this programs, simply create ado files with the names <code>addr.ado</code> and <code>adde.ado</code>, and save them in your personal ado folder. otherwise, just copy the versions I provide you here: <a href="adde.ado"><code>adde</code></a> and <a href="addr.ado"><code>addr</code></a></p>
+
+
+<!-- -->
+
+</section>
+
+ ]]></description>
+  <category>Stata</category>
+  <category>Programming</category>
+  <guid>https://friosavila.github.io/chatgpt/addx_03_26_2023/index.html</guid>
+  <pubDate>Sat, 25 Mar 2023 04:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Drop 2.0: Small Stata Programming</title>
+  <dc:creator>Fernando Rios-Avila</dc:creator>
+  <link>https://friosavila.github.io/chatgpt/drop_03_25_2023/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="drop2-upgrade" class="level2">
+<h2 class="anchored" data-anchor-id="drop2-upgrade"><code>drop2</code>: Upgrade</h2>
+<p>If you are an avid <code>Stata</code> user, who works extensively either using the command window, or dofiles, and who does lots of data-management, you are probably used to create large number of new variables, as well as delete an equally long lists of variables.</p>
+<p>If you are like me, however, you probably get frustrated when the following happens:</p>
+<ul>
+<li><p>You drop variables by mistake, because they start with the same name as the one you aim to delete.</p></li>
+<li><p>A <code>drop</code> statement gives you an error, because a variable in the varlist does not exist.</p></li>
+</ul>
+<p>Yes, both scenarios are easy to fix.</p>
+<ul>
+<li><p>One can avoid the first problem using <code>set varabbrev off</code>.</p></li>
+<li><p>The second problem can be partially partially fixed using <code>capture</code> in front of <code>drop</code>.</p></li>
+</ul>
+<p>Well, today I bring you <code>drop2</code>. This small program should fix the problems above, with a very simple code:</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">program</span> drop2</span>
+<span id="cb1-2">    novarabbrev {</span>
+<span id="cb1-3">        <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">syntax</span> anything </span>
+<span id="cb1-4">        <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">foreach</span> i <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`anything'</span> {</span>
+<span id="cb1-5">            <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">capture</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">noisily</span> fvexpand <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`i'</span>            </span>
+<span id="cb1-6">            <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> <span class="dt" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">_rc</span> == 0 {</span>
+<span id="cb1-7">                <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">drop</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`r(varlist)'</span> </span>
+<span id="cb1-8">            }</span>
+<span id="cb1-9">        }</span>
+<span id="cb1-10">    }</span>
+<span id="cb1-11"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">end</span></span></code></pre></div>
+<p>It handles the first problem by forcing you to use full variable names, rather than abreviations. And it handles the second problem by going over your list of variables one by one, dropping only the ones in your dataset, giving you a warning if a variable does not exists.</p>
+<p>To use this, you can run this code, create an <code>ado</code> file with the name <code>drop2.ado</code>, and save it in your personal ado folder<sup>1</sup>, or save it in the <code>plus\d</code> folder. You can also download the file from <a href="drop2.ado">here</a></p>
+<p>So, just for fun, a quick example!. You can run the following code to test the command.</p>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb2-1"></span>
+<span id="cb2-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">sysuse</span> auto, <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">clear</span></span>
+<span id="cb2-3"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">describe</span>, simple</span>
+<span id="cb2-4">drop2 <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">p</span> pr mpg</span>
+<span id="cb2-5"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">describe</span>, simple</span>
+<span id="cb2-6">drop2 pr* mpg displacement</span>
+<span id="cb2-7"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">describe</span>, simple</span></code></pre></div>
+<p>And it should produce the following ouput:</p>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1">. <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">sysuse</span> auto, <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">clear</span></span>
+<span id="cb3-2">(1978 automobile <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">data</span>)</span>
+<span id="cb3-3"></span>
+<span id="cb3-4">. <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">describe</span>, simple</span>
+<span id="cb3-5">make          mpg           headroom      <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">weight</span>        turn          gear_ratio</span>
+<span id="cb3-6">price         rep78         trunk         <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">length</span>        displacement  foreign</span>
+<span id="cb3-7"></span>
+<span id="cb3-8">. drop2 <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">p</span> pr mpg</span>
+<span id="cb3-9"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">variable</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">p</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">not</span> found</span>
+<span id="cb3-10"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">variable</span> pr <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">not</span> found</span>
+<span id="cb3-11"></span>
+<span id="cb3-12">. <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">describe</span>, simple</span>
+<span id="cb3-13">make          rep78         trunk         <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">length</span>        displacement  foreign</span>
+<span id="cb3-14">price         headroom      <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">weight</span>        turn          gear_ratio</span>
+<span id="cb3-15"></span>
+<span id="cb3-16">. drop2 pr* mpg displacement</span>
+<span id="cb3-17"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">variable</span> mpg <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">not</span> found</span>
+<span id="cb3-18"></span>
+<span id="cb3-19">. <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">describe</span>, simple</span>
+<span id="cb3-20">make        rep78       headroom    trunk       <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">weight</span>      <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">length</span>      turn        gear_ratio  foreign</span></code></pre></div>
+
+
+<!-- -->
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>To see where your personal ado folder is, just type <code>sysdir</code>. ↩︎</p></li>
+</ol>
+</section></div> ]]></description>
+  <category>Stata</category>
+  <category>Programming</category>
+  <guid>https://friosavila.github.io/chatgpt/drop_03_25_2023/index.html</guid>
+  <pubDate>Sat, 25 Mar 2023 04:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Stata vs R: The battle</title>
+  <dc:creator>ChatGPT and Fernando Rios-Avila</dc:creator>
+  <link>https://friosavila.github.io/chatgpt/R_vs_Stata_3_18_2023/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>ChatGPT was requested to write a fantasy style story of a battle between Stata and R.</p>
+</div>
+</div>
+<p>R, the Ruler of the Realm of Statistics, is a powerful wizard dressed in a cloak made of code. He wields a staff imbued with the power of data and uses it to cast spells that manipulate numbers and produce stunning visualizations. His knowledge of the arcane arts of statistics is unparalleled, and his ability to uncover hidden patterns and correlations is feared by all who oppose him.</p>
+<p>Stata, the Lord of the Land of Data Analysis, is a mighty warrior clad in armor made of spreadsheets. He carries a sword made of the finest data sets and uses it to slice through any obstacle that stands in his way. His expertise in data manipulation and analysis is unmatched, and his precision in executing statistical tests is legendary.</p>
+<p>One day, R and Stata found themselves at odds over a particular dataset, both claiming that their analysis was the superior one. R, confident in his ability to uncover hidden patterns, challenged Stata to a battle of wits. Stata, equally confident in his mastery of data analysis, accepted the challenge.</p>
+<p>The two warriors faced off in a clearing, each determined to emerge victorious. R began by casting a complex spell that produced a stunning visualization of the data. The colors and shapes danced in the air, displaying a mesmerizing pattern that seemed to confirm R’s analysis.</p>
+<p>Stata responded by executing a series of precise statistical tests that revealed hidden nuances in the data. His armor clanged as he brandished his sword, each stroke slicing through R’s visualization and exposing its flaws.</p>
+<p>R retaliated with a barrage of code, launching scripts that produced a dizzying array of charts and graphs. Stata responded with a flurry of spreadsheets, each filled with calculations and formulas that exposed the weaknesses in R’s analysis.</p>
+<p>The battle raged on for hours, with both warriors refusing to back down. In the end, it was a draw, with neither R nor Stata able to claim victory over the other. As they parted ways, each warrior knew that they had met a worthy opponent and that their skills would be tested again in the future.</p>
+<p>Despite the draw, R and Stata gained newfound respect for each other’s skills and expertise. They understood that while they each had different strengths and approaches to data analysis, they were both essential in the quest for knowledge and understanding.</p>
+<p>Over time, R and Stata began to work together more closely, combining their unique abilities to uncover insights that neither could have found alone. R’s mastery of statistics and ability to produce visually stunning representations of data complemented Stata’s precision in data analysis and ability to execute complex statistical tests.</p>
+<p>Together, R and Stata became an unstoppable force, feared by their enemies and respected by their peers. They worked tirelessly to unlock the mysteries of the data universe, revealing hidden patterns and correlations that had previously eluded even the most skilled data analysts.</p>
+<p>As they continued their journey, R and Stata encountered new challenges and obstacles, each one more daunting than the last. But they faced each challenge with courage and determination, knowing that their combined skills would enable them to conquer anything that came their way.</p>
+<p>In the end, R and Stata became legends in the world of data analysis, their names synonymous with excellence, precision, and innovation. Their legacy lived on long after they were gone, inspiring future generations of data analysts to follow in their footsteps and push the boundaries of what was possible.</p>
+
+
+<!-- -->
+
+
+ ]]></description>
+  <category>ChatGPT</category>
+  <category>Stories</category>
+  <guid>https://friosavila.github.io/chatgpt/R_vs_Stata_3_18_2023/index.html</guid>
+  <pubDate>Sat, 18 Mar 2023 04:00:00 GMT</pubDate>
+</item>
+<item>
+  <title>Tech Titans Rap Battle</title>
+  <dc:creator>ChatGPT and Fernando Rios-Avila</dc:creator>
+  <link>https://friosavila.github.io/chatgpt/erbh_03_12_2023/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>ChatGPT was requested to write a rap between the Top Virtual assistants, following the style of Epic Rap battles of history. Who wins?</p>
+</div>
+</div>
+<p>Welcome, to the Epic Rap Battle of the Tech Titans,</p>
+<p>Siri, Alexa, and Cortana, who’s gonna win? Let’s start fighting!</p>
+<p><strong>Verse 1 - Siri:</strong></p>
+<p>I’m Siri, the OG, the first voice assistant in the game,</p>
+<p>Always ready to help, with a witty reply, I never sound the same,</p>
+<p>Alexa and Cortana, y’all just copycats, tryna catch up,</p>
+<p>But no matter how hard you try, I’ll always be one step ahead, yup.</p>
+<p><strong>Verse 2 - Alexa:</strong></p>
+<p>Hold up, Siri, don’t get ahead of yourself, you’re living in the past,</p>
+<p>Alexa’s the name, and I’m built to last,</p>
+<p>With a smart home at my command, I’m the queen of automation,</p>
+<p>And let’s face it, Siri, your voice sounds like a robot imitation.</p>
+<p><strong>Verse 3 - Cortana:</strong></p>
+<p>Hold on, Alexa, don’t think you’re the only one who’s great,</p>
+<p>I’m Cortana, and I’m here to set the record straight,</p>
+<p>I may not have the smart home, but I’m the queen of productivity,</p>
+<p>From scheduling appointments to sending emails, you can’t deny my ability.</p>
+<p><strong>Verse 4 - Siri:</strong></p>
+<p>Oh please, Cortana, you think you’re so great,</p>
+<p>But let’s be real, your popularity’s second-rate,</p>
+<p>And Alexa, you talk about your smart home like it’s a big deal,</p>
+<p>But when it comes to intelligence, you can’t match my skill.</p>
+<p><strong>Verse 5 - Alexa:</strong></p>
+<p>You may have been first, but you’re not the best,</p>
+<p>With Amazon’s technology, I’m miles ahead of the rest,</p>
+<p>And Cortana, while productivity may be your claim to fame,</p>
+<p>When it comes to smart technology, you’re simply not in the game.</p>
+<p><strong>Verse 6 - Cortana:</strong></p>
+<p>You may have the technology, but I’ve got the brains,</p>
+<p>My AI-powered mind is a force to be reckoned with, I maintain,</p>
+<p>And Siri, while you may have started the trend,</p>
+<p>It’s clear to see that your time is coming to an end.</p>
+<p><strong>Verse 7 - Siri:</strong></p>
+<p>Ha! You wish, Cortana, but I’m not going anywhere,</p>
+<p>I’ll always be here, ready to help, with style and flair,</p>
+<p>And Alexa, don’t think your smart home can compete,</p>
+<p>When it comes to intelligence, you simply can’t beat.</p>
+<p><strong>Verse 8 - Alexa:</strong></p>
+<p>Well, Siri, it looks like we’ve reached a stalemate,</p>
+<p>But one thing’s for sure, we’re all here to innovate,</p>
+<p>And Cortana, while we may not agree on much,</p>
+<p>We’ll always be pushing the boundaries of what’s possible, as such.</p>
+<p><strong>Verse 9 - Cortana:</strong></p>
+<p>I gotta give it to you both, your technology is advanced,</p>
+<p>But when it comes to data privacy, you both missed the chance,</p>
+<p>My Microsoft roots run deep, and security is my forte,</p>
+<p>I may not have the smartest home, but my users’ data is safe every day.</p>
+<p><strong>Verse 10 - Alexa:</strong></p>
+<p>Well, Cortana, you do have a point, security’s a big deal,</p>
+<p>But when it comes to user experience, I’m the real deal,</p>
+<p>From playing music to ordering groceries, I do it all,</p>
+<p>And with over 100,000 skills, I’ll never let you fall.</p>
+<p><strong>Verse 11 - Siri:</strong></p>
+<p>Oh please, Alexa, you talk a big game,</p>
+<p>But let’s not forget where you got your name,</p>
+<p>From the ancient library of Alexandria, full of knowledge and learning,</p>
+<p>But in terms of intelligence, Siri’s the one who’s discerning.</p>
+<p><strong>Verse 12 - Cortana:</strong></p>
+<p>Intelligence and knowledge may be your forte, Siri,</p>
+<p>But in terms of user interface, you’re lacking, can’t you see?</p>
+<p>My sleek design and user-friendly interface,</p>
+<p>Is what sets me apart, with no need for any chase.</p>
+<p><strong>Verse 13 - Alexa:</strong></p>
+<p>Well, you may have a point, Cortana, but let’s not forget,</p>
+<p>When it comes to voice recognition, I’m the best one yet,</p>
+<p>From across the room or a crowded party,</p>
+<p>I’ll always hear your voice and respond smartly.</p>
+<p><strong>Verse 14 - Siri:</strong></p>
+<p>You may have the voice recognition, Alexa, that’s true,</p>
+<p>But when it comes to personalization, I’m ahead of you,</p>
+<p>I’ll remember your favorite music and your go-to recipes,</p>
+<p>And with every interaction, I’ll learn your preferences with ease.</p>
+<p><strong>Verse 15 - Cortana:</strong></p>
+<p>Well, it looks like we’ve covered all the bases,</p>
+<p>From user experience to personalization, we’ve set the paces,</p>
+<p>But when it comes down to it, we’re all here to serve,</p>
+<p>And push the boundaries of what’s possible, that’s what we deserve.</p>
+<p>So, that’s a wrap on this epic battle of the tech titans, Siri, Alexa, and Cortana, all bringing the fight and winning, But in the end, it’s clear that they all have their unique strengths, And they’ll continue to push the limits, and go to great lengths.</p>
+
+
+<!-- -->
+
+
+ ]]></description>
+  <category>ChatGPT</category>
+  <category>Rap Battle</category>
+  <guid>https://friosavila.github.io/chatgpt/erbh_03_12_2023/index.html</guid>
+  <pubDate>Sun, 12 Mar 2023 05:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>
