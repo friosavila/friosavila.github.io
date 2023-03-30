@@ -2,126 +2,126 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://friosavila.github.io/about.html</loc>
-    <lastmod>2023-03-28T02:06:44.931Z</lastmod>
+    <lastmod>2023-03-30T14:47:37.764Z</lastmod>
   </url>
   <url>
     <loc>https://friosavila.github.io/app_metrics/app_metrics1.html</loc>
-    <lastmod>2023-03-28T02:06:47.992Z</lastmod>
+    <lastmod>2023-03-30T14:47:39.200Z</lastmod>
   </url>
   <url>
     <loc>https://friosavila.github.io/app_metrics/app_metrics2.html</loc>
-    <lastmod>2023-03-28T02:06:48.448Z</lastmod>
+    <lastmod>2023-03-30T14:47:39.457Z</lastmod>
   </url>
   <url>
     <loc>https://friosavila.github.io/app_metrics/app_metrics3.html</loc>
-    <lastmod>2023-03-28T02:06:51.101Z</lastmod>
+    <lastmod>2023-03-30T14:47:40.643Z</lastmod>
   </url>
   <url>
     <loc>https://friosavila.github.io/app_metrics/app_metrics4.html</loc>
-    <lastmod>2023-03-28T02:06:54.014Z</lastmod>
+    <lastmod>2023-03-30T14:47:41.867Z</lastmod>
   </url>
   <url>
     <loc>https://friosavila.github.io/app_metrics/app_metrics5.html</loc>
-    <lastmod>2023-03-28T02:06:54.611Z</lastmod>
+    <lastmod>2023-03-30T14:47:42.156Z</lastmod>
   </url>
   <url>
     <loc>https://friosavila.github.io/app_metrics/index.html</loc>
-    <lastmod>2023-03-28T02:06:55.448Z</lastmod>
+    <lastmod>2023-03-30T14:47:42.440Z</lastmod>
   </url>
   <url>
     <loc>https://friosavila.github.io/chatgpt/addx_03_26_2023/index.html</loc>
-    <lastmod>2023-03-30T14:33:44.450Z</lastmod>
+    <lastmod>2023-03-30T14:47:43.147Z</lastmod>
   </url>
   <url>
     <loc>https://friosavila.github.io/chatgpt/drop_03_25_2023/index.html</loc>
-    <lastmod>2023-03-28T02:06:57.964Z</lastmod>
+    <lastmod>2023-03-30T14:47:43.525Z</lastmod>
   </url>
   <url>
     <loc>https://friosavila.github.io/chatgpt/erbh_03_12_2023/index.html</loc>
-    <lastmod>2023-03-28T02:06:59.107Z</lastmod>
-  </url>
-  <url>
-    <loc>https://friosavila.github.io/chatgpt/R_vs_Stata_3_18_2023/index.html</loc>
-    <lastmod>2023-03-28T02:07:00.049Z</lastmod>
-  </url>
-  <url>
-    <loc>https://friosavila.github.io/chatgpt/use_03_27_2023/index.html</loc>
-    <lastmod>2023-03-28T02:08:44.263Z</lastmod>
-  </url>
-  <url>
-    <loc>https://friosavila.github.io/chatgpt.html</loc>
-    <lastmod>2023-03-28T02:08:37.150Z</lastmod>
-  </url>
-  <url>
-    <loc>https://friosavila.github.io/cv.html</loc>
-    <lastmod>2023-03-28T02:07:03.564Z</lastmod>
-  </url>
-  <url>
-    <loc>https://friosavila.github.io/index.html</loc>
-    <lastmod>2023-03-30T14:33:44.752Z</lastmod>
-  </url>
-  <url>
-    <loc>https://friosavila.github.io/posts.html</loc>
-    <lastmod>2023-03-30T14:33:45.077Z</lastmod>
-  </url>
-  <url>
-    <loc>https://friosavila.github.io/stataviz/index.html</loc>
-    <lastmod>2023-03-30T14:33:45.476Z</lastmod>
-  </url>
-  <url>
-    <loc>https://friosavila.github.io/stataviz/stataviz1.html</loc>
-    <lastmod>2023-03-30T14:33:46.135Z</lastmod>
-  </url>
-  <url>
-    <loc>https://friosavila.github.io/stataviz/stataviz2.html</loc>
-    <lastmod>2023-03-30T14:33:46.940Z</lastmod>
-  </url>
-  <url>
-    <loc>https://friosavila.github.io/stataviz/stataviz3.html</loc>
-    <lastmod>2023-03-30T14:33:47.202Z</lastmod>
-  </url>
-  <url>
-    <loc>https://friosavila.github.io/stataviz/stataviz4.html</loc>
-    <lastmod>2023-03-30T14:33:47.458Z</lastmod>
-  </url>
-  <url>
-    <loc>https://friosavila.github.io/stataviz/stataviz5.html</loc>
-    <lastmod>2023-03-30T14:33:47.713Z</lastmod>
-  </url>
-  <url>
-    <loc>https://friosavila.github.io/stataviz/stataviz6.html</loc>
-    <lastmod>2023-03-30T14:33:47.978Z</lastmod>
-  </url>
-  <url>
-    <loc>https://friosavila.github.io/stata_do/index.html</loc>
-    <lastmod>2023-03-30T14:33:48.310Z</lastmod>
-  </url>
-  <url>
-    <loc>https://friosavila.github.io/stata_do/stata_do1.html</loc>
-    <lastmod>2023-03-30T14:33:49.215Z</lastmod>
-  </url>
-  <url>
-    <loc>https://friosavila.github.io/stata_do/stata_do2.html</loc>
-    <lastmod>2023-03-30T14:33:50.175Z</lastmod>
-  </url>
-  <url>
-    <loc>https://friosavila.github.io/stata_do/stata_do3.html</loc>
-    <lastmod>2023-03-30T14:33:51.120Z</lastmod>
-  </url>
-  <url>
-    <loc>https://friosavila.github.io/stata_do/stata_do4.html</loc>
-    <lastmod>2023-03-30T14:33:53.069Z</lastmod>
-  </url>
-  <url>
-    <loc>https://friosavila.github.io/stata_do/stata_do5.html</loc>
-    <lastmod>2023-03-30T14:33:53.356Z</lastmod>
-  </url>
-  <url>
-    <loc>https://friosavila.github.io/stata_do/stata_do6.html</loc>
-    <lastmod>2023-03-30T14:33:53.637Z</lastmod>
+    <lastmod>2023-03-30T14:47:44.093Z</lastmod>
   </url>
   <url>
     <loc>https://friosavila.github.io/chatgpt/fra_03_30_2023/index.html</loc>
-    <lastmod>2023-03-30T14:39:00.180Z</lastmod>
+    <lastmod>2023-03-30T14:47:44.517Z</lastmod>
+  </url>
+  <url>
+    <loc>https://friosavila.github.io/chatgpt/R_vs_Stata_3_18_2023/index.html</loc>
+    <lastmod>2023-03-30T14:47:45.009Z</lastmod>
+  </url>
+  <url>
+    <loc>https://friosavila.github.io/chatgpt/use_03_27_2023/index.html</loc>
+    <lastmod>2023-03-30T14:47:45.630Z</lastmod>
+  </url>
+  <url>
+    <loc>https://friosavila.github.io/chatgpt.html</loc>
+    <lastmod>2023-03-30T14:47:46.302Z</lastmod>
+  </url>
+  <url>
+    <loc>https://friosavila.github.io/cv.html</loc>
+    <lastmod>2023-03-30T14:47:46.819Z</lastmod>
+  </url>
+  <url>
+    <loc>https://friosavila.github.io/index.html</loc>
+    <lastmod>2023-03-30T14:47:47.080Z</lastmod>
+  </url>
+  <url>
+    <loc>https://friosavila.github.io/posts.html</loc>
+    <lastmod>2023-03-30T14:47:47.387Z</lastmod>
+  </url>
+  <url>
+    <loc>https://friosavila.github.io/stataviz/index.html</loc>
+    <lastmod>2023-03-30T14:47:47.702Z</lastmod>
+  </url>
+  <url>
+    <loc>https://friosavila.github.io/stataviz/stataviz1.html</loc>
+    <lastmod>2023-03-30T14:47:48.373Z</lastmod>
+  </url>
+  <url>
+    <loc>https://friosavila.github.io/stataviz/stataviz2.html</loc>
+    <lastmod>2023-03-30T14:47:49.128Z</lastmod>
+  </url>
+  <url>
+    <loc>https://friosavila.github.io/stataviz/stataviz3.html</loc>
+    <lastmod>2023-03-30T14:47:49.379Z</lastmod>
+  </url>
+  <url>
+    <loc>https://friosavila.github.io/stataviz/stataviz4.html</loc>
+    <lastmod>2023-03-30T14:47:49.647Z</lastmod>
+  </url>
+  <url>
+    <loc>https://friosavila.github.io/stataviz/stataviz5.html</loc>
+    <lastmod>2023-03-30T14:47:49.903Z</lastmod>
+  </url>
+  <url>
+    <loc>https://friosavila.github.io/stataviz/stataviz6.html</loc>
+    <lastmod>2023-03-30T14:47:50.150Z</lastmod>
+  </url>
+  <url>
+    <loc>https://friosavila.github.io/stata_do/index.html</loc>
+    <lastmod>2023-03-30T14:47:50.476Z</lastmod>
+  </url>
+  <url>
+    <loc>https://friosavila.github.io/stata_do/stata_do1.html</loc>
+    <lastmod>2023-03-30T14:47:51.286Z</lastmod>
+  </url>
+  <url>
+    <loc>https://friosavila.github.io/stata_do/stata_do2.html</loc>
+    <lastmod>2023-03-30T14:47:52.244Z</lastmod>
+  </url>
+  <url>
+    <loc>https://friosavila.github.io/stata_do/stata_do3.html</loc>
+    <lastmod>2023-03-30T14:47:53.125Z</lastmod>
+  </url>
+  <url>
+    <loc>https://friosavila.github.io/stata_do/stata_do4.html</loc>
+    <lastmod>2023-03-30T14:47:54.999Z</lastmod>
+  </url>
+  <url>
+    <loc>https://friosavila.github.io/stata_do/stata_do5.html</loc>
+    <lastmod>2023-03-30T14:47:55.271Z</lastmod>
+  </url>
+  <url>
+    <loc>https://friosavila.github.io/stata_do/stata_do6.html</loc>
+    <lastmod>2023-03-30T14:47:55.554Z</lastmod>
   </url>
 </urlset>

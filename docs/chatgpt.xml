@@ -9,8 +9,138 @@
 <link>https://friosavila.github.io/chatgpt.html</link>
 <atom:link href="https://friosavila.github.io/chatgpt.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.3.287</generator>
-<lastBuildDate>Mon, 27 Mar 2023 04:00:00 GMT</lastBuildDate>
+<generator>quarto-1.3.290</generator>
+<lastBuildDate>Thu, 30 Mar 2023 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>How to write your own Installer</title>
+  <dc:creator>Fernando Rios-Avila</dc:creator>
+  <link>https://friosavila.github.io/chatgpt/fra_03_30_2023/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>If you are an avid Stata user, you know that <strong>THE</strong> place to search and access user-written, now community-contributed, programs is via <code>SSC</code>.</p>
+<p><code>SSC</code> is a command that allows you to install community-contributed programs from the <strong><em>Boston College Statistical Software Components</em></strong>, provided by http://repec.org. This archive has become the “official” place to store all “unofficial” programs.</p>
+<p>While not official, most <code>SSC</code> programs are ment to be well documented, hard tested, and maintained set or programs that are of general interest. However, what if you want to share programs that are do not meet all this requirements. Say, you are writting small rutines for your own work, as well as your collegues.</p>
+<p>For those cases, there is <code>net</code>. This program is what operates behind <code>ssc</code> to bring forward, and allows you to install programs from the internet, and why not, your own repository.</p>
+<p>So here is where today’s post is about. How to write a wrapper around <code>net</code> that would easily install other programs from your personal repository.</p>
+<section id="structure-of-the-program" class="level2">
+<h2 class="anchored" data-anchor-id="structure-of-the-program">Structure of the program</h2>
+<p>To write your wrapping program you need two things:</p>
+<ul>
+<li>name for the program. I find this the hardest part, as you want something simple, memorable, that will connect to your research in general. In my case, I just decided to call it <code>fra</code></li>
+<li>the address for your repository. If you are archeving your programs online (outside of <code>ssc</code>) you already have this. In my case, it will be my <code>stpackage</code> repository.</li>
+</ul>
+<p>With these two elements lets write the wrapper:</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">program</span> fra</span>
+<span id="cb1-2">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">syntax</span> anything, [<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">all</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">replace</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">force</span>]</span>
+<span id="cb1-3">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">local</span> from <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"https://friosavila.github.io/stpackages"</span></span>
+<span id="cb1-4">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">tokenize</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`anything'</span></span>
+<span id="cb1-5"></span>
+<span id="cb1-6">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"`1'`2'"</span>==<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">""</span>  net from <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`from'</span> </span>
+<span id="cb1-7">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">else</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> !<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">inlist</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"`1'"</span>,<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"describe"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"install"</span>, <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"get"</span>) {</span>
+<span id="cb1-8">        <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">display</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">as</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">error</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"`1' invalid subcommand"</span></span>
+<span id="cb1-9">    }</span>
+<span id="cb1-10">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">else</span> {</span>
+<span id="cb1-11">        net <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`1'</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`2'</span>, <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`all'</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`replace'</span> from(<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`from'</span>)</span>
+<span id="cb1-12">    }</span>
+<span id="cb1-13">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">qui</span>:net from http:<span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//www.stata.com/</span></span>
+<span id="cb1-14"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">end</span></span></code></pre></div>
+<p>As you can see, this is a minimal program. It will only use 3 options:</p>
+<ul>
+<li>all : the all the package contents are downloaded (in addition to the ado and helpfiles)</li>
+<li>replace: to replace the currently available program in your computer</li>
+<li>force: To force any action.</li>
+</ul>
+<p>Line 3 is equally important, because is where your repository address will go. That way, users won’t have to modify “from” everytime they want to get your packages.</p>
+<p>Lines 6-12 will do the installing for you (or packages description).</p>
+<p>Lastly, to be nice, line 13 will restore <code>net</code> to the default addres: Stata</p>
+<p>The last step, of course, is to save this file with the name <code>fra.ado</code>. Excecute it once, and start redistributing your packages.</p>
+<p>If you are doing this I would suggest trying the following:</p>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb2-1">fra install fra, <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">replace</span></span></code></pre></div>
+<p>That way, it will store the information in the right place, and you wont have to worry about it anymore!</p>
+
+
+<!-- -->
+
+</section>
+
+ ]]></description>
+  <category>Stata</category>
+  <category>Tips</category>
+  <category>Programming</category>
+  <guid>https://friosavila.github.io/chatgpt/fra_03_30_2023/index.html</guid>
+  <pubDate>Thu, 30 Mar 2023 04:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Loading Large Datasets</title>
   <dc:creator>Fernando Rios-Avila</dc:creator>
@@ -424,7 +554,7 @@ macros:
   <category>Stata</category>
   <category>Programming</category>
   <guid>https://friosavila.github.io/chatgpt/addx_03_26_2023/index.html</guid>
-  <pubDate>Sat, 25 Mar 2023 04:00:00 GMT</pubDate>
+  <pubDate>Sun, 26 Mar 2023 04:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Drop 2.0: Small Stata Programming</title>
