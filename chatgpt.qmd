@@ -3,7 +3,7 @@ title: "Odds and Ends + ChatGPT"
 subtitle: "Just some extra tips, and short stories"
 listing:
   contents: chatgpt #This should match the post Directory
-  sort: true
+  sort: "date desc"
   type: default
   image-align: right
   max-description-length: 175

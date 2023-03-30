@@ -15,7 +15,9 @@ website:
     - text: "Home"      
       file: index.qmd
     - text: "my CV and Research"      
-      file: cv.qmd  
+      file: cv.qmd 
+    - text: "Software"      
+      file: software.qmd        
     - text: "Stata Viz"
       file: "stataviz/index.qmd"  
     - text: "Stata Do's Ado's"

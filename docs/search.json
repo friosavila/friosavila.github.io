@@ -277,7 +277,7 @@
     "href": "chatgpt.html",
     "title": "Odds and Ends + ChatGPT",
     "section": "",
-    "text": "Adding info to e() and r()\n\n\n\n\n\n\n\nStata\n\n\nProgramming\n\n\n\n\nI describe and introduce the programs adde and addr. They allow you to add and modify information to some Stata Objects\n\n\n\n\n\n\nMar 26, 2023\n\n\nFernando Rios-Avila\n\n\n\n\n\n\n  \n\n\n\n\nDrop 2.0: Small Stata Programming\n\n\n\n\n\n\n\nStata\n\n\nProgramming\n\n\n\n\nI describe and introduce the program drop2, for more flexible data dropping\n\n\n\n\n\n\nMar 25, 2023\n\n\nFernando Rios-Avila\n\n\n\n\n\n\n  \n\n\n\n\nHow to write your own Installer\n\n\n\n\n\n\n\nStata\n\n\nTips\n\n\nProgramming\n\n\n\n\nI provide a small descriptio on how to use net to program an easy installer for your own repository\n\n\n\n\n\n\nMar 30, 2023\n\n\nFernando Rios-Avila\n\n\n\n\n\n\n  \n\n\n\n\nLoading Large Datasets\n\n\n\n\n\n\n\nStata\n\n\ntips\n\n\n\n\nuse in vs use if\n\n\n\n\n\n\nMar 27, 2023\n\n\nFernando Rios-Avila\n\n\n\n\n\n\n  \n\n\n\n\nStata vs R: The battle\n\n\n\n\n\n\n\nChatGPT\n\n\nStories\n\n\n\n\nChat-GPT creates a high fantasy battle between this titans\n\n\n\n\n\n\nMar 18, 2023\n\n\nChatGPT and Fernando Rios-Avila\n\n\n\n\n\n\n  \n\n\n\n\nTech Titans Rap Battle\n\n\n\n\n\n\n\nChatGPT\n\n\nRap Battle\n\n\n\n\nChat-GPT creates a rap battle between Siri, Alexa and Cortana. Who wins?\n\n\n\n\n\n\nMar 12, 2023\n\n\nChatGPT and Fernando Rios-Avila\n\n\n\n\n\n\nNo matching items"
+    "text": "How to write your own Installer\n\n\n\n\n\n\n\nStata\n\n\nTips\n\n\nProgramming\n\n\n\n\nI provide a small descriptio on how to use net to program an easy installer for your own repository\n\n\n\n\n\n\nMar 30, 2023\n\n\nFernando Rios-Avila\n\n\n\n\n\n\n  \n\n\n\n\nLoading Large Datasets\n\n\n\n\n\n\n\nStata\n\n\ntips\n\n\n\n\nuse in vs use if\n\n\n\n\n\n\nMar 27, 2023\n\n\nFernando Rios-Avila\n\n\n\n\n\n\n  \n\n\n\n\nAdding info to e() and r()\n\n\n\n\n\n\n\nStata\n\n\nProgramming\n\n\n\n\nI describe and introduce the programs adde and addr. They allow you to add and modify information to some Stata Objects\n\n\n\n\n\n\nMar 26, 2023\n\n\nFernando Rios-Avila\n\n\n\n\n\n\n  \n\n\n\n\nDrop 2.0: Small Stata Programming\n\n\n\n\n\n\n\nStata\n\n\nProgramming\n\n\n\n\nI describe and introduce the program drop2, for more flexible data dropping\n\n\n\n\n\n\nMar 25, 2023\n\n\nFernando Rios-Avila\n\n\n\n\n\n\n  \n\n\n\n\nStata vs R: The battle\n\n\n\n\n\n\n\nChatGPT\n\n\nStories\n\n\n\n\nChat-GPT creates a high fantasy battle between this titans\n\n\n\n\n\n\nMar 18, 2023\n\n\nChatGPT and Fernando Rios-Avila\n\n\n\n\n\n\n  \n\n\n\n\nTech Titans Rap Battle\n\n\n\n\n\n\n\nChatGPT\n\n\nRap Battle\n\n\n\n\nChat-GPT creates a rap battle between Siri, Alexa and Cortana. Who wins?\n\n\n\n\n\n\nMar 12, 2023\n\n\nChatGPT and Fernando Rios-Avila\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "cv.html",
@@ -306,6 +306,13 @@
     "title": "posts",
     "section": "",
     "text": "No matching items"
+  },
+  {
+    "objectID": "software.html",
+    "href": "software.html",
+    "title": "Stata: Contributed packages",
+    "section": "",
+    "text": "Hi, I can see you are interested in some of the programs I have written over the years. I have quite a few that are available from SSC. However, I recently open my own repository\nhttps://github.com/friosavila/stpackages\nIt will contain the most uptodate versions of my packages, that come with its own installer!\nSee how to write your own installer\nIf you encounter any problems. Let me know."
   },
   {
     "objectID": "stataviz/index.html",
