@@ -2,7 +2,7 @@
 title: "Adding info to e() and r()"
 description: "I describe and introduce the programs `adde` and `addr`. They allow you to add and modify information to some Stata Objects"
 author: "Fernando Rios-Avila"
-date: "3/25/2023"
+date: "3/26/2023"
 categories: 
     - Stata
     - Programming
