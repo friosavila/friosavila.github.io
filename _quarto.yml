@@ -85,7 +85,7 @@ format:
     toc: true
     fontsize: 1.1em
 execute:
-  freeze: false
+  freeze: auto
   
 jupyter: nbstata
   

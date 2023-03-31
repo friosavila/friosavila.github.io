@@ -91,6 +91,8 @@ The previous section shows how to produce waffle plots providing the data you wa
 Doing that would even allow you to create multiple plots using `by()`. I provide some examples next mix and matching many options.
 
 ```{stata}
+*| output: false
+set graph off
 sysuse pop2000, clear
 waffle_plot black indian asian island, /// provides 3 variables with Pop for each
 legend(order(1 "Black" 2 "Indian" 3 "Asian" 4 "Island") cols(4)) ///
@@ -99,30 +101,38 @@ total  /// This is different. Im asking to construct shares internally
 by(agegrp, title("Population Composition") /// Using by(), Notice (sub)Title
 compact subtitle("by Age group") note("") cols(6)) /// and Cols
 xnobs(15)  // Just Because I want to show a rectangle
+graph export sv10.png, height(500) width(800) replace
 ```
+![](sv10.png)
 
 This first one uses data directly from the cesus, to plot the proportion of Blacks, indian, asiand, and islanders by age group in the US. I excluded white population on purpose, so i want the numbers create the shares based on this 5 groups only. 
 
 ```{stata}
+*| output: false
 sysuse cancer, clear
 waffle_plot died, ///
 color0(gs15) /// Color for the left out 
 legend(off) /// Legend
 by(drug, cols(3)) sctopt(msize(3)) ///
 title("Share of people who died by Drug type") ///
-flip nobs(15) // two new things. FLIP and increase to 15x15
+flip nobs(15)   // two new things. FLIP and increase to 15x15 s
+graph export sv11.png, height(500) width(800) replace
 ```
+![](sv11.png)
 
 This one plots the share of people who died based on access to a particular drug. It uses `nobs()` to allow for more Dots, and flip, for a different way of presenting the information. 
 
 ```{stata}
+*| output: false
 sysuse voter, clear
 xi, noomit:waffle_plot i.cand [w=pop], /// Notice weights, and "factor"
 color(cranberry*0.7 navy*0.7 forest_green*.5) /// Special colors
 msize(4) mlcolor(black%50) ///
 by(inc, title("1992 President Elections") subtitle("by Family Income")) ///
-legend(order(1 "Clinton" 2 "Bush" 3 "Perot") cols(3))
+legend(order(1 "Clinton" 2 "Bush" 3 "Perot") cols(3)) 
+graph export sv12.png, height(500) replace
 ```
+![](sv12.png)
 
 This last one shows you can use the option "factor", you can also use weights, and make use of special colors selection.
 
@@ -134,8 +144,4 @@ In any case, this command does the heavy lifting, you can do the fineness.
 
 Til next time
 
-Right now it produces rather slow graphs when by() is used. Perhaps I can do my own version of it that is faster. 
 
-Comments? suggestions? Drop me a message!
-
-![WeeMee](https://friosavila.github.io/playingwithstata/img/WeeMee.jpg)
