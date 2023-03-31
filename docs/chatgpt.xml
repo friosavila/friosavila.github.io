@@ -9,8 +9,37 @@
 <link>https://friosavila.github.io/chatgpt.html</link>
 <atom:link href="https://friosavila.github.io/chatgpt.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.3.290</generator>
-<lastBuildDate>Thu, 30 Mar 2023 04:00:00 GMT</lastBuildDate>
+<generator>quarto-1.3.299</generator>
+<lastBuildDate>Fri, 31 Mar 2023 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>Why are my estimates changing every time I run my do-files?!</title>
+  <dc:creator>Fernando Rios-Avila</dc:creator>
+  <link>https://friosavila.github.io/chatgpt/rep_03_31_2023/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>I have read this problem quite a few times in <code>Statalist</code> as well as other forums to like <code>Stackoverflow</code>. You try to do the right thing. Write and document a <code>do-file</code>, to produce your results the same way every time, but, for some reason they key changing. The question is always <strong>Why?</strong></p>
+<p>Of course, there could be a large number of reasons you this is happening, but I will narrow them to the most common causes:</p>
+<ol type="1">
+<li><strong>randomness</strong> The first one is the most obvious. You may be trying to introduce in your program a procedure that relies on some random process. <strong>Bootstrap</strong> standard errors or creating of simulated data are the most common couses for this. Solution: <code>set seed</code>.</li>
+<li><strong>sort</strong> The second most common problem is because you have some statement in your <code>dofile</code> that relies on sorting data with ties. When this happens, the default solution in <code>Stata</code> is to randomly assign an order to observations with the same value, which may affect procedures that are order dependent (matching). This is not a problem when you are sorting fully identified data. But if ties exists, it may kick in. Solution: <code>set sortseed</code>. Although one should be careful in analyzing if this is the true cause of replicability, or rather the next option</li>
+<li><strong>merging</strong> Most merging procedures in <code>Stata</code> are well defined, and won’t cause any problem: 1:m, m:1 and 1:1 will not create much of a problem. However, there is the infamous <code>m:m</code>. As many other people may have said this before…you <strong>NEVER-EVER</strong> do <code>merge m:m</code>. If you think you need to do it, think of <code>jointby</code>, because <code>merge m:m</code> is always wrong. In fact, this may trigger a problem that may “seem” caused and solved as mentionted before, so be mindful.</li>
+<li><strong>Multicolinearity</strong> Something that occurs less often are problems related to multicolinearity. When two variables are collinear, and you are trying to estimate a linear or linear like model, <code>Stata</code> will try to fix the problem by dropping some observations before the estimation occurs. Most of the time, the excluded variable is the first one, but more often than not, the excluded variable would be at random. Solution: Revise your model specification.</li>
+</ol>
+<p>If you have other reasons you have found to cause problems replicating your results, let me know, and we can add them to the list.</p>
+
+
+<!-- -->
+
+
+ ]]></description>
+  <category>Stata</category>
+  <category>tips</category>
+  <guid>https://friosavila.github.io/chatgpt/rep_03_31_2023/index.html</guid>
+  <pubDate>Fri, 31 Mar 2023 04:00:00 GMT</pubDate>
+</item>
 <item>
   <title>How to write your own Installer</title>
   <dc:creator>Fernando Rios-Avila</dc:creator>

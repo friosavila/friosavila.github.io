@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.290">
+<meta name="generator" content="quarto-1.3.299">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -122,6 +122,9 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-LCL2C8L3JH', { 'anonymize_ip': true});
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -355,6 +358,9 @@ y_{it} = a_i + a_t + \delta_{it}*D_{it} +e_{it}
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> trt  = (t&gt;=g)*(g&gt;0)</span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> teff = <span class="kw">te</span> * trt </span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> <span class="fu">y</span> = ai + <span class="fu">at</span> + <span class="kw">te</span> * trt + eit</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<style>div.jp-Notebook .datagrid-container {min-height: 448px; }</style>
+</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Number of observations (_N) was 0, now 100.
 (18 real changes made)
@@ -392,52 +398,28 @@ y_{it} = a_i + a_t + e_{it} \ if \ t&lt;g
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-Step 1</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Iteration 0:   GMM criterion Q(b) =  19.725543  </code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Iteration 1:   GMM criterion Q(b) =  5.816e-23  </code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Iteration 2:   GMM criterion Q(b) =  9.081e-33  </code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
+Step 1
+Iteration 0:   GMM criterion Q(b) =  19.725543  
+Iteration 1:   GMM criterion Q(b) =  5.816e-23  
+Iteration 2:   GMM criterion Q(b) =  9.081e-33  
+
 GMM estimation 
 
 Number of parameters =  19
 Number of moments    =  20
 Initial weight matrix: Identity                   Number of obs   =      1,000
-</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>                                   (Std. err. adjusted for 100 clusters in id)
-------------------------------------------------------------------------------</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>             |               Robust</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>             | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>-------------+----------------------------------------------------------------
-a0           |</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>       _cons |</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   3.146414   .6822892     4.61   0.000     1.809152    4.483677
+
+                                   (Std. err. adjusted for 100 clusters in id)
+------------------------------------------------------------------------------
+             |               Robust
+             | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+a0           |
+       _cons |   3.146414   .6822892     4.61   0.000     1.809152    4.483677
 -------------+----------------------------------------------------------------
 a_i          |
            g |
-          2  |</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>  -1.329894   .9540798    -1.39   0.163    -3.199856    .5400685
+          2  |  -1.329894   .9540798    -1.39   0.163    -3.199856    .5400685
           3  |   .3303121   .9832247     0.34   0.737    -1.596773    2.257397
           4  |  -.9533545   .8233816    -1.16   0.247    -2.567153    .6604439
           5  |  -.9570973   .8366389    -1.14   0.253    -2.596879    .6826848
@@ -460,10 +442,8 @@ a_t          |
 -------------+----------------------------------------------------------------
 att          |
          trt |   1.458058   .1493165     9.76   0.000     1.165403    1.750713
-------------------------------------------------------------------------------</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Instruments for equation 1: 0b.g 2.g 3.g 4.g 5.g 6.g 7.g 8.g 9.g 1b.t 2.t 3.t 4.t 5.t 6.t 7.t 8.t 9.t 10.t _cons
+------------------------------------------------------------------------------
+Instruments for equation 1: 0b.g 2.g 3.g 4.g 5.g 6.g 7.g 8.g 9.g 1b.t 2.t 3.t 4.t 5.t 6.t 7.t 8.t 9.t 10.t _cons
 Instruments for equation 2: trt _cons</code></pre>
 </div>
 </div>
@@ -471,7 +451,7 @@ Instruments for equation 2: trt _cons</code></pre>
 <div class="cell" data-execution_count="3">
 <details>
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">sum</span> teff <span class="kw">if</span> trt==1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">sum</span> teff <span class="kw">if</span> trt==1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -481,16 +461,16 @@ Instruments for equation 2: trt _cons</code></pre>
 </div>
 </div>
 <p>One advantage of this approach is that you could model the second stage to allow other types of aggregations:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> g0=g*trt    </span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> t0=t*trt</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>gmm ((<span class="fu">y</span>-{a0}-{a_i:i.g}-{a_t:i.t})*(trt==0)) <span class="co">///</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>    ((<span class="fu">y</span>-{a0}-{a_i:}   -{a_t:}    -{att:i.g0})) , <span class="co">///</span></span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>    winitial(<span class="kw">identity</span>)  instruments(1:i.g i.t) instruments(1: i.g0) <span class="co">///</span></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    onestep quickderivatives <span class="kw">vce</span>(<span class="kw">cluster</span> i) </span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>gmm ((<span class="fu">y</span>-{a0}-{a_i:i.g}-{a_t:i.t})*(trt==0)) <span class="co">///</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>    ((<span class="fu">y</span>-{a0}-{a_i:}   -{a_t:}    -{att:i.t0})) , <span class="co">///</span></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    winitial(<span class="kw">identity</span>)  instruments(1:i.g i.t) instruments(2: i.t0) <span class="co">///</span></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    onestep quickderivatives <span class="kw">vce</span>(<span class="kw">cluster</span> i)             </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> g0=g*trt    </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> t0=t*trt</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>gmm ((<span class="fu">y</span>-{a0}-{a_i:i.g}-{a_t:i.t})*(trt==0)) <span class="co">///</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    ((<span class="fu">y</span>-{a0}-{a_i:}   -{a_t:}    -{att:i.g0})) , <span class="co">///</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    winitial(<span class="kw">identity</span>)  instruments(1:i.g i.t) instruments(1: i.g0) <span class="co">///</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    onestep quickderivatives <span class="kw">vce</span>(<span class="kw">cluster</span> i) </span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>gmm ((<span class="fu">y</span>-{a0}-{a_i:i.g}-{a_t:i.t})*(trt==0)) <span class="co">///</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    ((<span class="fu">y</span>-{a0}-{a_i:}   -{a_t:}    -{att:i.t0})) , <span class="co">///</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    winitial(<span class="kw">identity</span>)  instruments(1:i.g i.t) instruments(2: i.t0) <span class="co">///</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>    onestep quickderivatives <span class="kw">vce</span>(<span class="kw">cluster</span> i)             </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </section>
 </section>
 <section id="you-dont-messup-with-ols" class="level3">
@@ -518,48 +498,29 @@ y_{it} = a_i + a_t + \sum_{g=g_0}^G \sum_{t\neq g-1} \delta_{gt} * 1(g,t)+e_{it}
 <p>Now for the application, I will use <code>jwdid</code> for both specifications. Because by default <code>jwdid</code> produces the fully saturated model, I will omit those results, showing only the average treatment effect.</p>
 <p>First the one using not-yet treated units as controls (default), which produces exactly the same results as the two-step approach:</p>
 <div class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ssc</span> install jwdid</span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>: jwdid <span class="fu">y</span>, ivar(i) tvar(t) gvar(g)</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="kw">estat</span> simple</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ssc</span> install jwdid</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>: jwdid <span class="fu">y</span>, ivar(i) tvar(t) gvar(g)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">estat</span> simple</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>checking jwdid consistency and verifying not already installed...</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>all files already exist and are up to date.</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>WARNING: Singleton observations not dropped; statistical significance is biased (link)</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>------------------------------------------------------------------------------</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>             |            Delta-method</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>             | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>-------------+----------------------------------------------------------------
+<pre><code>checking jwdid consistency and verifying not already installed...
+all files already exist and are up to date.
+WARNING: Singleton observations not dropped; statistical significance is biased (link)
+------------------------------------------------------------------------------
+             |            Delta-method
+             | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
          _at |
-   (2 vs 1)  |</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>   1.458058   .1494798     9.75   0.000     1.165083    1.751033</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>------------------------------------------------------------------------------</code></pre>
+   (2 vs 1)  |   1.458058   .1494798     9.75   0.000     1.165083    1.751033
+------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
 <p>Second the one with never treated units as controls:</p>
 <div class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>: jwdid <span class="fu">y</span>, ivar(i) tvar(t) gvar(g) never</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a><span class="kw">estat</span> simple</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>: jwdid <span class="fu">y</span>, ivar(i) tvar(t) gvar(g) never</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">estat</span> simple</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>WARNING: Singleton observations not dropped; statistical significance is biased (link)</code></pre>
-</div>
-<div class="cell-output cell-output-stdout">
-<pre><code>------------------------------------------------------------------------------
+<pre><code>WARNING: Singleton observations not dropped; statistical significance is biased (link)
+------------------------------------------------------------------------------
              |            Delta-method
              | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
 -------------+----------------------------------------------------------------
@@ -593,10 +554,10 @@ SATT = \sum \left( \frac{w_{gt} }{\sum w_{gt}}ATT(g,t) \right)
 <p>This multiple stage process may seem challening, but there are tools that allow you to implement them quite easily: <code>csdid</code> and <code>csdid2</code>. The first one, was written as a wrapper around <code>drdid</code>, to do all the heavy lifting for you. However, for large projects, it can be slow due to overhead. The alternative <code>csdid2</code> is self contained, still under development, but much faster than the predecesor. See <a href="https://github.com/friosavila/csdid2"><code>csdid2</code></a> if interested. Here I will use <code>csdid</code>, which you can get from SSC.</p>
 <p>As with <code>jwdid</code>. The default option is for <code>csdid</code> to produce all ATTGT’s. So, for the excercise, I’ll omit that ouput, and estimate the aggregate effects with the post estimation command. The default is to use the never treated as controls. I will also add the option <code>long2</code> to obtain the pre-treatment ATTGT’s as describe above, even though they won’t affect our point estimates:</p>
 <div class="cell" data-execution_count="6">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>: <span class="kw">ssc</span> install drdid, <span class="kw">replace</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>: <span class="kw">ssc</span> install csdid, <span class="kw">replace</span></span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>: csdid <span class="fu">y</span>, ivar(i) time(t) gvar(g) long2</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="kw">estat</span> simple </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>: <span class="kw">ssc</span> install drdid, <span class="kw">replace</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>: <span class="kw">ssc</span> install csdid, <span class="kw">replace</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>: csdid <span class="fu">y</span>, ivar(i) time(t) gvar(g) long2</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="kw">estat</span> simple </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Average Treatment Effect on Treated
 ------------------------------------------------------------------------------
@@ -608,8 +569,8 @@ SATT = \sum \left( \frac{w_{gt} }{\sum w_{gt}}ATT(g,t) \right)
 </div>
 <p>I will also use the not yet treated, to compare results.</p>
 <div class="cell" data-execution_count="7">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>: csdid <span class="fu">y</span>, ivar(i) time(t) gvar(g) notyet long2</span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="kw">estat</span> simple </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>: csdid <span class="fu">y</span>, ivar(i) time(t) gvar(g) notyet long2</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">estat</span> simple </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Average Treatment Effect on Treated
 ------------------------------------------------------------------------------
@@ -980,253 +941,253 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
-<div class="sourceCode" id="cb37" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "DID: The Revolution"</span></span>
-<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "How to right the wrongs"</span></span>
-<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a><span class="an">bibliography:</span><span class="co"> references.bib</span></span>
-<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introduction</span></span>
-<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>If you have been keeping up with the advancements and revolution in Difference-in-Differences (DID), you may be aware of the issues associated with using the simple Two-Way Fixed Effects (TWFE) method for identifying treatment effects. If you haven't, you can refer to my previous post titled **DID: The fall** where I have explained the problem.</span>
-<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>The issue can be summarized as follows:</span>
-<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>When multiple periods and groups are available, and the treatment has been implemented over several periods, the standard TWFE method is unlikely to identify the average treatment effects. This is because it tends to use inadequate controls, gives negative weights to treated units, and generally suffers from contamination that leads to biased estimates.</span>
-<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>As far as I know, the following model can only estimate average treatment effects if treatment effects remain constant over time:</span>
-<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>y_{it} = a_i + a_t + \delta D_{it} + e_{it}</span>
-<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a>where $D_{it}=1$ if a unit is effectively treated, $a_i$ represents the unit fixed effects, and $a_t$ time fixed effects.</span>
-<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-22"><a href="#cb37-22" aria-hidden="true" tabindex="-1"></a><span class="fu">## Solutions</span></span>
-<span id="cb37-23"><a href="#cb37-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-24"><a href="#cb37-24" aria-hidden="true" tabindex="-1"></a>Despite the challenges previously discussed, there is still hope for the successful implementation of DID. Numerous scholars have proposed various strategies that specifically address the issues at hand, as hinted in **DID: the Fall.**</span>
-<span id="cb37-25"><a href="#cb37-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-26"><a href="#cb37-26" aria-hidden="true" tabindex="-1"></a>In this context, I will provide a brief overview of three such solutions, two of which I am actively involved in, and one that is relatively straightforward to comprehend and articulate.</span>
-<span id="cb37-27"><a href="#cb37-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-28"><a href="#cb37-28" aria-hidden="true" tabindex="-1"></a><span class="fu">### Setup</span></span>
-<span id="cb37-29"><a href="#cb37-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-30"><a href="#cb37-30" aria-hidden="true" tabindex="-1"></a>Let us establish some fundamental nomenclature before we delve into the solution. This terminology will help understand and implement the solutions we will cover next.</span>
-<span id="cb37-31"><a href="#cb37-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-32"><a href="#cb37-32" aria-hidden="true" tabindex="-1"></a>Before we start discussing the solution, lets stablish some basic nomenclature that may help us understand and implement the solutions we will be discussing later on.</span>
-<span id="cb37-33"><a href="#cb37-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-34"><a href="#cb37-34" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>For simplicity,  we will focus on the case of balanced panel data. All units $i$ will be observed for $T$ periods, from $t=1$ to $t=T$.</span>
-<span id="cb37-35"><a href="#cb37-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-36"><a href="#cb37-36" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>At any given time, individual outcomes are defined as follows:</span>
-<span id="cb37-37"><a href="#cb37-37" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb37-38"><a href="#cb37-38" aria-hidden="true" tabindex="-1"></a>y_{it} = a_i + a_t + \delta_{it}*D_{it} +e_{it}</span>
-<span id="cb37-39"><a href="#cb37-39" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb37-40"><a href="#cb37-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-41"><a href="#cb37-41" aria-hidden="true" tabindex="-1"></a>where $a_i$ is the individual fixed effect, $a_t$ is a time fixed effect, and $e_{it}$ is an individual level iid error. </span>
-<span id="cb37-42"><a href="#cb37-42" aria-hidden="true" tabindex="-1"></a>$D_{it}$ is a dummy variable that takes the value of 1 after a unit is treated. </span>
-<span id="cb37-43"><a href="#cb37-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-44"><a href="#cb37-44" aria-hidden="true" tabindex="-1"></a>Notice that here, the treatment effect fully heterogeneous. </span>
-<span id="cb37-45"><a href="#cb37-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-46"><a href="#cb37-46" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Once a unit has been treated, it remains so, even if the effect eventually fades away. (if $D_{it}=1 \rightarrow D_{is}=1 \ \forall \ s&gt;t$)</span>
-<span id="cb37-47"><a href="#cb37-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-48"><a href="#cb37-48" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>There is variation in treatment timing, and as a result, the treatment dummy is not activated for everyone at the same time.</span>
-<span id="cb37-49"><a href="#cb37-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-50"><a href="#cb37-50" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Assume there are no controls.</span>
-<span id="cb37-51"><a href="#cb37-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-52"><a href="#cb37-52" aria-hidden="true" tabindex="-1"></a>Under this conditions, lets simulate a simple dataset with this characteristics:</span>
-<span id="cb37-53"><a href="#cb37-53" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-56"><a href="#cb37-56" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
-<span id="cb37-57"><a href="#cb37-57" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
-<span id="cb37-58"><a href="#cb37-58" aria-hidden="true" tabindex="-1"></a><span class="in">clear</span></span>
-<span id="cb37-59"><a href="#cb37-59" aria-hidden="true" tabindex="-1"></a><span class="in">set linesize 250</span></span>
-<span id="cb37-60"><a href="#cb37-60" aria-hidden="true" tabindex="-1"></a><span class="in">set seed     111</span></span>
-<span id="cb37-61"><a href="#cb37-61" aria-hidden="true" tabindex="-1"></a><span class="in">set sortseed 111</span></span>
-<span id="cb37-62"><a href="#cb37-62" aria-hidden="true" tabindex="-1"></a><span class="in">set obs 100  // &lt;- 100 units</span></span>
-<span id="cb37-63"><a href="#cb37-63" aria-hidden="true" tabindex="-1"></a><span class="in">gen id = _n</span></span>
-<span id="cb37-64"><a href="#cb37-64" aria-hidden="true" tabindex="-1"></a><span class="in">gen ai = rchi2(2)</span></span>
-<span id="cb37-65"><a href="#cb37-65" aria-hidden="true" tabindex="-1"></a><span class="in">// determines When would units receive treatment</span></span>
-<span id="cb37-66"><a href="#cb37-66" aria-hidden="true" tabindex="-1"></a><span class="in">gen     g = runiformint(2,10)</span></span>
-<span id="cb37-67"><a href="#cb37-67" aria-hidden="true" tabindex="-1"></a><span class="in">replace g = 0 if g&gt;9   // never treated       </span></span>
-<span id="cb37-68"><a href="#cb37-68" aria-hidden="true" tabindex="-1"></a><span class="in">expand 10   // &lt;-T=10</span></span>
-<span id="cb37-69"><a href="#cb37-69" aria-hidden="true" tabindex="-1"></a><span class="in">bysort id:gen t=_n </span></span>
-<span id="cb37-70"><a href="#cb37-70" aria-hidden="true" tabindex="-1"></a><span class="in">gen event = max(0,t-g)</span></span>
-<span id="cb37-71"><a href="#cb37-71" aria-hidden="true" tabindex="-1"></a><span class="in">gen aux = runiform()*2</span></span>
-<span id="cb37-72"><a href="#cb37-72" aria-hidden="true" tabindex="-1"></a><span class="in">bysort t:gen at = aux[1] // Determines Time fixed effect</span></span>
-<span id="cb37-73"><a href="#cb37-73" aria-hidden="true" tabindex="-1"></a><span class="in">gen te = (1-g/10)+(1-event/10)  </span></span>
-<span id="cb37-74"><a href="#cb37-74" aria-hidden="true" tabindex="-1"></a><span class="in">// Treatment effect but vanishes with time</span></span>
-<span id="cb37-75"><a href="#cb37-75" aria-hidden="true" tabindex="-1"></a><span class="in">gen eit= rnormal()</span></span>
-<span id="cb37-76"><a href="#cb37-76" aria-hidden="true" tabindex="-1"></a><span class="in">gen trt  = (t&gt;=g)*(g&gt;0)</span></span>
-<span id="cb37-77"><a href="#cb37-77" aria-hidden="true" tabindex="-1"></a><span class="in">gen teff = te * trt </span></span>
-<span id="cb37-78"><a href="#cb37-78" aria-hidden="true" tabindex="-1"></a><span class="in">gen y = ai + at + te * trt + eit</span></span>
-<span id="cb37-79"><a href="#cb37-79" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb37-80"><a href="#cb37-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-81"><a href="#cb37-81" aria-hidden="true" tabindex="-1"></a>The simulated data will follow 100 units over a span of 10 periods. Each unit is assigned to receive treatment at some point between periods 2 and 9, while 1/10 of the sample is not treated at all.</span>
-<span id="cb37-82"><a href="#cb37-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-83"><a href="#cb37-83" aria-hidden="true" tabindex="-1"></a>The impact of the treatment depends on two factors: the timing of treatment and the duration of treatment. The treatment effect becomes smaller the later a unit is treated, and as a unit is treated for longer durations.</span>
-<span id="cb37-84"><a href="#cb37-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-85"><a href="#cb37-85" aria-hidden="true" tabindex="-1"></a><span class="fu">### Two-Steps DID</span></span>
-<span id="cb37-86"><a href="#cb37-86" aria-hidden="true" tabindex="-1"></a><span class="fu">#### @gardner_two-stage_2022 `did2s` &amp;  @borusyak_revisiting_2022 `did_imputation`</span></span>
-<span id="cb37-87"><a href="#cb37-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-88"><a href="#cb37-88" aria-hidden="true" tabindex="-1"></a>Let's start by desribing one of the solutions solutions: the two-step DID, also referred to as the imputation approach. This strategy is explained and explored by two notable papers: @gardner_two-stage_2022 and @borusyak_revisiting_2022.</span>
-<span id="cb37-89"><a href="#cb37-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-90"><a href="#cb37-90" aria-hidden="true" tabindex="-1"></a>As the name implies, this approach aims to estimate treatment effects in a design with multiple groups treated at various points in time by imputing the values of what would have occurred to those units if they were never subjected to treatment. To accomplish this, the authors suggest breaking down the identification problem into two steps to avoid the erroneous use of already treated units as controls.</span>
-<span id="cb37-91"><a href="#cb37-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-92"><a href="#cb37-92" aria-hidden="true" tabindex="-1"></a>In the first step, one should only use units that have never been treated or have not yet been treated to model potential outcomes under the no-treatment scenario.</span>
-<span id="cb37-93"><a href="#cb37-93" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-94"><a href="#cb37-94" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb37-95"><a href="#cb37-95" aria-hidden="true" tabindex="-1"></a>y_{it} = a_i + a_t + e_{it} \ if \ t<span class="kw">&lt;g</span></span>
-<span id="cb37-96"><a href="#cb37-96" aria-hidden="true" tabindex="-1"></a><span class="er">$$</span></span>
-<span id="cb37-97"><a href="#cb37-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-98"><a href="#cb37-98" aria-hidden="true" tabindex="-1"></a><span class="ot">Doing</span> <span class="er">this,</span> <span class="er">the</span> <span class="er">fixed</span> <span class="er">effects</span> <span class="er">$a_i$</span> <span class="er">and</span> <span class="er">$a_t$</span> <span class="er">would</span> <span class="er">not</span> <span class="er">be</span> <span class="er">contaminated</span> <span class="er">by</span> <span class="er">the</span> <span class="er">treatment,</span> <span class="er">because</span> <span class="er">non</span> <span class="er">of</span> <span class="er">the</span> <span class="er">units</span> <span class="er">in</span> <span class="er">the</span> <span class="er">sample</span> <span class="er">are</span> <span class="er">treated.</span> </span>
-<span id="cb37-99"><a href="#cb37-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-100"><a href="#cb37-100" aria-hidden="true" tabindex="-1"></a><span class="ot">In</span> <span class="er">the</span> <span class="er">second</span> <span class="er">step,</span> <span class="er">individual-level</span> <span class="er">treatment</span> <span class="er">effects</span> <span class="er">predictions</span> <span class="er">can</span> <span class="er">be</span> <span class="er">obtained</span> <span class="er">by</span> <span class="er">simply</span> <span class="er">computing</span> <span class="er">the</span> <span class="er">difference</span> <span class="er">between</span> <span class="er">the</span> <span class="er">observed</span> <span class="er">outcome</span> <span class="er">under</span> <span class="er">treatment</span> <span class="er">and</span> <span class="er">the</span> <span class="er">prediction</span> <span class="er">of</span> <span class="er">the</span>  <span class="er">first</span> <span class="er">step</span> <span class="er">($\hat</span> <span class="er">y_{it}</span> <span class="ot">=</span> <span class="st">\hat</span> <span class="er">a_i</span> <span class="er">+</span> <span class="er">\hat</span> <span class="er">a</span> <span class="er">_t$),</span> <span class="er">which</span> <span class="er">represent</span> <span class="er">the</span> <span class="er">potential</span> <span class="er">outcomes</span> <span class="er">of</span> <span class="er">those</span> <span class="er">units</span> <span class="er">if</span> <span class="er">no</span> <span class="er">treatment</span> <span class="er">occured.</span></span>
-<span id="cb37-101"><a href="#cb37-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-102"><a href="#cb37-102" aria-hidden="true" tabindex="-1"></a><span class="er">$$</span></span>
-<span id="cb37-103"><a href="#cb37-103" aria-hidden="true" tabindex="-1"></a><span class="er">\delta_{it}</span> <span class="ot">=</span> <span class="st">y_{it}-\hat</span> <span class="er">a_i</span> <span class="er">-</span> <span class="er">\hat</span> <span class="er">a_t</span></span>
-<span id="cb37-104"><a href="#cb37-104" aria-hidden="true" tabindex="-1"></a><span class="er">$$</span></span>
-<span id="cb37-105"><a href="#cb37-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-106"><a href="#cb37-106" aria-hidden="true" tabindex="-1"></a><span class="ot">Because</span> <span class="er">unit</span> <span class="er">level</span> <span class="er">treatment</span> <span class="er">effects</span> <span class="er">are</span> <span class="er">not</span> <span class="er">useful</span> <span class="er">for</span> <span class="er">statistical</span> <span class="er">inference,</span> <span class="er">one</span> <span class="er">can</span> <span class="er">use</span> <span class="er">aggregations</span> <span class="er">to</span> <span class="er">obtain</span> <span class="er">standard</span> <span class="er">errors</span> <span class="er">or</span> <span class="er">aggregates</span> <span class="er">we</span> <span class="er">are</span> <span class="er">more</span> <span class="er">familiar</span> <span class="er">with:</span> <span class="er">Average</span> <span class="er">treatment</span> <span class="er">effect</span> <span class="er">on</span> <span class="er">treated,</span> <span class="er">dynamic</span> <span class="er">effects,</span> <span class="er">etc.</span></span>
-<span id="cb37-107"><a href="#cb37-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-108"><a href="#cb37-108" aria-hidden="true" tabindex="-1"></a><span class="ot">To</span> <span class="er">correctly</span> <span class="er">estimate</span> <span class="er">standard</span> <span class="er">errors,</span> <span class="er">both</span> <span class="er">steps</span> <span class="er">should</span> <span class="er">be</span> <span class="er">estimated</span> <span class="er">simulatenously,</span> <span class="er">so</span> <span class="er">that</span> <span class="er">the</span> <span class="er">estimation</span> <span class="er">error</span> <span class="er">from</span> <span class="er">the</span> <span class="er">first</span> <span class="er">stage</span> <span class="er">can</span> <span class="er">propagate</span> <span class="er">to</span> <span class="er">the</span> <span class="er">second</span> <span class="er">stage.</span> <span class="er">While</span> <span class="er">you</span> <span class="er">can</span> <span class="er">use</span> <span class="er">`did2s`</span> <span class="er">or</span> <span class="er">`did_imputation`,</span> <span class="er">I</span> <span class="er">will</span> <span class="er">show</span> <span class="er">you</span> <span class="er">the</span> <span class="er">code</span> <span class="er">using</span> <span class="er">`gmm`,</span> <span class="er">so</span> <span class="er">you</span> <span class="er">can</span> <span class="er">see</span> <span class="er">how</span> <span class="er">the</span> <span class="er">whole</span> <span class="er">system</span> <span class="er">would</span> <span class="er">work.</span></span>
-<span id="cb37-109"><a href="#cb37-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-110"><a href="#cb37-110" aria-hidden="true" tabindex="-1"></a><span class="ot">In</span> <span class="er">the</span> <span class="er">following</span> <span class="er">code</span> <span class="er">line</span> <span class="er">(1)</span> <span class="er">identifies</span> <span class="er">the</span> <span class="er">individual</span> <span class="er">and</span> <span class="er">time</span> <span class="er">FE</span> <span class="er">using</span> <span class="er">only</span> <span class="er">notyet</span> <span class="er">treated</span> <span class="er">units</span> <span class="er">(trt</span><span class="ot">=</span><span class="st">0).</span> <span class="er">Line</span> <span class="er">2</span> <span class="er">uses</span> <span class="er">tha</span> <span class="er">to</span> <span class="er">substract</span> <span class="er">from</span> <span class="er">$y$</span> <span class="er">and</span> <span class="er">identify</span> <span class="er">the</span> <span class="er">treatment</span> <span class="er">effect</span> <span class="er">(ATT).</span> <span class="er">Lines</span> <span class="er">3</span> <span class="er">and</span> <span class="er">4</span>  <span class="er">provides</span> <span class="er">information</span> <span class="er">to</span> <span class="er">gmm</span> <span class="er">to</span> <span class="er">estimate</span> <span class="er">the</span> <span class="er">model</span> <span class="er">and</span> <span class="er">standard</span> <span class="er">errors:</span></span>
-<span id="cb37-111"><a href="#cb37-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-114"><a href="#cb37-114" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
-<span id="cb37-115"><a href="#cb37-115" aria-hidden="true" tabindex="-1"></a><span class="ot">gmm</span> <span class="er">((y-{a0}-{a_i:i.g}-{a_t:i.t})*(trt</span><span class="ot">=</span><span class="st">=0))</span>     <span class="er">///</span> </span>
-<span id="cb37-116"><a href="#cb37-116" aria-hidden="true" tabindex="-1"></a><span class="ot">    (</span><span class="er">(y-{a0}-{a_i:}</span>   <span class="er">-{a_t:}</span>    <span class="er">-{att:trt}))</span> <span class="er">,</span> <span class="er">///</span> </span>
-<span id="cb37-117"><a href="#cb37-117" aria-hidden="true" tabindex="-1"></a><span class="ot">    winitial</span><span class="er">(identity)</span>  <span class="er">instruments(1:i.g</span> <span class="er">i.t)</span> <span class="er">instruments(2:</span> <span class="er">trt)</span> <span class="er">///</span> </span>
-<span id="cb37-118"><a href="#cb37-118" aria-hidden="true" tabindex="-1"></a><span class="ot">    onestep</span> <span class="er">quickderivatives</span> <span class="er">vce(cluster</span> <span class="er">i)</span>  </span>
-<span id="cb37-119"><a href="#cb37-119" aria-hidden="true" tabindex="-1"></a><span class="er">```</span></span>
-<span id="cb37-120"><a href="#cb37-120" aria-hidden="true" tabindex="-1"></a><span class="ot">You</span> <span class="er">can</span> <span class="er">compare</span> <span class="er">this</span> <span class="er">to</span> <span class="er">the</span> <span class="er">true</span> <span class="er">effect:</span></span>
-<span id="cb37-123"><a href="#cb37-123" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
-<span id="cb37-124"><a href="#cb37-124" aria-hidden="true" tabindex="-1"></a><span class="ot">sum</span> <span class="er">teff</span> <span class="er">if</span> <span class="er">trt</span><span class="ot">=</span><span class="st">=1</span></span>
-<span id="cb37-125"><a href="#cb37-125" aria-hidden="true" tabindex="-1"></a><span class="er">```</span></span>
-<span id="cb37-126"><a href="#cb37-126" aria-hidden="true" tabindex="-1"></a><span class="ot">One</span> <span class="er">advantage</span> <span class="er">of</span> <span class="er">this</span> <span class="er">approach</span> <span class="er">is</span> <span class="er">that</span> <span class="er">you</span> <span class="er">could</span> <span class="er">model</span> <span class="er">the</span> <span class="er">second</span> <span class="er">stage</span> <span class="er">to</span> <span class="er">allow</span> <span class="er">other</span> <span class="er">types</span> <span class="er">of</span> <span class="er">aggregations:</span></span>
-<span id="cb37-127"><a href="#cb37-127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-128"><a href="#cb37-128" aria-hidden="true" tabindex="-1"></a><span class="er">```stata</span></span>
-<span id="cb37-129"><a href="#cb37-129" aria-hidden="true" tabindex="-1"></a><span class="ot">gen</span> <span class="er">g0</span><span class="ot">=</span><span class="st">g*trt</span>    </span>
-<span id="cb37-130"><a href="#cb37-130" aria-hidden="true" tabindex="-1"></a><span class="ot">gen</span> <span class="er">t0</span><span class="ot">=</span><span class="st">t*trt</span></span>
-<span id="cb37-131"><a href="#cb37-131" aria-hidden="true" tabindex="-1"></a><span class="ot">gmm</span> <span class="er">((y-{a0}-{a_i:i.g}-{a_t:i.t})*(trt</span><span class="ot">=</span><span class="st">=0))</span> <span class="er">///</span></span>
-<span id="cb37-132"><a href="#cb37-132" aria-hidden="true" tabindex="-1"></a><span class="ot">    (</span><span class="er">(y-{a0}-{a_i:}</span>   <span class="er">-{a_t:}</span>    <span class="er">-{att:i.g0}))</span> <span class="er">,</span> <span class="er">///</span></span>
-<span id="cb37-133"><a href="#cb37-133" aria-hidden="true" tabindex="-1"></a><span class="ot">    winitial</span><span class="er">(identity)</span>  <span class="er">instruments(1:i.g</span> <span class="er">i.t)</span> <span class="er">instruments(1:</span> <span class="er">i.g0)</span> <span class="er">///</span></span>
-<span id="cb37-134"><a href="#cb37-134" aria-hidden="true" tabindex="-1"></a><span class="ot">    onestep</span> <span class="er">quickderivatives</span> <span class="er">vce(cluster</span> <span class="er">i)</span> </span>
-<span id="cb37-135"><a href="#cb37-135" aria-hidden="true" tabindex="-1"></a><span class="ot">gmm</span> <span class="er">((y-{a0}-{a_i:i.g}-{a_t:i.t})*(trt</span><span class="ot">=</span><span class="st">=0))</span> <span class="er">///</span></span>
-<span id="cb37-136"><a href="#cb37-136" aria-hidden="true" tabindex="-1"></a><span class="ot">    (</span><span class="er">(y-{a0}-{a_i:}</span>   <span class="er">-{a_t:}</span>    <span class="er">-{att:i.t0}))</span> <span class="er">,</span> <span class="er">///</span></span>
-<span id="cb37-137"><a href="#cb37-137" aria-hidden="true" tabindex="-1"></a><span class="ot">    winitial</span><span class="er">(identity)</span>  <span class="er">instruments(1:i.g</span> <span class="er">i.t)</span> <span class="er">instruments(2:</span> <span class="er">i.t0)</span> <span class="er">///</span></span>
-<span id="cb37-138"><a href="#cb37-138" aria-hidden="true" tabindex="-1"></a><span class="ot">    onestep</span> <span class="er">quickderivatives</span> <span class="er">vce(cluster</span> <span class="er">i)</span>             </span>
-<span id="cb37-139"><a href="#cb37-139" aria-hidden="true" tabindex="-1"></a><span class="er">```</span>    </span>
-<span id="cb37-140"><a href="#cb37-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-141"><a href="#cb37-141" aria-hidden="true" tabindex="-1"></a><span class="ot">#</span><span class="er">##</span> <span class="er">You</span> <span class="er">don't</span> <span class="er">messup</span> <span class="er">with</span> <span class="er">OLS</span></span>
-<span id="cb37-142"><a href="#cb37-142" aria-hidden="true" tabindex="-1"></a><span class="ot">#</span><span class="er">###</span> <span class="er">@wooldridge_twoway_2021</span> <span class="er">`jwdid`</span> <span class="er">and</span> <span class="er">@sun_estimating_2021</span></span>
-<span id="cb37-143"><a href="#cb37-143" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-144"><a href="#cb37-144" aria-hidden="true" tabindex="-1"></a><span class="ot">In</span> <span class="er">the</span> <span class="er">article</span> <span class="er">**DID:</span> <span class="er">the</span> <span class="er">fall**,</span> <span class="er">it</span> <span class="er">was</span> <span class="er">pointed</span> <span class="er">out</span> <span class="er">that</span> <span class="er">the</span> <span class="er">conventional</span> <span class="er">TWFE</span> <span class="er">approach</span> <span class="er">has</span> <span class="er">faced</span> <span class="er">significant</span> <span class="er">backlash</span> <span class="er">due</span> <span class="er">to</span> <span class="er">its</span> <span class="er">limited</span> <span class="er">ability</span> <span class="er">to</span> <span class="er">detect</span> <span class="er">treatment</span> <span class="er">effects,</span> <span class="er">because</span> <span class="er">it</span> <span class="er">cannot</span> <span class="er">distinguish</span> <span class="er">between</span> <span class="er">good</span> <span class="er">and</span> <span class="er">bad</span> <span class="er">variation</span> <span class="er">when</span> <span class="er">estimating</span> <span class="er">treatment</span> <span class="er">effects.</span> <span class="er">Despite</span> <span class="er">this</span> <span class="er">criticism,</span> <span class="er">Professor</span> <span class="er">Wooldridge</span> <span class="er">came</span> <span class="er">in</span> <span class="er">defense</span> <span class="er">and</span> <span class="er">revitalized</span> <span class="er">the</span> <span class="er">approach</span> <span class="er">by</span> <span class="er">emphasizing</span> <span class="er">its</span> <span class="er">simplicity</span> <span class="er">and</span> <span class="er">versatility,</span> <span class="er">enabling</span> <span class="er">extensions</span> <span class="er">to</span> <span class="er">go</span> <span class="er">beyond</span> <span class="er">linear</span> <span class="er">models.</span></span>
-<span id="cb37-145"><a href="#cb37-145" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-146"><a href="#cb37-146" aria-hidden="true" tabindex="-1"></a><span class="ot">The</span> <span class="er">message</span> <span class="er">was</span> <span class="er">simple:</span></span>
-<span id="cb37-147"><a href="#cb37-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-148"><a href="#cb37-148" aria-hidden="true" tabindex="-1"></a><span class="kw">&gt;</span> Although the conventional TWFE method has several shortcomings, if it is implemented correctly, it can overcome the issue of utilizing inadequate controls in estimation. As a result, it can estimate treatment effects efficiently, with results similar to @borusyak_revisiting_2022 and @gardner_two-stage_2022.</span>
-<span id="cb37-149"><a href="#cb37-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-150"><a href="#cb37-150" aria-hidden="true" tabindex="-1"></a>So what were we missing? Heterogeneity!</span>
-<span id="cb37-151"><a href="#cb37-151" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-152"><a href="#cb37-152" aria-hidden="true" tabindex="-1"></a>Both @wooldridge_twoway_2021 and @sun_estimating_2021 have proposed similar solutions to the problem at hand, albeit from different viewpoints. @sun_estimating_2021 argued that utilizing event studies with leads and lags may lead to contaminated coefficients, thus hampering proper identification of dynamic treatment effects. As a potential solution, the authors suggests using a specification that estimates dynamic effects for each cohort before making aggregations.</span>
-<span id="cb37-153"><a href="#cb37-153" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-154"><a href="#cb37-154" aria-hidden="true" tabindex="-1"></a>On the other hand, @wooldridge_twoway_2021 focused on identifying treatment effects. He recommends allowing all treatment effects to vary by cohort and time. In other words, instead of employing a single dummy variable to identify treated units, he suggests using a set of dummies representing the interaction of cohorts and periods.</span>
-<span id="cb37-155"><a href="#cb37-155" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-156"><a href="#cb37-156" aria-hidden="true" tabindex="-1"></a>Specifically, @wooldridge_twoway_2021 proposes estimating a model with the following specification:</span>
-<span id="cb37-157"><a href="#cb37-157" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-158"><a href="#cb37-158" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb37-159"><a href="#cb37-159" aria-hidden="true" tabindex="-1"></a>y_{it} = a_i + a_t + \sum_{g=g_0}^G \sum_{t=g}^T \delta_{gt} * 1(g,t)+e_{it}</span>
-<span id="cb37-160"><a href="#cb37-160" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb37-161"><a href="#cb37-161" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-162"><a href="#cb37-162" aria-hidden="true" tabindex="-1"></a>What Wooldridge suggests, at least for the case without covariates, is to estimate a model where, in addition to the individual (or cohort) and time fixed effects, we saturate **all** possible combinations of cohorts and times ($1(g,t)$), if that combination corresponds to an effectively treated unit ($t\geq g$). This specification essentially uses all not-yet treated units as controls, similar to the two-step approach.</span>
-<span id="cb37-163"><a href="#cb37-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-164"><a href="#cb37-164" aria-hidden="true" tabindex="-1"></a>This specification, however, could also be extended to a case where only those never treated are used as controls. In this case, one should use all cohort and time interactions, including the cases before units were treated. Following convention, one should exclude from the list of interactions the period before treatment took place:</span>
-<span id="cb37-165"><a href="#cb37-165" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-166"><a href="#cb37-166" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb37-167"><a href="#cb37-167" aria-hidden="true" tabindex="-1"></a>y_{it} = a_i + a_t + \sum_{g=g_0}^G \sum_{t\neq g-1} \delta_{gt} * 1(g,t)+e_{it}</span>
-<span id="cb37-168"><a href="#cb37-168" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb37-169"><a href="#cb37-169" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-170"><a href="#cb37-170" aria-hidden="true" tabindex="-1"></a>By saturating the model this way, each $\delta_{gt}$ represents a treatment effect for group G at time T, which can be later aggregated to obtain dynamic, group, or average treatment effects. Also interesting to note that this second specification is essentially the same @sun_estimating_2021 propose for dynamic effects, and produces results that are identical to the methodology proposed by @callaway_santanna_2021.</span>
-<span id="cb37-171"><a href="#cb37-171" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-172"><a href="#cb37-172" aria-hidden="true" tabindex="-1"></a>Now for the application, I will use <span class="in">`jwdid`</span> for both specifications. Because by default <span class="in">`jwdid`</span> produces the fully saturated model, I will omit those results, showing only the average treatment effect.</span>
-<span id="cb37-173"><a href="#cb37-173" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-174"><a href="#cb37-174" aria-hidden="true" tabindex="-1"></a>First the one using not-yet treated units as controls (default), which produces exactly the same results as the two-step approach:</span>
-<span id="cb37-175"><a href="#cb37-175" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-178"><a href="#cb37-178" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
-<span id="cb37-179"><a href="#cb37-179" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
-<span id="cb37-180"><a href="#cb37-180" aria-hidden="true" tabindex="-1"></a><span class="in">ssc install jwdid</span></span>
-<span id="cb37-181"><a href="#cb37-181" aria-hidden="true" tabindex="-1"></a><span class="in">qui: jwdid y, ivar(i) tvar(t) gvar(g)</span></span>
-<span id="cb37-182"><a href="#cb37-182" aria-hidden="true" tabindex="-1"></a><span class="in">estat simple</span></span>
-<span id="cb37-183"><a href="#cb37-183" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb37-184"><a href="#cb37-184" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-185"><a href="#cb37-185" aria-hidden="true" tabindex="-1"></a>Second the one with never treated units as controls:</span>
-<span id="cb37-186"><a href="#cb37-186" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-189"><a href="#cb37-189" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
-<span id="cb37-190"><a href="#cb37-190" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
-<span id="cb37-191"><a href="#cb37-191" aria-hidden="true" tabindex="-1"></a><span class="in">qui: jwdid y, ivar(i) tvar(t) gvar(g) never</span></span>
-<span id="cb37-192"><a href="#cb37-192" aria-hidden="true" tabindex="-1"></a><span class="in">estat simple</span></span>
-<span id="cb37-193"><a href="#cb37-193" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb37-194"><a href="#cb37-194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-195"><a href="#cb37-195" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2x2 in Steroids</span></span>
-<span id="cb37-196"><a href="#cb37-196" aria-hidden="true" tabindex="-1"></a><span class="fu">#### @callaway_santanna_2021 `csdid` &amp; `csdid2`</span></span>
-<span id="cb37-197"><a href="#cb37-197" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-198"><a href="#cb37-198" aria-hidden="true" tabindex="-1"></a>The third option is the most computing intensive, but at the same time simpler to understand, if you break it down to the basics. This is why I call this 2x2 in Steroids: @callaway_santanna_2021.</span>
-<span id="cb37-199"><a href="#cb37-199" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-200"><a href="#cb37-200" aria-hidden="true" tabindex="-1"></a>The literature on the 2x2 DID design has been extensively explored and extended, and it appears that most of the criticisms of the TWFE method do not apply to this simple design. Although there are a few technical details to consider while estimating ATT's, most of the information required can be found in @santanna_doubly_2020. In this work, the authors provide several options for obtaining the best estimate from a simple 2x2 DID design.</span>
-<span id="cb37-201"><a href="#cb37-201" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-202"><a href="#cb37-202" aria-hidden="true" tabindex="-1"></a>Assuming that we know how to execute 2x2 DID correctly (which can be achieved using <span class="in">`drdid`</span> in Stata), @callaway_santanna_2021 propose that we focus on estimating all the good and useful 2x2 DID designs from our data while avoiding incorrect comparisons. These are the building blocks of the methodology, the ATTGTs. This are the average treatment effects on the treated for units treated for the first time in period G, but measured at period T.</span>
-<span id="cb37-203"><a href="#cb37-203" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-204"><a href="#cb37-204" aria-hidden="true" tabindex="-1"></a>This process, however, could be time-consuming and computationally intensive if done manually, as the number of 2x2 designs increases with the number of cohorts and periods available in the data. For example, estimating 50 different ATTs would be necessary with 5 cohorts and 10 periods, and up to 5 separate models need to be estimated for each ATT. </span>
-<span id="cb37-205"><a href="#cb37-205" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-206"><a href="#cb37-206" aria-hidden="true" tabindex="-1"></a>Borrowing from the nomenclature in @callaway_santanna_2021, this ATTGT's are defined as follows:</span>
-<span id="cb37-207"><a href="#cb37-207" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb37-208"><a href="#cb37-208" aria-hidden="true" tabindex="-1"></a>\begin{aligned}</span>
-<span id="cb37-209"><a href="#cb37-209" aria-hidden="true" tabindex="-1"></a>    ATT(g,t) &amp;= E(Y_{i,t}|i\in g) - E(Y_{i,g-1}|i\in g) <span class="sc">\\</span></span>
-<span id="cb37-210"><a href="#cb37-210" aria-hidden="true" tabindex="-1"></a>             &amp; -\Big<span class="co">[</span><span class="ot"> E(Y_{i,t}|i\in C) - E(Y_{i,g-1}|i\in C) \Big</span><span class="co">]</span></span>
-<span id="cb37-211"><a href="#cb37-211" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
-<span id="cb37-212"><a href="#cb37-212" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb37-213"><a href="#cb37-213" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-214"><a href="#cb37-214" aria-hidden="true" tabindex="-1"></a>Which has the same structure as the simple 2x2 DID, with the difference that the control group $C$ will be formed by never treated units only, or include those not yet treated ( $i \in g_i, g_i&gt;t, \And \  g_i&gt;g$).^<span class="co">[</span><span class="ot">There are two other options, but I will leave them for a different post</span><span class="co">]</span></span>
-<span id="cb37-215"><a href="#cb37-215" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-216"><a href="#cb37-216" aria-hidden="true" tabindex="-1"></a>Once all individual ATTGT's have been identified and estimated, providing summary measures we are more familiar with is as easy as obtaining weighted averages:</span>
-<span id="cb37-217"><a href="#cb37-217" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-218"><a href="#cb37-218" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb37-219"><a href="#cb37-219" aria-hidden="true" tabindex="-1"></a>SATT = \sum \left( \frac{w_{gt} }{\sum w_{gt}}ATT(g,t) \right)</span>
-<span id="cb37-220"><a href="#cb37-220" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb37-221"><a href="#cb37-221" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-222"><a href="#cb37-222" aria-hidden="true" tabindex="-1"></a>where the weights $w_{gt}$ will change based on the type of aggregation one is interested in. </span>
-<span id="cb37-223"><a href="#cb37-223" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-224"><a href="#cb37-224" aria-hidden="true" tabindex="-1"></a>This multiple stage process may seem challening, but there are tools that allow you to implement them quite easily: <span class="in">`csdid`</span> and <span class="in">`csdid2`</span>. </span>
-<span id="cb37-225"><a href="#cb37-225" aria-hidden="true" tabindex="-1"></a>The first one, was written as a wrapper around <span class="in">`drdid`</span>, to do all the heavy lifting for you. However, for large projects, it can be slow due to overhead. The alternative <span class="in">`csdid2`</span> is self contained, still under development, but much faster than the predecesor. See <span class="co">[</span><span class="ot">`csdid2`</span><span class="co">](https://github.com/friosavila/csdid2)</span> if interested. Here I will use <span class="in">`csdid`</span>, which you can get from SSC.</span>
-<span id="cb37-226"><a href="#cb37-226" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-227"><a href="#cb37-227" aria-hidden="true" tabindex="-1"></a>As with <span class="in">`jwdid`</span>. The default option is for <span class="in">`csdid`</span> to produce all ATTGT's. So, for the excercise, I'll omit that ouput, and estimate the aggregate effects with the post estimation command. The default is to use the never treated as controls. I will also add the option <span class="in">`long2`</span> to obtain the pre-treatment ATTGT's as describe above, even though they won't affect our point estimates:</span>
-<span id="cb37-230"><a href="#cb37-230" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
-<span id="cb37-231"><a href="#cb37-231" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
-<span id="cb37-232"><a href="#cb37-232" aria-hidden="true" tabindex="-1"></a><span class="in">qui: ssc install drdid, replace</span></span>
-<span id="cb37-233"><a href="#cb37-233" aria-hidden="true" tabindex="-1"></a><span class="in">qui: ssc install csdid, replace</span></span>
-<span id="cb37-234"><a href="#cb37-234" aria-hidden="true" tabindex="-1"></a><span class="in">qui: csdid y, ivar(i) time(t) gvar(g) long2</span></span>
-<span id="cb37-235"><a href="#cb37-235" aria-hidden="true" tabindex="-1"></a><span class="in">estat simple </span></span>
-<span id="cb37-236"><a href="#cb37-236" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb37-237"><a href="#cb37-237" aria-hidden="true" tabindex="-1"></a>I will also use the not yet treated, to compare results.</span>
-<span id="cb37-240"><a href="#cb37-240" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
-<span id="cb37-241"><a href="#cb37-241" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
-<span id="cb37-242"><a href="#cb37-242" aria-hidden="true" tabindex="-1"></a><span class="in">qui: csdid y, ivar(i) time(t) gvar(g) notyet long2</span></span>
-<span id="cb37-243"><a href="#cb37-243" aria-hidden="true" tabindex="-1"></a><span class="in">estat simple </span></span>
-<span id="cb37-244"><a href="#cb37-244" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb37-245"><a href="#cb37-245" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-246"><a href="#cb37-246" aria-hidden="true" tabindex="-1"></a><span class="fu">## Conclusions</span></span>
-<span id="cb37-247"><a href="#cb37-247" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-248"><a href="#cb37-248" aria-hidden="true" tabindex="-1"></a>On this occasion, I have shared with you three solutions from the literature that aim to overcome the limitations of TWFE. Although there are other solutions available, I personally find these three to be the most intuitive and have worked on them. Granted, I have some bias on the matter.</span>
-<span id="cb37-249"><a href="#cb37-249" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-250"><a href="#cb37-250" aria-hidden="true" tabindex="-1"></a>Despite their apparent differences, these solutions actually converge towards similar outcomes, with discrepancies arising from variations in assumptions regarding control groups or covariate management.</span>
-<span id="cb37-251"><a href="#cb37-251" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-252"><a href="#cb37-252" aria-hidden="true" tabindex="-1"></a>|command | eq command|</span>
-<span id="cb37-253"><a href="#cb37-253" aria-hidden="true" tabindex="-1"></a>|---|---|</span>
-<span id="cb37-254"><a href="#cb37-254" aria-hidden="true" tabindex="-1"></a>|<span class="in">`jwdid`</span> | <span class="in">`did2s`</span> &amp; <span class="in">`did_imputation`</span>|</span>
-<span id="cb37-255"><a href="#cb37-255" aria-hidden="true" tabindex="-1"></a>|<span class="in">`jwdid, never`</span> | <span class="in">`eventstudyinteract`</span>|</span>
-<span id="cb37-256"><a href="#cb37-256" aria-hidden="true" tabindex="-1"></a>|<span class="in">`jwdid, never`</span> | <span class="in">`csdid, long2`</span> or <span class="in">`csdid2, long`</span>  |</span>
-<span id="cb37-257"><a href="#cb37-257" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-258"><a href="#cb37-258" aria-hidden="true" tabindex="-1"></a><span class="fu">## References</span></span>
-<span id="cb37-259"><a href="#cb37-259" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb37-260"><a href="#cb37-260" aria-hidden="true" tabindex="-1"></a>::: {#refs}</span>
-<span id="cb37-261"><a href="#cb37-261" aria-hidden="true" tabindex="-1"></a>:::</span>
+<div class="sourceCode" id="cb16" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "DID: The Revolution"</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "How to right the wrongs"</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="an">bibliography:</span><span class="co"> references.bib</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introduction</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>If you have been keeping up with the advancements and revolution in Difference-in-Differences (DID), you may be aware of the issues associated with using the simple Two-Way Fixed Effects (TWFE) method for identifying treatment effects. If you haven't, you can refer to my previous post titled **DID: The fall** where I have explained the problem.</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>The issue can be summarized as follows:</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>When multiple periods and groups are available, and the treatment has been implemented over several periods, the standard TWFE method is unlikely to identify the average treatment effects. This is because it tends to use inadequate controls, gives negative weights to treated units, and generally suffers from contamination that leads to biased estimates.</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>As far as I know, the following model can only estimate average treatment effects if treatment effects remain constant over time:</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>y_{it} = a_i + a_t + \delta D_{it} + e_{it}</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>where $D_{it}=1$ if a unit is effectively treated, $a_i$ represents the unit fixed effects, and $a_t$ time fixed effects.</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a><span class="fu">## Solutions</span></span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>Despite the challenges previously discussed, there is still hope for the successful implementation of DID. Numerous scholars have proposed various strategies that specifically address the issues at hand, as hinted in **DID: the Fall.**</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>In this context, I will provide a brief overview of three such solutions, two of which I am actively involved in, and one that is relatively straightforward to comprehend and articulate.</span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a><span class="fu">### Setup</span></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>Let us establish some fundamental nomenclature before we delve into the solution. This terminology will help understand and implement the solutions we will cover next.</span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>Before we start discussing the solution, lets stablish some basic nomenclature that may help us understand and implement the solutions we will be discussing later on.</span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>For simplicity,  we will focus on the case of balanced panel data. All units $i$ will be observed for $T$ periods, from $t=1$ to $t=T$.</span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>At any given time, individual outcomes are defined as follows:</span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>y_{it} = a_i + a_t + \delta_{it}*D_{it} +e_{it}</span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>where $a_i$ is the individual fixed effect, $a_t$ is a time fixed effect, and $e_{it}$ is an individual level iid error. </span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>$D_{it}$ is a dummy variable that takes the value of 1 after a unit is treated. </span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>Notice that here, the treatment effect fully heterogeneous. </span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Once a unit has been treated, it remains so, even if the effect eventually fades away. (if $D_{it}=1 \rightarrow D_{is}=1 \ \forall \ s&gt;t$)</span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>There is variation in treatment timing, and as a result, the treatment dummy is not activated for everyone at the same time.</span>
+<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>Assume there are no controls.</span>
+<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a>Under this conditions, lets simulate a simple dataset with this characteristics:</span>
+<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
+<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a><span class="in">clear</span></span>
+<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a><span class="in">set linesize 250</span></span>
+<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a><span class="in">set seed     111</span></span>
+<span id="cb16-61"><a href="#cb16-61" aria-hidden="true" tabindex="-1"></a><span class="in">set sortseed 111</span></span>
+<span id="cb16-62"><a href="#cb16-62" aria-hidden="true" tabindex="-1"></a><span class="in">set obs 100  // &lt;- 100 units</span></span>
+<span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a><span class="in">gen id = _n</span></span>
+<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a><span class="in">gen ai = rchi2(2)</span></span>
+<span id="cb16-65"><a href="#cb16-65" aria-hidden="true" tabindex="-1"></a><span class="in">// determines When would units receive treatment</span></span>
+<span id="cb16-66"><a href="#cb16-66" aria-hidden="true" tabindex="-1"></a><span class="in">gen     g = runiformint(2,10)</span></span>
+<span id="cb16-67"><a href="#cb16-67" aria-hidden="true" tabindex="-1"></a><span class="in">replace g = 0 if g&gt;9   // never treated       </span></span>
+<span id="cb16-68"><a href="#cb16-68" aria-hidden="true" tabindex="-1"></a><span class="in">expand 10   // &lt;-T=10</span></span>
+<span id="cb16-69"><a href="#cb16-69" aria-hidden="true" tabindex="-1"></a><span class="in">bysort id:gen t=_n </span></span>
+<span id="cb16-70"><a href="#cb16-70" aria-hidden="true" tabindex="-1"></a><span class="in">gen event = max(0,t-g)</span></span>
+<span id="cb16-71"><a href="#cb16-71" aria-hidden="true" tabindex="-1"></a><span class="in">gen aux = runiform()*2</span></span>
+<span id="cb16-72"><a href="#cb16-72" aria-hidden="true" tabindex="-1"></a><span class="in">bysort t:gen at = aux[1] // Determines Time fixed effect</span></span>
+<span id="cb16-73"><a href="#cb16-73" aria-hidden="true" tabindex="-1"></a><span class="in">gen te = (1-g/10)+(1-event/10)  </span></span>
+<span id="cb16-74"><a href="#cb16-74" aria-hidden="true" tabindex="-1"></a><span class="in">// Treatment effect but vanishes with time</span></span>
+<span id="cb16-75"><a href="#cb16-75" aria-hidden="true" tabindex="-1"></a><span class="in">gen eit= rnormal()</span></span>
+<span id="cb16-76"><a href="#cb16-76" aria-hidden="true" tabindex="-1"></a><span class="in">gen trt  = (t&gt;=g)*(g&gt;0)</span></span>
+<span id="cb16-77"><a href="#cb16-77" aria-hidden="true" tabindex="-1"></a><span class="in">gen teff = te * trt </span></span>
+<span id="cb16-78"><a href="#cb16-78" aria-hidden="true" tabindex="-1"></a><span class="in">gen y = ai + at + te * trt + eit</span></span>
+<span id="cb16-79"><a href="#cb16-79" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-80"><a href="#cb16-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-81"><a href="#cb16-81" aria-hidden="true" tabindex="-1"></a>The simulated data will follow 100 units over a span of 10 periods. Each unit is assigned to receive treatment at some point between periods 2 and 9, while 1/10 of the sample is not treated at all.</span>
+<span id="cb16-82"><a href="#cb16-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-83"><a href="#cb16-83" aria-hidden="true" tabindex="-1"></a>The impact of the treatment depends on two factors: the timing of treatment and the duration of treatment. The treatment effect becomes smaller the later a unit is treated, and as a unit is treated for longer durations.</span>
+<span id="cb16-84"><a href="#cb16-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-85"><a href="#cb16-85" aria-hidden="true" tabindex="-1"></a><span class="fu">### Two-Steps DID</span></span>
+<span id="cb16-86"><a href="#cb16-86" aria-hidden="true" tabindex="-1"></a><span class="fu">#### @gardner_two-stage_2022 `did2s` &amp;  @borusyak_revisiting_2022 `did_imputation`</span></span>
+<span id="cb16-87"><a href="#cb16-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-88"><a href="#cb16-88" aria-hidden="true" tabindex="-1"></a>Let's start by desribing one of the solutions solutions: the two-step DID, also referred to as the imputation approach. This strategy is explained and explored by two notable papers: @gardner_two-stage_2022 and @borusyak_revisiting_2022.</span>
+<span id="cb16-89"><a href="#cb16-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-90"><a href="#cb16-90" aria-hidden="true" tabindex="-1"></a>As the name implies, this approach aims to estimate treatment effects in a design with multiple groups treated at various points in time by imputing the values of what would have occurred to those units if they were never subjected to treatment. To accomplish this, the authors suggest breaking down the identification problem into two steps to avoid the erroneous use of already treated units as controls.</span>
+<span id="cb16-91"><a href="#cb16-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-92"><a href="#cb16-92" aria-hidden="true" tabindex="-1"></a>In the first step, one should only use units that have never been treated or have not yet been treated to model potential outcomes under the no-treatment scenario.</span>
+<span id="cb16-93"><a href="#cb16-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-94"><a href="#cb16-94" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-95"><a href="#cb16-95" aria-hidden="true" tabindex="-1"></a>y_{it} = a_i + a_t + e_{it} \ if \ t<span class="kw">&lt;g</span></span>
+<span id="cb16-96"><a href="#cb16-96" aria-hidden="true" tabindex="-1"></a><span class="er">$$</span></span>
+<span id="cb16-97"><a href="#cb16-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-98"><a href="#cb16-98" aria-hidden="true" tabindex="-1"></a><span class="ot">Doing</span> <span class="er">this,</span> <span class="er">the</span> <span class="er">fixed</span> <span class="er">effects</span> <span class="er">$a_i$</span> <span class="er">and</span> <span class="er">$a_t$</span> <span class="er">would</span> <span class="er">not</span> <span class="er">be</span> <span class="er">contaminated</span> <span class="er">by</span> <span class="er">the</span> <span class="er">treatment,</span> <span class="er">because</span> <span class="er">non</span> <span class="er">of</span> <span class="er">the</span> <span class="er">units</span> <span class="er">in</span> <span class="er">the</span> <span class="er">sample</span> <span class="er">are</span> <span class="er">treated.</span> </span>
+<span id="cb16-99"><a href="#cb16-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-100"><a href="#cb16-100" aria-hidden="true" tabindex="-1"></a><span class="ot">In</span> <span class="er">the</span> <span class="er">second</span> <span class="er">step,</span> <span class="er">individual-level</span> <span class="er">treatment</span> <span class="er">effects</span> <span class="er">predictions</span> <span class="er">can</span> <span class="er">be</span> <span class="er">obtained</span> <span class="er">by</span> <span class="er">simply</span> <span class="er">computing</span> <span class="er">the</span> <span class="er">difference</span> <span class="er">between</span> <span class="er">the</span> <span class="er">observed</span> <span class="er">outcome</span> <span class="er">under</span> <span class="er">treatment</span> <span class="er">and</span> <span class="er">the</span> <span class="er">prediction</span> <span class="er">of</span> <span class="er">the</span>  <span class="er">first</span> <span class="er">step</span> <span class="er">($\hat</span> <span class="er">y_{it}</span> <span class="ot">=</span> <span class="st">\hat</span> <span class="er">a_i</span> <span class="er">+</span> <span class="er">\hat</span> <span class="er">a</span> <span class="er">_t$),</span> <span class="er">which</span> <span class="er">represent</span> <span class="er">the</span> <span class="er">potential</span> <span class="er">outcomes</span> <span class="er">of</span> <span class="er">those</span> <span class="er">units</span> <span class="er">if</span> <span class="er">no</span> <span class="er">treatment</span> <span class="er">occured.</span></span>
+<span id="cb16-101"><a href="#cb16-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-102"><a href="#cb16-102" aria-hidden="true" tabindex="-1"></a><span class="er">$$</span></span>
+<span id="cb16-103"><a href="#cb16-103" aria-hidden="true" tabindex="-1"></a><span class="er">\delta_{it}</span> <span class="ot">=</span> <span class="st">y_{it}-\hat</span> <span class="er">a_i</span> <span class="er">-</span> <span class="er">\hat</span> <span class="er">a_t</span></span>
+<span id="cb16-104"><a href="#cb16-104" aria-hidden="true" tabindex="-1"></a><span class="er">$$</span></span>
+<span id="cb16-105"><a href="#cb16-105" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-106"><a href="#cb16-106" aria-hidden="true" tabindex="-1"></a><span class="ot">Because</span> <span class="er">unit</span> <span class="er">level</span> <span class="er">treatment</span> <span class="er">effects</span> <span class="er">are</span> <span class="er">not</span> <span class="er">useful</span> <span class="er">for</span> <span class="er">statistical</span> <span class="er">inference,</span> <span class="er">one</span> <span class="er">can</span> <span class="er">use</span> <span class="er">aggregations</span> <span class="er">to</span> <span class="er">obtain</span> <span class="er">standard</span> <span class="er">errors</span> <span class="er">or</span> <span class="er">aggregates</span> <span class="er">we</span> <span class="er">are</span> <span class="er">more</span> <span class="er">familiar</span> <span class="er">with:</span> <span class="er">Average</span> <span class="er">treatment</span> <span class="er">effect</span> <span class="er">on</span> <span class="er">treated,</span> <span class="er">dynamic</span> <span class="er">effects,</span> <span class="er">etc.</span></span>
+<span id="cb16-107"><a href="#cb16-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-108"><a href="#cb16-108" aria-hidden="true" tabindex="-1"></a><span class="ot">To</span> <span class="er">correctly</span> <span class="er">estimate</span> <span class="er">standard</span> <span class="er">errors,</span> <span class="er">both</span> <span class="er">steps</span> <span class="er">should</span> <span class="er">be</span> <span class="er">estimated</span> <span class="er">simulatenously,</span> <span class="er">so</span> <span class="er">that</span> <span class="er">the</span> <span class="er">estimation</span> <span class="er">error</span> <span class="er">from</span> <span class="er">the</span> <span class="er">first</span> <span class="er">stage</span> <span class="er">can</span> <span class="er">propagate</span> <span class="er">to</span> <span class="er">the</span> <span class="er">second</span> <span class="er">stage.</span> <span class="er">While</span> <span class="er">you</span> <span class="er">can</span> <span class="er">use</span> <span class="er">`did2s`</span> <span class="er">or</span> <span class="er">`did_imputation`,</span> <span class="er">I</span> <span class="er">will</span> <span class="er">show</span> <span class="er">you</span> <span class="er">the</span> <span class="er">code</span> <span class="er">using</span> <span class="er">`gmm`,</span> <span class="er">so</span> <span class="er">you</span> <span class="er">can</span> <span class="er">see</span> <span class="er">how</span> <span class="er">the</span> <span class="er">whole</span> <span class="er">system</span> <span class="er">would</span> <span class="er">work.</span></span>
+<span id="cb16-109"><a href="#cb16-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-110"><a href="#cb16-110" aria-hidden="true" tabindex="-1"></a><span class="ot">In</span> <span class="er">the</span> <span class="er">following</span> <span class="er">code</span> <span class="er">line</span> <span class="er">(1)</span> <span class="er">identifies</span> <span class="er">the</span> <span class="er">individual</span> <span class="er">and</span> <span class="er">time</span> <span class="er">FE</span> <span class="er">using</span> <span class="er">only</span> <span class="er">notyet</span> <span class="er">treated</span> <span class="er">units</span> <span class="er">(trt</span><span class="ot">=</span><span class="st">0).</span> <span class="er">Line</span> <span class="er">2</span> <span class="er">uses</span> <span class="er">tha</span> <span class="er">to</span> <span class="er">substract</span> <span class="er">from</span> <span class="er">$y$</span> <span class="er">and</span> <span class="er">identify</span> <span class="er">the</span> <span class="er">treatment</span> <span class="er">effect</span> <span class="er">(ATT).</span> <span class="er">Lines</span> <span class="er">3</span> <span class="er">and</span> <span class="er">4</span>  <span class="er">provides</span> <span class="er">information</span> <span class="er">to</span> <span class="er">gmm</span> <span class="er">to</span> <span class="er">estimate</span> <span class="er">the</span> <span class="er">model</span> <span class="er">and</span> <span class="er">standard</span> <span class="er">errors:</span></span>
+<span id="cb16-111"><a href="#cb16-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-114"><a href="#cb16-114" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb16-115"><a href="#cb16-115" aria-hidden="true" tabindex="-1"></a><span class="ot">gmm</span> <span class="er">((y-{a0}-{a_i:i.g}-{a_t:i.t})*(trt</span><span class="ot">=</span><span class="st">=0))</span>     <span class="er">///</span> </span>
+<span id="cb16-116"><a href="#cb16-116" aria-hidden="true" tabindex="-1"></a><span class="ot">    (</span><span class="er">(y-{a0}-{a_i:}</span>   <span class="er">-{a_t:}</span>    <span class="er">-{att:trt}))</span> <span class="er">,</span> <span class="er">///</span> </span>
+<span id="cb16-117"><a href="#cb16-117" aria-hidden="true" tabindex="-1"></a><span class="ot">    winitial</span><span class="er">(identity)</span>  <span class="er">instruments(1:i.g</span> <span class="er">i.t)</span> <span class="er">instruments(2:</span> <span class="er">trt)</span> <span class="er">///</span> </span>
+<span id="cb16-118"><a href="#cb16-118" aria-hidden="true" tabindex="-1"></a><span class="ot">    onestep</span> <span class="er">quickderivatives</span> <span class="er">vce(cluster</span> <span class="er">i)</span>  </span>
+<span id="cb16-119"><a href="#cb16-119" aria-hidden="true" tabindex="-1"></a><span class="er">```</span></span>
+<span id="cb16-120"><a href="#cb16-120" aria-hidden="true" tabindex="-1"></a><span class="ot">You</span> <span class="er">can</span> <span class="er">compare</span> <span class="er">this</span> <span class="er">to</span> <span class="er">the</span> <span class="er">true</span> <span class="er">effect:</span></span>
+<span id="cb16-123"><a href="#cb16-123" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb16-124"><a href="#cb16-124" aria-hidden="true" tabindex="-1"></a><span class="ot">sum</span> <span class="er">teff</span> <span class="er">if</span> <span class="er">trt</span><span class="ot">=</span><span class="st">=1</span></span>
+<span id="cb16-125"><a href="#cb16-125" aria-hidden="true" tabindex="-1"></a><span class="er">```</span></span>
+<span id="cb16-126"><a href="#cb16-126" aria-hidden="true" tabindex="-1"></a><span class="ot">One</span> <span class="er">advantage</span> <span class="er">of</span> <span class="er">this</span> <span class="er">approach</span> <span class="er">is</span> <span class="er">that</span> <span class="er">you</span> <span class="er">could</span> <span class="er">model</span> <span class="er">the</span> <span class="er">second</span> <span class="er">stage</span> <span class="er">to</span> <span class="er">allow</span> <span class="er">other</span> <span class="er">types</span> <span class="er">of</span> <span class="er">aggregations:</span></span>
+<span id="cb16-127"><a href="#cb16-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-128"><a href="#cb16-128" aria-hidden="true" tabindex="-1"></a><span class="er">```stata</span></span>
+<span id="cb16-129"><a href="#cb16-129" aria-hidden="true" tabindex="-1"></a><span class="ot">gen</span> <span class="er">g0</span><span class="ot">=</span><span class="st">g*trt</span>    </span>
+<span id="cb16-130"><a href="#cb16-130" aria-hidden="true" tabindex="-1"></a><span class="ot">gen</span> <span class="er">t0</span><span class="ot">=</span><span class="st">t*trt</span></span>
+<span id="cb16-131"><a href="#cb16-131" aria-hidden="true" tabindex="-1"></a><span class="ot">gmm</span> <span class="er">((y-{a0}-{a_i:i.g}-{a_t:i.t})*(trt</span><span class="ot">=</span><span class="st">=0))</span> <span class="er">///</span></span>
+<span id="cb16-132"><a href="#cb16-132" aria-hidden="true" tabindex="-1"></a><span class="ot">    (</span><span class="er">(y-{a0}-{a_i:}</span>   <span class="er">-{a_t:}</span>    <span class="er">-{att:i.g0}))</span> <span class="er">,</span> <span class="er">///</span></span>
+<span id="cb16-133"><a href="#cb16-133" aria-hidden="true" tabindex="-1"></a><span class="ot">    winitial</span><span class="er">(identity)</span>  <span class="er">instruments(1:i.g</span> <span class="er">i.t)</span> <span class="er">instruments(1:</span> <span class="er">i.g0)</span> <span class="er">///</span></span>
+<span id="cb16-134"><a href="#cb16-134" aria-hidden="true" tabindex="-1"></a><span class="ot">    onestep</span> <span class="er">quickderivatives</span> <span class="er">vce(cluster</span> <span class="er">i)</span> </span>
+<span id="cb16-135"><a href="#cb16-135" aria-hidden="true" tabindex="-1"></a><span class="ot">gmm</span> <span class="er">((y-{a0}-{a_i:i.g}-{a_t:i.t})*(trt</span><span class="ot">=</span><span class="st">=0))</span> <span class="er">///</span></span>
+<span id="cb16-136"><a href="#cb16-136" aria-hidden="true" tabindex="-1"></a><span class="ot">    (</span><span class="er">(y-{a0}-{a_i:}</span>   <span class="er">-{a_t:}</span>    <span class="er">-{att:i.t0}))</span> <span class="er">,</span> <span class="er">///</span></span>
+<span id="cb16-137"><a href="#cb16-137" aria-hidden="true" tabindex="-1"></a><span class="ot">    winitial</span><span class="er">(identity)</span>  <span class="er">instruments(1:i.g</span> <span class="er">i.t)</span> <span class="er">instruments(2:</span> <span class="er">i.t0)</span> <span class="er">///</span></span>
+<span id="cb16-138"><a href="#cb16-138" aria-hidden="true" tabindex="-1"></a><span class="ot">    onestep</span> <span class="er">quickderivatives</span> <span class="er">vce(cluster</span> <span class="er">i)</span>             </span>
+<span id="cb16-139"><a href="#cb16-139" aria-hidden="true" tabindex="-1"></a><span class="er">```</span>    </span>
+<span id="cb16-140"><a href="#cb16-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-141"><a href="#cb16-141" aria-hidden="true" tabindex="-1"></a><span class="ot">#</span><span class="er">##</span> <span class="er">You</span> <span class="er">don't</span> <span class="er">messup</span> <span class="er">with</span> <span class="er">OLS</span></span>
+<span id="cb16-142"><a href="#cb16-142" aria-hidden="true" tabindex="-1"></a><span class="ot">#</span><span class="er">###</span> <span class="er">@wooldridge_twoway_2021</span> <span class="er">`jwdid`</span> <span class="er">and</span> <span class="er">@sun_estimating_2021</span></span>
+<span id="cb16-143"><a href="#cb16-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-144"><a href="#cb16-144" aria-hidden="true" tabindex="-1"></a><span class="ot">In</span> <span class="er">the</span> <span class="er">article</span> <span class="er">**DID:</span> <span class="er">the</span> <span class="er">fall**,</span> <span class="er">it</span> <span class="er">was</span> <span class="er">pointed</span> <span class="er">out</span> <span class="er">that</span> <span class="er">the</span> <span class="er">conventional</span> <span class="er">TWFE</span> <span class="er">approach</span> <span class="er">has</span> <span class="er">faced</span> <span class="er">significant</span> <span class="er">backlash</span> <span class="er">due</span> <span class="er">to</span> <span class="er">its</span> <span class="er">limited</span> <span class="er">ability</span> <span class="er">to</span> <span class="er">detect</span> <span class="er">treatment</span> <span class="er">effects,</span> <span class="er">because</span> <span class="er">it</span> <span class="er">cannot</span> <span class="er">distinguish</span> <span class="er">between</span> <span class="er">good</span> <span class="er">and</span> <span class="er">bad</span> <span class="er">variation</span> <span class="er">when</span> <span class="er">estimating</span> <span class="er">treatment</span> <span class="er">effects.</span> <span class="er">Despite</span> <span class="er">this</span> <span class="er">criticism,</span> <span class="er">Professor</span> <span class="er">Wooldridge</span> <span class="er">came</span> <span class="er">in</span> <span class="er">defense</span> <span class="er">and</span> <span class="er">revitalized</span> <span class="er">the</span> <span class="er">approach</span> <span class="er">by</span> <span class="er">emphasizing</span> <span class="er">its</span> <span class="er">simplicity</span> <span class="er">and</span> <span class="er">versatility,</span> <span class="er">enabling</span> <span class="er">extensions</span> <span class="er">to</span> <span class="er">go</span> <span class="er">beyond</span> <span class="er">linear</span> <span class="er">models.</span></span>
+<span id="cb16-145"><a href="#cb16-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-146"><a href="#cb16-146" aria-hidden="true" tabindex="-1"></a><span class="ot">The</span> <span class="er">message</span> <span class="er">was</span> <span class="er">simple:</span></span>
+<span id="cb16-147"><a href="#cb16-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-148"><a href="#cb16-148" aria-hidden="true" tabindex="-1"></a><span class="kw">&gt;</span> Although the conventional TWFE method has several shortcomings, if it is implemented correctly, it can overcome the issue of utilizing inadequate controls in estimation. As a result, it can estimate treatment effects efficiently, with results similar to @borusyak_revisiting_2022 and @gardner_two-stage_2022.</span>
+<span id="cb16-149"><a href="#cb16-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-150"><a href="#cb16-150" aria-hidden="true" tabindex="-1"></a>So what were we missing? Heterogeneity!</span>
+<span id="cb16-151"><a href="#cb16-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-152"><a href="#cb16-152" aria-hidden="true" tabindex="-1"></a>Both @wooldridge_twoway_2021 and @sun_estimating_2021 have proposed similar solutions to the problem at hand, albeit from different viewpoints. @sun_estimating_2021 argued that utilizing event studies with leads and lags may lead to contaminated coefficients, thus hampering proper identification of dynamic treatment effects. As a potential solution, the authors suggests using a specification that estimates dynamic effects for each cohort before making aggregations.</span>
+<span id="cb16-153"><a href="#cb16-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-154"><a href="#cb16-154" aria-hidden="true" tabindex="-1"></a>On the other hand, @wooldridge_twoway_2021 focused on identifying treatment effects. He recommends allowing all treatment effects to vary by cohort and time. In other words, instead of employing a single dummy variable to identify treated units, he suggests using a set of dummies representing the interaction of cohorts and periods.</span>
+<span id="cb16-155"><a href="#cb16-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-156"><a href="#cb16-156" aria-hidden="true" tabindex="-1"></a>Specifically, @wooldridge_twoway_2021 proposes estimating a model with the following specification:</span>
+<span id="cb16-157"><a href="#cb16-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-158"><a href="#cb16-158" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-159"><a href="#cb16-159" aria-hidden="true" tabindex="-1"></a>y_{it} = a_i + a_t + \sum_{g=g_0}^G \sum_{t=g}^T \delta_{gt} * 1(g,t)+e_{it}</span>
+<span id="cb16-160"><a href="#cb16-160" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-161"><a href="#cb16-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-162"><a href="#cb16-162" aria-hidden="true" tabindex="-1"></a>What Wooldridge suggests, at least for the case without covariates, is to estimate a model where, in addition to the individual (or cohort) and time fixed effects, we saturate **all** possible combinations of cohorts and times ($1(g,t)$), if that combination corresponds to an effectively treated unit ($t\geq g$). This specification essentially uses all not-yet treated units as controls, similar to the two-step approach.</span>
+<span id="cb16-163"><a href="#cb16-163" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-164"><a href="#cb16-164" aria-hidden="true" tabindex="-1"></a>This specification, however, could also be extended to a case where only those never treated are used as controls. In this case, one should use all cohort and time interactions, including the cases before units were treated. Following convention, one should exclude from the list of interactions the period before treatment took place:</span>
+<span id="cb16-165"><a href="#cb16-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-166"><a href="#cb16-166" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-167"><a href="#cb16-167" aria-hidden="true" tabindex="-1"></a>y_{it} = a_i + a_t + \sum_{g=g_0}^G \sum_{t\neq g-1} \delta_{gt} * 1(g,t)+e_{it}</span>
+<span id="cb16-168"><a href="#cb16-168" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-169"><a href="#cb16-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-170"><a href="#cb16-170" aria-hidden="true" tabindex="-1"></a>By saturating the model this way, each $\delta_{gt}$ represents a treatment effect for group G at time T, which can be later aggregated to obtain dynamic, group, or average treatment effects. Also interesting to note that this second specification is essentially the same @sun_estimating_2021 propose for dynamic effects, and produces results that are identical to the methodology proposed by @callaway_santanna_2021.</span>
+<span id="cb16-171"><a href="#cb16-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-172"><a href="#cb16-172" aria-hidden="true" tabindex="-1"></a>Now for the application, I will use <span class="in">`jwdid`</span> for both specifications. Because by default <span class="in">`jwdid`</span> produces the fully saturated model, I will omit those results, showing only the average treatment effect.</span>
+<span id="cb16-173"><a href="#cb16-173" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-174"><a href="#cb16-174" aria-hidden="true" tabindex="-1"></a>First the one using not-yet treated units as controls (default), which produces exactly the same results as the two-step approach:</span>
+<span id="cb16-175"><a href="#cb16-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-178"><a href="#cb16-178" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb16-179"><a href="#cb16-179" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
+<span id="cb16-180"><a href="#cb16-180" aria-hidden="true" tabindex="-1"></a><span class="in">ssc install jwdid</span></span>
+<span id="cb16-181"><a href="#cb16-181" aria-hidden="true" tabindex="-1"></a><span class="in">qui: jwdid y, ivar(i) tvar(t) gvar(g)</span></span>
+<span id="cb16-182"><a href="#cb16-182" aria-hidden="true" tabindex="-1"></a><span class="in">estat simple</span></span>
+<span id="cb16-183"><a href="#cb16-183" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-184"><a href="#cb16-184" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-185"><a href="#cb16-185" aria-hidden="true" tabindex="-1"></a>Second the one with never treated units as controls:</span>
+<span id="cb16-186"><a href="#cb16-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-189"><a href="#cb16-189" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb16-190"><a href="#cb16-190" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
+<span id="cb16-191"><a href="#cb16-191" aria-hidden="true" tabindex="-1"></a><span class="in">qui: jwdid y, ivar(i) tvar(t) gvar(g) never</span></span>
+<span id="cb16-192"><a href="#cb16-192" aria-hidden="true" tabindex="-1"></a><span class="in">estat simple</span></span>
+<span id="cb16-193"><a href="#cb16-193" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-194"><a href="#cb16-194" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-195"><a href="#cb16-195" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2x2 in Steroids</span></span>
+<span id="cb16-196"><a href="#cb16-196" aria-hidden="true" tabindex="-1"></a><span class="fu">#### @callaway_santanna_2021 `csdid` &amp; `csdid2`</span></span>
+<span id="cb16-197"><a href="#cb16-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-198"><a href="#cb16-198" aria-hidden="true" tabindex="-1"></a>The third option is the most computing intensive, but at the same time simpler to understand, if you break it down to the basics. This is why I call this 2x2 in Steroids: @callaway_santanna_2021.</span>
+<span id="cb16-199"><a href="#cb16-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-200"><a href="#cb16-200" aria-hidden="true" tabindex="-1"></a>The literature on the 2x2 DID design has been extensively explored and extended, and it appears that most of the criticisms of the TWFE method do not apply to this simple design. Although there are a few technical details to consider while estimating ATT's, most of the information required can be found in @santanna_doubly_2020. In this work, the authors provide several options for obtaining the best estimate from a simple 2x2 DID design.</span>
+<span id="cb16-201"><a href="#cb16-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-202"><a href="#cb16-202" aria-hidden="true" tabindex="-1"></a>Assuming that we know how to execute 2x2 DID correctly (which can be achieved using <span class="in">`drdid`</span> in Stata), @callaway_santanna_2021 propose that we focus on estimating all the good and useful 2x2 DID designs from our data while avoiding incorrect comparisons. These are the building blocks of the methodology, the ATTGTs. This are the average treatment effects on the treated for units treated for the first time in period G, but measured at period T.</span>
+<span id="cb16-203"><a href="#cb16-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-204"><a href="#cb16-204" aria-hidden="true" tabindex="-1"></a>This process, however, could be time-consuming and computationally intensive if done manually, as the number of 2x2 designs increases with the number of cohorts and periods available in the data. For example, estimating 50 different ATTs would be necessary with 5 cohorts and 10 periods, and up to 5 separate models need to be estimated for each ATT. </span>
+<span id="cb16-205"><a href="#cb16-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-206"><a href="#cb16-206" aria-hidden="true" tabindex="-1"></a>Borrowing from the nomenclature in @callaway_santanna_2021, this ATTGT's are defined as follows:</span>
+<span id="cb16-207"><a href="#cb16-207" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-208"><a href="#cb16-208" aria-hidden="true" tabindex="-1"></a>\begin{aligned}</span>
+<span id="cb16-209"><a href="#cb16-209" aria-hidden="true" tabindex="-1"></a>    ATT(g,t) &amp;= E(Y_{i,t}|i\in g) - E(Y_{i,g-1}|i\in g) <span class="sc">\\</span></span>
+<span id="cb16-210"><a href="#cb16-210" aria-hidden="true" tabindex="-1"></a>             &amp; -\Big<span class="co">[</span><span class="ot"> E(Y_{i,t}|i\in C) - E(Y_{i,g-1}|i\in C) \Big</span><span class="co">]</span></span>
+<span id="cb16-211"><a href="#cb16-211" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
+<span id="cb16-212"><a href="#cb16-212" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-213"><a href="#cb16-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-214"><a href="#cb16-214" aria-hidden="true" tabindex="-1"></a>Which has the same structure as the simple 2x2 DID, with the difference that the control group $C$ will be formed by never treated units only, or include those not yet treated ( $i \in g_i, g_i&gt;t, \And \  g_i&gt;g$).^<span class="co">[</span><span class="ot">There are two other options, but I will leave them for a different post</span><span class="co">]</span></span>
+<span id="cb16-215"><a href="#cb16-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-216"><a href="#cb16-216" aria-hidden="true" tabindex="-1"></a>Once all individual ATTGT's have been identified and estimated, providing summary measures we are more familiar with is as easy as obtaining weighted averages:</span>
+<span id="cb16-217"><a href="#cb16-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-218"><a href="#cb16-218" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-219"><a href="#cb16-219" aria-hidden="true" tabindex="-1"></a>SATT = \sum \left( \frac{w_{gt} }{\sum w_{gt}}ATT(g,t) \right)</span>
+<span id="cb16-220"><a href="#cb16-220" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-221"><a href="#cb16-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-222"><a href="#cb16-222" aria-hidden="true" tabindex="-1"></a>where the weights $w_{gt}$ will change based on the type of aggregation one is interested in. </span>
+<span id="cb16-223"><a href="#cb16-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-224"><a href="#cb16-224" aria-hidden="true" tabindex="-1"></a>This multiple stage process may seem challening, but there are tools that allow you to implement them quite easily: <span class="in">`csdid`</span> and <span class="in">`csdid2`</span>. </span>
+<span id="cb16-225"><a href="#cb16-225" aria-hidden="true" tabindex="-1"></a>The first one, was written as a wrapper around <span class="in">`drdid`</span>, to do all the heavy lifting for you. However, for large projects, it can be slow due to overhead. The alternative <span class="in">`csdid2`</span> is self contained, still under development, but much faster than the predecesor. See <span class="co">[</span><span class="ot">`csdid2`</span><span class="co">](https://github.com/friosavila/csdid2)</span> if interested. Here I will use <span class="in">`csdid`</span>, which you can get from SSC.</span>
+<span id="cb16-226"><a href="#cb16-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-227"><a href="#cb16-227" aria-hidden="true" tabindex="-1"></a>As with <span class="in">`jwdid`</span>. The default option is for <span class="in">`csdid`</span> to produce all ATTGT's. So, for the excercise, I'll omit that ouput, and estimate the aggregate effects with the post estimation command. The default is to use the never treated as controls. I will also add the option <span class="in">`long2`</span> to obtain the pre-treatment ATTGT's as describe above, even though they won't affect our point estimates:</span>
+<span id="cb16-230"><a href="#cb16-230" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb16-231"><a href="#cb16-231" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
+<span id="cb16-232"><a href="#cb16-232" aria-hidden="true" tabindex="-1"></a><span class="in">qui: ssc install drdid, replace</span></span>
+<span id="cb16-233"><a href="#cb16-233" aria-hidden="true" tabindex="-1"></a><span class="in">qui: ssc install csdid, replace</span></span>
+<span id="cb16-234"><a href="#cb16-234" aria-hidden="true" tabindex="-1"></a><span class="in">qui: csdid y, ivar(i) time(t) gvar(g) long2</span></span>
+<span id="cb16-235"><a href="#cb16-235" aria-hidden="true" tabindex="-1"></a><span class="in">estat simple </span></span>
+<span id="cb16-236"><a href="#cb16-236" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-237"><a href="#cb16-237" aria-hidden="true" tabindex="-1"></a>I will also use the not yet treated, to compare results.</span>
+<span id="cb16-240"><a href="#cb16-240" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb16-241"><a href="#cb16-241" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
+<span id="cb16-242"><a href="#cb16-242" aria-hidden="true" tabindex="-1"></a><span class="in">qui: csdid y, ivar(i) time(t) gvar(g) notyet long2</span></span>
+<span id="cb16-243"><a href="#cb16-243" aria-hidden="true" tabindex="-1"></a><span class="in">estat simple </span></span>
+<span id="cb16-244"><a href="#cb16-244" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-245"><a href="#cb16-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-246"><a href="#cb16-246" aria-hidden="true" tabindex="-1"></a><span class="fu">## Conclusions</span></span>
+<span id="cb16-247"><a href="#cb16-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-248"><a href="#cb16-248" aria-hidden="true" tabindex="-1"></a>On this occasion, I have shared with you three solutions from the literature that aim to overcome the limitations of TWFE. Although there are other solutions available, I personally find these three to be the most intuitive and have worked on them. Granted, I have some bias on the matter.</span>
+<span id="cb16-249"><a href="#cb16-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-250"><a href="#cb16-250" aria-hidden="true" tabindex="-1"></a>Despite their apparent differences, these solutions actually converge towards similar outcomes, with discrepancies arising from variations in assumptions regarding control groups or covariate management.</span>
+<span id="cb16-251"><a href="#cb16-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-252"><a href="#cb16-252" aria-hidden="true" tabindex="-1"></a>|command | eq command|</span>
+<span id="cb16-253"><a href="#cb16-253" aria-hidden="true" tabindex="-1"></a>|---|---|</span>
+<span id="cb16-254"><a href="#cb16-254" aria-hidden="true" tabindex="-1"></a>|<span class="in">`jwdid`</span> | <span class="in">`did2s`</span> &amp; <span class="in">`did_imputation`</span>|</span>
+<span id="cb16-255"><a href="#cb16-255" aria-hidden="true" tabindex="-1"></a>|<span class="in">`jwdid, never`</span> | <span class="in">`eventstudyinteract`</span>|</span>
+<span id="cb16-256"><a href="#cb16-256" aria-hidden="true" tabindex="-1"></a>|<span class="in">`jwdid, never`</span> | <span class="in">`csdid, long2`</span> or <span class="in">`csdid2, long`</span>  |</span>
+<span id="cb16-257"><a href="#cb16-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-258"><a href="#cb16-258" aria-hidden="true" tabindex="-1"></a><span class="fu">## References</span></span>
+<span id="cb16-259"><a href="#cb16-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-260"><a href="#cb16-260" aria-hidden="true" tabindex="-1"></a>::: {#refs}</span>
+<span id="cb16-261"><a href="#cb16-261" aria-hidden="true" tabindex="-1"></a>:::</span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
