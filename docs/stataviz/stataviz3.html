@@ -103,6 +103,9 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-LCL2C8L3JH', { 'anonymize_ip': true});
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
 </head>
@@ -322,7 +325,10 @@ gtag('config', 'G-LCL2C8L3JH', { 'anonymize_ip': true});
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>color_style tableau</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>waffle_plot 35 </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="stataviz3_files/figure-html/cell-2-output-1.png" class="img-fluid"></p>
+<style>div.jp-Notebook .datagrid-container {min-height: 448px; }</style>
+</div>
+<div class="cell-output cell-output-display">
+<p><img src="stataviz3_files/figure-html/cell-2-output-2.png" class="img-fluid"></p>
 </div>
 </div>
 <p>When used like this, waffle_plot acts like an immediate command. You just feed it data, and it makes the waffle.</p>
@@ -386,7 +392,7 @@ gtag('config', 'G-LCL2C8L3JH', { 'anonymize_ip': true});
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>waffle_plot died, <span class="co">///</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>color0(gs15) <span class="co">/// Color for the left out </span></span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="bn">legend</span>(<span class="kw">off</span>) <span class="co">/// Legend</span></span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="kw">by</span>(drug, <span class="bn">cols</span>(3)) sctopt(msize(3)) <span class="co">///</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="kw">by</span>(drug, <span class="bn">cols</span>(3)) msize(3) <span class="co">///</span></span>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="bn">title</span>(<span class="st">"Share of people who died by Drug type"</span>) <span class="co">///</span></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>flip nobs(15)   <span class="co">// two new things. FLIP and increase to 15x15 s</span></span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="kw">graph</span> <span class="kw">export</span> sv11.png, height(500) <span class="kw">width</span>(800) <span class="kw">replace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -828,7 +834,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb9-125"><a href="#cb9-125" aria-hidden="true" tabindex="-1"></a><span class="in">waffle_plot died, ///</span></span>
 <span id="cb9-126"><a href="#cb9-126" aria-hidden="true" tabindex="-1"></a><span class="in">color0(gs15) /// Color for the left out </span></span>
 <span id="cb9-127"><a href="#cb9-127" aria-hidden="true" tabindex="-1"></a><span class="in">legend(off) /// Legend</span></span>
-<span id="cb9-128"><a href="#cb9-128" aria-hidden="true" tabindex="-1"></a><span class="in">by(drug, cols(3)) sctopt(msize(3)) ///</span></span>
+<span id="cb9-128"><a href="#cb9-128" aria-hidden="true" tabindex="-1"></a><span class="in">by(drug, cols(3)) msize(3) ///</span></span>
 <span id="cb9-129"><a href="#cb9-129" aria-hidden="true" tabindex="-1"></a><span class="in">title("Share of people who died by Drug type") ///</span></span>
 <span id="cb9-130"><a href="#cb9-130" aria-hidden="true" tabindex="-1"></a><span class="in">flip nobs(15)   // two new things. FLIP and increase to 15x15 s</span></span>
 <span id="cb9-131"><a href="#cb9-131" aria-hidden="true" tabindex="-1"></a><span class="in">graph export sv11.png, height(500) width(800) replace</span></span>

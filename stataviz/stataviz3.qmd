@@ -113,7 +113,7 @@ sysuse cancer, clear
 waffle_plot died, ///
 color0(gs15) /// Color for the left out 
 legend(off) /// Legend
-by(drug, cols(3)) sctopt(msize(3)) ///
+by(drug, cols(3)) msize(3) ///
 title("Share of people who died by Drug type") ///
 flip nobs(15)   // two new things. FLIP and increase to 15x15 s
 graph export sv11.png, height(500) width(800) replace
