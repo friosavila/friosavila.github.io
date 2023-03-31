@@ -105,4 +105,4 @@ We believe that our method has important applications in economics and other soc
 
 ## Software 
 
-The excercise presented here was produce using `Stata`. The modeling was done using the official commands `intreg`. The imputed values were generated out command `intreg_mi`, available upon reqeust. The analysis of the data was performed using `mi`. 
+The excercise presented here was produce using `Stata`. The modeling was done using the official commands `intreg`. The imputed values were generated our command [`intreg_mi`](https://github.com/friosavila/stpackages/tree/main/intreg_mi). The analysis of the data was performed using `mi`, `qreg` and `rifhdreg`. 

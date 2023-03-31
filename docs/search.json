@@ -214,7 +214,7 @@
     "href": "app_metrics/app_metrics6.html#software",
     "title": "Making better use of interval-censored data",
     "section": "Software",
-    "text": "Software\nThe excercise presented here was produce using Stata. The modeling was done using the official commands intreg. The imputed values were generated out command intreg_mi, available upon reqeust. The analysis of the data was performed using mi."
+    "text": "Software\nThe excercise presented here was produce using Stata. The modeling was done using the official commands intreg. The imputed values were generated our command intreg_mi. The analysis of the data was performed using mi, qreg and rifhdreg."
   },
   {
     "objectID": "app_metrics/index.html",
