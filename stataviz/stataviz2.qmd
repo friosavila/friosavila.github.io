@@ -1,5 +1,5 @@
 ---
-title: "Ploting Quantile Regressions: qregplot"
+title: "Ploting Quantile Regressions: `qregplot`"
 subtitle: "Because no one is average"
 code-fold: false
 execute:
@@ -88,11 +88,11 @@ If you want, you can change the color, intensity, or transparency of the confide
 Now, say that I want to see this, but in 3 cols. This would be a graph combine option. I will use the new syntax :
 
 ```{stata}
-*| column: page
+*| column: body-outset
 qregplot age education married , ///
         from(e_qreg) label ///
         col(3) /// request 3 column with 
-        ysize(5) xsize(10) // and different sizes for the graph
+        ysize(5) xsize(12) // and different sizes for the graph
 ```
 
 With the new command, you can also modify the titles and costumize them as needed:
