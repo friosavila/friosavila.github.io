@@ -1,0 +1,7 @@
+---
+title: "Making `joy_plot`s!"
+subtitle: "Adding some Joy (and Ridge) to your Stata-life "
+code-fold: false
+execute:
+  freeze: auto
+---

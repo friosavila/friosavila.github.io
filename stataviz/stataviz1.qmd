@@ -1,5 +1,5 @@
 ---
-title: "How to add Colors to your Life"
+title: "How to add Colors to your Life: `color_style`"
 subtitle: "The `ado` way"
 format: html
 ---

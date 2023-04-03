@@ -1,6 +1,6 @@
 ---
-title: "Making Spirograph! `spirograph`"
-subtitle: "The `ado` Way"
+title: "Making `spirograph` & `harmograph`!"
+subtitle: "Taking Line graphs for a spin"
 code-fold: false
 execute:
   freeze: auto
