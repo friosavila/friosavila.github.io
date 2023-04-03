@@ -5,7 +5,7 @@ author: "Fernando Rios-Avila"
 date: "3/27/2023"
 categories: 
     - Stata
-    - tips
+    - Tips
 draft: false
 ---
 
