@@ -5,6 +5,7 @@ author:
     - Fernando Rios-Avila
     - Gustavo Canavire-Bacarreza
     - Flavia Sacco Capurro
+format: docx
 bibliography: references.bib
 
 ---

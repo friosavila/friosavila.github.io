@@ -6,3 +6,109 @@ execute:
   freeze: auto
 ---
 
+## Introduction 
+
+The program `mscatter` came as an answer to two questions, often asked on `statalist`. 
+
+- How to produce Scatter plots `by` groups? to each group is labeled?
+- How can I change the colors, if I have more 15 groups in my graph?
+
+Doing plots that produce this is simple. One just needs to create multiple scatterplots, and combine them with `twoway`. This will produce you this kind of plot.
+For example, if I had to produce and join 4 scatter plots (across different groups) I would do the following:
+
+```stata
+twoway (scatter y x if z ==1, options) ///
+       (scatter y x if z ==2, options) ///
+       (scatter y x if z ==3, options) ///
+       (scatter y x if z ==4, options), ///
+       overall options
+```       
+
+Doing this for multiple groups, however, can be a pain. Thus, I decided to write a do-file that address this problem.
+
+## `mscatter`: scatter with Multiple groups
+
+First some minimal setup. The latest version of `mscatter` is available from `SSC`. You can install it using the following:
+
+```stata
+ssc install mscatter
+```
+
+In the examples below, I will also use the scheme `white2` within [`color_style`]](https://friosavila.github.io/stataviz/stataviz1.html). See instructions there if you want to install all its components.
+
+Now, how do you produce a scatter with multiple groups. The task is, in fact, simple. If I were to use `auto.dta` dataset, it would be something like this:
+
+```{stata}
+sysuse auto, clear
+two scatter price mpg if foreign == 1 || ///
+    scatter price mpg if foreign == 0
+```
+
+In fact, I have been pointted out to one command by Nick Cox, named linkplot, which may also help you produce similar plots.
+
+```{stata}
+ssc install linkplot
+linkplot price mpg , link(foreign) asyvars recast(scatter)
+```
+
+And produces pretty much the same. The limitation: only works with up to 15 groups. But who needs more right? Well, if you need more, you can use `mscatter`!
+
+```{stata}
+set scheme white2                   // Lets use white scheme
+mscatter price mpg , over(rep78)    /// Upto here normal. I use over instead of By
+  alegend  legend(cols(5)) msize(3) /// add a legend with large dots
+  by(foreign)                       // and groups by foreign
+```
+
+But those are easy to do by hand. What if you have many groups. Lets see with some different data:
+
+```{stata}
+webuse nlswork
+mscatter ln_wage ttl_exp ,     /// normal
+          over(age)            /// but over many groups!
+          colorpalette(magma ) /// all color coded
+          alegend               // with a legend to match
+```
+
+
+And as I show you before, mscatter can be combined with by()
+
+```{stata}
+mscatter ln_wage ttl_exp , over(grade) ///
+ colorpalette(magma ) by(race, legend(off)) // legend(off) should go here
+```
+![sct_5](./figures/sct_5.png)
+
+Only current limitation, you can use weights (for size of markers) but it will fail 
+if you have groups without observations based on **over** and **by** (difficult to explain and reproduce)
+
+## New update!
+
+Two improvements with respect to previous version. 
+
+1. You should now be able to use it with Stata v14 (or even earlier versions?)
+2. You can now add fitted plots to the scatter!
+
+```
+webuse nlswork, clear
+set seed 10
+keep if runiform()<.2
+set scheme white
+color_style tableau
+mscatter ln_wage ttl_exp , over(race)  ///
+fit(qfitci) ///<-adds quadratic fit with CI
+mfcolor(%5) mlcolor(%5) alegend ytitle("Log Wages")
+```
+![sct_6](./figures/sct_6.png)
+
+Or take the scatterplot out!
+
+```
+set scheme white
+color_style tableau
+mscatter ln_wage ttl_exp , over(race)  ///
+fit(qfitci) mfcolor(%5) mlcolor(%5) ///
+noscatter  /// Asks not to show the scatter points
+alegend ytitle("Log Wages")
+```
+![sct_7](./figures/sct_7.png)
