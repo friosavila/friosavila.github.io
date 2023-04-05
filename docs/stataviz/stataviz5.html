@@ -104,6 +104,8 @@ gtag('js', new Date());
 gtag('config', 'G-LCL2C8L3JH', { 'anonymize_ip': true});
 </script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -254,7 +256,13 @@ gtag('config', 'G-LCL2C8L3JH', { 'anonymize_ip': true});
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#what-are-spirographs" id="toc-what-are-spirographs" class="nav-link active" data-scroll-target="#what-are-spirographs">What are Spirographs?</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -277,10 +285,25 @@ gtag('config', 'G-LCL2C8L3JH', { 'anonymize_ip': true});
 
 </header>
 
+<section id="what-are-spirographs" class="level2">
+<h2 class="anchored" data-anchor-id="what-are-spirographs">What are Spirographs?</h2>
+<p>I believe the correct term for them is Guilloche patterns. From a programming perspective these are figures created by drawing circles, connected to circles, connected to more circles, so on and so forth. The subsequent circles build up on each other, and with the right parameters, and sufficient flexibility, one could potentially use the principle of Spirographs to draw anything using very complex functions.</p>
+<blockquote class="blockquote">
+<p>So how does this work?</p>
+</blockquote>
+<p>First, we need to change the perspective from a cartesian coordinates <span class="math inline">\((x,y)\)</span>, to one with polar coordinates, where every point in space is determined by a distance to the origin (<span class="math inline">\(r\)</span>), and the angle of a line that connects it to the origin, with respect to the horizon. However, for drawing them, we need to transform them back to the cartesian coordinates:</p>
+<p><span class="math display">\[
+\begin{aligned}
+y = r \times sin (\theta) \\
+x = r \times cos (\theta)
+\end{aligned}
+\]</span></p>
+<p>So, if we fix <span class="math inline">\(r\)</span> to be the same and change <span class="math inline">\(\theta\)</span> from 0 to <span class="math inline">\(2\pi\)</span>, we could draw a simple circle:</p>
 
 
 <!-- -->
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -583,9 +606,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Making `spirograph` &amp; `harmograph`!"</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Taking Line graphs for a spin"</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">code-fold:</span><span class="co"> false</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">  freeze: auto</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">## What are Spirographs? </span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>I believe the correct term for them is Guilloche patterns. From a programming perspective these are figures created by drawing circles, connected to circles, connected to more circles, so on and so forth. The subsequent circles build up on each other, and with the right parameters, and sufficient flexibility, one could potentially use the principle of Spirographs to draw anything using very complex functions.</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; So how does this work?</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>First, we need to change the perspective from a cartesian coordinates $(x,y)$, to one with polar coordinates, where every point in space is determined by a distance to the origin ($r$), and the angle of a line that connects it to the origin, with respect to the horizon. However, for drawing them, we need to transform them back to the cartesian coordinates:</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>\begin{aligned}</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>y = r \times sin (\theta) <span class="sc">\\</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>x = r \times cos (\theta)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>So, if we fix $r$ to be the same and change $\theta$ from 0 to $2\pi$, we could draw a simple circle:</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
