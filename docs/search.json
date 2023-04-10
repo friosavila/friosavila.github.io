@@ -497,6 +497,20 @@
     "text": "Conclusions\nmscatter is a data-visualization utility that may enable you to create informative graphs capturing correlations between 2 variables.\nWhile its use may be limited, I believe that those who need it, may find this a good tool to have for their arsenal.\nLastly, try checking the helpfile, where I add other options, not described here.\nTil next time!"
   },
   {
+    "objectID": "stataviz/stataviz5.html",
+    "href": "stataviz/stataviz5.html",
+    "title": "Making spirograph & harmograph!",
+    "section": "",
+    "text": "I believe the correct term for them is Guilloche patterns. From a programming perspective these are figures created by drawing circles, connected to circles, connected to more circles, so on and so forth. The subsequent circles build up on each other, and with the right parameters, and sufficient flexibility, one could potentially use the principle of Spirographs to draw anything using very complex functions.\n\nSo how does this work?\n\nFirst, we need to change the perspective from a cartesian coordinates \\((x,y)\\), to one with polar coordinates, where every point in space is determined by a distance to the origin (\\(r\\)), and the angle of a line that connects it to the origin, with respect to the horizon. However, for drawing them, we need to transform them back to the cartesian coordinates:\n\\[\n\\begin{aligned}\ny = r \\times sin (\\theta) \\\\\nx = r \\times cos (\\theta)\n\\end{aligned}\n\\]\nSo, if we fix \\(r\\) to be the same and change \\(\\theta\\) from 0 to \\(2\\pi\\), we could draw a simple circle:"
+  },
+  {
+    "objectID": "stataviz/stataviz5.html#what-are-spirographs",
+    "href": "stataviz/stataviz5.html#what-are-spirographs",
+    "title": "Making spirograph & harmograph!",
+    "section": "",
+    "text": "I believe the correct term for them is Guilloche patterns. From a programming perspective these are figures created by drawing circles, connected to circles, connected to more circles, so on and so forth. The subsequent circles build up on each other, and with the right parameters, and sufficient flexibility, one could potentially use the principle of Spirographs to draw anything using very complex functions.\n\nSo how does this work?\n\nFirst, we need to change the perspective from a cartesian coordinates \\((x,y)\\), to one with polar coordinates, where every point in space is determined by a distance to the origin (\\(r\\)), and the angle of a line that connects it to the origin, with respect to the horizon. However, for drawing them, we need to transform them back to the cartesian coordinates:\n\\[\n\\begin{aligned}\ny = r \\times sin (\\theta) \\\\\nx = r \\times cos (\\theta)\n\\end{aligned}\n\\]\nSo, if we fix \\(r\\) to be the same and change \\(\\theta\\) from 0 to \\(2\\pi\\), we could draw a simple circle:"
+  },
+  {
     "objectID": "stata_do/index.html",
     "href": "stata_do/index.html",
     "title": "Stata Programming",
@@ -677,19 +691,5 @@
     "title": "The IV-Probit: margins and ml",
     "section": "Conclusion",
     "text": "Conclusion\nThe command -ml- is a powerful tool that can be used to estimate single or multiple equation models, as long as the loglikelihood functions (and their inter-relations) can be properly defined.\n-margins- is also a very flexible command that can be easily combined with -ml- to expand the estimation of marginal effects for properly defined outcomes. While the command is flexible and relatively easy to use, these properties can also be double-edge swords, if one is not aware of the mechanics behind the actual estimation of partial effects.\nIn my view, the original estimation of marginal effects after iv-probit was correct, but the changes it received in Stata 14.1 introduced what we could call a bug, that was based on solid Math. However, unless you dig deeper into what ivprobit tries to estimate, it would be difficult to say why that change produced undesirable results.\nThe updates pushed in Stata 16 made the necesary corrections following my suggestions, and now produces correct partial effects (two-step like), even adopting my comment regarding standard errors."
-  },
-  {
-    "objectID": "stataviz/stataviz5.html",
-    "href": "stataviz/stataviz5.html",
-    "title": "Making spirograph & harmograph!",
-    "section": "",
-    "text": "I believe the correct term for them is Guilloche patterns. From a programming perspective these are figures created by drawing circles, connected to circles, connected to more circles, so on and so forth. The subsequent circles build up on each other, and with the right parameters, and sufficient flexibility, one could potentially use the principle of Spirographs to draw anything using very complex functions.\n\nSo how does this work?\n\nFirst, we need to change the perspective from a cartesian coordinates \\((x,y)\\), to one with polar coordinates, where every point in space is determined by a distance to the origin (\\(r\\)), and the angle of a line that connects it to the origin, with respect to the horizon. However, for drawing them, we need to transform them back to the cartesian coordinates:\n\\[\n\\begin{aligned}\ny = r \\times sin (\\theta) \\\\\nx = r \\times cos (\\theta)\n\\end{aligned}\n\\]\nSo, if we fix \\(r\\) to be the same and change \\(\\theta\\) from 0 to \\(2\\pi\\), we could draw a simple circle:"
-  },
-  {
-    "objectID": "stataviz/stataviz5.html#what-are-spirographs",
-    "href": "stataviz/stataviz5.html#what-are-spirographs",
-    "title": "Making spirograph & harmograph!",
-    "section": "",
-    "text": "I believe the correct term for them is Guilloche patterns. From a programming perspective these are figures created by drawing circles, connected to circles, connected to more circles, so on and so forth. The subsequent circles build up on each other, and with the right parameters, and sufficient flexibility, one could potentially use the principle of Spirographs to draw anything using very complex functions.\n\nSo how does this work?\n\nFirst, we need to change the perspective from a cartesian coordinates \\((x,y)\\), to one with polar coordinates, where every point in space is determined by a distance to the origin (\\(r\\)), and the angle of a line that connects it to the origin, with respect to the horizon. However, for drawing them, we need to transform them back to the cartesian coordinates:\n\\[\n\\begin{aligned}\ny = r \\times sin (\\theta) \\\\\nx = r \\times cos (\\theta)\n\\end{aligned}\n\\]\nSo, if we fix \\(r\\) to be the same and change \\(\\theta\\) from 0 to \\(2\\pi\\), we could draw a simple circle:"
   }
 ]
