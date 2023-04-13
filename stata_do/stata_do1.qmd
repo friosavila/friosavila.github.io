@@ -17,6 +17,20 @@ To use this, you will need:
 
 Follow Tim's steps to install the kernel.
 
+## Quarto Setup
+
+While this page is being rendered as a quarto website project, you can also use the following YAML heading, once you installed `Python` and `nbstata` in your computer. You will also need Quarto (if using say VSC) or one of the latests iterations of Rstudio.
+
+```
+---
+title: Using Quarto for Stata dynamic documents
+format: html
+jupyter: nbstata
+---
+```
+
+You can, of course, add other formats. Once this is done, you can see the rest of the code [here](https://github.com/friosavila/friosavila.github.io/blob/main/stata_do/stata_do1.qmd)
+
 ## Lets do this:
 
 Let us consider an example where we study the **mpg** and **weight** variables
