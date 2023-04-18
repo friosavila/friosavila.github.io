@@ -1,6 +1,6 @@
 ---
 title: "Simultaneous/Uniform Confidence Intervals"
-subtitle: "Featuring `uci/sci`"
+subtitle: "Featuring `uci`"
 format: html
 code-fold: true
 ---
