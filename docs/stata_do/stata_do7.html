@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Playing With Stata - Stata Programming</title>
+<title>Playing With Stata - The Probit: margins and ml</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -64,7 +64,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../stata_do/stata_do1.html" rel="next">
+<link href="../stata_do/stata_do6.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -171,7 +171,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../stata_do/index.html">Stata Programming</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../stata_do/stata_do1.html">Stata Do</a></li><li class="breadcrumb-item"><a href="../stata_do/stata_do7.html">The Probit: <code>margins</code> and <code>ml</code></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
     </div>
@@ -190,7 +190,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../stata_do/index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../stata_do/index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Stata Programming</span></a>
   </div>
 </li>
@@ -241,7 +241,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../stata_do/stata_do7.html" class="sidebar-item-text sidebar-link">
+  <a href="../stata_do/stata_do7.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">The Probit: <code>margins</code> and <code>ml</code></span></a>
   </div>
 </li>
@@ -260,7 +260,8 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Stata Programming</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">The Probit: <code>margins</code> and <code>ml</code></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<p class="subtitle lead">A nonlinear-linear model</p>
 </div>
 
 
@@ -275,12 +276,6 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 
 </header>
 
-<p>Welcome to the Stata programming section! As a “<em>seasoned</em>” (just another word for oldish) Stata user, I have developed quite few tricks of knowledge and experience in programming with Stata and Mata. I am excited to share my insights with you.</p>
-<p>Stata programming is a powerful tool that can enhance your data analysis and streamline your research workflows. For instance, if you do the same thing over and over, why not write a program that will replicate it as well!. Of course, it can be daunting for beginners, and even experienced users may encounter challenges and roadblocks in their programming endeavors (The more skillful you become, the harder the problems you face!).</p>
-<p>In this section, I provide hints and suggestions for programming, some times replicating simulation excercises, some times for making examples statistical methods, and some times just for fun.</p>
-<p>Here, I will try to cover a wide range of programming topics, from basic syntax and functions to advanced techniques (depending on my own skills), providing examples and code snippets to demonstrate how the code works.</p>
-<p>My main goal is to help you and myself becoming a more proficient Stata programmer. I hope you find this section informative and useful, and I look forward to helping you advance your Stata programming skills!</p>
-<p>Comments and suggestions are always welcome.</p>
 
 
 <!-- -->
@@ -573,28 +568,20 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../stata_do/stata_do6.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Measurement Errors in Administrative and Survey Data</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../stata_do/stata_do1.html" class="pagination-link">
-        <span class="nav-page-text">Using Quarto for Stata dynamic documents</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Stata Programming"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>Welcome to the Stata programming section! As a "*seasoned*" (just another word for oldish)  Stata user, I have developed quite few tricks of knowledge and experience in programming with Stata and Mata. I am excited to share my insights with you.</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>Stata programming is a powerful tool that can enhance your data analysis and streamline your research workflows. For instance, if you do the same thing over and over, why not write a program that will replicate it as well!. Of course, it can be daunting for beginners, and even experienced users may encounter challenges and roadblocks in their programming endeavors (The more skillful you become, the harder the problems you face!).</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>In this section, I provide hints and suggestions for programming, some times replicating simulation excercises, some times for making examples statistical methods, and some times just for fun.</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>Here, I will try to cover a wide range of programming topics, from basic syntax and functions to advanced techniques (depending on my own skills), providing  examples and code snippets to demonstrate how the code works.</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>My main goal is to help you and myself becoming a more proficient Stata programmer. I hope you find this section informative and useful, and I look forward to helping you advance your Stata programming skills!</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>Comments and suggestions are always welcome.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "The Probit: `margins` and `ml`"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "A nonlinear-linear model"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> html</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">code-fold:</span><span class="co"> false</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="an">bibliography:</span><span class="co"> mywork.bib</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
