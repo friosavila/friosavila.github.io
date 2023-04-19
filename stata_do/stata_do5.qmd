@@ -138,7 +138,7 @@ So, one alternative I'm suggesting here is to do the same, but via simulation.
 3. Obtain the **z/t** statistic from the simulated coefficients, and the model estimated variance matrix.
 4. Just like before, obtain the new critical value, based on the new set of **t-statistics**, and adjust the Confidence intervals!
 
-Here is where my new command `uci` comes into play. First, you may need to install it using:
+Here is where my new command `uci` comes into play. First, you may need to install it using `fra`. Also if you want to use `fra` please see [here](https://friosavila.github.io/chatgpt/fra_03_30_2023/) for instructions:
 
 ```{stata}
 *| code-fold: false
