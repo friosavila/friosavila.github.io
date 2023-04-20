@@ -10,7 +10,271 @@
 <atom:link href="https://friosavila.github.io/chatgpt.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.3.313</generator>
-<lastBuildDate>Wed, 19 Apr 2023 04:00:00 GMT</lastBuildDate>
+<lastBuildDate>Thu, 20 Apr 2023 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>Merging Data 1:1, m:1, 1:m and m:m?</title>
+  <dc:creator>Fernando Rios-Avila</dc:creator>
+  <link>https://friosavila.github.io/chatgpt/merge_04_20_2023/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="merging-11" class="level2">
+<h2 class="anchored" data-anchor-id="merging-11">Merging 1:1</h2>
+<p>When you can uniquely identify all observations in each dataset using a common identifier viariable.</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">use</span> file1</span>
+<span id="cb1-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">merge</span> 1:1 id <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">using</span> file2</span></code></pre></div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart BT
+    subgraph File2
+    db1-1["id=1"]
+    db1-2["id=2"]
+    db1-3["id=3"]
+    end
+    subgraph File1
+    db2-1["id=1"]
+    db2-2["id=2"]
+    db2-3["id=3"]
+    end
+    
+    db1-1--&gt;db2-1
+    db1-2--&gt;db2-2
+    db1-3--&gt;db2-3
+</pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="merging-m1" class="level2">
+<h2 class="anchored" data-anchor-id="merging-m1">Merging m:1</h2>
+<p>When you try to merge together data from various family members to a single <em>family</em> file. Each member is merged to its family.</p>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">use</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">family</span></span>
+<span id="cb2-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">merge</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">m</span>:1 id <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">using</span> family_members</span></code></pre></div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart BT
+    subgraph members ["Family Members"]
+    db1-1["hid=1,pid=1"]
+    db1-2["hid=1,pid=2"]
+    db1-3["hid=2,pid=1"]
+    db1-4["hid=2,pid=1"]
+    db1-5["hid=3,pid=3"]
+    db1-6["hid=3,pid=1"]
+    db1-7["hid=3,pid=2"]
+    end
+    subgraph Family
+    db2-1["hid=1"]
+    db2-2["hid=2"]
+    db2-3["hid=3"]
+    end
+    
+    db1-1--&gt;db2-1
+    db1-2--&gt;db2-1
+    db1-3--&gt;db2-2
+    db1-4--&gt;db2-2
+    db1-5--&gt;db2-3
+    db1-6--&gt;db2-3
+    db1-7--&gt;db2-3
+</pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="merging-1m" class="level2">
+<h2 class="anchored" data-anchor-id="merging-1m">Merging 1:m</h2>
+<p>When you are trying to transfer <em>family</em> level data to each family member. The family member file is uniquely identified</p>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">use</span> family_members</span>
+<span id="cb3-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">merge</span> 1:<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">m</span> id <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">using</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">family</span></span></code></pre></div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart BT
+    subgraph members ["Family Members"]
+    db1-1["hid=1,pid=1"]
+    db1-2["hid=1,pid=2"]
+    db1-3["hid=2,pid=1"]
+    db1-4["hid=2,pid=2"]
+    db1-5["hid=3,pid=1"]
+    db1-6["hid=3,pid=2"]
+    db1-7["hid=3,pid=3"]
+    end
+    subgraph Family
+    db2-1["hid=1"]
+    db2-2["hid=2"]
+    db2-3["hid=3"]
+    end
+    
+    db2-1--&gt;db1-1
+    db2-1--&gt;db1-2
+    db2-2--&gt;db1-3
+    db2-2--&gt;db1-4
+    db2-3--&gt;db1-5
+    db2-3--&gt;db1-6
+    db2-3--&gt;db1-7
+</pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="merging-mm" class="level2">
+<h2 class="anchored" data-anchor-id="merging-mm">Merging m:m</h2>
+<p>Something you <strong>NEVER</strong> want to do. It tries to merge to datasets based on a single set identification variable. This variable does not identify unique observations in either file. The merge is done by “id” based on the order they appear in the data. It will typically provide very odd results.</p>
+<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">use</span> family_mem1</span>
+<span id="cb4-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">merge</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">m</span>:<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">m</span> id <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">using</span> family_mem2</span></code></pre></div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart BT
+    subgraph members ["Family Members 1"]
+    db1-1["hid=1,pid=1"]
+    db1-2["hid=1,pid=2"]
+    db1-3["hid=2,pid=1"]
+    db1-4["hid=2,pid=2"]
+    db1-5["hid=3,pid=1"]
+    db1-6["hid=3,pid=2"]
+    db1-7["hid=3,pid=3"]
+    end
+    subgraph Family ["Family Members 2"]
+    db2-1["hid=1,pid=2"]
+    db2-2["hid=1,pid=3"]
+    db2-3["hid=1,pid=4"]
+    db2-4["hid=2,pid=1"]
+    db2-5["hid=2,pid=3"]
+    db2-6["hid=3,pid=2"]
+    db2-7["hid=3,pid=4"]
+    end
+    
+    db2-1--&gt;db1-1
+    db2-2--&gt;db1-2
+    db2-4--&gt;db1-3
+    db2-5--&gt;db1-4
+    db2-6--&gt;db1-5
+    db2-7--&gt;db1-6
+</pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="true-merge-m-x-m" class="level2">
+<h2 class="anchored" data-anchor-id="true-merge-m-x-m">True Merge m x m</h2>
+<p>If you were trying <code>m:m</code> merge (which is probably wrong), means you want to <code>joinby</code>. This means merge both files using all combinations of individuals that have the same id. This will create a very large dataset, unless other restrictions are applied.</p>
+<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">use</span> family_mem1</span>
+<span id="cb5-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">joinby</span> id <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">using</span> family_mem2</span></code></pre></div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart BT
+    subgraph members ["Family Members 1"]
+    db1-1["hid=1,pid=1"]
+    db1-2["hid=1,pid=2"]
+    db1-3["hid=2,pid=1"]
+    db1-4["hid=2,pid=2"]
+    db1-5["hid=3,pid=1"]
+    db1-6["hid=3,pid=2"]
+    db1-7["hid=3,pid=3"]
+    end
+    subgraph Family ["Family Members 2"]
+    db2-1["hid=1,pid=2"]
+    db2-2["hid=1,pid=3"]
+    db2-3["hid=1,pid=4"]
+    db2-4["hid=2,pid=1"]
+    db2-5["hid=2,pid=3"]
+    db2-6["hid=3,pid=2"]
+    db2-7["hid=3,pid=4"]
+    end
+    
+    db2-1--&gt;db1-1
+    db2-2--&gt;db1-1
+    db2-3--&gt;db1-1
+
+    db2-1--&gt;db1-2
+    db2-2--&gt;db1-2
+    db2-3--&gt;db1-2
+
+    db2-4--&gt;db1-3
+    db2-4--&gt;db1-4
+    db2-5--&gt;db1-4
+    db2-5--&gt;db1-3
+
+    db2-6--&gt;db1-5
+    db2-6--&gt;db1-6
+    db2-6--&gt;db1-7
+    db2-7--&gt;db1-5
+    db2-7--&gt;db1-6
+    db2-7--&gt;db1-7
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+
+<!-- -->
+
+</section>
+
+ ]]></description>
+  <category>Stata</category>
+  <category>Tips</category>
+  <category>Programming</category>
+  <guid>https://friosavila.github.io/chatgpt/merge_04_20_2023/index.html</guid>
+  <pubDate>Thu, 20 Apr 2023 04:00:00 GMT</pubDate>
+</item>
 <item>
   <title>A Poem for Abby’s Teeth</title>
   <dc:creator>ChatGPT and Fernando Rios-Avila</dc:creator>

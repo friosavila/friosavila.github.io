@@ -1,6 +1,6 @@
 ---
 title: "How to write your own Installer"
-description: "I provide a small descriptio on how to use `net` to program an easy installer for your own repository"
+description: "I provide a small description on how to use `net` to program an easy installer for your own repository"
 author: "Fernando Rios-Avila"
 date: "3/30/2023"
 categories: 
