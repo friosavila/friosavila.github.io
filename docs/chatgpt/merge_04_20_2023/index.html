@@ -268,7 +268,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <h2 class="anchored" data-anchor-id="merging-m1">Merging m:1</h2>
 <p>When you are trying to transfer <em>family</em> level data to each family member. The family member file is uniquely identified</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">use</span> family_members</span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">merge</span> <span class="fu">m</span>:1 id <span class="kw">using</span> <span class="kw">family</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">merge</span> <span class="fu">m</span>:1 hid <span class="kw">using</span> <span class="kw">family</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -306,7 +306,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <h2 class="anchored" data-anchor-id="merging-1m">Merging 1:m</h2>
 <p>When you try to merge together data from various family members to a single <em>family</em> file. Each member is merged to its family.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">use</span> <span class="kw">family</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">merge</span> 1:<span class="fu">m</span> id <span class="kw">using</span> family_members</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">merge</span> 1:<span class="fu">m</span> hid <span class="kw">using</span> family_members</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -775,7 +775,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb6-50"><a href="#cb6-50"></a></span>
 <span id="cb6-51"><a href="#cb6-51"></a><span class="in">```stata</span></span>
 <span id="cb6-52"><a href="#cb6-52"></a><span class="in">use family_members</span></span>
-<span id="cb6-53"><a href="#cb6-53"></a><span class="in">merge m:1 id using family</span></span>
+<span id="cb6-53"><a href="#cb6-53"></a><span class="in">merge m:1 hid using family</span></span>
 <span id="cb6-54"><a href="#cb6-54"></a><span class="in">```</span></span>
 <span id="cb6-57"><a href="#cb6-57"></a><span class="in">```{mermaid}</span></span>
 <span id="cb6-58"><a href="#cb6-58"></a>flowchart BT</span>
@@ -811,7 +811,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb6-88"><a href="#cb6-88"></a></span>
 <span id="cb6-89"><a href="#cb6-89"></a><span class="in">```stata</span></span>
 <span id="cb6-90"><a href="#cb6-90"></a><span class="in">use family</span></span>
-<span id="cb6-91"><a href="#cb6-91"></a><span class="in">merge 1:m id using family_members</span></span>
+<span id="cb6-91"><a href="#cb6-91"></a><span class="in">merge 1:m hid using family_members</span></span>
 <span id="cb6-92"><a href="#cb6-92"></a><span class="in">```</span></span>
 <span id="cb6-95"><a href="#cb6-95"></a><span class="in">```{mermaid}</span></span>
 <span id="cb6-96"><a href="#cb6-96"></a>flowchart BT</span>

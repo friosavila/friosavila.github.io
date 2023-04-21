@@ -48,7 +48,7 @@ When you are trying to transfer *family* level data to each family member. The f
 
 ```stata
 use family_members
-merge m:1 id using family
+merge m:1 hid using family
 ```
 ```{mermaid}
 flowchart BT
@@ -84,7 +84,7 @@ When you try to merge together data from various family members to a single *fam
 
 ```stata
 use family
-merge 1:m id using family_members
+merge 1:m hid using family_members
 ```
 ```{mermaid}
 flowchart BT
