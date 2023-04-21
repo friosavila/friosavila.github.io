@@ -312,14 +312,14 @@
     "href": "chatgpt/merge_04_20_2023/index.html#merging-m1",
     "title": "Merging Data 1:1, m:1, 1:m and m:m?",
     "section": "Merging m:1",
-    "text": "Merging m:1\nWhen you try to merge together data from various family members to a single family file. Each member is merged to its family.\nuse family\nmerge m:1 id using family_members\n\n\n\n\nflowchart BT\n    subgraph members [\"Family Members\"]\n    db1-1[\"hid=1,pid=1\"]\n    db1-2[\"hid=1,pid=2\"]\n    db1-3[\"hid=2,pid=1\"]\n    db1-4[\"hid=2,pid=1\"]\n    db1-5[\"hid=3,pid=3\"]\n    db1-6[\"hid=3,pid=1\"]\n    db1-7[\"hid=3,pid=2\"]\n    end\n    subgraph Family\n    db2-1[\"hid=1\"]\n    db2-2[\"hid=2\"]\n    db2-3[\"hid=3\"]\n    end\n    \n    db1-1--&gt;db2-1\n    db1-2--&gt;db2-1\n    db1-3--&gt;db2-2\n    db1-4--&gt;db2-2\n    db1-5--&gt;db2-3\n    db1-6--&gt;db2-3\n    db1-7--&gt;db2-3"
+    "text": "Merging m:1\nWhen you are trying to transfer family level data to each family member. The family member file is uniquely identified\nuse family_members\nmerge m:1 id using family\n\n\n\n\nflowchart BT\n    subgraph members [\"Family Members\"]\n    db1-1[\"hid=1,pid=1\"]\n    db1-2[\"hid=1,pid=2\"]\n    db1-3[\"hid=2,pid=1\"]\n    db1-4[\"hid=2,pid=2\"]\n    db1-5[\"hid=3,pid=1\"]\n    db1-6[\"hid=3,pid=2\"]\n    db1-7[\"hid=3,pid=3\"]\n    end\n    subgraph Family\n    db2-1[\"hid=1\"]\n    db2-2[\"hid=2\"]\n    db2-3[\"hid=3\"]\n    end\n    \n    db2-1--&gt;db1-1\n    db2-1--&gt;db1-2\n    db2-2--&gt;db1-3\n    db2-2--&gt;db1-4\n    db2-3--&gt;db1-5\n    db2-3--&gt;db1-6\n    db2-3--&gt;db1-7"
   },
   {
     "objectID": "chatgpt/merge_04_20_2023/index.html#merging-1m",
     "href": "chatgpt/merge_04_20_2023/index.html#merging-1m",
     "title": "Merging Data 1:1, m:1, 1:m and m:m?",
     "section": "Merging 1:m",
-    "text": "Merging 1:m\nWhen you are trying to transfer family level data to each family member. The family member file is uniquely identified\nuse family_members\nmerge 1:m id using family\n\n\n\n\nflowchart BT\n    subgraph members [\"Family Members\"]\n    db1-1[\"hid=1,pid=1\"]\n    db1-2[\"hid=1,pid=2\"]\n    db1-3[\"hid=2,pid=1\"]\n    db1-4[\"hid=2,pid=2\"]\n    db1-5[\"hid=3,pid=1\"]\n    db1-6[\"hid=3,pid=2\"]\n    db1-7[\"hid=3,pid=3\"]\n    end\n    subgraph Family\n    db2-1[\"hid=1\"]\n    db2-2[\"hid=2\"]\n    db2-3[\"hid=3\"]\n    end\n    \n    db2-1--&gt;db1-1\n    db2-1--&gt;db1-2\n    db2-2--&gt;db1-3\n    db2-2--&gt;db1-4\n    db2-3--&gt;db1-5\n    db2-3--&gt;db1-6\n    db2-3--&gt;db1-7"
+    "text": "Merging 1:m\nWhen you try to merge together data from various family members to a single family file. Each member is merged to its family.\nuse family\nmerge 1:m id using family_members\n\n\n\n\nflowchart BT\n    subgraph members [\"Family Members\"]\n    db1-1[\"hid=1,pid=1\"]\n    db1-2[\"hid=1,pid=2\"]\n    db1-3[\"hid=2,pid=1\"]\n    db1-4[\"hid=2,pid=1\"]\n    db1-5[\"hid=3,pid=3\"]\n    db1-6[\"hid=3,pid=1\"]\n    db1-7[\"hid=3,pid=2\"]\n    end\n    subgraph Family\n    db2-1[\"hid=1\"]\n    db2-2[\"hid=2\"]\n    db2-3[\"hid=3\"]\n    end\n    \n    db1-1--&gt;db2-1\n    db1-2--&gt;db2-1\n    db1-3--&gt;db2-2\n    db1-4--&gt;db2-2\n    db1-5--&gt;db2-3\n    db1-6--&gt;db2-3\n    db1-7--&gt;db2-3"
   },
   {
     "objectID": "chatgpt/merge_04_20_2023/index.html#merging-mm",

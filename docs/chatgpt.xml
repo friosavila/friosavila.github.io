@@ -58,63 +58,15 @@ font-style: inherit;">using</span> file2</span></code></pre></div>
 </section>
 <section id="merging-m1" class="level2">
 <h2 class="anchored" data-anchor-id="merging-m1">Merging m:1</h2>
-<p>When you try to merge together data from various family members to a single <em>family</em> file. Each member is merged to its family.</p>
+<p>When you are trying to transfer <em>family</em> level data to each family member. The family member file is uniquely identified</p>
 <div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><span class="kw" style="color: #003B4F;
 background-color: null;
-font-style: inherit;">use</span> <span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">family</span></span>
+font-style: inherit;">use</span> family_members</span>
 <span id="cb2-2"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">merge</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">m</span>:1 id <span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">using</span> family_members</span></code></pre></div>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<div>
-<pre class="mermaid mermaid-js">flowchart BT
-    subgraph members ["Family Members"]
-    db1-1["hid=1,pid=1"]
-    db1-2["hid=1,pid=2"]
-    db1-3["hid=2,pid=1"]
-    db1-4["hid=2,pid=1"]
-    db1-5["hid=3,pid=3"]
-    db1-6["hid=3,pid=1"]
-    db1-7["hid=3,pid=2"]
-    end
-    subgraph Family
-    db2-1["hid=1"]
-    db2-2["hid=2"]
-    db2-3["hid=3"]
-    end
-    
-    db1-1--&gt;db2-1
-    db1-2--&gt;db2-1
-    db1-3--&gt;db2-2
-    db1-4--&gt;db2-2
-    db1-5--&gt;db2-3
-    db1-6--&gt;db2-3
-    db1-7--&gt;db2-3
-</pre>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="merging-1m" class="level2">
-<h2 class="anchored" data-anchor-id="merging-1m">Merging 1:m</h2>
-<p>When you are trying to transfer <em>family</em> level data to each family member. The family member file is uniquely identified</p>
-<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">use</span> family_members</span>
-<span id="cb3-2"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">merge</span> 1:<span class="fu" style="color: #4758AB;
-background-color: null;
-font-style: inherit;">m</span> id <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">using</span> <span class="kw" style="color: #003B4F;
 background-color: null;
@@ -146,6 +98,54 @@ font-style: inherit;">family</span></span></code></pre></div>
     db2-3--&gt;db1-5
     db2-3--&gt;db1-6
     db2-3--&gt;db1-7
+</pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="merging-1m" class="level2">
+<h2 class="anchored" data-anchor-id="merging-1m">Merging 1:m</h2>
+<p>When you try to merge together data from various family members to a single <em>family</em> file. Each member is merged to its family.</p>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">use</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">family</span></span>
+<span id="cb3-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">merge</span> 1:<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">m</span> id <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">using</span> family_members</span></code></pre></div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart BT
+    subgraph members ["Family Members"]
+    db1-1["hid=1,pid=1"]
+    db1-2["hid=1,pid=2"]
+    db1-3["hid=2,pid=1"]
+    db1-4["hid=2,pid=1"]
+    db1-5["hid=3,pid=3"]
+    db1-6["hid=3,pid=1"]
+    db1-7["hid=3,pid=2"]
+    end
+    subgraph Family
+    db2-1["hid=1"]
+    db2-2["hid=2"]
+    db2-3["hid=3"]
+    end
+    
+    db1-1--&gt;db2-1
+    db1-2--&gt;db2-1
+    db1-3--&gt;db2-2
+    db1-4--&gt;db2-2
+    db1-5--&gt;db2-3
+    db1-6--&gt;db2-3
+    db1-7--&gt;db2-3
 </pre>
 </div>
 </div>

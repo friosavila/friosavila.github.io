@@ -266,47 +266,9 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 </section>
 <section id="merging-m1" class="level2">
 <h2 class="anchored" data-anchor-id="merging-m1">Merging m:1</h2>
-<p>When you try to merge together data from various family members to a single <em>family</em> file. Each member is merged to its family.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">use</span> <span class="kw">family</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">merge</span> <span class="fu">m</span>:1 id <span class="kw">using</span> family_members</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<div>
-<pre class="mermaid mermaid-js">flowchart BT
-    subgraph members ["Family Members"]
-    db1-1["hid=1,pid=1"]
-    db1-2["hid=1,pid=2"]
-    db1-3["hid=2,pid=1"]
-    db1-4["hid=2,pid=1"]
-    db1-5["hid=3,pid=3"]
-    db1-6["hid=3,pid=1"]
-    db1-7["hid=3,pid=2"]
-    end
-    subgraph Family
-    db2-1["hid=1"]
-    db2-2["hid=2"]
-    db2-3["hid=3"]
-    end
-    
-    db1-1--&gt;db2-1
-    db1-2--&gt;db2-1
-    db1-3--&gt;db2-2
-    db1-4--&gt;db2-2
-    db1-5--&gt;db2-3
-    db1-6--&gt;db2-3
-    db1-7--&gt;db2-3
-</pre>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="merging-1m" class="level2">
-<h2 class="anchored" data-anchor-id="merging-1m">Merging 1:m</h2>
 <p>When you are trying to transfer <em>family</em> level data to each family member. The family member file is uniquely identified</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">use</span> family_members</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">merge</span> 1:<span class="fu">m</span> id <span class="kw">using</span> <span class="kw">family</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">use</span> family_members</span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">merge</span> <span class="fu">m</span>:1 id <span class="kw">using</span> <span class="kw">family</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -334,6 +296,44 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
     db2-3--&gt;db1-5
     db2-3--&gt;db1-6
     db2-3--&gt;db1-7
+</pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="merging-1m" class="level2">
+<h2 class="anchored" data-anchor-id="merging-1m">Merging 1:m</h2>
+<p>When you try to merge together data from various family members to a single <em>family</em> file. Each member is merged to its family.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">use</span> <span class="kw">family</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">merge</span> 1:<span class="fu">m</span> id <span class="kw">using</span> family_members</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart BT
+    subgraph members ["Family Members"]
+    db1-1["hid=1,pid=1"]
+    db1-2["hid=1,pid=2"]
+    db1-3["hid=2,pid=1"]
+    db1-4["hid=2,pid=1"]
+    db1-5["hid=3,pid=3"]
+    db1-6["hid=3,pid=1"]
+    db1-7["hid=3,pid=2"]
+    end
+    subgraph Family
+    db2-1["hid=1"]
+    db2-2["hid=2"]
+    db2-3["hid=3"]
+    end
+    
+    db1-1--&gt;db2-1
+    db1-2--&gt;db2-1
+    db1-3--&gt;db2-2
+    db1-4--&gt;db2-2
+    db1-5--&gt;db2-3
+    db1-6--&gt;db2-3
+    db1-7--&gt;db2-3
 </pre>
 </div>
 </div>
@@ -771,74 +771,74 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb6-46"><a href="#cb6-46"></a></span>
 <span id="cb6-47"><a href="#cb6-47"></a><span class="fu">## Merging m:1</span></span>
 <span id="cb6-48"><a href="#cb6-48"></a></span>
-<span id="cb6-49"><a href="#cb6-49"></a>When you try to merge together data from various family members to a single *family* file. Each member is merged to its family.</span>
+<span id="cb6-49"><a href="#cb6-49"></a>When you are trying to transfer *family* level data to each family member. The family member file is uniquely identified </span>
 <span id="cb6-50"><a href="#cb6-50"></a></span>
 <span id="cb6-51"><a href="#cb6-51"></a><span class="in">```stata</span></span>
-<span id="cb6-52"><a href="#cb6-52"></a><span class="in">use family</span></span>
-<span id="cb6-53"><a href="#cb6-53"></a><span class="in">merge m:1 id using family_members</span></span>
+<span id="cb6-52"><a href="#cb6-52"></a><span class="in">use family_members</span></span>
+<span id="cb6-53"><a href="#cb6-53"></a><span class="in">merge m:1 id using family</span></span>
 <span id="cb6-54"><a href="#cb6-54"></a><span class="in">```</span></span>
-<span id="cb6-55"><a href="#cb6-55"></a></span>
-<span id="cb6-58"><a href="#cb6-58"></a><span class="in">```{mermaid}</span></span>
-<span id="cb6-59"><a href="#cb6-59"></a>flowchart BT</span>
-<span id="cb6-60"><a href="#cb6-60"></a>    subgraph members [<span class="ot">"</span><span class="st">Family Members</span><span class="ot">"</span>]</span>
-<span id="cb6-61"><a href="#cb6-61"></a>    db1<span class="dv">-1</span>[<span class="ot">"</span><span class="st">hid=1,pid=1</span><span class="ot">"</span>]</span>
-<span id="cb6-62"><a href="#cb6-62"></a>    db1<span class="dv">-2</span>[<span class="ot">"</span><span class="st">hid=1,pid=2</span><span class="ot">"</span>]</span>
-<span id="cb6-63"><a href="#cb6-63"></a>    db1<span class="dv">-3</span>[<span class="ot">"</span><span class="st">hid=2,pid=1</span><span class="ot">"</span>]</span>
-<span id="cb6-64"><a href="#cb6-64"></a>    db1<span class="dv">-4</span>[<span class="ot">"</span><span class="st">hid=2,pid=1</span><span class="ot">"</span>]</span>
-<span id="cb6-65"><a href="#cb6-65"></a>    db1<span class="dv">-5</span>[<span class="ot">"</span><span class="st">hid=3,pid=3</span><span class="ot">"</span>]</span>
-<span id="cb6-66"><a href="#cb6-66"></a>    db1<span class="dv">-6</span>[<span class="ot">"</span><span class="st">hid=3,pid=1</span><span class="ot">"</span>]</span>
-<span id="cb6-67"><a href="#cb6-67"></a>    db1<span class="dv">-7</span>[<span class="ot">"</span><span class="st">hid=3,pid=2</span><span class="ot">"</span>]</span>
-<span id="cb6-68"><a href="#cb6-68"></a>    end</span>
-<span id="cb6-69"><a href="#cb6-69"></a>    subgraph Family</span>
-<span id="cb6-70"><a href="#cb6-70"></a>    db2<span class="dv">-1</span>[<span class="ot">"</span><span class="st">hid=1</span><span class="ot">"</span>]</span>
-<span id="cb6-71"><a href="#cb6-71"></a>    db2<span class="dv">-2</span>[<span class="ot">"</span><span class="st">hid=2</span><span class="ot">"</span>]</span>
-<span id="cb6-72"><a href="#cb6-72"></a>    db2<span class="dv">-3</span>[<span class="ot">"</span><span class="st">hid=3</span><span class="ot">"</span>]</span>
-<span id="cb6-73"><a href="#cb6-73"></a>    end</span>
-<span id="cb6-74"><a href="#cb6-74"></a>    </span>
-<span id="cb6-75"><a href="#cb6-75"></a>    db1<span class="dv">-1</span>--&gt;db2<span class="dv">-1</span></span>
-<span id="cb6-76"><a href="#cb6-76"></a>    db1<span class="dv">-2</span>--&gt;db2<span class="dv">-1</span></span>
-<span id="cb6-77"><a href="#cb6-77"></a>    db1<span class="dv">-3</span>--&gt;db2<span class="dv">-2</span></span>
-<span id="cb6-78"><a href="#cb6-78"></a>    db1<span class="dv">-4</span>--&gt;db2<span class="dv">-2</span></span>
-<span id="cb6-79"><a href="#cb6-79"></a>    db1<span class="dv">-5</span>--&gt;db2<span class="dv">-3</span></span>
-<span id="cb6-80"><a href="#cb6-80"></a>    db1<span class="dv">-6</span>--&gt;db2<span class="dv">-3</span></span>
-<span id="cb6-81"><a href="#cb6-81"></a>    db1<span class="dv">-7</span>--&gt;db2<span class="dv">-3</span></span>
-<span id="cb6-82"><a href="#cb6-82"></a><span class="in">```</span></span>
+<span id="cb6-57"><a href="#cb6-57"></a><span class="in">```{mermaid}</span></span>
+<span id="cb6-58"><a href="#cb6-58"></a>flowchart BT</span>
+<span id="cb6-59"><a href="#cb6-59"></a>    subgraph members [<span class="ot">"</span><span class="st">Family Members</span><span class="ot">"</span>]</span>
+<span id="cb6-60"><a href="#cb6-60"></a>    db1<span class="dv">-1</span>[<span class="ot">"</span><span class="st">hid=1,pid=1</span><span class="ot">"</span>]</span>
+<span id="cb6-61"><a href="#cb6-61"></a>    db1<span class="dv">-2</span>[<span class="ot">"</span><span class="st">hid=1,pid=2</span><span class="ot">"</span>]</span>
+<span id="cb6-62"><a href="#cb6-62"></a>    db1<span class="dv">-3</span>[<span class="ot">"</span><span class="st">hid=2,pid=1</span><span class="ot">"</span>]</span>
+<span id="cb6-63"><a href="#cb6-63"></a>    db1<span class="dv">-4</span>[<span class="ot">"</span><span class="st">hid=2,pid=2</span><span class="ot">"</span>]</span>
+<span id="cb6-64"><a href="#cb6-64"></a>    db1<span class="dv">-5</span>[<span class="ot">"</span><span class="st">hid=3,pid=1</span><span class="ot">"</span>]</span>
+<span id="cb6-65"><a href="#cb6-65"></a>    db1<span class="dv">-6</span>[<span class="ot">"</span><span class="st">hid=3,pid=2</span><span class="ot">"</span>]</span>
+<span id="cb6-66"><a href="#cb6-66"></a>    db1<span class="dv">-7</span>[<span class="ot">"</span><span class="st">hid=3,pid=3</span><span class="ot">"</span>]</span>
+<span id="cb6-67"><a href="#cb6-67"></a>    end</span>
+<span id="cb6-68"><a href="#cb6-68"></a>    subgraph Family</span>
+<span id="cb6-69"><a href="#cb6-69"></a>    db2<span class="dv">-1</span>[<span class="ot">"</span><span class="st">hid=1</span><span class="ot">"</span>]</span>
+<span id="cb6-70"><a href="#cb6-70"></a>    db2<span class="dv">-2</span>[<span class="ot">"</span><span class="st">hid=2</span><span class="ot">"</span>]</span>
+<span id="cb6-71"><a href="#cb6-71"></a>    db2<span class="dv">-3</span>[<span class="ot">"</span><span class="st">hid=3</span><span class="ot">"</span>]</span>
+<span id="cb6-72"><a href="#cb6-72"></a>    end</span>
+<span id="cb6-73"><a href="#cb6-73"></a>    </span>
+<span id="cb6-74"><a href="#cb6-74"></a>    db2<span class="dv">-1</span>--&gt;db1<span class="dv">-1</span></span>
+<span id="cb6-75"><a href="#cb6-75"></a>    db2<span class="dv">-1</span>--&gt;db1<span class="dv">-2</span></span>
+<span id="cb6-76"><a href="#cb6-76"></a>    db2<span class="dv">-2</span>--&gt;db1<span class="dv">-3</span></span>
+<span id="cb6-77"><a href="#cb6-77"></a>    db2<span class="dv">-2</span>--&gt;db1<span class="dv">-4</span></span>
+<span id="cb6-78"><a href="#cb6-78"></a>    db2<span class="dv">-3</span>--&gt;db1<span class="dv">-5</span></span>
+<span id="cb6-79"><a href="#cb6-79"></a>    db2<span class="dv">-3</span>--&gt;db1<span class="dv">-6</span></span>
+<span id="cb6-80"><a href="#cb6-80"></a>    db2<span class="dv">-3</span>--&gt;db1<span class="dv">-7</span></span>
+<span id="cb6-81"><a href="#cb6-81"></a><span class="in">```</span></span>
+<span id="cb6-82"><a href="#cb6-82"></a></span>
 <span id="cb6-83"><a href="#cb6-83"></a></span>
 <span id="cb6-84"><a href="#cb6-84"></a></span>
 <span id="cb6-85"><a href="#cb6-85"></a><span class="fu">## Merging 1:m</span></span>
 <span id="cb6-86"><a href="#cb6-86"></a></span>
-<span id="cb6-87"><a href="#cb6-87"></a>When you are trying to transfer *family* level data to each family member. The family member file is uniquely identified </span>
+<span id="cb6-87"><a href="#cb6-87"></a>When you try to merge together data from various family members to a single *family* file. Each member is merged to its family.</span>
 <span id="cb6-88"><a href="#cb6-88"></a></span>
 <span id="cb6-89"><a href="#cb6-89"></a><span class="in">```stata</span></span>
-<span id="cb6-90"><a href="#cb6-90"></a><span class="in">use family_members</span></span>
-<span id="cb6-91"><a href="#cb6-91"></a><span class="in">merge 1:m id using family</span></span>
+<span id="cb6-90"><a href="#cb6-90"></a><span class="in">use family</span></span>
+<span id="cb6-91"><a href="#cb6-91"></a><span class="in">merge 1:m id using family_members</span></span>
 <span id="cb6-92"><a href="#cb6-92"></a><span class="in">```</span></span>
-<span id="cb6-93"><a href="#cb6-93"></a></span>
-<span id="cb6-96"><a href="#cb6-96"></a><span class="in">```{mermaid}</span></span>
-<span id="cb6-97"><a href="#cb6-97"></a>flowchart BT</span>
-<span id="cb6-98"><a href="#cb6-98"></a>    subgraph members [<span class="ot">"</span><span class="st">Family Members</span><span class="ot">"</span>]</span>
-<span id="cb6-99"><a href="#cb6-99"></a>    db1<span class="dv">-1</span>[<span class="ot">"</span><span class="st">hid=1,pid=1</span><span class="ot">"</span>]</span>
-<span id="cb6-100"><a href="#cb6-100"></a>    db1<span class="dv">-2</span>[<span class="ot">"</span><span class="st">hid=1,pid=2</span><span class="ot">"</span>]</span>
-<span id="cb6-101"><a href="#cb6-101"></a>    db1<span class="dv">-3</span>[<span class="ot">"</span><span class="st">hid=2,pid=1</span><span class="ot">"</span>]</span>
-<span id="cb6-102"><a href="#cb6-102"></a>    db1<span class="dv">-4</span>[<span class="ot">"</span><span class="st">hid=2,pid=2</span><span class="ot">"</span>]</span>
-<span id="cb6-103"><a href="#cb6-103"></a>    db1<span class="dv">-5</span>[<span class="ot">"</span><span class="st">hid=3,pid=1</span><span class="ot">"</span>]</span>
-<span id="cb6-104"><a href="#cb6-104"></a>    db1<span class="dv">-6</span>[<span class="ot">"</span><span class="st">hid=3,pid=2</span><span class="ot">"</span>]</span>
-<span id="cb6-105"><a href="#cb6-105"></a>    db1<span class="dv">-7</span>[<span class="ot">"</span><span class="st">hid=3,pid=3</span><span class="ot">"</span>]</span>
-<span id="cb6-106"><a href="#cb6-106"></a>    end</span>
-<span id="cb6-107"><a href="#cb6-107"></a>    subgraph Family</span>
-<span id="cb6-108"><a href="#cb6-108"></a>    db2<span class="dv">-1</span>[<span class="ot">"</span><span class="st">hid=1</span><span class="ot">"</span>]</span>
-<span id="cb6-109"><a href="#cb6-109"></a>    db2<span class="dv">-2</span>[<span class="ot">"</span><span class="st">hid=2</span><span class="ot">"</span>]</span>
-<span id="cb6-110"><a href="#cb6-110"></a>    db2<span class="dv">-3</span>[<span class="ot">"</span><span class="st">hid=3</span><span class="ot">"</span>]</span>
-<span id="cb6-111"><a href="#cb6-111"></a>    end</span>
-<span id="cb6-112"><a href="#cb6-112"></a>    </span>
-<span id="cb6-113"><a href="#cb6-113"></a>    db2<span class="dv">-1</span>--&gt;db1<span class="dv">-1</span></span>
-<span id="cb6-114"><a href="#cb6-114"></a>    db2<span class="dv">-1</span>--&gt;db1<span class="dv">-2</span></span>
-<span id="cb6-115"><a href="#cb6-115"></a>    db2<span class="dv">-2</span>--&gt;db1<span class="dv">-3</span></span>
-<span id="cb6-116"><a href="#cb6-116"></a>    db2<span class="dv">-2</span>--&gt;db1<span class="dv">-4</span></span>
-<span id="cb6-117"><a href="#cb6-117"></a>    db2<span class="dv">-3</span>--&gt;db1<span class="dv">-5</span></span>
-<span id="cb6-118"><a href="#cb6-118"></a>    db2<span class="dv">-3</span>--&gt;db1<span class="dv">-6</span></span>
-<span id="cb6-119"><a href="#cb6-119"></a>    db2<span class="dv">-3</span>--&gt;db1<span class="dv">-7</span></span>
-<span id="cb6-120"><a href="#cb6-120"></a><span class="in">```</span></span>
+<span id="cb6-95"><a href="#cb6-95"></a><span class="in">```{mermaid}</span></span>
+<span id="cb6-96"><a href="#cb6-96"></a>flowchart BT</span>
+<span id="cb6-97"><a href="#cb6-97"></a>    subgraph members [<span class="ot">"</span><span class="st">Family Members</span><span class="ot">"</span>]</span>
+<span id="cb6-98"><a href="#cb6-98"></a>    db1<span class="dv">-1</span>[<span class="ot">"</span><span class="st">hid=1,pid=1</span><span class="ot">"</span>]</span>
+<span id="cb6-99"><a href="#cb6-99"></a>    db1<span class="dv">-2</span>[<span class="ot">"</span><span class="st">hid=1,pid=2</span><span class="ot">"</span>]</span>
+<span id="cb6-100"><a href="#cb6-100"></a>    db1<span class="dv">-3</span>[<span class="ot">"</span><span class="st">hid=2,pid=1</span><span class="ot">"</span>]</span>
+<span id="cb6-101"><a href="#cb6-101"></a>    db1<span class="dv">-4</span>[<span class="ot">"</span><span class="st">hid=2,pid=1</span><span class="ot">"</span>]</span>
+<span id="cb6-102"><a href="#cb6-102"></a>    db1<span class="dv">-5</span>[<span class="ot">"</span><span class="st">hid=3,pid=3</span><span class="ot">"</span>]</span>
+<span id="cb6-103"><a href="#cb6-103"></a>    db1<span class="dv">-6</span>[<span class="ot">"</span><span class="st">hid=3,pid=1</span><span class="ot">"</span>]</span>
+<span id="cb6-104"><a href="#cb6-104"></a>    db1<span class="dv">-7</span>[<span class="ot">"</span><span class="st">hid=3,pid=2</span><span class="ot">"</span>]</span>
+<span id="cb6-105"><a href="#cb6-105"></a>    end</span>
+<span id="cb6-106"><a href="#cb6-106"></a>    subgraph Family</span>
+<span id="cb6-107"><a href="#cb6-107"></a>    db2<span class="dv">-1</span>[<span class="ot">"</span><span class="st">hid=1</span><span class="ot">"</span>]</span>
+<span id="cb6-108"><a href="#cb6-108"></a>    db2<span class="dv">-2</span>[<span class="ot">"</span><span class="st">hid=2</span><span class="ot">"</span>]</span>
+<span id="cb6-109"><a href="#cb6-109"></a>    db2<span class="dv">-3</span>[<span class="ot">"</span><span class="st">hid=3</span><span class="ot">"</span>]</span>
+<span id="cb6-110"><a href="#cb6-110"></a>    end</span>
+<span id="cb6-111"><a href="#cb6-111"></a>    </span>
+<span id="cb6-112"><a href="#cb6-112"></a>    db1<span class="dv">-1</span>--&gt;db2<span class="dv">-1</span></span>
+<span id="cb6-113"><a href="#cb6-113"></a>    db1<span class="dv">-2</span>--&gt;db2<span class="dv">-1</span></span>
+<span id="cb6-114"><a href="#cb6-114"></a>    db1<span class="dv">-3</span>--&gt;db2<span class="dv">-2</span></span>
+<span id="cb6-115"><a href="#cb6-115"></a>    db1<span class="dv">-4</span>--&gt;db2<span class="dv">-2</span></span>
+<span id="cb6-116"><a href="#cb6-116"></a>    db1<span class="dv">-5</span>--&gt;db2<span class="dv">-3</span></span>
+<span id="cb6-117"><a href="#cb6-117"></a>    db1<span class="dv">-6</span>--&gt;db2<span class="dv">-3</span></span>
+<span id="cb6-118"><a href="#cb6-118"></a>    db1<span class="dv">-7</span>--&gt;db2<span class="dv">-3</span></span>
+<span id="cb6-119"><a href="#cb6-119"></a><span class="in">```</span></span>
+<span id="cb6-120"><a href="#cb6-120"></a></span>
 <span id="cb6-121"><a href="#cb6-121"></a></span>
 <span id="cb6-122"><a href="#cb6-122"></a><span class="fu">## Merging m:m</span></span>
 <span id="cb6-123"><a href="#cb6-123"></a></span>
