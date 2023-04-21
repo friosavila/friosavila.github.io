@@ -128,10 +128,10 @@ font-style: inherit;">using</span> family_members</span></code></pre></div>
     db1-1["hid=1,pid=1"]
     db1-2["hid=1,pid=2"]
     db1-3["hid=2,pid=1"]
-    db1-4["hid=2,pid=1"]
-    db1-5["hid=3,pid=3"]
-    db1-6["hid=3,pid=1"]
-    db1-7["hid=3,pid=2"]
+    db1-4["hid=2,pid=2"]
+    db1-5["hid=3,pid=1"]
+    db1-6["hid=3,pid=2"]
+    db1-7["hid=3,pid=3"]
     end
     subgraph Family
     db2-1["hid=1"]
