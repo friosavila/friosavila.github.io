@@ -1,0 +1,147 @@
+---
+title: "Variance-Covariance Matrix VCV"
+format: html
+---
+
+$$
+Var(\beta) = \color{brown}{(X'X)^{-1}} \color{green}{X'} \color{red} \Omega \color{green}{X}\color{brown}{(X'X)^{-1}}
+$$
+$$
+\Omega = \left(
+\begin{matrix}
+\sigma^2_1 & \sigma_{1,2} & \sigma_{1,3} & ... &  \sigma_{1,n} \\
+\sigma_{1,2} & \sigma_2^2 & \sigma_{2,3} & ... &  \sigma_{2,n} \\
+\sigma_{1,3} & \sigma_{2,3} & \sigma^2_{3} & ...  & \sigma_{3,n} \\
+... & ... & ... & ...& ...  \\
+\sigma_{1,n} & \sigma_{n,2} & \sigma_{n,3} & ...  & \sigma^2_{n} \\
+\end{matrix}\right)
+$$
+
+## Homoskedastic Standard errors
+
+$$
+\begin{aligned}
+\sigma_i^2 &=\sigma_j^2 = \sigma^2 \\
+\sigma_{ij} &=0 \ \forall \ i\neq j
+\end{aligned}
+$$
+
+$$
+\Omega = I(N) \sigma^2 =
+\left(
+\begin{matrix}
+\sigma^2 & 0 & 0 & ... &  0 \\
+0 & \sigma^2 & 0 & ... &  0 \\
+0 & 0 & \sigma^2 & ...  & 0 \\
+... & ... & ... & ...& ...  \\
+0 & 0 & 0 & ...  & \sigma^2 \\
+\end{matrix}\right)
+$$
+
+## Robust Standard errors
+
+$$
+\begin{aligned}
+\sigma_{ij} &=0 \ \forall \ i\neq j
+\end{aligned}
+$$
+$$
+\Omega =
+\left(
+\begin{matrix}
+\sigma_1^2 & 0 & 0 & ... &  0 \\
+0 & \sigma_2^2 & 0 & ... &  0 \\
+0 & 0 & \sigma_3^2 & ...  & 0 \\
+... & ... & ... & ...& ...  \\
+0 & 0 & 0 & ...  & \sigma_n^2 \\
+\end{matrix}\right)
+$$
+
+## 1-way Cluster Standard errors
+
+$$
+\begin{aligned}
+g(i)=k : k \in {1,...,G}
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+\sigma_{i,j} \neq 0 \text{  if  } g(i)=g(j)
+\end{aligned}
+$$
+
+$$
+\Omega =
+\left(
+\begin{matrix}
+\sigma_1^2     & \sigma_{1,2} & 0         & ...  &  0 \\
+\sigma_{1,2} & \sigma_2^2     & 0         & ...  &  0 \\
+0            & 0            & \sigma_3^2  & ...  & \sigma_{3,n} \\
+...          & ...          & ...       & ...  & ...  \\
+0            & 0            & \sigma_{3,n}     & ...  & \sigma_n^2 \\
+\end{matrix}\right) =
+\left(
+\begin{matrix}
+\Sigma_1     & 0            \\
+0            & \Sigma_2      \\
+\end{matrix}\right)
+$$
+
+## 2-way Cluster Standard Errors
+
+$$
+\begin{aligned}
+g_h(i) &=k \ \forall \ h \\
+gg_h(i,j)&=1 \text{  if  } h: g_h(i)= g_h(j) 
+\end{aligned}
+$$
+
+$$
+\sigma_{ij} \neq 0  \text{ if } gg_1(i,j)=1 \lor gg_2(i,j)=1
+$$
+
+$$
+\Omega =
+\left(
+\begin{matrix}
+\sigma_1^2     & \sigma_{1,2} & 0         & ...  &  \sigma_{1,n} \\
+\sigma_{1,2} & \sigma_2^2     & \sigma_{2,3}         & ...  &  0 \\
+0            & \sigma_{2,3}   & \sigma_3^2  & ...  & \sigma_{3,n} \\
+...          & ...            & ...       & ...  & ...  \\
+\sigma_{1,n} & 0            & \sigma_{3,n}     & ...  & \sigma_n^2 \\
+\end{matrix}\right)
+$$
+
+## How to estimate $\sigma_{ij}$?
+
+$$
+y_i = x_i \beta + \varepsilon_i
+$$
+$$
+\hat \sigma_{ij} = \hat\varepsilon_i*\hat\varepsilon_j
+$$
+
+$$
+\begin{aligned}
+\hat \Omega &= \hat \varepsilon \hat \varepsilon' \circ GG \\
+GG_{i,j} &= \max [ gg_1(i,j) , gg_2(i,j) ,..., gg_n(i,j) ]
+\end{aligned}
+$$
+
+$$
+\begin{aligned}
+GG &= GG_1 + GG_2 - GG_1 \circ GG_2
+\end{aligned}
+$$
+
+Even Simpler
+
+$$
+Var(\beta)_{cc} = Var(\beta)_{1} + Var(\beta)_{2} - Var(\beta)_{1,2}
+$$
+
+
+## Conclusions
+
+This provides a visual for 2-way clustering. 

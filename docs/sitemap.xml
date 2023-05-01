@@ -126,7 +126,11 @@
   </url>
   <url>
     <loc>https://friosavila.github.io/stata_do/stata_do1.html</loc>
+<<<<<<< Updated upstream
     <lastmod>2023-04-21T13:39:50.953Z</lastmod>
+=======
+    <lastmod>2023-04-28T17:32:46.980Z</lastmod>
+>>>>>>> Stashed changes
   </url>
   <url>
     <loc>https://friosavila.github.io/stata_do/stata_do2.html</loc>
@@ -151,5 +155,13 @@
   <url>
     <loc>https://friosavila.github.io/stata_do/stata_do7.html</loc>
     <lastmod>2023-04-21T13:39:56.237Z</lastmod>
+  </url>
+  <url>
+    <loc>https://friosavila.github.io/app_metrics/app_metrics7.html</loc>
+    <lastmod>2023-04-28T18:22:15.612Z</lastmod>
+  </url>
+  <url>
+    <loc>https://friosavila.github.io/app_metrics/app_metrics6.html</loc>
+    <lastmod>2023-04-28T17:32:41.780Z</lastmod>
   </url>
 </urlset>
