@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.299">
+<meta name="generator" content="quarto-1.3.313">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -267,7 +267,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../app_metrics/app_metrics7.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Variance-Covariance Matrix VCV</span></a>
+ <span class="menu-text">Linear Regressions, OLS and Standard Errors</span></a>
   </div>
 </li>
       </ul>
@@ -288,7 +288,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
   <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
   <li><a href="#two-steps-did" id="toc-two-steps-did" class="nav-link" data-scroll-target="#two-steps-did">Two-Steps DID</a></li>
   <li><a href="#you-dont-messup-with-ols" id="toc-you-dont-messup-with-ols" class="nav-link" data-scroll-target="#you-dont-messup-with-ols">You don’t messup with OLS</a></li>
-  <li><a href="#x2-in-steroids" id="toc-x2-in-steroids" class="nav-link" data-scroll-target="#x2-in-steroids">2x2 in Steroids</a></li>
+  <li><a href="#x2-on-steroids" id="toc-x2-on-steroids" class="nav-link" data-scroll-target="#x2-on-steroids">2x2 on Steroids</a></li>
   </ul></li>
   <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">Conclusions</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
@@ -411,9 +411,9 @@ y_{it} = a_i + a_t + e_{it} \ if \ t&lt;g
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Step 1
-Iteration 0:   GMM criterion Q(b) =  19.725543  
-Iteration 1:   GMM criterion Q(b) =  5.816e-23  
-Iteration 2:   GMM criterion Q(b) =  9.081e-33  
+Iteration 0:  GMM criterion Q(b) =  23.553096  
+Iteration 1:  GMM criterion Q(b) =  8.570e-25  
+Iteration 2:  GMM criterion Q(b) =  8.350e-33  
 
 GMM estimation 
 
@@ -427,33 +427,33 @@ Initial weight matrix: Identity                   Number of obs   =      1,000
              | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
 -------------+----------------------------------------------------------------
 a0           |
-       _cons |   3.146414   .6822892     4.61   0.000     1.809152    4.483677
+       _cons |   4.613828   .6318042     7.30   0.000     3.375515    5.852142
 -------------+----------------------------------------------------------------
 a_i          |
            g |
-          2  |  -1.329894   .9540798    -1.39   0.163    -3.199856    .5400685
-          3  |   .3303121   .9832247     0.34   0.737    -1.596773    2.257397
-          4  |  -.9533545   .8233816    -1.16   0.247    -2.567153    .6604439
-          5  |  -.9570973   .8366389    -1.14   0.253    -2.596879    .6826848
-          6  |    -.58129   .8707363    -0.67   0.504    -2.287902    1.125322
-          7  |   .9916895   1.010794     0.98   0.327    -.9894297    2.972809
-          8  |  -1.609291   .7437976    -2.16   0.030    -3.067108   -.1514746
-          9  |  -1.160353   1.033179    -1.12   0.261    -3.185346    .8646411
+          2  |  -1.468802   .7825655    -1.88   0.061    -3.002602    .0649987
+          3  |  -.2194434   .9415556    -0.23   0.816    -2.064858    1.625972
+          4  |  -1.689998   .6999231    -2.41   0.016    -3.061822    -.318174
+          5  |  -1.022837    .755609    -1.35   0.176    -2.503803    .4581298
+          6  |  -.9195831   .7941991    -1.16   0.247    -2.476185    .6370185
+          7  |   1.057528   1.069432     0.99   0.323    -1.038521    3.153577
+          8  |   -1.76994   .6663358    -2.66   0.008    -3.075934   -.4639455
+          9  |  -1.103626   .9857633    -1.12   0.263    -3.035687    .8284342
 -------------+----------------------------------------------------------------
 a_t          |
            t |
-          2  |  -.0585438   .1385197    -0.42   0.673    -.3300374    .2129498
-          3  |   -.213678   .1704212    -1.25   0.210    -.5476975    .1203415
-          4  |  -.5752045   .1713895    -3.36   0.001    -.9111217   -.2392872
-          5  |   .0842171   .1677747     0.50   0.616    -.2446152    .4130494
-          6  |   .1190078   .1841714     0.65   0.518    -.2419615    .4799771
-          7  |   1.000738   .2034229     4.92   0.000     .6020363    1.399439
-          8  |  -.0146057   .2190799    -0.07   0.947    -.4439945    .4147831
-          9  |   .9380065   .2007013     4.67   0.000     .5446391    1.331374
-         10  |   .9572597   .2578496     3.71   0.000     .4518838    1.462636
+          2  |   .2691986   .1549314     1.74   0.082    -.0344614    .5728586
+          3  |  -1.562914   .1732142    -9.02   0.000    -1.902408   -1.223421
+          4  |  -.4982935   .1606318    -3.10   0.002    -.8131261    -.183461
+          5  |  -1.036587   .1955554    -5.30   0.000    -1.419869   -.6533056
+          6  |  -.8198623   .1933862    -4.24   0.000    -1.198892   -.4408324
+          7  |   .3765546   .1927384     1.95   0.051    -.0012058     .754315
+          8  |  -1.348335   .1905433    -7.08   0.000    -1.721793   -.9748773
+          9  |  -1.535839   .2185551    -7.03   0.000    -1.964199   -1.107479
+         10  |  -1.367743   .2559179    -5.34   0.000    -1.869333    -.866153
 -------------+----------------------------------------------------------------
 att          |
-         trt |   1.458058   .1493165     9.76   0.000     1.165403    1.750713
+         trt |    1.54546   .1290656    11.97   0.000     1.292496    1.798424
 ------------------------------------------------------------------------------
 Instruments for equation 1: 0b.g 2.g 3.g 4.g 5.g 6.g 7.g 8.g 9.g 1b.t 2.t 3.t 4.t 5.t 6.t 7.t 8.t 9.t 10.t _cons
 Instruments for equation 2: trt _cons</code></pre>
@@ -510,19 +510,17 @@ y_{it} = a_i + a_t + \sum_{g=g_0}^G \sum_{t\neq g-1} \delta_{gt} * 1(g,t)+e_{it}
 <p>Now for the application, I will use <code>jwdid</code> for both specifications. Because by default <code>jwdid</code> produces the fully saturated model, I will omit those results, showing only the average treatment effect.</p>
 <p>First the one using not-yet treated units as controls (default), which produces exactly the same results as the two-step approach:</p>
 <div class="cell" data-execution_count="4">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ssc</span> install jwdid</span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>*<span class="kw">ssc</span> install jwdid</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>: jwdid <span class="fu">y</span>, ivar(i) tvar(t) gvar(g)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">estat</span> simple</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>checking jwdid consistency and verifying not already installed...
-all files already exist and are up to date.
-WARNING: Singleton observations not dropped; statistical significance is biased (link)
+<pre><code>WARNING: Singleton observations not dropped; statistical significance is biased (link)
 ------------------------------------------------------------------------------
              |            Delta-method
              | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
 -------------+----------------------------------------------------------------
          _at |
-   (2 vs 1)  |   1.458058   .1494798     9.75   0.000     1.165083    1.751033
+   (2 vs 1)  |    1.54546    .125852    12.28   0.000     1.298795    1.792125
 ------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
@@ -537,14 +535,14 @@ WARNING: Singleton observations not dropped; statistical significance is biased 
              | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
 -------------+----------------------------------------------------------------
          _at |
-   (2 vs 1)  |   1.543749   .1567784     9.85   0.000     1.236469    1.851029
+   (2 vs 1)  |   1.580746   .1374021    11.50   0.000     1.311443    1.850049
 ------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
 </section>
 </section>
-<section id="x2-in-steroids" class="level3">
-<h3 class="anchored" data-anchor-id="x2-in-steroids">2x2 in Steroids</h3>
+<section id="x2-on-steroids" class="level3">
+<h3 class="anchored" data-anchor-id="x2-on-steroids">2x2 on Steroids</h3>
 <section id="callaway_santanna_2021-csdid-csdid2" class="level4">
 <h4 class="anchored" data-anchor-id="callaway_santanna_2021-csdid-csdid2"><span class="citation" data-cites="callaway_santanna_2021">Callaway and Sant’Anna (<a href="#ref-callaway_santanna_2021" role="doc-biblioref">2021</a>)</span> <code>csdid</code> &amp; <code>csdid2</code></h4>
 <p>The third option is the most computing intensive, but at the same time simpler to understand, if you break it down to the basics. This is why I call this 2x2 in Steroids: <span class="citation" data-cites="callaway_santanna_2021">Callaway and Sant’Anna (<a href="#ref-callaway_santanna_2021" role="doc-biblioref">2021</a>)</span>.</p>
@@ -575,7 +573,7 @@ SATT = \sum \left( \frac{w_{gt} }{\sum w_{gt}}ATT(g,t) \right)
 ------------------------------------------------------------------------------
              | Coefficient  Std. err.      z    P&gt;|z|     [95% conf. interval]
 -------------+----------------------------------------------------------------
-         ATT |   1.543749   .1577366     9.79   0.000     1.234591    1.852907
+         ATT |   1.580746   .1405861    11.24   0.000     1.305203     1.85629
 ------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
@@ -588,7 +586,7 @@ SATT = \sum \left( \frac{w_{gt} }{\sum w_{gt}}ATT(g,t) \right)
 ------------------------------------------------------------------------------
              | Coefficient  Std. err.      z    P&gt;|z|     [95% conf. interval]
 -------------+----------------------------------------------------------------
-         ATT |   1.494475   .1587386     9.41   0.000     1.183353    1.805597
+         ATT |    1.59861   .1500332    10.66   0.000      1.30455     1.89267
 ------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
@@ -1124,7 +1122,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb16-175"><a href="#cb16-175" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-178"><a href="#cb16-178" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
 <span id="cb16-179"><a href="#cb16-179" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
-<span id="cb16-180"><a href="#cb16-180" aria-hidden="true" tabindex="-1"></a><span class="in">ssc install jwdid</span></span>
+<span id="cb16-180"><a href="#cb16-180" aria-hidden="true" tabindex="-1"></a><span class="in">*ssc install jwdid</span></span>
 <span id="cb16-181"><a href="#cb16-181" aria-hidden="true" tabindex="-1"></a><span class="in">qui: jwdid y, ivar(i) tvar(t) gvar(g)</span></span>
 <span id="cb16-182"><a href="#cb16-182" aria-hidden="true" tabindex="-1"></a><span class="in">estat simple</span></span>
 <span id="cb16-183"><a href="#cb16-183" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
@@ -1137,7 +1135,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb16-192"><a href="#cb16-192" aria-hidden="true" tabindex="-1"></a><span class="in">estat simple</span></span>
 <span id="cb16-193"><a href="#cb16-193" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
 <span id="cb16-194"><a href="#cb16-194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-195"><a href="#cb16-195" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2x2 in Steroids</span></span>
+<span id="cb16-195"><a href="#cb16-195" aria-hidden="true" tabindex="-1"></a><span class="fu">### 2x2 on Steroids</span></span>
 <span id="cb16-196"><a href="#cb16-196" aria-hidden="true" tabindex="-1"></a><span class="fu">#### @callaway_santanna_2021 `csdid` &amp; `csdid2`</span></span>
 <span id="cb16-197"><a href="#cb16-197" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-198"><a href="#cb16-198" aria-hidden="true" tabindex="-1"></a>The third option is the most computing intensive, but at the same time simpler to understand, if you break it down to the basics. This is why I call this 2x2 in Steroids: @callaway_santanna_2021.</span>

@@ -169,7 +169,7 @@ First the one using not-yet treated units as controls (default), which produces 
 
 ```{stata}
 *| code-fold: false
-ssc install jwdid
+*ssc install jwdid
 qui: jwdid y, ivar(i) tvar(t) gvar(g)
 estat simple
 ```
