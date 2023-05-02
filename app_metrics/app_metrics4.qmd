@@ -182,7 +182,7 @@ qui: jwdid y, ivar(i) tvar(t) gvar(g) never
 estat simple
 ```
 
-### 2x2 in Steroids
+### 2x2 on Steroids
 #### @callaway_santanna_2021 `csdid` & `csdid2`
 
 The third option is the most computing intensive, but at the same time simpler to understand, if you break it down to the basics. This is why I call this 2x2 in Steroids: @callaway_santanna_2021.
