@@ -9,7 +9,7 @@
 <link>https://friosavila.github.io/chatgpt.html</link>
 <atom:link href="https://friosavila.github.io/chatgpt.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.3.313</generator>
+<generator>quarto-1.3.299</generator>
 <lastBuildDate>Tue, 09 May 2023 04:00:00 GMT</lastBuildDate>
 <item>
   <title>Synthetic Control: Role of rescaling</title>
@@ -60,49 +60,54 @@
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><span class="kw" style="color: #003B4F;
 background-color: null;
+font-style: inherit;">set</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">scheme</span> white2</span>
+<span id="cb1-2"><span class="kw" style="color: #003B4F;
+background-color: null;
 font-style: inherit;">capture</span> <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">program</span> <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">drop</span> sc_doer</span>
-<span id="cb1-2"><span class="kw" style="color: #003B4F;
+<span id="cb1-3"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">program</span> sc_doer</span>
-<span id="cb1-3">** Estimates the Effect <span class="kw" style="color: #003B4F;
+<span id="cb1-4">** Estimates the Effect <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">for</span> California.</span>
-<span id="cb1-4">    <span class="kw" style="color: #003B4F;
+<span id="cb1-5">    <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">tempfile</span> sc3</span>
-<span id="cb1-5">    synth cigsale cigsale(1971) cigsale(1975) cigsale(1980)   cigsale(1985), trunit(3) trperiod(1989) <span class="kw" style="color: #003B4F;
+<span id="cb1-6">    synth cigsale cigsale(1971) cigsale(1975) cigsale(1980)   cigsale(1985), trunit(3) trperiod(1989) <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">keep</span>(<span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">`sc3'</span>) <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">replace</span>  </span>
-<span id="cb1-6">** And <span class="ot" style="color: #003B4F;
+<span id="cb1-7">** And <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">all</span> other states</span>
-<span id="cb1-7">    <span class="kw" style="color: #003B4F;
+<span id="cb1-8">    <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">forvalues</span> i =1/39{</span>
-<span id="cb1-8">        <span class="kw" style="color: #003B4F;
+<span id="cb1-9">        <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">if</span> <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">`i'</span>!=3 {</span>
-<span id="cb1-9">            <span class="kw" style="color: #003B4F;
+<span id="cb1-10">            <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">local</span> pool</span>
-<span id="cb1-10">            <span class="kw" style="color: #003B4F;
+<span id="cb1-11">            <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">foreach</span> j <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">of</span> <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">local</span> stl {</span>
-<span id="cb1-11">                <span class="kw" style="color: #003B4F;
+<span id="cb1-12">                <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">if</span> <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -117,16 +122,16 @@ background-color: null;
 font-style: inherit;">`pool'</span> <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">`j'</span></span>
-<span id="cb1-12">            }</span>
-<span id="cb1-13">            <span class="kw" style="color: #003B4F;
+<span id="cb1-13">            }</span>
+<span id="cb1-14">            <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">tempfile</span> sc<span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">`i'</span></span>
-<span id="cb1-14">            synth cigsale cigsale(1971) cigsale(1975) cigsale(1980) cigsale(1985) , <span class="co" style="color: #5E5E5E;
+<span id="cb1-15">            synth cigsale cigsale(1971) cigsale(1975) cigsale(1980) cigsale(1985) , <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb1-15">            trunit(<span class="ot" style="color: #003B4F;
+<span id="cb1-16">            trunit(<span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">`i'</span>) trperiod(1989) <span class="kw" style="color: #003B4F;
 background-color: null;
@@ -137,32 +142,33 @@ background-color: null;
 font-style: inherit;">replace</span> counit(<span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">`pool'</span>)</span>
-<span id="cb1-16">        }</span>
-<span id="cb1-17">    }</span>
-<span id="cb1-18">** Collects the Saved files to estimate the Treatment effect</span>
-<span id="cb1-19">** and the <span class="kw" style="color: #003B4F;
+<span id="cb1-17">        }</span>
+<span id="cb1-18">    }</span>
+<span id="cb1-19">** Collects the Saved files to estimate the Treatment effect</span>
+<span id="cb1-20">** and the <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">p</span>-<span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">value</span>/<span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">ratio</span> statistic</span>
-<span id="cb1-20">    <span class="kw" style="color: #003B4F;
+<span id="cb1-21"></span>
+<span id="cb1-22">    <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">forvalues</span> i =1/39{</span>
-<span id="cb1-21">        <span class="kw" style="color: #003B4F;
+<span id="cb1-23">        <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">use</span> <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">`sc`i'</span>' , <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">clear</span></span>
-<span id="cb1-22">        <span class="kw" style="color: #003B4F;
+<span id="cb1-24">        <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">gen</span> tef<span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">`i'</span> = _Y_treated - _Y_synthetic</span>
-<span id="cb1-23">        <span class="kw" style="color: #003B4F;
+<span id="cb1-25">        <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">egen</span> sef<span class="ot" style="color: #003B4F;
 background-color: null;
@@ -171,7 +177,7 @@ background-color: null;
 font-style: inherit;">mean</span>( (_Y_treated - _Y_synthetic)^2) <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">if</span> _time&lt;=1988</span>
-<span id="cb1-24">        <span class="kw" style="color: #003B4F;
+<span id="cb1-26">        <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">egen</span> sef<span class="ot" style="color: #003B4F;
 background-color: null;
@@ -180,7 +186,7 @@ background-color: null;
 font-style: inherit;">mean</span>( (_Y_treated - _Y_synthetic)^2) <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">if</span> _time&gt;1988</span>
-<span id="cb1-25">        <span class="kw" style="color: #003B4F;
+<span id="cb1-27">        <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">gen</span> sef<span class="ot" style="color: #003B4F;
 background-color: null;
@@ -189,7 +195,7 @@ background-color: null;
 font-style: inherit;">sqrt</span>(sef<span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">`i'</span>a[2])</span>
-<span id="cb1-26">        <span class="kw" style="color: #003B4F;
+<span id="cb1-28">        <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">gen</span> sef<span class="ot" style="color: #003B4F;
 background-color: null;
@@ -198,75 +204,75 @@ background-color: null;
 font-style: inherit;">sqrt</span>(sef<span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">`i'</span>b[_N])</span>
-<span id="cb1-27">        <span class="kw" style="color: #003B4F;
+<span id="cb1-29">        <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">replace</span> sef<span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">`i'</span>a=sef<span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">`i'</span>aa</span>
-<span id="cb1-28">        <span class="kw" style="color: #003B4F;
+<span id="cb1-30">        <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">replace</span> sef<span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">`i'</span>b=sef<span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">`i'</span>bb</span>
-<span id="cb1-29">        <span class="kw" style="color: #003B4F;
+<span id="cb1-31">        <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">drop</span> <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">if</span> _time==.</span>
-<span id="cb1-30">        <span class="kw" style="color: #003B4F;
+<span id="cb1-32">        <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">keep</span> tef<span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">`i'</span> sef<span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">`i'</span>* _time</span>
-<span id="cb1-31">        <span class="kw" style="color: #003B4F;
+<span id="cb1-33">        <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">save</span> <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">`sc`i'</span>', <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">replace</span></span>
-<span id="cb1-32">    }</span>
-<span id="cb1-33"></span>
-<span id="cb1-34">    <span class="kw" style="color: #003B4F;
+<span id="cb1-34">    }</span>
+<span id="cb1-35"></span>
+<span id="cb1-36">    <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">clear</span></span>
-<span id="cb1-35">    <span class="kw" style="color: #003B4F;
+<span id="cb1-37">    <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">use</span> <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">`sc1'</span></span>
-<span id="cb1-36">    <span class="kw" style="color: #003B4F;
+<span id="cb1-38">    <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">forvalues</span> i = 2/39 {</span>
-<span id="cb1-37">        <span class="kw" style="color: #003B4F;
+<span id="cb1-39">        <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">merge</span> 1:1 _time <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">using</span> <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">`sc`i'</span>', nogen</span>
-<span id="cb1-38">    }</span>
-<span id="cb1-39">    <span class="kw" style="color: #003B4F;
+<span id="cb1-40">    }</span>
+<span id="cb1-41">    <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">global</span> toplot</span>
-<span id="cb1-40">    <span class="kw" style="color: #003B4F;
+<span id="cb1-42">    <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">global</span> toplot2</span>
-<span id="cb1-41">** Stores which models will <span class="kw" style="color: #003B4F;
+<span id="cb1-43">** Stores which models will <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">be</span> saved <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">for</span> plotting    </span>
-<span id="cb1-42">    <span class="kw" style="color: #003B4F;
+<span id="cb1-44">    <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">forvalues</span> i = 1/39 {</span>
-<span id="cb1-43">        <span class="kw" style="color: #003B4F;
+<span id="cb1-45">        <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">global</span> toplot <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -277,12 +283,12 @@ background-color: null;
 font-style: inherit;">`i'</span> _time, <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">color</span>(gs11) )</span>
-<span id="cb1-44">    <span class="kw" style="color: #003B4F;
+<span id="cb1-46">    <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">if</span> (sef<span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">`i'</span>a[1])&lt;(2*sef3a[1]) {</span>
-<span id="cb1-45">            <span class="kw" style="color: #003B4F;
+<span id="cb1-47">            <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">global</span> toplot2 <span class="ot" style="color: #003B4F;
 background-color: null;
@@ -293,29 +299,29 @@ background-color: null;
 font-style: inherit;">`i'</span> _time, <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">color</span>(gs11) )</span>
-<span id="cb1-46">        }</span>
-<span id="cb1-47">    }</span>
-<span id="cb1-48">** Estimates the <span class="kw" style="color: #003B4F;
+<span id="cb1-48">        }</span>
+<span id="cb1-49">    }</span>
+<span id="cb1-50">** Estimates the <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">post</span>/pre RMSE <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">ratio</span></span>
-<span id="cb1-49">    <span class="kw" style="color: #003B4F;
+<span id="cb1-51">    <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">capture</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">matrix</span> <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">drop</span> rt</span>
-<span id="cb1-50">    <span class="kw" style="color: #003B4F;
+<span id="cb1-52">    <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">forvalues</span> i = 1/39 {</span>
-<span id="cb1-51">        <span class="kw" style="color: #003B4F;
+<span id="cb1-53">        <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">if</span> (sef<span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">`i'</span>a[1])&lt;(2*sef3a[1]) {</span>
-<span id="cb1-52">            <span class="fu" style="color: #4758AB;
+<span id="cb1-54">            <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">matrix</span> rt=<span class="fu" style="color: #4758AB;
 background-color: null;
@@ -326,52 +332,52 @@ background-color: null;
 font-style: inherit;">`i'</span>b[1]/sef<span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">`i'</span>a[1]]</span>
-<span id="cb1-53">        }</span>
-<span id="cb1-54">    }</span>
-<span id="cb1-55">    <span class="kw" style="color: #003B4F;
+<span id="cb1-55">        }</span>
+<span id="cb1-56">    }</span>
+<span id="cb1-57">    <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">svmat</span> rt</span>
-<span id="cb1-56">    <span class="kw" style="color: #003B4F;
+<span id="cb1-58">    <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">egen</span> rnk=<span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">rank</span>(rt2)</span>
-<span id="cb1-57">** and the ranking /<span class="kw" style="color: #003B4F;
+<span id="cb1-59">** and the ranking /<span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">p</span>-<span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">value</span> <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">for</span> each period</span>
-<span id="cb1-58">    <span class="kw" style="color: #003B4F;
+<span id="cb1-60">    <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">gen</span> rnk2=0</span>
-<span id="cb1-59">    <span class="kw" style="color: #003B4F;
+<span id="cb1-61">    <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">forvalues</span> i = 1/39 {</span>
-<span id="cb1-60">        <span class="kw" style="color: #003B4F;
+<span id="cb1-62">        <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">if</span>   (sef<span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">`i'</span>a[1])&lt;(2*sef3a[1]) {</span>
-<span id="cb1-61">            <span class="kw" style="color: #003B4F;
+<span id="cb1-63">            <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">local</span> t = <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">`t'</span>+1</span>
-<span id="cb1-62">            <span class="kw" style="color: #003B4F;
+<span id="cb1-64">            <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">replace</span> rnk2=rnk2+(tef<span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">`i'</span>&lt;=tef3)    </span>
-<span id="cb1-63">        }</span>
-<span id="cb1-64">    } </span>
-<span id="cb1-65">    <span class="kw" style="color: #003B4F;
+<span id="cb1-65">        }</span>
+<span id="cb1-66">    } </span>
+<span id="cb1-67">    <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">gen</span> pv=rnk2*100/<span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">`t'</span></span>
-<span id="cb1-66"><span class="kw" style="color: #003B4F;
+<span id="cb1-68"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">end</span></span></code></pre></div>
 </details>
@@ -384,7 +390,7 @@ font-style: inherit;">end</span></span></code></pre></div>
 </div>
 <section id="asis-case" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="asis-case">ASIS case</h3>
-<p>The first case will be the “vanilla” one. I will only use 4 pretreatment outcomes for the weight construction: 1971, 1975, 1980 and 1985.</p>
+<p>The first case will be the “vanilla” one. I will only use 4 pretreatment outcomes for the weight construction: 1971, 1975, 1980 and 1985. The outcome of interest is cigarette sale per capita (in packs). Thus, to some extend, data has already been standardized to be measured in comparable units.</p>
 <p>The basic code will look like this:</p>
 <div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1">synth cigsale cigsale(1971) cigsale(1975) cigsale(1980)   cigsale(1985), trunit(3) trperiod(1989) </span></code></pre></div>
 <div class="cell" data-execution_count="2">
@@ -392,7 +398,7 @@ font-style: inherit;">end</span></span></code></pre></div>
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><span class="kw" style="color: #003B4F;
 background-color: null;
-font-style: inherit;">qui</span>:frause smoking, <span class="kw" style="color: #003B4F;
+font-style: inherit;">qui</span>:frause smoking2, <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">clear</span></span>
 <span id="cb4-2"><span class="kw" style="color: #003B4F;
@@ -540,11 +546,11 @@ font-style: inherit;">ylabel</span>(0(5)25)</span></code></pre></div>
 </figure>
 </div>
 </div>
-<p>Based on Figure&nbsp;1, there is an effect of the Policy which reduced sales of cigarates. Figure&nbsp;1 (c) and Figure&nbsp;1 (d) suggest the effect is significant.</p>
+<p>Based on Figure&nbsp;1, there is an effect of the Policy which reduced sales of cigarates. Figure&nbsp;1 (c) and Figure&nbsp;1 (d) suggest the effect is significant across most post-treatment periods.</p>
 </section>
 <section id="log-case" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="log-case">Log Case</h3>
-<p>Lets make 1 small change, and transform the data on CIG sales into logs. This is what would happen</p>
+<p>Lets make one change. Instead of using cigarette sale per capita, I will use the log of that variable. The idea is that while raw data may not be comparable, because of different scales across units, data may be more comparable if its comparessed using a logScale.</p>
 <div class="page-columns page-full">
 <details>
 <summary>Code</summary>
@@ -672,9 +678,11 @@ font-style: inherit;">ylabel</span>(0(5)25)</span></code></pre></div>
 </figure>
 </div>
 </div>
+<p>Interestingly enough Figure&nbsp;2 shows a very similar effect plot as in Figure&nbsp;1. The RMSE ratio is even better, but with few post-treatment effects that are not as significant.</p>
 </section>
 <section id="relative-change" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="relative-change">Relative Change</h3>
+<p>The next alternative is to use a relative rescaling. Specifically, I will change the baseline of cigsales across all States, so that Cigarette Sales in 1970 is normalized to be 100. The changes, then could be interpreted in units relative to what happened in 1970.</p>
 <div class="page-columns page-full">
 <details>
 <summary>Code</summary>
@@ -802,12 +810,11 @@ font-style: inherit;">ylabel</span>(0(5)25)</span></code></pre></div>
 </figure>
 </div>
 </div>
+<p>Based on Figure&nbsp;3, we still have many states with very bad model fitness. Figure&nbsp;3 (c) and Figure&nbsp;3 (d), however, still shows good model performance, with slighly higher significance than when the data was used as is.</p>
 </section>
-</section>
-<section id="fully-rescale-to-california-pre-treament" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="fully-rescale-to-california-pre-treament">Fully Rescale (to California pre-treament)</h2>
-<section id="relative-change-1" class="level3 page-columns page-full">
-<h3 class="anchored" data-anchor-id="relative-change-1">Relative Change</h3>
+<section id="fully-rescale-to-california-pre-treament" class="level3 page-columns page-full">
+<h3 class="anchored" data-anchor-id="fully-rescale-to-california-pre-treament">Fully Rescale (to California pre-treament)</h3>
+<p>The last transformation I implement is one where all data is rescaled and shifted so that all countries have the same average and standard deviation in the period before treatment. I believe this could be the best approach, because forces all data to be perfectly comparable in the pre-treatment period, increasing the posibility to find good controls even for the other wise extreme states.</p>
 <div class="page-columns page-full">
 <details>
 <summary>Code</summary>
@@ -891,7 +898,8 @@ font-style: inherit;">name</span>(m4, <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">replace</span>) <span class="kw" style="color: #003B4F;
 background-color: null;
-font-style: inherit;">ylabel</span>(0(5)25)</span></code></pre></div>
+font-style: inherit;">ylabel</span>(0(5)25)</span>
+<span id="cb8-8">frame put *, into(m4)</span></code></pre></div>
 </details>
 <div id="fig-sc4" class="cell column-page quarto-layout-panel" data-execution_count="9">
 <figure class="figure">
@@ -935,11 +943,328 @@ font-style: inherit;">ylabel</span>(0(5)25)</span></code></pre></div>
 </figure>
 </div>
 </div>
+<p>What I consider quite interesting is that even the effect plot that uses no restrictions shows very good pre-treatment model fit for all donor units. Although the fitness for California is even better. Once we impose the same restriction to the data, excluding units with a RMSE twice as large as the one in California, we obtain a plot similar to the ones in the previous cases.</p>
+<p>Figure&nbsp;4 (c) and Figure&nbsp;4 (d) show that the effect may not be as strong as in the previous example. The RMSE ratio method suggests a p-value of 12.5%, above the standard 5% we like to consider as minimum threshold. The significance across periods is also slighly worse, because there is one state that exhibits a pseudo treatment that is larger than California.</p>
+</section>
+</section>
+<section id="comparing-magnitude-effects" class="level2">
+<h2 class="anchored" data-anchor-id="comparing-magnitude-effects">Comparing Magnitude effects</h2>
+<div class="cell" data-execution_count="10">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">qui</span>:frause smoking2, <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">clear</span></span>
+<span id="cb9-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">tempfile</span> sc1x sc2x sc3x sc4x</span>
+<span id="cb9-3">xtset state <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">year</span></span>
+<span id="cb9-4"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">qui</span>: {</span>
+<span id="cb9-5">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">gen</span> or_cigsale=cigsale</span>
+<span id="cb9-6">    synth cigsale cigsale(1971) cigsale(1975) cigsale(1980)   cigsale(1985), trunit(3) trperiod(1989) <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">keep</span>(<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`sc1x'</span>) <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">replace</span>  </span>
+<span id="cb9-7">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">replace</span> cigsale=<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">log</span>(or_cigsale)</span>
+<span id="cb9-8">    synth cigsale cigsale(1971) cigsale(1975) cigsale(1980)   cigsale(1985), trunit(3) trperiod(1989) <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">keep</span>(<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`sc2x'</span>) <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">replace</span>  </span>
+<span id="cb9-9">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">sort</span> state <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">year</span></span>
+<span id="cb9-10">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">by</span> state:<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">replace</span> cigsale=or_cigsale/or_cigsale[1]*100</span>
+<span id="cb9-11">    synth cigsale cigsale(1971) cigsale(1975) cigsale(1980)   cigsale(1985), trunit(3) trperiod(1989) <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">keep</span>(<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`sc3x'</span>) <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">replace</span>  </span>
+<span id="cb9-12"></span>
+<span id="cb9-13">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">sum</span> or_cigsale <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> state==3 &amp; <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">year</span>&lt;=1988</span>
+<span id="cb9-14">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">local</span> cmean=<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">r</span>(<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">mean</span>)</span>
+<span id="cb9-15">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">local</span> smean=<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">r</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sd</span>)</span>
+<span id="cb9-16">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">forvalues</span> i = 1/39 {</span>
+<span id="cb9-17">        <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">sum</span> or_cigsale <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> state==<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`i'</span> &amp; <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">year</span>&lt;=1988</span>
+<span id="cb9-18">        <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">replace</span> cigsale = <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`cmean'</span> + <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`smean'</span> * (or_cigsale - <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">r</span>(<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">mean</span>))/<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">r</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sd</span>) <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> state==<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`i'</span></span>
+<span id="cb9-19">    }</span>
+<span id="cb9-20">    synth cigsale cigsale(1971) cigsale(1975) cigsale(1980)   cigsale(1985), trunit(3) trperiod(1989) <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">keep</span>(<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`sc4x'</span>) <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">replace</span>  </span>
+<span id="cb9-21">}</span>
+<span id="cb9-22"></span>
+<span id="cb9-23"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">clear</span></span>
+<span id="cb9-24"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">use</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`sc1x'</span></span>
+<span id="cb9-25"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">rename</span>  _Y_synthetic y1_synth</span>
+<span id="cb9-26"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">drop</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> _time==.</span>
+<span id="cb9-27"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">save</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`sc1x'</span>, <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">replace</span></span>
+<span id="cb9-28"></span>
+<span id="cb9-29"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">use</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`sc2x'</span></span>
+<span id="cb9-30"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">rename</span>  _Y_synthetic y2_synth</span>
+<span id="cb9-31"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">replace</span> y2_synth = <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">exp</span>(y2_synth )</span>
+<span id="cb9-32"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">drop</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> _time==.</span>
+<span id="cb9-33"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">save</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`sc2x'</span>, <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">replace</span></span>
+<span id="cb9-34"></span>
+<span id="cb9-35"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">use</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`sc3x'</span></span>
+<span id="cb9-36"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">ren</span> _Y_synthetic y3_synth</span>
+<span id="cb9-37"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">drop</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> _time==.</span>
+<span id="cb9-38"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">save</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`sc3x'</span>, <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">replace</span></span>
+<span id="cb9-39"></span>
+<span id="cb9-40"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">use</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`sc4x'</span></span>
+<span id="cb9-41"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">ren</span> _Y_synthetic y4_synth</span>
+<span id="cb9-42"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">drop</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> _time==.</span>
+<span id="cb9-43"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">save</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`sc4x'</span>, <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">replace</span></span>
+<span id="cb9-44"></span>
+<span id="cb9-45"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">use</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`sc1x'</span>, <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">clear</span></span>
+<span id="cb9-46"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">merge</span> 1:1 _time <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">using</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`sc2x'</span>, nogen</span>
+<span id="cb9-47"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">merge</span> 1:1 _time <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">using</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`sc3x'</span>, nogen</span>
+<span id="cb9-48"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">merge</span> 1:1 _time <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">using</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`sc4x'</span>, nogen</span>
+<span id="cb9-49"></span>
+<span id="cb9-50"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">replace</span> y3_synth=y3_synth* _Y_treated[1]/100</span>
+<span id="cb9-51"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">gen</span> eff1= _Y_treated-y1_synth</span>
+<span id="cb9-52"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">gen</span> eff2= _Y_treated-y2_synth</span>
+<span id="cb9-53"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">gen</span> eff3= _Y_treated-y3_synth</span>
+<span id="cb9-54"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">gen</span> eff4= _Y_treated-y4_synth</span></code></pre></div>
+</details>
+</div>
+<p>Perhaps what would be the best way to comapre the different cases presented above is to rescale the results as to obtain results that can be compared across specifications. In Figure&nbsp;5, I puts together this effects, so that they can be compared across each other.</p>
+<div class="cell" data-execution_count="11">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">scatter</span> eff* _time, <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">connect</span>(<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">l</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">l</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">l</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">l</span>) <span class="bn" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">msymbol</span>(O D T S) <span class="bn" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">xline</span>(1989) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">///</span></span>
+<span id="cb10-2"><span class="bn" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">legend</span>(<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">order</span>(1 <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Asis  2.550"</span> 2 <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Logs 2.859"</span> 3 <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Rate 1.928"</span> 4 <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Rescaled 1.955"</span>))</span></code></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-sc5" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc5-output-1.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">Figure&nbsp;5: Synthetic Control Effects</figcaption><p></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Interestingly enough, Model Specification does very little on the estimated effect, as they all suggest a sharp decline in Cigarette sales of just above 10 fewer packs per capita 3 years after implementation, up to 25/27 fewer packs per capita by 2000.</p>
+<p>Asis and Logs specifications show the largest decline in 1997 (30 fewer packs), with rescaled and rate specifications being the most conservative. The table also provides the pre-RMSE for all models. They suggest that using Rates provided the best fit, followed by the ReScaled data, using data as is, and using the log transformation.</p>
+</section>
+<section id="conclusions" class="level2">
+<h2 class="anchored" data-anchor-id="conclusions">Conclusions</h2>
+<p>This was an interesting excercise driven by asking if it matter how the covariates are measured when applying SC. I was also curious about this approach, as I was trying to understand one of the extensions of the methodology: Synthetid Differences in Differences. This may require some testing, but that can be left for a future exploration.</p>
+<p>It may seem, for this simplified example, that it doesnt really matter how covariates are transformed. The estimated effects were effectively the same. This conclusion, however, may not be valid in more complex settings.</p>
+<p>Perhaps the only concern at this point is that the “significance” level of the estimates did change considerably with the data rescaling approach. Granted, the change seems large, because the sample is small (25 observations), and a single change in ranking may look like a large change in the p-value of the statistic.</p>
+<p>If you are reading this, and have some comments, please let me know.</p>
 
 
 <!-- -->
 
-</section>
 </section>
 
  ]]></description>
