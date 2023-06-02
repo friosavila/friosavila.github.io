@@ -1,0 +1,68 @@
+---
+title: "Renaming variables in Bulk"
+description: "I describe an extended option from rename to easily rename your variabes"
+author: "Fernando Rios-Avila and Fahad Mirza"
+date: "6/02/2023"
+categories: 
+    - Stata
+    - Tips
+format:
+  html:
+    code-line-numbers: true
+    mermaid:
+      theme: neutral
+draft: false
+---
+
+## Aknowledgements
+
+This tip was brought to you by Fahad Mirza. Its one of those little things I have found useful, but usually forget, and have to look for it all over again. 
+
+Luckily, I know have my own site, where I can save and store this information! I give, however, total creadit to Fahad. 
+
+## The problem
+
+The problem is simple. Some times, you may have a series of variables with somewhat unappealing names. I particuarly dislike names that are too long. While some people like having descriptive variable names, I find it particularly distracting.
+
+My preference is to have variables with good labels, and/or good value labels, whenever necessary. For variables themselves, I like short names, that are descriptive, however, I also like to have them labeled sequentially!.
+
+How do we do that?
+
+Obviously, the first approach is to go one by one. In fact, not too many `Stata's` ago, that was the only option. That particular task could have been done using loops as follows:
+
+```{stata}
+*| echo: true
+*| code-fold: false
+sysuse auto, clear
+* This loop iterates over all variable names in the dataset
+foreach i of varlist * {
+    local j = `j'+1
+    ren `i' var_`j'
+}
+describe *
+```
+
+## There is a better way
+
+While the process above is rather simple, there is a better way of doing this, as Fahad suggests. That is using some of the extended options of `rename`.
+
+Lets first replicate the code above, using the code that Fahad suggested.
+
+```{stata}
+*| echo: true
+*| code-fold: false
+sysuse auto, clear
+ren (*) (var_#), addnumber
+describe
+```
+
+This is a much shorter, and cleaner code. What it does is take all variables within the first parenthesis to be rename using the instructions of the second set. Of course rename has quite few other options that you may find useful. Just type `help rename group`, to see all other extended options.
+
+Before ending this `tip`. Something else you may find useful. You can use the option `dryrun`. Doing this none of the variable names will change, but instead you will see a report of how variable names will change after the command is executed.
+
+```{stata}
+*| echo: true
+*| code-fold: false
+sysuse auto, clear
+ren (*) (var_#), addnumber dryrun
+```
