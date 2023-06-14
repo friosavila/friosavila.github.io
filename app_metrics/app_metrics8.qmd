@@ -1,0 +1,265 @@
+---
+title: "DID: Panel Data & Repeated Crossection"
+subtitle: "Using `CSDID` and `JWDID`"
+format: html
+bibliography: references.bib
+---
+
+## First Things First
+
+### DID with Multiple Periods and Time Heterogeneity
+
+If you are reading this, you probably know quite well all the problems associated with the infamous TWFE-DID especification. Nevertheless, its worth a quick recap, in case you are not aware of.
+
+Before the new literature on DID, whenever people wanted to analyze treatment effects using a difference in differences approach, and had access to data with many periods and many individuals, they would tend to use a model specification that look like this:
+ 
+$$y_{it} = \delta_i + \delta_t + \gamma \times trt + e_{it}
+$${#eq-1}
+
+
+Where $trt$ was a dummy variable that would take the value of 1 for treated units after the treatment was implemented, and zero otherwise. The idea was that all units with $trt=0$ (those not yet treated) would be used used as controls. In this specification, one is also controlling for time fixed effects $\delta_t$ as well as individual (or group) fixed effects $\delta_i$.
+
+This specification was considered a generalization of the simple 2x2 DID design:
+
+$$
+y = \delta_0 + \delta_1 post+ \delta_2 treat + \gamma \ (post\times treat) + e_{it}
+$$
+
+Where $\delta_i$ was the equivalent to $\delta_1$, and $\delta_2$ the equivalent for $\delta_t$.
+
+What many didn't know at the time is that @eq-1 would provide correct identification of the Average treatment effect $\gamma$, under strict assumptions:
+
+- There is no treatment timing heterogeneity (All units are treated at the same time)
+- If there is timing heterogeneity, the treatment effect is homogenous across time and across groups. ($\gamma$ is the same across time or across groups)
+
+This assumptions almost never hold. For example, the original treatment may become less effective few periods after they are implemented, and units treated later may experience stronger treatment effects than those treated earlier. When this happen, @eq-1 will provide incorrect results for three related reasons:
+
+1. Linear regressions do not discriminate between good or bad controls when identifying coefficients. They simply exploit all possible varation in the data. 
+2. Already treated units would be implicitly used as "control units", when analyzing units treated at a later point in time.
+3. Because of this, some treated units will receive "negative" weights, when estimating Average treatemnt effects.
+
+One of the most interesting consequences of this problem is that one may estimate negative treatment effects, even if all units in the sample had a theoreticaly possitive treatment effect.
+
+Many paper published in 2021 including @goodman_bacon_2021, @callaway_santanna_2021, @sun_estimating_2021, @wooldridge_twoway_2021 and @borusyak_revisiting_2022, to name a few, identified this problem, and proposed similar solutions: Estimate ATTs allowing for cohort and timing heterogeneity, avoiding the use of already treated units as controls. 
+
+While these papers also provide their own estimators (in `Stata`, `R`, and in some cases `python`), I will focus only on two solutions. The ones proposed by @callaway_santanna_2021 and @wooldridge_twoway_2021, which I programmed in `Stata` using `csdid[2]`, and `jwdid`. Both approaches suggest to estimate heterogenous treatment effects based on when a unit is treated (its cohort $G$), and at what point in time one is interested in estimating that effect $T$. We will call them the $ATT(G,T)$. ^[I will not provide details of the model specification in this post, but leave it for some future page on this site.]
+
+##  GxT DID (instead  of 2x2 DID)
+
+### Panel Data
+
+Lets assume you have access to Balanced Panel Data. In other words, you observe the same group of individuals across the same window of time. Different individuals are treated at different points in time, and some are not treated at all (never treated). This is the best case scenario, since you do not need to worry about identifying cohorts by treat timing. 
+
+Let's see how to estimate this type of models using `csdid` and `jwdid`. They estimate the treatment effects using different strategies, but under specific cases, they will provide the same point estimates. To show how this is done, I will employ the toy-dataset used in @callaway_santanna_2021.
+
+First let's set things up, loading the data:
+```{stata}
+*| output: false
+** to get the data from my repository
+ssc install frause, replace
+frause mpdta, clear
+```
+
+This dataset contains information at the county level on population size (lpop), employment (lemp), and a variable that indicates when a county instuted a change in minimum wage (first_treat). To estimate a DID model with heterogenous treatment effects, could use either `jwdid` or `csdid`, which are available from SSC.^[If you want to use `csdid2`, please check the blog-post on using "own installer", and try `fra install csdid2`.]
+
+```{stata}
+*| output: false
+** This is a dependency for csdid
+ssc install drdid, replace
+ssc install csdid, replace
+ssc install jwdid, replace
+```
+
+Just one more step (not required but important if you did not identified the `cohort` variable). Lets create a dummy that takes the value of 1 only after the treated unit is treated:
+
+```{stata}
+gen trt = (first_treat<=year)*(first_treat>0)
+```
+
+This is what @eq-1 is using. So how do I create the "*treatment cohort*" variable?. That can be easily done using one of `csdid` subprograms. You just need to provide the group or panel identifier, and the time variable:
+
+```{stata}
+egen gvar = csgvar(trt), ivar(countyreal) tvar(year)
+```
+
+Its worth noting that the official commands `xthdidregress` and `hdidregress` do not require you to do this, because it automatically creates the gvar internally, based on the information provided. You can now create a small tabulation, as a sanity check, to verity the variable `gvar` is correctly created:
+
+```stata
+tab year gvar
+```
+
+|year\gvar |         0    |   2004   |    2006   |    2007 |     Total|
+|-----------|--------------|----------|-----------|---------|----------|
+|      2003 |       309    |     20   |      40   |     131 |       500 |
+|      2004 |       309    |     20   |      40   |     131 |       500 |
+|      2005 |       309    |     20   |      40   |     131 |       500 |
+|      2006 |       309    |     20   |      40   |     131 |       500 |
+|      2007 |       309    |     20   |      40   |     131 |       500 |
+|     Total |     1,545    |    100   |     200   |     655 |     2,500 |
+
+
+If all goes as expected, you a tabulation similar to the one you see here. You have a total of 2500 observations, but only 500 counties. 309 were not treated (had no changes in minimum wage between 2003 and 2007), 20 were treated in 2004, 40 in 2006 and 131 in 2007.
+
+These numbers are what I call "effective sample size", because  `csdid` (and implicitly `jwdid`) use only this ammount of information when estimating the treatment effects. In other words, we should assume the sample size is 20 (for the purposes of model specification and controls).
+
+By default, `jwdid` uses the not yet treated as comparison group. So, to make the results comparable to `csdid`, I will request using those "never-treated" as comparison group. For `csdid`, the default is using short gaps for pre-treatment ATT's, along with the never treated as comaprison group. To change that I will use `long2` option. This will make the following comparable to the outcomes from standard Event-studies estimations. The next lines should produce identical point estimates, with very similar standard errors. 
+
+::: {.panel-tabset}
+
+## CSDID
+
+```{stata}
+csdid lemp , ivar(county) time(year) gvar(gvar) long2
+```
+
+## JWDID
+
+```{stata}
+jwdid lemp , ivar(county) time(year) gvar(gvar) never
+```
+
+:::
+
+You can of course add controls. In this case `lpop` is a time constant variable, so it can be added to both commands. For us to obtain the same results, however, you need to add the `method(reg)` to `csdid`. Otherwise it will implement the double robust estimator `dripw` (default)
+
+::: {.panel-tabset}
+
+## CSDID
+
+```{stata}
+csdid lemp lpop , ivar(county) time(year) gvar(gvar) long2 method(reg)
+```
+
+## JWDID
+
+```{stata}
+jwdid lemp lpop, ivar(county) time(year) gvar(gvar) never 
+```
+
+:::
+
+In general, however, you may not be interested in analyzing each individual ATTGT, but rather some aggregated results. For example, overall average, or dynamic effects.^[also available `group` and `calendar`]. Prof. Wooldrige, however, also suggest to ajust standard errors to account for sampling variation on the covariates. To do so, I need to modify the syntax of `jwdid` slighly, as well as the post-estimation commands.
+
+
+::: {.panel-tabset}
+
+## CSDID
+
+```{stata}
+qui:csdid lemp lpop , ivar(county) time(year) gvar(gvar) long2 method(reg)
+estat simple
+estat event
+estat calendar
+estat group
+```
+
+## JWDID
+
+```{stata}
+qui:jwdid lemp lpop, ivar(county) time(year) gvar(gvar) never 
+estat simple
+estat event
+estat calendar
+estat group
+```
+
+## JWDID: vce(unconditional)
+
+```{stata}
+qui:jwdid lemp lpop, ivar(county) time(year) gvar(gvar) never ///
+    method(regress) group
+estat simple, vce(unconditional)
+estat event, vce(unconditional)
+estat calendar, vce(unconditional)
+estat group, vce(unconditional)
+```
+
+:::
+
+Again, both showing identical point estimates with slighly different standard errors. 
+
+## Repeated Crossection
+
+Repeated crossection operates slighly different than panel data. On the one hand, you do not observe the same units across time. Thus, there is no *unit specific fixed-effect*. Instead one would be trying to account for cohort specific effect, or treatment-level fixed effects. This may become clearer with an example. 
+
+Lets us first consider the same dataset as before. To simulate the situation of repeated crossection, lets assume that each round, data was collected for a random sample of counties within each State, and that, for some unknown reason, we cannot identify counties across time. Lets us also assume that the treatment was implemented at the State level (for clustering purposes). First some data preparation.
+
+To simulate repeated crossection structure, I will drop 10% of the data, create a ***State id***, and drop the county identifier.  
+
+```{stata}
+** load and obtain trt
+frause mpdta, clear
+gen trt = (first_treat<=year)*(first_treat>0)
+gen state = int(countyreal/1000)
+** Randomly keep 90% of the data
+set seed 1
+sample 90
+drop countyreal
+```
+
+Next is to create the `gvar`. This will follow the same syntax as before, with the main difference that instead of using **countyreal** as `ivar`, we will use `state`. Its important that this variable represents the identifier of the level at which the treatment was implemented, and that we can follow up across time. 
+
+```{stata}
+egen gvar = csgvar(trt), ivar(state) tvar(year)
+```
+
+And as always, its a good idea to crosstabulate year with the new gvar:
+
+```stata
+tab year gvar
+```
+
+|year\gvar |         0    |   2004   |    2006   |    2007 |     Total|
+|-----------|--------------|----------|-----------|---------|----------|
+|      2003 |       279    |     19    |     35    |    114 |       447 |
+|      2004 |       286    |     19    |     34    |    117 |       456 |
+|      2005 |       279    |     18    |     38    |    121 |       456 |
+|      2006 |       275    |     18    |     40     |   115 |       448 |
+|      2007 |       275    |     18    |     36      |  114 |       443 |
+|     Total |     1,474     |    93   |     193     |   615 |     2,375 |
+
+What you should observe, as shown here, is that you still have roughtly the same number of observations per `gvar` across time. This is important because you need to have a groups that are comparable across time. Think of this as having a pseudo panel. 
+
+In terms of estimation, the syntax needs to be adjusted slighly:
+
+::: {.panel-tabset}
+
+## CSDID
+
+If you are using `csdid`, the adjustment simply requires to drop `ivar` option. To make sure we are clustering at the correct level, one should use `cluster()` instead, using the pseudo panel identifier `state` as clustering variable:
+
+```{stata}
+csdid lemp , cluster(state) time(year) gvar(gvar) long2
+```
+
+Aggregations are obtained using `estat` post estimation commnads.
+
+## JWDID-I
+
+If you are using `jwdid`, there are two alternatives. The first one is to use `ivar()` with the new pseudo panel identifier (`state`).
+
+```{stata}
+jwdid lemp , ivar(state) time(year) gvar(gvar) never
+```
+
+Data will be clustered at the state level, explicitly accounting for State fixed effects.
+
+## JWDID-II
+
+Alternatively, one could change `ivar()` with `cluster()`, to ensure clustering is done at the correct level, and add the option `group`, so that cohort fixed effects are added to the specification.^[In my repository, the newer version of `jwdid` does this automatically if `ivar()` is not provided.]
+
+```{stata}
+jwdid lemp , cluster(state) time(year) gvar(gvar) never group
+```
+
+:::
+
+The results across the different approaches will be different because of how the data is used. But, as you can see here, point estimates are broadly comparable. 
+
+As far as I know, either option is correct.
+
+## Conclusions
+
+I hope this reference helps people who want to use `jwdid` and `csdid` for the estimation of DID models in the presence of repeated crossection.
+
+If you have comments, or questions, do not hesitate to contact me.
