@@ -6,7 +6,7 @@ author:
     - Gustavo Canavire-Bacarreza
     - Leonardo Siles
 format: 
-  revealjs: 
+  html: 
     slide-number: true
     width: 1500
     height: 900
@@ -92,9 +92,7 @@ $$\beta(\tau) = \beta + \gamma(\tau)
 $$
 
 ## 
-
-:::{.panel-tabset}
-
+  
 ```{stata}
 *| output: false
 
@@ -111,6 +109,8 @@ qui:qreg dy x
 qregplot, ylabel(-6 (3) 10)
 graph export fig93.png, replace width(1000)
 ```
+
+:::{.panel-tabset}
 
 ## qreg
 
@@ -281,7 +281,7 @@ Easily allows for simultaneous Qregressions and weights
 
 ## Command syntax `mmqreg` 
 
-```markdown{style="font-size: 60px" code-line-numbers="1|3,4,5,6,7|9,10,11" }
+```markdown
 mmqreg depvar indepvar [if in] [pw] , [Options] <-- Standard Syntax
 
 ** Variance Options
@@ -364,11 +364,11 @@ graph export fig95.png, replace width(1000)
 
 ## `qreg`
 
-![](fig94.png){heigth=100% fig-align=center}
+![](fig94.png)
 
 ## `mmqreg`
 
-![](fig95.png){heigth=100% fig-align=center}
+![](fig95.png)
 
 :::
 
@@ -401,7 +401,7 @@ graph export fig95.png, replace width(1000)
 
 ## `cre`: For Correlated Random Effects Model
 
-```markdown{style="font-size: 60px" .code-overflow-wrap}
+```markdown
 from -fra install-
 syntax: 
   cre, abs(varlist) [keep compact]: [regression command]
@@ -479,9 +479,3 @@ graph export fig99.png, width(2000) replace
 ![](fig99.png){heigth=100% fig-align=center}
 
 # Thank you!
-
-Interested in more?
-
-visit my site: <https://friosavila.github.io/>
-
-

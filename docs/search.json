@@ -686,11 +686,18 @@
     "text": "Footnotes\n\n\nSee for example Introductory Econometrics: A Modern Approach by Jeffery Wooldridge↩︎"
   },
   {
+    "objectID": "app_metrics/app_metrics9.html",
+    "href": "app_metrics/app_metrics9.html",
+    "title": "Quantile regressions with multiple fixed effects",
+    "section": "",
+    "text": "Quantile Regressions are an alternative to standard linear regressions that help us to better understand the relationship between the distribution of \\(Y\\) and \\(X's\\).\nIn constrast with Linear regression models, where one focuses on explaining \\(E(y|X)\\) as a function of \\(X\\), quantile regressions aim to assess the relationship between \\(Q_\\tau(y|X)\\) with respect to \\(X\\).\n\nThis means that to interpret Q-regressions properly, one needs to “condition” on \\(X\\) but also on \\(\\tau\\).\n\nQuantile Regressions are nonlinear-models, that “look” and can be interpreted as linear ones.\n\n\n\n\n\n\n\n\n\nNumber of observations (_N) was 0, now 250.\n\n\n\n\n\n\n\n\n\nA Generalization of Quantile regression data generating function can be written as follows:\n\n\\[y_i = \\beta_0(\\tau)+\\beta_1(\\tau) X_{i,1}+\\beta_2(\\tau) X_{i,2}+...+\\beta_k(\\tau) X_{i,k}\n\\]\n\nBase on this specification, few characteristics should be considered:\n\nSlopes \\(\\beta_k(\\tau)\\) will vary across quantiles only if the model is Heteroskedastic.\nQreg can be considered as a semi-parametric-varying coefficient model, with unobserved running variable (\\(\\tau\\)).\nCoefficients are percentile specific, but functional forms can be used for more efficient estimation.\nIt is possible to separate location effects (mean) from scale effect (deviation from the mean)\n\n\n\n\n\nStandard\n\\[\\beta(\\tau) \\leftarrow \\frac 1 n \\sum \\left[ I(x_i\\beta(\\tau) \\geq y_i) - \\tau \\right] =0\n\\]\nSemiparamatric (Kaplan (2022))\n\\[\\beta(\\tau) \\leftarrow \\frac 1 n \\sum \\left[ F\\left(\\frac{x_i\\beta(\\tau)-y_i}{bw} \\right) - \\tau \\right] =0\n\\]\nFunctional (Bottai and Orsini (2019))\n\\[\\beta(\\tau) = \\theta_0 + \\theta_1 \\tau + \\theta_2 \\tau^2 +...\n\\]\nLocation-Scale \\[\\beta(\\tau) = \\beta + \\gamma(\\tau)\n\\]\n\n\n\n\nqregsivqrLocation-Scale"
+  },
+  {
     "objectID": "app_metrics/app_metrics9.html#what-do-quantile-regressions-do",
     "href": "app_metrics/app_metrics9.html#what-do-quantile-regressions-do",
     "title": "Quantile regressions with multiple fixed effects",
-    "section": "What do Quantile Regressions do?",
-    "text": "What do Quantile Regressions do?\n\nQuantile Regressions are an alternative to standard linear regressions that help us to better understand the relationship between the distribution of \\(Y\\) and \\(X's\\).\nIn constrast with Linear regression models, where one focuses on explaining \\(E(y|X)\\) as a function of \\(X\\), quantile regressions aim to assess the relationship between \\(Q_\\tau(y|X)\\) with respect to \\(X\\).\n\nThis means that to interpret Q-regressions properly, one needs to “condition” on \\(X\\) but also on \\(\\tau\\).\n\nQuantile Regressions are nonlinear-models, that “look” and can be interpreted as linear ones."
+    "section": "",
+    "text": "Quantile Regressions are an alternative to standard linear regressions that help us to better understand the relationship between the distribution of \\(Y\\) and \\(X's\\).\nIn constrast with Linear regression models, where one focuses on explaining \\(E(y|X)\\) as a function of \\(X\\), quantile regressions aim to assess the relationship between \\(Q_\\tau(y|X)\\) with respect to \\(X\\).\n\nThis means that to interpret Q-regressions properly, one needs to “condition” on \\(X\\) but also on \\(\\tau\\).\n\nQuantile Regressions are nonlinear-models, that “look” and can be interpreted as linear ones."
   },
   {
     "objectID": "app_metrics/app_metrics9.html#section",
@@ -703,8 +710,8 @@
     "objectID": "app_metrics/app_metrics9.html#estimation",
     "href": "app_metrics/app_metrics9.html#estimation",
     "title": "Quantile regressions with multiple fixed effects",
-    "section": "Estimation",
-    "text": "Estimation\n\nA Generalization of Quantile regression data generating function can be written as follows:\n\n\\[y_i = \\beta_0(\\tau)+\\beta_1(\\tau) X_{i,1}+\\beta_2(\\tau) X_{i,2}+...+\\beta_k(\\tau) X_{i,k}\n\\]\n\nBase on this specification, few characteristics should be considered:\n\nSlopes \\(\\beta_k(\\tau)\\) will vary across quantiles only if the model is Heteroskedastic.\nQreg can be considered as a semi-parametric-varying coefficient model, with unobserved running variable (\\(\\tau\\)).\nCoefficients are percentile specific, but functional forms can be used for more efficient estimation.\nIt is possible to separate location effects (mean) from scale effect (deviation from the mean)"
+    "section": "",
+    "text": "A Generalization of Quantile regression data generating function can be written as follows:\n\n\\[y_i = \\beta_0(\\tau)+\\beta_1(\\tau) X_{i,1}+\\beta_2(\\tau) X_{i,2}+...+\\beta_k(\\tau) X_{i,k}\n\\]\n\nBase on this specification, few characteristics should be considered:\n\nSlopes \\(\\beta_k(\\tau)\\) will vary across quantiles only if the model is Heteroskedastic.\nQreg can be considered as a semi-parametric-varying coefficient model, with unobserved running variable (\\(\\tau\\)).\nCoefficients are percentile specific, but functional forms can be used for more efficient estimation.\nIt is possible to separate location effects (mean) from scale effect (deviation from the mean)"
   },
   {
     "objectID": "app_metrics/app_metrics9.html#section-1",
@@ -746,7 +753,7 @@
     "href": "app_metrics/app_metrics9.html#how-does-simplified-he2019-and-mss2019-works",
     "title": "Quantile regressions with multiple fixed effects",
     "section": "How does Simplified He (1997) and Machado and Santos Silva (2019) works?",
-    "text": "How does Simplified He (1997) and Machado and Santos Silva (2019) works?\n\\[y_i = x_i \\beta + \\varepsilon x_i \\gamma \\rightarrow Q_\\tau(y|X)=X\\beta + X\\gamma F_\\varepsilon^{-1}(\\tau)\n\\]\nStep 1: Location model \\(E(X'(y-X\\beta))=0\\)\nStep 2: Scale model \\(E(X'(|y-X\\beta|-X\\gamma))=0\\)\nStep 3: Standardized Quantile \\(E\\left[ I\\left( \\frac{y-X\\beta}{X\\gamma} \\geq q_\\tau \\right) -\\tau \\right]=0\\)\nStep 4: Aggregate \\(\\beta(\\tau) = \\beta + q_\\tau \\gamma\\)"
+    "text": "How does Simplified He (1997) and Machado and Santos Silva (2019) works?\n\\[y_i = x_i \\beta + \\varepsilon x_i \\gamma \\rightarrow Q_\\tau(y|X)=X\\beta + X\\gamma F_\\varepsilon^{-1}(\\tau)\n\\]\n\nStep 1: Location model \\(E(X'(y-X\\beta))=0\\)\n\n\nStep 2: Scale model \\(E(X'(|y-X\\beta|-X\\gamma))=0\\)\n\n\nStep 3: Standardized Quantile \\(E\\left[ I\\left( \\frac{y-X\\beta}{X\\gamma} \\geq q_\\tau \\right) -\\tau \\right]=0\\)\n\n\nStep 4: Aggregate \\(\\beta(\\tau) = \\beta + q_\\tau \\gamma\\)"
   },
   {
     "objectID": "app_metrics/app_metrics9.html#extension-multiple-fixed-effects",
