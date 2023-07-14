@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.313">
+<meta name="generator" content="quarto-1.3.433">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -113,7 +113,8 @@ div.csl-indent {
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-GNMLZDYJ2P"></script>
@@ -274,6 +275,12 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
  <span class="menu-text">DID: Panel Data &amp; Repeated Crossection</span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantile regressions with multiple fixed effects</span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -338,7 +345,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <div id="fig-corr1-1" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="intreg_mi1.png" class="img-fluid figure-img" data-ref-parent="fig-corr1"></p>
-<p></p><figcaption class="figure-caption">(a) Fully Observed</figcaption><p></p>
+<figcaption class="figure-caption">(a) Fully Observed</figcaption>
 </figure>
 </div>
 </div>
@@ -346,7 +353,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <div id="fig-corr1-2" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="intreg_mi2.png" class="img-fluid figure-img" data-ref-parent="fig-corr1"></p>
-<p></p><figcaption class="figure-caption">(b) Censored</figcaption><p></p>
+<figcaption class="figure-caption">(b) Censored</figcaption>
 </figure>
 </div>
 </div>
@@ -360,14 +367,14 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <div id="fig-den" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="intreg_mi3.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;2: Observed vs Imputed Wages</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;2: Observed vs Imputed Wages</figcaption>
 </figure>
 </div>
 <p>After creating the multiple-imputed synthethic datasets, they can be analyzed applying standard aggregation rules. In <code>Stata</code>, this can be done using <code>mi</code> commands. Because multiple imputation would provide no added value to the estimation of conditional means (linear regression), we compare esitmates using conditional quantile regressions.</p>
 <div id="fig-qret" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
 <p><img src="intreg_mi4.png" class="img-fluid figure-img"></p>
-<p></p><figcaption class="figure-caption">Figure&nbsp;3: Quantile Regression Coefficients</figcaption><p></p>
+<figcaption class="figure-caption">Figure&nbsp;3: Quantile Regression Coefficients</figcaption>
 </figure>
 </div>
 <p><a href="#fig-qret">Figure&nbsp;3</a> contrasts the results of the quantile regression coefficients, using the fully observed data, as well as the two imputed data options. In general, while the estimated parameters using imputed data does not replicate the quantile regression coefficients perfectly, it captures most of the observed trends across the distribution. Considering that we start with only limited information of wages in brackets, the fact that we can obtain good approximations of the unobserved effects is a considerable advantage.</p>
