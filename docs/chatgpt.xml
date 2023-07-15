@@ -10,7 +10,447 @@
 <atom:link href="https://friosavila.github.io/chatgpt.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.3.433</generator>
-<lastBuildDate>Fri, 02 Jun 2023 04:00:00 GMT</lastBuildDate>
+<lastBuildDate>Fri, 14 Jul 2023 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>How to suest a HDFE</title>
+  <dc:creator>Fernando Rios-Avila</dc:creator>
+  <link>https://friosavila.github.io/chatgpt/suregfe_07_14_2023/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>A question I have seen online many…many…many times is how to compare the coefficients of a model that has been estimated using a highdimensional set of fixed effects.</p>
+<p>The starting answer has always been…to <code>suest</code> the both equations, or <em>stack</em> both equations to compare the effects. However, <code>suest</code> will not work with <code>reghdfe</code> nor <code>xtreg</code>. And <em>stacking</em> equations is even less intuitive.</p>
+<p>Today, however, I will present you an easy way to do this with with a little command of my own creation, but also using some simple syntax.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Setup
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>To use the strategies I will present here you will need <code>reghdfe</code> (from <code>ssc</code>) and <code>cre</code> (from <code>fra</code>, my own repository). You will need <code>frause</code> from ssc.</p>
+</div>
+</div>
+</section>
+<section id="suest-the-problem" class="level2">
+<h2 class="anchored" data-anchor-id="suest-the-problem"><code>suest</code> the problem</h2>
+<p>Lets start with a simple wage regression model, where we aim to compare the coefficients of men and women. For this, we will use the data set <code>oaxaca</code>, and a simple <em>Mincerian</em> regression model:</p>
+<p>First, lets estimate both models:</p>
+<div class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">qui</span>:frause oaxaca, <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">clear</span></span>
+<span id="cb1-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">qui</span>:<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">reg</span> lnwage educ exper tenure age <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> female==0</span>
+<span id="cb1-3"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">est</span> sto male</span>
+<span id="cb1-4"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">qui</span>:<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">reg</span> lnwage educ exper tenure age <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> female==1</span>
+<span id="cb1-5"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">est</span> sto female</span></code></pre></div>
+</div>
+<p>and use <code>suest</code> to put them together, and test if coefficients are different from each other or not. For this I will use <code>lincom</code> and <code>test</code> commands:</p>
+<div class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">qui</span>: <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">suest</span> male female</span>
+<span id="cb2-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">lincom</span> [male_mean]:educ-[female_mean]:educ</span>
+<span id="cb2-3"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">test</span> [male_mean=female_mean]:educ</span>
+<span id="cb2-4"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">test</span> [male_mean=female_mean], common</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ ( 1)  [male_mean]educ - [female_mean]educ = 0
+
+------------------------------------------------------------------------------
+             | Coefficient  Std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         (1) |  -.0300371   .0119579    -2.51   0.012    -.0534741   -.0066001
+------------------------------------------------------------------------------
+
+ ( 1)  [male_mean]educ - [female_mean]educ = 0
+
+           chi2(  1) =    6.31
+         Prob &gt; chi2 =    0.0120
+
+ ( 1)  [male_mean]educ - [female_mean]educ = 0
+ ( 2)  [male_mean]exper - [female_mean]exper = 0
+ ( 3)  [male_mean]tenure - [female_mean]tenure = 0
+ ( 4)  [male_mean]age - [female_mean]age = 0
+
+           chi2(  4) =   26.63
+         Prob &gt; chi2 =    0.0000</code></pre>
+</div>
+</div>
+<p>I could also use more involved methods like creating my own <code>ml</code> or <code>gmm</code> option, but there is no need in this simplified method.</p>
+</section>
+<section id="stacking" class="level2">
+<h2 class="anchored" data-anchor-id="stacking">Stacking</h2>
+<p>The next option is do <em>Stacking</em>. This sounds difficult, but its nothing different than using the old trick of interactions. we simply need to estimate a model where all covariates are interacted with our sampling indicator (gender):</p>
+<div class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">qui</span>:<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">reg</span> lnwage i.female##c.(educ exper tenure age), <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">robust</span></span>
+<span id="cb4-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">lincom</span> 1.female#c.educ</span>
+<span id="cb4-3"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">test</span> 1.female#c.educ</span>
+<span id="cb4-4"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">test</span> 1.female#c.educ 1.female#c.<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">exp</span> 1.female#c.tenure 1.female#c.age</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ ( 1)  1.female#c.educ = 0
+
+------------------------------------------------------------------------------
+      lnwage | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         (1) |   .0300371   .0119956     2.50   0.012     .0065062    .0535681
+------------------------------------------------------------------------------
+
+ ( 1)  1.female#c.educ = 0
+
+       F(  1,  1424) =    6.27
+            Prob &gt; F =    0.0124
+
+ ( 1)  1.female#c.educ = 0
+ ( 2)  1.female#c.exper = 0
+ ( 3)  1.female#c.tenure = 0
+ ( 4)  1.female#c.age = 0
+
+       F(  4,  1424) =    6.62
+            Prob &gt; F =    0.0000</code></pre>
+</div>
+</div>
+<p>Again we will obtain the same results as before.</p>
+<p>But now the hard question. What if we have a HDFE?</p>
+</section>
+<section id="stacking-fe" class="level2">
+<h2 class="anchored" data-anchor-id="stacking-fe">Stacking FE</h2>
+<p>To simulate the sitution of a high-dimensional FE, I will use <code>age</code>. This will allow me to still obtain point estimates using simple regression (and say <code>suest</code>), while comparing it to the alternative:</p>
+<div class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">qui</span>:<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">reg</span> lnwage educ exper tenure i.age <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> female==0</span>
+<span id="cb6-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">est</span> sto male</span>
+<span id="cb6-3"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">qui</span>:<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">reg</span> lnwage educ exper tenure i.age <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> female==1</span>
+<span id="cb6-4"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">est</span> sto female</span>
+<span id="cb6-5"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">qui</span>:<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">suest</span> male female, <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">cluster</span>(age)</span>
+<span id="cb6-6"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">lincom</span> [male_mean]:educ-[female_mean]:educ</span>
+<span id="cb6-7"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">test</span> [male_mean=female_mean]:educ exper tenure</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ ( 1)  [male_mean]educ - [female_mean]educ = 0
+
+------------------------------------------------------------------------------
+             | Coefficient  Std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         (1) |  -.0354668   .0095251    -3.72   0.000    -.0541357   -.0167978
+------------------------------------------------------------------------------
+
+ ( 1)  [male_mean]educ - [female_mean]educ = 0
+ ( 2)  [male_mean]exper - [female_mean]exper = 0
+ ( 3)  [male_mean]tenure - [female_mean]tenure = 0
+
+           chi2(  3) =   30.72
+         Prob &gt; chi2 =    0.0000</code></pre>
+</div>
+</div>
+<p>Now the second method, using <code>reghdfe</code></p>
+<div class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">egen</span> age_fem = <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group</span>(age  fem)</span>
+<span id="cb8-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">qui</span>:reghdfe lnwage i.female##c.(educ exper tenure), <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">abs</span>(female#age) <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">cluster</span>(age_fem)</span>
+<span id="cb8-3"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">lincom</span> 1.female#c.educ</span>
+<span id="cb8-4"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">test</span> 1.female#c.educ 1.female#c.<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">exp</span> 1.female#c.tenure </span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ ( 1)  1.female#c.educ = 0
+
+------------------------------------------------------------------------------
+      lnwage | Coefficient  Std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         (1) |   .0354668   .0104804     3.38   0.001     .0146424    .0562911
+------------------------------------------------------------------------------
+
+ ( 1)  1.female#c.educ = 0
+ ( 2)  1.female#c.exper = 0
+ ( 3)  1.female#c.tenure = 0
+
+       F(  3,    89) =    6.49
+            Prob &gt; F =    0.0005</code></pre>
+</div>
+</div>
+</section>
+<section id="using-suest-and-correlated-random-effects-model-cre" class="level2">
+<h2 class="anchored" data-anchor-id="using-suest-and-correlated-random-effects-model-cre">Using <code>suest</code> and correlated random effects model <code>cre</code></h2>
+<p>Now we use Correlated Random Effects model to estimate the FE models:</p>
+<div class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">qui</span>:cre, <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">keep</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">prefix</span>(<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">ml</span>) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">abs</span>(age):<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">reg</span> lnwage educ exper tenure <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> female==0</span>
+<span id="cb10-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">est</span> sto male</span>
+<span id="cb10-3"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">qui</span>:cre, <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">keep</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">prefix</span>(m2) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">abs</span>(age):<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">reg</span> lnwage educ exper tenure <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> female==1</span>
+<span id="cb10-4"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">est</span> sto female</span>
+<span id="cb10-5"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">qui</span>:<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">suest</span> male female, <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">cluster</span>(age)</span>
+<span id="cb10-6"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">lincom</span> [male_mean]:educ-[female_mean]:educ</span>
+<span id="cb10-7"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">test</span> [male_mean=female_mean]:educ exper tenure</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ ( 1)  [male_mean]educ - [female_mean]educ = 0
+
+------------------------------------------------------------------------------
+             | Coefficient  Std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         (1) |  -.0354668   .0095251    -3.72   0.000    -.0541357   -.0167978
+------------------------------------------------------------------------------
+
+ ( 1)  [male_mean]educ - [female_mean]educ = 0
+ ( 2)  [male_mean]exper - [female_mean]exper = 0
+ ( 3)  [male_mean]tenure - [female_mean]tenure = 0
+
+           chi2(  3) =   30.72
+         Prob &gt; chi2 =    0.0000</code></pre>
+</div>
+</div>
+<p>Which gives me exactly the same result!</p>
+</section>
+<section id="hard-example" class="level2">
+<h2 class="anchored" data-anchor-id="hard-example">Hard Example:</h2>
+<p>Lets do this with a harder example, using <code>nlswork</code> dataset, comparing of a wage regression coefficients between north and south:</p>
+<div class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">webuse</span> nlswork, <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">clear</span></span>
+<span id="cb12-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">egen</span> cl = <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">group</span>(idcode south)</span>
+<span id="cb12-3"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">qui</span>: reghdfe ln_wage i.south##c.(age msp  not_smsa c_city <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">union</span> tenure hours) , <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">abs</span>(idcode#south) <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">cluster</span>(cl)</span>
+<span id="cb12-4"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">test</span> 1.south#c.age 1.south#c.msp 1.south#c.<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">union</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(National Longitudinal Survey of Young Women, 14-24 years old in 1968)
+(8 missing values generated)
+
+ ( 1)  1.south#c.age = 0
+ ( 2)  1.south#c.msp = 0
+ ( 3)  1.south#c.union = 0
+
+       F(  3,  3586) =    1.24
+            Prob &gt; F =    0.2941</code></pre>
+</div>
+</div>
+<p>But also using CRE:</p>
+<div class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">webuse</span> nlswork, <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">clear</span></span>
+<span id="cb14-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">qui</span>:cre, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">abs</span>(idcode) <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">keep</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">prefix</span>(m1): <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">regress</span> ln_wage age msp not_smsa c_city <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">union</span> tenure hours <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> south==0  </span>
+<span id="cb14-3"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">est</span> sto north</span>
+<span id="cb14-4"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">qui</span>:cre, <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">abs</span>(idcode) <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">keep</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">prefix</span>(m2): <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">regress</span> ln_wage age msp not_smsa c_city <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">union</span> tenure hours <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> south==1  </span>
+<span id="cb14-5"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">est</span> sto south</span>
+<span id="cb14-6"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">qui</span>:<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">suest</span> north south</span>
+<span id="cb14-7"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">test</span> [north_mean=south_mean]: age msp <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">union</span></span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(National Longitudinal Survey of Young Women, 14-24 years old in 1968)
+
+ ( 1)  [north_mean]age - [south_mean]age = 0
+ ( 2)  [north_mean]msp - [south_mean]msp = 0
+ ( 3)  [north_mean]union - [south_mean]union = 0
+
+           chi2(  3) =    3.82
+         Prob &gt; chi2 =    0.2821</code></pre>
+</div>
+</div>
+</section>
+<section id="conclusions" class="level2">
+<h2 class="anchored" data-anchor-id="conclusions">Conclusions</h2>
+<p>There you have it. Two ways to compare coefficients across two models using interactions or <code>suest</code>.</p>
+<p>Both provide the same results, if you cluster variables with the absorbed variable.</p>
+<p>Hope you find it useful</p>
+
+
+<!-- -->
+
+</section>
+
+ ]]></description>
+  <category>Stata</category>
+  <category>Programming</category>
+  <category>Fixed Effects</category>
+  <guid>https://friosavila.github.io/chatgpt/suregfe_07_14_2023/index.html</guid>
+  <pubDate>Fri, 14 Jul 2023 04:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Renaming variables in Bulk</title>
   <dc:creator>Fernando Rios-Avila and Fahad Mirza</dc:creator>
