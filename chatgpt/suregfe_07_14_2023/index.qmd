@@ -8,7 +8,6 @@ categories:
     - Programming
     - Fixed Effects
 draft: false
-highlight-style: github
 code-fold: false
 execute: 
   echo: true  
