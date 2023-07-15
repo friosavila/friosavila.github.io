@@ -77,6 +77,7 @@ format:
     code-overflow: scroll
     code-fold: true
     code-tools: true
+    highlight-style: github
     grid:
       sidebar-width: 300px
       body-width: 950px
