@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.4.251">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -101,6 +101,11 @@ div.csl-indent {
   "panel-placement": "end",
   "type": "overlay",
   "limit": 20,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -138,7 +143,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Playing With Stata</span>
     </a>
@@ -182,14 +187,14 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
  <span class="menu-text">about</span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools">
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
   </div>
 </a>
 </div>
-          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
   <nav class="quarto-secondary-nav">
@@ -197,9 +202,9 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../app_metrics/app_metrics1.html">App Metrics</a></li><li class="breadcrumb-item"><a href="../app_metrics/app_metrics8.html">DID: Panel Data &amp; Repeated Crossection</a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../app_metrics/app_metrics1.html">App Metrics</a></li><li class="breadcrumb-item"><a href="../app_metrics/app_metrics8.html">DID: Panel Data &amp; Repeated Crossection</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
     </div>
   </nav>
 </header>
@@ -311,7 +316,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../app_metrics/app_metrics1.html">App Metrics</a></li><li class="breadcrumb-item"><a href="../app_metrics/app_metrics8.html">DID: Panel Data &amp; Repeated Crossection</a></li></ol></nav>
 <div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">DID: Panel Data &amp; Repeated Crossection</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
 <p class="subtitle lead">Using <code>CSDID</code> and <code>JWDID</code></p>
@@ -326,6 +331,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
     
   </div>
   
+
 
 </header>
 
@@ -343,12 +349,12 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 y = \delta_0 + \delta_1 post+ \delta_2 treat + \gamma \ (post\times treat) + e_{it}
 \]</span></p>
 <p>Where <span class="math inline">\(\delta_i\)</span> was the equivalent to <span class="math inline">\(\delta_1\)</span>, and <span class="math inline">\(\delta_2\)</span> the equivalent for <span class="math inline">\(\delta_t\)</span>.</p>
-<p>What many didn’t know at the time is that <a href="#eq-1">Equation&nbsp;1</a> would provide correct identification of the Average treatment effect <span class="math inline">\(\gamma\)</span>, under strict assumptions:</p>
+<p>What many didn’t know at the time is that <a href="#eq-1" class="quarto-xref">Equation&nbsp;1</a> would provide correct identification of the Average treatment effect <span class="math inline">\(\gamma\)</span>, under strict assumptions:</p>
 <ul>
 <li>There is no treatment timing heterogeneity (All units are treated at the same time)</li>
 <li>If there is timing heterogeneity, the treatment effect is homogenous across time and across groups. (<span class="math inline">\(\gamma\)</span> is the same across time or across groups)</li>
 </ul>
-<p>This assumptions almost never hold. For example, the original treatment may become less effective few periods after they are implemented, and units treated later may experience stronger treatment effects than those treated earlier. When this happen, <a href="#eq-1">Equation&nbsp;1</a> will provide incorrect results for three related reasons:</p>
+<p>This assumptions almost never hold. For example, the original treatment may become less effective few periods after they are implemented, and units treated later may experience stronger treatment effects than those treated earlier. When this happen, <a href="#eq-1" class="quarto-xref">Equation&nbsp;1</a> will provide incorrect results for three related reasons:</p>
 <ol type="1">
 <li>Linear regressions do not discriminate between good or bad controls when identifying coefficients. They simply exploit all possible varation in the data.</li>
 <li>Already treated units would be implicitly used as “control units”, when analyzing units treated at a later point in time.</li>
@@ -391,7 +397,7 @@ y = \delta_0 + \delta_1 post+ \delta_2 treat + \gamma \ (post\times treat) + e_{
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> trt = (first_treat&lt;=<span class="fu">year</span>)*(first_treat&gt;0)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>This is what <a href="#eq-1">Equation&nbsp;1</a> is using. So how do I create the “<em>treatment cohort</em>” variable?. That can be easily done using one of <code>csdid</code> subprograms. You just need to provide the group or panel identifier, and the time variable:</p>
+<p>This is what <a href="#eq-1" class="quarto-xref">Equation&nbsp;1</a> is using. So how do I create the “<em>treatment cohort</em>” variable?. That can be easily done using one of <code>csdid</code> subprograms. You just need to provide the group or panel identifier, and the time variable:</p>
 <div class="cell" data-execution_count="4">
 <details>
 <summary>Code</summary>
@@ -1186,7 +1192,7 @@ Sun, Liyang, and Sarah Abraham. 2021. <span>“Estimating Dynamic Treatment Effe
 <div id="ref-wooldridge_twoway_2021" class="csl-entry" role="listitem">
 Wooldridge, Jeffrey M. 2021. <span>“Two-<span>Way</span> <span>Fixed</span> <span>Effects</span>, the <span>Two</span>-<span>Way</span> <span>Mundlak</span> <span>Regression</span>, and <span>Difference</span>-in-<span>Differences</span> <span>Estimators</span>.”</span> {SSRN} {Scholarly} {Paper}. Rochester, NY. <a href="https://doi.org/10.2139/ssrn.3906345">https://doi.org/10.2139/ssrn.3906345</a>.
 </div>
-</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+</div></section><aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
 <li id="fn1"><p>I will not provide details of the model specification in this post, but leave it for some future page on this site.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
@@ -1194,7 +1200,7 @@ Wooldridge, Jeffrey M. 2021. <span>“Two-<span>Way</span> <span>Fixed</span> <s
 <li id="fn3"><p>also available <code>group</code> and <code>calendar</code><a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn4"><p>In my repository, the newer version of <code>jwdid</code> does this automatically if <code>ivar()</code> is not provided.<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
-</section></div></main> <!-- /main -->
+</aside></div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -1325,10 +1331,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   if (showAllCode) {
     showAllCode.addEventListener("click", toggleCodeHandler(true));
   }
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1338,8 +1343,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1352,6 +1366,81 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        for (let i = 0; i < 2; i++) {
+          container.appendChild(note.children[i].cloneNode(true));
+        }
+        return container.innerHTML
+      } else {
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1395,6 +1484,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1759,6 +1849,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
+
 
 
 

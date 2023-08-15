@@ -9,8 +9,700 @@
 <link>https://friosavila.github.io/chatgpt.html</link>
 <atom:link href="https://friosavila.github.io/chatgpt.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.3.433</generator>
-<lastBuildDate>Fri, 14 Jul 2023 04:00:00 GMT</lastBuildDate>
+<generator>quarto-1.4.251</generator>
+<lastBuildDate>Tue, 15 Aug 2023 04:00:00 GMT</lastBuildDate>
+<item>
+  <title>Weak IV: And the problem of Inference</title>
+  <dc:creator>Fernando Rios-Avila</dc:creator>
+  <link>https://friosavila.github.io/chatgpt/weakiv_08_15_2023/index.html</link>
+  <description><![CDATA[ 
+
+
+
+
+<section id="f-geq-10-rightarrow-strong-instrument-or-is-it" class="level2">
+<h2 class="anchored" data-anchor-id="f-geq-10-rightarrow-strong-instrument-or-is-it"><img src="https://latex.codecogs.com/png.latex?F%20%5Cgeq%2010%20%5Crightarrow"> Strong instrument! (or is it?)</h2>
+<p>If you are “old-school” like me, and you are using instrumental variables, you probably are still relying on the rule thumb of using and <img src="https://latex.codecogs.com/png.latex?F%20%5Cgeq%2010"> to Judge if an instrument is strong enough to proceed and do statistical inference.</p>
+<p>This “critical” value was constructed based on the research by <span class="citation" data-cites="Staiger_stock_1997">Staiger and Stock (1997)</span> and <span class="citation" data-cites="stock_yogo2005">Stock and Yogo (2005)</span>, and is still included in introductory econometric textbooks, and thought in econometric courses. This are said to be valid in cases where there is no heteroskedasticity in the model.</p>
+<p>As described in Wooldridge’s <strong><em>“Introductory Econometrics: A Modern Approach” 7e</em></strong>, if models are heteroskedastic, it makes sense that more strict requirements are needed to indicate one has a strong Instrument. Specifically, he cites work by <span class="citation" data-cites="olea_pflueger2013">Olea and Pflueger (2013)</span> who suggest that one might need an <img src="https://latex.codecogs.com/png.latex?F%5Cgeq%2020"> to ensure instruments are sufficiently strong.</p>
+<p>In <span class="citation" data-cites="lee2022">Lee et al. (2022)</span>, however, the bar to judge an instrument strong has been raised even higher. What they suggest is that one must consider the joint distribution of the first stage “F-stat” statistic and second stage “t-stat”, to make any inference judgements. Specifically, the authors indicate that, in order to use “standard” critical values to judge significance in second stage models (say the 1.96 for and <img src="https://latex.codecogs.com/png.latex?%5Calpha=5%5C%25">), one should have an F-statistic of at least 104.7!. Alternatively, if we keep using an <img src="https://latex.codecogs.com/png.latex?F=10">, the t-stat critical value should be at least 3.43.</p>
+</section>
+<section id="how-bad-is-the-problem" class="level2">
+<h2 class="anchored" data-anchor-id="how-bad-is-the-problem">How bad is the problem?</h2>
+<p>While I was perplex at first regarding the “new” requirements for a high “F-stat”, I also understood that this problem was important. Because of this, I decided to do a small simulation study to see how bad the problem was in terms of inference, using different levels of Instruments strength. Let me show you how I did this, and what it tells me in regards to previous beliefs about the <img src="https://latex.codecogs.com/png.latex?F%5Cgeq%2010"> rule.</p>
+<p>Bottom line, in my design, an <img src="https://latex.codecogs.com/png.latex?E(F)=10"> is not enough to judge an instrument to be strong enough to guarantee the distribution of the coefficient of interest follows a normal distribution. And, if the distribution of such coefficient is not normal, then standard “t-statistics” may be inappropiate when making statistical inference.</p>
+</section>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<p>For this simulation, I will use a very simple structure that considers a single endogenous variable and a single instrument, without any other controls.</p>
+<ul>
+<li>First, The common Error: To simulate endogeneity, I will assume there is a common unobserved factor <img src="https://latex.codecogs.com/png.latex?e"> that affects the endogenous variable <img src="https://latex.codecogs.com/png.latex?x"> and outcome <img src="https://latex.codecogs.com/png.latex?y">. This unobserved error is assumed to follow a standardized normal distribution.</li>
+</ul>
+<p><img src="https://latex.codecogs.com/png.latex?e%5Csim%20N(0,1)"></p>
+<ul>
+<li>The instrument: The instrument will be a completely independent variable that also follows a standardized normal distribution.</li>
+</ul>
+<p><img src="https://latex.codecogs.com/png.latex?z%5Csim%20N(0,1)"></p>
+<ul>
+<li>The endogenous variable: This variable will be created by adding the endogenous common error <img src="https://latex.codecogs.com/png.latex?e">, the instrument <img src="https://latex.codecogs.com/png.latex?z"> and a random error <img src="https://latex.codecogs.com/png.latex?u_x">. To control the strength of the instrument, the endogenous variable <img src="https://latex.codecogs.com/png.latex?x"> is defined as:</li>
+</ul>
+<p><img src="https://latex.codecogs.com/png.latex?x=1%20+%20z%20+%20(e+u_x)*%5Csqrt%7B2%5Cfrac%7BN%7D%7BF%7D%7D"></p>
+<p>where <img src="https://latex.codecogs.com/png.latex?N"> is the number of observations, and <img src="https://latex.codecogs.com/png.latex?F"> is the Expected Strength of the instrument.</p>
+<ul>
+<li>The dependent variable: It will combine the common error and a random standardize normal distributed error, and assume <img src="https://latex.codecogs.com/png.latex?x"> has no explanatory power. The common error <img src="https://latex.codecogs.com/png.latex?e"> and the standardized normal distributed error <img src="https://latex.codecogs.com/png.latex?u_y"> are scaled so the combined error has a variance of 1.</li>
+</ul>
+<p><img src="https://latex.codecogs.com/png.latex?y%20=%201%20+%20(e%20+%20u_y)*%5Csqrt%7B2%7D"></p>
+<p>The simulation is run 100’000 times, with a sample of 500 observations each, using various levels of “F-statistics”: 5, 10, 20, 40, 80 and 160. To speed up the simulation excercise, I use <code>parallel</code>, a community-contributed command written <span class="citation" data-cites="VegaYon2019">Vega Yon and Quistorff (2019)</span>. You can find the latest version of it on their <a href="https://github.com/gvegayon/parallel">github</a>.</p>
+<p>The code for the simulation program is as follows:</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">program</span> simx, <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">eclass</span></span>
+<span id="cb1-2">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">clear</span></span>
+<span id="cb1-3">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">local</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">N</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`1'</span></span>
+<span id="cb1-4">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">local</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">F</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`2'</span></span>
+<span id="cb1-5">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">local</span> sig = <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sqrt</span>(<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`N'</span>/ <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`F'</span>)</span>
+<span id="cb1-6">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">set</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">obs</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`N'</span></span>
+<span id="cb1-7">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">gen</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">e</span> = rnormal()</span>
+<span id="cb1-8">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">gen</span> z = rnormal() </span>
+<span id="cb1-9">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">gen</span> x = 1 + z + (<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">e</span>+rnormal())*<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sqrt</span>(.5)*<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`sig'</span></span>
+<span id="cb1-10">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">gen</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">y</span> = 1 + ( <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">e</span> + rnormal())*<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sqrt</span>(.5)</span>
+<span id="cb1-11">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">reg</span> x z, </span>
+<span id="cb1-12">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">matrix</span> b=(_b[z]/_se[z])^2</span>
+<span id="cb1-13">    ivregress 2sls  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">y</span> (x=z), </span>
+<span id="cb1-14">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">matrix</span> b=b,_b[x],_b[x]/_se[x]</span>
+<span id="cb1-15">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">ereturn</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">post</span> b</span>
+<span id="cb1-16"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">end</span></span></code></pre></div>
+<p>and the simulation itself can be run using:</p>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb2-1">net install parallel, from(https:<span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">//raw.github.com/gvegayon/parallel/stable/) replace</span></span>
+<span id="cb2-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">mata</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">mata</span> mlib <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">index</span></span>
+<span id="cb2-3">** Initializes number <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">of</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Stata"</span> instances</span>
+<span id="cb2-4">parallel initialize 17</span>
+<span id="cb2-5">** Some tempfiles to <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">store</span> the simulations</span>
+<span id="cb2-6"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">tempfile</span> f0 f1 f2 f3 f4 f5</span>
+<span id="cb2-7">** A loop <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">for</span> the simulations</span>
+<span id="cb2-8"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">forvalues</span> i = 0/5 {</span>
+<span id="cb2-9">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">local</span> j = 5*2^<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`i'</span></span>
+<span id="cb2-10">    parallel sim, reps(100000): simx 500 <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`j'</span></span>
+<span id="cb2-11">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">gen</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">F</span>=<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`j'</span></span>
+<span id="cb2-12">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">save</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`f`i'</span>'</span>
+<span id="cb2-13">}</span>
+<span id="cb2-14"> </span>
+<span id="cb2-15">** Append and <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">rename</span></span>
+<span id="cb2-16"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">clear</span> </span>
+<span id="cb2-17"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">append</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">using</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`f0'</span></span>
+<span id="cb2-18"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">append</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">using</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`f1'</span></span>
+<span id="cb2-19"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">append</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">using</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`f2'</span></span>
+<span id="cb2-20"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">append</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">using</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`f3'</span></span>
+<span id="cb2-21"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">append</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">using</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`f4'</span></span>
+<span id="cb2-22"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">append</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">using</span> <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`f5'</span></span>
+<span id="cb2-23"></span>
+<span id="cb2-24"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">ren</span> (_b_c1 _b_c2 _b_c3 <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">F</span>) (f_stat b_coef t_stat FF)</span></code></pre></div>
+<p>If you are interested in the data, it can be downloaded from <a href="weakiv.dta">here</a>. It is a <code>Stata</code> file with 4 variables and 60k observations.</p>
+</section>
+<section id="results" class="level2">
+<h2 class="anchored" data-anchor-id="results">Results</h2>
+<p>First, to make sure data was created correctly, we can do a quick summary statistics of the F-statistic of the first stage regression.</p>
+<div id="84bcbfc7" class="cell" data-execution_count="1">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">use</span> weakiv, <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">clear</span></span>
+<span id="cb3-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">tabstat</span> f_stat , <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">by</span>(FF) <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">stats</span>(<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">mean</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">median</span>)</span></code></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<style>div.jp-Notebook .datagrid-container {min-height: 448px; }</style>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Summary for variables: f_stat
+Group variable: FF 
+
+      FF |      Mean       p50
+---------+--------------------
+       5 |  6.012032  4.989151
+      10 |  11.03701  10.01228
+      20 |   21.0688  19.97883
+      40 |  41.13833  39.95357
+      80 |  81.26734  79.84747
+     160 |  161.4196  159.6645
+---------+--------------------
+   Total |  53.65718  29.36334
+------------------------------</code></pre>
+</div>
+</div>
+<p>The mean is a bit higher than the intended F-Statistic, whereas the median is closer. Both statistics suggesting simulations were created as intended.</p>
+<div id="dcc70c98" class="cell" data-execution_count="2">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">set</span> <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">scheme</span> white2</span>
+<span id="cb5-2">color_style tableau</span>
+<span id="cb5-3">joy_plot f_stat, <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">by</span>(FF) gap0 <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">color</span>(%50) alegend <span class="bn" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">xtitle</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"F-stat"</span>) <span class="bn" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">xline</span>(10 20 100)</span></code></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://friosavila.github.io/chatgpt/weakiv_08_15_2023/index_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">F-Statistics Distribution</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>We can also see the distribution of the F-statistics across all simulations.</p>
+<p>What about the endogenous variable coefficient?</p>
+<p>While we could examine the coefficient themselves, I find it more useful to examine the distribution of the t-statistics in the second Stage.</p>
+<div id="1e7ecc3f" class="cell" data-execution_count="3">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">two</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">kdensity</span> t_stat || <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">y</span> = <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">normalden</span>(x) , <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">range</span>(-3 3) , <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">by</span>(FF, <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">note</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">""</span>)) <span class="bn" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">legend</span>(<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">order</span>(1 <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"T-stat distribution"</span> 2 <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Normal"</span>) <span class="bn" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">cols</span>(2)) <span class="bn" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">xline</span>(-1.96 1.96)</span>
+<span id="cb6-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">graph</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">export</span> fig1.png, <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">replace</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">width</span>(1000) </span>
+<span id="cb6-3"></span>
+<span id="cb6-4"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">two</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">kdensity</span> t_stat <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> f_stat&gt;10 || <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">function</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">y</span> = <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">normalden</span>(x) , <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">range</span>(-3 3) , <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">by</span>(FF, <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">note</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">""</span>)) <span class="bn" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">legend</span>(<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">order</span>(1 <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"T-stat distribution"</span> 2 <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Normal"</span>) <span class="bn" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">cols</span>(2)) <span class="bn" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">xline</span>(-1.96 1.96)</span>
+<span id="cb6-5"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">graph</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">export</span> fig2.png, <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">replace</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">width</span>(1000) </span></code></pre></div>
+</details>
+</div>
+<div id="fig-fig1" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="https://friosavila.github.io/chatgpt/weakiv_08_15_2023/fig1.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;1: T-Stat distribution by E(F)</figcaption>
+</figure>
+</div>
+<p>What we see from Figure&nbsp;1 is that the distribution of the t-statistic is not consistent with a normal distribution. For and <img src="https://latex.codecogs.com/png.latex?F%5Cleq%2040">, there is a clear discrepancy between the normal distribution (orange) and the empirical t-stat distribution (blue). As consequence, when coefficients are possitive, it is more likely to reject the null hypothesis, but also under-reject when the coefficients are negative.</p>
+<p>Once we reach an F-statistic of at least 80 and 160, the difference between the normal distribution and the t-statistic empirical distribution dissapears. Lesson, if your F-stat is “low”, perhaps using standard distributions may be innapropriate.</p>
+<p>One problem with the results in Figure&nbsp;1 was that when <img src="https://latex.codecogs.com/png.latex?E(F)"> is low, there are many instances where the F-distribution is less than 10. One may say that is the reason why the distribution is skew in Figure&nbsp;1. A simple way to avoid this is by ploting the same information, but restricting F-statistics to be larger than 10.</p>
+<div id="fig-fig2" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="https://friosavila.github.io/chatgpt/weakiv_08_15_2023/fig2.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;2: T-Stat distribution by E(F) if F&gt;10</figcaption>
+</figure>
+</div>
+<p>Unfortunately, the situation is much worse. By constraining the F-statistic to be larger than 10, we are doing the equivalent of p-hacking (F hacking?), which further distorts the distribution of the endogenous variable. While it looks a bit more normal (distributed), we can see now that it over rejects the null hypothesis, if the true F-statistic was, in fact, lower. You can call this evidence of biased estimations.</p>
+</section>
+<section id="conclusions" class="level2">
+<h2 class="anchored" data-anchor-id="conclusions">Conclusions</h2>
+<p>This note was prepared with the intention of showing in class the consequences of weak IV’s. While I knew that this was an important problem, it was not completely clear what would the consequences in terms of distribution of the coefficient of interest would be.</p>
+<p>Although this simulation is rather limited, it clearly shows problems of using weak instrumental variables (even when using the well known “rule of 10”). When the instrument is weak, even if its completely exogenous, the distribution of the endogenous variable coefficient will not be normal. Thus, further steps may be needed for constructing appropriate Confidence intervals.</p>
+<p>Is everything lost? Perhaps not. In <code>Stata</code>, there is the community-contributed command <code>weakiv</code> (ssc install weakiv). This command construct alternative CI that take into account the presence of weak instrumental variables reporting adjusted CI. They seem to be closer to what I expect, based on this simulations.</p>
+</section>
+<section id="extra" class="level2">
+<h2 class="anchored" data-anchor-id="extra">Extra</h2>
+<p>Ok, so while you do simulations like this, sometimes, you find very interesting results. Some worth exploring.</p>
+<p>What did I see (you may ask)? First, let me concentrate only on the cases with “stronger” IVs. In particular those with an <img src="https://latex.codecogs.com/png.latex?E(F)%5Cleq%2080">. None of the F-statistics is less than 10 across all simulations in this case.</p>
+<p>Second, because the F-Statistics have different ranges, I will standardize them across groups. This will make it easier to compare scatter plots.</p>
+<div id="e70552a5" class="cell" data-execution_count="4">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb7-1">** Keeping only FF&gt;=80</span>
+<span id="cb7-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">qui</span> {</span>
+<span id="cb7-3">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">keep</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> FF&gt;=80</span>
+<span id="cb7-4">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">gen</span> f_stat2=.</span>
+<span id="cb7-5">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">foreach</span> i <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">in</span> 80 160 {</span>
+<span id="cb7-6">        <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">sum</span> f_stat <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> FF==<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`i'</span></span>
+<span id="cb7-7">        <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">replace</span> f_stat2 = (f_stat-FF)/<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">r</span>(<span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">sd</span>) <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> FF==<span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">`i'</span></span>
+<span id="cb7-8">    }</span>
+<span id="cb7-9">}</span>
+<span id="cb7-10"></span>
+<span id="cb7-11"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">two</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">scatter</span> t_stat  f_stat2 , <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">by</span>(FF , col(3) <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">note</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">""</span>)) <span class="bn" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">ysize</span>(5) <span class="bn" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">xsize</span>(10) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">///</span></span>
+<span id="cb7-12">    <span class="bn" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">ytitle</span>(T-stat) <span class="bn" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">xtitle</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Standardized F-Stat"</span>)</span>
+<span id="cb7-13"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">graph</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">export</span> fig3.png, <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">replace</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">width</span>(1000)</span></code></pre></div>
+</details>
+</div>
+<div id="fig-fig3" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="https://friosavila.github.io/chatgpt/weakiv_08_15_2023/fig3.png" class="img-fluid figure-img" style="width:80.0%"></p>
+<figcaption class="figure-caption">Figure&nbsp;3: T-Stat vs SF-Stat</figcaption>
+</figure>
+</div>
+<p>What I see in Figure&nbsp;3 is that higher F-Stats in the first Stage seem to increase the likelihood of the t-value to be positive and significant. Whereas lower F-stats are associated with the opposite (but to a lesser extent possibly due to simulation design).</p>
+<div id="ae0c9901" class="cell" data-execution_count="5">
+<details>
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">two</span> (<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">kdensity</span> t_stat <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">inrange</span>(f_stat2,-.65,.7)) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">///</span></span>
+<span id="cb8-2">    (<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">kdensity</span> t_stat <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> f_stat2&lt;-.65) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">///</span></span>
+<span id="cb8-3">    (<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">kdensity</span> t_stat <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> f_stat2&gt;.7) , <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">///</span></span>
+<span id="cb8-4">    <span class="bn" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">legend</span>(<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">order</span>(1 <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"sF-Stat near 0"</span> 2 <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"sF-Stat&lt;25thp"</span> 3 <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Sf-Stat&gt;75thp"</span>)) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">///</span></span>
+<span id="cb8-5">    <span class="bn" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">xtitle</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"t-Statistic Distribution"</span>) <span class="bn" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">ytitle</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Density"</span>)</span>
+<span id="cb8-6"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">graph</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">export</span> fig4.png, <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">replace</span>  <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">width</span>(1000) </span>
+<span id="cb8-7"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">two</span> (<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">kdensity</span> b_coef <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">inrange</span>(f_stat2,-.65,.7)) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">///</span></span>
+<span id="cb8-8">    (<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">kdensity</span> b_coef <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> f_stat2&lt;-.65) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">///</span></span>
+<span id="cb8-9">    (<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">kdensity</span> b_coef <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">if</span> f_stat2&gt;.7) , <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">///</span></span>
+<span id="cb8-10">    <span class="bn" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">legend</span>(<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">order</span>(1 <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"sF-Stat near 0"</span> 2 <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"sF-Stat&lt;25thp"</span> 3 <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Sf-Stat&gt;75thp"</span>)) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">///</span></span>
+<span id="cb8-11">    <span class="bn" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">xtitle</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Coefficient Distribution"</span>) <span class="bn" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">ytitle</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Density"</span>)</span>
+<span id="cb8-12"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">graph</span> <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">export</span> fig5.png, <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">replace</span>  <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">width</span>(1000)    </span></code></pre></div>
+</details>
+</div>
+<div id="fig-fig4" class="quarto-layout-panel">
+<figure class="figure">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-fig4a" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="https://friosavila.github.io/chatgpt/weakiv_08_15_2023/fig4.png" class="img-fluid figure-img" data-ref-parent="fig-fig4"></p>
+<figcaption class="figure-caption">(a) t-Stat Distribution</figcaption>
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-fig4b" class="quarto-figure quarto-figure-center anchored">
+<figure class="figure">
+<p><img src="https://friosavila.github.io/chatgpt/weakiv_08_15_2023/fig5.png" class="img-fluid figure-img" data-ref-parent="fig-fig4"></p>
+<figcaption class="figure-caption">(b) Coefficient Distribution</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p></p><figcaption class="figure-caption">Figure&nbsp;4: Distribution based on Standardized F-Statistic</figcaption><p></p>
+</figure>
+</div>
+<p>Figure&nbsp;4 shows the distribution of both the t-statistic and the coefficient of the endogenous variables for three groups. Observations where the F-statistic is between the 25th and 75th percentile of the distribution (Thus close to the E(F)), and observations for the top (above 75th percentile) and bottom (below 25th percentile) of the distribution. This is similar to the previous conjecture. Even if the instrument is “strong”, if the sample F-statistic is too high or low compared to the E(F), inference may be biased.</p>
+<p>This is just conjecture, however, it may be the case that IV’s are more difficult to trust that I previously expected. If your first stage has a high F-Statistic, it may be worth asking:</p>
+<blockquote class="blockquote">
+<p>is this F-statistic larger than expected?</p>
+</blockquote>
+<p>If the answer is yes, then you are likely to be over (or under) stating your coefficients.</p>
+<p>If the F-statistic is just as large as expected. Then we may be able to trust the estimated coefficients.</p>
+</section>
+<section id="references" class="level1">
+
+
+
+<!-- -->
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-lee2022" class="csl-entry">
+Lee, David S., Justin McCrary, Marcelo J. Moreira, and Jack Porter. 2022. <span>“Valid t-Ratio Inference for IV.”</span> <em>American Economic Review</em> 112 (10): 3260–90. <a href="https://doi.org/10.1257/aer.20211063">https://doi.org/10.1257/aer.20211063</a>.
+</div>
+<div id="ref-olea_pflueger2013" class="csl-entry">
+Olea, José Luis Montiel, and Carolin Pflueger. 2013. <span>“A Robust Test for Weak Instruments.”</span> <em>Journal of Business &amp; Economic Statistics</em> 31 (3): 358–69. <a href="https://doi.org/10.1080/00401706.2013.806694">https://doi.org/10.1080/00401706.2013.806694</a>.
+</div>
+<div id="ref-Staiger_stock_1997" class="csl-entry">
+Staiger, Douglas, and James H. Stock. 1997. <span>“Instrumental Variables Regression with Weak Instruments.”</span> <em>Econometrica</em> 65 (3): 557–86. <a href="http://www.jstor.org/stable/2171753">http://www.jstor.org/stable/2171753</a>.
+</div>
+<div id="ref-stock_yogo2005" class="csl-entry">
+Stock, James H, and Motohiro Yogo. 2005. <span>“Testing for Weak Instruments in Linear Iv Regression, in Dwk Andrews and Jh Stock, Eds., Identification and Inference for Econometric Models: Essays in Honor of Thomas j. Rothenberg. Cambridge: Cambridge University Press.”</span> Cambridge University Press, Cambridge, UK.
+</div>
+<div id="ref-VegaYon2019" class="csl-entry">
+Vega Yon, George G., and Brian Quistorff. 2019. <span>“Parallel: A Command for Parallel Computing.”</span> <em>The Stata Journal</em> 19 (3): 667–84. <a href="https://doi.org/10.1177/1536867X19874242">https://doi.org/10.1177/1536867X19874242</a>.
+</div>
+</div></section></div> ]]></description>
+  <category>Stata</category>
+  <category>Programming</category>
+  <category>Econometrics</category>
+  <category>Weak IV</category>
+  <guid>https://friosavila.github.io/chatgpt/weakiv_08_15_2023/index.html</guid>
+  <pubDate>Tue, 15 Aug 2023 04:00:00 GMT</pubDate>
+</item>
 <item>
   <title>How to suest a HDFE</title>
   <dc:creator>Fernando Rios-Avila</dc:creator>
@@ -2925,12 +3617,12 @@ font-style: inherit;">length</span>      turn        gear_ratio  foreign</span><
 </section>
 
 
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+<div id="quarto-appendix" class="default"><aside id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
 <li id="fn1"><p>To see where your personal ado folder is, just type <code>sysdir</code>. ↩︎</p></li>
 </ol>
-</section></div> ]]></description>
+</aside></div> ]]></description>
   <category>Stata</category>
   <category>Programming</category>
   <guid>https://friosavila.github.io/chatgpt/drop_03_25_2023/index.html</guid>

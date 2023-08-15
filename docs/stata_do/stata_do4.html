@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.433">
+<meta name="generator" content="quarto-1.4.251">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -101,6 +101,11 @@ div.csl-indent {
   "panel-placement": "end",
   "type": "overlay",
   "limit": 20,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -138,7 +143,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">Playing With Stata</span>
     </a>
@@ -182,14 +187,14 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
  <span class="menu-text">about</span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools">
+          </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
   </div>
 </a>
 </div>
-          </div> <!-- /navcollapse -->
       </div> <!-- /container-fluid -->
     </nav>
   <nav class="quarto-secondary-nav">
@@ -197,9 +202,9 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../stata_do/stata_do1.html">Stata Do</a></li><li class="breadcrumb-item"><a href="../stata_do/stata_do4.html">The IV-Probit: <code>margins</code> and <code>ml</code></a></li></ol></nav>
-      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-      </a>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../stata_do/stata_do1.html">Stata Do</a></li><li class="breadcrumb-item"><a href="../stata_do/stata_do4.html">The IV-Probit: <code>margins</code> and <code>ml</code></a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
     </div>
   </nav>
 </header>
@@ -302,7 +307,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../stata_do/stata_do1.html">Stata Do</a></li><li class="breadcrumb-item"><a href="../stata_do/stata_do4.html">The IV-Probit: <code>margins</code> and <code>ml</code></a></li></ol></nav>
 <div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">The IV-Probit: <code>margins</code> and <code>ml</code></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 <p class="subtitle lead">Story of marginal effects</p>
@@ -317,6 +322,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
     
   </div>
   
+
 
 </header>
 
@@ -372,8 +378,8 @@ y_1 = 1(y_1^*&gt;0)
 \begin{matrix} 1 &amp; \rho \sigma_2\\ \rho \sigma_2 &amp; \sigma^2_2 \end{matrix} \end{pmatrix}
 \]</span></p>
 <p>In this model <span class="math inline">\(z_1\)</span> and <span class="math inline">\(z_2\)</span> are exogenous variables, <span class="math inline">\(z_2\)</span> is a set of instruments, and <span class="math inline">\(y_2\)</span> is a continuous but endogenous variable in the model. Finally we do not observe the latent variable <span class="math inline">\(y_1^*\)</span>, but instead observe <span class="math inline">\(y_1\)</span> which only takes values of 0 or 1. So how do we estimate this model?? by parts!</p>
-<p>The <a href="#eq-q1">Equation&nbsp;1</a> can be estimated directly, because it is a function of exogenous variables only. Thus, we could estimate that equation using standard OLS (as ivprobit-two-step does), or via MLE assuming the normality of the errors.</p>
-<p>The one that requires more attention is <a href="#eq-q2">Equation&nbsp;2</a>. We know that <span class="math inline">\(corr(y_2,u_1)\)</span> is different from zero, which is the cause of the endogeneity of <span class="math inline">\(y_2\)</span>. We could, however, <strong>decompose</strong> <span class="math inline">\(u1\)</span> into two parts. One that contains the endogenous component, and one that is exogenous and uncorrelated with all other variables.</p>
+<p>The <a href="#eq-q1" class="quarto-xref">Equation&nbsp;1</a> can be estimated directly, because it is a function of exogenous variables only. Thus, we could estimate that equation using standard OLS (as ivprobit-two-step does), or via MLE assuming the normality of the errors.</p>
+<p>The one that requires more attention is <a href="#eq-q2" class="quarto-xref">Equation&nbsp;2</a>. We know that <span class="math inline">\(corr(y_2,u_1)\)</span> is different from zero, which is the cause of the endogeneity of <span class="math inline">\(y_2\)</span>. We could, however, <strong>decompose</strong> <span class="math inline">\(u1\)</span> into two parts. One that contains the endogenous component, and one that is exogenous and uncorrelated with all other variables.</p>
 <p>To do this, we should first recall that if <span class="math inline">\(u_1, u_2\)</span> follow a bivariate normal distribution, then, conditional on <span class="math inline">\(u_2\)</span>, <span class="math inline">\(u_1\)</span> will have the following distribution:</p>
 <p><span id="eq-q3s"><span class="math display">\[
 u_1 \sim N\left(\rho \frac{u_2}{\sigma_2}, {1-\rho^2} \right)
@@ -382,12 +388,12 @@ u_1 \sim N\left(\rho \frac{u_2}{\sigma_2}, {1-\rho^2} \right)
 <p><span id="eq-q3"><span class="math display">\[
 u_1 = \rho \frac{ u_2}{ \sigma_2} + v_1
 \tag{4}\]</span></span></p>
-<p>In this case, <span class="math inline">\(v_1\)</span> will be, by construction, uncorrelated with <span class="math inline">\(u_2\)</span> or with <span class="math inline">\(y_2\)</span>. So, we if substitute <a href="#eq-q3">Equation&nbsp;4</a> into <a href="#eq-q1">Equation&nbsp;1</a>, we obtain:</p>
+<p>In this case, <span class="math inline">\(v_1\)</span> will be, by construction, uncorrelated with <span class="math inline">\(u_2\)</span> or with <span class="math inline">\(y_2\)</span>. So, we if substitute <a href="#eq-q3" class="quarto-xref">Equation&nbsp;4</a> into <a href="#eq-q1" class="quarto-xref">Equation&nbsp;1</a>, we obtain:</p>
 <p><span id="eq-q4"><span class="math display">\[
 y_1^* = z_1 \beta_1 + y_2 \beta_2 + \rho \frac{ u_2}{ \sigma_2} + v_1
 \tag{5}\]</span></span></p>
 <p>This equation can now be estimated directly, assuming we observe <span class="math inline">\(u_2\)</span>. However, to be estimated with a probit model, we also need to rescale the equation so that the re-scaled error <span class="math inline">\(v_1\)</span> has a variance of 1.</p>
-<p>Based on <a href="#eq-q3s">Equation&nbsp;3</a>, we know <span class="math inline">\(v_1\)</span> has a variance of <span class="math inline">\(1-\rho^2\)</span>, so we just need to divide all terms in <a href="#eq-q4">Equation&nbsp;5</a> by <span class="math inline">\(\sqrt{1-\rho^2}\)</span> and estimating the following model (or its simplification) using standard probit model. <span id="eq-q5"><span class="math display">\[
+<p>Based on <a href="#eq-q3s" class="quarto-xref">Equation&nbsp;3</a>, we know <span class="math inline">\(v_1\)</span> has a variance of <span class="math inline">\(1-\rho^2\)</span>, so we just need to divide all terms in <a href="#eq-q4" class="quarto-xref">Equation&nbsp;5</a> by <span class="math inline">\(\sqrt{1-\rho^2}\)</span> and estimating the following model (or its simplification) using standard probit model. <span id="eq-q5"><span class="math display">\[
 \frac{y^*_1}{\sqrt{1-\rho^2}} =
     z_1 \frac{\beta_1}{\sqrt{1-\rho^2}} +
     y_2 \frac{\beta_2}{\sqrt{1-\rho^2}} +
@@ -402,14 +408,14 @@ y^{**}_1 = z_1 \beta^r_1 + y_2 \beta^r_2 +
 <section id="the-actual-estimation" class="level2">
 <h2 class="anchored" data-anchor-id="the-actual-estimation">The actual estimation</h2>
 <p>Let’s discuss the different methods that can be used to estimate the ivprobit model. There are at least three ways to do so.</p>
-<p>The first method is the two-step approach. In this method, one estimates <a href="#eq-q1">Equation&nbsp;1</a> using OLS, obtains the predicted residuals, which are plugged into equation <a href="#eq-q6">Equation&nbsp;7</a>. This can be estimated using a simple probit model.</p>
+<p>The first method is the two-step approach. In this method, one estimates <a href="#eq-q1" class="quarto-xref">Equation&nbsp;1</a> using OLS, obtains the predicted residuals, which are plugged into equation <a href="#eq-q6" class="quarto-xref">Equation&nbsp;7</a>. This can be estimated using a simple probit model.</p>
 <p>This method has two problems:</p>
 <ul>
 <li><p>It only provides estimates for the “rescaled” coefficients, not the structural coefficients.</p></li>
 <li><p>It will not provide you with the correct estimation of standard errors, because it will not consider the residuals are carrying over errors from the first step.</p></li>
 </ul>
-<p>Some textbooks suggest that doing so is a <strong>simple</strong> application of the <strong>delta method</strong>, or use <strong>bootstrap</strong>. But, the fact of the matter, is that you need to take into account that the residuals from <a href="#eq-q1">Equation&nbsp;1</a> are estimated not the true residuals <span class="math inline">\(u_2\)</span>.</p>
-<p>The second method is to estimate <a href="#eq-q1">Equation&nbsp;1</a> and <a href="#eq-q4">Equation&nbsp;5</a> simultaneously using full information maximum likelihood. This imposes the assumption that the errors follow a bivariate normal distribution, and allows you to obtain estimates for the structural parameters, in addition to the “link” parameters <span class="math inline">\(\sigma_2\)</span> and <span class="math inline">\(\rho\)</span>, providing correct standard errors.</p>
+<p>Some textbooks suggest that doing so is a <strong>simple</strong> application of the <strong>delta method</strong>, or use <strong>bootstrap</strong>. But, the fact of the matter, is that you need to take into account that the residuals from <a href="#eq-q1" class="quarto-xref">Equation&nbsp;1</a> are estimated not the true residuals <span class="math inline">\(u_2\)</span>.</p>
+<p>The second method is to estimate <a href="#eq-q1" class="quarto-xref">Equation&nbsp;1</a> and <a href="#eq-q4" class="quarto-xref">Equation&nbsp;5</a> simultaneously using full information maximum likelihood. This imposes the assumption that the errors follow a bivariate normal distribution, and allows you to obtain estimates for the structural parameters, in addition to the “link” parameters <span class="math inline">\(\sigma_2\)</span> and <span class="math inline">\(\rho\)</span>, providing correct standard errors.</p>
 <p>Under this strategy, the contribution of a single observation to the likelihood function becomes:</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -421,7 +427,7 @@ L^2_i &amp; = P(y_1|.)^{y_1} * (1-P(y_1|.))^{1-y_1}
 \end{aligned}
 \]</span></p>
 <p>Notice that instead of <strong><em>plugging in</em></strong> <span class="math inline">\(\hat u_2\)</span> in the probit equation, I explicitly add <span class="math inline">\(y_2 -z_1 \delta_1 - z_2 \delta_2\)</span>. This allows to explicilty account for the measurement errors of the first stage.</p>
-<p>There is a third option, which I will call <strong>two-step-mle</strong>. I call it this way, because the ivprobit will be estimated using <a href="#eq-q1">Equation&nbsp;1</a> and <a href="#eq-q6">Equation&nbsp;7</a>. However, I call it MLE, because both equations are estimated simultaneously using MLE:</p>
+<p>There is a third option, which I will call <strong>two-step-mle</strong>. I call it this way, because the ivprobit will be estimated using <a href="#eq-q1" class="quarto-xref">Equation&nbsp;1</a> and <a href="#eq-q6" class="quarto-xref">Equation&nbsp;7</a>. However, I call it MLE, because both equations are estimated simultaneously using MLE:</p>
 <p><span id="eq-q8"><span class="math display">\[
 \begin{aligned}
 L_i &amp;= L_i^1*L_i^2 \\
@@ -441,7 +447,7 @@ L^2_i &amp; = P(y_1|.)^{y_1} * (1-P(y_1|.))^{1-y_1}
 <section id="the-log-likelihood-function" class="level2">
 <h2 class="anchored" data-anchor-id="the-log-likelihood-function">The Log Likelihood function</h2>
 <p>While I have shown that using FIML and two-step-ml will provide the same results, I’ll stick with the two-step approach, as it allows me to derive marginal effects telling the story of what happened to -margins- through different Stata versions.</p>
-<p>The following program defines this the log-likelihood function for the IV probit, using the two-step approach (<a href="#eq-q8">Equation&nbsp;8</a>), using the following walk-through for the specification:</p>
+<p>The following program defines this the log-likelihood function for the IV probit, using the two-step approach (<a href="#eq-q8" class="quarto-xref">Equation&nbsp;8</a>), using the following walk-through for the specification:</p>
 <ul>
 <li><code>xb</code> will contain all the exogenous variables <span class="math inline">\(z_1\)</span> plus the endogenous variable <span class="math inline">\(y_2\)</span></li>
 <li><code>zb</code> will contain all the exogenous variables <span class="math inline">\(z_1\)</span> and the instruments <span class="math inline">\(z_2\)</span></li>
@@ -473,7 +479,7 @@ L^2_i &amp; = P(y_1|.)^{y_1} * (1-P(y_1|.))^{1-y_1}
 <h2 class="anchored" data-anchor-id="the-predict-program">The predict program</h2>
 <p>So finally, the part that will be a bit more controversial. The prediction of the probability of success!.</p>
 <p>The reason why this is controversial is because there are two candidates to identify this expression.</p>
-<p>The first candidate relates to the structural <a href="#eq-q2">Equation&nbsp;2</a>. Basically, if we can estimate the unscaled coefficients, the predicted outcome could be identified by:</p>
+<p>The first candidate relates to the structural <a href="#eq-q2" class="quarto-xref">Equation&nbsp;2</a>. Basically, if we can estimate the unscaled coefficients, the predicted outcome could be identified by:</p>
 <p><span class="math display">\[
 P(y_1=1| z_1 , y_2) = \Phi \left( z_1 \beta_1 + y_2 \beta_2  \right)
 \]</span></p>
@@ -481,7 +487,7 @@ P(y_1=1| z_1 , y_2) = \Phi \left( z_1 \beta_1 + y_2 \beta_2  \right)
 P(y_1=1| z_1 , y_2) = \Phi \left( z_1 \beta^r_1 * {\sqrt{1-\rho^2}} + y_2 \beta^r_2 * {\sqrt{1-\rho^2}} \right)
 \]</span></p>
 <p>Thus, marginal effects can be obtained by analyzing either one of these equations alone. Standard errors for this expression can be identified directly only if we estimate the structural equation using FIML, or using the rescaled coefficients, making sure standard errors are calculated acounting for the estimation errors of the first stage.</p>
-<p>The second option relates to estimate the marginal effects using <a href="#eq-q6">Equation&nbsp;7</a>:</p>
+<p>The second option relates to estimate the marginal effects using <a href="#eq-q6" class="quarto-xref">Equation&nbsp;7</a>:</p>
 <p><span id="eq-q6a"><span class="math display">\[
 P(y_1=1| z_1 , y_2, \hat{u}_2 ) = \Phi \left( z_1 \beta^r_1 + y_2 \beta^r_2 + \theta \hat{u}_2 \right)
 \tag{9}\]</span></span></p>
@@ -731,7 +737,7 @@ P(y_1=1|z_1,y_2,z_2) =\Phi \left(
     {\sqrt{1-\rho^2}}   \right)
 \tag{11}\]</span></span></p>
 <p>While the two equations above are basically the same, they have important differences when marginal effects are estimated by software. Specifically, the probability of sucess is now a function of <span class="math inline">\(z_2\)</span>!.</p>
-<p>So let me explain first what Stata 14.1, did. To estimate marginal effects, partial derivatives were based on <a href="#eq-q12">Equation&nbsp;11</a>:</p>
+<p>So let me explain first what Stata 14.1, did. To estimate marginal effects, partial derivatives were based on <a href="#eq-q12" class="quarto-xref">Equation&nbsp;11</a>:</p>
 <p><span class="math display">\[
 \begin{aligned}
 \frac{\partial P(y=1|.)}{\partial z_1} &amp;=
@@ -798,7 +804,7 @@ dy/dx wrt:  fem_educ kids other_inc male_educ
 <p>In this update, they change the default option and now produces the correct marginal effects, assuming the predicted errors are fixed.</p>
 <p>Let’s take a closer look at the findings. First, it appears that Stata 14, 15, and early 16 versions were unintentionally estimating a partial effect that accounted for a second-order effect through the first stage regression. While this might have a negligible effect on the exogenous variables, it could have a considerable impact on the endogenous variable of interest, resulting in some people reporting negative marginal effects even when the estimated coefficient was positive. Additionally, the instrument, in this case <code>male_educ</code>, would also appear in the output, capturing only a second-order effect on the outcome of interest.</p>
 <p>However, after a lively discussion on Statalist, including input from Prof.&nbsp;Wooldridge, it was revealed that Stata (and margins) was incorrectly estimating marginal effects. As shown here, partial derivatives were being estimated through the first and second equations, leading to incorrect results.</p>
-<p>Prof.&nbsp;Wooldridge recommended a manual two-step approach for estimating marginal effects, with standard errors obtained via bootstrap, using <a href="#eq-q6a">Equation&nbsp;9</a> to estimate the partial effects. This makes a difference because we will be making the explicit assumption that <span class="math inline">\(\hat u_2\)</span> does not change when the other variables change. This will modify the partial effects to the following:</p>
+<p>Prof.&nbsp;Wooldridge recommended a manual two-step approach for estimating marginal effects, with standard errors obtained via bootstrap, using <a href="#eq-q6a" class="quarto-xref">Equation&nbsp;9</a> to estimate the partial effects. This makes a difference because we will be making the explicit assumption that <span class="math inline">\(\hat u_2\)</span> does not change when the other variables change. This will modify the partial effects to the following:</p>
 <p><span class="math display">\[
 \begin{aligned}
 \frac{\partial P(y=1|.)}{\partial z_1} &amp;=
@@ -1132,10 +1138,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   if (showAllCode) {
     showAllCode.addEventListener("click", toggleCodeHandler(true));
   }
-  function tippyHover(el, contentFn) {
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -1145,8 +1150,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -1159,6 +1173,81 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
       return note.innerHTML;
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        for (let i = 0; i < 2; i++) {
+          container.appendChild(note.children[i].cloneNode(true));
+        }
+        return container.innerHTML
+      } else {
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      return note.innerHTML;
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -1202,6 +1291,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -1865,6 +1955,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
+
 
 
 
