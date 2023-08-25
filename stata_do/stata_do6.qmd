@@ -1,5 +1,5 @@
 ---
-title: "Marginal effects with nonlinear transormations: `f_able`"
+title: "Marginal effects with nonlinear transformations: `f_able`"
 subtitle: "Featuring @rios-avila_estimation_2021"
 code-fold: false
 bibliography: mywork.bib

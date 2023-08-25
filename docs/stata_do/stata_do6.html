@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Playing With Stata - Marginal effects with nonlinear transormations: f_able</title>
+<title>Playing With Stata - Marginal effects with nonlinear transformations: f_able</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -128,6 +128,9 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
@@ -199,7 +202,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../stata_do/stata_do1.html">Stata Do</a></li><li class="breadcrumb-item"><a href="../stata_do/stata_do6.html">Marginal effects with nonlinear transormations</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../stata_do/stata_do1.html">Stata Do</a></li><li class="breadcrumb-item"><a href="../stata_do/stata_do6.html">Marginal effects with nonlinear transformations: <code>f_able</code></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -264,7 +267,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../stata_do/stata_do6.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Marginal effects with nonlinear transormations</span></a>
+ <span class="menu-text">Marginal effects with nonlinear transformations: <code>f_able</code></span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -308,9 +311,9 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../stata_do/stata_do1.html">Stata Do</a></li><li class="breadcrumb-item"><a href="../stata_do/stata_do6.html">Marginal effects with nonlinear transormations</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../stata_do/stata_do1.html">Stata Do</a></li><li class="breadcrumb-item"><a href="../stata_do/stata_do6.html">Marginal effects with nonlinear transformations: <code>f_able</code></a></li></ol></nav>
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Marginal effects with nonlinear transormations: <code>f_able</code></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<div class="quarto-title-block"><div><h1 class="title">Marginal effects with nonlinear transformations: <code>f_able</code></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 <p class="subtitle lead">Featuring <span class="citation" data-cites="rios-avila_estimation_2021">Rios-Avila (<a href="#ref-rios-avila_estimation_2021" role="doc-biblioref">2021</a>)</span></p>
 </div>
 
@@ -374,7 +377,7 @@ E(y|x) = \beta_0+\beta_1 x_1 + \beta_2 x_2 + \beta_3 x_1 \times x_2  + \beta_4 x
 \]</span></p>
 <p>These effects are not constant. They vary based on values of <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span>. Knowing some calculus, however, its rather straight forward to determine the marginal effects, and apply that to our work.</p>
 <p>So lets see an example of this. First the setup:</p>
-<div id="2ea6ab55" class="cell" data-execution_count="1">
+<div id="5d8eccbd" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">clear</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> <span class="dv">linesize</span> 255</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> <span class="dv">seed</span> 1</span>
@@ -399,7 +402,7 @@ E(y|x) = \beta_0+\beta_1 x_1 + \beta_2 x_2 + \beta_3 x_1 \times x_2  + \beta_4 x
 E(y|X) = 1.953 + 1.046 x1 + 0.944 x2 + 1.019 x1x2 + 1.005 x2sqr
 \]</span></p>
 <p>From where we can estimate marginal effects using the analytical formulas we derived.</p>
-<div id="e20396fe" class="cell" data-execution_count="4">
+<div id="1a397218" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>margins, expression(_b[<span class="kw">x2</span>]+_b[x1x2]*x1+2*_b[x2sqr]*<span class="kw">x2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>warning: option expression() does not contain option predict() or xb().
@@ -423,7 +426,7 @@ Expression: _b[x2]+_b[x1x2]*x1+2*_b[x2sqr]*x2
 <section id="marginal-effects-margins" class="level2">
 <h2 class="anchored" data-anchor-id="marginal-effects-margins">Marginal effects: <code>margins</code></h2>
 <p>As mentioned earlier, <code>Stata</code> command <code>margins</code> allows you to estimate marginal effects of almost any model, as long as it understands the inter-relationships among variables. So lets see what would have happend if I use it in my previous model:</p>
-<div id="6e6b4aba" class="cell" data-execution_count="5">
+<div id="16c34726" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>margins, <span class="kw">dydx</span>(x1 <span class="kw">x2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -444,7 +447,7 @@ dy/dx wrt:  x1 x2
 </div>
 <p>We get something that is wrong. Instead of estimating the correct marginal effects, it is only showing the coefficients for <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span>. The reason for this is that <code>margins</code> has no way to know that the variables <span class="math inline">\(x1x2\)</span> and <span class="math inline">\(x2sqr\)</span> are in fact functions of <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span>. Not at least we use the correct syntax.</p>
 <p>In <code>Stata</code>, interactions and polynomials can be added to the model specification using “#”, and indicating the type of variable one is using. In this case, I use “<strong>c.</strong>” because <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> are continuous variables. See <code>help fvvarlist</code>, for more information.</p>
-<div id="289b6d2d" class="cell" data-execution_count="6">
+<div id="c07f6dd7" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:<span class="kw">reg</span> <span class="fu">y</span> c.x1 c.<span class="kw">x2</span> c.x1#c.<span class="kw">x2</span> c.x2#c.<span class="kw">x2</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>margins, <span class="kw">dydx</span>(x1 <span class="kw">x2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -522,13 +525,13 @@ dy/dx wrt:  x1 x2
 <section id="re-doing-the-example" class="level3">
 <h3 class="anchored" data-anchor-id="re-doing-the-example">Re-doing the example</h3>
 <p>So, lets retake the previous example. We know that the “offending” variables were <code>x1x2</code> and <code>x2sqr</code>. So lets recreate them using <code>fgen</code>.</p>
-<div id="2ff7ad80" class="cell" data-execution_count="7">
+<div id="a5d5dde4" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">drop</span> x1x2 x2sqr</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>fgen x1x2  = x1*<span class="kw">x2</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>fgen x2sqr = <span class="kw">x2</span>*<span class="kw">x2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now, lets estimate the model of interest, but adding a line indicating what variables are “created” variables:</p>
-<div id="6fd68b93" class="cell" data-execution_count="8">
+<div id="e8c4f9bd" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:<span class="kw">reg</span> <span class="fu">y</span> x1 <span class="kw">x2</span> x1x2 x2sqr</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>** This <span class="kw">line</span> is necessary</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>f_able x1x2 x2sqr, auto</span>
@@ -540,7 +543,7 @@ All variables in -nlvar- have been declared</code></pre>
 </div>
 </div>
 <p>Finally, lets estimate the marginal effects again</p>
-<div id="a1beec66" class="cell" data-execution_count="9">
+<div id="136ae5ef" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>margins, <span class="kw">dydx</span>(*)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -564,7 +567,7 @@ dy/dx wrt:  x1 x2
 <h3 class="anchored" data-anchor-id="what-if-x-is-no-longer-in-the-main-model">What if <span class="math inline">\(x\)</span> is no longer in the main model</h3>
 <p>There are a few other cases that may be of interest. Consider the previous model, and assume we are only interested in adding the quadratic term in the model, not the linear one.</p>
 <p>Using factor notation, one could do the following:</p>
-<div id="2a14f39d" class="cell" data-execution_count="10">
+<div id="910ec20c" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:<span class="kw">reg</span> <span class="fu">y</span> c.x2#c.<span class="kw">x2</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>margins, <span class="kw">dydx</span>(*)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -584,7 +587,7 @@ dy/dx wrt:  x2
 </div>
 </div>
 <p>Using <code>f_able</code>, however, you still need to include the original variable in the model. This can be done using the “o.” prefix, so that the variable is ommitted, from calculations, but remain in the model.</p>
-<div id="60eae31d" class="cell" data-execution_count="11">
+<div id="f09b64a3" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:<span class="kw">reg</span> <span class="fu">y</span> x2sqr o.<span class="kw">x2</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>f_able x2sqr, auto</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>margins, <span class="kw">dydx</span>(*)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -608,7 +611,7 @@ dy/dx wrt:  x2
 </div>
 </div>
 <p>Alright, these are very simple examples that you could already do with margins. So lets try something different. Estimate a model using <span class="math inline">\(x\)</span> and <span class="math inline">\(\sqrt x\)</span> as explanatory variables:</p>
-<div id="04162feb" class="cell" data-execution_count="12">
+<div id="9b1ddfbd" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>fgen rx1=x1^.5</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:<span class="kw">reg</span> <span class="fu">y</span> x1 rx1</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>f_able rx1, auto</span>
@@ -633,7 +636,7 @@ dy/dx wrt:  x1
 </div>
 </div>
 <p>How do we know is correct? We can replicate the results using <code>nl</code>!. Technically, it works in a similar way as <code>f_able</code> does.</p>
-<div id="561312dd" class="cell" data-execution_count="13">
+<div id="07b03c29" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:<span class="kw">nl</span> (<span class="fu">y</span>={b0}+{b1}*x1+{b2}*x1^0.5), <span class="kw">variable</span>(x1)</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>margins, <span class="kw">dydx</span>(*)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -653,7 +656,7 @@ dy/dx wrt:  x1
 </div>
 </div>
 <p>Something even harder? What about a poisson regression:</p>
-<div id="bbe5a66f" class="cell" data-execution_count="14">
+<div id="b6a1b60a" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:<span class="kw">poisson</span> <span class="fu">y</span> x1 <span class="kw">x2</span> x1x2 x2sqr</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:f_able x1x2 x2sqr, auto</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>margins, <span class="kw">dydx</span>(*)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -676,7 +679,7 @@ dy/dx wrt:  x1 x2
 </div>
 <p>Another implementation some people usually ask for is the estimation of marginal effects when using splines, either regular polynomial splines, or restricted cubic splines.</p>
 <p>Because splines are messy to code, instead of using <code>fgen</code>, we can use <code>f_spline</code> or <code>f_rcspline</code>. Let’s use both:</p>
-<div id="433159c5" class="cell" data-execution_count="15">
+<div id="7c3f23ae" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">webuse</span> dui, <span class="kw">clear</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>* <span class="kw">model</span> citation=f(fines)+<span class="fu">e</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>* Cubic polynomial spline with 1 knot</span>
@@ -1181,7 +1184,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb29" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Marginal effects with nonlinear transormations: `f_able`"</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Marginal effects with nonlinear transformations: `f_able`"</span></span>
 <span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Featuring @rios-avila_estimation_2021"</span></span>
 <span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="an">code-fold:</span><span class="co"> false</span></span>
 <span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="an">bibliography:</span><span class="co"> mywork.bib</span></span>
