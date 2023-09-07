@@ -1346,9 +1346,9 @@
   {
     "objectID": "stataviz/stataviz5.html",
     "href": "stataviz/stataviz5.html",
-    "title": "Making spirograph & harmograph!",
+    "title": "Palmer Penguins",
     "section": "",
-    "text": "I believe the correct term for them is Guilloche patterns. From a programming perspective these are figures created by drawing circles, connected to circles, connected to more circles, so on and so forth. The subsequent circles build up on each other, and with the right parameters, and sufficient flexibility, one could potentially use the principle of Spirographs to draw anything using very complex functions.\n\nSo how does this work?\n\nFirst, we need to change the perspective from a cartesian coordinates \\((x,y)\\), to one with polar coordinates, where every point in space is determined by a distance to the origin (\\(r\\)), and the angle of a line that connects it to the origin, with respect to the horizon. However, for drawing them, we need to transform them back to the cartesian coordinates:\n\\[\n\\begin{aligned}\ny = r \\times sin (\\theta) \\\\\nx = r \\times cos (\\theta)\n\\end{aligned}\n\\]\nSo, if we fix \\(r\\) to be the same and change \\(\\theta\\) from 0 to \\(2\\pi\\), we could draw a simple circle:"
+    "text": "In this post, I will show some of the basics of data visualization using the Palmer Pinguins dataset. This dataset is available in R using the palmerpenguins package. And now there is also a copy of in using frause for Stata. The dataset contains data on 344 penguins collected from 3 islands in the Palmer Archipelago, Antarctica. The data was collected and made available by Dr. Kristen Gorman and the Palmer Station, Antarctica LTER, a member of the Long Term Ecological Research Network."
   },
   {
     "objectID": "stataviz/stataviz5.html#what-are-spirographs",
@@ -1489,5 +1489,61 @@
     "title": "Simultaneous/Uniform Confidence Intervals",
     "section": "Conclusions",
     "text": "Conclusions\nThis aims to provide a small description of what Uniform confidence intervals are, and how to estimate them.\nIt also introduces a new small command, uci, which should help to estimate this type of confidence intervals, for almost any model.\nComments and suggestions are welcome.\nTil next time."
+  },
+  {
+    "objectID": "stataviz/stataviz5.html#introduction",
+    "href": "stataviz/stataviz5.html#introduction",
+    "title": "Palmer Penguins",
+    "section": "",
+    "text": "In this post, I will show some of the basics of data visualization using the Palmer Pinguins dataset. This dataset is available in R using the palmerpenguins package. And now there is also a copy of in using frause for Stata. The dataset contains data on 344 penguins collected from 3 islands in the Palmer Archipelago, Antarctica. The data was collected and made available by Dr. Kristen Gorman and the Palmer Station, Antarctica LTER, a member of the Long Term Ecological Research Network."
+  },
+  {
+    "objectID": "stataviz/stataviz5.html#setup",
+    "href": "stataviz/stataviz5.html#setup",
+    "title": "Palmer Penguins",
+    "section": "Setup",
+    "text": "Setup\nFirst, we need to install the frause package. This can be done using the ssc install command. We will also need some additional commands to change colors of shemes, and create and select custom colors. Please copy the following code to your do-file, or run it from your command line.\n\n%%set\ngraph_width = default\ngraph_height = default\n\n\nssc install frause\nssc install color_style\nnet install colrspace, replace from(https://raw.githubusercontent.com/benjann/colrspace/master/)\nnet install palettes, replace from(https://raw.githubusercontent.com/benjann/palettes/master/)\nnet install grstyle, replace from(https://raw.githubusercontent.com/benjann/grstyle/master/)\n\nNow, lets load the data, and set a cleaner scheme than the default. We will also set the default color scheme to tableau.\n\nset scheme white2\ncolor_style tableau\nfrause penguins, clear"
+  },
+  {
+    "objectID": "stataviz/stataviz5.html#basic-plots-scatter-plot",
+    "href": "stataviz/stataviz5.html#basic-plots-scatter-plot",
+    "title": "Palmer Penguins",
+    "section": "Basic plots: Scatter plot",
+    "text": "Basic plots: Scatter plot\nLets start with a basic Scatter plot\n\ntwoway scatter flipper_length_mm body_mass_g, /// Creates a Scatter plot\n    ytitle(\"Flipper length (mm)\") ///             Sets the title for the y-axis\n    xtitle(\"Body mass (g)\") ///                   Sets the title for the x-axis\n    legend(off) scale(1.1) ///                    Set legends off, and scale the plot by 1.1 (fonts) \n    xsize(9) ysize(6) //                          Finally, setting Size of the plot  \n\n\n\n\n\n\n\n\nBut we can also add some additional information to the plot. For example, we can color the points by the species of the penguin. We can change the markers, and finally, add a title and subtitle to the plot.\n\ntwoway (scatter body_mass_g flipper_length_mm if species == 1, msymbol(o) ) /// changes Symbol to a circle\n    (scatter body_mass_g flipper_length_mm if species == 2, msymbol(t) ) /// changes Symbol to a triangle, etc\n    (scatter body_mass_g flipper_length_mm if species == 3, msymbol(s) ) , /// Creates a Scatter plot by groups\n    ytitle(\"Flipper length (mm)\") ///             Sets the title for the y-axis\n    xtitle(\"Body mass (g)\") ///                   Sets the title for the x-axis\n    legend(order(1 \"Adelie\" 2 \"Chinstrap\" 3 \"Gentoo\") ring(0)) ///  Adds text to the legend  \n    title(\"Penguin size, Palmer Station LTER\", pos(11) span )  /// Adds a title to the plot             \n    subtitle(\"Flipper lengh and body mass by species\", pos(11) span )  /// Adds a title to the plot             \n    scale(1.1) xsize(9) ysize(6) //                                 Scales the plot by 1.1 (fonts) \n\n\n\n\n\n\n\n\nOf course, we could also add a regression line to the plot. On top of that, I will change the colors and size of the symbols. For this example, I will use different variables: Bill lenght and Flipper lenght. Changing the colors i will use color_style:\n\n** This line changes the color of the scheme, setting the first n colors based \n** on a list of colors, or a palette. See help colorpalette for more options\ncolor_style darkorange purple LightSeaGreen\n\ntwoway (scatter bill_length_mm flipper_length_mm if species == 1, msymbol(o) ) /// \n    (scatter bill_length_mm flipper_length_mm if species == 2, msymbol(t) ) /// \n    (scatter bill_length_mm flipper_length_mm if species == 3, msymbol(s) ) ///\n    (lfit bill_length_mm flipper_length_mm if species == 1, pstyle(p1) color(%60)) /// Creates fitted lines\n    (lfit bill_length_mm flipper_length_mm if species == 2, pstyle(p2) color(%60)) /// Need to use pstyle to keep colors\n    (lfit bill_length_mm flipper_length_mm if species == 3, pstyle(p3) color(%60)), /// consistent\n    ytitle(\"Bill length (mm)\") ///             Sets the title for the y-axis\n    xtitle(\"Flipper lenght (mm)\") ///                   Sets the title for the x-axis\n    legend(order(1 \"Adelie\" 2 \"Chinstrap\" 3 \"Gentoo\") ring(0) pos(5)) ///  Adds text to the legend  \n    title(\"Flipper and Bill length\", pos(11) span )  /// Adds a title to the plot             \n    subtitle(\"Dimensions by species\", pos(11) span )  /// Adds a title to the plot             \n    scale(1.1) xsize(9) ysize(6) //"
+  },
+  {
+    "objectID": "stataviz/stataviz8.html",
+    "href": "stataviz/stataviz8.html",
+    "title": "Making spirograph & harmograph!",
+    "section": "",
+    "text": "I believe the correct term for them is Guilloche patterns. From a programming perspective these are figures created by drawing circles, connected to circles, connected to more circles, so on and so forth. The subsequent circles build up on each other, and with the right parameters, and sufficient flexibility, one could potentially use the principle of Spirographs to draw anything using very complex functions.\n\nSo how does this work?\n\nFirst, we need to change the perspective from a cartesian coordinates \\((x,y)\\), to one with polar coordinates, where every point in space is determined by a distance to the origin (\\(r\\)), and the angle of a line that connects it to the origin, with respect to the horizon. However, for drawing them, we need to transform them back to the cartesian coordinates:\n\\[\n\\begin{aligned}\ny = r \\times sin (\\theta) \\\\\nx = r \\times cos (\\theta)\n\\end{aligned}\n\\]\nSo, if we fix \\(r\\) to be the same and change \\(\\theta\\) from 0 to \\(2\\pi\\), we could draw a simple circle:"
+  },
+  {
+    "objectID": "stataviz/stataviz8.html#what-are-spirographs",
+    "href": "stataviz/stataviz8.html#what-are-spirographs",
+    "title": "Making spirograph & harmograph!",
+    "section": "",
+    "text": "I believe the correct term for them is Guilloche patterns. From a programming perspective these are figures created by drawing circles, connected to circles, connected to more circles, so on and so forth. The subsequent circles build up on each other, and with the right parameters, and sufficient flexibility, one could potentially use the principle of Spirographs to draw anything using very complex functions.\n\nSo how does this work?\n\nFirst, we need to change the perspective from a cartesian coordinates \\((x,y)\\), to one with polar coordinates, where every point in space is determined by a distance to the origin (\\(r\\)), and the angle of a line that connects it to the origin, with respect to the horizon. However, for drawing them, we need to transform them back to the cartesian coordinates:\n\\[\n\\begin{aligned}\ny = r \\times sin (\\theta) \\\\\nx = r \\times cos (\\theta)\n\\end{aligned}\n\\]\nSo, if we fix \\(r\\) to be the same and change \\(\\theta\\) from 0 to \\(2\\pi\\), we could draw a simple circle:"
+  },
+  {
+    "objectID": "stataviz/stataviz5.html#basic-plots-histogram",
+    "href": "stataviz/stataviz5.html#basic-plots-histogram",
+    "title": "Palmer Penguins",
+    "section": "Basic plots: Histogram",
+    "text": "Basic plots: Histogram\n\nhistogram flipper_length_mm, lcolor(*.80) /// Creates a histogram, and \n    ytitle(\"Frequency\") ///             Sets the title for the y-axis\n    xtitle(\"Flipper length (mm)\") ///                   Sets the title for the x-axis\n    title(\"Penguin Flipper length\", pos(11) span )  /// Adds a title to the plot             \n    subtitle(\"Distribution of flipper length\", pos(11) span )  /// Adds a title to the plot             \n    scale(1.1) xsize(9) ysize(6) //                                 Scales the plot by 1.1 (fonts)                                Scales the plot by 1.1 (fonts) \n\n(bin=18, start=172, width=3.2777778)\n\n\n\n\n\n\n\n\n\nNow by color. We will need to set width and binwidth to make the plot look better.\n\ncolor_style darkorange   LightSeaGreen\n\ntwo (histogram flipper_length_mm if species==1, color(%50) lcolor(%0) ///\n    frequency start(170) width(2) pstyle(p1)) ///\n    (histogram flipper_length_mm if species==2, color(%50) lcolor(%0) ///\n    frequency start(170) width(2) pstyle(p2)) ///\n    (histogram flipper_length_mm if species==3, color(%50) lcolor(%0) ///\n    frequency start(170) width(2) pstyle(p3)), ///\n    ytitle(\"Frequency\") ///                             Sets the title for the y-axis\n    xtitle(\"Flipper length (mm)\") ///                   Sets the title for the x-axis\n    legend(order(1 \"Adelie\" 2 \"Chinstrap\" 3 \"Gentoo\")  ) ///  Adds text to the legend  \n    title(\"Penguin Flipper length\", pos(11) span )  /// Adds a title to the plot             \n    subtitle(\"Distribution of flipper length\", pos(11) span )  /// Adds a title to the plot             \n    scale(1.1) xsize(9) ysize(6) //                                 Scales the plot by 1.1"
+  },
+  {
+    "objectID": "stataviz/stataviz5.html#basic-plots-scatter-plot-by",
+    "href": "stataviz/stataviz5.html#basic-plots-scatter-plot-by",
+    "title": "Palmer Penguins",
+    "section": "Basic plots: scatter plot by",
+    "text": "Basic plots: scatter plot by\n\ncolor_style darkorange   LightSeaGreen\n\ntwo (scatter body_mass_g flipper_length_mm if sex==1) ///\n    (scatter body_mass_g flipper_length_mm if sex==2), ///\n    by(species, col(3) note(\"\")  ///\n    title(\"Penguin Flipper and Body Mass\", pos(11) span )  /// Adds a title to the plot             \n    subtitle(\"Dimensions for Male and Female\", pos(11) span ))  /// Adds a title to the plot \n    legend(order(1 \"Female\" 2 \"Male\") cols(2) ) ///\n    ytitle(\"Body Mass (g)\") ///             Sets the title for the y-axis\n    xtitle(\"Flipper lenght (mm)\") ///                   Sets the title for the x-axis\n    scale(1.1) xsize(9) ysize(6) //"
+  },
+  {
+    "objectID": "stataviz/stataviz5.html#conclusions",
+    "href": "stataviz/stataviz5.html#conclusions",
+    "title": "Palmer Penguins",
+    "section": "Conclusions",
+    "text": "Conclusions\nSo this was just for fun, as I wanted to produce this, and use an extra fix of nbstata Enjoy"
   }
 ]
