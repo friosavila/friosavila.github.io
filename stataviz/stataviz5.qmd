@@ -13,7 +13,7 @@ In this post, I will show some of the basics of data visualization using the Pal
 First, we need to install the `frause` package. This can be done using the `ssc install` command. We will also need some additional commands to change colors of shemes, and create and select custom colors. Please copy the following code to your do-file, or run it from your command line.
 
 ```{stata}
-*| output: false
+*| echo: false
 %%set
 graph_width = default
 graph_height = default
@@ -109,8 +109,7 @@ Now by color. We will need to set width and binwidth to make the plot look bette
 
 ```{stata}
 *| fig-align: center
-color_style darkorange   LightSeaGreen
-
+ 
 two (histogram flipper_length_mm if species==1, color(%50) lcolor(%0) ///
     frequency start(170) width(2) pstyle(p1)) ///
     (histogram flipper_length_mm if species==2, color(%50) lcolor(%0) ///
