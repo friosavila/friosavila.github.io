@@ -7,7 +7,7 @@ about:
   links:
     - icon: twitter
       text: twitter
-      href: https://twitter.com/friosavi
+      href: https://twitter.com/friosavila
     - icon: envelope 
       text: Email
       href: f.rios.a@gmail.com
