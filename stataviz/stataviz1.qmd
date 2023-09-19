@@ -52,10 +52,16 @@ ssc install grstyle
 ssc install color_style 
 ```
 
+```{stata}
+*| echo: false
+%%set 
+graph_width = default
+graph_height = default
+```
+
 Lets start using default options for something simple. A pie Graph. 
 
 ```{stata}
-set scheme white2
 sysuse auto, clear
 set scheme s2color
 graph pie mpg, over(rep78)
@@ -65,6 +71,7 @@ This creates a pie graph with average MPG's by number of repairs in 1978. But wh
 default colors, you can request a change:
 
 ```{stata}
+set scheme white2
 color_style viridis, n(5)
 graph pie mpg, over(rep78)
 ```
@@ -98,7 +105,7 @@ graph pie mpg, over(rep78) name(m3, replace)
 
 Now that you know the magic, it is fair to know the trick.
 
-This command `color_style` works as a wrapper behind `colorpalette'. It basically passes the information to this program
+This command `color_style` works as a wrapper behind `colorpalette`. It basically passes the information to this program
 to translate and create colors from either palettes, or directly provided colors, so it translates into RGB color code that `Stata` 
 understands. 
 
