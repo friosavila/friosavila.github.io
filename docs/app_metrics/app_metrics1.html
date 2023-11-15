@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.251">
+<meta name="generator" content="quarto-1.4.455">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -58,6 +58,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -76,14 +77,14 @@ div.csl-indent {
 }</style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../app_metrics/app_metrics2.html" rel="next">
+<link href="../app_metrics/app_metrics10.html" rel="next">
 <link href="../app_metrics/index.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
@@ -100,12 +101,13 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
   "keyboard-shortcut": [
     "f",
     "/",
     "s"
   ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -129,7 +131,7 @@ gtag('js', new Date());
 gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
@@ -139,7 +141,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
@@ -153,36 +155,36 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="../index.html" rel="" target="" aria-current="page">
- <span class="menu-text">Home</span></a>
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../cv.html" rel="" target="">
- <span class="menu-text">my CV and Research</span></a>
+    <a class="nav-link" href="../cv.html"> 
+<span class="menu-text">my CV and Research</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../software.html" rel="" target="">
- <span class="menu-text">Software</span></a>
+    <a class="nav-link" href="../software.html"> 
+<span class="menu-text">Software</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../stataviz/index.html" rel="" target="">
- <span class="menu-text">Stata Viz</span></a>
+    <a class="nav-link" href="../stataviz/index.html"> 
+<span class="menu-text">Stata Viz</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../stata_do/index.html" rel="" target="">
- <span class="menu-text">Stata Do’s Ado’s</span></a>
+    <a class="nav-link" href="../stata_do/index.html"> 
+<span class="menu-text">Stata Do’s Ado’s</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../app_metrics/index.html" rel="" target="">
- <span class="menu-text">Applied econometrics</span></a>
+    <a class="nav-link" href="../app_metrics/index.html"> 
+<span class="menu-text">Applied econometrics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../chatgpt.html" rel="" target="">
- <span class="menu-text">Odds and Ends</span></a>
+    <a class="nav-link" href="../chatgpt.html"> 
+<span class="menu-text">Odds and Ends</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../about.html" rel="" target="">
- <span class="menu-text">about</span></a>
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">about</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -197,11 +199,11 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
     </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../app_metrics/app_metrics1.html">App Metrics</a></li><li class="breadcrumb-item"><a href="../app_metrics/app_metrics1.html">Constructing synthetic Datasets</a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
   </nav>
@@ -209,7 +211,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../index.html" class="sidebar-logo-link">
       <img src="../WeeMee.jpg" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
@@ -236,6 +238,12 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
   <div class="sidebar-item-container"> 
   <a href="../app_metrics/app_metrics1.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Constructing synthetic Datasets</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Nonlinear DID:</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -291,7 +299,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -329,6 +337,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 
 </header>
 
+
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>In my current collaboration with Stephen Jenkins, we are grappling with the challenge of providing a self-contained replication package alongside our paper.</p>
@@ -342,8 +351,8 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <h2 class="anchored" data-anchor-id="the-problem">The Problem</h2>
 <p>Assume you signed a confidentiality agreement to work with Swiss Survey data and are ready to submit your work. However, you are required to provide a replication package with a code to produce the tables and the dataset itself. Since you cannot share the original data, you suggest generating 5 synthetic datasets instead. By doing so, people can apply your code and reach similar conclusions to your main paper, but with the advantage that the data is simulated, thus fulfilling privacy concerns.</p>
 <p>Here is a piece of code that can be used for that:</p>
-<div class="cell" data-execution_count="1">
-<details>
+<div id="588a8f22" class="cell" data-execution_count="1">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>frame <span class="kw">reset</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> <span class="dv">linesize</span> 255</span>
@@ -372,8 +381,8 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <section id="the-solution" class="level2">
 <h2 class="anchored" data-anchor-id="the-solution">The solution</h2>
 <p>The first step is to decide on the size of the synthetic dataset. You could create a dataset with the same number of observations or adjust it to your desired sample size. I will expand the dataset to double the size, tag the new observations and make all variables, except for <code>lfp</code>, missing. This is because some data is missing as it’s only available for those in the labor force. Alternatively, you could have created <code>lfp</code> using a random draw from a Bernoulli distribution with the same probability as the original data.</p>
-<div class="cell" data-execution_count="2">
-<details>
+<div id="72477c83" class="cell" data-execution_count="2">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>expand 2, <span class="kw">gen</span>(<span class="fu">tag</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">foreach</span> i <span class="kw">of</span> <span class="kw">varlist</span> lnwage educ exper tenure isco female age single married divorced kids6 kids714 wt {</span>
@@ -385,8 +394,8 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 </div>
 </div>
 <p>Next, create multiple imputed datasets using the predictive mean matching strategy. To do this, set the data and register all variables to be imputed. Then, impute all variables using chain <code>pmm</code>. Make sure none of the variables are collinear, and variables with structural missing data are specified separately. The only explanatory variable or exogenous variable here is <code>lfp</code>.</p>
-<div class="cell" data-execution_count="3">
-<details>
+<div id="374a4fd5" class="cell" data-execution_count="3">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mi</span> <span class="kw">set</span> <span class="kw">wide</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mi</span> register <span class="kw">impute</span> lnwage educ exper tenure isco female age single married kids6 kids714 wt</span>
@@ -395,8 +404,8 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 </details>
 </div>
 <p>You now have 5 sets of variables that can be used to create unique synthetic datasets with a similar structure to the original confidential dataset. Let’s now put the newly created data into frames, so we can estimate few models and compare them with the original data.</p>
-<div class="cell" data-execution_count="4">
-<details>
+<div id="e370fc23" class="cell" data-execution_count="4">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">forvalues</span> i = 1/5 {</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  frame put _<span class="ot">`i'</span>_* lfp <span class="kw">if</span> <span class="fu">tag</span>==1, into(fr<span class="ot">`i'</span>)</span>
@@ -1129,7 +1138,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 </section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>
-<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-jann_2008" class="csl-entry" role="listitem">
 Jann, Ben. 2008. <span>“The <span>Blinder</span>–<span>Oaxaca</span> <span>Decomposition</span> for <span>Linear</span> <span>Regression</span> <span>Models</span>.”</span> <em>The Stata Journal</em> 8 (4): 453–79. <a href="https://doi.org/10.1177/1536867X0800800401">https://doi.org/10.1177/1536867X0800800401</a>.
 </div>
@@ -1320,15 +1329,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    if (id.startsWith('sec-')) {
+    const typesetMath = (el) => {
+      if (window.MathJax) {
+        // MathJax Typeset
+        window.MathJax.typeset([el]);
+      } else if (window.katex) {
+        // KaTeX Render
+        var mathElements = el.getElementsByClassName("math");
+        var macros = [];
+        for (var i = 0; i < mathElements.length; i++) {
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            window.katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains('display'),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false
+            });
+          }
+        }
+      }
+    }
+    if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
         for (let i = 0; i < 2; i++) {
           container.appendChild(note.children[i].cloneNode(true));
         }
+        typesetMath(container);
         return container.innerHTML
       } else {
+        typesetMath(note);
         return note.innerHTML;
       }
     } else {
@@ -1337,6 +1369,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
+      typesetMath(note);
       return note.innerHTML;
     }
   }
@@ -1379,6 +1412,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
       }
     }, function(instance) {
     });
@@ -1450,6 +1506,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1511,13 +1593,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../app_metrics/index.html" class="pagination-link">
+      <a href="../app_metrics/index.html" class="pagination-link  aria-label=" applied="" econometrics"="">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Applied Econometrics</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../app_metrics/app_metrics2.html" class="pagination-link">
-        <span class="nav-page-text">DRDID/CSDID in Stata</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../app_metrics/app_metrics10.html" class="pagination-link" aria-label="Nonlinear DID:">
+        <span class="nav-page-text">Nonlinear DID:</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">

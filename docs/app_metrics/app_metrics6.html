@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.251">
+<meta name="generator" content="quarto-1.4.455">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -25,7 +25,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -61,6 +61,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -103,12 +104,13 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
   "keyboard-shortcut": [
     "f",
     "/",
     "s"
   ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -139,7 +141,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
@@ -153,36 +155,36 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="../index.html" rel="" target="" aria-current="page">
- <span class="menu-text">Home</span></a>
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../cv.html" rel="" target="">
- <span class="menu-text">my CV and Research</span></a>
+    <a class="nav-link" href="../cv.html"> 
+<span class="menu-text">my CV and Research</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../software.html" rel="" target="">
- <span class="menu-text">Software</span></a>
+    <a class="nav-link" href="../software.html"> 
+<span class="menu-text">Software</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../stataviz/index.html" rel="" target="">
- <span class="menu-text">Stata Viz</span></a>
+    <a class="nav-link" href="../stataviz/index.html"> 
+<span class="menu-text">Stata Viz</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../stata_do/index.html" rel="" target="">
- <span class="menu-text">Stata Do’s Ado’s</span></a>
+    <a class="nav-link" href="../stata_do/index.html"> 
+<span class="menu-text">Stata Do’s Ado’s</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../app_metrics/index.html" rel="" target="">
- <span class="menu-text">Applied econometrics</span></a>
+    <a class="nav-link" href="../app_metrics/index.html"> 
+<span class="menu-text">Applied econometrics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../chatgpt.html" rel="" target="">
- <span class="menu-text">Odds and Ends</span></a>
+    <a class="nav-link" href="../chatgpt.html"> 
+<span class="menu-text">Odds and Ends</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../about.html" rel="" target="">
- <span class="menu-text">about</span></a>
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">about</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -197,11 +199,11 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
     </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../app_metrics/app_metrics1.html">App Metrics</a></li><li class="breadcrumb-item"><a href="../app_metrics/app_metrics6.html">Making better use of interval-censored data</a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
   </nav>
@@ -209,7 +211,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../index.html" class="sidebar-logo-link">
       <img src="../WeeMee.jpg" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
@@ -236,6 +238,12 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
   <div class="sidebar-item-container"> 
   <a href="../app_metrics/app_metrics1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Constructing synthetic Datasets</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Nonlinear DID:</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -291,7 +299,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -306,7 +314,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 </nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../app_metrics/app_metrics1.html">App Metrics</a></li><li class="breadcrumb-item"><a href="../app_metrics/app_metrics6.html">Making better use of interval-censored data</a></li></ol></nav>
 <div class="quarto-title">
@@ -335,64 +343,92 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 
 </header>
 
+
 <section id="motivation" class="level2">
 <h2 class="anchored" data-anchor-id="motivation">Motivation</h2>
 <p>Researchers and policy makers rely on household budget surveys and labor force surveys to answer questions related to employment changes and income dynamics. Although household budget surveys offer rich income data that is used for official poverty and income inequality analysis, they are only available at a relatively low frequency. In contrast, labor force surveys are typically collected at a higher frequency but have more limited information in terms of sample sizes or quality of information collected. However, in many cases, labor force surveys collect and report family income and labor income data in brackets, which raises the problem of recovering the full income distribution, key to analyzing poverty and inequality.</p>
 <p>Using interval-censored data for analysis of income inequality is not uncommon. Many approaches exist to estimate GINI indices in presence of income inequality (see <span class="citation" data-cites="jenkins_measuring_2011">Jenkins et al. (<a href="#ref-jenkins_measuring_2011" role="doc-biblioref">2011</a>)</span>, <span class="citation" data-cites="jargowsky_estimating_2018">Jargowsky and Wheeler (<a href="#ref-jargowsky_estimating_2018" role="doc-biblioref">2018</a>)</span>), which rely on the parametric estimation of the unconditional income distribution. While these approaches can be used to obtain general measures of poverty and inequality for the population as a whole, their use is limited for analyzing the heterogeneity across individual characteristics.</p>
 <p>In our paper <a href="https://documents1.worldbank.org/curated/en/099724408222262517/pdf/IDU04f787105008b604f5108f1a061fe88def833.pdf"><span class="citation" data-cites="rios_canavire_intregmi">Canavire-Bacarreza, Rios-Avila, and Sacco-Capurro (<span>n.d.</span>)</span></a>, we propose an alternative solution to the problem of analyzing interval-censored data that should be easy to implement using already available software. Our method extends the application of Multiple Imputation with interval-regression estimator proposed in <span class="citation" data-cites="royston_multiple_2007">Royston (<a href="#ref-royston_multiple_2007" role="doc-biblioref">2007</a>)</span>, that is already built-in in many statistical software packages including <code>Stata</code>. Specifically, we suggest that using a <strong>flexible</strong> enough interval regression estimator that allows for heteroskedastic errors can be used to characterized the conditional distribution of the censored data. One the model is estimated, we can use multiple imputation to create syntethic data, which can be analyzed using standard econometric or statistic tools.</p>
 </section>
-<section id="understanding-the-problem" class="level2 page-columns page-full">
+<section id="understanding-the-problem" class="level2">
 <h2 class="anchored" data-anchor-id="understanding-the-problem">Understanding the Problem</h2>
 <p>To illustrate the problem, we use an excerpt of the Swiss Labor Force Survey 1998, which is available online and has the type of data and variables applied econometricians may use. Assume we are interested in analyzing the relationship between hourly wages (dependent variable) and four independent variables: years of education, age of the respondent, years of job tenure, and gender. However, data on wages per hour were not collected directly, but rather it was collected by people indicating if their earnings belong to a list of income brackets. Thus, we only know the category of where a person’s wage per hour would fall, making it difficult to relate our variables of interest with wages per hour.</p>
 <div id="fig-corr1" class="quarto-layout-panel">
-<figure class="figure">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-corr1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-corr1" style="flex-basis: 50.0%;justify-content: center;">
 <div id="fig-corr1-1" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="intreg_mi1.png" class="img-fluid figure-img" data-ref-parent="fig-corr1"></p>
-<figcaption class="figure-caption">(a) Fully Observed</figcaption>
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-corr1-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="intreg_mi1.png" class="img-fluid figure-img" data-ref-parent="fig-corr1">
+</div>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-corr1-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Fully Observed
+</figcaption>
 </figure>
 </div>
 </div>
-<div class="quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-corr1" style="flex-basis: 50.0%;justify-content: center;">
 <div id="fig-corr1-2" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="intreg_mi2.png" class="img-fluid figure-img" data-ref-parent="fig-corr1"></p>
-<figcaption class="figure-caption">(b) Censored</figcaption>
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-corr1-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="intreg_mi2.png" class="img-fluid figure-img" data-ref-parent="fig-corr1">
+</div>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-corr1-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Censored
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p></p><figcaption class="figure-caption">Figure&nbsp;1: Wages vs Education, Age and Tenure</figcaption><p></p>
+</div>
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-corr1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Wages vs Education, Age and Tenure
+</figcaption>
 </figure>
 </div>
 <p><a href="#fig-corr1" class="quarto-xref">Figure&nbsp;1</a> presents information on the visual correlations between wages and three of the varialbes of interest. <a href="#fig-corr1-1" class="quarto-xref">Figure&nbsp;1 (a)</a> provides scatter plots of the fully observed wages agains the explanatory variables, whereas <a href="#fig-corr1-2" class="quarto-xref">Figure&nbsp;1 (b)</a> does the same, but using the bracket censored data.</p>
 <p>If one is interested in analyzing other moments, such as conditional quantiles, current methods would not allow for it, since they are mostly focused on explaining conditional means. However, that is where our approach comes into place. We start by using the <code>intreg, het()</code> command to model both the conditional mean and conditional variance. The latter is important because it allows us to explicitly model relationships between the dependent and independent variables that vary across the distribution. After we estimate the parameters for the conditional distribution, we can use it to generate multiple syntethic datasets (multiple imputation) with our command <code>intreg_mi</code>. This multiple imputed data can later be analyzed using standard econometric tools.</p>
 <p>We use this strategy with the data from <a href="#fig-corr1-2" class="quarto-xref">Figure&nbsp;1 (b)</a>, and generate multiple synthetic datasets to reconstruct the censored data. For completeness, we impute directly <strong>wages</strong> as well as <strong>log(wages)</strong>. To inspect how well the imputed data replicates the original data, we plot their density functions in <a href="#fig-den" class="quarto-xref">Figure&nbsp;2</a>. The yellow line representing the true wage distribution, and the blue lines corresponding to the imputed data. And of this scenario, it seems that imputed log(wages), or wages directly has little effect in the replicating the wage distribution.</p>
 <div id="fig-den" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="intreg_mi3.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;2: Observed vs Imputed Wages</figcaption>
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-den-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="intreg_mi3.png" class="img-fluid figure-img">
+</div>
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-den-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Observed vs Imputed Wages
+</figcaption>
 </figure>
 </div>
 <p>After creating the multiple-imputed synthethic datasets, they can be analyzed applying standard aggregation rules. In <code>Stata</code>, this can be done using <code>mi</code> commands. Because multiple imputation would provide no added value to the estimation of conditional means (linear regression), we compare esitmates using conditional quantile regressions.</p>
 <div id="fig-qret" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="intreg_mi4.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;3: Quantile Regression Coefficients</figcaption>
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-qret-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="intreg_mi4.png" class="img-fluid figure-img">
+</div>
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-qret-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Quantile Regression Coefficients
+</figcaption>
 </figure>
 </div>
 <p><a href="#fig-qret" class="quarto-xref">Figure&nbsp;3</a> contrasts the results of the quantile regression coefficients, using the fully observed data, as well as the two imputed data options. In general, while the estimated parameters using imputed data does not replicate the quantile regression coefficients perfectly, it captures most of the observed trends across the distribution. Considering that we start with only limited information of wages in brackets, the fact that we can obtain good approximations of the unobserved effects is a considerable advantage.</p>
 <p>The imputed data can be utilized in other ways. Policy analysists may be interested in analyzing the role of covariates on distributional statistics other than the mean. For example, they may be interested in analyzing income distribution using unconditional quantiles, Gini coefficients across groups, as well as other measures of income inequality.</p>
-<div id="tbl-ineq" class="tbl-parent column-body-outset quarto-layout-panel anchored">
-<div class="panel-caption table-caption">
-<p>Table&nbsp;1: Inequality Statistics by Gender</p>
-</div>
+<div id="tbl-ineq" class="quarto-layout-panel anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="table quarto-float-caption quarto-float-tbl" id="tbl-ineq-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Inequality Statistics by Gender
+</figcaption>
+<div aria-describedby="tbl-ineq-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row quarto-layout-valign-top">
-<div id="tbl-ineq1" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-ineq" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="tbl-ineq" style="flex-basis: 50.0%;justify-content: center;">
+<div id="tbl-ineq1" class="anchored">
+<figure class="quarto-float quarto-subfloat-tbl figure">
+<figcaption class="table quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-ineq1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Men
+</figcaption>
+<div aria-describedby="tbl-ineq1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="table">
-<caption>(a) Men</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;"></th>
@@ -465,9 +501,17 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 </tbody>
 </table>
 </div>
-<div id="tbl-ineq2" class="quarto-layout-cell quarto-layout-cell-subref anchored" data-ref-parent="tbl-ineq" style="flex-basis: 50.0%;justify-content: center;">
+</figure>
+</div>
+</div>
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="tbl-ineq" style="flex-basis: 50.0%;justify-content: center;">
+<div id="tbl-ineq2" class="anchored">
+<figure class="quarto-float quarto-subfloat-tbl figure">
+<figcaption class="table quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-ineq2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Women
+</figcaption>
+<div aria-describedby="tbl-ineq2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <table class="table">
-<caption>(b) Women</caption>
 <thead>
 <tr class="header">
 <th style="text-align: left;"></th>
@@ -540,12 +584,17 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 </tbody>
 </table>
 </div>
+</figure>
+</div>
+</div>
 </div>
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
 <p>Note: Standard Errors in Parenthesis</p>
 </div>
 </div>
+</div>
+</figure>
 </div>
 <p>With this excercise in mind, <a href="#tbl-ineq" class="quarto-xref">Table&nbsp;1</a> presents a few distributional statistics using the obseved and imputed data for men (<a href="#tbl-ineq1" class="quarto-xref">Table&nbsp;1 (a)</a>) and women (<a href="#tbl-ineq2" class="quarto-xref">Table&nbsp;1 (b)</a>). In all cases we obtain good approximations to the true statistics using the imputed data.</p>
 </section>
@@ -565,7 +614,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-rios_canavire_intregmi" class="csl-entry" role="listitem">
 Canavire-Bacarreza, Gustavo, Fernando Rios-Avila, and Flavia Sacco-Capurro. n.d. <span>“Recovering <span>Income</span> <span>Distribution</span> in the <span>Presence</span> of <span>Interval</span>-<span>Censored</span> <span>Data</span>.”</span>
 </div>
@@ -758,15 +807,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    if (id.startsWith('sec-')) {
+    const typesetMath = (el) => {
+      if (window.MathJax) {
+        // MathJax Typeset
+        window.MathJax.typeset([el]);
+      } else if (window.katex) {
+        // KaTeX Render
+        var mathElements = el.getElementsByClassName("math");
+        var macros = [];
+        for (var i = 0; i < mathElements.length; i++) {
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            window.katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains('display'),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false
+            });
+          }
+        }
+      }
+    }
+    if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
         for (let i = 0; i < 2; i++) {
           container.appendChild(note.children[i].cloneNode(true));
         }
+        typesetMath(container);
         return container.innerHTML
       } else {
+        typesetMath(note);
         return note.innerHTML;
       }
     } else {
@@ -775,6 +847,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
+      typesetMath(note);
       return note.innerHTML;
     }
   }
@@ -817,6 +890,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
       }
     }, function(instance) {
     });
@@ -888,6 +984,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -949,12 +1071,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../app_metrics/app_metrics5.html" class="pagination-link">
+      <a href="../app_metrics/app_metrics5.html" class="pagination-link  aria-label=" 2x2="" did:="" sant&#39;anna="" and="" zhao="" (2020)"="">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">2x2 DID: Sant’Anna and Zhao (2020)</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../app_metrics/app_metrics7.html" class="pagination-link">
+      <a href="../app_metrics/app_metrics7.html" class="pagination-link" aria-label="Linear Regressions, OLS and Standard Errors">
         <span class="nav-page-text">Linear Regressions, OLS and Standard Errors</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>

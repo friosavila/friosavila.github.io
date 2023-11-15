@@ -1,0 +1,13 @@
+/* css styles */
+.reveal pre.sourceCode code {
+    /* height: 500px; */
+    max-height: 10000px;
+  }
+.reveal pre code {
+    /*overflow: visible*/
+    max-height: 10000px;
+}  
+
+.larger {
+  font-size: 1.2em;
+} 

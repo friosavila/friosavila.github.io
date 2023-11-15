@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.251">
+<meta name="generator" content="quarto-1.4.455">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -25,7 +25,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -61,6 +61,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -101,12 +102,13 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
   "keyboard-shortcut": [
     "f",
     "/",
     "s"
   ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -142,7 +144,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
@@ -156,36 +158,36 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html" rel="" target="">
- <span class="menu-text">Home</span></a>
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../cv.html" rel="" target="">
- <span class="menu-text">my CV and Research</span></a>
+    <a class="nav-link" href="../../cv.html"> 
+<span class="menu-text">my CV and Research</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../software.html" rel="" target="">
- <span class="menu-text">Software</span></a>
+    <a class="nav-link" href="../../software.html"> 
+<span class="menu-text">Software</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../stataviz/index.html" rel="" target="">
- <span class="menu-text">Stata Viz</span></a>
+    <a class="nav-link" href="../../stataviz/index.html"> 
+<span class="menu-text">Stata Viz</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../stata_do/index.html" rel="" target="">
- <span class="menu-text">Stata Do’s Ado’s</span></a>
+    <a class="nav-link" href="../../stata_do/index.html"> 
+<span class="menu-text">Stata Do’s Ado’s</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../app_metrics/index.html" rel="" target="">
- <span class="menu-text">Applied econometrics</span></a>
+    <a class="nav-link" href="../../app_metrics/index.html"> 
+<span class="menu-text">Applied econometrics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../chatgpt.html" rel="" target="">
- <span class="menu-text">Odds and Ends</span></a>
+    <a class="nav-link" href="../../chatgpt.html"> 
+<span class="menu-text">Odds and Ends</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../about.html" rel="" target="">
- <span class="menu-text">about</span></a>
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">about</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -259,6 +261,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
+
 
 
 
@@ -344,7 +347,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <h2 class="anchored" data-anchor-id="results">Results</h2>
 <p>First, to make sure data was created correctly, we can do a quick summary statistics of the F-statistic of the first stage regression.</p>
 <div id="84bcbfc7" class="cell" data-execution_count="1">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> weakiv, <span class="kw">clear</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">tabstat</span> f_stat , <span class="kw">by</span>(FF) <span class="kw">stats</span>(<span class="kw">mean</span> <span class="kw">median</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -372,7 +375,7 @@ Group variable: FF
 </div>
 <p>The mean is a bit higher than the intended F-Statistic, whereas the median is closer. Both statistics suggesting simulations were created as intended.</p>
 <div id="dcc70c98" class="cell" data-execution_count="2">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> <span class="dv">scheme</span> white2</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>color_style tableau</span>
@@ -382,7 +385,7 @@ Group variable: FF
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="index_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">F-Statistics Distribution</figcaption>
+<figcaption>F-Statistics Distribution</figcaption>
 </figure>
 </div>
 </div>
@@ -391,7 +394,7 @@ Group variable: FF
 <p>What about the endogenous variable coefficient?</p>
 <p>While we could examine the coefficient themselves, I find it more useful to examine the distribution of the t-statistics in the second Stage.</p>
 <div id="1e7ecc3f" class="cell" data-execution_count="3">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">two</span> <span class="kw">kdensity</span> t_stat || <span class="kw">function</span> <span class="fu">y</span> = <span class="fu">normalden</span>(x) , <span class="kw">range</span>(-3 3) , <span class="kw">by</span>(FF, <span class="kw">note</span>(<span class="st">""</span>)) <span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"T-stat distribution"</span> 2 <span class="st">"Normal"</span>) <span class="bn">cols</span>(2)) <span class="bn">xline</span>(-1.96 1.96)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">graph</span> <span class="kw">export</span> fig1.png, <span class="kw">replace</span> <span class="kw">width</span>(1000) </span>
@@ -400,19 +403,27 @@ Group variable: FF
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="kw">graph</span> <span class="kw">export</span> fig2.png, <span class="kw">replace</span> <span class="kw">width</span>(1000) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="fig-fig1" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="fig1.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;1: T-Stat distribution by E(F)</figcaption>
+<div id="fig-fig1" class="quarto-figure quarto-figure-center anchored" width="80%" data-fig-pos="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="fig1.png" class="img-fluid figure-img" style="width:80.0%" data-fig-pos="center">
+</div>
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-fig1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: T-Stat distribution by E(F)
+</figcaption>
 </figure>
 </div>
 <p>What we see from <a href="#fig-fig1" class="quarto-xref">Figure&nbsp;1</a> is that the distribution of the t-statistic is not consistent with a normal distribution. For and <span class="math inline">\(F\leq 40\)</span>, there is a clear discrepancy between the normal distribution (orange) and the empirical t-stat distribution (blue). As consequence, when coefficients are possitive, it is more likely to reject the null hypothesis, but also under-reject when the coefficients are negative.</p>
 <p>Once we reach an F-statistic of at least 80 and 160, the difference between the normal distribution and the t-statistic empirical distribution dissapears. Lesson, if your F-stat is “low”, perhaps using standard distributions may be innapropriate.</p>
 <p>One problem with the results in <a href="#fig-fig1" class="quarto-xref">Figure&nbsp;1</a> was that when <span class="math inline">\(E(F)\)</span> is low, there are many instances where the F-distribution is less than 10. One may say that is the reason why the distribution is skew in <a href="#fig-fig1" class="quarto-xref">Figure&nbsp;1</a>. A simple way to avoid this is by ploting the same information, but restricting F-statistics to be larger than 10.</p>
-<div id="fig-fig2" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="fig2.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;2: T-Stat distribution by E(F) if F&gt;10</figcaption>
+<div id="fig-fig2" class="quarto-figure quarto-figure-center anchored" width="80%" data-fig-pos="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="fig2.png" class="img-fluid figure-img" style="width:80.0%" data-fig-pos="center">
+</div>
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-fig2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: T-Stat distribution by E(F) if F&gt;10
+</figcaption>
 </figure>
 </div>
 <p>Unfortunately, the situation is much worse. By constraining the F-statistic to be larger than 10, we are doing the equivalent of p-hacking (F hacking?), which further distorts the distribution of the endogenous variable. While it looks a bit more normal (distributed), we can see now that it over rejects the null hypothesis, if the true F-statistic was, in fact, lower. You can call this evidence of biased estimations.</p>
@@ -429,7 +440,7 @@ Group variable: FF
 <p>What did I see (you may ask)? First, let me concentrate only on the cases with “stronger” IVs. In particular those with an <span class="math inline">\(E(F)\leq 80\)</span>. None of the F-statistics is less than 10 across all simulations in this case.</p>
 <p>Second, because the F-Statistics have different ranges, I will standardize them across groups. This will make it easier to compare scatter plots.</p>
 <div id="e70552a5" class="cell" data-execution_count="4">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>** Keeping only FF&gt;=80</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span> {</span>
@@ -446,15 +457,19 @@ Group variable: FF
 <span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="kw">graph</span> <span class="kw">export</span> fig3.png, <span class="kw">replace</span> <span class="kw">width</span>(1000)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="fig-fig3" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="fig3.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;3: T-Stat vs SF-Stat</figcaption>
+<div id="fig-fig3" class="quarto-figure quarto-figure-center anchored" width="80%" data-fig-pos="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="fig3.png" class="img-fluid figure-img" style="width:80.0%" data-fig-pos="center">
+</div>
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-fig3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: T-Stat vs SF-Stat
+</figcaption>
 </figure>
 </div>
 <p>What I see in <a href="#fig-fig3" class="quarto-xref">Figure&nbsp;3</a> is that higher F-Stats in the first Stage seem to increase the likelihood of the t-value to be positive and significant. Whereas lower F-stats are associated with the opposite (but to a lesser extent possibly due to simulation design).</p>
 <div id="ae0c9901" class="cell" data-execution_count="5">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">two</span> (<span class="kw">kdensity</span> t_stat <span class="kw">if</span> <span class="fu">inrange</span>(f_stat2,-.65,.7)) <span class="co">///</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">kdensity</span> t_stat <span class="kw">if</span> f_stat2&lt;-.65) <span class="co">///</span></span>
@@ -471,26 +486,38 @@ Group variable: FF
 </details>
 </div>
 <div id="fig-fig4" class="quarto-layout-panel">
-<figure class="figure">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-fig4" style="flex-basis: 50.0%;justify-content: center;">
 <div id="fig-fig4a" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="fig4.png" class="img-fluid figure-img" data-ref-parent="fig-fig4"></p>
-<figcaption class="figure-caption">(a) t-Stat Distribution</figcaption>
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-fig4a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="fig4.png" class="img-fluid figure-img" data-ref-parent="fig-fig4">
+</div>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-fig4a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) t-Stat Distribution
+</figcaption>
 </figure>
 </div>
 </div>
-<div class="quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-fig4" style="flex-basis: 50.0%;justify-content: center;">
 <div id="fig-fig4b" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="fig5.png" class="img-fluid figure-img" data-ref-parent="fig-fig4"></p>
-<figcaption class="figure-caption">(b) Coefficient Distribution</figcaption>
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-fig4b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="fig5.png" class="img-fluid figure-img" data-ref-parent="fig-fig4">
+</div>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-fig4b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Coefficient Distribution
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p></p><figcaption class="figure-caption">Figure&nbsp;4: Distribution based on Standardized F-Statistic</figcaption><p></p>
+</div>
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-fig4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Distribution based on Standardized F-Statistic
+</figcaption>
 </figure>
 </div>
 <p><a href="#fig-fig4" class="quarto-xref">Figure&nbsp;4</a> shows the distribution of both the t-statistic and the coefficient of the endogenous variables for three groups. Observations where the F-statistic is between the 25th and 75th percentile of the distribution (Thus close to the E(F)), and observations for the top (above 75th percentile) and bottom (below 25th percentile) of the distribution. This is similar to the previous conjecture. Even if the instrument is “strong”, if the sample F-statistic is too high or low compared to the E(F), inference may be biased.</p>
@@ -510,7 +537,7 @@ Group variable: FF
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-lee2022" class="csl-entry" role="listitem">
 Lee, David S., Justin McCrary, Marcelo J. Moreira, and Jack Porter. 2022. <span>“Valid t-Ratio Inference for IV.”</span> <em>American Economic Review</em> 112 (10): 3260–90. <a href="https://doi.org/10.1257/aer.20211063">https://doi.org/10.1257/aer.20211063</a>.
 </div>
@@ -706,15 +733,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    if (id.startsWith('sec-')) {
+    const typesetMath = (el) => {
+      if (window.MathJax) {
+        // MathJax Typeset
+        window.MathJax.typeset([el]);
+      } else if (window.katex) {
+        // KaTeX Render
+        var mathElements = el.getElementsByClassName("math");
+        var macros = [];
+        for (var i = 0; i < mathElements.length; i++) {
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            window.katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains('display'),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false
+            });
+          }
+        }
+      }
+    }
+    if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
         for (let i = 0; i < 2; i++) {
           container.appendChild(note.children[i].cloneNode(true));
         }
+        typesetMath(container);
         return container.innerHTML
       } else {
+        typesetMath(note);
         return note.innerHTML;
       }
     } else {
@@ -723,6 +773,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
+      typesetMath(note);
       return note.innerHTML;
     }
   }
@@ -765,6 +816,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
       }
     }, function(instance) {
     });
@@ -836,6 +910,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {

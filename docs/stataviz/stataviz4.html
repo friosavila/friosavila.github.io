@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.251">
+<meta name="generator" content="quarto-1.4.455">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -57,7 +57,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -81,12 +81,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
   "keyboard-shortcut": [
     "f",
     "/",
     "s"
   ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -110,7 +111,7 @@ gtag('js', new Date());
 gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
 
@@ -120,7 +121,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
@@ -134,36 +135,36 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="../index.html" rel="" target="" aria-current="page">
- <span class="menu-text">Home</span></a>
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../cv.html" rel="" target="">
- <span class="menu-text">my CV and Research</span></a>
+    <a class="nav-link" href="../cv.html"> 
+<span class="menu-text">my CV and Research</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../software.html" rel="" target="">
- <span class="menu-text">Software</span></a>
+    <a class="nav-link" href="../software.html"> 
+<span class="menu-text">Software</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../stataviz/index.html" rel="" target="">
- <span class="menu-text">Stata Viz</span></a>
+    <a class="nav-link" href="../stataviz/index.html"> 
+<span class="menu-text">Stata Viz</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../stata_do/index.html" rel="" target="">
- <span class="menu-text">Stata Do’s Ado’s</span></a>
+    <a class="nav-link" href="../stata_do/index.html"> 
+<span class="menu-text">Stata Do’s Ado’s</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../app_metrics/index.html" rel="" target="">
- <span class="menu-text">Applied econometrics</span></a>
+    <a class="nav-link" href="../app_metrics/index.html"> 
+<span class="menu-text">Applied econometrics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../chatgpt.html" rel="" target="">
- <span class="menu-text">Odds and Ends</span></a>
+    <a class="nav-link" href="../chatgpt.html"> 
+<span class="menu-text">Odds and Ends</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../about.html" rel="" target="">
- <span class="menu-text">about</span></a>
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">about</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -178,11 +179,11 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
     </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../stataviz/stataviz1.html">Stataviz</a></li><li class="breadcrumb-item"><a href="../stataviz/stataviz4.html">Make Scatters more Colorful: <code>mscatter</code></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
   </nav>
@@ -190,7 +191,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../index.html" class="sidebar-logo-link">
       <img src="../WeeMee.jpg" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
@@ -266,7 +267,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -302,6 +303,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 
 </header>
 
+
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>The program <code>mscatter</code> came as an answer to two questions, often asked on <code>statalist</code>.</p>
@@ -323,7 +325,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <div class="sourceCode" id="cb2"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ssc</span> install mscatter</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>In the examples below, I will also use the scheme <code>white2</code> within [<code>color_style</code>]](https://friosavila.github.io/stataviz/stataviz1.html). See instructions there if you want to install all its components.</p>
 <p>Now, how do you produce a scatter with multiple groups. The task is, in fact, simple. If I were to use <code>auto.dta</code> dataset, it would be something like this:</p>
-<div class="cell" data-execution_count="1">
+<div id="79e1c682" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">sysuse</span> auto, <span class="kw">clear</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">two</span> <span class="kw">scatter</span> price mpg <span class="kw">if</span> foreign == 1 || <span class="co">///</span></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">scatter</span> price mpg <span class="kw">if</span> foreign == 0</span>
@@ -331,14 +333,14 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 </div>
 <p><img src="ms1.png" class="img-fluid" style="width:80.0%"></p>
 <p>In fact, I have been pointted out to one command by Nick Cox, named linkplot, which may also help you produce similar plots.</p>
-<div class="cell" data-execution_count="2">
+<div id="6b198cde" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ssc</span> install linkplot</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>linkplot price mpg , <span class="kw">link</span>(foreign) asyvars <span class="kw">recast</span>(<span class="kw">scatter</span>)</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">graph</span> <span class="kw">export</span> ms2.png, <span class="kw">width</span>(1200) <span class="kw">replace</span>   </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><img src="ms2.png" class="img-fluid" style="width:80.0%"></p>
 <p>And produces pretty much the same. The limitation: only works with up to 15 groups. But who needs more right? Well, if you need more, you can use <code>mscatter</code>!</p>
-<div class="cell" data-execution_count="3">
+<div id="4d065e2b" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> <span class="dv">scheme</span> white2                   <span class="co">// Lets use white scheme</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>mscatter price mpg , <span class="bn">over</span>(rep78)    <span class="co">/// Upto here normal. I use over instead of By</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  alegend  <span class="bn">legend</span>(<span class="bn">cols</span>(5)) msize(3) <span class="co">/// add a legend with large dots</span></span>
@@ -347,7 +349,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 </div>
 <p><img src="ms3.png" class="img-fluid" style="width:80.0%"></p>
 <p>But those are easy to do by hand. What if you have many groups. Lets see with some different data:</p>
-<div class="cell" data-execution_count="4">
+<div id="e726fc59" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">webuse</span> nlswork</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>mscatter ln_wage ttl_exp ,     <span class="co">/// normal</span></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>          <span class="bn">over</span>(age)            <span class="co">/// but over many groups!</span></span>
@@ -357,7 +359,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 </div>
 <p><img src="ms4.png" class="img-fluid" style="width:80.0%"></p>
 <p>And as I show you before, mscatter can be combined with by()</p>
-<div class="cell" data-execution_count="5">
+<div id="de44ebfa" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mscatter ln_wage ttl_exp , <span class="bn">over</span>(grade) <span class="co">///</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>      colorpalette(magma ) <span class="kw">by</span>(race, <span class="bn">legend</span>(<span class="kw">off</span>)) <span class="co">// legend(off) should go here</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="kw">graph</span> <span class="kw">export</span> ms5.png, <span class="kw">width</span>(1200) <span class="kw">replace</span>       </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -370,7 +372,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <p><code>mscatter</code> has other features that might put it apart from other commands. While the original version was written to take advantage of <strong>frames</strong>. The current version will also work with earlier Stata versions (at least V14), using <code>preserve/restore</code> commands.</p>
 <p>In addition to this, <code>mscatter</code> may also allow you to add fitted plots to your scatter!</p>
 <p>Lets see how this works:</p>
-<div class="cell" data-execution_count="6">
+<div id="43c14218" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">webuse</span> nlswork, <span class="kw">clear</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> <span class="dv">seed</span> 10</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">keep</span> <span class="kw">if</span> runiform()&lt;.2</span>
@@ -383,7 +385,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 </div>
 <p><img src="ms6.png" class="img-fluid" style="width:80.0%"></p>
 <p>As you can see, this figure plots log of wages agains total experience across race groups. In addition to this, however, it also adds a fitted plot using quadratic fit using the option <code>fit(qfitci)</code>. You can add here other options that are command specific. Of course, with the addition of this, you may want to drop the scatter plot all together</p>
-<div class="cell" data-execution_count="7">
+<div id="e4932864" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>mscatter ln_wage ttl_exp , <span class="bn">over</span>(race)  <span class="co">///</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>        <span class="kw">fit</span>(qfitci) mfcolor(%5) mlcolor(%5) <span class="co">///</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>        noscatter  <span class="co">/// Asks not to show the scatter points</span></span>
@@ -585,15 +587,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    if (id.startsWith('sec-')) {
+    const typesetMath = (el) => {
+      if (window.MathJax) {
+        // MathJax Typeset
+        window.MathJax.typeset([el]);
+      } else if (window.katex) {
+        // KaTeX Render
+        var mathElements = el.getElementsByClassName("math");
+        var macros = [];
+        for (var i = 0; i < mathElements.length; i++) {
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            window.katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains('display'),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false
+            });
+          }
+        }
+      }
+    }
+    if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
         for (let i = 0; i < 2; i++) {
           container.appendChild(note.children[i].cloneNode(true));
         }
+        typesetMath(container);
         return container.innerHTML
       } else {
+        typesetMath(note);
         return note.innerHTML;
       }
     } else {
@@ -602,6 +627,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
+      typesetMath(note);
       return note.innerHTML;
     }
   }
@@ -644,6 +670,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
       }
     }, function(instance) {
     });
@@ -715,6 +764,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -776,12 +851,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../stataviz/stataviz3.html" class="pagination-link">
+      <a href="../stataviz/stataviz3.html" class="pagination-link  aria-label=" how="" to="" make="" waffles:="" `waffle_plot`"="">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">How to make Waffles: <code>waffle_plot</code></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../stataviz/stataviz5.html" class="pagination-link">
+      <a href="../stataviz/stataviz5.html" class="pagination-link" aria-label="Palmer Penguins">
         <span class="nav-page-text">Palmer Penguins</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>

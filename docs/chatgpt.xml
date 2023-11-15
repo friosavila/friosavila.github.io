@@ -9,13 +9,14 @@
 <link>https://friosavila.github.io/chatgpt.html</link>
 <atom:link href="https://friosavila.github.io/chatgpt.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.4.251</generator>
+<generator>quarto-1.4.455</generator>
 <lastBuildDate>Thu, 24 Aug 2023 04:00:00 GMT</lastBuildDate>
 <item>
   <title>Keynes vs Hayek: The Rap battle</title>
   <dc:creator>ChatGPT and Fernando Rios-Avila</dc:creator>
-  <link>https://friosavila.github.io/chatgpt/ky_hy_08_24_2023/index.html</link>
+  <link>https://friosavila.github.io/chatgpt/ky_hy_08_24_2023/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -161,14 +162,15 @@ Mimicking history, it’s Keynes and Hayek’s fight!</p>
  ]]></description>
   <category>ChatGPT</category>
   <category>Rap Battles</category>
-  <guid>https://friosavila.github.io/chatgpt/ky_hy_08_24_2023/index.html</guid>
+  <guid>https://friosavila.github.io/chatgpt/ky_hy_08_24_2023/</guid>
   <pubDate>Thu, 24 Aug 2023 04:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Weak IV: And the problem of Inference</title>
   <dc:creator>Fernando Rios-Avila</dc:creator>
-  <link>https://friosavila.github.io/chatgpt/weakiv_08_15_2023/index.html</link>
+  <link>https://friosavila.github.io/chatgpt/weakiv_08_15_2023/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -402,7 +404,7 @@ font-style: inherit;">F</span>) (f_stat b_coef t_stat FF)</span></code></pre></d
 <h2 class="anchored" data-anchor-id="results">Results</h2>
 <p>First, to make sure data was created correctly, we can do a quick summary statistics of the F-statistic of the first stage regression.</p>
 <div id="84bcbfc7" class="cell" data-execution_count="1">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><span class="kw" style="color: #003B4F;
 background-color: null;
@@ -444,7 +446,7 @@ Group variable: FF
 </div>
 <p>The mean is a bit higher than the intended F-Statistic, whereas the median is closer. Both statistics suggesting simulations were created as intended.</p>
 <div id="dcc70c98" class="cell" data-execution_count="2">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><span class="kw" style="color: #003B4F;
 background-color: null;
@@ -468,7 +470,7 @@ font-style: inherit;">xline</span>(10 20 100)</span></code></pre></div>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://friosavila.github.io/chatgpt/weakiv_08_15_2023/index_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">F-Statistics Distribution</figcaption>
+<figcaption>F-Statistics Distribution</figcaption>
 </figure>
 </div>
 </div>
@@ -477,7 +479,7 @@ font-style: inherit;">xline</span>(10 20 100)</span></code></pre></div>
 <p>What about the endogenous variable coefficient?</p>
 <p>While we could examine the coefficient themselves, I find it more useful to examine the distribution of the t-statistics in the second Stage.</p>
 <div id="1e7ecc3f" class="cell" data-execution_count="3">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><span class="kw" style="color: #003B4F;
 background-color: null;
@@ -564,19 +566,27 @@ background-color: null;
 font-style: inherit;">width</span>(1000) </span></code></pre></div>
 </details>
 </div>
-<div id="fig-fig1" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="https://friosavila.github.io/chatgpt/weakiv_08_15_2023/fig1.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;1: T-Stat distribution by E(F)</figcaption>
+<div id="fig-fig1" class="quarto-figure quarto-figure-center anchored" width="80%" data-fig-pos="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://friosavila.github.io/chatgpt/weakiv_08_15_2023/fig1.png" class="img-fluid figure-img" style="width:80.0%" data-fig-pos="center">
+</div>
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-fig1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: T-Stat distribution by E(F)
+</figcaption>
 </figure>
 </div>
 <p>What we see from Figure&nbsp;1 is that the distribution of the t-statistic is not consistent with a normal distribution. For and <img src="https://latex.codecogs.com/png.latex?F%5Cleq%2040">, there is a clear discrepancy between the normal distribution (orange) and the empirical t-stat distribution (blue). As consequence, when coefficients are possitive, it is more likely to reject the null hypothesis, but also under-reject when the coefficients are negative.</p>
 <p>Once we reach an F-statistic of at least 80 and 160, the difference between the normal distribution and the t-statistic empirical distribution dissapears. Lesson, if your F-stat is “low”, perhaps using standard distributions may be innapropriate.</p>
 <p>One problem with the results in Figure&nbsp;1 was that when <img src="https://latex.codecogs.com/png.latex?E(F)"> is low, there are many instances where the F-distribution is less than 10. One may say that is the reason why the distribution is skew in Figure&nbsp;1. A simple way to avoid this is by ploting the same information, but restricting F-statistics to be larger than 10.</p>
-<div id="fig-fig2" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="https://friosavila.github.io/chatgpt/weakiv_08_15_2023/fig2.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;2: T-Stat distribution by E(F) if F&gt;10</figcaption>
+<div id="fig-fig2" class="quarto-figure quarto-figure-center anchored" width="80%" data-fig-pos="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://friosavila.github.io/chatgpt/weakiv_08_15_2023/fig2.png" class="img-fluid figure-img" style="width:80.0%" data-fig-pos="center">
+</div>
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-fig2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: T-Stat distribution by E(F) if F&gt;10
+</figcaption>
 </figure>
 </div>
 <p>Unfortunately, the situation is much worse. By constraining the F-statistic to be larger than 10, we are doing the equivalent of p-hacking (F hacking?), which further distorts the distribution of the endogenous variable. While it looks a bit more normal (distributed), we can see now that it over rejects the null hypothesis, if the true F-statistic was, in fact, lower. You can call this evidence of biased estimations.</p>
@@ -593,7 +603,7 @@ font-style: inherit;">width</span>(1000) </span></code></pre></div>
 <p>What did I see (you may ask)? First, let me concentrate only on the cases with “stronger” IVs. In particular those with an <img src="https://latex.codecogs.com/png.latex?E(F)%5Cleq%2080">. None of the F-statistics is less than 10 across all simulations in this case.</p>
 <p>Second, because the F-Statistics have different ranges, I will standardize them across groups. This will make it easier to compare scatter plots.</p>
 <div id="e70552a5" class="cell" data-execution_count="4">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb7-1">** Keeping only FF&gt;=80</span>
 <span id="cb7-2"><span class="kw" style="color: #003B4F;
@@ -668,15 +678,19 @@ background-color: null;
 font-style: inherit;">width</span>(1000)</span></code></pre></div>
 </details>
 </div>
-<div id="fig-fig3" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="https://friosavila.github.io/chatgpt/weakiv_08_15_2023/fig3.png" class="img-fluid figure-img" style="width:80.0%"></p>
-<figcaption class="figure-caption">Figure&nbsp;3: T-Stat vs SF-Stat</figcaption>
+<div id="fig-fig3" class="quarto-figure quarto-figure-center anchored" width="80%" data-fig-pos="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://friosavila.github.io/chatgpt/weakiv_08_15_2023/fig3.png" class="img-fluid figure-img" style="width:80.0%" data-fig-pos="center">
+</div>
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-fig3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: T-Stat vs SF-Stat
+</figcaption>
 </figure>
 </div>
 <p>What I see in Figure&nbsp;3 is that higher F-Stats in the first Stage seem to increase the likelihood of the t-value to be positive and significant. Whereas lower F-stats are associated with the opposite (but to a lesser extent possibly due to simulation design).</p>
 <div id="ae0c9901" class="cell" data-execution_count="5">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><span class="kw" style="color: #003B4F;
 background-color: null;
@@ -793,26 +807,38 @@ font-style: inherit;">width</span>(1000)    </span></code></pre></div>
 </details>
 </div>
 <div id="fig-fig4" class="quarto-layout-panel">
-<figure class="figure">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-fig4" style="flex-basis: 50.0%;justify-content: center;">
 <div id="fig-fig4a" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="https://friosavila.github.io/chatgpt/weakiv_08_15_2023/fig4.png" class="img-fluid figure-img" data-ref-parent="fig-fig4"></p>
-<figcaption class="figure-caption">(a) t-Stat Distribution</figcaption>
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-fig4a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://friosavila.github.io/chatgpt/weakiv_08_15_2023/fig4.png" class="img-fluid figure-img" data-ref-parent="fig-fig4">
+</div>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-fig4a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) t-Stat Distribution
+</figcaption>
 </figure>
 </div>
 </div>
-<div class="quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-fig4" style="flex-basis: 50.0%;justify-content: center;">
 <div id="fig-fig4b" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="https://friosavila.github.io/chatgpt/weakiv_08_15_2023/fig5.png" class="img-fluid figure-img" data-ref-parent="fig-fig4"></p>
-<figcaption class="figure-caption">(b) Coefficient Distribution</figcaption>
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-fig4b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://friosavila.github.io/chatgpt/weakiv_08_15_2023/fig5.png" class="img-fluid figure-img" data-ref-parent="fig-fig4">
+</div>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-fig4b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Coefficient Distribution
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p></p><figcaption class="figure-caption">Figure&nbsp;4: Distribution based on Standardized F-Statistic</figcaption><p></p>
+</div>
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-fig4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Distribution based on Standardized F-Statistic
+</figcaption>
 </figure>
 </div>
 <p>Figure&nbsp;4 shows the distribution of both the t-statistic and the coefficient of the endogenous variables for three groups. Observations where the F-statistic is between the 25th and 75th percentile of the distribution (Thus close to the E(F)), and observations for the top (above 75th percentile) and bottom (below 25th percentile) of the distribution. This is similar to the previous conjecture. Even if the instrument is “strong”, if the sample F-statistic is too high or low compared to the E(F), inference may be biased.</p>
@@ -832,7 +858,7 @@ font-style: inherit;">width</span>(1000)    </span></code></pre></div>
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
 <div id="ref-lee2022" class="csl-entry">
 Lee, David S., Justin McCrary, Marcelo J. Moreira, and Jack Porter. 2022. <span>“Valid t-Ratio Inference for IV.”</span> <em>American Economic Review</em> 112 (10): 3260–90. <a href="https://doi.org/10.1257/aer.20211063">https://doi.org/10.1257/aer.20211063</a>.
 </div>
@@ -853,14 +879,15 @@ Vega Yon, George G., and Brian Quistorff. 2019. <span>“Parallel: A Command for
   <category>Programming</category>
   <category>Econometrics</category>
   <category>Weak IV</category>
-  <guid>https://friosavila.github.io/chatgpt/weakiv_08_15_2023/index.html</guid>
+  <guid>https://friosavila.github.io/chatgpt/weakiv_08_15_2023/</guid>
   <pubDate>Tue, 15 Aug 2023 04:00:00 GMT</pubDate>
 </item>
 <item>
   <title>How to suest a HDFE</title>
   <dc:creator>Fernando Rios-Avila</dc:creator>
-  <link>https://friosavila.github.io/chatgpt/suregfe_07_14_2023/index.html</link>
+  <link>https://friosavila.github.io/chatgpt/suregfe_07_14_2023/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -1293,14 +1320,15 @@ font-style: inherit;">union</span></span></code></pre></div>
   <category>Stata</category>
   <category>Programming</category>
   <category>Fixed Effects</category>
-  <guid>https://friosavila.github.io/chatgpt/suregfe_07_14_2023/index.html</guid>
+  <guid>https://friosavila.github.io/chatgpt/suregfe_07_14_2023/</guid>
   <pubDate>Fri, 14 Jul 2023 04:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Renaming variables in Bulk</title>
   <dc:creator>Fernando Rios-Avila and Fahad Mirza</dc:creator>
-  <link>https://friosavila.github.io/chatgpt/ren_06_02_2023/index.html</link>
+  <link>https://friosavila.github.io/chatgpt/ren_06_02_2023/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -1462,14 +1490,15 @@ font-style: inherit;">ren</span> (*) (var_#), addnumber dryrun</span></code></pr
  ]]></description>
   <category>Stata</category>
   <category>Tips</category>
-  <guid>https://friosavila.github.io/chatgpt/ren_06_02_2023/index.html</guid>
+  <guid>https://friosavila.github.io/chatgpt/ren_06_02_2023/</guid>
   <pubDate>Fri, 02 Jun 2023 04:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Synthetic Control: Role of rescaling</title>
   <dc:creator>Fernando Rios-Avila</dc:creator>
-  <link>https://friosavila.github.io/chatgpt/synth_05_09_2023/index.html</link>
+  <link>https://friosavila.github.io/chatgpt/synth_05_09_2023/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -1510,7 +1539,7 @@ font-style: inherit;">ren</span> (*) (var_#), addnumber dryrun</span></code></pr
 <p>For the example I have in mind, I will use the <strong><code>Smoking</code></strong> dataset that is typically used to teach the methodology. I will also use two community-contributed programs <code>synth</code> and <code>frause</code>. The second one, just to make it easy uploading the data.</p>
 <p>I will also use a small programm to prepare the data before creating the figures. This one is rather long, but if you are interested, please take a look.</p>
 <div class="cell" data-execution_count="1">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><span class="kw" style="color: #003B4F;
 background-color: null;
@@ -1848,7 +1877,7 @@ font-style: inherit;">end</span></span></code></pre></div>
 <p>The basic code will look like this:</p>
 <div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1">synth cigsale cigsale(1971) cigsale(1975) cigsale(1980)   cigsale(1985), trunit(3) trperiod(1989) </span></code></pre></div>
 <div class="cell" data-execution_count="2">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><span class="kw" style="color: #003B4F;
 background-color: null;
@@ -1873,8 +1902,7 @@ font-style: inherit;">qui</span>:sc_doer</span></code></pre></div>
 </details>
 </div>
 <p>which will produce the following:</p>
-<div class="page-columns page-full">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><span class="kw" style="color: #003B4F;
 background-color: null;
@@ -1958,55 +1986,73 @@ font-style: inherit;">replace</span>) <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">ylabel</span>(0(5)25)</span></code></pre></div>
 </details>
-<div id="fig-sc1" class="cell column-page quarto-layout-panel" data-execution_count="3">
-<figure class="figure">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc1-1" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc1-output-1.png" class="img-fluid figure-img" data-ref-parent="fig-sc1"></p>
-<figcaption class="figure-caption">(a) Unrestricted effect</figcaption>
+<div id="fig-sc1" class="quarto-layout-panel page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-sc1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<div class="quarto-layout-row quarto-layout-valign-top page-columns page-full">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc1" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-sc1-1" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
+<div aria-describedby="fig-sc1-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc1-output-1.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc1">
+</div>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc1-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Unrestricted effect
+</figcaption>
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc1-2" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc1-output-2.png" class="img-fluid figure-img" data-ref-parent="fig-sc1"></p>
-<figcaption class="figure-caption">(b) Restricted effect</figcaption>
-</figure>
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc1" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-sc1-2" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
+<div aria-describedby="fig-sc1-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc1-output-2.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc1">
 </div>
-</div>
-</div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc1-3" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc1-output-3.png" class="img-fluid figure-img" data-ref-parent="fig-sc1"></p>
-<figcaption class="figure-caption">(c) RMSE Ratio</figcaption>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc1-4" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc1-output-4.png" class="img-fluid figure-img" data-ref-parent="fig-sc1"></p>
-<figcaption class="figure-caption">(d) P-value</figcaption>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc1-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Restricted effect
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p></p><figcaption class="figure-caption">Figure&nbsp;1: Synthetic Control Results: ASIS</figcaption><p></p>
+<div class="quarto-layout-row quarto-layout-valign-top page-columns page-full">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc1" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-sc1-3" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
+<div aria-describedby="fig-sc1-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc1-output-3.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc1">
+</div>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc1-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c) RMSE Ratio
+</figcaption>
 </figure>
 </div>
+</div>
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc1" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-sc1-4" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
+<div aria-describedby="fig-sc1-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc1-output-4.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc1">
+</div>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc1-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(d) P-value
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-sc1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Synthetic Control Results: ASIS
+</figcaption>
+</figure>
 </div>
 <p>Based on Figure&nbsp;1, there is an effect of the Policy which reduced sales of cigarates. Figure&nbsp;1 (c) and Figure&nbsp;1 (d) suggest the effect is significant across most post-treatment periods.</p>
 </section>
 <section id="log-case" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="log-case">Log Case</h3>
 <p>Lets make one change. Instead of using cigarette sale per capita, I will use the log of that variable. The idea is that while raw data may not be comparable, because of different scales across units, data may be more comparable if its comparessed using a logScale.</p>
-<div class="page-columns page-full">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><span class="kw" style="color: #003B4F;
 background-color: null;
@@ -2090,55 +2136,73 @@ font-style: inherit;">replace</span>) <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">ylabel</span>(0(5)25)</span></code></pre></div>
 </details>
-<div id="fig-sc2" class="cell column-page quarto-layout-panel" data-execution_count="5">
-<figure class="figure">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc2-1" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc2-output-1.png" class="img-fluid figure-img" data-ref-parent="fig-sc2"></p>
-<figcaption class="figure-caption">(a) Unrestricted effect</figcaption>
+<div id="fig-sc2" class="quarto-layout-panel page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-sc2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<div class="quarto-layout-row quarto-layout-valign-top page-columns page-full">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc2" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-sc2-1" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
+<div aria-describedby="fig-sc2-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc2-output-1.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc2">
+</div>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc2-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Unrestricted effect
+</figcaption>
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc2-2" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc2-output-2.png" class="img-fluid figure-img" data-ref-parent="fig-sc2"></p>
-<figcaption class="figure-caption">(b) Restricted effect</figcaption>
-</figure>
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc2" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-sc2-2" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
+<div aria-describedby="fig-sc2-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc2-output-2.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc2">
 </div>
-</div>
-</div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc2-3" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc2-output-3.png" class="img-fluid figure-img" data-ref-parent="fig-sc2"></p>
-<figcaption class="figure-caption">(c) RMSE Ratio</figcaption>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc2-4" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc2-output-4.png" class="img-fluid figure-img" data-ref-parent="fig-sc2"></p>
-<figcaption class="figure-caption">(d) P-value</figcaption>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc2-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Restricted effect
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p></p><figcaption class="figure-caption">Figure&nbsp;2: Synthetic Control Results: Logs</figcaption><p></p>
+<div class="quarto-layout-row quarto-layout-valign-top page-columns page-full">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc2" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-sc2-3" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
+<div aria-describedby="fig-sc2-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc2-output-3.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc2">
+</div>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc2-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c) RMSE Ratio
+</figcaption>
 </figure>
 </div>
+</div>
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc2" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-sc2-4" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
+<div aria-describedby="fig-sc2-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc2-output-4.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc2">
+</div>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc2-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(d) P-value
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-sc2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Synthetic Control Results: Logs
+</figcaption>
+</figure>
 </div>
 <p>Interestingly enough Figure&nbsp;2 shows a very similar effect plot as in Figure&nbsp;1. The RMSE ratio is even better, but with few post-treatment effects that are not as significant.</p>
 </section>
 <section id="relative-change" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="relative-change">Relative Change</h3>
 <p>The next alternative is to use a relative rescaling. Specifically, I will change the baseline of cigsales across all States, so that Cigarette Sales in 1970 is normalized to be 100. The changes, then could be interpreted in units relative to what happened in 1970.</p>
-<div class="page-columns page-full">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><span class="kw" style="color: #003B4F;
 background-color: null;
@@ -2222,55 +2286,73 @@ font-style: inherit;">replace</span>) <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">ylabel</span>(0(5)25)</span></code></pre></div>
 </details>
-<div id="fig-sc3" class="cell column-page quarto-layout-panel" data-execution_count="7">
-<figure class="figure">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc3-1" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc3-output-1.png" class="img-fluid figure-img" data-ref-parent="fig-sc3"></p>
-<figcaption class="figure-caption">(a) Unrestricted effect</figcaption>
+<div id="fig-sc3" class="quarto-layout-panel page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-sc3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<div class="quarto-layout-row quarto-layout-valign-top page-columns page-full">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc3" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-sc3-1" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
+<div aria-describedby="fig-sc3-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc3-output-1.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc3">
+</div>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc3-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Unrestricted effect
+</figcaption>
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc3-2" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc3-output-2.png" class="img-fluid figure-img" data-ref-parent="fig-sc3"></p>
-<figcaption class="figure-caption">(b) Restricted effect</figcaption>
-</figure>
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc3" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-sc3-2" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
+<div aria-describedby="fig-sc3-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc3-output-2.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc3">
 </div>
-</div>
-</div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc3-3" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc3-output-3.png" class="img-fluid figure-img" data-ref-parent="fig-sc3"></p>
-<figcaption class="figure-caption">(c) RMSE Ratio</figcaption>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc3-4" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc3-output-4.png" class="img-fluid figure-img" data-ref-parent="fig-sc3"></p>
-<figcaption class="figure-caption">(d) P-value</figcaption>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc3-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Restricted effect
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p></p><figcaption class="figure-caption">Figure&nbsp;3: Synthetic Control Results: Logs</figcaption><p></p>
+<div class="quarto-layout-row quarto-layout-valign-top page-columns page-full">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc3" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-sc3-3" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
+<div aria-describedby="fig-sc3-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc3-output-3.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc3">
+</div>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc3-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c) RMSE Ratio
+</figcaption>
 </figure>
 </div>
+</div>
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc3" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-sc3-4" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
+<div aria-describedby="fig-sc3-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc3-output-4.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc3">
+</div>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc3-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(d) P-value
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-sc3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Synthetic Control Results: Logs
+</figcaption>
+</figure>
 </div>
 <p>Based on Figure&nbsp;3, we still have many states with very bad model fitness. Figure&nbsp;3 (c) and Figure&nbsp;3 (d), however, still shows good model performance, with slighly higher significance than when the data was used as is.</p>
 </section>
 <section id="fully-rescale-to-california-pre-treament" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="fully-rescale-to-california-pre-treament">Fully Rescale (to California pre-treament)</h3>
 <p>The last transformation I implement is one where all data is rescaled and shifted so that all countries have the same average and standard deviation in the period before treatment. I believe this could be the best approach, because forces all data to be perfectly comparable in the pre-treatment period, increasing the posibility to find good controls even for the other wise extreme states.</p>
-<div class="page-columns page-full">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><span class="kw" style="color: #003B4F;
 background-color: null;
@@ -2355,47 +2437,66 @@ background-color: null;
 font-style: inherit;">ylabel</span>(0(5)25)</span>
 <span id="cb8-8">frame put *, into(m4)</span></code></pre></div>
 </details>
-<div id="fig-sc4" class="cell column-page quarto-layout-panel" data-execution_count="9">
-<figure class="figure">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc4-1" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc4-output-1.png" class="img-fluid figure-img" data-ref-parent="fig-sc4"></p>
-<figcaption class="figure-caption">(a) Unrestricted effect</figcaption>
+<div id="fig-sc4" class="quarto-layout-panel page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-sc4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<div class="quarto-layout-row quarto-layout-valign-top page-columns page-full">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc4" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-sc4-1" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
+<div aria-describedby="fig-sc4-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc4-output-1.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc4">
+</div>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc4-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Unrestricted effect
+</figcaption>
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc4-2" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc4-output-2.png" class="img-fluid figure-img" data-ref-parent="fig-sc4"></p>
-<figcaption class="figure-caption">(b) Restricted effect</figcaption>
-</figure>
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc4" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-sc4-2" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
+<div aria-describedby="fig-sc4-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc4-output-2.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc4">
 </div>
-</div>
-</div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc4-3" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc4-output-3.png" class="img-fluid figure-img" data-ref-parent="fig-sc4"></p>
-<figcaption class="figure-caption">(c) RMSE Ratio</figcaption>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc4-4" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc4-output-4.png" class="img-fluid figure-img" data-ref-parent="fig-sc4"></p>
-<figcaption class="figure-caption">(d) P-value</figcaption>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc4-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Restricted effect
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p></p><figcaption class="figure-caption">Figure&nbsp;4: Synthetic Control Results: Rescale to California</figcaption><p></p>
+<div class="quarto-layout-row quarto-layout-valign-top page-columns page-full">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc4" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-sc4-3" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
+<div aria-describedby="fig-sc4-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc4-output-3.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc4">
+</div>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc4-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c) RMSE Ratio
+</figcaption>
 </figure>
 </div>
+</div>
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc4" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-sc4-4" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
+<div aria-describedby="fig-sc4-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc4-output-4.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc4">
+</div>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc4-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(d) P-value
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-sc4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Synthetic Control Results: Rescale to California
+</figcaption>
+</figure>
 </div>
 <p>What I consider quite interesting is that even the effect plot that uses no restrictions shows very good pre-treatment model fit for all donor units. Although the fitness for California is even better. Once we impose the same restriction to the data, excluding units with a RMSE twice as large as the one in California, we obtain a plot similar to the ones in the previous cases.</p>
 <p>Figure&nbsp;4 (c) and Figure&nbsp;4 (d) show that the effect may not be as strong as in the previous example. The RMSE ratio method suggests a p-value of 12.5%, above the standard 5% we like to consider as minimum threshold. The significance across periods is also slighly worse, because there is one state that exhibits a pseudo treatment that is larger than California.</p>
@@ -2404,7 +2505,7 @@ font-style: inherit;">ylabel</span>(0(5)25)</span>
 <section id="comparing-magnitude-effects" class="level2">
 <h2 class="anchored" data-anchor-id="comparing-magnitude-effects">Comparing Magnitude effects</h2>
 <div class="cell" data-execution_count="10">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><span class="kw" style="color: #003B4F;
 background-color: null;
@@ -2662,7 +2763,7 @@ font-style: inherit;">gen</span> eff4= _Y_treated-y4_synth</span></code></pre></
 </div>
 <p>Perhaps what would be the best way to comapre the different cases presented above is to rescale the results as to obtain results that can be compared across specifications. In Figure&nbsp;5, I puts together this effects, so that they can be compared across each other.</p>
 <div class="cell" data-execution_count="11">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><span class="kw" style="color: #003B4F;
 background-color: null;
@@ -2699,9 +2800,13 @@ font-style: inherit;">"Rescaled 1.955"</span>))</span></code></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-sc5" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc5-output-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;5: Synthetic Control Effects</figcaption>
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sc5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc5-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-sc5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Synthetic Control Effects
+</figcaption>
 </figure>
 </div>
 </div>
@@ -2725,14 +2830,15 @@ font-style: inherit;">"Rescaled 1.955"</span>))</span></code></pre></div>
   <category>Stata</category>
   <category>Programming</category>
   <category>Causal effects</category>
-  <guid>https://friosavila.github.io/chatgpt/synth_05_09_2023/index.html</guid>
+  <guid>https://friosavila.github.io/chatgpt/synth_05_09_2023/</guid>
   <pubDate>Tue, 09 May 2023 04:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Merging Data 1:1, m:1, 1:m and m:m?</title>
   <dc:creator>Fernando Rios-Avila</dc:creator>
-  <link>https://friosavila.github.io/chatgpt/merge_04_20_2023/index.html</link>
+  <link>https://friosavila.github.io/chatgpt/merge_04_20_2023/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -2989,14 +3095,15 @@ font-style: inherit;">using</span> family_mem2</span></code></pre></div>
   <category>Stata</category>
   <category>Tips</category>
   <category>Programming</category>
-  <guid>https://friosavila.github.io/chatgpt/merge_04_20_2023/index.html</guid>
+  <guid>https://friosavila.github.io/chatgpt/merge_04_20_2023/</guid>
   <pubDate>Thu, 20 Apr 2023 04:00:00 GMT</pubDate>
 </item>
 <item>
   <title>A Poem for Abby’s Teeth</title>
   <dc:creator>ChatGPT and Fernando Rios-Avila</dc:creator>
-  <link>https://friosavila.github.io/chatgpt/teeth_04_19_2023/index.html</link>
+  <link>https://friosavila.github.io/chatgpt/teeth_04_19_2023/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -3043,14 +3150,15 @@ Note
  ]]></description>
   <category>ChatGPT</category>
   <category>Poem</category>
-  <guid>https://friosavila.github.io/chatgpt/teeth_04_19_2023/index.html</guid>
+  <guid>https://friosavila.github.io/chatgpt/teeth_04_19_2023/</guid>
   <pubDate>Wed, 19 Apr 2023 04:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Why are my estimates changing every time I run my do-files?!</title>
   <dc:creator>Fernando Rios-Avila</dc:creator>
-  <link>https://friosavila.github.io/chatgpt/rep_03_31_2023/index.html</link>
+  <link>https://friosavila.github.io/chatgpt/rep_03_31_2023/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -3072,14 +3180,15 @@ Note
  ]]></description>
   <category>Stata</category>
   <category>Tips</category>
-  <guid>https://friosavila.github.io/chatgpt/rep_03_31_2023/index.html</guid>
+  <guid>https://friosavila.github.io/chatgpt/rep_03_31_2023/</guid>
   <pubDate>Fri, 31 Mar 2023 04:00:00 GMT</pubDate>
 </item>
 <item>
   <title>How to write your own Installer</title>
   <dc:creator>Fernando Rios-Avila</dc:creator>
-  <link>https://friosavila.github.io/chatgpt/fra_03_30_2023/index.html</link>
+  <link>https://friosavila.github.io/chatgpt/fra_03_30_2023/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -3202,14 +3311,15 @@ font-style: inherit;">replace</span></span></code></pre></div>
   <category>Stata</category>
   <category>Tips</category>
   <category>Programming</category>
-  <guid>https://friosavila.github.io/chatgpt/fra_03_30_2023/index.html</guid>
+  <guid>https://friosavila.github.io/chatgpt/fra_03_30_2023/</guid>
   <pubDate>Thu, 30 Mar 2023 04:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Loading Large Datasets</title>
   <dc:creator>Fernando Rios-Avila</dc:creator>
-  <link>https://friosavila.github.io/chatgpt/use_03_27_2023/index.html</link>
+  <link>https://friosavila.github.io/chatgpt/use_03_27_2023/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -3308,14 +3418,15 @@ font-style: inherit;">list</span> , sep(0)</span></code></pre></div>
  ]]></description>
   <category>Stata</category>
   <category>Tips</category>
-  <guid>https://friosavila.github.io/chatgpt/use_03_27_2023/index.html</guid>
+  <guid>https://friosavila.github.io/chatgpt/use_03_27_2023/</guid>
   <pubDate>Mon, 27 Mar 2023 04:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Adding info to e() and r()</title>
   <dc:creator>Fernando Rios-Avila</dc:creator>
-  <link>https://friosavila.github.io/chatgpt/addx_03_26_2023/index.html</link>
+  <link>https://friosavila.github.io/chatgpt/addx_03_26_2023/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -3617,14 +3728,15 @@ macros:
  ]]></description>
   <category>Stata</category>
   <category>Programming</category>
-  <guid>https://friosavila.github.io/chatgpt/addx_03_26_2023/index.html</guid>
+  <guid>https://friosavila.github.io/chatgpt/addx_03_26_2023/</guid>
   <pubDate>Sun, 26 Mar 2023 04:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Drop 2.0: Small Stata Programming</title>
   <dc:creator>Fernando Rios-Avila</dc:creator>
-  <link>https://friosavila.github.io/chatgpt/drop_03_25_2023/index.html</link>
+  <link>https://friosavila.github.io/chatgpt/drop_03_25_2023/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -3778,14 +3890,15 @@ font-style: inherit;">length</span>      turn        gear_ratio  foreign</span><
 </aside></div> ]]></description>
   <category>Stata</category>
   <category>Programming</category>
-  <guid>https://friosavila.github.io/chatgpt/drop_03_25_2023/index.html</guid>
+  <guid>https://friosavila.github.io/chatgpt/drop_03_25_2023/</guid>
   <pubDate>Sat, 25 Mar 2023 04:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Stata vs R: The battle</title>
   <dc:creator>ChatGPT and Fernando Rios-Avila</dc:creator>
-  <link>https://friosavila.github.io/chatgpt/R_vs_Stata_3_18_2023/index.html</link>
+  <link>https://friosavila.github.io/chatgpt/R_vs_Stata_3_18_2023/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -3823,14 +3936,15 @@ Note
  ]]></description>
   <category>ChatGPT</category>
   <category>Stories</category>
-  <guid>https://friosavila.github.io/chatgpt/R_vs_Stata_3_18_2023/index.html</guid>
+  <guid>https://friosavila.github.io/chatgpt/R_vs_Stata_3_18_2023/</guid>
   <pubDate>Sat, 18 Mar 2023 04:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Tech Titans Rap Battle</title>
   <dc:creator>ChatGPT and Fernando Rios-Avila</dc:creator>
-  <link>https://friosavila.github.io/chatgpt/erbh_03_12_2023/index.html</link>
+  <link>https://friosavila.github.io/chatgpt/erbh_03_12_2023/</link>
   <description><![CDATA[ 
+
 
 
 
@@ -3934,7 +4048,7 @@ Note
  ]]></description>
   <category>ChatGPT</category>
   <category>Rap Battle</category>
-  <guid>https://friosavila.github.io/chatgpt/erbh_03_12_2023/index.html</guid>
+  <guid>https://friosavila.github.io/chatgpt/erbh_03_12_2023/</guid>
   <pubDate>Sun, 12 Mar 2023 05:00:00 GMT</pubDate>
 </item>
 </channel>

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.251">
+<meta name="generator" content="quarto-1.4.455">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -58,6 +58,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -76,7 +77,7 @@ div.csl-indent {
 }</style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -100,12 +101,13 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
   "keyboard-shortcut": [
     "f",
     "/",
     "s"
   ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -129,7 +131,7 @@ gtag('js', new Date());
 gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -141,7 +143,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
@@ -155,36 +157,36 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="../index.html" rel="" target="" aria-current="page">
- <span class="menu-text">Home</span></a>
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../cv.html" rel="" target="">
- <span class="menu-text">my CV and Research</span></a>
+    <a class="nav-link" href="../cv.html"> 
+<span class="menu-text">my CV and Research</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../software.html" rel="" target="">
- <span class="menu-text">Software</span></a>
+    <a class="nav-link" href="../software.html"> 
+<span class="menu-text">Software</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../stataviz/index.html" rel="" target="">
- <span class="menu-text">Stata Viz</span></a>
+    <a class="nav-link" href="../stataviz/index.html"> 
+<span class="menu-text">Stata Viz</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../stata_do/index.html" rel="" target="">
- <span class="menu-text">Stata Do’s Ado’s</span></a>
+    <a class="nav-link" href="../stata_do/index.html"> 
+<span class="menu-text">Stata Do’s Ado’s</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../app_metrics/index.html" rel="" target="">
- <span class="menu-text">Applied econometrics</span></a>
+    <a class="nav-link" href="../app_metrics/index.html"> 
+<span class="menu-text">Applied econometrics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../chatgpt.html" rel="" target="">
- <span class="menu-text">Odds and Ends</span></a>
+    <a class="nav-link" href="../chatgpt.html"> 
+<span class="menu-text">Odds and Ends</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../about.html" rel="" target="">
- <span class="menu-text">about</span></a>
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">about</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -199,11 +201,11 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
     </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../stata_do/stata_do1.html">Stata Do</a></li><li class="breadcrumb-item"><a href="../stata_do/stata_do4.html">The IV-Probit: <code>margins</code> and <code>ml</code></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
   </nav>
@@ -211,7 +213,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../index.html" class="sidebar-logo-link">
       <img src="../WeeMee.jpg" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
@@ -287,7 +289,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -332,6 +334,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 
 </header>
 
+
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>In previous articles, I have shown how to use the <code>margins</code> command after <code>ml</code> for the linear regression model (assuming normality) and the probit model. Today, I’ll provide another example for a more complex case: a two-equation model estimation, specifically the “IVprobit,” or instrumental variable probit.</p>
@@ -348,7 +351,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <section id="the-setup" class="level2">
 <h2 class="anchored" data-anchor-id="the-setup">The Setup</h2>
 <p>First thing first. Unless you already have this program saved somewhere in your accesible ado files (most likely the “ado/personal” folder), make sure to have the following program in memory. It will allow you to add or modify information to e(), which is where all estimation commands store information.</p>
-<div class="cell" data-execution_count="1">
+<div id="90f30fa0" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">clear</span> <span class="ot">all</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">program</span> adde, <span class="kw">eclass</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">ereturn</span> <span class="ot">`0'</span></span>
@@ -458,7 +461,7 @@ L^2_i &amp; = P(y_1|.)^{y_1} * (1-P(y_1|.))^{1-y_1}
 <li><code>xb</code> will contain all the exogenous variables <span class="math inline">\(z_1\)</span> plus the endogenous variable <span class="math inline">\(y_2\)</span></li>
 <li><code>zb</code> will contain all the exogenous variables <span class="math inline">\(z_1\)</span> and the instruments <span class="math inline">\(z_2\)</span></li>
 </ul>
-<div class="cell" data-execution_count="2">
+<div id="76184ed5" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">program</span> myivprobit_2sls</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">args</span> lnf <span class="kw">xb</span> theta zb lnsigma</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">qui</span> {</span>
@@ -503,7 +506,7 @@ P(y_1=1| z_1 , y_2) = E \left( \Phi \left( z_1 \beta^r_1 + y_2 \beta^r_2 + \thet
 \tag{10}\]</span></span></p>
 <p>The bottom line: If one uses the two-step approach, marginal effects could be estimated assuming <span class="math inline">\(\hat u_2\)</span> is just another exogenous variable in the model. The difficulty would be obtaining the correct estimation of standard errors.</p>
 <p>So lets write these two options into a “predict” program.</p>
-<div class="cell" data-execution_count="3">
+<div id="6ecf356d" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">program</span> myivprobit_p</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">syntax</span> newvarname [<span class="kw">if</span>] [<span class="kw">in</span>] , [ pr1 pr2  *]</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">if</span> <span class="st">"`pr1'`pr2'"</span> ==<span class="st">""</span> {</span>
@@ -538,7 +541,7 @@ P(y_1=1| z_1 , y_2) = E \left( \Phi \left( z_1 \beta^r_1 + y_2 \beta^r_2 + \thet
 </div>
 <p>The first option <code>pr1</code> will estimate the predicted probability as if the model were estimated using the two-step approach, whereas the second will estimate the predicted probability based on the structural equation.</p>
 <p>Alright, so lets estimate the model and compare the results with the built-in ivprobit command:</p>
-<div class="cell" data-execution_count="4">
+<div id="b77fa30a" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">clear</span>  </span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="kw">webuse</span> laborsup</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="kw">global</span>  y1   fem_work</span>
@@ -568,7 +571,7 @@ Instrumented: other_inc
  Instruments: fem_educ kids male_educ</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="5">
+<div id="39e22d4a" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>*my <span class="kw">ivprobit</span> <span class="kw">two</span>-step</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">ml</span> <span class="kw">model</span> lf myivprobit_2sls (<span class="ot">$y1</span> = <span class="ot">$z1</span>  <span class="ot">$y2</span> ) <span class="co">///</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>         (theta:) (<span class="ot">$y2</span> = <span class="ot">$z1</span> <span class="ot">$z2</span>  ) (lnsigma:) , <span class="co">///</span></span>
@@ -604,7 +607,7 @@ lnsigma      |
 </div>
 </div>
 <p>You can see right away that except for differences attributed to rounding errors and degrees of freedom, the results are virtually the same. It is also reasuring to see that the results are also the same when we compared ivprobit-mle and the rescaled coefficients:</p>
-<div class="cell" data-execution_count="6">
+<div id="1d12ffd3" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>*FIML</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">ivprobit</span> <span class="ot">$y1</span>  <span class="ot">$z1</span> (<span class="ot">$y2</span> = <span class="ot">$z2</span>), <span class="kw">ml</span> <span class="kw">nolog</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -630,7 +633,7 @@ Instrumented: other_inc
  Instruments: fem_educ kids male_educ</code></pre>
 </div>
 </div>
-<div class="cell" data-execution_count="7">
+<div id="9fe586ee" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>*my <span class="kw">ivprobit</span> <span class="kw">two</span>-step</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="kw">ml</span> <span class="kw">model</span> lf myivprobit_2sls (<span class="ot">$y1</span> = <span class="ot">$z1</span>  <span class="ot">$y2</span> )  (theta:) (<span class="ot">$y2</span> = <span class="ot">$z1</span> <span class="ot">$z2</span>  ) (lnsigma:) , <span class="co">///</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">technique</span>(<span class="kw">nr</span> <span class="kw">bhhh</span>)   init(lnsigma:<span class="dt">_cons</span> = 2.81 ) <span class="kw">maximize</span> <span class="kw">nolog</span></span>
@@ -706,7 +709,7 @@ Note
 <span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>   male_educ |          0  (omitted)</span>
 <span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------------</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>This marginal effects are emulated using pr2 after myivprobit:</p>
-<div class="cell" data-execution_count="8">
+<div id="62a7f9ff" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">est</span> <span class="kw">restore</span> myivp</span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>margins, <span class="kw">dydx</span>(*) <span class="kw">predict</span>(pr2) <span class="kw">force</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -778,7 +781,7 @@ P(y_1=1|z_1,y_2,z_2) =\Phi \left(
 <span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>   male_educ |  -.0194406   .0022103    -8.80   0.000    -.0237728   -.0151084</span>
 <span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------------</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>To replicate this using <code>myivprobit</code>, I would estimate marginal effects using option <code>pr1</code>, requesting derivates to be estimated without the <strong>chain rule</strong> (<code>nochain</code>). This makes sure that one takes into account the effect of all changes in <span class="math inline">\(y_2, z_1\)</span> and <span class="math inline">\(z_2\)</span> on the predicted outcome <span class="math inline">\(P(y=1|.)\)</span>:</p>
-<div class="cell" data-execution_count="9">
+<div id="da41afe4" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">est</span> <span class="kw">restore</span> myivp</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>margins, <span class="kw">dydx</span>(*) <span class="kw">predict</span>(pr1) <span class="kw">force</span> nochain</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -823,7 +826,7 @@ dy/dx wrt:  fem_educ kids other_inc male_educ
 \]</span></p>
 <p>The differences with the “structural” marginal effects are that the evaluation of <span class="math inline">\(\phi(.)\)</span> includes the predicted values of the errors (<span class="math inline">\(\hat u_2\)</span>), and that coefficients used correspond to the two-step procedure ones (rescaled).</p>
 <p>To show empirically how this works, we can compare the builtin command, with the “two-step” procedure suggested by Prof.&nbsp;Wooldridge:</p>
-<div class="cell" data-execution_count="10">
+<div id="78b205d7" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>* <span class="kw">two</span> step procedure</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>* 1st</span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>: <span class="kw">reg</span> <span class="ot">$y2</span> <span class="ot">$z1</span> <span class="ot">$z2</span></span>
@@ -873,7 +876,7 @@ dy/dx wrt:  fem_educ kids other_inc u2
 <span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>------------------------------------------------------------------------------</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>So you can see that the two-step approach and the built-in approach now provide the same marginal effects. And since the official command estimates all coefficients simultaneously, the standard errors can be taken as correct (more on that later).</p>
 <p>So how can we correct for this with our predict program. Since there is nothing to prevent margins to obtain numerical derivatives across both equations, we need to modify the specification slighly. First, we create clone copies of all variables that enter the second stage: z_1 and y_2, and use them for the model estimation:</p>
-<div class="cell" data-execution_count="11">
+<div id="504b7191" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">clonevar</span> c_other_inc = other_inc</span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="kw">clonevar</span> c_fem_educ  = fem_educ</span>
 <span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="kw">clonevar</span> c_kids      = kids</span>
@@ -887,7 +890,7 @@ dy/dx wrt:  fem_educ kids other_inc u2
 </div>
 <p>The idea of using “clones” of the exogenous variables and endogenous one is to have access to the same information as the original data, but making sure they do not change when the original data changes.</p>
 <p>Marginal effects can be calculated as I did before, except that I now make it explicit to request marginal effects with respect to <span class="math inline">\(z_1\)</span> and <span class="math inline">\(y_2\)</span> only.</p>
-<div class="cell" data-execution_count="12">
+<div id="e44e756e" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">est</span> <span class="kw">restore</span> myivp       </span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>margins, <span class="kw">dydx</span>(<span class="ot">$z1</span> <span class="ot">$y2</span>) <span class="kw">predict</span>(pr1) <span class="kw">force</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -921,7 +924,7 @@ dy/dx wrt:  fem_educ kids other_inc
 <p>If you recall the estimation of marginal effects from the structural equation, it is not affected by <span class="math inline">\(\rho\)</span> nor <span class="math inline">\(\sigma\)</span>. Perhaps this was one of the reasons why the estimated standard errors (Nov2020) are so similar to the ones based on the “old” structural marginal effects.</p>
 <p>My own command, however, accounts for the uncertainty in these parameter. This also seems correct since two-step marginal procedures are expected to be less efficient than the Full Information counterparts.</p>
 <p>Of course, if you prefer to have a tie-breaker on which one is correct, I can use a Bootstrap procedure to produce the elusive standard errors. Basically, I’ll use the manual two-step procedure, along with a 250 bootstrap repetitions, to report the results:</p>
-<div class="cell" data-execution_count="13">
+<div id="6c51e2cf" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">program</span> bs_ivprobit, <span class="kw">eclass</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">reg</span> <span class="ot">$y2</span> <span class="ot">$z1</span> <span class="ot">$z2</span></span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">capture</span> <span class="kw">drop</span> u2</span>
@@ -953,7 +956,7 @@ Average marginal effects                                   Number of obs = 500
 <section id="one-last-change." class="level2">
 <h2 class="anchored" data-anchor-id="one-last-change.">One last change.</h2>
 <p>Seems my guess was correct!. In March of 2021, Stata pushed another update to Stata16. They have now changed how SE are estimated after margins, which now coincides with the experiment I started with.</p>
-<div class="cell" data-execution_count="14">
+<div id="af3fdd5b" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb29"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ivprobit</span> <span class="ot">$y1</span>  <span class="ot">$z1</span> (<span class="ot">$y2</span> = <span class="ot">$z2</span>), <span class="kw">ml</span> <span class="kw">nolog</span></span>
 <span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>margins, <span class="kw">dydx</span>(*) <span class="kw">predict</span>(pr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -1009,7 +1012,7 @@ dy/dx wrt:  other_inc fem_educ kids
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-rios-avila_standard-error_2018" class="csl-entry" role="listitem">
 Rios-Avila, Fernando, and Gustavo Canavire-Bacarreza. 2018. <span>“Standard-Error <span>Correction</span> in <span>Two</span>-Stage <span>Optimization</span> <span>Models</span>: <span>A</span> <span>Quasi</span>–Maximum <span>Likelihood</span> <span>Estimation</span> <span>Approach</span>.”</span> <em>The Stata Journal</em> 18 (1): 206–22. <a href="https://doi.org/10.1177/1536867X1801800113">https://doi.org/10.1177/1536867X1801800113</a>.
 </div>
@@ -1193,15 +1196,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    if (id.startsWith('sec-')) {
+    const typesetMath = (el) => {
+      if (window.MathJax) {
+        // MathJax Typeset
+        window.MathJax.typeset([el]);
+      } else if (window.katex) {
+        // KaTeX Render
+        var mathElements = el.getElementsByClassName("math");
+        var macros = [];
+        for (var i = 0; i < mathElements.length; i++) {
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            window.katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains('display'),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false
+            });
+          }
+        }
+      }
+    }
+    if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
         for (let i = 0; i < 2; i++) {
           container.appendChild(note.children[i].cloneNode(true));
         }
+        typesetMath(container);
         return container.innerHTML
       } else {
+        typesetMath(note);
         return note.innerHTML;
       }
     } else {
@@ -1210,6 +1236,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
+      typesetMath(note);
       return note.innerHTML;
     }
   }
@@ -1252,6 +1279,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
       }
     }, function(instance) {
     });
@@ -1323,6 +1373,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1384,12 +1460,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../stata_do/stata_do3.html" class="pagination-link">
+      <a href="../stata_do/stata_do3.html" class="pagination-link  aria-label=" linear="" regression="" via="" mle"="">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Linear Regression via MLE</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../stata_do/stata_do5.html" class="pagination-link">
+      <a href="../stata_do/stata_do5.html" class="pagination-link" aria-label="Simultaneous/Uniform Confidence Intervals">
         <span class="nav-page-text">Simultaneous/Uniform Confidence Intervals</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>

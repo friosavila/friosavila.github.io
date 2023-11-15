@@ -202,7 +202,7 @@ replace y = 1 if trt==1 & trt_d <0
 In this case, y is zero for everyone, but for selected treated units at some point in time. You would expect average treatment effects to be possitive. TWFE, would dissagree:
 
 ```{stata}
-qui:ssc install reghdfe
+capture ssc install reghdfe
 reghdfe y trt, abs(id t)
 ```
 

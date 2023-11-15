@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.251">
+<meta name="generator" content="quarto-1.4.455">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -25,7 +25,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -82,12 +82,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
   "keyboard-shortcut": [
     "f",
     "/",
     "s"
   ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -123,7 +124,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
@@ -137,36 +138,36 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html" rel="" target="">
- <span class="menu-text">Home</span></a>
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../cv.html" rel="" target="">
- <span class="menu-text">my CV and Research</span></a>
+    <a class="nav-link" href="../../cv.html"> 
+<span class="menu-text">my CV and Research</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../software.html" rel="" target="">
- <span class="menu-text">Software</span></a>
+    <a class="nav-link" href="../../software.html"> 
+<span class="menu-text">Software</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../stataviz/index.html" rel="" target="">
- <span class="menu-text">Stata Viz</span></a>
+    <a class="nav-link" href="../../stataviz/index.html"> 
+<span class="menu-text">Stata Viz</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../stata_do/index.html" rel="" target="">
- <span class="menu-text">Stata Do’s Ado’s</span></a>
+    <a class="nav-link" href="../../stata_do/index.html"> 
+<span class="menu-text">Stata Do’s Ado’s</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../app_metrics/index.html" rel="" target="">
- <span class="menu-text">Applied econometrics</span></a>
+    <a class="nav-link" href="../../app_metrics/index.html"> 
+<span class="menu-text">Applied econometrics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../chatgpt.html" rel="" target="">
- <span class="menu-text">Odds and Ends</span></a>
+    <a class="nav-link" href="../../chatgpt.html"> 
+<span class="menu-text">Odds and Ends</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../about.html" rel="" target="">
- <span class="menu-text">about</span></a>
+    <a class="nav-link" href="../../about.html"> 
+<span class="menu-text">about</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -248,6 +249,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 
 
 
+
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>As a wise man once said:</p>
@@ -287,7 +289,7 @@ w^*=\min_w \sum_{h} \left(X_{1,h}-\sum_{j=2}^J w_j X_{j,h}\right)^2
 <p>For the example I have in mind, I will use the <strong><code>Smoking</code></strong> dataset that is typically used to teach the methodology. I will also use two community-contributed programs <code>synth</code> and <code>frause</code>. The second one, just to make it easy uploading the data.</p>
 <p>I will also use a small programm to prepare the data before creating the figures. This one is rather long, but if you are interested, please take a look.</p>
 <div class="cell" data-execution_count="1">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> <span class="dv">scheme</span> white2</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">capture</span> <span class="kw">program</span> <span class="kw">drop</span> sc_doer</span>
@@ -371,7 +373,7 @@ w^*=\min_w \sum_{h} \left(X_{1,h}-\sum_{j=2}^J w_j X_{j,h}\right)^2
 <p>The basic code will look like this:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>synth cigsale cigsale(1971) cigsale(1975) cigsale(1980)   cigsale(1985), trunit(3) trperiod(1989) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell" data-execution_count="2">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:frause smoking2, <span class="kw">clear</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:xtset state <span class="fu">year</span></span>
@@ -380,8 +382,7 @@ w^*=\min_w \sum_{h} \left(X_{1,h}-\sum_{j=2}^J w_j X_{j,h}\right)^2
 </details>
 </div>
 <p>which will produce the following:</p>
-<div class="page-columns page-full">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">two</span> <span class="ot">$toplot</span> (<span class="kw">line</span> tef3 _time, lw(1) <span class="kw">color</span>(<span class="bn">navy</span>*.8)), <span class="bn">xline</span>(1989) <span class="bn">legend</span>(<span class="kw">off</span>) <span class="bn">name</span>(m1, <span class="kw">replace</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -391,55 +392,73 @@ w^*=\min_w \sum_{h} \left(X_{1,h}-\sum_{j=2}^J w_j X_{j,h}\right)^2
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="kw">two</span> <span class="bn">bar</span> pv _time <span class="kw">if</span> _time&gt;1988 &amp; pv&lt;40, <span class="bn">legend</span>(<span class="kw">off</span>) <span class="bn">name</span>(m4, <span class="kw">replace</span>) <span class="kw">ylabel</span>(0(5)25)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="fig-sc1" class="cell column-page quarto-layout-panel" data-execution_count="3">
-<figure class="figure">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc1-1" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="index_files/figure-html/fig-sc1-output-1.png" class="img-fluid figure-img" data-ref-parent="fig-sc1"></p>
-<figcaption class="figure-caption">(a) Unrestricted effect</figcaption>
+<div id="fig-sc1" class="quarto-layout-panel page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-sc1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<div class="quarto-layout-row quarto-layout-valign-top page-columns page-full">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc1" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-sc1-1" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
+<div aria-describedby="fig-sc1-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<img src="index_files/figure-html/fig-sc1-output-1.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc1">
+</div>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc1-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Unrestricted effect
+</figcaption>
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc1-2" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="index_files/figure-html/fig-sc1-output-2.png" class="img-fluid figure-img" data-ref-parent="fig-sc1"></p>
-<figcaption class="figure-caption">(b) Restricted effect</figcaption>
-</figure>
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc1" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-sc1-2" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
+<div aria-describedby="fig-sc1-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<img src="index_files/figure-html/fig-sc1-output-2.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc1">
 </div>
-</div>
-</div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc1-3" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="index_files/figure-html/fig-sc1-output-3.png" class="img-fluid figure-img" data-ref-parent="fig-sc1"></p>
-<figcaption class="figure-caption">(c) RMSE Ratio</figcaption>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc1-4" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="index_files/figure-html/fig-sc1-output-4.png" class="img-fluid figure-img" data-ref-parent="fig-sc1"></p>
-<figcaption class="figure-caption">(d) P-value</figcaption>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc1-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Restricted effect
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p></p><figcaption class="figure-caption">Figure&nbsp;1: Synthetic Control Results: ASIS</figcaption><p></p>
+<div class="quarto-layout-row quarto-layout-valign-top page-columns page-full">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc1" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-sc1-3" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
+<div aria-describedby="fig-sc1-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<img src="index_files/figure-html/fig-sc1-output-3.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc1">
+</div>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc1-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c) RMSE Ratio
+</figcaption>
 </figure>
 </div>
+</div>
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc1" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-sc1-4" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
+<div aria-describedby="fig-sc1-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<img src="index_files/figure-html/fig-sc1-output-4.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc1">
+</div>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc1-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(d) P-value
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-sc1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Synthetic Control Results: ASIS
+</figcaption>
+</figure>
 </div>
 <p>Based on <a href="#fig-sc1" class="quarto-xref">Figure&nbsp;1</a>, there is an effect of the Policy which reduced sales of cigarates. <a href="#fig-sc1-3" class="quarto-xref">Figure&nbsp;1 (c)</a> and <a href="#fig-sc1-4" class="quarto-xref">Figure&nbsp;1 (d)</a> suggest the effect is significant across most post-treatment periods.</p>
 </section>
 <section id="log-case" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="log-case">Log Case</h3>
 <p>Lets make one change. Instead of using cigarette sale per capita, I will use the log of that variable. The idea is that while raw data may not be comparable, because of different scales across units, data may be more comparable if its comparessed using a logScale.</p>
-<div class="page-columns page-full">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">two</span> <span class="ot">$toplot</span> (<span class="kw">line</span> tef3 _time, lw(1) <span class="kw">color</span>(<span class="bn">navy</span>*.8)), <span class="bn">xline</span>(1989) <span class="bn">legend</span>(<span class="kw">off</span>) <span class="bn">name</span>(m1, <span class="kw">replace</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -449,55 +468,73 @@ w^*=\min_w \sum_{h} \left(X_{1,h}-\sum_{j=2}^J w_j X_{j,h}\right)^2
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="kw">two</span> <span class="bn">bar</span> pv _time <span class="kw">if</span> _time&gt;1988 &amp; pv&lt;40, <span class="bn">legend</span>(<span class="kw">off</span>) <span class="bn">name</span>(m4, <span class="kw">replace</span>) <span class="kw">ylabel</span>(0(5)25)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="fig-sc2" class="cell column-page quarto-layout-panel" data-execution_count="5">
-<figure class="figure">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc2-1" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="index_files/figure-html/fig-sc2-output-1.png" class="img-fluid figure-img" data-ref-parent="fig-sc2"></p>
-<figcaption class="figure-caption">(a) Unrestricted effect</figcaption>
+<div id="fig-sc2" class="quarto-layout-panel page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-sc2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<div class="quarto-layout-row quarto-layout-valign-top page-columns page-full">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc2" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-sc2-1" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
+<div aria-describedby="fig-sc2-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<img src="index_files/figure-html/fig-sc2-output-1.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc2">
+</div>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc2-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Unrestricted effect
+</figcaption>
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc2-2" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="index_files/figure-html/fig-sc2-output-2.png" class="img-fluid figure-img" data-ref-parent="fig-sc2"></p>
-<figcaption class="figure-caption">(b) Restricted effect</figcaption>
-</figure>
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc2" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-sc2-2" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
+<div aria-describedby="fig-sc2-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<img src="index_files/figure-html/fig-sc2-output-2.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc2">
 </div>
-</div>
-</div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc2-3" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="index_files/figure-html/fig-sc2-output-3.png" class="img-fluid figure-img" data-ref-parent="fig-sc2"></p>
-<figcaption class="figure-caption">(c) RMSE Ratio</figcaption>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc2-4" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="index_files/figure-html/fig-sc2-output-4.png" class="img-fluid figure-img" data-ref-parent="fig-sc2"></p>
-<figcaption class="figure-caption">(d) P-value</figcaption>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc2-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Restricted effect
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p></p><figcaption class="figure-caption">Figure&nbsp;2: Synthetic Control Results: Logs</figcaption><p></p>
+<div class="quarto-layout-row quarto-layout-valign-top page-columns page-full">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc2" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-sc2-3" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
+<div aria-describedby="fig-sc2-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<img src="index_files/figure-html/fig-sc2-output-3.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc2">
+</div>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc2-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c) RMSE Ratio
+</figcaption>
 </figure>
 </div>
+</div>
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc2" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-sc2-4" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
+<div aria-describedby="fig-sc2-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<img src="index_files/figure-html/fig-sc2-output-4.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc2">
+</div>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc2-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(d) P-value
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-sc2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Synthetic Control Results: Logs
+</figcaption>
+</figure>
 </div>
 <p>Interestingly enough <a href="#fig-sc2" class="quarto-xref">Figure&nbsp;2</a> shows a very similar effect plot as in <a href="#fig-sc1" class="quarto-xref">Figure&nbsp;1</a>. The RMSE ratio is even better, but with few post-treatment effects that are not as significant.</p>
 </section>
 <section id="relative-change" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="relative-change">Relative Change</h3>
 <p>The next alternative is to use a relative rescaling. Specifically, I will change the baseline of cigsales across all States, so that Cigarette Sales in 1970 is normalized to be 100. The changes, then could be interpreted in units relative to what happened in 1970.</p>
-<div class="page-columns page-full">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">two</span> <span class="ot">$toplot</span> (<span class="kw">line</span> tef3 _time, lw(1) <span class="kw">color</span>(<span class="bn">navy</span>*.8)), <span class="bn">xline</span>(1989) <span class="bn">legend</span>(<span class="kw">off</span>) <span class="bn">name</span>(m1, <span class="kw">replace</span>)</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -507,55 +544,73 @@ w^*=\min_w \sum_{h} \left(X_{1,h}-\sum_{j=2}^J w_j X_{j,h}\right)^2
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="kw">two</span> <span class="bn">bar</span> pv _time <span class="kw">if</span> _time&gt;1988 &amp; pv&lt;40, <span class="bn">legend</span>(<span class="kw">off</span>) <span class="bn">name</span>(m4, <span class="kw">replace</span>) <span class="kw">ylabel</span>(0(5)25)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="fig-sc3" class="cell column-page quarto-layout-panel" data-execution_count="7">
-<figure class="figure">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc3-1" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="index_files/figure-html/fig-sc3-output-1.png" class="img-fluid figure-img" data-ref-parent="fig-sc3"></p>
-<figcaption class="figure-caption">(a) Unrestricted effect</figcaption>
+<div id="fig-sc3" class="quarto-layout-panel page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-sc3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<div class="quarto-layout-row quarto-layout-valign-top page-columns page-full">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc3" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-sc3-1" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
+<div aria-describedby="fig-sc3-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<img src="index_files/figure-html/fig-sc3-output-1.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc3">
+</div>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc3-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Unrestricted effect
+</figcaption>
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc3-2" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="index_files/figure-html/fig-sc3-output-2.png" class="img-fluid figure-img" data-ref-parent="fig-sc3"></p>
-<figcaption class="figure-caption">(b) Restricted effect</figcaption>
-</figure>
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc3" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-sc3-2" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
+<div aria-describedby="fig-sc3-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<img src="index_files/figure-html/fig-sc3-output-2.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc3">
 </div>
-</div>
-</div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc3-3" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="index_files/figure-html/fig-sc3-output-3.png" class="img-fluid figure-img" data-ref-parent="fig-sc3"></p>
-<figcaption class="figure-caption">(c) RMSE Ratio</figcaption>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc3-4" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="index_files/figure-html/fig-sc3-output-4.png" class="img-fluid figure-img" data-ref-parent="fig-sc3"></p>
-<figcaption class="figure-caption">(d) P-value</figcaption>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc3-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Restricted effect
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p></p><figcaption class="figure-caption">Figure&nbsp;3: Synthetic Control Results: Logs</figcaption><p></p>
+<div class="quarto-layout-row quarto-layout-valign-top page-columns page-full">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc3" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-sc3-3" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
+<div aria-describedby="fig-sc3-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<img src="index_files/figure-html/fig-sc3-output-3.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc3">
+</div>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc3-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c) RMSE Ratio
+</figcaption>
 </figure>
 </div>
+</div>
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc3" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-sc3-4" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
+<div aria-describedby="fig-sc3-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<img src="index_files/figure-html/fig-sc3-output-4.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc3">
+</div>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc3-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(d) P-value
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-sc3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: Synthetic Control Results: Logs
+</figcaption>
+</figure>
 </div>
 <p>Based on <a href="#fig-sc3" class="quarto-xref">Figure&nbsp;3</a>, we still have many states with very bad model fitness. <a href="#fig-sc3-3" class="quarto-xref">Figure&nbsp;3 (c)</a> and <a href="#fig-sc3-4" class="quarto-xref">Figure&nbsp;3 (d)</a>, however, still shows good model performance, with slighly higher significance than when the data was used as is.</p>
 </section>
 <section id="fully-rescale-to-california-pre-treament" class="level3 page-columns page-full">
 <h3 class="anchored" data-anchor-id="fully-rescale-to-california-pre-treament">Fully Rescale (to California pre-treament)</h3>
 <p>The last transformation I implement is one where all data is rescaled and shifted so that all countries have the same average and standard deviation in the period before treatment. I believe this could be the best approach, because forces all data to be perfectly comparable in the pre-treatment period, increasing the posibility to find good controls even for the other wise extreme states.</p>
-<div class="page-columns page-full">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">two</span> <span class="ot">$toplot</span> (<span class="kw">line</span> tef3 _time, lw(1) <span class="kw">color</span>(<span class="bn">navy</span>*.8)), <span class="bn">xline</span>(1989) <span class="bn">legend</span>(<span class="kw">off</span>) <span class="bn">name</span>(m1, <span class="kw">replace</span>)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -566,47 +621,66 @@ w^*=\min_w \sum_{h} \left(X_{1,h}-\sum_{j=2}^J w_j X_{j,h}\right)^2
 <span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="kw">two</span> <span class="bn">bar</span> pv _time <span class="kw">if</span> _time&gt;1988 &amp; pv&lt;40, <span class="bn">legend</span>(<span class="kw">off</span>) <span class="bn">name</span>(m4, <span class="kw">replace</span>) <span class="kw">ylabel</span>(0(5)25)</span>
 <span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>frame put *, into(m4)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="fig-sc4" class="cell column-page quarto-layout-panel" data-execution_count="9">
-<figure class="figure">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc4-1" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="index_files/figure-html/fig-sc4-output-1.png" class="img-fluid figure-img" data-ref-parent="fig-sc4"></p>
-<figcaption class="figure-caption">(a) Unrestricted effect</figcaption>
+<div id="fig-sc4" class="quarto-layout-panel page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-sc4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<div class="quarto-layout-row quarto-layout-valign-top page-columns page-full">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc4" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-sc4-1" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
+<div aria-describedby="fig-sc4-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<img src="index_files/figure-html/fig-sc4-output-1.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc4">
+</div>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc4-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Unrestricted effect
+</figcaption>
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc4-2" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="index_files/figure-html/fig-sc4-output-2.png" class="img-fluid figure-img" data-ref-parent="fig-sc4"></p>
-<figcaption class="figure-caption">(b) Restricted effect</figcaption>
-</figure>
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc4" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-sc4-2" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
+<div aria-describedby="fig-sc4-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<img src="index_files/figure-html/fig-sc4-output-2.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc4">
 </div>
-</div>
-</div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc4-3" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="index_files/figure-html/fig-sc4-output-3.png" class="img-fluid figure-img" data-ref-parent="fig-sc4"></p>
-<figcaption class="figure-caption">(c) RMSE Ratio</figcaption>
-</figure>
-</div>
-</div>
-<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc4-4" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="index_files/figure-html/fig-sc4-output-4.png" class="img-fluid figure-img" data-ref-parent="fig-sc4"></p>
-<figcaption class="figure-caption">(d) P-value</figcaption>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc4-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Restricted effect
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p></p><figcaption class="figure-caption">Figure&nbsp;4: Synthetic Control Results: Rescale to California</figcaption><p></p>
+<div class="quarto-layout-row quarto-layout-valign-top page-columns page-full">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc4" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-sc4-3" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
+<div aria-describedby="fig-sc4-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<img src="index_files/figure-html/fig-sc4-output-3.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc4">
+</div>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc4-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c) RMSE Ratio
+</figcaption>
 </figure>
 </div>
+</div>
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc4" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-sc4-4" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
+<div aria-describedby="fig-sc4-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<img src="index_files/figure-html/fig-sc4-output-4.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc4">
+</div>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc4-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(d) P-value
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-sc4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Synthetic Control Results: Rescale to California
+</figcaption>
+</figure>
 </div>
 <p>What I consider quite interesting is that even the effect plot that uses no restrictions shows very good pre-treatment model fit for all donor units. Although the fitness for California is even better. Once we impose the same restriction to the data, excluding units with a RMSE twice as large as the one in California, we obtain a plot similar to the ones in the previous cases.</p>
 <p><a href="#fig-sc4-3" class="quarto-xref">Figure&nbsp;4 (c)</a> and <a href="#fig-sc4-4" class="quarto-xref">Figure&nbsp;4 (d)</a> show that the effect may not be as strong as in the previous example. The RMSE ratio method suggests a p-value of 12.5%, above the standard 5% we like to consider as minimum threshold. The significance across periods is also slighly worse, because there is one state that exhibits a pseudo treatment that is larger than California.</p>
@@ -615,7 +689,7 @@ w^*=\min_w \sum_{h} \left(X_{1,h}-\sum_{j=2}^J w_j X_{j,h}\right)^2
 <section id="comparing-magnitude-effects" class="level2">
 <h2 class="anchored" data-anchor-id="comparing-magnitude-effects">Comparing Magnitude effects</h2>
 <div class="cell" data-execution_count="10">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:frause smoking2, <span class="kw">clear</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">tempfile</span> sc1x sc2x sc3x sc4x</span>
@@ -675,16 +749,20 @@ w^*=\min_w \sum_{h} \left(X_{1,h}-\sum_{j=2}^J w_j X_{j,h}\right)^2
 </div>
 <p>Perhaps what would be the best way to comapre the different cases presented above is to rescale the results as to obtain results that can be compared across specifications. In <a href="#fig-sc5" class="quarto-xref">Figure&nbsp;5</a>, I puts together this effects, so that they can be compared across each other.</p>
 <div class="cell" data-execution_count="11">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">scatter</span> eff* _time, <span class="kw">connect</span>(<span class="ot">l</span> <span class="ot">l</span> <span class="ot">l</span> <span class="ot">l</span>) <span class="bn">msymbol</span>(O D T S) <span class="bn">xline</span>(1989) <span class="co">///</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"Asis  2.550"</span> 2 <span class="st">"Logs 2.859"</span> 3 <span class="st">"Rate 1.928"</span> 4 <span class="st">"Rescaled 1.955"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-sc5" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="index_files/figure-html/fig-sc5-output-1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;5: Synthetic Control Effects</figcaption>
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-sc5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="index_files/figure-html/fig-sc5-output-1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-sc5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5: Synthetic Control Effects
+</figcaption>
 </figure>
 </div>
 </div>
@@ -884,15 +962,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    if (id.startsWith('sec-')) {
+    const typesetMath = (el) => {
+      if (window.MathJax) {
+        // MathJax Typeset
+        window.MathJax.typeset([el]);
+      } else if (window.katex) {
+        // KaTeX Render
+        var mathElements = el.getElementsByClassName("math");
+        var macros = [];
+        for (var i = 0; i < mathElements.length; i++) {
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            window.katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains('display'),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false
+            });
+          }
+        }
+      }
+    }
+    if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
         for (let i = 0; i < 2; i++) {
           container.appendChild(note.children[i].cloneNode(true));
         }
+        typesetMath(container);
         return container.innerHTML
       } else {
+        typesetMath(note);
         return note.innerHTML;
       }
     } else {
@@ -901,6 +1002,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
+      typesetMath(note);
       return note.innerHTML;
     }
   }
@@ -943,6 +1045,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
       }
     }, function(instance) {
     });
@@ -1014,6 +1139,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {

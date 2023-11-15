@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.251">
+<meta name="generator" content="quarto-1.4.455">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -58,6 +58,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -76,7 +77,7 @@ div.csl-indent {
 }</style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -100,12 +101,13 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
   "keyboard-shortcut": [
     "f",
     "/",
     "s"
   ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -129,7 +131,7 @@ gtag('js', new Date());
 gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -141,7 +143,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
@@ -155,36 +157,36 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="../index.html" rel="" target="" aria-current="page">
- <span class="menu-text">Home</span></a>
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../cv.html" rel="" target="">
- <span class="menu-text">my CV and Research</span></a>
+    <a class="nav-link" href="../cv.html"> 
+<span class="menu-text">my CV and Research</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../software.html" rel="" target="">
- <span class="menu-text">Software</span></a>
+    <a class="nav-link" href="../software.html"> 
+<span class="menu-text">Software</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../stataviz/index.html" rel="" target="">
- <span class="menu-text">Stata Viz</span></a>
+    <a class="nav-link" href="../stataviz/index.html"> 
+<span class="menu-text">Stata Viz</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../stata_do/index.html" rel="" target="">
- <span class="menu-text">Stata Do’s Ado’s</span></a>
+    <a class="nav-link" href="../stata_do/index.html"> 
+<span class="menu-text">Stata Do’s Ado’s</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../app_metrics/index.html" rel="" target="">
- <span class="menu-text">Applied econometrics</span></a>
+    <a class="nav-link" href="../app_metrics/index.html"> 
+<span class="menu-text">Applied econometrics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../chatgpt.html" rel="" target="">
- <span class="menu-text">Odds and Ends</span></a>
+    <a class="nav-link" href="../chatgpt.html"> 
+<span class="menu-text">Odds and Ends</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../about.html" rel="" target="">
- <span class="menu-text">about</span></a>
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">about</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -199,11 +201,11 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
     </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../app_metrics/app_metrics1.html">App Metrics</a></li><li class="breadcrumb-item"><a href="../app_metrics/app_metrics7.html">Linear Regressions, OLS and Standard Errors</a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
   </nav>
@@ -211,7 +213,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../index.html" class="sidebar-logo-link">
       <img src="../WeeMee.jpg" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
@@ -238,6 +240,12 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
   <div class="sidebar-item-container"> 
   <a href="../app_metrics/app_metrics1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Constructing synthetic Datasets</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Nonlinear DID:</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -293,7 +301,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -332,6 +340,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 
 
 </header>
+
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
@@ -467,8 +476,8 @@ Var(\hat\beta_{OLS}) = \color{brown}{(X'X)^{-1}} \color{green}{X'} \color{red} \
 \end{matrix}\right)
 \]</span></p>
 <p>Visually, this would look like the following</p>
-<div class="cell" data-execution_count="1">
-<details>
+<div id="f518e625" class="cell" data-execution_count="1">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">clear</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> <span class="dv">scheme</span> white2</span>
@@ -538,8 +547,7 @@ gg(i,j)&amp;=0 \text{  if  } \forall h:g_h(i)\neq  g_h(j) \\
 \end{matrix}\right)
 \]</span></p>
 <p>Visually, its perhaps easier to show this visually:</p>
-<div class="page-columns page-full">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">two</span> (<span class="kw">scatter</span> rr11 rr12 <span class="kw">if</span> rr13==1,  ms(<span class="fu">s</span>) msize(2.1))  <span class="co">///</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    , aspect(1) <span class="bn">legend</span>(<span class="kw">off</span>)  <span class="bn">xtitle</span>(<span class="st">""</span>) <span class="bn">ytitle</span>(<span class="st">""</span>) <span class="bn">yscale</span>(<span class="kw">off</span>) <span class="bn">xscale</span>(<span class="kw">off</span>) <span class="bn">name</span>(m1, <span class="kw">replace</span>) </span>
@@ -550,37 +558,52 @@ gg(i,j)&amp;=0 \text{  if  } \forall h:g_h(i)\neq  g_h(j) \\
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="kw">two</span> (<span class="kw">scatter</span> rr11 rr12 <span class="kw">if</span> rr14==1 | rr13==1,  ms(<span class="fu">s</span>) msize(2.1))  <span class="co">///</span></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    , aspect(1) <span class="bn">legend</span>(<span class="kw">off</span>)  <span class="bn">xtitle</span>(<span class="st">""</span>) <span class="bn">ytitle</span>(<span class="st">""</span>) <span class="bn">yscale</span>(<span class="kw">off</span>) <span class="bn">xscale</span>(<span class="kw">off</span>) <span class="bn">name</span>(m3, <span class="kw">replace</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="fig-corr" class="cell quarto-layout-panel page-columns page-full" data-execution_count="2">
-<figure class="figure page-columns page-full">
-<div class="quarto-layout-row quarto-layout-valign-top column-page">
-<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 33.3%;justify-content: center;">
-<div id="fig-corr-1" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="app_metrics7_files/figure-html/fig-corr-output-1.png" class="img-fluid figure-img" data-ref-parent="fig-corr"></p>
-<figcaption class="figure-caption">(a) 1-way cluster</figcaption>
+<div id="fig-corr" class="quarto-layout-panel page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-corr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<div class="quarto-layout-row quarto-layout-valign-top page-columns page-full">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-corr" style="flex-basis: 33.3%;justify-content: center;">
+<div id="fig-corr-1" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
+<div aria-describedby="fig-corr-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<img src="app_metrics7_files/figure-html/fig-corr-output-1.png" class="img-fluid figure-img column-page" data-ref-parent="fig-corr">
+</div>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-corr-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) 1-way cluster
+</figcaption>
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 33.3%;justify-content: center;">
-<div id="fig-corr-2" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="app_metrics7_files/figure-html/fig-corr-output-2.png" class="img-fluid figure-img" data-ref-parent="fig-corr"></p>
-<figcaption class="figure-caption">(b) 2nd 1-way cluster</figcaption>
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-corr" style="flex-basis: 33.3%;justify-content: center;">
+<div id="fig-corr-2" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
+<div aria-describedby="fig-corr-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<img src="app_metrics7_files/figure-html/fig-corr-output-2.png" class="img-fluid figure-img column-page" data-ref-parent="fig-corr">
+</div>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-corr-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) 2nd 1-way cluster
+</figcaption>
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 33.3%;justify-content: center;">
-<div id="fig-corr-3" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="app_metrics7_files/figure-html/fig-corr-output-3.png" class="img-fluid figure-img" data-ref-parent="fig-corr"></p>
-<figcaption class="figure-caption">(c) 2-way cluster</figcaption>
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-corr" style="flex-basis: 33.3%;justify-content: center;">
+<div id="fig-corr-3" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
+<div aria-describedby="fig-corr-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<img src="app_metrics7_files/figure-html/fig-corr-output-3.png" class="img-fluid figure-img column-page" data-ref-parent="fig-corr">
+</div>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-corr-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c) 2-way cluster
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p></p><figcaption class="figure-caption">Figure&nbsp;1: Correlation matrix <span class="math inline">\(\Omega\)</span></figcaption><p></p>
-</figure>
 </div>
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-corr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Correlation matrix <span class="math inline">\(\Omega\)</span>
+</figcaption>
+</figure>
 </div>
 <p><a href="#fig-corr" class="quarto-xref">Figure&nbsp;1</a> shows the correlation structure we would observe considering the 2 clustered variables. <a href="#fig-corr-1" class="quarto-xref">Figure&nbsp;1 (a)</a> and <a href="#fig-corr-2" class="quarto-xref">Figure&nbsp;1 (b)</a> show the interconnections based on a first and a second cluster variables, whereas <a href="#fig-corr-3" class="quarto-xref">Figure&nbsp;1 (c)</a> considers the combination of both. To estimate Standard errors we need to allow the <em>blue</em> cells to be different from zero, impossing the zero condition only on the “unconnected” pairs.</p>
 </section>
@@ -601,7 +624,7 @@ gg(i,j)&amp;=0 \text{  if  } \forall h:g_h(i)\neq  g_h(j) \\
 <section id="stata-example" class="level2">
 <h2 class="anchored" data-anchor-id="stata-example"><code>Stata</code> Example</h2>
 <p>Here I will work on a small example that would implement the 4 approaches to estimating standard errors. Because I will use the unrestrict <span class="math inline">\(\hat\Omega\)</span> matrix, I will work with a very small dataset: `auto’. The next contains lots of code, so feel free to skip it.</p>
-<div class="cell" data-execution_count="3">
+<div id="e1248815" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>** Load Data, create clusters and a constant</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">sysuse</span> auto, <span class="kw">clear</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> <span class="dv">seed</span> 1</span>
@@ -622,7 +645,7 @@ variable price was int now float
 </div>
 </div>
 <p>Homoskedastic errors:</p>
-<div class="cell" data-execution_count="4">
+<div id="2132c724" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: omega_0 = <span class="fu">I</span>(74)*<span class="kw">mean</span>(<span class="fu">e</span>:^2)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: vcv_0   = ixx * x' * omega_0 * x * ixx</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: svcv_0  = diagonal(vcv_0):^.5;svcv_0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -635,7 +658,7 @@ variable price was int now float
 </div>
 </div>
 <p>Robust Standard errors</p>
-<div class="cell" data-execution_count="5">
+<div id="5f1f3929" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: omega_1 = (<span class="fu">e</span>*e'):*<span class="fu">I</span>(74)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: vcv_1   = ixx * x' * omega_1 * x * ixx</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: svcv_1  = diagonal(vcv_1):^.5;svcv_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -648,7 +671,7 @@ variable price was int now float
 </div>
 </div>
 <p>1-way Cluster Standard errors:</p>
-<div class="cell" data-execution_count="6">
+<div id="d508be75" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: <span class="kw">cc</span> = st_data(.,<span class="st">"c1 c2"</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: i1 = <span class="fu">J</span>(1,74,<span class="kw">cc</span>[,1]):==<span class="fu">J</span>(74,1,<span class="kw">cc</span>[,1]') </span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: i2 = <span class="fu">J</span>(1,74,<span class="kw">cc</span>[,2]):==<span class="fu">J</span>(74,1,<span class="kw">cc</span>[,2]') </span>
@@ -667,7 +690,7 @@ variable price was int now float
 </div>
 </div>
 <p>2-way Cluster Standard errors</p>
-<div class="cell" data-execution_count="7">
+<div id="aa819020" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: i3 = i1:|i2</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: omega_3 = (<span class="fu">e</span>*e'):*i3</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: vcv_3   = ixx * x' * omega_3 * x * ixx</span>
@@ -681,7 +704,7 @@ variable price was int now float
 </div>
 </div>
 <p>But for the 2-way Cluster Standard errors you also have the more commonly used formula:</p>
-<div class="cell" data-execution_count="8">
+<div id="7afdc30c" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>** First we need to create a <span class="kw">variable</span> that combines both clusters</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: i4 = i1:&amp;i2</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: omega_4 = (<span class="fu">e</span>*e'):*i4</span>
@@ -712,7 +735,7 @@ variable price was int now float
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-abadie_when_2022" class="csl-entry" role="listitem">
 Abadie, Alberto, Susan Athey, Guido W Imbens, and Jeffrey M Wooldridge. 2022. <span>“When <span>Should</span> <span>You</span> <span>Adjust</span> <span>Standard</span> <span>Errors</span> for <span>Clustering</span>?”</span> <em>The Quarterly Journal of Economics</em> 138 (1): 1–35. <a href="https://doi.org/10.1093/qje/qjac038">https://doi.org/10.1093/qje/qjac038</a>.
 </div>
@@ -907,15 +930,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    if (id.startsWith('sec-')) {
+    const typesetMath = (el) => {
+      if (window.MathJax) {
+        // MathJax Typeset
+        window.MathJax.typeset([el]);
+      } else if (window.katex) {
+        // KaTeX Render
+        var mathElements = el.getElementsByClassName("math");
+        var macros = [];
+        for (var i = 0; i < mathElements.length; i++) {
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            window.katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains('display'),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false
+            });
+          }
+        }
+      }
+    }
+    if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
         for (let i = 0; i < 2; i++) {
           container.appendChild(note.children[i].cloneNode(true));
         }
+        typesetMath(container);
         return container.innerHTML
       } else {
+        typesetMath(note);
         return note.innerHTML;
       }
     } else {
@@ -924,6 +970,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
+      typesetMath(note);
       return note.innerHTML;
     }
   }
@@ -966,6 +1013,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
       }
     }, function(instance) {
     });
@@ -1037,6 +1107,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1098,12 +1194,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../app_metrics/app_metrics6.html" class="pagination-link">
+      <a href="../app_metrics/app_metrics6.html" class="pagination-link  aria-label=" making="" better="" use="" of="" interval-censored="" data"="">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Making better use of interval-censored data</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../app_metrics/app_metrics8.html" class="pagination-link">
+      <a href="../app_metrics/app_metrics8.html" class="pagination-link" aria-label="DID: Panel Data &amp; Repeated Crossection">
         <span class="nav-page-text">DID: Panel Data &amp; Repeated Crossection</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>

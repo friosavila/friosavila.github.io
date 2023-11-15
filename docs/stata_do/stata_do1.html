@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.251">
+<meta name="generator" content="quarto-1.4.455">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -57,7 +57,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -81,12 +81,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
   "keyboard-shortcut": [
     "f",
     "/",
     "s"
   ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -110,7 +111,7 @@ gtag('js', new Date());
 gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -122,7 +123,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
@@ -136,36 +137,36 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="../index.html" rel="" target="" aria-current="page">
- <span class="menu-text">Home</span></a>
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../cv.html" rel="" target="">
- <span class="menu-text">my CV and Research</span></a>
+    <a class="nav-link" href="../cv.html"> 
+<span class="menu-text">my CV and Research</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../software.html" rel="" target="">
- <span class="menu-text">Software</span></a>
+    <a class="nav-link" href="../software.html"> 
+<span class="menu-text">Software</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../stataviz/index.html" rel="" target="">
- <span class="menu-text">Stata Viz</span></a>
+    <a class="nav-link" href="../stataviz/index.html"> 
+<span class="menu-text">Stata Viz</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../stata_do/index.html" rel="" target="">
- <span class="menu-text">Stata Do’s Ado’s</span></a>
+    <a class="nav-link" href="../stata_do/index.html"> 
+<span class="menu-text">Stata Do’s Ado’s</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../app_metrics/index.html" rel="" target="">
- <span class="menu-text">Applied econometrics</span></a>
+    <a class="nav-link" href="../app_metrics/index.html"> 
+<span class="menu-text">Applied econometrics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../chatgpt.html" rel="" target="">
- <span class="menu-text">Odds and Ends</span></a>
+    <a class="nav-link" href="../chatgpt.html"> 
+<span class="menu-text">Odds and Ends</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../about.html" rel="" target="">
- <span class="menu-text">about</span></a>
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">about</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -180,11 +181,11 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
     </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../stata_do/stata_do1.html">Stata Do</a></li><li class="breadcrumb-item"><a href="../stata_do/stata_do1.html">Using Quarto for Stata dynamic documents</a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
   </nav>
@@ -192,7 +193,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../index.html" class="sidebar-logo-link">
       <img src="../WeeMee.jpg" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
@@ -268,7 +269,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -302,6 +303,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 
 
 </header>
+
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
@@ -337,8 +339,8 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <h2 class="anchored" data-anchor-id="lets-do-this">Lets do this:</h2>
 <p>Let us consider an example where we study the <strong>mpg</strong> and <strong>weight</strong> variables in <strong>auto.dta</strong>. In this example, all code used to construct the desired output will be displayed as fenced block code, followed by the output it produces. This is done using the option <code>*|echo: fenced</code>.</p>
 <p>We first use the <strong>sysuse</strong> command to load the dataset and then describe the data using the <strong>describe</strong> command.</p>
-<div class="cell" data-execution_count="1">
-<details>
+<div id="8887abdf" class="cell" data-execution_count="1">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="in">sysuse auto, clear</span></span>
@@ -351,9 +353,9 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <div class="cell-output cell-output-stdout">
 <pre><code>(1978 automobile data)
 
-Contains data from C:\Program Files\Stata18/ado\base/a/auto.dta
+Contains data from C:\Program Files\Stata17/ado\base/a/auto.dta
  Observations:            74                  1978 automobile data
-    Variables:            12                  13 Apr 2022 17:45
+    Variables:            12                  13 Apr 2020 17:45
                                               (_dta has notes)
 -------------------------------------------------------------------------------
 Variable      Storage   Display    Value
@@ -376,8 +378,8 @@ Sorted by: foreign</code></pre>
 </div>
 </div>
 <p>Now, we want to check if <strong>mpg</strong> is always greater than 0 and less than 100. We use the <strong>assert</strong> command to perform the check. In this case, we do not want to include any output in the target HTML file, so we use the <strong>quietly</strong> attribute to modify the behavior of the <strong>dd_do</strong> Stata dynamic tag.</p>
-<div class="cell" data-execution_count="2">
-<details>
+<div id="66f235e7" class="cell" data-execution_count="2">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="in"> assert mpg &gt; 0 &amp; mpg &lt; 100</span></span>
@@ -386,8 +388,8 @@ Sorted by: foreign</code></pre>
 </div>
 <p>If the data do not satisfy the conditions, <strong>quatro</strong> will fail with an error message, which will occur if we run the same <strong>assert</strong> command in a do-file.</p>
 <p>Next, we want to summarize the <strong>weight</strong> variable:</p>
-<div class="cell" data-execution_count="3">
-<details>
+<div id="b8aba1eb" class="cell" data-execution_count="3">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="in">summarize weight</span></span>
@@ -401,7 +403,7 @@ Sorted by: foreign</code></pre>
 </div>
 </div>
 <p>We want to use the minimum and maximum values of <strong>weight</strong> in a sentence. Instead of copying and pasting the numbers from the <strong>summarize</strong> output, we can use the <strong><code>display</code></strong> Stata to show <strong>r(min)</strong> and <strong>r(max)</strong> stored results. We will also use the options <code>*| output: asis</code> to obtain text that follows markdown formatting.</p>
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="in">*| output: asis</span></span>
@@ -412,7 +414,7 @@ Sorted by: foreign</code></pre>
 <p>The variable weight has minimum value 1760.00 and has maximum value 4840.00.</p>
 <p>In other words, if one wants to use dynamic tags, its possible to do so by simply using display, with the corresponding locals, so Stata evaluates the expressions as normal. <code>*| output: asis</code> is used so the output can still be interpreted using markdown syntax.</p>
 <p>As with <strong><code>dyndoc</code></strong>, display can also be used as a calculator. For example, if we want to include the <span class="math inline">\(range = max - min\)</span> in a sentence, instead of calculating the number and then copying and pasting it, we can use</p>
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="in">*| output: asis</span></span>
@@ -422,8 +424,8 @@ Sorted by: foreign</code></pre>
 <p>The variable weight has range 3080.00.</p>
 <p>Now, we want to graph <strong>mpg</strong> and <strong>weight</strong> using a scatterplot. There are at least two ways to do this.</p>
 <p>First, one can simply create the scatterplot using the same procedure as before:</p>
-<div class="cell" data-execution_count="6">
-<details>
+<div id="4063ce5c" class="cell" data-execution_count="6">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="in">scatter mpg weight, mcolor(blue%50)</span></span>
@@ -435,8 +437,8 @@ Sorted by: foreign</code></pre>
 </div>
 <p>which generates a scatterplot of <strong>mpg</strong> and <strong>weight</strong> with 50% opacity color markers.</p>
 <p>Now, we want to export the graph to a file and include an image link to the file.</p>
-<div class="cell" data-execution_count="7">
-<details>
+<div id="e4dfab11" class="cell" data-execution_count="7">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="in">qui:graph export fig1.png, width(1600) replace</span></span>
@@ -447,12 +449,11 @@ Sorted by: foreign</code></pre>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="fig1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">scatter</figcaption>
+<figcaption>scatter</figcaption>
 </figure>
 </div>
 <p>It is possible, however, to combine figure creation using quatro tags and directives. Here, however, you need to make sure all figures are named:</p>
-<div class="page-columns page-full">
-<details>
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="in">*| label: fig-cost</span></span>
@@ -469,29 +470,40 @@ Sorted by: foreign</code></pre>
 <span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="in">qui:graph export fig2b.png, width(1600) replace</span></span>
 <span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="fig-cost" class="cell quarto-layout-panel page-columns page-full" data-execution_count="8">
-<figure class="figure page-columns page-full">
-<div class="quarto-layout-row quarto-layout-valign-top column-page">
-<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-cost-1" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="stata_do1_files/figure-html/fig-cost-output-1.png" class="img-fluid figure-img" data-ref-parent="fig-cost"></p>
-<figcaption class="figure-caption">(a) Foreign Cars</figcaption>
+<div id="fig-cost" class="quarto-layout-panel page-columns page-full">
+<figure class="quarto-float quarto-float-fig figure page-columns page-full">
+<div aria-describedby="fig-cost-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<div class="quarto-layout-row quarto-layout-valign-top page-columns page-full">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-cost" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-cost-1" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
+<div aria-describedby="fig-cost-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<img src="stata_do1_files/figure-html/fig-cost-output-1.png" class="img-fluid figure-img column-page" data-ref-parent="fig-cost">
+</div>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-cost-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Foreign Cars
+</figcaption>
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-cost-2" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="stata_do1_files/figure-html/fig-cost-output-2.png" class="img-fluid figure-img" data-ref-parent="fig-cost"></p>
-<figcaption class="figure-caption">(b) Domestic Cars</figcaption>
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-cost" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-cost-2" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
+<div aria-describedby="fig-cost-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
+<img src="stata_do1_files/figure-html/fig-cost-output-2.png" class="img-fluid figure-img column-page" data-ref-parent="fig-cost">
+</div>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-cost-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Domestic Cars
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p></p><figcaption class="figure-caption">Figure&nbsp;1: Price vs MPG</figcaption><p></p>
-</figure>
 </div>
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-cost-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Price vs MPG
+</figcaption>
+</figure>
 </div>
 <p>And of course, we can now the figure tags to link it to the text:</p>
 <p><a href="#fig-cost" class="quarto-xref">Figure&nbsp;1</a> provides a simple scatter between prices and MPG for foreign and domestic cars. While there seems to be a strong negative relationship between these variables among foreign cars (see <a href="#fig-cost-1" class="quarto-xref">Figure&nbsp;1 (a)</a>), the relationship among domestic cars is much weaker, when looking at cars with a fuel efficiency larger than 15mpg (see <a href="#fig-cost-2" class="quarto-xref">Figure&nbsp;1 (b)</a>).</p>
@@ -503,27 +515,39 @@ Sorted by: foreign</code></pre>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>Price vs MPG</span>
 <span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>to produce</p>
-<div id="fig-mpgprice" class="quarto-layout-panel page-columns page-full">
-<figure class="figure page-columns page-full">
-<div class="quarto-layout-row quarto-layout-valign-top column-page">
-<div class="quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div id="fig-mpgprice" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-mpgprice-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row quarto-layout-valign-top">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-mpgprice" style="flex-basis: 50.0%;justify-content: center;">
 <div id="fig-mpgprice-1" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="fig2a.png" class="img-fluid figure-img" data-ref-parent="fig-mpgprice"></p>
-<figcaption class="figure-caption">(a) foreign</figcaption>
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-mpgprice-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="fig2a.png" class="img-fluid figure-img" data-ref-parent="fig-mpgprice">
+</div>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-mpgprice-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) foreign
+</figcaption>
 </figure>
 </div>
 </div>
-<div class="quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-mpgprice" style="flex-basis: 50.0%;justify-content: center;">
 <div id="fig-mpgprice-2" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="fig2b.png" class="img-fluid figure-img" data-ref-parent="fig-mpgprice"></p>
-<figcaption class="figure-caption">(b) domestic</figcaption>
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-mpgprice-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="fig2b.png" class="img-fluid figure-img" data-ref-parent="fig-mpgprice">
+</div>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-mpgprice-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) domestic
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p></p><figcaption class="figure-caption">Figure&nbsp;2: Price vs MPG</figcaption><p></p>
+</div>
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-mpgprice-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Price vs MPG
+</figcaption>
 </figure>
 </div>
 <p>As plot in <a href="#fig-mpgprice" class="quarto-xref">Figure&nbsp;2</a> provides a simple scatter between prices and MPG for foreign and domestic cars. While there seems to be a strong negative relationship between these variables among foreign cars (see <a href="#fig-mpgprice-1" class="quarto-xref">Figure&nbsp;2 (a)</a>), the relationship among domestic cars is much weaker, when looking at cars with a fuel efficiency larger than 15mpg (see <a href="#fig-mpgprice-2" class="quarto-xref">Figure&nbsp;2 (b)</a>).</p>
@@ -714,15 +738,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    if (id.startsWith('sec-')) {
+    const typesetMath = (el) => {
+      if (window.MathJax) {
+        // MathJax Typeset
+        window.MathJax.typeset([el]);
+      } else if (window.katex) {
+        // KaTeX Render
+        var mathElements = el.getElementsByClassName("math");
+        var macros = [];
+        for (var i = 0; i < mathElements.length; i++) {
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            window.katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains('display'),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false
+            });
+          }
+        }
+      }
+    }
+    if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
         for (let i = 0; i < 2; i++) {
           container.appendChild(note.children[i].cloneNode(true));
         }
+        typesetMath(container);
         return container.innerHTML
       } else {
+        typesetMath(note);
         return note.innerHTML;
       }
     } else {
@@ -731,6 +778,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
+      typesetMath(note);
       return note.innerHTML;
     }
   }
@@ -773,6 +821,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
       }
     }, function(instance) {
     });
@@ -844,6 +915,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -905,12 +1002,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../stata_do/index.html" class="pagination-link">
+      <a href="../stata_do/index.html" class="pagination-link  aria-label=" stata="" programming"="">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Stata Programming</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../stata_do/stata_do2.html" class="pagination-link">
+      <a href="../stata_do/stata_do2.html" class="pagination-link" aria-label="How to Bootstrap">
         <span class="nav-page-text">How to Bootstrap</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>

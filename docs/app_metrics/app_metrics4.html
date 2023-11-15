@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.251">
+<meta name="generator" content="quarto-1.4.455">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -58,6 +58,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -76,7 +77,7 @@ div.csl-indent {
 }</style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -100,12 +101,13 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
   "keyboard-shortcut": [
     "f",
     "/",
     "s"
   ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -129,7 +131,7 @@ gtag('js', new Date());
 gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -141,7 +143,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
@@ -155,36 +157,36 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="../index.html" rel="" target="" aria-current="page">
- <span class="menu-text">Home</span></a>
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../cv.html" rel="" target="">
- <span class="menu-text">my CV and Research</span></a>
+    <a class="nav-link" href="../cv.html"> 
+<span class="menu-text">my CV and Research</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../software.html" rel="" target="">
- <span class="menu-text">Software</span></a>
+    <a class="nav-link" href="../software.html"> 
+<span class="menu-text">Software</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../stataviz/index.html" rel="" target="">
- <span class="menu-text">Stata Viz</span></a>
+    <a class="nav-link" href="../stataviz/index.html"> 
+<span class="menu-text">Stata Viz</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../stata_do/index.html" rel="" target="">
- <span class="menu-text">Stata Do’s Ado’s</span></a>
+    <a class="nav-link" href="../stata_do/index.html"> 
+<span class="menu-text">Stata Do’s Ado’s</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../app_metrics/index.html" rel="" target="">
- <span class="menu-text">Applied econometrics</span></a>
+    <a class="nav-link" href="../app_metrics/index.html"> 
+<span class="menu-text">Applied econometrics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../chatgpt.html" rel="" target="">
- <span class="menu-text">Odds and Ends</span></a>
+    <a class="nav-link" href="../chatgpt.html"> 
+<span class="menu-text">Odds and Ends</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../about.html" rel="" target="">
- <span class="menu-text">about</span></a>
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">about</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -199,11 +201,11 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
     </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../app_metrics/app_metrics1.html">App Metrics</a></li><li class="breadcrumb-item"><a href="../app_metrics/app_metrics4.html">DID: The Revolution</a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
   </nav>
@@ -211,7 +213,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../index.html" class="sidebar-logo-link">
       <img src="../WeeMee.jpg" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
@@ -238,6 +240,12 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
   <div class="sidebar-item-container"> 
   <a href="../app_metrics/app_metrics1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Constructing synthetic Datasets</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Nonlinear DID:</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -293,7 +301,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -335,6 +343,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 
 </header>
 
+
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
 <p>If you have been keeping up with the advancements and revolution in Difference-in-Differences (DID), you may be aware of the issues associated with using the simple Two-Way Fixed Effects (TWFE) method for identifying treatment effects. If you haven’t, you can refer to my previous post titled <strong>DID: The fall</strong> where I have explained the problem.</p>
@@ -367,7 +376,7 @@ y_{it} = a_i + a_t + \delta_{it}*D_{it} +e_{it}
 <li><p>Assume there are no controls.</p></li>
 </ol>
 <p>Under this conditions, lets simulate a simple dataset with this characteristics:</p>
-<div class="cell" data-execution_count="1">
+<div id="c9c2937e" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">clear</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> <span class="dv">linesize</span> 250</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> <span class="dv">seed</span>     111</span>
@@ -419,8 +428,8 @@ y_{it} = a_i + a_t + e_{it} \ if \ t&lt;g
 <p>Because unit level treatment effects are not useful for statistical inference, one can use aggregations to obtain standard errors or aggregates we are more familiar with: Average treatment effect on treated, dynamic effects, etc.</p>
 <p>To correctly estimate standard errors, both steps should be estimated simulatenously, so that the estimation error from the first stage can propagate to the second stage. While you can use <code>did2s</code> or <code>did_imputation</code>, I will show you the code using <code>gmm</code>, so you can see how the whole system would work.</p>
 <p>In the following code line (1) identifies the individual and time FE using only notyet treated units (trt=0). Line 2 uses tha to substract from <span class="math inline">\(y\)</span> and identify the treatment effect (ATT). Lines 3 and 4 provides information to gmm to estimate the model and standard errors:</p>
-<div class="cell" data-execution_count="2">
-<details>
+<div id="6374f8ef" class="cell" data-execution_count="2">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>gmm ((<span class="fu">y</span>-{a0}-{a_i:i.g}-{a_t:i.t})*(trt==0))     <span class="co">/// </span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    ((<span class="fu">y</span>-{a0}-{a_i:}   -{a_t:}    -{att:trt})) , <span class="co">/// </span></span>
@@ -430,9 +439,9 @@ y_{it} = a_i + a_t + e_{it} \ if \ t&lt;g
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Step 1
-Iteration 0:  GMM criterion Q(b) =  23.553096  
-Iteration 1:  GMM criterion Q(b) =  8.570e-25  
-Iteration 2:  GMM criterion Q(b) =  8.350e-33  
+Iteration 0:   GMM criterion Q(b) =  19.725543  
+Iteration 1:   GMM criterion Q(b) =  5.816e-23  
+Iteration 2:   GMM criterion Q(b) =  9.081e-33  
 
 GMM estimation 
 
@@ -446,41 +455,41 @@ Initial weight matrix: Identity                   Number of obs   =      1,000
              | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
 -------------+----------------------------------------------------------------
 a0           |
-       _cons |   4.613828   .6318042     7.30   0.000     3.375515    5.852142
+       _cons |   3.146414   .6822892     4.61   0.000     1.809152    4.483677
 -------------+----------------------------------------------------------------
 a_i          |
            g |
-          2  |  -1.468802   .7825655    -1.88   0.061    -3.002602    .0649987
-          3  |  -.2194434   .9415556    -0.23   0.816    -2.064858    1.625972
-          4  |  -1.689998   .6999231    -2.41   0.016    -3.061822    -.318174
-          5  |  -1.022837    .755609    -1.35   0.176    -2.503803    .4581298
-          6  |  -.9195831   .7941991    -1.16   0.247    -2.476185    .6370185
-          7  |   1.057528   1.069432     0.99   0.323    -1.038521    3.153577
-          8  |   -1.76994   .6663358    -2.66   0.008    -3.075934   -.4639455
-          9  |  -1.103626   .9857633    -1.12   0.263    -3.035687    .8284342
+          2  |  -1.329894   .9540798    -1.39   0.163    -3.199856    .5400685
+          3  |   .3303121   .9832247     0.34   0.737    -1.596773    2.257397
+          4  |  -.9533545   .8233816    -1.16   0.247    -2.567153    .6604439
+          5  |  -.9570973   .8366389    -1.14   0.253    -2.596879    .6826848
+          6  |    -.58129   .8707363    -0.67   0.504    -2.287902    1.125322
+          7  |   .9916895   1.010794     0.98   0.327    -.9894297    2.972809
+          8  |  -1.609291   .7437976    -2.16   0.030    -3.067108   -.1514746
+          9  |  -1.160353   1.033179    -1.12   0.261    -3.185346    .8646411
 -------------+----------------------------------------------------------------
 a_t          |
            t |
-          2  |   .2691986   .1549314     1.74   0.082    -.0344614    .5728586
-          3  |  -1.562914   .1732142    -9.02   0.000    -1.902408   -1.223421
-          4  |  -.4982935   .1606318    -3.10   0.002    -.8131261    -.183461
-          5  |  -1.036587   .1955554    -5.30   0.000    -1.419869   -.6533056
-          6  |  -.8198623   .1933862    -4.24   0.000    -1.198892   -.4408324
-          7  |   .3765546   .1927384     1.95   0.051    -.0012058     .754315
-          8  |  -1.348335   .1905433    -7.08   0.000    -1.721793   -.9748773
-          9  |  -1.535839   .2185551    -7.03   0.000    -1.964199   -1.107479
-         10  |  -1.367743   .2559179    -5.34   0.000    -1.869333    -.866153
+          2  |  -.0585438   .1385197    -0.42   0.673    -.3300374    .2129498
+          3  |   -.213678   .1704212    -1.25   0.210    -.5476975    .1203415
+          4  |  -.5752045   .1713895    -3.36   0.001    -.9111217   -.2392872
+          5  |   .0842171   .1677747     0.50   0.616    -.2446152    .4130494
+          6  |   .1190078   .1841714     0.65   0.518    -.2419615    .4799771
+          7  |   1.000738   .2034229     4.92   0.000     .6020363    1.399439
+          8  |  -.0146057   .2190799    -0.07   0.947    -.4439945    .4147831
+          9  |   .9380065   .2007013     4.67   0.000     .5446391    1.331374
+         10  |   .9572597   .2578496     3.71   0.000     .4518838    1.462636
 -------------+----------------------------------------------------------------
 att          |
-         trt |    1.54546   .1290656    11.97   0.000     1.292496    1.798424
+         trt |   1.458058   .1493165     9.76   0.000     1.165403    1.750713
 ------------------------------------------------------------------------------
 Instruments for equation 1: 0b.g 2.g 3.g 4.g 5.g 6.g 7.g 8.g 9.g 1b.t 2.t 3.t 4.t 5.t 6.t 7.t 8.t 9.t 10.t _cons
 Instruments for equation 2: trt _cons</code></pre>
 </div>
 </div>
 <p>You can compare this to the true effect:</p>
-<div class="cell" data-execution_count="3">
-<details>
+<div id="b3afbba1" class="cell" data-execution_count="3">
+<details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">sum</span> teff <span class="kw">if</span> trt==1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
@@ -528,7 +537,7 @@ y_{it} = a_i + a_t + \sum_{g=g_0}^G \sum_{t\neq g-1} \delta_{gt} * 1(g,t)+e_{it}
 <p>By saturating the model this way, each <span class="math inline">\(\delta_{gt}\)</span> represents a treatment effect for group G at time T, which can be later aggregated to obtain dynamic, group, or average treatment effects. Also interesting to note that this second specification is essentially the same <span class="citation" data-cites="sun_estimating_2021">Sun and Abraham (<a href="#ref-sun_estimating_2021" role="doc-biblioref">2021</a>)</span> propose for dynamic effects, and produces results that are identical to the methodology proposed by <span class="citation" data-cites="callaway_santanna_2021">Callaway and Sant’Anna (<a href="#ref-callaway_santanna_2021" role="doc-biblioref">2021</a>)</span>.</p>
 <p>Now for the application, I will use <code>jwdid</code> for both specifications. Because by default <code>jwdid</code> produces the fully saturated model, I will omit those results, showing only the average treatment effect.</p>
 <p>First the one using not-yet treated units as controls (default), which produces exactly the same results as the two-step approach:</p>
-<div class="cell" data-execution_count="4">
+<div id="ee75df72" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>*<span class="kw">ssc</span> install jwdid</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>: jwdid <span class="fu">y</span>, ivar(i) tvar(t) gvar(g)</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">estat</span> simple</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -538,13 +547,12 @@ y_{it} = a_i + a_t + \sum_{g=g_0}^G \sum_{t\neq g-1} \delta_{gt} * 1(g,t)+e_{it}
              |            Delta-method
              | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
 -------------+----------------------------------------------------------------
-         _at |
-   (2 vs 1)  |    1.54546    .125852    12.28   0.000     1.298795    1.792125
+      simple |   1.458058   .1494798     9.75   0.000     1.165083    1.751033
 ------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
 <p>Second the one with never treated units as controls:</p>
-<div class="cell" data-execution_count="5">
+<div id="9dd6acd3" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>: jwdid <span class="fu">y</span>, ivar(i) tvar(t) gvar(g) never</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">estat</span> simple</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -553,8 +561,7 @@ y_{it} = a_i + a_t + \sum_{g=g_0}^G \sum_{t\neq g-1} \delta_{gt} * 1(g,t)+e_{it}
              |            Delta-method
              | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
 -------------+----------------------------------------------------------------
-         _at |
-   (2 vs 1)  |   1.580746   .1374021    11.50   0.000     1.311443    1.850049
+      simple |   1.543749   .1567784     9.85   0.000     1.236469    1.851029
 ------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
@@ -582,7 +589,7 @@ SATT = \sum \left( \frac{w_{gt} }{\sum w_{gt}}ATT(g,t) \right)
 <p>where the weights <span class="math inline">\(w_{gt}\)</span> will change based on the type of aggregation one is interested in.</p>
 <p>This multiple stage process may seem challening, but there are tools that allow you to implement them quite easily: <code>csdid</code> and <code>csdid2</code>. The first one, was written as a wrapper around <code>drdid</code>, to do all the heavy lifting for you. However, for large projects, it can be slow due to overhead. The alternative <code>csdid2</code> is self contained, still under development, but much faster than the predecesor. See <a href="https://github.com/friosavila/csdid2"><code>csdid2</code></a> if interested. Here I will use <code>csdid</code>, which you can get from SSC.</p>
 <p>As with <code>jwdid</code>. The default option is for <code>csdid</code> to produce all ATTGT’s. So, for the excercise, I’ll omit that ouput, and estimate the aggregate effects with the post estimation command. The default is to use the never treated as controls. I will also add the option <code>long2</code> to obtain the pre-treatment ATTGT’s as describe above, even though they won’t affect our point estimates:</p>
-<div class="cell" data-execution_count="6">
+<div id="345b9c68" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>: <span class="kw">ssc</span> install drdid, <span class="kw">replace</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>: <span class="kw">ssc</span> install csdid, <span class="kw">replace</span></span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>: csdid <span class="fu">y</span>, ivar(i) time(t) gvar(g) long2</span>
@@ -592,12 +599,12 @@ SATT = \sum \left( \frac{w_{gt} }{\sum w_{gt}}ATT(g,t) \right)
 ------------------------------------------------------------------------------
              | Coefficient  Std. err.      z    P&gt;|z|     [95% conf. interval]
 -------------+----------------------------------------------------------------
-         ATT |   1.580746   .1405861    11.24   0.000     1.305203     1.85629
+         ATT |   1.543749   .1577366     9.79   0.000     1.234591    1.852907
 ------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
 <p>I will also use the not yet treated, to compare results.</p>
-<div class="cell" data-execution_count="7">
+<div id="967d663f" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>: csdid <span class="fu">y</span>, ivar(i) time(t) gvar(g) notyet long2</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">estat</span> simple </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -605,7 +612,7 @@ SATT = \sum \left( \frac{w_{gt} }{\sum w_{gt}}ATT(g,t) \right)
 ------------------------------------------------------------------------------
              | Coefficient  Std. err.      z    P&gt;|z|     [95% conf. interval]
 -------------+----------------------------------------------------------------
-         ATT |    1.59861   .1500332    10.66   0.000      1.30455     1.89267
+         ATT |   1.494475   .1587386     9.41   0.000     1.183353    1.805597
 ------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
@@ -641,7 +648,7 @@ SATT = \sum \left( \frac{w_{gt} }{\sum w_{gt}}ATT(g,t) \right)
 </section>
 <section id="references" class="level2">
 <h2 class="anchored" data-anchor-id="references">References</h2>
-<div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-borusyak_revisiting_2022" class="csl-entry" role="listitem">
 Borusyak, Kirill, Xavier Jaravel, and Jann Spiess. 2022. <span>“Revisiting <span>Event</span> <span>Study</span> <span>Designs</span>: <span>Robust</span> and <span>Efficient</span> <span>Estimation</span>.”</span> arXiv. <a href="https://doi.org/10.48550/arXiv.2108.12419">https://doi.org/10.48550/arXiv.2108.12419</a>.
 </div>
@@ -853,15 +860,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    if (id.startsWith('sec-')) {
+    const typesetMath = (el) => {
+      if (window.MathJax) {
+        // MathJax Typeset
+        window.MathJax.typeset([el]);
+      } else if (window.katex) {
+        // KaTeX Render
+        var mathElements = el.getElementsByClassName("math");
+        var macros = [];
+        for (var i = 0; i < mathElements.length; i++) {
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            window.katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains('display'),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false
+            });
+          }
+        }
+      }
+    }
+    if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
         for (let i = 0; i < 2; i++) {
           container.appendChild(note.children[i].cloneNode(true));
         }
+        typesetMath(container);
         return container.innerHTML
       } else {
+        typesetMath(note);
         return note.innerHTML;
       }
     } else {
@@ -870,6 +900,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
+      typesetMath(note);
       return note.innerHTML;
     }
   }
@@ -912,6 +943,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
       }
     }, function(instance) {
     });
@@ -983,6 +1037,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1044,12 +1124,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../app_metrics/app_metrics3.html" class="pagination-link">
+      <a href="../app_metrics/app_metrics3.html" class="pagination-link  aria-label=" did:="" the="" fall"="">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">DID: The Fall</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../app_metrics/app_metrics5.html" class="pagination-link">
+      <a href="../app_metrics/app_metrics5.html" class="pagination-link" aria-label="2x2 DID: Sant'Anna and Zhao (2020)">
         <span class="nav-page-text">2x2 DID: Sant’Anna and Zhao (2020)</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>

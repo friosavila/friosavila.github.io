@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.251">
+<meta name="generator" content="quarto-1.4.455">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -22,7 +22,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -58,6 +58,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -76,7 +77,7 @@ div.csl-indent {
 }</style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -100,12 +101,13 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
   "keyboard-shortcut": [
     "f",
     "/",
     "s"
   ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -129,7 +131,7 @@ gtag('js', new Date());
 gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
@@ -141,7 +143,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
@@ -155,36 +157,36 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="../index.html" rel="" target="" aria-current="page">
- <span class="menu-text">Home</span></a>
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../cv.html" rel="" target="">
- <span class="menu-text">my CV and Research</span></a>
+    <a class="nav-link" href="../cv.html"> 
+<span class="menu-text">my CV and Research</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../software.html" rel="" target="">
- <span class="menu-text">Software</span></a>
+    <a class="nav-link" href="../software.html"> 
+<span class="menu-text">Software</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../stataviz/index.html" rel="" target="">
- <span class="menu-text">Stata Viz</span></a>
+    <a class="nav-link" href="../stataviz/index.html"> 
+<span class="menu-text">Stata Viz</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../stata_do/index.html" rel="" target="">
- <span class="menu-text">Stata Do’s Ado’s</span></a>
+    <a class="nav-link" href="../stata_do/index.html"> 
+<span class="menu-text">Stata Do’s Ado’s</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../app_metrics/index.html" rel="" target="">
- <span class="menu-text">Applied econometrics</span></a>
+    <a class="nav-link" href="../app_metrics/index.html"> 
+<span class="menu-text">Applied econometrics</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../chatgpt.html" rel="" target="">
- <span class="menu-text">Odds and Ends</span></a>
+    <a class="nav-link" href="../chatgpt.html"> 
+<span class="menu-text">Odds and Ends</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../about.html" rel="" target="">
- <span class="menu-text">about</span></a>
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">about</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
@@ -199,11 +201,11 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
     </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../stata_do/stata_do1.html">Stata Do</a></li><li class="breadcrumb-item"><a href="../stata_do/stata_do6.html">Marginal effects with nonlinear transformations: <code>f_able</code></a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
   </nav>
@@ -211,7 +213,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
       <a href="../index.html" class="sidebar-logo-link">
       <img src="../WeeMee.jpg" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
@@ -287,7 +289,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
     </ul>
     </div>
 </nav>
-<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         <nav id="TOC" role="doc-toc" class="toc-active">
@@ -329,6 +331,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 
 
 </header>
+
 
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
@@ -377,7 +380,7 @@ E(y|x) = \beta_0+\beta_1 x_1 + \beta_2 x_2 + \beta_3 x_1 \times x_2  + \beta_4 x
 \]</span></p>
 <p>These effects are not constant. They vary based on values of <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span>. Knowing some calculus, however, its rather straight forward to determine the marginal effects, and apply that to our work.</p>
 <p>So lets see an example of this. First the setup:</p>
-<div id="5d8eccbd" class="cell" data-execution_count="1">
+<div id="5c6da623" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">clear</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> <span class="dv">linesize</span> 255</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> <span class="dv">seed</span> 1</span>
@@ -398,11 +401,10 @@ E(y|x) = \beta_0+\beta_1 x_1 + \beta_2 x_2 + \beta_3 x_1 \times x_2  + \beta_4 x
 <p>Now, we can estimate the model and obtain marginal effects based on the analytical solution:</p>
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:<span class="kw">reg</span> <span class="fu">y</span> x1 <span class="kw">x2</span> x1x2 x2sqr</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>which gives us the following</p>
-<p><span class="math display">\[
-E(y|X) = 1.953 + 1.046 x1 + 0.944 x2 + 1.019 x1x2 + 1.005 x2sqr
-\]</span></p>
+<p>$$ E(y|X) = 1.953 + 1.046 x1 + 0.944 x2 + 1.019 x1x2 + 1.005 x2sqr</p>
+<p>N = 1000 R^2 = 0.989 $$</p>
 <p>From where we can estimate marginal effects using the analytical formulas we derived.</p>
-<div id="1a397218" class="cell" data-execution_count="4">
+<div id="cbc6cc1b" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>margins, expression(_b[<span class="kw">x2</span>]+_b[x1x2]*x1+2*_b[x2sqr]*<span class="kw">x2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>warning: option expression() does not contain option predict() or xb().
@@ -426,7 +428,7 @@ Expression: _b[x2]+_b[x1x2]*x1+2*_b[x2sqr]*x2
 <section id="marginal-effects-margins" class="level2">
 <h2 class="anchored" data-anchor-id="marginal-effects-margins">Marginal effects: <code>margins</code></h2>
 <p>As mentioned earlier, <code>Stata</code> command <code>margins</code> allows you to estimate marginal effects of almost any model, as long as it understands the inter-relationships among variables. So lets see what would have happend if I use it in my previous model:</p>
-<div id="16c34726" class="cell" data-execution_count="5">
+<div id="f040b705" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>margins, <span class="kw">dydx</span>(x1 <span class="kw">x2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -447,7 +449,7 @@ dy/dx wrt:  x1 x2
 </div>
 <p>We get something that is wrong. Instead of estimating the correct marginal effects, it is only showing the coefficients for <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span>. The reason for this is that <code>margins</code> has no way to know that the variables <span class="math inline">\(x1x2\)</span> and <span class="math inline">\(x2sqr\)</span> are in fact functions of <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span>. Not at least we use the correct syntax.</p>
 <p>In <code>Stata</code>, interactions and polynomials can be added to the model specification using “#”, and indicating the type of variable one is using. In this case, I use “<strong>c.</strong>” because <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> are continuous variables. See <code>help fvvarlist</code>, for more information.</p>
-<div id="c07f6dd7" class="cell" data-execution_count="6">
+<div id="63f15c74" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:<span class="kw">reg</span> <span class="fu">y</span> c.x1 c.<span class="kw">x2</span> c.x1#c.<span class="kw">x2</span> c.x2#c.<span class="kw">x2</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>margins, <span class="kw">dydx</span>(x1 <span class="kw">x2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -481,17 +483,25 @@ dy/dx wrt:  x1 x2
 <li>Calculates marginal effects, and reports them.</li>
 </ol>
 <div id="fig-fig1" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="Diag_1.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;1: How <code>margins</code> work?</figcaption>
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Diag_1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-fig1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: How <code>margins</code> work?
+</figcaption>
 </figure>
 </div>
 <p>The problem with using data that we create before the model has to do with step 3.</p>
 <p>The change induced on <span class="math inline">\(x\)</span> will not be reflected in <span class="math inline">\(GX\)</span>, because there is nothing to tie them together.</p>
 <div id="fig-fig2" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="Diag_2.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;2: Why <code>margins</code> fails?</figcaption>
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Diag_2.png" class="img-fluid figure-img">
+</div>
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-fig2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Why <code>margins</code> fails?
+</figcaption>
 </figure>
 </div>
 <p><a href="#fig-fig3" class="quarto-xref">Figure&nbsp;3</a> shows how <code>f_able</code> helps solving this problems.</p>
@@ -501,9 +511,13 @@ dy/dx wrt:  x1 x2
 <li>Finally, <code>f_able_p</code> acts as an intermediary to update all “created variables” during the numerical differentiation process.</li>
 </ol>
 <div id="fig-fig3" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="Diag_3.png" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">Figure&nbsp;3: How does <code>f_able</code> helps?</figcaption>
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fig3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Diag_3.png" class="img-fluid figure-img">
+</div>
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-fig3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: How does <code>f_able</code> helps?
+</figcaption>
 </figure>
 </div>
 </section>
@@ -525,13 +539,13 @@ dy/dx wrt:  x1 x2
 <section id="re-doing-the-example" class="level3">
 <h3 class="anchored" data-anchor-id="re-doing-the-example">Re-doing the example</h3>
 <p>So, lets retake the previous example. We know that the “offending” variables were <code>x1x2</code> and <code>x2sqr</code>. So lets recreate them using <code>fgen</code>.</p>
-<div id="a5d5dde4" class="cell" data-execution_count="7">
+<div id="ebfc8dd0" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">drop</span> x1x2 x2sqr</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>fgen x1x2  = x1*<span class="kw">x2</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>fgen x2sqr = <span class="kw">x2</span>*<span class="kw">x2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now, lets estimate the model of interest, but adding a line indicating what variables are “created” variables:</p>
-<div id="e8c4f9bd" class="cell" data-execution_count="8">
+<div id="aa12c1c6" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:<span class="kw">reg</span> <span class="fu">y</span> x1 <span class="kw">x2</span> x1x2 x2sqr</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>** This <span class="kw">line</span> is necessary</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>f_able x1x2 x2sqr, auto</span>
@@ -543,7 +557,7 @@ All variables in -nlvar- have been declared</code></pre>
 </div>
 </div>
 <p>Finally, lets estimate the marginal effects again</p>
-<div id="136ae5ef" class="cell" data-execution_count="9">
+<div id="809edd7f" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>margins, <span class="kw">dydx</span>(*)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -567,7 +581,7 @@ dy/dx wrt:  x1 x2
 <h3 class="anchored" data-anchor-id="what-if-x-is-no-longer-in-the-main-model">What if <span class="math inline">\(x\)</span> is no longer in the main model</h3>
 <p>There are a few other cases that may be of interest. Consider the previous model, and assume we are only interested in adding the quadratic term in the model, not the linear one.</p>
 <p>Using factor notation, one could do the following:</p>
-<div id="910ec20c" class="cell" data-execution_count="10">
+<div id="f5d9fb90" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:<span class="kw">reg</span> <span class="fu">y</span> c.x2#c.<span class="kw">x2</span></span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>margins, <span class="kw">dydx</span>(*)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -587,7 +601,7 @@ dy/dx wrt:  x2
 </div>
 </div>
 <p>Using <code>f_able</code>, however, you still need to include the original variable in the model. This can be done using the “o.” prefix, so that the variable is ommitted, from calculations, but remain in the model.</p>
-<div id="f09b64a3" class="cell" data-execution_count="11">
+<div id="be96f0b1" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:<span class="kw">reg</span> <span class="fu">y</span> x2sqr o.<span class="kw">x2</span></span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>f_able x2sqr, auto</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>margins, <span class="kw">dydx</span>(*)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -611,7 +625,7 @@ dy/dx wrt:  x2
 </div>
 </div>
 <p>Alright, these are very simple examples that you could already do with margins. So lets try something different. Estimate a model using <span class="math inline">\(x\)</span> and <span class="math inline">\(\sqrt x\)</span> as explanatory variables:</p>
-<div id="9b1ddfbd" class="cell" data-execution_count="12">
+<div id="e399069b" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>fgen rx1=x1^.5</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:<span class="kw">reg</span> <span class="fu">y</span> x1 rx1</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>f_able rx1, auto</span>
@@ -636,7 +650,7 @@ dy/dx wrt:  x1
 </div>
 </div>
 <p>How do we know is correct? We can replicate the results using <code>nl</code>!. Technically, it works in a similar way as <code>f_able</code> does.</p>
-<div id="07b03c29" class="cell" data-execution_count="13">
+<div id="2f23db75" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:<span class="kw">nl</span> (<span class="fu">y</span>={b0}+{b1}*x1+{b2}*x1^0.5), <span class="kw">variable</span>(x1)</span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>margins, <span class="kw">dydx</span>(*)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -656,7 +670,7 @@ dy/dx wrt:  x1
 </div>
 </div>
 <p>Something even harder? What about a poisson regression:</p>
-<div id="b6a1b60a" class="cell" data-execution_count="14">
+<div id="65fa8a3f" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:<span class="kw">poisson</span> <span class="fu">y</span> x1 <span class="kw">x2</span> x1x2 x2sqr</span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:f_able x1x2 x2sqr, auto</span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>margins, <span class="kw">dydx</span>(*)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -679,7 +693,7 @@ dy/dx wrt:  x1 x2
 </div>
 <p>Another implementation some people usually ask for is the estimation of marginal effects when using splines, either regular polynomial splines, or restricted cubic splines.</p>
 <p>Because splines are messy to code, instead of using <code>fgen</code>, we can use <code>f_spline</code> or <code>f_rcspline</code>. Let’s use both:</p>
-<div id="7c3f23ae" class="cell" data-execution_count="15">
+<div id="d8f9afb3" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">webuse</span> dui, <span class="kw">clear</span></span>
 <span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>* <span class="kw">model</span> citation=f(fines)+<span class="fu">e</span></span>
 <span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>* Cubic polynomial spline with 1 knot</span>
@@ -744,7 +758,6 @@ dy/dx wrt:  x1 x2
 </table>
 <p>Contrasting effects<br> <sup>*</sup> <em>p</em> &lt; 0.05, <sup>**</sup> <em>p</em> &lt; 0.01, <sup>***</sup> <em>p</em> &lt; 0.001</p>
 <p>Of course, when using splines, it may be far more interesting plotting the effects across values of <span class="math inline">\(fines\)</span>.</p>
-<div>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> <span class="dv">scheme</span> white2</span>
 <span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>color_style tableau</span>
 <span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:<span class="kw">reg</span> citations fines spfine2 spfine3 spfine4</span>
@@ -753,29 +766,40 @@ dy/dx wrt:  x1 x2
 <span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:marginsplot, <span class="bn">name</span>(m1, <span class="kw">replace</span>)</span>
 <span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:emargins , <span class="kw">dydx</span>(fines) <span class="fu">at</span>(fines=(8(0.125)12))  </span>
 <span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:marginsplot, <span class="bn">name</span>(m2, <span class="kw">replace</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div id="fig-dui" class="cell quarto-layout-panel" data-execution_count="17">
-<figure class="figure">
+<div id="fig-dui" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dui-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row quarto-layout-valign-top">
-<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-dui" style="flex-basis: 50.0%;justify-content: center;">
 <div id="fig-dui-1" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="stata_do6_files/figure-html/fig-dui-output-1.png" class="img-fluid figure-img" data-ref-parent="fig-dui"></p>
-<figcaption class="figure-caption">(a) Predicted mean</figcaption>
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-dui-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="stata_do6_files/figure-html/fig-dui-output-1.png" class="img-fluid figure-img" data-ref-parent="fig-dui">
+</div>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-dui-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) Predicted mean
+</figcaption>
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-display quarto-layout-cell quarto-layout-cell-subref" style="flex-basis: 50.0%;justify-content: center;">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-dui" style="flex-basis: 50.0%;justify-content: center;">
 <div id="fig-dui-2" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="stata_do6_files/figure-html/fig-dui-output-2.png" class="img-fluid figure-img" data-ref-parent="fig-dui"></p>
-<figcaption class="figure-caption">(b) Marginal effect</figcaption>
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-dui-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="stata_do6_files/figure-html/fig-dui-output-2.png" class="img-fluid figure-img" data-ref-parent="fig-dui">
+</div>
+<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-dui-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) Marginal effect
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p></p><figcaption class="figure-caption">Figure&nbsp;4: Predictive mean vs Marginal efects</figcaption><p></p>
-</figure>
 </div>
+<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-dui-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Predictive mean vs Marginal efects
+</figcaption>
+</figure>
 </div>
 </section>
 </section>
@@ -798,7 +822,7 @@ dy/dx wrt:  x1 x2
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-rios-avila_estimation_2021" class="csl-entry" role="listitem">
 Rios-Avila, Fernando. 2021. <span>“Estimation of Marginal Effects for Models with Alternative Variable Transformations.”</span> <em>The Stata Journal</em> 21 (1): 81–96. <a href="https://doi.org/10.1177/1536867X211000005">https://doi.org/10.1177/1536867X211000005</a>.
 </div>
@@ -982,15 +1006,38 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    if (id.startsWith('sec-')) {
+    const typesetMath = (el) => {
+      if (window.MathJax) {
+        // MathJax Typeset
+        window.MathJax.typeset([el]);
+      } else if (window.katex) {
+        // KaTeX Render
+        var mathElements = el.getElementsByClassName("math");
+        var macros = [];
+        for (var i = 0; i < mathElements.length; i++) {
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            window.katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains('display'),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false
+            });
+          }
+        }
+      }
+    }
+    if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
         for (let i = 0; i < 2; i++) {
           container.appendChild(note.children[i].cloneNode(true));
         }
+        typesetMath(container);
         return container.innerHTML
       } else {
+        typesetMath(note);
         return note.innerHTML;
       }
     } else {
@@ -999,6 +1046,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
+      typesetMath(note);
       return note.innerHTML;
     }
   }
@@ -1041,6 +1089,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
       }
     }, function(instance) {
     });
@@ -1112,6 +1183,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1173,12 +1270,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../stata_do/stata_do5.html" class="pagination-link">
+      <a href="../stata_do/stata_do5.html" class="pagination-link  aria-label=" simultaneous="" uniform="" confidence="" intervals"="">
         <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Simultaneous/Uniform Confidence Intervals</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../stata_do/stata_do7.html" class="pagination-link">
+      <a href="../stata_do/stata_do7.html" class="pagination-link" aria-label="The Probit: `margins` and `ml`">
         <span class="nav-page-text">The Probit: <code>margins</code> and <code>ml</code></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
