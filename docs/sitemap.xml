@@ -106,7 +106,7 @@
   </url>
   <url>
     <loc>https://friosavila.github.io/app_metrics/app_metrics10.html</loc>
-    <lastmod>2023-11-15T10:14:16.652Z</lastmod>
+    <lastmod>2023-11-15T13:57:45.914Z</lastmod>
   </url>
   <url>
     <loc>https://friosavila.github.io/app_metrics/app_metrics3.html</loc>
@@ -162,7 +162,7 @@
   </url>
   <url>
     <loc>https://friosavila.github.io/index.html</loc>
-    <lastmod>2023-09-14T02:25:04.834Z</lastmod>
+    <lastmod>2023-11-15T13:51:41.517Z</lastmod>
   </url>
   <url>
     <loc>https://friosavila.github.io/stataviz/index.html</loc>
@@ -199,5 +199,9 @@
   <url>
     <loc>https://friosavila.github.io/stata_do/stata_do7.html</loc>
     <lastmod>2023-07-25T17:28:31.240Z</lastmod>
+  </url>
+  <url>
+    <loc>https://friosavila.github.io/app_metrics/app_mt1.html</loc>
+    <lastmod>2023-11-15T13:56:21.782Z</lastmod>
   </url>
 </urlset>

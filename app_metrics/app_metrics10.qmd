@@ -1,5 +1,5 @@
 ---
-title: "Nonlinear DID:"
+title: "Nonlinear DID"
 subtitle: "Lessons from Staggered Linear Differences in Differences"
 author: 
   - name: Fernando Rios-Avila

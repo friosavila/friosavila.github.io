@@ -953,309 +953,309 @@
   {
     "objectID": "app_metrics/app_metrics10.html",
     "href": "app_metrics/app_metrics10.html",
-    "title": "Nonlinear DID:",
+    "title": "Nonlinear DID",
     "section": "",
     "text": "Differences in Differences (DiD) design is one of the most popular methods in applied microeconomics, because it requires relatively few assumptions to identify treatment effects.\n\nNo anticipation,\nParallel trends,\nNo spillovers\n\nThe canonical DiD, a 2x2 design, simply compares means (or conditional means) of the outcome variable (before after x treated non-treated) to identify treatment effects.\n\nThus it can be used even if outcome is a limited dependent variable (binary, count, etc) (parallel to the linear regression case)",
     "crumbs": [
       "App Metrics",
-      "Nonlinear DID:"
+      "Nonlinear DID"
     ]
   },
   {
     "objectID": "app_metrics/app_metrics10.html#introduction",
     "href": "app_metrics/app_metrics10.html#introduction",
-    "title": "Nonlinear DID:",
+    "title": "Nonlinear DID",
     "section": "",
     "text": "Differences in Differences (DiD) design is one of the most popular methods in applied microeconomics, because it requires relatively few assumptions to identify treatment effects.\n\nNo anticipation,\nParallel trends,\nNo spillovers\n\nThe canonical DiD, a 2x2 design, simply compares means (or conditional means) of the outcome variable (before after x treated non-treated) to identify treatment effects.\n\nThus it can be used even if outcome is a limited dependent variable (binary, count, etc) (parallel to the linear regression case)",
     "crumbs": [
       "App Metrics",
-      "Nonlinear DID:"
+      "Nonlinear DID"
     ]
   },
   {
     "objectID": "app_metrics/app_metrics10.html#section",
     "href": "app_metrics/app_metrics10.html#section",
-    "title": "Nonlinear DID:",
+    "title": "Nonlinear DID",
     "section": "",
     "text": "Because the Canonical design is rather limited, many extensions have been proposed to handle more complex scenarios: Staggered Treatment with GxT DID.\n\nEarly Extensions (infamous TWFE) have been shown to be problematic. (negative weights and bad controls)\nbut more recent approaches (See Roth et al. (2023)) have shown how can one better use these designs to identify treatment effects, avoiding the simple-TWFE problems.\n\nLinear models, however, have limitations:\n\nLinear models do a poor job interpolating and predicting LDV outcomes\nParallel trends assumptions may only be credible under specific functional forms",
     "crumbs": [
       "App Metrics",
-      "Nonlinear DID:"
+      "Nonlinear DID"
     ]
   },
   {
     "objectID": "app_metrics/app_metrics10.html#not-andrew-goodman-bacon",
     "href": "app_metrics/app_metrics10.html#not-andrew-goodman-bacon",
-    "title": "Nonlinear DID:",
+    "title": "Nonlinear DID",
     "section": "Not Andrew Goodman-Bacon",
     "text": "Not Andrew Goodman-Bacon\n\n\n\n\n\nAmong others, Andrew showed the problems of using TWFE in the presence of staggered adoption of the treatment.\nBecause of treatment timing, later treated units are compared to bad controls (early treated ones), in potential violation of the parallel trends assumption.\nThis also relates to negative weights.\nSee Goodman-Bacon (2021)",
     "crumbs": [
       "App Metrics",
-      "Nonlinear DID:"
+      "Nonlinear DID"
     ]
   },
   {
     "objectID": "app_metrics/app_metrics10.html#not-pedro-santanna",
     "href": "app_metrics/app_metrics10.html#not-pedro-santanna",
-    "title": "Nonlinear DID:",
+    "title": "Nonlinear DID",
     "section": "Not Pedro Sant’Anna",
     "text": "Not Pedro Sant’Anna\n\n\n\n\n\nPedro and Brantly proposed deconstructing the GxT problem. Consider only good 2x2 DD designs to identify Treatment effects in DID.\nAgregate them as needed to obtain the desired treatment effect (weighted Average). (dynamic, average, across time, across groups, etc)\nAlong with Jonathan Roth, discuss the problem of PTA and functional forms. Not all may be valid.\nsee Callaway and Sant’Anna (2021) and Roth and Sant’Anna (2023)",
     "crumbs": [
       "App Metrics",
-      "Nonlinear DID:"
+      "Nonlinear DID"
     ]
   },
   {
     "objectID": "app_metrics/app_metrics10.html#not-jeffrey-wooldridge",
     "href": "app_metrics/app_metrics10.html#not-jeffrey-wooldridge",
-    "title": "Nonlinear DID:",
+    "title": "Nonlinear DID",
     "section": "Not Jeffrey Wooldridge",
     "text": "Not Jeffrey Wooldridge\n\n\n\n\n\nJeff Wooldridge brought back life to the TWFE.\nThe problem was not the TWFE part of the analysis, but the model specification.\n\n(\\(post \\times treated\\) instead of \\(G \\times T\\))\n\nThis insights, can be extended to nonlinear cases.\nSee Wooldridge (2021) and Wooldridge (2023)",
     "crumbs": [
       "App Metrics",
-      "Nonlinear DID:"
+      "Nonlinear DID"
     ]
   },
   {
     "objectID": "app_metrics/app_metrics10.html#fernando-rios-avila",
     "href": "app_metrics/app_metrics10.html#fernando-rios-avila",
-    "title": "Nonlinear DID:",
+    "title": "Nonlinear DID",
     "section": "Fernando Rios-Avila",
     "text": "Fernando Rios-Avila\n\n\n\n\n\nI have followed some of the developments in DID with staggered adoption of the treatment.\n\nImplemented few things (drdid/csdid/csdid2/jwdid)\nUnderstood few others (comparison groups, efficiency, negative weights, nonlinear models)\n\nAnd today, I will be providing some of my insights regarding the empirical analysis of nonlinear DID.\n\nI will rely heavily on Wooldridge (2023),",
     "crumbs": [
       "App Metrics",
-      "Nonlinear DID:"
+      "Nonlinear DID"
     ]
   },
   {
     "objectID": "app_metrics/app_metrics10.html#basics-2x2-did",
     "href": "app_metrics/app_metrics10.html#basics-2x2-did",
-    "title": "Nonlinear DID:",
+    "title": "Nonlinear DID",
     "section": "Basics: 2x2 DiD",
     "text": "Basics: 2x2 DiD\n\nIn the 2x2 DID design, we have 2 groups:\n\nControl (\\(D=0\\)) and treated (\\(D=1\\)),\n\nWhich are observed for two periods of time:\n\nBefore (\\(T=0\\)) and after (\\(T=1\\)) the treatment.\n\nFor all groups and periods of time, we observe the realized outcome \\(Y_{i,t}\\), but cannot observe all potential outcomes \\(Y_{i,t}(D)\\).\nRealized outcomes are determined by the following equation:\n\n\\[Y_{i,t}=D_i Y_{i,t}(1) + (1-D_i) Y_{i,t}(0)\n\\]",
     "crumbs": [
       "App Metrics",
-      "Nonlinear DID:"
+      "Nonlinear DID"
     ]
   },
   {
     "objectID": "app_metrics/app_metrics10.html#section-1",
     "href": "app_metrics/app_metrics10.html#section-1",
-    "title": "Nonlinear DID:",
+    "title": "Nonlinear DID",
     "section": "",
     "text": "If treatment occured at some point between T0 and T1, and we could observe all potential outcomes, the estimate of interested, Average Treatment effect, could be estimated as follows:\n\\[ATT = E(Y_{i,1}(1) - Y_{i,1}(0)|D_i=1)\n\\]\nFor the treated, we observe \\(Y_{i,1}(1)\\), but cannot observe \\(Y_{i,t}(0)\\) (counterfactual), thus, to identify Treatment Effects, we need to impose some assumptions.\n\nPTA:\n\n\\[\\begin{aligned}\nE(Y_{i,1}(0) - Y_{i,0}(0)|D_i=1) &= E(Y_{i,1} - Y_{i,0}|D_i=0) \\\\\nE(Y_{i,1}(0)|D_i=1) &= E(Y_{i,0}(0)|D_i=1) + E(Y_{i,1} - Y_{i,0}|D_i=0)\n\\end{aligned}\n\\]\n\nNo Anticipation: \\[Y_{i,0}(1) =  Y_{i,0}(0)=Y_{i,0}\\]",
     "crumbs": [
       "App Metrics",
-      "Nonlinear DID:"
+      "Nonlinear DID"
     ]
   },
   {
     "objectID": "app_metrics/app_metrics10.html#section-2",
     "href": "app_metrics/app_metrics10.html#section-2",
-    "title": "Nonlinear DID:",
+    "title": "Nonlinear DID",
     "section": "",
     "text": "Thus, ATT can be estimated as follows:\n\\[\\begin{aligned}\nATT &= E(Y_{i,1}(1)|D_i=1)-E(Y_{i,1}(0)|D_i=1) \\\\\n&= E(Y_{i,1}|D_i=1)- \\Big(E(Y_{i,0}|D_i=1) + E(Y_{i,1} - Y_{i,0}|D_i=0)  \\Big) \\\\\n&= E(Y_{i,1}-Y_{i,0}|D_i=1)- E(Y_{i,1} - Y_{i,0}|D_i=0)  \n\\end{aligned}\n\\]\n\nAnd the Same could be done via Regressions:\n\n\\[y_{i,t} = \\beta_0 + \\beta_1 T + \\beta_2 D_i + \\theta (D_i \\times T) + \\epsilon_{i,t}\n\\]\n\nATT identification relies on the Parallel trend assumption.",
     "crumbs": [
       "App Metrics",
-      "Nonlinear DID:"
+      "Nonlinear DID"
     ]
   },
   {
     "objectID": "app_metrics/app_metrics10.html#how-to-test-for-pta",
     "href": "app_metrics/app_metrics10.html#how-to-test-for-pta",
-    "title": "Nonlinear DID:",
+    "title": "Nonlinear DID",
     "section": "How to test for PTA?",
     "text": "How to test for PTA?\n\nPTA is a non-testable assumption, because we do not observe all potential outcomes.\nHowever, if we “move”, from the 2x2 design, it may be possible to test if PTA hold Before treatment.\nConsider a case of T periods of time, and that treatment happen at period G.\nSay we estimate the ATT comparing periods T and T-1, for any T&lt;G.\n\n\\[ATT(T) = E(Y_{i,T} - Y_{i,T-1}|D_i=1) - E(Y_{i,T} - Y_{i,T-1}|D_i=0)\n\\]\n\nIf there is no anticipation, and Parallel trends hold, then \\(ATT(T)=0 \\text{ if } T&lt;G\\)\n\nThis is what Callaway and Sant’Anna (2021) uses for PTA testing",
     "crumbs": [
       "App Metrics",
-      "Nonlinear DID:"
+      "Nonlinear DID"
     ]
   },
   {
     "objectID": "app_metrics/app_metrics10.html#how-to-test-for-pta-1",
     "href": "app_metrics/app_metrics10.html#how-to-test-for-pta-1",
-    "title": "Nonlinear DID:",
+    "title": "Nonlinear DID",
     "section": "How to test for PTA?",
     "text": "How to test for PTA?\n\nAlternatively, one could simply estimate all ATT’s using period G-1 as baseline period (long2 differences):\n\n\\[ATT^2(T) = E(Y_{i,T} - Y_{i,G-1}|D_i=1) - E(Y_{i,T} - Y_{i,G-1}|D_i=0)\n\\]\n\nAnd use all post-treatment periods to estimate the ATT (\\(T\\geq G\\))\nand use all pre-treatment periods to test for PTA (\\(T&lt;G\\))",
     "crumbs": [
       "App Metrics",
-      "Nonlinear DID:"
+      "Nonlinear DID"
     ]
   },
   {
     "objectID": "app_metrics/app_metrics10.html#section-3",
     "href": "app_metrics/app_metrics10.html#section-3",
-    "title": "Nonlinear DID:",
+    "title": "Nonlinear DID",
     "section": "",
     "text": "What if PTA does not hold?Wage PTA in levelsWage PTA in logs\n\n\n\nAs suggested by Wooldridge (2023), one of the reasons PTA may not hold is because we may be analyzing the wrong model.\n\nconsider two groups of workers, high and low earners, that experience the same wage growth. (parallel trends in relative terms)\nIf we observe wages at levels, parallel trends would be violated\nAnd Post treatment estimates will be missleading",
     "crumbs": [
       "App Metrics",
-      "Nonlinear DID:"
+      "Nonlinear DID"
     ]
   },
   {
     "objectID": "app_metrics/app_metrics10.html#pta-may-hold-for-gbar-y",
     "href": "app_metrics/app_metrics10.html#pta-may-hold-for-gbar-y",
-    "title": "Nonlinear DID:",
+    "title": "Nonlinear DID",
     "section": "PTA may hold for \\(G(\\bar Y)\\)",
     "text": "PTA may hold for \\(G(\\bar Y)\\)\nA similar story could be told about other types of transformations.\nIn general, it is possible that PTA hold for some other monotonic transformation of the outcome variable.\n\\[G^{-1}\\Big( E_1 [Y_{i,1}(0)] \\Big) -G^{-1}\\Big(E_1[ Y_{i,0}(0) ] \\Big)  \n= G^{-1}\\Big(E_0[Y_{i,1}]\\Big) - G^{-1}\\Big(E_0[Y_{i,0}]\\Big)\n\\]\nThis is very similar to the PTA assumption explored in Roth and Sant’Anna (2023).\n\\[E_1\\Big[g(Y_{i,1}(0))\\Big] - E_1\\Big[g(Y_{i,0}(0))\\Big] = E_0\\Big[g(Y_{i,1})\\Big] - E_0\\Big[g(Y_{i,0})\\Big]\n\\]\nWooldridge idea: It may be possible to identify ATTs using correct functional forms, through the latent index.",
     "crumbs": [
       "App Metrics",
-      "Nonlinear DID:"
+      "Nonlinear DID"
     ]
   },
   {
     "objectID": "app_metrics/app_metrics10.html#how-do-things-change",
     "href": "app_metrics/app_metrics10.html#how-do-things-change",
-    "title": "Nonlinear DID:",
+    "title": "Nonlinear DID",
     "section": "How do things Change?",
     "text": "How do things Change?\n\nUsing this insight, we can go back to the 2x2 design, and see how things change.\n\nBefore:\n\\[E(y_{i,t}|D,T)=\\beta_0 + \\beta_1 T + \\beta_2 D_i + \\theta (D_i \\times T)\n\\]\nAfter:\n\\[E(y_{i,t}|D,T)=G\\Big(\\beta_0 + \\beta_1 T + \\beta_2 D_i + \\theta (D_i \\times T)\\Big)\n\\]\n\nFor the practitioner, the extended Nonlinear DID simply requires choosing a functional form that better fits the data.\n\nPoisson, logit, fractional regression, multinomial model, Linear model, etc",
     "crumbs": [
       "App Metrics",
-      "Nonlinear DID:"
+      "Nonlinear DID"
     ]
   },
   {
     "objectID": "app_metrics/app_metrics10.html#extension-i-adding-covariates",
     "href": "app_metrics/app_metrics10.html#extension-i-adding-covariates",
-    "title": "Nonlinear DID:",
+    "title": "Nonlinear DID",
     "section": "Extension I: Adding Covariates",
     "text": "Extension I: Adding Covariates\n\nMany papers in the literature consider the use of covariates in the estimation of the ATT.\nThe lessons from Sant’Anna and Zhao (2020):\n\nThe choosen covariates should be time fixed, to avoid contamination of the treatment effect.\nUsing covariates allows relaxing the parallel trends assumption: PTA hold for specific groups of individuals. (if not for the whole population due to compositional changes)\n\nIn the 2x2 DID-Regression, covariates can be added with interactions:\n\n\\[\\begin{aligned}\ny_{i,t} &= \\beta_0 + \\beta_1 D + \\beta_2 T + \\theta (D \\times T) \\\\\n&+ X\\gamma +  D \\times X\\gamma_d + T \\times X\\gamma_T + D \\times T (X-\\bar X )\\lambda + \\epsilon_{i,t}\n\\end{aligned}\n\\]\n\nThe same could be done in the nonlinear case",
     "crumbs": [
       "App Metrics",
-      "Nonlinear DID:"
+      "Nonlinear DID"
     ]
   },
   {
     "objectID": "app_metrics/app_metrics10.html#extension-ii-gxt-did",
     "href": "app_metrics/app_metrics10.html#extension-ii-gxt-did",
-    "title": "Nonlinear DID:",
+    "title": "Nonlinear DID",
     "section": "Extension II: GxT DiD",
     "text": "Extension II: GxT DiD\n\nThe 2x2 design is rather limited, because often people have access to multiple periods of time, with differential treatment timing. (staggered adoption of the treatment)\n\nI call this the GxT design (G groups, T periods of time)\n\nThe majority of the papers that analyze this case impose an additional assumption:\n\nTreatment is not Reversable: Once treated always treated\n\n\nNOTE: Because of the interactions required, adding covariates would rapidily “consume” degrees of freedom. (may be a problem with nonlinear models).\nHow to see this? --&gt; tab tvar gvar",
     "crumbs": [
       "App Metrics",
-      "Nonlinear DID:"
+      "Nonlinear DID"
     ]
   },
   {
     "objectID": "app_metrics/app_metrics10.html#section-4",
     "href": "app_metrics/app_metrics10.html#section-4",
-    "title": "Nonlinear DID:",
+    "title": "Nonlinear DID",
     "section": "",
     "text": "The Problem\n\nEarly extensions of the 2x2 design to the GxT design, relied on the TWFE estimator. \\[y_{i,t} = \\delta_i + \\delta_t + \\theta^{fe} D_{i,t} + e_{i,t}\\]\n\nwhere \\(D_{i,t}=1\\) only after treatment is in place, and zero otherwise.\n\nThis model has been shown to be problematic, because of How OLS estimates the \\(\\theta^{fe}\\) parameter.\n\n\\(\\theta^{fe}\\) is a weighted average of all possible 2x2 DID designs. Goodman-Bacon (2021)\nSome designs use early treated units as controls for late treated units, which might be a violation of the parallel trends assumption.\n\n(treated units effectively receiving negative weights) Goodman-Bacon (2021), Chaisemartin and D’Haultfœuille (2020) and Borusyak, Jaravel, and Spiess (2023).",
     "crumbs": [
       "App Metrics",
-      "Nonlinear DID:"
+      "Nonlinear DID"
     ]
   },
   {
     "objectID": "app_metrics/app_metrics10.html#section-5",
     "href": "app_metrics/app_metrics10.html#section-5",
-    "title": "Nonlinear DID:",
+    "title": "Nonlinear DID",
     "section": "",
     "text": "Avoiding the Problem\n\nCallaway and Sant’Anna (2021) proposes a simple solution: Deconstruct the problem into smaller pieces (2x2 DIDs), and aggregate them as needed.\nWooldridge (2021), however, proposes a different solution: Use the correct functional form to estimate the ATTs.\n\n\\[\\text{Instead of: }Y_{i,t} = \\delta_i + \\gamma_t  + \\theta^{fe} PT_{i,t} + \\epsilon_{i,t}\\]\n\\[\\text{Use: }Y_{i,t} = \\delta_i + \\gamma_t  + \\sum_{g \\in \\mathbb{G}} \\sum_{t=g}^T \\theta_{g,t} \\mathbb{1}(G=g,T=t) + \\epsilon_{i,t}\\]\n\nTheir Message: Embrace heterogeneity across time and cohorts.",
     "crumbs": [
       "App Metrics",
-      "Nonlinear DID:"
+      "Nonlinear DID"
     ]
   },
   {
     "objectID": "app_metrics/app_metrics10.html#an-added-insight",
     "href": "app_metrics/app_metrics10.html#an-added-insight",
-    "title": "Nonlinear DID:",
+    "title": "Nonlinear DID",
     "section": "An added Insight",
     "text": "An added Insight\n\nThe approach proposed by Wooldridge (2021), is more efficient than Callaway and Sant’Anna (2021), because it uses all pre-treatment data to estimate the ATTs. (Callaway and Sant’Anna (2021) uses only one pre-treatment period)\nHowever, doing this doesn’t allow you to test for PTA directly, unless we use an alternative approach:\n\n\\[Y_{i,t} = \\delta_i + \\gamma_t  +\n\\sum_{g \\in \\mathbb{G}} \\sum_{t=t_0}^{g-2} \\theta_{g,t}^{pre} \\mathbb{1}(G=g,T=t) +\n\\sum_{g \\in \\mathbb{G}} \\sum_{t=g}^T \\theta_{g,t}^{post} \\mathbb{1}(G=g,T=t) + \\epsilon_{i,t}\\]\n\nThis specification is equivalent to Callaway and Sant’Anna (2021) and to Sun and Abraham (2021).\n\nIts explicily a regression (Wooldridge)\nand uses actual, instead of relative, time.",
     "crumbs": [
       "App Metrics",
-      "Nonlinear DID:"
+      "Nonlinear DID"
     ]
   },
   {
     "objectID": "app_metrics/app_metrics10.html#implementing-nl-did-the-jw-way",
     "href": "app_metrics/app_metrics10.html#implementing-nl-did-the-jw-way",
-    "title": "Nonlinear DID:",
+    "title": "Nonlinear DID",
     "section": "Implementing NL-DID the JW way",
     "text": "Implementing NL-DID the JW way\n\nOne of the advantages of the approaches proposed by Wooldridge (2021) and Wooldridge (2023), is that they can be directly estimated using regressions.\nThe hard part is to construct all the interactions required for the model to work.\nAnd a second challenge is to aggregate the results.\n\njwdid\n\njwdid is a simple command that helps with the construction of all required interactions that could be used to implement Wooldridge approach.\nIt is flexible enough, in that it allows you to choose different estimators that would better fit your data.\nit comes with its own post estimation commands that can help you aggregate the results into simple ATT, dynamics effects, across periods, across years, etc.\nLets take it for a spin",
     "crumbs": [
       "App Metrics",
-      "Nonlinear DID:"
+      "Nonlinear DID"
     ]
   },
   {
     "objectID": "app_metrics/app_metrics10.html#command-syntax",
     "href": "app_metrics/app_metrics10.html#command-syntax",
-    "title": "Nonlinear DID:",
+    "title": "Nonlinear DID",
     "section": "Command Syntax",
     "text": "Command Syntax\n\njwdid - Command Name. In charge of getting all interactions -right-\n\ndepvar [indepvar] - Declare the dependent variables. Independent variables are optional. They should be time fixed.\n[if] [in] [weight], Declares sample and weights. Only PW is allowed.",
     "crumbs": [
       "App Metrics",
-      "Nonlinear DID:"
+      "Nonlinear DID"
     ]
   },
   {
     "objectID": "app_metrics/app_metrics10.html#command-main-options",
     "href": "app_metrics/app_metrics10.html#command-main-options",
-    "title": "Nonlinear DID:",
+    "title": "Nonlinear DID",
     "section": "Command Main Options",
     "text": "Command Main Options\n\njwdid: main options\n\nivar(varname): Panel indicator. If not declared, command assumes one is using repeated cross sections.\ncluster(varname): Cluster variable. To request a clustered standard error other than at ivar level. Recommended with RC.\ntvar(varname) or time(varname): Required, Time variable. There are two ways to call it for compatability with csdid.\ngvar(varname): Group variable. Indicates the timing of when a unit has ben treated.\ntrtvar(varname): If using Panel data, one could instead provide the post-treatment dummy.\n\nIf data is repeated crossection, one requires using trgvar(varname) (Pseudo panel indicator).",
     "crumbs": [
       "App Metrics",
-      "Nonlinear DID:"
+      "Nonlinear DID"
     ]
   },
   {
     "objectID": "app_metrics/app_metrics10.html#extra-options",
     "href": "app_metrics/app_metrics10.html#extra-options",
-    "title": "Nonlinear DID:",
+    "title": "Nonlinear DID",
     "section": "Extra Options",
     "text": "Extra Options\n\ngroup: Requests using group fixed effects, instead of individual fixed effects (default)\nnever: Request to use alternative specification that allows to test for PTA. (default is to use the standard specification)\nLinear and Nonlinear models:\n\nmethod(command, options): Request to use a specific method to model the data. Default is using linear regression via reghdfe.\nthe option part allows you do include specific options for the method. (e.g. method(glm, link() family()))",
     "crumbs": [
       "App Metrics",
-      "Nonlinear DID:"
+      "Nonlinear DID"
     ]
   },
   {
     "objectID": "app_metrics/app_metrics10.html#example-1-min-wages-on-employment-cs-data",
     "href": "app_metrics/app_metrics10.html#example-1-min-wages-on-employment-cs-data",
-    "title": "Nonlinear DID:",
+    "title": "Nonlinear DID",
     "section": "Example 1: Min Wages on Employment CS data",
     "text": "Example 1: Min Wages on Employment CS data\n\nclear all\nqui:ssc install frause\nqui:frause mpdta, clear\nfrause mpdta, clear\njwdid lemp, ivar(county) tvar(year) gvar(first)\n\n(Written by R.              )\nWARNING: Singleton observations not dropped; statistical significance is biased\n&gt;  (link)\n(MWFE estimator converged in 2 iterations)\n\nHDFE Linear regression                            Number of obs   =      2,500\nAbsorbing 2 HDFE groups                           F(   7,    499) =       3.82\nStatistics robust to heteroskedasticity           Prob &gt; F        =     0.0005\n                                                  R-squared       =     0.9933\n                                                  Adj R-squared   =     0.9915\n                                                  Within R-sq.    =     0.0101\nNumber of clusters (countyreal) =        500      Root MSE        =     0.1389\n\n                           (Std. err. adjusted for 500 clusters in countyreal)\n------------------------------------------------------------------------------\n             |               Robust\n        lemp | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n first_treat#|\n        year#|\n    c.__tr__ |\n  2004 2004  |  -.0193724   .0223818    -0.87   0.387    -.0633465    .0246018\n  2004 2005  |  -.0783191   .0304878    -2.57   0.010    -.1382195   -.0184187\n  2004 2006  |  -.1360781   .0354555    -3.84   0.000    -.2057386   -.0664177\n  2004 2007  |  -.1047075   .0338743    -3.09   0.002    -.1712613   -.0381536\n  2006 2006  |   .0025139   .0199328     0.13   0.900    -.0366487    .0416765\n  2006 2007  |  -.0391927   .0240087    -1.63   0.103    -.0863634     .007978\n  2007 2007  |   -.043106   .0184311    -2.34   0.020    -.0793182   -.0068938\n             |\n       _cons |    5.77807    .001544  3742.17   0.000     5.775036    5.781103\n------------------------------------------------------------------------------\n\nAbsorbed degrees of freedom:\n-----------------------------------------------------+\n Absorbed FE | Categories  - Redundant  = Num. Coefs |\n-------------+---------------------------------------|\n  countyreal |       500         500           0    *|\n        year |         5           0           5     |\n-----------------------------------------------------+\n* = FE nested within cluster; treated as redundant for DoF computation\n\n\n\ngen emp = exp(lemp)\njwdid emp, ivar(county) tvar(year) gvar(first) method(poisson) \n\n\nIteration 0:   log pseudolikelihood = -2980537.4  \nIteration 1:   log pseudolikelihood = -2980526.5  \nIteration 2:   log pseudolikelihood = -2980526.5  \n\nPoisson regression                                      Number of obs =  2,500\n                                                        Wald chi2(14) = 225.38\nLog pseudolikelihood = -2980526.5                       Prob &gt; chi2   = 0.0000\n\n                           (Std. err. adjusted for 500 clusters in countyreal)\n------------------------------------------------------------------------------\n             |               Robust\n         emp | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n first_treat#|\n        year#|\n    c.__tr__ |\n  2004 2004  |  -.0080499   .0100858    -0.80   0.425    -.0278177    .0117178\n  2004 2005  |  -.0252131   .0176754    -1.43   0.154    -.0598562    .0094299\n  2004 2006  |   -.051965   .0197745    -2.63   0.009    -.0907222   -.0132077\n  2004 2007  |  -.0672208   .0192207    -3.50   0.000    -.1048926    -.029549\n  2006 2006  |    .055212   .0330023     1.67   0.094    -.0094714    .1198954\n  2006 2007  |   .0109993     .04294     0.26   0.798    -.0731617    .0951602\n  2007 2007  |   -.060675   .0149793    -4.05   0.000    -.0900339   -.0313161\n             |\n first_treat |\n       2004  |   .4789133   .4347691     1.10   0.271    -.3732184    1.331045\n       2006  |   .6010118   .3248861     1.85   0.064    -.0357532    1.237777\n       2007  |   .1269293   .2472938     0.51   0.608    -.3577576    .6116163\n             |\n        year |\n       2004  |  -.0459369   .0064592    -7.11   0.000    -.0585966   -.0332771\n       2005  |  -.0301284   .0094457    -3.19   0.001    -.0486416   -.0116152\n       2006  |  -.0030985   .0122001    -0.25   0.800    -.0270104    .0208133\n       2007  |   .0350031   .0118264     2.96   0.003     .0118238    .0581824\n             |\n       _cons |    6.84775   .1555219    44.03   0.000     6.542932    7.152567\n------------------------------------------------------------------------------\n\n\n\njwdid emp, ivar(county) tvar(year) gvar(first) method(poisson) never\n\n\nIteration 0:   log pseudolikelihood = -2980450.1  \nIteration 1:   log pseudolikelihood = -2980438.8  \nIteration 2:   log pseudolikelihood = -2980438.8  \n\nPoisson regression                                      Number of obs =  2,500\n                                                        Wald chi2(19) = 262.50\nLog pseudolikelihood = -2980438.8                       Prob &gt; chi2   = 0.0000\n\n                           (Std. err. adjusted for 500 clusters in countyreal)\n------------------------------------------------------------------------------\n             |               Robust\n         emp | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n first_treat#|\n        year#|\n    c.__tr__ |\n  2004 2004  |  -.0063802   .0111509    -0.57   0.567    -.0282356    .0154752\n  2004 2005  |   -.027483   .0190781    -1.44   0.150    -.0648753    .0099094\n  2004 2006  |  -.0641446   .0224733    -2.85   0.004    -.1081913   -.0200978\n  2004 2007  |  -.0704859   .0204208    -3.45   0.001    -.1105099   -.0304619\n  2006 2003  |  -.0081647   .0366458    -0.22   0.824     -.079989    .0636597\n  2006 2004  |  -.0289763   .0258763    -1.12   0.263    -.0796929    .0217403\n  2006 2006  |   .0310817   .0186723     1.66   0.096    -.0055153    .0676788\n  2006 2007  |  -.0042165   .0335939    -0.13   0.900    -.0700593    .0616263\n  2007 2003  |   .0358582   .0236868     1.51   0.130    -.0105671    .0822835\n  2007 2004  |   .0517571   .0164417     3.15   0.002      .019532    .0839822\n  2007 2005  |   .0237174   .0112134     2.12   0.034     .0017395    .0456952\n  2007 2007  |  -.0329817    .009941    -3.32   0.001    -.0524657   -.0134976\n             |\n first_treat |\n       2004  |   .4821784   .4354246     1.11   0.268    -.3712381    1.335595\n       2006  |   .6162276   .3252255     1.89   0.058    -.0212028    1.253658\n       2007  |    .099236    .244468     0.41   0.685    -.3799124    .5783844\n             |\n        year |\n       2004  |  -.0476066   .0080213    -5.94   0.000     -.063328   -.0318852\n       2005  |  -.0278586   .0118649    -2.35   0.019    -.0511134   -.0046038\n       2006  |    .009081    .016213     0.56   0.575    -.0226959     .040858\n       2007  |   .0382682   .0136908     2.80   0.005     .0114347    .0651017\n             |\n       _cons |   6.844485   .1573451    43.50   0.000     6.536094    7.152875\n------------------------------------------------------------------------------",
     "crumbs": [
       "App Metrics",
-      "Nonlinear DID:"
+      "Nonlinear DID"
     ]
   },
   {
     "objectID": "app_metrics/app_metrics10.html#example-1-aggregations",
     "href": "app_metrics/app_metrics10.html#example-1-aggregations",
-    "title": "Nonlinear DID:",
+    "title": "Nonlinear DID",
     "section": "Example 1: Aggregations",
     "text": "Example 1: Aggregations\n\nestat event\n\n------------------------------------------------------------------------------\n             |            Delta-method\n             | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n   __event__ |\n         -4  |   37.84578   27.92442     1.36   0.175    -16.88508    92.57665\n         -3  |   36.91665   23.13761     1.60   0.111     -8.43224    82.26554\n         -2  |   7.462364   14.88422     0.50   0.616    -21.71018    36.63491\n         -1  |          0  (omitted)\n          0  |  -13.33389   12.32746    -1.08   0.279    -37.49527    10.82749\n          1  |  -18.42686   40.35552    -0.46   0.648    -97.52222     60.6685\n          2  |   -95.3188   36.54186    -2.61   0.009    -166.9395   -23.69806\n          3  |  -107.5067   44.45653    -2.42   0.016    -194.6399   -20.37347\n------------------------------------------------------------------------------\n\n\n\nestat group\n\n------------------------------------------------------------------------------\n             |            Delta-method\n             | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n   __group__ |\n       2004  |  -63.03151   28.14208    -2.24   0.025     -118.189   -7.874052\n       2006  |   23.89072   46.37715     0.52   0.606    -67.00682    114.7883\n       2007  |  -34.94374   13.54265    -2.58   0.010    -61.48686   -8.400625\n------------------------------------------------------------------------------\n\n\n\nestat calendar\n\n------------------------------------------------------------------------------\n             |            Delta-method\n             | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n__calendar__ |\n       2004  |  -9.219455   15.81277    -0.58   0.560    -40.21192    21.77301\n       2005  |  -40.08113   29.74368    -1.35   0.178    -98.37767    18.21541\n       2006  |   5.147843   33.13277     0.16   0.877     -59.7912    70.08689\n       2007  |  -36.81546   16.84608    -2.19   0.029    -69.83316   -3.797752\n------------------------------------------------------------------------------\n\n\n\nqui:estat event, plot\ngraph export event.png, replace width(1000)",
     "crumbs": [
       "App Metrics",
-      "Nonlinear DID:"
+      "Nonlinear DID"
     ]
   },
   {
     "objectID": "app_metrics/app_metrics10.html#example-2-wooldridge-simulation-data",
     "href": "app_metrics/app_metrics10.html#example-2-wooldridge-simulation-data",
-    "title": "Nonlinear DID:",
+    "title": "Nonlinear DID",
     "section": "Example 2: Wooldridge Simulation data",
     "text": "Example 2: Wooldridge Simulation data\n\nclear all\nuse did_common_6_binary, clear\nqui {\nreg y i.w#c.d#c.f04 i.w#c.d#c.f05 i.w#c.d#c.f06 ///\n    i.w#c.d#c.f04#c.x i.w#c.d#c.f05#c.x i.w#c.d#c.f06#c.x ///\n    f02 f03 f04 f05 f06 ///\n    c.f02#c.x c.f03#c.x c.f04#c.x c.f05#c.x c.f06#c.x /// \n    d x c.d#c.x, noomitted vce(cluster id)\n  est sto m1\n}  \nqui:margins, dydx(w) at(f02 = 0 f03 = 0 f04 = 1 f05 = 0 f06 = 0) ///\n    subpop(if d == 1) noestimcheck vce(uncond)  post\nereturn display  \nest restore m1\nqui:margins, dydx(w) at(f02 = 0 f03 = 0 f04 = 0 f05 = 1 f06 = 0) ///\n    subpop(if d == 1) noestimcheck vce(uncond) post\nereturn display  \nest restore m1\nqui:margins, dydx(w) at(f02 = 0 f03 = 0 f04 = 0 f05 = 0 f06 = 1) ///\n    subpop(if d == 1) noestimcheck vce(uncond) post\nereturn display \n\n                                 (Std. err. adjusted for 1,000 clusters in id)\n------------------------------------------------------------------------------\n             |            Unconditional\n             | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n         1.w |   .0462206   .0367939     1.26   0.209    -.0259816    .1184228\n------------------------------------------------------------------------------\n(results m1 are active now)\n                                 (Std. err. adjusted for 1,000 clusters in id)\n------------------------------------------------------------------------------\n             |            Unconditional\n             | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n         1.w |   .0755069   .0376124     2.01   0.045     .0016985    .1493153\n------------------------------------------------------------------------------\n(results m1 are active now)\n                                 (Std. err. adjusted for 1,000 clusters in id)\n------------------------------------------------------------------------------\n             |            Unconditional\n             | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n         1.w |   .0445457   .0379857     1.17   0.241    -.0299952    .1190866\n------------------------------------------------------------------------------\n\n\nUsing jwdid:\n\nclear all\nuse did_common_6_binary, clear\nqui: jwdid y x, ivar(id) tvar(year) trtvar(w) method(regress)\nestat event, vce(unconditional)\n\n                                 (Std. err. adjusted for 1,000 clusters in id)\n------------------------------------------------------------------------------\n             |            Unconditional\n             | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n   __event__ |\n          0  |   .0462206   .0367939     1.26   0.209    -.0259816    .1184228\n          1  |   .0755069   .0376124     2.01   0.045     .0016985    .1493153\n          2  |   .0445457   .0379857     1.17   0.241    -.0299952    .1190866\n------------------------------------------------------------------------------\n\n\nUsing Logit\n\nclear all\nuse did_common_6_binary, clear\nqui {\nlogit y i.w#c.d#c.f04 i.w#c.d#c.f05 i.w#c.d#c.f06 ///\n    i.w#c.d#c.f04#c.x i.w#c.d#c.f05#c.x i.w#c.d#c.f06#c.x ///\n    f02 f03 f04 f05 f06 c.f02#c.x c.f03#c.x c.f04#c.x c.f05#c.x c.f06#c.x ///\n    d x c.d#c.x, noomitted vce(cluster id)\n  est store m1\n}  \n\nqui:margins, dydx(w) at(f02 = 0 f03 = 0 f04 = 1 f05 = 0 f06 = 0) ///\n    subpop(if d == 1) noestimcheck vce(uncond)  post\nereturn display  \nest restore m1\nqui:margins, dydx(w) at(f02 = 0 f03 = 0 f04 = 0 f05 = 1 f06 = 0) ///\n    subpop(if d == 1) noestimcheck vce(uncond) post\nereturn display  \nest restore m1\nqui:margins, dydx(w) at(f02 = 0 f03 = 0 f04 = 0 f05 = 0 f06 = 1) ///\n    subpop(if d == 1) noestimcheck vce(uncond) post\nereturn display \n\n                                 (Std. err. adjusted for 1,000 clusters in id)\n------------------------------------------------------------------------------\n             |            Unconditional\n             | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n         1.w |   .0886639   .0326848     2.71   0.007     .0246029    .1527249\n------------------------------------------------------------------------------\n(results m1 are active now)\n                                 (Std. err. adjusted for 1,000 clusters in id)\n------------------------------------------------------------------------------\n             |            Unconditional\n             | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n         1.w |   .1217999   .0355845     3.42   0.001     .0520556    .1915441\n------------------------------------------------------------------------------\n(results m1 are active now)\n                                 (Std. err. adjusted for 1,000 clusters in id)\n------------------------------------------------------------------------------\n             |            Unconditional\n             | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n         1.w |   .1073639   .0371242     2.89   0.004     .0346018    .1801261\n------------------------------------------------------------------------------\n\n\nUsing jwdid:\n\nclear all\nuse did_common_6_binary, clear\nqui: jwdid y x, ivar(id) tvar(year) trtvar(w) method(logit)\nestat event, vce(unconditional)\n\n                                 (Std. err. adjusted for 1,000 clusters in id)\n------------------------------------------------------------------------------\n             |            Unconditional\n             | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n   __event__ |\n          0  |   .0886639   .0326848     2.71   0.007     .0246029    .1527249\n          1  |   .1217999   .0355845     3.42   0.001     .0520556    .1915441\n          2  |   .1073639   .0371242     2.89   0.004     .0346018    .1801261\n------------------------------------------------------------------------------",
     "crumbs": [
       "App Metrics",
-      "Nonlinear DID:"
+      "Nonlinear DID"
     ]
   },
   {
     "objectID": "app_metrics/app_metrics10.html#conclusion",
     "href": "app_metrics/app_metrics10.html#conclusion",
-    "title": "Nonlinear DID:",
+    "title": "Nonlinear DID",
     "section": "Conclusion",
     "text": "Conclusion\n\nDID is a popular method for analyzing policy interventions.\nThanks to the contributions of Wooldridge, Roth and Sant’Anna among others, we have a better understanding of how to implement DID in more complex scenarios.\nOne of this important extensions is the use of nonlinear models to better fit the data, and better estimate treatment effects.\nThe jwdid command is a simple tool that can help you implement the Wooldridge approach to nonlinear DID.",
     "crumbs": [
       "App Metrics",
-      "Nonlinear DID:"
+      "Nonlinear DID"
     ]
   },
   {
@@ -2495,6 +2495,314 @@
     "crumbs": [
       "Stata Do",
       "Simultaneous/Uniform Confidence Intervals"
+    ]
+  },
+  {
+    "objectID": "app_metrics/app_mt1.html",
+    "href": "app_metrics/app_mt1.html",
+    "title": "Nonlinear DID",
+    "section": "",
+    "text": "Differences in Differences (DiD) design is one of the most popular methods in applied microeconomics, because it requires relatively few assumptions to identify treatment effects.\n\nNo anticipation,\nParallel trends,\nNo spillovers\n\nThe canonical DiD, a 2x2 design, simply compares means (or conditional means) of the outcome variable (before after x treated non-treated) to identify treatment effects.\n\nThus it can be used even if outcome is a limited dependent variable (binary, count, etc) (parallel to the linear regression case)",
+    "crumbs": [
+      "App Metrics",
+      "Nonlinear DID:"
+    ]
+  },
+  {
+    "objectID": "app_metrics/app_mt1.html#introduction",
+    "href": "app_metrics/app_mt1.html#introduction",
+    "title": "Nonlinear DID",
+    "section": "",
+    "text": "Differences in Differences (DiD) design is one of the most popular methods in applied microeconomics, because it requires relatively few assumptions to identify treatment effects.\n\nNo anticipation,\nParallel trends,\nNo spillovers\n\nThe canonical DiD, a 2x2 design, simply compares means (or conditional means) of the outcome variable (before after x treated non-treated) to identify treatment effects.\n\nThus it can be used even if outcome is a limited dependent variable (binary, count, etc) (parallel to the linear regression case)",
+    "crumbs": [
+      "App Metrics",
+      "Nonlinear DID:"
+    ]
+  },
+  {
+    "objectID": "app_metrics/app_mt1.html#section",
+    "href": "app_metrics/app_mt1.html#section",
+    "title": "Nonlinear DID",
+    "section": "",
+    "text": "Because the Canonical design is rather limited, many extensions have been proposed to handle more complex scenarios: Staggered Treatment with GxT DID.\n\nEarly Extensions (infamous TWFE) have been shown to be problematic. (negative weights and bad controls)\nbut more recent approaches (See Roth et al. (2023)) have shown how can one better use these designs to identify treatment effects, avoiding the simple-TWFE problems.\n\nLinear models, however, have limitations:\n\nLinear models do a poor job interpolating and predicting LDV outcomes\nParallel trends assumptions may only be credible under specific functional forms",
+    "crumbs": [
+      "App Metrics",
+      "Nonlinear DID:"
+    ]
+  },
+  {
+    "objectID": "app_metrics/app_mt1.html#not-andrew-goodman-bacon",
+    "href": "app_metrics/app_mt1.html#not-andrew-goodman-bacon",
+    "title": "Nonlinear DID",
+    "section": "Not Andrew Goodman-Bacon",
+    "text": "Not Andrew Goodman-Bacon\n\n\n\n\n\nAmong others, Andrew showed the problems of using TWFE in the presence of staggered adoption of the treatment.\nBecause of treatment timing, later treated units are compared to bad controls (early treated ones), in potential violation of the parallel trends assumption.\nThis also relates to negative weights.\nSee Goodman-Bacon (2021)",
+    "crumbs": [
+      "App Metrics",
+      "Nonlinear DID:"
+    ]
+  },
+  {
+    "objectID": "app_metrics/app_mt1.html#not-pedro-santanna",
+    "href": "app_metrics/app_mt1.html#not-pedro-santanna",
+    "title": "Nonlinear DID",
+    "section": "Not Pedro Sant’Anna",
+    "text": "Not Pedro Sant’Anna\n\n\n\n\n\nPedro and Brantly proposed deconstructing the GxT problem. Consider only good 2x2 DD designs to identify Treatment effects in DID.\nAgregate them as needed to obtain the desired treatment effect (weighted Average). (dynamic, average, across time, across groups, etc)\nAlong with Jonathan Roth, discuss the problem of PTA and functional forms. Not all may be valid.\nsee Callaway and Sant’Anna (2021) and Roth and Sant’Anna (2023)",
+    "crumbs": [
+      "App Metrics",
+      "Nonlinear DID:"
+    ]
+  },
+  {
+    "objectID": "app_metrics/app_mt1.html#not-jeffrey-wooldridge",
+    "href": "app_metrics/app_mt1.html#not-jeffrey-wooldridge",
+    "title": "Nonlinear DID",
+    "section": "Not Jeffrey Wooldridge",
+    "text": "Not Jeffrey Wooldridge\n\n\n\n\n\nJeff Wooldridge brought back life to the TWFE.\nThe problem was not the TWFE part of the analysis, but the model specification.\n\n(\\(post \\times treated\\) instead of \\(G \\times T\\))\n\nThis insights, can be extended to nonlinear cases.\nSee Wooldridge (2021) and Wooldridge (2023)",
+    "crumbs": [
+      "App Metrics",
+      "Nonlinear DID:"
+    ]
+  },
+  {
+    "objectID": "app_metrics/app_mt1.html#fernando-rios-avila",
+    "href": "app_metrics/app_mt1.html#fernando-rios-avila",
+    "title": "Nonlinear DID",
+    "section": "Fernando Rios-Avila",
+    "text": "Fernando Rios-Avila\n\n\n\n\n\nI have followed some of the developments in DID with staggered adoption of the treatment.\n\nImplemented few things (drdid/csdid/csdid2/jwdid)\nUnderstood few others (comparison groups, efficiency, negative weights, nonlinear models)\n\nAnd today, I will be providing some of my insights regarding the empirical analysis of nonlinear DID.\n\nI will rely heavily on Wooldridge (2023),",
+    "crumbs": [
+      "App Metrics",
+      "Nonlinear DID:"
+    ]
+  },
+  {
+    "objectID": "app_metrics/app_mt1.html#basics-2x2-did",
+    "href": "app_metrics/app_mt1.html#basics-2x2-did",
+    "title": "Nonlinear DID",
+    "section": "Basics: 2x2 DiD",
+    "text": "Basics: 2x2 DiD\n\nIn the 2x2 DID design, we have 2 groups:\n\nControl (\\(D=0\\)) and treated (\\(D=1\\)),\n\nWhich are observed for two periods of time:\n\nBefore (\\(T=0\\)) and after (\\(T=1\\)) the treatment.\n\nFor all groups and periods of time, we observe the realized outcome \\(Y_{i,t}\\), but cannot observe all potential outcomes \\(Y_{i,t}(D)\\).\nRealized outcomes are determined by the following equation:\n\n\\[Y_{i,t}=D_i Y_{i,t}(1) + (1-D_i) Y_{i,t}(0)\n\\]",
+    "crumbs": [
+      "App Metrics",
+      "Nonlinear DID:"
+    ]
+  },
+  {
+    "objectID": "app_metrics/app_mt1.html#section-1",
+    "href": "app_metrics/app_mt1.html#section-1",
+    "title": "Nonlinear DID",
+    "section": "",
+    "text": "If treatment occured at some point between T0 and T1, and we could observe all potential outcomes, the estimate of interested, Average Treatment effect, could be estimated as follows:\n\\[ATT = E(Y_{i,1}(1) - Y_{i,1}(0)|D_i=1)\n\\]\nFor the treated, we observe \\(Y_{i,1}(1)\\), but cannot observe \\(Y_{i,t}(0)\\) (counterfactual), thus, to identify Treatment Effects, we need to impose some assumptions.\n\nPTA:\n\n\\[\\begin{aligned}\nE(Y_{i,1}(0) - Y_{i,0}(0)|D_i=1) &= E(Y_{i,1} - Y_{i,0}|D_i=0) \\\\\nE(Y_{i,1}(0)|D_i=1) &= E(Y_{i,0}(0)|D_i=1) + E(Y_{i,1} - Y_{i,0}|D_i=0)\n\\end{aligned}\n\\]\n\nNo Anticipation: \\[Y_{i,0}(1) =  Y_{i,0}(0)=Y_{i,0}\\]",
+    "crumbs": [
+      "App Metrics",
+      "Nonlinear DID:"
+    ]
+  },
+  {
+    "objectID": "app_metrics/app_mt1.html#section-2",
+    "href": "app_metrics/app_mt1.html#section-2",
+    "title": "Nonlinear DID",
+    "section": "",
+    "text": "Thus, ATT can be estimated as follows:\n\\[\\begin{aligned}\nATT &= E(Y_{i,1}(1)|D_i=1)-E(Y_{i,1}(0)|D_i=1) \\\\\n&= E(Y_{i,1}|D_i=1)- \\Big(E(Y_{i,0}|D_i=1) + E(Y_{i,1} - Y_{i,0}|D_i=0)  \\Big) \\\\\n&= E(Y_{i,1}-Y_{i,0}|D_i=1)- E(Y_{i,1} - Y_{i,0}|D_i=0)  \n\\end{aligned}\n\\]\n\nAnd the Same could be done via Regressions:\n\n\\[y_{i,t} = \\beta_0 + \\beta_1 T + \\beta_2 D_i + \\theta (D_i \\times T) + \\epsilon_{i,t}\n\\]\n\nATT identification relies on the Parallel trend assumption.",
+    "crumbs": [
+      "App Metrics",
+      "Nonlinear DID:"
+    ]
+  },
+  {
+    "objectID": "app_metrics/app_mt1.html#how-to-test-for-pta",
+    "href": "app_metrics/app_mt1.html#how-to-test-for-pta",
+    "title": "Nonlinear DID",
+    "section": "How to test for PTA?",
+    "text": "How to test for PTA?\n\nPTA is a non-testable assumption, because we do not observe all potential outcomes.\nHowever, if we “move”, from the 2x2 design, it may be possible to test if PTA hold Before treatment.\nConsider a case of T periods of time, and that treatment happen at period G.\nSay we estimate the ATT comparing periods T and T-1, for any T&lt;G.\n\n\\[ATT(T) = E(Y_{i,T} - Y_{i,T-1}|D_i=1) - E(Y_{i,T} - Y_{i,T-1}|D_i=0)\n\\]\n\nIf there is no anticipation, and Parallel trends hold, then \\(ATT(T)=0 \\text{ if } T&lt;G\\)\n\nThis is what Callaway and Sant’Anna (2021) uses for PTA testing",
+    "crumbs": [
+      "App Metrics",
+      "Nonlinear DID:"
+    ]
+  },
+  {
+    "objectID": "app_metrics/app_mt1.html#how-to-test-for-pta-1",
+    "href": "app_metrics/app_mt1.html#how-to-test-for-pta-1",
+    "title": "Nonlinear DID",
+    "section": "How to test for PTA?",
+    "text": "How to test for PTA?\n\nAlternatively, one could simply estimate all ATT’s using period G-1 as baseline period (long2 differences):\n\n\\[ATT^2(T) = E(Y_{i,T} - Y_{i,G-1}|D_i=1) - E(Y_{i,T} - Y_{i,G-1}|D_i=0)\n\\]\n\nAnd use all post-treatment periods to estimate the ATT (\\(T\\geq G\\))\nand use all pre-treatment periods to test for PTA (\\(T&lt;G\\))",
+    "crumbs": [
+      "App Metrics",
+      "Nonlinear DID:"
+    ]
+  },
+  {
+    "objectID": "app_metrics/app_mt1.html#section-3",
+    "href": "app_metrics/app_mt1.html#section-3",
+    "title": "Nonlinear DID",
+    "section": "",
+    "text": "What if PTA does not hold?Wage PTA in levelsWage PTA in logs\n\n\n\nAs suggested by Wooldridge (2023), one of the reasons PTA may not hold is because we may be analyzing the wrong model.\n\nconsider two groups of workers, high and low earners, that experience the same wage growth. (parallel trends in relative terms)\nIf we observe wages at levels, parallel trends would be violated\nAnd Post treatment estimates will be missleading",
+    "crumbs": [
+      "App Metrics",
+      "Nonlinear DID:"
+    ]
+  },
+  {
+    "objectID": "app_metrics/app_mt1.html#pta-may-hold-for-gbar-y",
+    "href": "app_metrics/app_mt1.html#pta-may-hold-for-gbar-y",
+    "title": "Nonlinear DID",
+    "section": "PTA may hold for \\(G(\\bar Y)\\)",
+    "text": "PTA may hold for \\(G(\\bar Y)\\)\nA similar story could be told about other types of transformations.\nIn general, it is possible that PTA hold for some other monotonic transformation of the outcome variable.\n\\[G^{-1}\\Big( E_1 [Y_{i,1}(0)] \\Big) -G^{-1}\\Big(E_1[ Y_{i,0}(0) ] \\Big)  \n= G^{-1}\\Big(E_0[Y_{i,1}]\\Big) - G^{-1}\\Big(E_0[Y_{i,0}]\\Big)\n\\]\nThis is very similar to the PTA assumption explored in Roth and Sant’Anna (2023).\n\\[E_1\\Big[g(Y_{i,1}(0))\\Big] - E_1\\Big[g(Y_{i,0}(0))\\Big] = E_0\\Big[g(Y_{i,1})\\Big] - E_0\\Big[g(Y_{i,0})\\Big]\n\\]\nWooldridge idea: It may be possible to identify ATTs using correct functional forms, through the latent index.",
+    "crumbs": [
+      "App Metrics",
+      "Nonlinear DID:"
+    ]
+  },
+  {
+    "objectID": "app_metrics/app_mt1.html#how-do-things-change",
+    "href": "app_metrics/app_mt1.html#how-do-things-change",
+    "title": "Nonlinear DID",
+    "section": "How do things Change?",
+    "text": "How do things Change?\n\nUsing this insight, we can go back to the 2x2 design, and see how things change.\n\nBefore:\n\\[E(y_{i,t}|D,T)=\\beta_0 + \\beta_1 T + \\beta_2 D_i + \\theta (D_i \\times T)\n\\]\nAfter:\n\\[E(y_{i,t}|D,T)=G\\Big(\\beta_0 + \\beta_1 T + \\beta_2 D_i + \\theta (D_i \\times T)\\Big)\n\\]\n\nFor the practitioner, the extended Nonlinear DID simply requires choosing a functional form that better fits the data.\n\nPoisson, logit, fractional regression, multinomial model, Linear model, etc",
+    "crumbs": [
+      "App Metrics",
+      "Nonlinear DID:"
+    ]
+  },
+  {
+    "objectID": "app_metrics/app_mt1.html#extension-i-adding-covariates",
+    "href": "app_metrics/app_mt1.html#extension-i-adding-covariates",
+    "title": "Nonlinear DID",
+    "section": "Extension I: Adding Covariates",
+    "text": "Extension I: Adding Covariates\n\nMany papers in the literature consider the use of covariates in the estimation of the ATT.\nThe lessons from Sant’Anna and Zhao (2020):\n\nThe choosen covariates should be time fixed, to avoid contamination of the treatment effect.\nUsing covariates allows relaxing the parallel trends assumption: PTA hold for specific groups of individuals. (if not for the whole population due to compositional changes)\n\nIn the 2x2 DID-Regression, covariates can be added with interactions:\n\n\\[\\begin{aligned}\ny_{i,t} &= \\beta_0 + \\beta_1 D + \\beta_2 T + \\theta (D \\times T) \\\\\n&+ X\\gamma +  D \\times X\\gamma_d + T \\times X\\gamma_T + D \\times T (X-\\bar X )\\lambda + \\epsilon_{i,t}\n\\end{aligned}\n\\]\n\nThe same could be done in the nonlinear case",
+    "crumbs": [
+      "App Metrics",
+      "Nonlinear DID:"
+    ]
+  },
+  {
+    "objectID": "app_metrics/app_mt1.html#extension-ii-gxt-did",
+    "href": "app_metrics/app_mt1.html#extension-ii-gxt-did",
+    "title": "Nonlinear DID",
+    "section": "Extension II: GxT DiD",
+    "text": "Extension II: GxT DiD\n\nThe 2x2 design is rather limited, because often people have access to multiple periods of time, with differential treatment timing. (staggered adoption of the treatment)\n\nI call this the GxT design (G groups, T periods of time)\n\nThe majority of the papers that analyze this case impose an additional assumption:\n\nTreatment is not Reversable: Once treated always treated\n\n\nNOTE: Because of the interactions required, adding covariates would rapidily “consume” degrees of freedom. (may be a problem with nonlinear models).\nHow to see this? --&gt; tab tvar gvar",
+    "crumbs": [
+      "App Metrics",
+      "Nonlinear DID:"
+    ]
+  },
+  {
+    "objectID": "app_metrics/app_mt1.html#section-4",
+    "href": "app_metrics/app_mt1.html#section-4",
+    "title": "Nonlinear DID",
+    "section": "",
+    "text": "The Problem\n\nEarly extensions of the 2x2 design to the GxT design, relied on the TWFE estimator. \\[y_{i,t} = \\delta_i + \\delta_t + \\theta^{fe} D_{i,t} + e_{i,t}\\]\n\nwhere \\(D_{i,t}=1\\) only after treatment is in place, and zero otherwise.\n\nThis model has been shown to be problematic, because of How OLS estimates the \\(\\theta^{fe}\\) parameter.\n\n\\(\\theta^{fe}\\) is a weighted average of all possible 2x2 DID designs. Goodman-Bacon (2021)\nSome designs use early treated units as controls for late treated units, which might be a violation of the parallel trends assumption.\n\n(treated units effectively receiving negative weights) Goodman-Bacon (2021), Chaisemartin and D’Haultfœuille (2020) and Borusyak, Jaravel, and Spiess (2023).",
+    "crumbs": [
+      "App Metrics",
+      "Nonlinear DID:"
+    ]
+  },
+  {
+    "objectID": "app_metrics/app_mt1.html#section-5",
+    "href": "app_metrics/app_mt1.html#section-5",
+    "title": "Nonlinear DID",
+    "section": "",
+    "text": "Avoiding the Problem\n\nCallaway and Sant’Anna (2021) proposes a simple solution: Deconstruct the problem into smaller pieces (2x2 DIDs), and aggregate them as needed.\nWooldridge (2021), however, proposes a different solution: Use the correct functional form to estimate the ATTs.\n\n\\[\\text{Instead of: }Y_{i,t} = \\delta_i + \\gamma_t  + \\theta^{fe} PT_{i,t} + \\epsilon_{i,t}\\]\n\\[\\text{Use: }Y_{i,t} = \\delta_i + \\gamma_t  + \\sum_{g \\in \\mathbb{G}} \\sum_{t=g}^T \\theta_{g,t} \\mathbb{1}(G=g,T=t) + \\epsilon_{i,t}\\]\n\nTheir Message: Embrace heterogeneity across time and cohorts.",
+    "crumbs": [
+      "App Metrics",
+      "Nonlinear DID:"
+    ]
+  },
+  {
+    "objectID": "app_metrics/app_mt1.html#an-added-insight",
+    "href": "app_metrics/app_mt1.html#an-added-insight",
+    "title": "Nonlinear DID",
+    "section": "An added Insight",
+    "text": "An added Insight\n\nThe approach proposed by Wooldridge (2021), is more efficient than Callaway and Sant’Anna (2021), because it uses all pre-treatment data to estimate the ATTs. (Callaway and Sant’Anna (2021) uses only one pre-treatment period)\nHowever, doing this doesn’t allow you to test for PTA directly, unless we use an alternative approach:\n\n\\[Y_{i,t} = \\delta_i + \\gamma_t  +\n\\sum_{g \\in \\mathbb{G}} \\sum_{t=t_0}^{g-2} \\theta_{g,t}^{pre} \\mathbb{1}(G=g,T=t) +\n\\sum_{g \\in \\mathbb{G}} \\sum_{t=g}^T \\theta_{g,t}^{post} \\mathbb{1}(G=g,T=t) + \\epsilon_{i,t}\\]\n\nThis specification is equivalent to Callaway and Sant’Anna (2021) and to Sun and Abraham (2021).\n\nIts explicily a regression (Wooldridge)\nand uses actual, instead of relative, time.",
+    "crumbs": [
+      "App Metrics",
+      "Nonlinear DID:"
+    ]
+  },
+  {
+    "objectID": "app_metrics/app_mt1.html#implementing-nl-did-the-jw-way",
+    "href": "app_metrics/app_mt1.html#implementing-nl-did-the-jw-way",
+    "title": "Nonlinear DID",
+    "section": "Implementing NL-DID the JW way",
+    "text": "Implementing NL-DID the JW way\n\nOne of the advantages of the approaches proposed by Wooldridge (2021) and Wooldridge (2023), is that they can be directly estimated using regressions.\nThe hard part is to construct all the interactions required for the model to work.\nAnd a second challenge is to aggregate the results.\n\njwdid\n\njwdid is a simple command that helps with the construction of all required interactions that could be used to implement Wooldridge approach.\nIt is flexible enough, in that it allows you to choose different estimators that would better fit your data.\nit comes with its own post estimation commands that can help you aggregate the results into simple ATT, dynamics effects, across periods, across years, etc.\nLets take it for a spin",
+    "crumbs": [
+      "App Metrics",
+      "Nonlinear DID:"
+    ]
+  },
+  {
+    "objectID": "app_metrics/app_mt1.html#command-syntax",
+    "href": "app_metrics/app_mt1.html#command-syntax",
+    "title": "Nonlinear DID",
+    "section": "Command Syntax",
+    "text": "Command Syntax\n\njwdid - Command Name. In charge of getting all interactions -right-\n\ndepvar [indepvar] - Declare the dependent variables. Independent variables are optional. They should be time fixed.\n[if] [in] [weight], Declares sample and weights. Only PW is allowed.",
+    "crumbs": [
+      "App Metrics",
+      "Nonlinear DID:"
+    ]
+  },
+  {
+    "objectID": "app_metrics/app_mt1.html#command-main-options",
+    "href": "app_metrics/app_mt1.html#command-main-options",
+    "title": "Nonlinear DID",
+    "section": "Command Main Options",
+    "text": "Command Main Options\n\njwdid: main options\n\nivar(varname): Panel indicator. If not declared, command assumes one is using repeated cross sections.\ncluster(varname): Cluster variable. To request a clustered standard error other than at ivar level. Recommended with RC.\ntvar(varname) or time(varname): Required, Time variable. There are two ways to call it for compatability with csdid.\ngvar(varname): Group variable. Indicates the timing of when a unit has ben treated.\ntrtvar(varname): If using Panel data, one could instead provide the post-treatment dummy.\n\nIf data is repeated crossection, one requires using trgvar(varname) (Pseudo panel indicator).",
+    "crumbs": [
+      "App Metrics",
+      "Nonlinear DID:"
+    ]
+  },
+  {
+    "objectID": "app_metrics/app_mt1.html#extra-options",
+    "href": "app_metrics/app_mt1.html#extra-options",
+    "title": "Nonlinear DID",
+    "section": "Extra Options",
+    "text": "Extra Options\n\ngroup: Requests using group fixed effects, instead of individual fixed effects (default)\nnever: Request to use alternative specification that allows to test for PTA. (default is to use the standard specification)\nLinear and Nonlinear models:\n\nmethod(command, options): Request to use a specific method to model the data. Default is using linear regression via reghdfe.\nthe option part allows you do include specific options for the method. (e.g. method(glm, link() family()))",
+    "crumbs": [
+      "App Metrics",
+      "Nonlinear DID:"
+    ]
+  },
+  {
+    "objectID": "app_metrics/app_mt1.html#example-1-min-wages-on-employment-cs-data",
+    "href": "app_metrics/app_mt1.html#example-1-min-wages-on-employment-cs-data",
+    "title": "Nonlinear DID",
+    "section": "Example 1: Min Wages on Employment CS data",
+    "text": "Example 1: Min Wages on Employment CS data\n\nclear all\nqui:ssc install frause\nqui:frause mpdta, clear\nfrause mpdta, clear\njwdid lemp, ivar(county) tvar(year) gvar(first)\n\n(Written by R.              )\nWARNING: Singleton observations not dropped; statistical significance is biased\n&gt;  (link)\n(MWFE estimator converged in 2 iterations)\n\nHDFE Linear regression                            Number of obs   =      2,500\nAbsorbing 2 HDFE groups                           F(   7,    499) =       3.82\nStatistics robust to heteroskedasticity           Prob &gt; F        =     0.0005\n                                                  R-squared       =     0.9933\n                                                  Adj R-squared   =     0.9915\n                                                  Within R-sq.    =     0.0101\nNumber of clusters (countyreal) =        500      Root MSE        =     0.1389\n\n                           (Std. err. adjusted for 500 clusters in countyreal)\n------------------------------------------------------------------------------\n             |               Robust\n        lemp | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n first_treat#|\n        year#|\n    c.__tr__ |\n  2004 2004  |  -.0193724   .0223818    -0.87   0.387    -.0633465    .0246018\n  2004 2005  |  -.0783191   .0304878    -2.57   0.010    -.1382195   -.0184187\n  2004 2006  |  -.1360781   .0354555    -3.84   0.000    -.2057386   -.0664177\n  2004 2007  |  -.1047075   .0338743    -3.09   0.002    -.1712613   -.0381536\n  2006 2006  |   .0025139   .0199328     0.13   0.900    -.0366487    .0416765\n  2006 2007  |  -.0391927   .0240087    -1.63   0.103    -.0863634     .007978\n  2007 2007  |   -.043106   .0184311    -2.34   0.020    -.0793182   -.0068938\n             |\n       _cons |    5.77807    .001544  3742.17   0.000     5.775036    5.781103\n------------------------------------------------------------------------------\n\nAbsorbed degrees of freedom:\n-----------------------------------------------------+\n Absorbed FE | Categories  - Redundant  = Num. Coefs |\n-------------+---------------------------------------|\n  countyreal |       500         500           0    *|\n        year |         5           0           5     |\n-----------------------------------------------------+\n* = FE nested within cluster; treated as redundant for DoF computation\n\n\n\ngen emp = exp(lemp)\njwdid emp, ivar(county) tvar(year) gvar(first) method(poisson) \n\n\nIteration 0:   log pseudolikelihood = -2980537.4  \nIteration 1:   log pseudolikelihood = -2980526.5  \nIteration 2:   log pseudolikelihood = -2980526.5  \n\nPoisson regression                                      Number of obs =  2,500\n                                                        Wald chi2(14) = 225.38\nLog pseudolikelihood = -2980526.5                       Prob &gt; chi2   = 0.0000\n\n                           (Std. err. adjusted for 500 clusters in countyreal)\n------------------------------------------------------------------------------\n             |               Robust\n         emp | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n first_treat#|\n        year#|\n    c.__tr__ |\n  2004 2004  |  -.0080499   .0100858    -0.80   0.425    -.0278177    .0117178\n  2004 2005  |  -.0252131   .0176754    -1.43   0.154    -.0598562    .0094299\n  2004 2006  |   -.051965   .0197745    -2.63   0.009    -.0907222   -.0132077\n  2004 2007  |  -.0672208   .0192207    -3.50   0.000    -.1048926    -.029549\n  2006 2006  |    .055212   .0330023     1.67   0.094    -.0094714    .1198954\n  2006 2007  |   .0109993     .04294     0.26   0.798    -.0731617    .0951602\n  2007 2007  |   -.060675   .0149793    -4.05   0.000    -.0900339   -.0313161\n             |\n first_treat |\n       2004  |   .4789133   .4347691     1.10   0.271    -.3732184    1.331045\n       2006  |   .6010118   .3248861     1.85   0.064    -.0357532    1.237777\n       2007  |   .1269293   .2472938     0.51   0.608    -.3577576    .6116163\n             |\n        year |\n       2004  |  -.0459369   .0064592    -7.11   0.000    -.0585966   -.0332771\n       2005  |  -.0301284   .0094457    -3.19   0.001    -.0486416   -.0116152\n       2006  |  -.0030985   .0122001    -0.25   0.800    -.0270104    .0208133\n       2007  |   .0350031   .0118264     2.96   0.003     .0118238    .0581824\n             |\n       _cons |    6.84775   .1555219    44.03   0.000     6.542932    7.152567\n------------------------------------------------------------------------------\n\n\n\njwdid emp, ivar(county) tvar(year) gvar(first) method(poisson) never\n\n\nIteration 0:   log pseudolikelihood = -2980450.1  \nIteration 1:   log pseudolikelihood = -2980438.8  \nIteration 2:   log pseudolikelihood = -2980438.8  \n\nPoisson regression                                      Number of obs =  2,500\n                                                        Wald chi2(19) = 262.50\nLog pseudolikelihood = -2980438.8                       Prob &gt; chi2   = 0.0000\n\n                           (Std. err. adjusted for 500 clusters in countyreal)\n------------------------------------------------------------------------------\n             |               Robust\n         emp | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n first_treat#|\n        year#|\n    c.__tr__ |\n  2004 2004  |  -.0063802   .0111509    -0.57   0.567    -.0282356    .0154752\n  2004 2005  |   -.027483   .0190781    -1.44   0.150    -.0648753    .0099094\n  2004 2006  |  -.0641446   .0224733    -2.85   0.004    -.1081913   -.0200978\n  2004 2007  |  -.0704859   .0204208    -3.45   0.001    -.1105099   -.0304619\n  2006 2003  |  -.0081647   .0366458    -0.22   0.824     -.079989    .0636597\n  2006 2004  |  -.0289763   .0258763    -1.12   0.263    -.0796929    .0217403\n  2006 2006  |   .0310817   .0186723     1.66   0.096    -.0055153    .0676788\n  2006 2007  |  -.0042165   .0335939    -0.13   0.900    -.0700593    .0616263\n  2007 2003  |   .0358582   .0236868     1.51   0.130    -.0105671    .0822835\n  2007 2004  |   .0517571   .0164417     3.15   0.002      .019532    .0839822\n  2007 2005  |   .0237174   .0112134     2.12   0.034     .0017395    .0456952\n  2007 2007  |  -.0329817    .009941    -3.32   0.001    -.0524657   -.0134976\n             |\n first_treat |\n       2004  |   .4821784   .4354246     1.11   0.268    -.3712381    1.335595\n       2006  |   .6162276   .3252255     1.89   0.058    -.0212028    1.253658\n       2007  |    .099236    .244468     0.41   0.685    -.3799124    .5783844\n             |\n        year |\n       2004  |  -.0476066   .0080213    -5.94   0.000     -.063328   -.0318852\n       2005  |  -.0278586   .0118649    -2.35   0.019    -.0511134   -.0046038\n       2006  |    .009081    .016213     0.56   0.575    -.0226959     .040858\n       2007  |   .0382682   .0136908     2.80   0.005     .0114347    .0651017\n             |\n       _cons |   6.844485   .1573451    43.50   0.000     6.536094    7.152875\n------------------------------------------------------------------------------",
+    "crumbs": [
+      "App Metrics",
+      "Nonlinear DID:"
+    ]
+  },
+  {
+    "objectID": "app_metrics/app_mt1.html#example-1-aggregations",
+    "href": "app_metrics/app_mt1.html#example-1-aggregations",
+    "title": "Nonlinear DID",
+    "section": "Example 1: Aggregations",
+    "text": "Example 1: Aggregations\n\nestat event\n\n------------------------------------------------------------------------------\n             |            Delta-method\n             | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n   __event__ |\n         -4  |   37.84578   27.92442     1.36   0.175    -16.88508    92.57665\n         -3  |   36.91665   23.13761     1.60   0.111     -8.43224    82.26554\n         -2  |   7.462364   14.88422     0.50   0.616    -21.71018    36.63491\n         -1  |          0  (omitted)\n          0  |  -13.33389   12.32746    -1.08   0.279    -37.49527    10.82749\n          1  |  -18.42686   40.35552    -0.46   0.648    -97.52222     60.6685\n          2  |   -95.3188   36.54186    -2.61   0.009    -166.9395   -23.69806\n          3  |  -107.5067   44.45653    -2.42   0.016    -194.6399   -20.37347\n------------------------------------------------------------------------------\n\n\n\nestat group\n\n------------------------------------------------------------------------------\n             |            Delta-method\n             | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n   __group__ |\n       2004  |  -63.03151   28.14208    -2.24   0.025     -118.189   -7.874052\n       2006  |   23.89072   46.37715     0.52   0.606    -67.00682    114.7883\n       2007  |  -34.94374   13.54265    -2.58   0.010    -61.48686   -8.400625\n------------------------------------------------------------------------------\n\n\n\nestat calendar\n\n------------------------------------------------------------------------------\n             |            Delta-method\n             | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n__calendar__ |\n       2004  |  -9.219455   15.81277    -0.58   0.560    -40.21192    21.77301\n       2005  |  -40.08113   29.74368    -1.35   0.178    -98.37767    18.21541\n       2006  |   5.147843   33.13277     0.16   0.877     -59.7912    70.08689\n       2007  |  -36.81546   16.84608    -2.19   0.029    -69.83316   -3.797752\n------------------------------------------------------------------------------\n\n\n\nqui:estat event, plot\ngraph export event.png, replace width(1000)",
+    "crumbs": [
+      "App Metrics",
+      "Nonlinear DID:"
+    ]
+  },
+  {
+    "objectID": "app_metrics/app_mt1.html#example-2-wooldridge-simulation-data",
+    "href": "app_metrics/app_mt1.html#example-2-wooldridge-simulation-data",
+    "title": "Nonlinear DID",
+    "section": "Example 2: Wooldridge Simulation data",
+    "text": "Example 2: Wooldridge Simulation data\n\nclear all\nuse did_common_6_binary, clear\nqui {\nreg y i.w#c.d#c.f04 i.w#c.d#c.f05 i.w#c.d#c.f06 ///\n    i.w#c.d#c.f04#c.x i.w#c.d#c.f05#c.x i.w#c.d#c.f06#c.x ///\n    f02 f03 f04 f05 f06 ///\n    c.f02#c.x c.f03#c.x c.f04#c.x c.f05#c.x c.f06#c.x /// \n    d x c.d#c.x, noomitted vce(cluster id)\n  est sto m1\n}  \nqui:margins, dydx(w) at(f02 = 0 f03 = 0 f04 = 1 f05 = 0 f06 = 0) ///\n    subpop(if d == 1) noestimcheck vce(uncond)  post\nereturn display  \nest restore m1\nqui:margins, dydx(w) at(f02 = 0 f03 = 0 f04 = 0 f05 = 1 f06 = 0) ///\n    subpop(if d == 1) noestimcheck vce(uncond) post\nereturn display  \nest restore m1\nqui:margins, dydx(w) at(f02 = 0 f03 = 0 f04 = 0 f05 = 0 f06 = 1) ///\n    subpop(if d == 1) noestimcheck vce(uncond) post\nereturn display \n\n                                 (Std. err. adjusted for 1,000 clusters in id)\n------------------------------------------------------------------------------\n             |            Unconditional\n             | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n         1.w |   .0462206   .0367939     1.26   0.209    -.0259816    .1184228\n------------------------------------------------------------------------------\n(results m1 are active now)\n                                 (Std. err. adjusted for 1,000 clusters in id)\n------------------------------------------------------------------------------\n             |            Unconditional\n             | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n         1.w |   .0755069   .0376124     2.01   0.045     .0016985    .1493153\n------------------------------------------------------------------------------\n(results m1 are active now)\n                                 (Std. err. adjusted for 1,000 clusters in id)\n------------------------------------------------------------------------------\n             |            Unconditional\n             | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n         1.w |   .0445457   .0379857     1.17   0.241    -.0299952    .1190866\n------------------------------------------------------------------------------\n\n\nUsing jwdid:\n\nclear all\nuse did_common_6_binary, clear\nqui: jwdid y x, ivar(id) tvar(year) trtvar(w) method(regress)\nestat event, vce(unconditional)\n\n                                 (Std. err. adjusted for 1,000 clusters in id)\n------------------------------------------------------------------------------\n             |            Unconditional\n             | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n   __event__ |\n          0  |   .0462206   .0367939     1.26   0.209    -.0259816    .1184228\n          1  |   .0755069   .0376124     2.01   0.045     .0016985    .1493153\n          2  |   .0445457   .0379857     1.17   0.241    -.0299952    .1190866\n------------------------------------------------------------------------------\n\n\nUsing Logit\n\nclear all\nuse did_common_6_binary, clear\nqui {\nlogit y i.w#c.d#c.f04 i.w#c.d#c.f05 i.w#c.d#c.f06 ///\n    i.w#c.d#c.f04#c.x i.w#c.d#c.f05#c.x i.w#c.d#c.f06#c.x ///\n    f02 f03 f04 f05 f06 c.f02#c.x c.f03#c.x c.f04#c.x c.f05#c.x c.f06#c.x ///\n    d x c.d#c.x, noomitted vce(cluster id)\n  est store m1\n}  \n\nqui:margins, dydx(w) at(f02 = 0 f03 = 0 f04 = 1 f05 = 0 f06 = 0) ///\n    subpop(if d == 1) noestimcheck vce(uncond)  post\nereturn display  \nest restore m1\nqui:margins, dydx(w) at(f02 = 0 f03 = 0 f04 = 0 f05 = 1 f06 = 0) ///\n    subpop(if d == 1) noestimcheck vce(uncond) post\nereturn display  \nest restore m1\nqui:margins, dydx(w) at(f02 = 0 f03 = 0 f04 = 0 f05 = 0 f06 = 1) ///\n    subpop(if d == 1) noestimcheck vce(uncond) post\nereturn display \n\n                                 (Std. err. adjusted for 1,000 clusters in id)\n------------------------------------------------------------------------------\n             |            Unconditional\n             | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n         1.w |   .0886639   .0326848     2.71   0.007     .0246029    .1527249\n------------------------------------------------------------------------------\n(results m1 are active now)\n                                 (Std. err. adjusted for 1,000 clusters in id)\n------------------------------------------------------------------------------\n             |            Unconditional\n             | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n         1.w |   .1217999   .0355845     3.42   0.001     .0520556    .1915441\n------------------------------------------------------------------------------\n(results m1 are active now)\n                                 (Std. err. adjusted for 1,000 clusters in id)\n------------------------------------------------------------------------------\n             |            Unconditional\n             | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n         1.w |   .1073639   .0371242     2.89   0.004     .0346018    .1801261\n------------------------------------------------------------------------------\n\n\nUsing jwdid:\n\nclear all\nuse did_common_6_binary, clear\nqui: jwdid y x, ivar(id) tvar(year) trtvar(w) method(logit)\nestat event, vce(unconditional)\n\n                                 (Std. err. adjusted for 1,000 clusters in id)\n------------------------------------------------------------------------------\n             |            Unconditional\n             | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]\n-------------+----------------------------------------------------------------\n   __event__ |\n          0  |   .0886639   .0326848     2.71   0.007     .0246029    .1527249\n          1  |   .1217999   .0355845     3.42   0.001     .0520556    .1915441\n          2  |   .1073639   .0371242     2.89   0.004     .0346018    .1801261\n------------------------------------------------------------------------------",
+    "crumbs": [
+      "App Metrics",
+      "Nonlinear DID:"
+    ]
+  },
+  {
+    "objectID": "app_metrics/app_mt1.html#conclusion",
+    "href": "app_metrics/app_mt1.html#conclusion",
+    "title": "Nonlinear DID",
+    "section": "Conclusion",
+    "text": "Conclusion\n\nDID is a popular method for analyzing policy interventions.\nThanks to the contributions of Wooldridge, Roth and Sant’Anna among others, we have a better understanding of how to implement DID in more complex scenarios.\nOne of this important extensions is the use of nonlinear models to better fit the data, and better estimate treatment effects.\nThe jwdid command is a simple tool that can help you implement the Wooldridge approach to nonlinear DID.",
+    "crumbs": [
+      "App Metrics",
+      "Nonlinear DID:"
     ]
   }
 ]

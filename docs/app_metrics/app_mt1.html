@@ -85,8 +85,7 @@ div.csl-indent {
 <script src="../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../">
-<link href="../app_metrics/app_metrics2.html" rel="next">
-<link href="../app_metrics/app_metrics1.html" rel="prev">
+<link href="../app_metrics/app_metrics9.html" rel="prev">
 <script src="../site_libs/quarto-html/quarto.js"></script>
 <script src="../site_libs/quarto-html/popper.min.js"></script>
 <script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -205,7 +204,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../app_metrics/app_metrics1.html">App Metrics</a></li><li class="breadcrumb-item"><a href="../app_metrics/app_metrics10.html">Nonlinear DID</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../app_metrics/app_mt1.html">App Metrics</a></li><li class="breadcrumb-item"><a href="../app_metrics/app_mt1.html">Nonlinear DID:</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -241,12 +240,6 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
   <div class="sidebar-item-container"> 
   <a href="../app_metrics/app_metrics1.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Constructing synthetic Datasets</span></a>
-  </div>
-</li>
-          <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="../app_metrics/app_metrics10.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Nonlinear DID</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -295,6 +288,23 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
   <div class="sidebar-item-container"> 
   <a href="../app_metrics/app_metrics9.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Quantile regressions with multiple fixed effects</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true">
+ <span class="menu-text">App Metrics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_mt1.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Nonlinear DID:</span></a>
   </div>
 </li>
       </ul>
@@ -352,7 +362,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../app_metrics/app_metrics1.html">App Metrics</a></li><li class="breadcrumb-item"><a href="../app_metrics/app_metrics10.html">Nonlinear DID</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../app_metrics/app_mt1.html">App Metrics</a></li><li class="breadcrumb-item"><a href="../app_metrics/app_mt1.html">Nonlinear DID:</a></li></ol></nav>
 <div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">Nonlinear DID</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 <p class="subtitle lead">Lessons from Staggered Linear Differences in Differences</p>
@@ -764,7 +774,7 @@ y_{i,t} &amp;= \beta_0 + \beta_1 D + \beta_2 T + \theta (D \times T) \\
 </section>
 <section id="example-1-min-wages-on-employment-cs-data" class="level2 scrollable">
 <h2 class="scrollable anchored" data-anchor-id="example-1-min-wages-on-employment-cs-data">Example 1: Min Wages on Employment CS data</h2>
-<div id="716b7b0a" class="cell larger" data-execution_count="3">
+<div id="ffb07e56" class="cell larger" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">clear</span> <span class="ot">all</span></span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="kw">qui</span>:<span class="kw">ssc</span> install frause</span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="kw">qui</span>:frause mpdta, <span class="kw">clear</span></span>
@@ -813,7 +823,7 @@ Absorbed degrees of freedom:
 * = FE nested within cluster; treated as redundant for DoF computation</code></pre>
 </div>
 </div>
-<div id="834d80b3" class="cell larger" data-execution_count="4">
+<div id="8597bcde" class="cell larger" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">gen</span> emp = <span class="fu">exp</span>(lemp)</span>
 <span id="cb3-2"><a href="#cb3-2"></a>jwdid emp, ivar(county) tvar(<span class="fu">year</span>) gvar(first) method(<span class="kw">poisson</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -857,7 +867,7 @@ Log pseudolikelihood = -2980526.5                       Prob &gt; chi2   = 0.000
 ------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
-<div id="40173c1f" class="cell larger" data-execution_count="5">
+<div id="f4e28ef3" class="cell larger" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1"></a>jwdid emp, ivar(county) tvar(<span class="fu">year</span>) gvar(first) method(<span class="kw">poisson</span>) never</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
@@ -908,7 +918,7 @@ Log pseudolikelihood = -2980438.8                       Prob &gt; chi2   = 0.000
 </section>
 <section id="example-1-aggregations" class="level2 scrollable">
 <h2 class="scrollable anchored" data-anchor-id="example-1-aggregations">Example 1: Aggregations</h2>
-<div id="367e4899" class="cell larger" data-execution_count="6">
+<div id="6caf0f3d" class="cell larger" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">estat</span> event</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>------------------------------------------------------------------------------
@@ -927,7 +937,7 @@ Log pseudolikelihood = -2980438.8                       Prob &gt; chi2   = 0.000
 ------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
-<div id="6846ba3f" class="cell larger" data-execution_count="7">
+<div id="f6d8ecf8" class="cell larger" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">estat</span> <span class="fu">group</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>------------------------------------------------------------------------------
@@ -941,7 +951,7 @@ Log pseudolikelihood = -2980438.8                       Prob &gt; chi2   = 0.000
 ------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
-<div id="137ace0c" class="cell larger" data-execution_count="8">
+<div id="a6a58d8a" class="cell larger" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">estat</span> calendar</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>------------------------------------------------------------------------------
@@ -956,7 +966,7 @@ __calendar__ |
 ------------------------------------------------------------------------------</code></pre>
 </div>
 </div>
-<div id="af486748" class="cell larger" data-execution_count="9">
+<div id="e11b9d3f" class="cell larger" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">qui</span>:<span class="kw">estat</span> event, plot</span>
 <span id="cb13-2"><a href="#cb13-2"></a><span class="kw">graph</span> <span class="kw">export</span> event.png, <span class="kw">replace</span> <span class="kw">width</span>(1000)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -964,7 +974,7 @@ __calendar__ |
 </section>
 <section id="example-2-wooldridge-simulation-data" class="level2 scrollable">
 <h2 class="scrollable anchored" data-anchor-id="example-2-wooldridge-simulation-data">Example 2: Wooldridge Simulation data</h2>
-<div id="a4d3c068" class="cell larger" data-execution_count="10">
+<div id="1d4d2d32" class="cell larger" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">clear</span> <span class="ot">all</span></span>
 <span id="cb14-2"><a href="#cb14-2"></a><span class="kw">use</span> did_common_6_binary, <span class="kw">clear</span></span>
 <span id="cb14-3"><a href="#cb14-3"></a><span class="kw">qui</span> {</span>
@@ -1013,7 +1023,7 @@ __calendar__ |
 </div>
 </div>
 <p>Using <code>jwdid</code>:</p>
-<div id="f7958732" class="cell larger" data-execution_count="11">
+<div id="18952d36" class="cell larger" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw">clear</span> <span class="ot">all</span></span>
 <span id="cb16-2"><a href="#cb16-2"></a><span class="kw">use</span> did_common_6_binary, <span class="kw">clear</span></span>
 <span id="cb16-3"><a href="#cb16-3"></a><span class="kw">qui</span>: jwdid <span class="fu">y</span> x, ivar(id) tvar(<span class="fu">year</span>) trtvar(<span class="fu">w</span>) method(<span class="kw">regress</span>)</span>
@@ -1032,7 +1042,7 @@ __calendar__ |
 </div>
 </div>
 <p><strong>Using Logit</strong></p>
-<div id="0a162400" class="cell larger" data-execution_count="12">
+<div id="35d78fc1" class="cell larger" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">clear</span> <span class="ot">all</span></span>
 <span id="cb18-2"><a href="#cb18-2"></a><span class="kw">use</span> did_common_6_binary, <span class="kw">clear</span></span>
 <span id="cb18-3"><a href="#cb18-3"></a><span class="kw">qui</span> {</span>
@@ -1081,7 +1091,7 @@ __calendar__ |
 </div>
 </div>
 <p>Using <code>jwdid</code>:</p>
-<div id="9257184d" class="cell larger" data-execution_count="13">
+<div id="2a1d1ca4" class="cell larger" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb20-1"><a href="#cb20-1"></a><span class="kw">clear</span> <span class="ot">all</span></span>
 <span id="cb20-2"><a href="#cb20-2"></a><span class="kw">use</span> did_common_6_binary, <span class="kw">clear</span></span>
 <span id="cb20-3"><a href="#cb20-3"></a><span class="kw">qui</span>: jwdid <span class="fu">y</span> x, ivar(id) tvar(<span class="fu">year</span>) trtvar(<span class="fu">w</span>) method(<span class="kw">logit</span>)</span>
@@ -1594,14 +1604,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../app_metrics/app_metrics1.html" class="pagination-link  aria-label=" constructing="" synthetic="" datasets"="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Constructing synthetic Datasets</span>
+      <a href="../app_metrics/app_metrics9.html" class="pagination-link  aria-label=" quantile="" regressions="" with="" multiple="" fixed="" effects"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Quantile regressions with multiple fixed effects</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../app_metrics/app_metrics2.html" class="pagination-link" aria-label="DRDID/CSDID in Stata">
-        <span class="nav-page-text">DRDID/CSDID in Stata</span> <i class="bi bi-arrow-right-short"></i>
-      </a>
   </div>
 </nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="sourceCode" id="cb22" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
