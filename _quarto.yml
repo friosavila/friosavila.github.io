@@ -62,7 +62,6 @@ website:
     contents:
       - "app_metrics/index.qmd"
       - auto: "app_metrics/app_metrics*.qmd"
-
       #- wls_ols.qmd
       #- cqr_simulation.qmd
       #- qreg_1.qmd

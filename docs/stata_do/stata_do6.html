@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.455">
+<meta name="generator" content="quarto-1.4.506">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -204,7 +204,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../stata_do/stata_do1.html">Stata Do</a></li><li class="breadcrumb-item"><a href="../stata_do/stata_do6.html">Marginal effects with nonlinear transformations: <code>f_able</code></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../stata_do/stata_do1.html">Stata Do</a></li><li class="breadcrumb-item"><a href="../stata_do/stata_do6.html">Measurement Errors in Administrative and Survey Data</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -269,7 +269,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../stata_do/stata_do6.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Marginal effects with nonlinear transformations: <code>f_able</code></span></a>
+ <span class="menu-text">Measurement Errors in Administrative and Survey Data</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -313,7 +313,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../stata_do/stata_do1.html">Stata Do</a></li><li class="breadcrumb-item"><a href="../stata_do/stata_do6.html">Marginal effects with nonlinear transformations: <code>f_able</code></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../stata_do/stata_do1.html">Stata Do</a></li><li class="breadcrumb-item"><a href="../stata_do/stata_do6.html">Measurement Errors in Administrative and Survey Data</a></li></ol></nav>
 <div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">Marginal effects with nonlinear transformations: <code>f_able</code></h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
 <p class="subtitle lead">Featuring <span class="citation" data-cites="rios-avila_estimation_2021">Rios-Avila (<a href="#ref-rios-avila_estimation_2021" role="doc-biblioref">2021</a>)</span></p>
@@ -1031,8 +1031,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        for (let i = 0; i < 2; i++) {
-          container.appendChild(note.children[i].cloneNode(true));
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
         }
         typesetMath(container);
         return container.innerHTML
