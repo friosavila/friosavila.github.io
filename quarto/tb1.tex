@@ -1,0 +1,41 @@
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{3}{c}}
+\hline\hline
+            &\multicolumn{1}{c}{(1)}&\multicolumn{1}{c}{(2)}&\multicolumn{1}{c}{(3)}\\
+            &\multicolumn{1}{c}{lnwage}&\multicolumn{1}{c}{lnwage}&\multicolumn{1}{c}{lnwage}\\
+\hline
+educ        &      0.0870\sym{***}&      0.0763\sym{***}&      0.0738\sym{***}\\
+            &     (16.85)         &     (14.45)         &     (14.03)         \\
+[1em]
+exper       &      0.0113\sym{***}&     0.00266         &     0.00228         \\
+            &      (7.31)         &      (1.41)         &      (1.21)         \\
+[1em]
+tenure      &     0.00837\sym{***}&     0.00255         &     0.00312         \\
+            &      (4.46)         &      (1.29)         &      (1.59)         \\
+[1em]
+female      &                     &      -0.135\sym{***}&      -0.127\sym{***}\\
+            &                     &     (-5.27)         &     (-5.01)         \\
+[1em]
+age         &                     &      0.0107\sym{***}&      0.0134\sym{***}\\
+            &                     &      (5.45)         &      (6.64)         \\
+[1em]
+married     &                     &      0.0810\sym{**} &     -0.0242         \\
+            &                     &      (2.71)         &     (-0.68)         \\
+[1em]
+divorced    &                     &       0.147\sym{***}&      0.0792         \\
+            &                     &      (3.42)         &      (1.78)         \\
+[1em]
+kids6       &                     &                     &       0.108\sym{***}\\
+            &                     &                     &      (4.50)         \\
+[1em]
+kids714     &                     &                     &      0.0678\sym{***}\\
+            &                     &                     &      (3.44)         \\
+[1em]
+\_cons      &       2.140\sym{***}&       2.013\sym{***}&       1.950\sym{***}\\
+            &     (32.94)         &     (27.44)         &     (26.44)         \\
+\hline
+\(N\)       &        1434         &        1434         &        1434         \\
+\hline\hline
+\multicolumn{4}{l}{\footnotesize \textit{t} statistics in parentheses}\\
+\multicolumn{4}{l}{\footnotesize \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}

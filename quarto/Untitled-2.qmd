@@ -1,0 +1,22 @@
+---
+title: "Untitled"
+format: html
+---
+
+::: {#tbl-example}
+
+
+{{< include tb1.htm >}}
+
+This is a table.
+
+:::
+
+as someone said with @tbl-example, life is but a dream. 
+ 
+
+
+
+
+
+ 
