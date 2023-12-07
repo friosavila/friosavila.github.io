@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.455">
+<meta name="generator" content="quarto-1.4.506">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -241,7 +241,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../stataviz/stataviz5.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Palmer Penguins</span></a>
+ <span class="menu-text">Making <code>spirograph</code> &amp; <code>harmograph</code>!</span></a>
   </div>
 </li>
           <li class="sidebar-item">
@@ -366,7 +366,11 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <pre><code>(1978 automobile data)</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="stataviz1_files/figure-html/cell-3-output-2.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="stataviz1_files/figure-html/cell-3-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>This creates a pie graph with average MPG’s by number of repairs in 1978. But what I didn’t like default colors, you can request a change:</p>
@@ -378,7 +382,11 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">graph</span> pie mpg, <span class="bn">over</span>(rep78)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<p><img src="stataviz1_files/figure-html/cell-4-output-1.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="stataviz1_files/figure-html/cell-4-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Here, I’ll be using Viridis palette, but requesting only 5 colors. One can request up to 15 different colors.</p>
@@ -403,13 +411,25 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="kw">graph</span> pie mpg, <span class="bn">over</span>(rep78) <span class="bn">name</span>(m3, <span class="kw">replace</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<p><img src="stataviz1_files/figure-html/cell-5-output-1.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="stataviz1_files/figure-html/cell-5-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="stataviz1_files/figure-html/cell-5-output-2.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="stataviz1_files/figure-html/cell-5-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="stataviz1_files/figure-html/cell-5-output-3.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="stataviz1_files/figure-html/cell-5-output-3.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -631,8 +651,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        for (let i = 0; i < 2; i++) {
-          container.appendChild(note.children[i].cloneNode(true));
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
         }
         typesetMath(container);
         return container.innerHTML
