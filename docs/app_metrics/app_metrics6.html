@@ -309,6 +309,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
   <li><a href="#motivation" id="toc-motivation" class="nav-link active" data-scroll-target="#motivation">Motivation</a></li>
   <li><a href="#understanding-the-problem" id="toc-understanding-the-problem" class="nav-link" data-scroll-target="#understanding-the-problem">Understanding the Problem</a></li>
   <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">Conclusions</a></li>
+  <li><a href="#further-examples" id="toc-further-examples" class="nav-link" data-scroll-target="#further-examples">Further Examples</a></li>
   <li><a href="#software" id="toc-software" class="nav-link" data-scroll-target="#software">Software</a></li>
   </ul>
 </nav>
@@ -603,6 +604,18 @@ Table&nbsp;1: Inequality Statistics by Gender
 <p>In our <a href="Rios_2024_Recovering_Income_Brackets.pdf">paper</a>, we propose a method that makes better use of interval-censored. We propose using multiple imputation based on an interval-regression estimator with heteroskedastic errors, extending the work <span class="citation" data-cites="royston_multiple_2007">Royston (<a href="#ref-royston_multiple_2007" role="doc-biblioref">2007</a>)</span>. The multiple imputed data can be used to analyze the heterogeneity across individual characteristics using regression tools such as conditional or unconditional quantile regressions.</p>
 <p>In this note, we provide a small excercise of the type of analysis one could do using our approach. In the paper, we include further simulation evidence on the performance of the methodology, as well as real case study using data for the developing country of Grenada.</p>
 <p>We believe that our method has important applications in economics and other social sciences, where interval-censored data are commonly used to capture income variables. Our method can also be used to analyze other types of censored data, such as duration data or survival data. We hope that our method will encourage more researchers to utilize interval-censored data in their research, and to develop more flexible and robust methods for analyzing such data.</p>
+</section>
+<section id="further-examples" class="level2">
+<h2 class="anchored" data-anchor-id="further-examples">Further Examples</h2>
+<p>As part of the journey of developing our method, we have produced a few examples that illustrate the application. You can find them in here:</p>
+<ul>
+<li>How to install the command <a href="https://friosavila.github.io/intreg_mi/readme.html"><code>intreg_mi</code></a></li>
+<li>Wage analysis using “Swiss Labor Market Survey 1998” data. <a href="https://friosavila.github.io/intreg_mi/example_1/example_1.html">here</a></li>
+<li>Melrbourne Housing Market <a href="https://friosavila.github.io/intreg_mi/example_2/example_2.html">here</a></li>
+<li>Wage analysis using ASEC-CPS <a href="https://friosavila.github.io/intreg_mi/example_3/example_3.html">here</a></li>
+<li>Housing Prices: King County, USA <a href="https://friosavila.github.io/intreg_mi/example_4/example_4.html">here</a></li>
+<li>Poverty analysis using ASEC-CPS 2018 <a href="https://friosavila.github.io/intreg_mi/example_5/example_5.html">here</a></li>
+</ul>
 </section>
 <section id="software" class="level2">
 <h2 class="anchored" data-anchor-id="software">Software</h2>
@@ -1187,9 +1200,20 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a>We believe that our method has important applications in economics and other social sciences, where interval-censored data are commonly used to capture income variables. Our method can also be used to analyze other types of censored data, such as duration data or survival data. We hope that our method will encourage more researchers to utilize interval-censored data in their research, and to develop more flexible and robust methods for analyzing such data.</span>
 <span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a><span class="fu">## Software </span></span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a><span class="fu">## Further Examples</span></span>
 <span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a>The excercise presented here was produce using <span class="in">`Stata`</span>. The modeling was done using the official commands <span class="in">`intreg`</span>. The imputed values were generated our command <span class="co">[</span><span class="ot">`intreg_mi`</span><span class="co">](https://github.com/friosavila/stpackages/tree/main/intreg_mi)</span>. The analysis of the data was performed using <span class="in">`mi`</span>, <span class="in">`qreg`</span> and <span class="in">`rifhdreg`</span>. </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a>As part of the journey of developing our method, we have produced a few examples that illustrate the application. You can find them in here:</span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>How to install the command <span class="co">[</span><span class="ot">`intreg_mi`</span><span class="co">](https://friosavila.github.io/intreg_mi/readme.html)</span></span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Wage analysis using “Swiss Labor Market Survey 1998” data. <span class="co">[</span><span class="ot">here</span><span class="co">](https://friosavila.github.io/intreg_mi/example_1/example_1.html)</span></span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Melrbourne Housing Market <span class="co">[</span><span class="ot">here</span><span class="co">](https://friosavila.github.io/intreg_mi/example_2/example_2.html)</span></span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Wage analysis using ASEC-CPS <span class="co">[</span><span class="ot">here</span><span class="co">](https://friosavila.github.io/intreg_mi/example_3/example_3.html)</span></span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Housing Prices: King County, USA <span class="co">[</span><span class="ot">here</span><span class="co">](https://friosavila.github.io/intreg_mi/example_4/example_4.html)</span></span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Poverty analysis using ASEC-CPS 2018 <span class="co">[</span><span class="ot">here</span><span class="co">](https://friosavila.github.io/intreg_mi/example_5/example_5.html)</span></span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a><span class="fu">## Software </span></span>
+<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a>The excercise presented here was produce using <span class="in">`Stata`</span>. The modeling was done using the official commands <span class="in">`intreg`</span>. The imputed values were generated our command <span class="co">[</span><span class="ot">`intreg_mi`</span><span class="co">](https://github.com/friosavila/stpackages/tree/main/intreg_mi)</span>. The analysis of the data was performed using <span class="in">`mi`</span>, <span class="in">`qreg`</span> and <span class="in">`rifhdreg`</span>. </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

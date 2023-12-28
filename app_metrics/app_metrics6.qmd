@@ -104,6 +104,17 @@ In this note, we provide a small excercise of the type of analysis one could do 
 
 We believe that our method has important applications in economics and other social sciences, where interval-censored data are commonly used to capture income variables. Our method can also be used to analyze other types of censored data, such as duration data or survival data. We hope that our method will encourage more researchers to utilize interval-censored data in their research, and to develop more flexible and robust methods for analyzing such data.
 
+## Further Examples
+
+As part of the journey of developing our method, we have produced a few examples that illustrate the application. You can find them in here:
+
+- How to install the command [`intreg_mi`](https://friosavila.github.io/intreg_mi/readme.html)
+- Wage analysis using “Swiss Labor Market Survey 1998” data. [here](https://friosavila.github.io/intreg_mi/example_1/example_1.html)
+- Melrbourne Housing Market [here](https://friosavila.github.io/intreg_mi/example_2/example_2.html)
+- Wage analysis using ASEC-CPS [here](https://friosavila.github.io/intreg_mi/example_3/example_3.html)
+- Housing Prices: King County, USA [here](https://friosavila.github.io/intreg_mi/example_4/example_4.html)
+- Poverty analysis using ASEC-CPS 2018 [here](https://friosavila.github.io/intreg_mi/example_5/example_5.html)
+  
 ## Software 
 
 The excercise presented here was produce using `Stata`. The modeling was done using the official commands `intreg`. The imputed values were generated our command [`intreg_mi`](https://github.com/friosavila/stpackages/tree/main/intreg_mi). The analysis of the data was performed using `mi`, `qreg` and `rifhdreg`. 

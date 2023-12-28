@@ -2811,5 +2811,16 @@
     "title": "Untitled",
     "section": "",
     "text": "Table 1: This is a table.\n\n\n\n\n\n                     (1)                       (2)                       (3)              \n                  lnwage                    lnwage                    lnwage              \n\neduc              0.0870***      0.0763***      0.0738***\n                 (16.85)                   (14.45)                   (14.03)              \n\nexper             0.0113***     0.00266                   0.00228              \n                  (7.31)                    (1.41)                    (1.21)              \n\ntenure           0.00837***     0.00255                   0.00312              \n                  (4.46)                    (1.29)                    (1.59)              \n\nfemale                                      -0.135***      -0.127***\n                                           (-5.27)                   (-5.01)              \n\nage                                         0.0107***      0.0134***\n                                            (5.45)                    (6.64)              \n\nmarried                                     0.0810**      -0.0242              \n                                            (2.71)                   (-0.68)              \n\ndivorced                                     0.147***      0.0792              \n                                            (3.42)                    (1.78)              \n\nkids6                                                                  0.108***\n                                                                      (4.50)              \n\nkids714                                                               0.0678***\n                                                                      (3.44)              \n\n_cons              2.140***       2.013***       1.950***\n                 (32.94)                   (27.44)                   (26.44)              \n\nN            1434                      1434                      1434              \n\n\nt statistics in parentheses\n* p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001\n\n\n\n\n\nas someone said with Table 1, life is but a dream."
+  },
+  {
+    "objectID": "app_metrics/app_metrics6.html#further-examples",
+    "href": "app_metrics/app_metrics6.html#further-examples",
+    "title": "Making better use of interval-censored data",
+    "section": "Further Examples",
+    "text": "Further Examples\nAs part of the journey of developing our method, we have produced a few examples that illustrate the application. You can find them in here:\n\nHow to install the command intreg_mi\nWage analysis using “Swiss Labor Market Survey 1998” data. here\nMelrbourne Housing Market here\nWage analysis using ASEC-CPS here\nHousing Prices: King County, USA here\nPoverty analysis using ASEC-CPS 2018 here",
+    "crumbs": [
+      "App Metrics",
+      "Making better use of interval-censored data"
+    ]
   }
 ]
