@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.455">
+<meta name="generator" content="quarto-1.4.533">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -97,6 +97,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -122,7 +123,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -247,9 +248,10 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <p>When you can uniquely identify all observations in each dataset using a common identifier viariable.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">use</span> file1</span>
 <span id="cb1-2"><a href="#cb1-2"></a><span class="kw">merge</span> 1:1 id <span class="kw">using</span> file2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell">
+<div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
+<p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">flowchart BT
     subgraph File2
@@ -268,6 +270,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
     db1-3--&gt;db2-3
 </pre>
 </div>
+<p></p></figure><p></p>
 </div>
 </div>
 </div>
@@ -277,9 +280,10 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <p>When you are trying to transfer <em>family</em> level data to each family member. The family member file is uniquely identified</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">use</span> family_members</span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="kw">merge</span> <span class="fu">m</span>:1 hid <span class="kw">using</span> <span class="kw">family</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell">
+<div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
+<p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">flowchart BT
     subgraph members ["Family Members"]
@@ -306,6 +310,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
     db2-3--&gt;db1-7
 </pre>
 </div>
+<p></p></figure><p></p>
 </div>
 </div>
 </div>
@@ -315,9 +320,10 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <p>When you try to merge together data from various family members to a single <em>family</em> file. Each member is merged to its family.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">use</span> <span class="kw">family</span></span>
 <span id="cb3-2"><a href="#cb3-2"></a><span class="kw">merge</span> 1:<span class="fu">m</span> hid <span class="kw">using</span> family_members</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell">
+<div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
+<p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">flowchart BT
     subgraph members ["Family Members"]
@@ -344,6 +350,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
     db1-7--&gt;db2-3
 </pre>
 </div>
+<p></p></figure><p></p>
 </div>
 </div>
 </div>
@@ -353,9 +360,10 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <p>Something you <strong>NEVER</strong> want to do. It tries to merge to datasets based on a single set identification variable. This variable does not identify unique observations in either file. The merge is done by “id” based on the order they appear in the data. It will typically provide very odd results.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">use</span> family_mem1</span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="kw">merge</span> <span class="fu">m</span>:<span class="fu">m</span> id <span class="kw">using</span> family_mem2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell">
+<div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
+<p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">flowchart BT
     subgraph members ["Family Members 1"]
@@ -385,6 +393,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
     db2-7--&gt;db1-6
 </pre>
 </div>
+<p></p></figure><p></p>
 </div>
 </div>
 </div>
@@ -394,9 +403,10 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <p>If you were trying <code>m:m</code> merge (which is probably wrong), means you want to <code>joinby</code>. This means merge both files using all combinations of individuals that have the same id. This will create a very large dataset, unless other restrictions are applied.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">use</span> family_mem1</span>
 <span id="cb5-2"><a href="#cb5-2"></a><span class="kw">joinby</span> id <span class="kw">using</span> family_mem2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell">
+<div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
+<p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">flowchart BT
     subgraph members ["Family Members 1"]
@@ -439,6 +449,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
     db2-7--&gt;db1-7
 </pre>
 </div>
+<p></p></figure><p></p>
 </div>
 </div>
 </div>
@@ -628,38 +639,28 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    const typesetMath = (el) => {
-      if (window.MathJax) {
-        // MathJax Typeset
-        window.MathJax.typeset([el]);
-      } else if (window.katex) {
-        // KaTeX Render
-        var mathElements = el.getElementsByClassName("math");
-        var macros = [];
-        for (var i = 0; i < mathElements.length; i++) {
-          var texText = mathElements[i].firstChild;
-          if (mathElements[i].tagName == "SPAN") {
-            window.katex.render(texText.data, mathElements[i], {
-              displayMode: mathElements[i].classList.contains('display'),
-              throwOnError: false,
-              macros: macros,
-              fleqn: false
-            });
-          }
-        }
-      }
-    }
     if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        for (let i = 0; i < 2; i++) {
-          container.appendChild(note.children[i].cloneNode(true));
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
         }
-        typesetMath(container);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
         return container.innerHTML
       } else {
-        typesetMath(note);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
         return note.innerHTML;
       }
     } else {
@@ -668,7 +669,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
-      typesetMath(note);
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
       return note.innerHTML;
     }
   }

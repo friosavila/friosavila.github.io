@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.455">
+<meta name="generator" content="quarto-1.4.533">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -96,6 +96,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -358,7 +359,11 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>         estore(e_qreg) <span class="co">/// Request Storing the variables in memory</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>         <span class="fu">q</span>(5(5)95) <span class="co">// and indicates what quantiles to plot</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="stataviz2_files/figure-html/cell-4-output-1.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="stataviz2_files/figure-html/cell-4-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>This is a very good start. In the newest version of <code>qregplot</code>, I add some default options to the plot, providing a look that is visually pleasing. Notice the margins are also tight (less waiste of space).</p>
@@ -371,7 +376,11 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <pre><code>(results e_qreg are active now)</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="stataviz2_files/figure-html/cell-5-output-2.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="stataviz2_files/figure-html/cell-5-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>If you want, you can change the color, intensity, or transparency of the confidence intervals. But if you like what you see (I do), you can just keep it.</p>
@@ -384,8 +393,12 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <div class="cell-output cell-output-stdout">
 <pre><code>(results e_qreg are active now)</code></pre>
 </div>
-<div class="cell-output cell-output-display column-page">
-<p><img src="stataviz2_files/figure-html/cell-6-output-2.png" class="img-fluid"></p>
+<div class="cell-output cell-output-display page-columns page-full">
+<div class="page-columns page-full">
+<figure class="figure page-columns page-full">
+<p class="page-columns page-full"><img src="stataviz2_files/figure-html/cell-6-output-2.png" class="img-fluid figure-img column-page"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>With the new command, you can also modify the titles and costumize them as needed:</p>
@@ -400,7 +413,11 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <pre><code>(results e_qreg are active now)</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="stataviz2_files/figure-html/cell-7-output-2.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="stataviz2_files/figure-html/cell-7-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>So, seems that the titles are too long. So lets adjust them using labelopt(options). This option tells the program to break the long titles into two lines, so there is less overlapping in the figure.</p>
@@ -416,7 +433,11 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <pre><code>(results e_qreg are active now)</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="stataviz2_files/figure-html/cell-8-output-2.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="stataviz2_files/figure-html/cell-8-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -430,7 +451,11 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>qregplot age education ,  <span class="fu">q</span>(5(5)95) <span class="dv">seed</span>(101) <span class="kw">label</span> <span class="bn">title</span>(<span class="st">"BSqreg"</span>) <span class="co">///</span></span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="bn">ysize</span>(5) <span class="bn">xsize</span>(12)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="stataviz2_files/figure-html/cell-9-output-1.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="stataviz2_files/figure-html/cell-9-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell" data-execution_count="9">
@@ -439,7 +464,11 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>qregplot age education , <span class="fu">q</span>(5(5)95) <span class="dv">seed</span>(101) <span class="kw">label</span> <span class="co">///</span></span>
 <span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>    <span class="bn">title</span>(<span class="st">"QREG2: from SSC"</span>) <span class="bn">ysize</span>(5) <span class="bn">xsize</span>(12)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="stataviz2_files/figure-html/cell-10-output-1.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="stataviz2_files/figure-html/cell-10-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell" data-execution_count="10">
@@ -448,7 +477,11 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>qregplot age education ,  <span class="fu">q</span>(5(5)95) <span class="dv">seed</span>(101) <span class="kw">label</span> <span class="co">///</span></span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>    <span class="bn">title</span>(<span class="st">"qrprocess: from SSC"</span>)  <span class="bn">ysize</span>(5) <span class="bn">xsize</span>(12)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="stataviz2_files/figure-html/cell-11-output-1.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="stataviz2_files/figure-html/cell-11-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell" data-execution_count="11">
@@ -457,7 +490,11 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>qregplot age education ,  <span class="fu">q</span>(5(5)95) <span class="dv">seed</span>(101) <span class="kw">label</span> <span class="co">///</span></span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="bn">title</span>(<span class="st">"mmqreg: from SSC"</span>) <span class="bn">ysize</span>(5) <span class="bn">xsize</span>(12)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="stataviz2_files/figure-html/cell-12-output-1.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="stataviz2_files/figure-html/cell-12-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell" data-execution_count="12">
@@ -466,7 +503,11 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>qregplot age education ,  <span class="fu">q</span>(5(5)95) <span class="dv">seed</span>(101) <span class="kw">label</span> <span class="co">///</span></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>    <span class="bn">title</span>(<span class="st">"rifhdreg: from SSC"</span>) <span class="bn">ysize</span>(5) <span class="bn">xsize</span>(12)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="stataviz2_files/figure-html/cell-13-output-1.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="stataviz2_files/figure-html/cell-13-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <div class="cell" data-execution_count="13">
@@ -475,7 +516,11 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>qregplot age education,  <span class="fu">q</span>(5(5)95) <span class="dv">seed</span>(101) <span class="kw">label</span> <span class="co">///</span></span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="bn">title</span>(<span class="st">"sivqr: from SSC"</span>)  <span class="bn">ysize</span>(5) <span class="bn">xsize</span>(12)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="stataviz2_files/figure-html/cell-14-output-1.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="stataviz2_files/figure-html/cell-14-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -671,38 +716,28 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    const typesetMath = (el) => {
-      if (window.MathJax) {
-        // MathJax Typeset
-        window.MathJax.typeset([el]);
-      } else if (window.katex) {
-        // KaTeX Render
-        var mathElements = el.getElementsByClassName("math");
-        var macros = [];
-        for (var i = 0; i < mathElements.length; i++) {
-          var texText = mathElements[i].firstChild;
-          if (mathElements[i].tagName == "SPAN") {
-            window.katex.render(texText.data, mathElements[i], {
-              displayMode: mathElements[i].classList.contains('display'),
-              throwOnError: false,
-              macros: macros,
-              fleqn: false
-            });
-          }
-        }
-      }
-    }
     if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        for (let i = 0; i < 2; i++) {
-          container.appendChild(note.children[i].cloneNode(true));
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
         }
-        typesetMath(container);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
         return container.innerHTML
       } else {
-        typesetMath(note);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
         return note.innerHTML;
       }
     } else {
@@ -711,7 +746,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
-      typesetMath(note);
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
       return note.innerHTML;
     }
   }

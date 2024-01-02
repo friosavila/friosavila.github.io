@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.455">
+<meta name="generator" content="quarto-1.4.533">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -119,6 +119,7 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -357,26 +358,26 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <div id="fig-corr1" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-corr1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-corr1" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-corr1-1" class="quarto-figure quarto-figure-center anchored">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-corr1" style="flex-basis: 50.0%;justify-content: flex-start;display: flex;">
+<div id="fig-corr1-1" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-corr1-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="intreg_mi1.png" class="img-fluid figure-img" data-ref-parent="fig-corr1">
 </div>
-<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-corr1-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-corr1-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) Fully Observed
 </figcaption>
 </figure>
 </div>
 </div>
-<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-corr1" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-corr1-2" class="quarto-figure quarto-figure-center anchored">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-corr1" style="flex-basis: 50.0%;justify-content: flex-start;display: flex;">
+<div id="fig-corr1-2" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-corr1-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="intreg_mi2.png" class="img-fluid figure-img" data-ref-parent="fig-corr1">
 </div>
-<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-corr1-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-corr1-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) Censored
 </figcaption>
 </figure>
@@ -384,7 +385,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 </div>
 </div>
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-corr1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-corr1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1: Wages vs Education, Age and Tenure
 </figcaption>
 </figure>
@@ -392,23 +393,23 @@ Figure&nbsp;1: Wages vs Education, Age and Tenure
 <p><a href="#fig-corr1" class="quarto-xref">Figure&nbsp;1</a> presents information on the visual correlations between wages and three of the varialbes of interest. <a href="#fig-corr1-1" class="quarto-xref">Figure&nbsp;1 (a)</a> provides scatter plots of the fully observed wages agains the explanatory variables, whereas <a href="#fig-corr1-2" class="quarto-xref">Figure&nbsp;1 (b)</a> does the same, but using the bracket censored data.</p>
 <p>If one is interested in analyzing other moments, such as conditional quantiles, current methods would not allow for it, since they are mostly focused on explaining conditional means. However, that is where our approach comes into place. We start by using the <code>intreg, het()</code> command to model both the conditional mean and conditional variance. The latter is important because it allows us to explicitly model relationships between the dependent and independent variables that vary across the distribution. After we estimate the parameters for the conditional distribution, we can use it to generate multiple syntethic datasets (multiple imputation) with our command <code>intreg_mi</code>. This multiple imputed data can later be analyzed using standard econometric tools.</p>
 <p>We use this strategy with the data from <a href="#fig-corr1-2" class="quarto-xref">Figure&nbsp;1 (b)</a>, and generate multiple synthetic datasets to reconstruct the censored data. For completeness, we impute directly <strong>wages</strong> as well as <strong>log(wages)</strong>. To inspect how well the imputed data replicates the original data, we plot their density functions in <a href="#fig-den" class="quarto-xref">Figure&nbsp;2</a>. The yellow line representing the true wage distribution, and the blue lines corresponding to the imputed data. And of this scenario, it seems that imputed log(wages), or wages directly has little effect in the replicating the wage distribution.</p>
-<div id="fig-den" class="quarto-figure quarto-figure-center anchored">
+<div id="fig-den" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-den-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="intreg_mi3.png" class="img-fluid figure-img">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-den-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-den-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;2: Observed vs Imputed Wages
 </figcaption>
 </figure>
 </div>
 <p>After creating the multiple-imputed synthethic datasets, they can be analyzed applying standard aggregation rules. In <code>Stata</code>, this can be done using <code>mi</code> commands. Because multiple imputation would provide no added value to the estimation of conditional means (linear regression), we compare esitmates using conditional quantile regressions.</p>
-<div id="fig-qret" class="quarto-figure quarto-figure-center anchored">
+<div id="fig-qret" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-qret-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="intreg_mi4.png" class="img-fluid figure-img">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-qret-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-qret-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;3: Quantile Regression Coefficients
 </figcaption>
 </figure>
@@ -417,15 +418,15 @@ Figure&nbsp;3: Quantile Regression Coefficients
 <p>The imputed data can be utilized in other ways. Policy analysists may be interested in analyzing the role of covariates on distributional statistics other than the mean. For example, they may be interested in analyzing income distribution using unconditional quantiles, Gini coefficients across groups, as well as other measures of income inequality.</p>
 <div id="tbl-ineq" class="quarto-layout-panel anchored">
 <figure class="quarto-float quarto-float-tbl figure">
-<figcaption class="table quarto-float-caption quarto-float-tbl" id="tbl-ineq-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ineq-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;1: Inequality Statistics by Gender
 </figcaption>
 <div aria-describedby="tbl-ineq-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="tbl-ineq" style="flex-basis: 50.0%;justify-content: center;">
-<div id="tbl-ineq1" class="anchored">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="tbl-ineq" style="flex-basis: 50.0%;justify-content: center;display: flex;">
+<div id="tbl-ineq1" class="quarto-float anchored">
 <figure class="quarto-float quarto-subfloat-tbl figure">
-<figcaption class="table quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-ineq1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-ineq1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) Men
 </figcaption>
 <div aria-describedby="tbl-ineq1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -505,10 +506,10 @@ Table&nbsp;1: Inequality Statistics by Gender
 </figure>
 </div>
 </div>
-<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="tbl-ineq" style="flex-basis: 50.0%;justify-content: center;">
-<div id="tbl-ineq2" class="anchored">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="tbl-ineq" style="flex-basis: 50.0%;justify-content: center;display: flex;">
+<div id="tbl-ineq2" class="quarto-float anchored">
 <figure class="quarto-float quarto-subfloat-tbl figure">
-<figcaption class="table quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-ineq2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-ineq2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) Women
 </figcaption>
 <div aria-describedby="tbl-ineq2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -589,8 +590,8 @@ Table&nbsp;1: Inequality Statistics by Gender
 </div>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;display: flex;">
 <p>Note: Standard Errors in Parenthesis</p>
 </div>
 </div>
@@ -627,7 +628,7 @@ Table&nbsp;1: Inequality Statistics by Gender
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-jargowsky_estimating_2018" class="csl-entry" role="listitem">
 Jargowsky, Paul A., and Christopher A. Wheeler. 2018. <span>“Estimating <span>Income</span> <span>Statistics</span> from <span>Grouped</span> <span>Data</span>: <span>Mean</span>-Constrained <span>Integration</span> over <span>Brackets</span>.”</span> <em>Sociological Methodology</em> 48 (1): 337–74. <a href="https://doi.org/10.1177/0081175018782579">https://doi.org/10.1177/0081175018782579</a>.
 </div>
@@ -820,38 +821,28 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    const typesetMath = (el) => {
-      if (window.MathJax) {
-        // MathJax Typeset
-        window.MathJax.typeset([el]);
-      } else if (window.katex) {
-        // KaTeX Render
-        var mathElements = el.getElementsByClassName("math");
-        var macros = [];
-        for (var i = 0; i < mathElements.length; i++) {
-          var texText = mathElements[i].firstChild;
-          if (mathElements[i].tagName == "SPAN") {
-            window.katex.render(texText.data, mathElements[i], {
-              displayMode: mathElements[i].classList.contains('display'),
-              throwOnError: false,
-              macros: macros,
-              fleqn: false
-            });
-          }
-        }
-      }
-    }
     if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        for (let i = 0; i < 2; i++) {
-          container.appendChild(note.children[i].cloneNode(true));
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
         }
-        typesetMath(container);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
         return container.innerHTML
       } else {
-        typesetMath(note);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
         return note.innerHTML;
       }
     } else {
@@ -860,7 +851,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
-      typesetMath(note);
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
       return note.innerHTML;
     }
   }

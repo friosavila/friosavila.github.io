@@ -9,7 +9,7 @@
 <link>https://friosavila.github.io/chatgpt.html</link>
 <atom:link href="https://friosavila.github.io/chatgpt.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.4.506</generator>
+<generator>quarto-1.4.533</generator>
 <lastBuildDate>Thu, 24 Aug 2023 04:00:00 GMT</lastBuildDate>
 <item>
   <title>Keynes vs Hayek: The Rap battle</title>
@@ -467,9 +467,9 @@ background-color: null;
 font-style: inherit;">xline</span>(10 20 100)</span></code></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div class="quarto-figure quarto-figure-center">
+<div class="img-fluid quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://friosavila.github.io/chatgpt/weakiv_08_15_2023/index_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
+<p><img src="https://friosavila.github.io/chatgpt/weakiv_08_15_2023/index_files/figure-html/cell-3-output-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 <figcaption>F-Statistics Distribution</figcaption>
 </figure>
 </div>
@@ -566,12 +566,12 @@ background-color: null;
 font-style: inherit;">width</span>(1000) </span></code></pre></div>
 </details>
 </div>
-<div id="fig-fig1" class="quarto-figure quarto-figure-center anchored" width="80%" data-fig-pos="center">
+<div id="fig-fig1" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-pos="center" width="80%">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-fig1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://friosavila.github.io/chatgpt/weakiv_08_15_2023/fig1.png" class="img-fluid figure-img" style="width:80.0%" data-fig-pos="center">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-fig1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1: T-Stat distribution by E(F)
 </figcaption>
 </figure>
@@ -579,12 +579,12 @@ Figure&nbsp;1: T-Stat distribution by E(F)
 <p>What we see from Figure&nbsp;1 is that the distribution of the t-statistic is not consistent with a normal distribution. For and <img src="https://latex.codecogs.com/png.latex?F%5Cleq%2040">, there is a clear discrepancy between the normal distribution (orange) and the empirical t-stat distribution (blue). As consequence, when coefficients are possitive, it is more likely to reject the null hypothesis, but also under-reject when the coefficients are negative.</p>
 <p>Once we reach an F-statistic of at least 80 and 160, the difference between the normal distribution and the t-statistic empirical distribution dissapears. Lesson, if your F-stat is “low”, perhaps using standard distributions may be innapropriate.</p>
 <p>One problem with the results in Figure&nbsp;1 was that when <img src="https://latex.codecogs.com/png.latex?E(F)"> is low, there are many instances where the F-distribution is less than 10. One may say that is the reason why the distribution is skew in Figure&nbsp;1. A simple way to avoid this is by ploting the same information, but restricting F-statistics to be larger than 10.</p>
-<div id="fig-fig2" class="quarto-figure quarto-figure-center anchored" width="80%" data-fig-pos="center">
+<div id="fig-fig2" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-pos="center" width="80%">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-fig2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://friosavila.github.io/chatgpt/weakiv_08_15_2023/fig2.png" class="img-fluid figure-img" style="width:80.0%" data-fig-pos="center">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-fig2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;2: T-Stat distribution by E(F) if F&gt;10
 </figcaption>
 </figure>
@@ -678,12 +678,12 @@ background-color: null;
 font-style: inherit;">width</span>(1000)</span></code></pre></div>
 </details>
 </div>
-<div id="fig-fig3" class="quarto-figure quarto-figure-center anchored" width="80%" data-fig-pos="center">
+<div id="fig-fig3" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-pos="center" width="80%">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-fig3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://friosavila.github.io/chatgpt/weakiv_08_15_2023/fig3.png" class="img-fluid figure-img" style="width:80.0%" data-fig-pos="center">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-fig3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;3: T-Stat vs SF-Stat
 </figcaption>
 </figure>
@@ -809,26 +809,26 @@ font-style: inherit;">width</span>(1000)    </span></code></pre></div>
 <div id="fig-fig4" class="quarto-layout-panel">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-fig4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<div class="quarto-layout-row quarto-layout-valign-top">
-<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-fig4" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-fig4a" class="quarto-figure quarto-figure-center anchored">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-fig4" style="flex-basis: 50.0%;justify-content: flex-start;display: flex;">
+<div id="fig-fig4a" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-fig4a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://friosavila.github.io/chatgpt/weakiv_08_15_2023/fig4.png" class="img-fluid figure-img" data-ref-parent="fig-fig4">
 </div>
-<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-fig4a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-fig4a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) t-Stat Distribution
 </figcaption>
 </figure>
 </div>
 </div>
-<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-fig4" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-fig4b" class="quarto-figure quarto-figure-center anchored">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-fig4" style="flex-basis: 50.0%;justify-content: flex-start;display: flex;">
+<div id="fig-fig4b" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-fig4b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://friosavila.github.io/chatgpt/weakiv_08_15_2023/fig5.png" class="img-fluid figure-img" data-ref-parent="fig-fig4">
 </div>
-<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-fig4b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-fig4b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) Coefficient Distribution
 </figcaption>
 </figure>
@@ -836,7 +836,7 @@ font-style: inherit;">width</span>(1000)    </span></code></pre></div>
 </div>
 </div>
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-fig4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fig4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;4: Distribution based on Standardized F-Statistic
 </figcaption>
 </figure>
@@ -858,7 +858,7 @@ Figure&nbsp;4: Distribution based on Standardized F-Statistic
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
 <div id="ref-lee2022" class="csl-entry">
 Lee, David S., Justin McCrary, Marcelo J. Moreira, and Jack Porter. 2022. <span>“Valid t-Ratio Inference for IV.”</span> <em>American Economic Review</em> 112 (10): 3260–90. <a href="https://doi.org/10.1257/aer.20211063">https://doi.org/10.1257/aer.20211063</a>.
 </div>
@@ -1989,52 +1989,52 @@ font-style: inherit;">ylabel</span>(0(5)25)</span></code></pre></div>
 <div id="fig-sc1" class="quarto-layout-panel page-columns page-full">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
 <div aria-describedby="fig-sc1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
-<div class="quarto-layout-row quarto-layout-valign-top page-columns page-full">
-<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc1" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc1-1" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<div class="quarto-layout-row page-columns page-full">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc1" style="flex-basis: 50.0%;justify-content: flex-start;display: flex;">
+<div id="fig-sc1-1" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
 <figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
 <div aria-describedby="fig-sc1-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
 <img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc1-output-1.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc1">
 </div>
-<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc1-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc1-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) Unrestricted effect
 </figcaption>
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc1" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc1-2" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc1" style="flex-basis: 50.0%;justify-content: flex-start;display: flex;">
+<div id="fig-sc1-2" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
 <figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
 <div aria-describedby="fig-sc1-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
 <img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc1-output-2.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc1">
 </div>
-<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc1-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc1-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) Restricted effect
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top page-columns page-full">
-<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc1" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc1-3" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<div class="quarto-layout-row page-columns page-full">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc1" style="flex-basis: 50.0%;justify-content: flex-start;display: flex;">
+<div id="fig-sc1-3" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
 <figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
 <div aria-describedby="fig-sc1-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
 <img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc1-output-3.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc1">
 </div>
-<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc1-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc1-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (c) RMSE Ratio
 </figcaption>
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc1" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc1-4" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc1" style="flex-basis: 50.0%;justify-content: flex-start;display: flex;">
+<div id="fig-sc1-4" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
 <figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
 <div aria-describedby="fig-sc1-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
 <img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc1-output-4.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc1">
 </div>
-<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc1-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc1-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (d) P-value
 </figcaption>
 </figure>
@@ -2042,7 +2042,7 @@ font-style: inherit;">ylabel</span>(0(5)25)</span></code></pre></div>
 </div>
 </div>
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-sc1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sc1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1: Synthetic Control Results: ASIS
 </figcaption>
 </figure>
@@ -2139,52 +2139,52 @@ font-style: inherit;">ylabel</span>(0(5)25)</span></code></pre></div>
 <div id="fig-sc2" class="quarto-layout-panel page-columns page-full">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
 <div aria-describedby="fig-sc2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
-<div class="quarto-layout-row quarto-layout-valign-top page-columns page-full">
-<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc2" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc2-1" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<div class="quarto-layout-row page-columns page-full">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc2" style="flex-basis: 50.0%;justify-content: flex-start;display: flex;">
+<div id="fig-sc2-1" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
 <figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
 <div aria-describedby="fig-sc2-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
 <img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc2-output-1.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc2">
 </div>
-<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc2-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc2-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) Unrestricted effect
 </figcaption>
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc2" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc2-2" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc2" style="flex-basis: 50.0%;justify-content: flex-start;display: flex;">
+<div id="fig-sc2-2" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
 <figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
 <div aria-describedby="fig-sc2-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
 <img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc2-output-2.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc2">
 </div>
-<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc2-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc2-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) Restricted effect
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top page-columns page-full">
-<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc2" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc2-3" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<div class="quarto-layout-row page-columns page-full">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc2" style="flex-basis: 50.0%;justify-content: flex-start;display: flex;">
+<div id="fig-sc2-3" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
 <figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
 <div aria-describedby="fig-sc2-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
 <img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc2-output-3.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc2">
 </div>
-<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc2-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc2-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (c) RMSE Ratio
 </figcaption>
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc2" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc2-4" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc2" style="flex-basis: 50.0%;justify-content: flex-start;display: flex;">
+<div id="fig-sc2-4" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
 <figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
 <div aria-describedby="fig-sc2-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
 <img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc2-output-4.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc2">
 </div>
-<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc2-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc2-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (d) P-value
 </figcaption>
 </figure>
@@ -2192,7 +2192,7 @@ font-style: inherit;">ylabel</span>(0(5)25)</span></code></pre></div>
 </div>
 </div>
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-sc2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sc2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;2: Synthetic Control Results: Logs
 </figcaption>
 </figure>
@@ -2289,52 +2289,52 @@ font-style: inherit;">ylabel</span>(0(5)25)</span></code></pre></div>
 <div id="fig-sc3" class="quarto-layout-panel page-columns page-full">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
 <div aria-describedby="fig-sc3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
-<div class="quarto-layout-row quarto-layout-valign-top page-columns page-full">
-<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc3" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc3-1" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<div class="quarto-layout-row page-columns page-full">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc3" style="flex-basis: 50.0%;justify-content: flex-start;display: flex;">
+<div id="fig-sc3-1" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
 <figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
 <div aria-describedby="fig-sc3-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
 <img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc3-output-1.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc3">
 </div>
-<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc3-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc3-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) Unrestricted effect
 </figcaption>
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc3" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc3-2" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc3" style="flex-basis: 50.0%;justify-content: flex-start;display: flex;">
+<div id="fig-sc3-2" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
 <figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
 <div aria-describedby="fig-sc3-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
 <img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc3-output-2.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc3">
 </div>
-<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc3-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc3-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) Restricted effect
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top page-columns page-full">
-<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc3" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc3-3" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<div class="quarto-layout-row page-columns page-full">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc3" style="flex-basis: 50.0%;justify-content: flex-start;display: flex;">
+<div id="fig-sc3-3" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
 <figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
 <div aria-describedby="fig-sc3-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
 <img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc3-output-3.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc3">
 </div>
-<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc3-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc3-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (c) RMSE Ratio
 </figcaption>
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc3" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc3-4" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc3" style="flex-basis: 50.0%;justify-content: flex-start;display: flex;">
+<div id="fig-sc3-4" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
 <figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
 <div aria-describedby="fig-sc3-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
 <img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc3-output-4.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc3">
 </div>
-<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc3-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc3-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (d) P-value
 </figcaption>
 </figure>
@@ -2342,7 +2342,7 @@ font-style: inherit;">ylabel</span>(0(5)25)</span></code></pre></div>
 </div>
 </div>
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-sc3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sc3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;3: Synthetic Control Results: Logs
 </figcaption>
 </figure>
@@ -2440,52 +2440,52 @@ font-style: inherit;">ylabel</span>(0(5)25)</span>
 <div id="fig-sc4" class="quarto-layout-panel page-columns page-full">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
 <div aria-describedby="fig-sc4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
-<div class="quarto-layout-row quarto-layout-valign-top page-columns page-full">
-<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc4" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc4-1" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<div class="quarto-layout-row page-columns page-full">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc4" style="flex-basis: 50.0%;justify-content: flex-start;display: flex;">
+<div id="fig-sc4-1" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
 <figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
 <div aria-describedby="fig-sc4-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
 <img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc4-output-1.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc4">
 </div>
-<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc4-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc4-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) Unrestricted effect
 </figcaption>
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc4" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc4-2" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc4" style="flex-basis: 50.0%;justify-content: flex-start;display: flex;">
+<div id="fig-sc4-2" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
 <figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
 <div aria-describedby="fig-sc4-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
 <img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc4-output-2.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc4">
 </div>
-<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc4-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc4-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) Restricted effect
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<div class="quarto-layout-row quarto-layout-valign-top page-columns page-full">
-<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc4" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc4-3" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<div class="quarto-layout-row page-columns page-full">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc4" style="flex-basis: 50.0%;justify-content: flex-start;display: flex;">
+<div id="fig-sc4-3" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
 <figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
 <div aria-describedby="fig-sc4-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
 <img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc4-output-3.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc4">
 </div>
-<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc4-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc4-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (c) RMSE Ratio
 </figcaption>
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc4" style="flex-basis: 50.0%;justify-content: center;">
-<div id="fig-sc4-4" class="quarto-figure quarto-figure-center anchored page-columns page-full">
+<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc4" style="flex-basis: 50.0%;justify-content: flex-start;display: flex;">
+<div id="fig-sc4-4" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
 <figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
 <div aria-describedby="fig-sc4-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
 <img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc4-output-4.png" class="img-fluid figure-img column-page" data-ref-parent="fig-sc4">
 </div>
-<figcaption class="figure quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc4-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-sc4-4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (d) P-value
 </figcaption>
 </figure>
@@ -2493,7 +2493,7 @@ font-style: inherit;">ylabel</span>(0(5)25)</span>
 </div>
 </div>
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-sc4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sc4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;4: Synthetic Control Results: Rescale to California
 </figcaption>
 </figure>
@@ -2799,12 +2799,12 @@ background-color: null;
 font-style: inherit;">"Rescaled 1.955"</span>))</span></code></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div id="fig-sc5" class="quarto-figure quarto-figure-center anchored">
+<div id="fig-sc5" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-sc5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="https://friosavila.github.io/chatgpt/synth_05_09_2023/index_files/figure-html/fig-sc5-output-1.png" class="img-fluid figure-img">
 </div>
-<figcaption class="figure quarto-float-caption quarto-float-fig" id="fig-sc5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-sc5-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;5: Synthetic Control Effects
 </figcaption>
 </figure>
@@ -2854,9 +2854,10 @@ background-color: null;
 font-style: inherit;">merge</span> 1:1 id <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">using</span> file2</span></code></pre></div>
-<div class="cell">
+<div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
+<p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">flowchart BT
     subgraph File2
@@ -2875,6 +2876,7 @@ font-style: inherit;">using</span> file2</span></code></pre></div>
     db1-3--&gt;db2-3
 </pre>
 </div>
+<p></p></figure><p></p>
 </div>
 </div>
 </div>
@@ -2894,9 +2896,10 @@ background-color: null;
 font-style: inherit;">using</span> <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">family</span></span></code></pre></div>
-<div class="cell">
+<div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
+<p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">flowchart BT
     subgraph members ["Family Members"]
@@ -2923,6 +2926,7 @@ font-style: inherit;">family</span></span></code></pre></div>
     db2-3--&gt;db1-7
 </pre>
 </div>
+<p></p></figure><p></p>
 </div>
 </div>
 </div>
@@ -2942,9 +2946,10 @@ background-color: null;
 font-style: inherit;">m</span> hid <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">using</span> family_members</span></code></pre></div>
-<div class="cell">
+<div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
+<p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">flowchart BT
     subgraph members ["Family Members"]
@@ -2971,6 +2976,7 @@ font-style: inherit;">using</span> family_members</span></code></pre></div>
     db1-7--&gt;db2-3
 </pre>
 </div>
+<p></p></figure><p></p>
 </div>
 </div>
 </div>
@@ -2990,9 +2996,10 @@ background-color: null;
 font-style: inherit;">m</span> id <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">using</span> family_mem2</span></code></pre></div>
-<div class="cell">
+<div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
+<p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">flowchart BT
     subgraph members ["Family Members 1"]
@@ -3022,6 +3029,7 @@ font-style: inherit;">using</span> family_mem2</span></code></pre></div>
     db2-7--&gt;db1-6
 </pre>
 </div>
+<p></p></figure><p></p>
 </div>
 </div>
 </div>
@@ -3037,9 +3045,10 @@ background-color: null;
 font-style: inherit;">joinby</span> id <span class="kw" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">using</span> family_mem2</span></code></pre></div>
-<div class="cell">
+<div class="cell" data-layout-align="default">
 <div class="cell-output-display">
 <div>
+<p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">flowchart BT
     subgraph members ["Family Members 1"]
@@ -3082,6 +3091,7 @@ font-style: inherit;">using</span> family_mem2</span></code></pre></div>
     db2-7--&gt;db1-7
 </pre>
 </div>
+<p></p></figure><p></p>
 </div>
 </div>
 </div>
@@ -3882,12 +3892,12 @@ font-style: inherit;">length</span>      turn        gear_ratio  foreign</span><
 </section>
 
 
-<div id="quarto-appendix" class="default"><aside id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
 <li id="fn1"><p>To see where your personal ado folder is, just type <code>sysdir</code>. ↩︎</p></li>
 </ol>
-</aside></div> ]]></description>
+</section></div> ]]></description>
   <category>Stata</category>
   <category>Programming</category>
   <guid>https://friosavila.github.io/chatgpt/drop_03_25_2023/</guid>
