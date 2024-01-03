@@ -2,6 +2,7 @@
 title: "Palmer Penguins"
 subtitle: "A quick guide for visualization"
 code-fold: false
+jupyter: nbstata
 ---
 
 ## Introduction
