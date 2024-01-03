@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.455">
+<meta name="generator" content="quarto-1.4.533">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -96,6 +96,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -321,7 +322,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <h2 class="anchored" data-anchor-id="what-is-a-waffle-plot">What is a waffle plot?</h2>
 <p>A <strong>waffle</strong> plot is a type of chart similar to a <strong>pie</strong> chart (how interesting we like to name them as foods), because they can be used to visualize sample compositions.</p>
 <p>The key difference between a waffle plot and a pie chart is the way the information is displayed. Whereas a pie chart depicts the composition as pieces of a circle, a waffle plot represents it as dots in a box. Interestingly, the dots in a waffle plot resemble a waffle, hence the name.</p>
-<div class="quarto-figure quarto-figure-center">
+<div class="img-fluid quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="waffle.jpg" class="img-fluid figure-img"></p>
 <figcaption>waffle</figcaption>
@@ -349,7 +350,11 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <style>div.jp-Notebook .datagrid-container {min-height: 448px; }</style>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="stataviz3_files/figure-html/cell-2-output-2.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="stataviz3_files/figure-html/cell-2-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>When used like this, waffle_plot acts like an immediate command. You just feed it data, and it makes the waffle.</p>
@@ -364,7 +369,11 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>                <span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"The blues"</span> 2 <span class="st">"The rest"</span>)) <span class="co">/// ads Labels</span></span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>                <span class="bn">title</span>(<span class="st">"First nice? Waffle"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="stataviz3_files/figure-html/cell-3-output-1.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="stataviz3_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Of course, if your goal is to show the distribution for more than just 1 group, you can add more numbers to the command. However, the command will only recognize new numbers as long as the total is below 100. If the total is below 100, the last group is considered the “rest”, and colors for that group is assigned using option <code>color0</code>. If the total is above 100, the last values will be ignored, unless you use the option <code>total[(number)]</code>. To either rescale it based on the information given, or providing a “Total” for rescaling.</p>
@@ -375,7 +384,11 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">color</span>(<span class="bn">blue</span> <span class="kw">red</span>) <span class="co">/// and to the other two</span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"Democrats"</span> 2 <span class="st">"Republicans"</span> 3 <span class="st">"Green Party"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="stataviz3_files/figure-html/cell-4-output-1.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="stataviz3_files/figure-html/cell-4-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Something else I added to the command was the ability of chaning the dimensions of the <code>BOX</code>. By default, your waffle is a 10x10 matrix. this can be changed using <code>xnobs()</code> and <code>ynobs()</code>.</p>
@@ -385,7 +398,11 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  color0(gs10) <span class="kw">color</span>(<span class="bn">blue</span> <span class="kw">red</span> <span class="kw">green</span>) <span class="co">/// Color for rest and each group</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="bn">legend</span>(<span class="kw">order</span>(1 <span class="st">"Rep"</span> 2 <span class="st">"dem"</span> 3 <span class="st">"green"</span> 4 <span class="st">"Undecided"</span>)) xnobs(12) ynobs(8)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="stataviz3_files/figure-html/cell-5-output-1.png" class="img-fluid"></p>
+<div>
+<figure class="figure">
+<p><img src="stataviz3_files/figure-html/cell-5-output-1.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -623,38 +640,28 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    const typesetMath = (el) => {
-      if (window.MathJax) {
-        // MathJax Typeset
-        window.MathJax.typeset([el]);
-      } else if (window.katex) {
-        // KaTeX Render
-        var mathElements = el.getElementsByClassName("math");
-        var macros = [];
-        for (var i = 0; i < mathElements.length; i++) {
-          var texText = mathElements[i].firstChild;
-          if (mathElements[i].tagName == "SPAN") {
-            window.katex.render(texText.data, mathElements[i], {
-              displayMode: mathElements[i].classList.contains('display'),
-              throwOnError: false,
-              macros: macros,
-              fleqn: false
-            });
-          }
-        }
-      }
-    }
     if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        for (let i = 0; i < 2; i++) {
-          container.appendChild(note.children[i].cloneNode(true));
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
         }
-        typesetMath(container);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
         return container.innerHTML
       } else {
-        typesetMath(note);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
         return note.innerHTML;
       }
     } else {
@@ -663,7 +670,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
-      typesetMath(note);
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
       return note.innerHTML;
     }
   }
