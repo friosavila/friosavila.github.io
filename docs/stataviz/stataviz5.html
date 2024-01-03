@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.533">
+<meta name="generator" content="quarto-1.4.455">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -96,7 +96,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
-    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -314,7 +313,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <section id="setup" class="level2">
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
 <p>First, we need to install the <code>frause</code> package. This can be done using the <code>ssc install</code> command. We will also need some additional commands to change colors of shemes, and create and select custom colors. Please copy the following code to your do-file, or run it from your command line.</p>
-<div id="a46ce44f" class="cell" data-execution_count="1">
+<div id="6e0b66c1" class="cell" data-execution_count="1">
 <div class="cell-output cell-output-display">
 <style>div.jp-Notebook .datagrid-container {min-height: 448px; }</style>
 </div>
@@ -322,7 +321,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <pre><code>graph size was (5.5in, 4in), is now (default, default).</code></pre>
 </div>
 </div>
-<div id="1feed692" class="cell" data-execution_count="2">
+<div id="195af4af" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">ssc</span> install frause</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="kw">ssc</span> install color_style</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>net install colrspace, <span class="kw">replace</span> from(https:<span class="co">//raw.githubusercontent.com/benjann/colrspace/master/)</span></span>
@@ -330,7 +329,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>net install grstyle, <span class="kw">replace</span> from(https:<span class="co">//raw.githubusercontent.com/benjann/grstyle/master/)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now, lets load the data, and set a cleaner scheme than the default. We will also set the default color scheme to <code>tableau</code>.</p>
-<div id="7577ae22" class="cell" data-execution_count="3">
+<div id="325024aa" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> <span class="dv">scheme</span> white2</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>color_style tableau</span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>frause penguins, <span class="kw">clear</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -339,7 +338,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <section id="basic-plots-scatter-plot" class="level2">
 <h2 class="anchored" data-anchor-id="basic-plots-scatter-plot">Basic plots: Scatter plot</h2>
 <p>Lets start with a basic Scatter plot</p>
-<div id="b68234a5" class="cell" data-execution_count="4">
+<div id="276c94cb" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">twoway</span> <span class="kw">scatter</span> flipper_length_mm body_mass_g, <span class="co">/// Creates a Scatter plot</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="bn">ytitle</span>(<span class="st">"Flipper length (mm)"</span>) <span class="co">///             Sets the title for the y-axis</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="bn">xtitle</span>(<span class="st">"Body mass (g)"</span>) <span class="co">///                   Sets the title for the x-axis</span></span>
@@ -350,7 +349,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 </div>
 </div>
 <p>But we can also add some additional information to the plot. For example, we can color the points by the species of the penguin. We can change the markers, and finally, add a title and subtitle to the plot.</p>
-<div id="4142187b" class="cell" data-execution_count="5">
+<div id="e20eed8f" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">twoway</span> (<span class="kw">scatter</span> body_mass_g flipper_length_mm <span class="kw">if</span> species == 1, <span class="bn">msymbol</span>(o) ) <span class="co">/// changes Symbol to a circle</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">scatter</span> body_mass_g flipper_length_mm <span class="kw">if</span> species == 2, <span class="bn">msymbol</span>(t) ) <span class="co">/// changes Symbol to a triangle, etc</span></span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">scatter</span> body_mass_g flipper_length_mm <span class="kw">if</span> species == 3, <span class="bn">msymbol</span>(<span class="fu">s</span>) ) , <span class="co">/// Creates a Scatter plot by groups</span></span>
@@ -365,7 +364,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 </div>
 </div>
 <p>Of course, we could also add a regression line to the plot. On top of that, I will change the colors and size of the symbols. For this example, I will use different variables: Bill lenght and Flipper lenght. Changing the colors i will use <code>color_style</code>:</p>
-<div id="6d1e4b4b" class="cell" data-execution_count="6">
+<div id="7d75f855" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>** This <span class="kw">line</span> changes the <span class="kw">color</span> <span class="kw">of</span> the <span class="dv">scheme</span>, setting the first n colors based </span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>** <span class="kw">on</span> a <span class="ot">list</span> <span class="kw">of</span> colors, <span class="kw">or</span> a <span class="kw">palette</span>. See <span class="kw">help</span> colorpalette <span class="kw">for</span> <span class="kw">more</span> options</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>color_style darkorange <span class="bn">purple</span> LightSeaGreen</span>
@@ -389,7 +388,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 </section>
 <section id="basic-plots-histogram" class="level2">
 <h2 class="anchored" data-anchor-id="basic-plots-histogram">Basic plots: Histogram</h2>
-<div id="6c361f43" class="cell" data-execution_count="7">
+<div id="7f44b746" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">histogram</span> flipper_length_mm, lcolor(*.80) <span class="co">/// Creates a histogram, and </span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="bn">ytitle</span>(<span class="st">"Frequency"</span>) <span class="co">///             Sets the title for the y-axis</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="bn">xtitle</span>(<span class="st">"Flipper length (mm)"</span>) <span class="co">///                   Sets the title for the x-axis</span></span>
@@ -404,7 +403,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 </div>
 </div>
 <p>Now by color. We will need to set width and binwidth to make the plot look better.</p>
-<div id="90d7e2db" class="cell" data-execution_count="8">
+<div id="10d0b00e" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">two</span> (<span class="kw">histogram</span> flipper_length_mm <span class="kw">if</span> species==1, <span class="kw">color</span>(%50) lcolor(%0) <span class="co">///</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">frequency</span> <span class="bn">start</span>(170) <span class="kw">width</span>(2) pstyle(p1)) <span class="co">///</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">histogram</span> flipper_length_mm <span class="kw">if</span> species==2, <span class="kw">color</span>(%50) lcolor(%0) <span class="co">///</span></span>
@@ -424,7 +423,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 </section>
 <section id="basic-plots-scatter-plot-by" class="level2">
 <h2 class="anchored" data-anchor-id="basic-plots-scatter-plot-by">Basic plots: scatter plot by</h2>
-<div id="3495ecda" class="cell" data-execution_count="9">
+<div id="30e1c38d" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>color_style darkorange   LightSeaGreen</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="kw">two</span> (<span class="kw">scatter</span> body_mass_g flipper_length_mm <span class="kw">if</span> sex==1) <span class="co">///</span></span>
@@ -630,6 +629,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
+    const typesetMath = (el) => {
+      if (window.MathJax) {
+        // MathJax Typeset
+        window.MathJax.typeset([el]);
+      } else if (window.katex) {
+        // KaTeX Render
+        var mathElements = el.getElementsByClassName("math");
+        var macros = [];
+        for (var i = 0; i < mathElements.length; i++) {
+          var texText = mathElements[i].firstChild;
+          if (mathElements[i].tagName == "SPAN") {
+            window.katex.render(texText.data, mathElements[i], {
+              displayMode: mathElements[i].classList.contains('display'),
+              throwOnError: false,
+              macros: macros,
+              fleqn: false
+            });
+          }
+        }
+      }
+    }
     if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
@@ -637,14 +657,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         for (let i = 0; i < 2; i++) {
           container.appendChild(note.children[i].cloneNode(true));
         }
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(container);
-        }
+        typesetMath(container);
         return container.innerHTML
       } else {
-        if (window.Quarto?.typesetMath) {
-          window.Quarto.typesetMath(note);
-        }
+        typesetMath(note);
         return note.innerHTML;
       }
     } else {
@@ -653,9 +669,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
-      if (window.Quarto?.typesetMath) {
-        window.Quarto.typesetMath(note);
-      }
+      typesetMath(note);
       return note.innerHTML;
     }
   }
