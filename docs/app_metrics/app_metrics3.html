@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.533">
+<meta name="generator" content="quarto-1.4.537">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -461,7 +461,7 @@ y_{it} = a_0 + a_1*tr + a_2*t + \delta * (tr*t) +e_{it}
 <p><span class="citation" data-cites="callaway_santanna_2021">Callaway and Sant’Anna (<a href="#ref-callaway_santanna_2021" role="doc-biblioref">2021</a>)</span> use the letter “G” to identify this variable and represent observations that are never treated as “infinity <span class="math inline">\(\infty\)</span>”. This is done because those units are never treated in the window of time we have access to.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></p>
 <p>For simplicity, I will use “NT” to represent never treated units. It is worth noting that groups that are always treated cannot be identified in this design.</p>
 <p>The TxG design can be represented in matrix form as follows:</p>
-<div class="img-fluid quarto-figure quarto-figure-center">
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="did_fig3.png" class="img-fluid figure-img"></p>
 <figcaption>TxG Design</figcaption>
@@ -490,7 +490,7 @@ y_{it} = a_i + a_t + \delta D_{it}+e_{it}
 <p>Lets say, we are interested in the treatment effect only for the group that was first treated in period 2 (G=2).</p>
 <p>The first thing to consider is which groups could be used as a “control”, to appropriately identify the TE. The first and easy choice is to compare the G=1 units with observations that were never treated (NT), the “perfect” control group.</p>
 <p>Using the NT as control units, we can construct at least 3 2x2 DiD setups to identify the TE, at periods 2, 3 and 4:</p>
-<div class="img-fluid quarto-figure quarto-figure-center">
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="did_fig5.png" class="img-fluid figure-img"></p>
 <figcaption>fig3</figcaption>
@@ -498,7 +498,7 @@ y_{it} = a_i + a_t + \delta D_{it}+e_{it}
 </div>
 <p>A very similar exercise could be done if one is interested in analyzing the TE for other groups (say G3 and G4):</p>
 <p>If a Never treated group were not available, it is also possible, and valid given limited information, to use units from other “treated” groups as controls, as long as they have not yet been treated:</p>
-<div class="img-fluid quarto-figure quarto-figure-center">
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="did_fig6.png" class="img-fluid figure-img"></p>
 <figcaption>fig4</figcaption>
@@ -509,7 +509,7 @@ y_{it} = a_i + a_t + \delta D_{it}+e_{it}
 <section id="second-the-bad" class="level3">
 <h3 class="anchored" data-anchor-id="second-the-bad">Second the Bad</h3>
 <p>Just as there are good, there are also bad designs. As described in <span class="citation" data-cites="goodman_bacon_2021">Goodman-Bacon (<a href="#ref-goodman_bacon_2021" role="doc-biblioref">2021</a>)</span>, one of the pitfalls of the TWFE is that it may also try to identify TE by comparing units that are already treated, but at different times.</p>
-<div class="img-fluid quarto-figure quarto-figure-center">
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="did_fig4.png" class="img-fluid figure-img"></p>
 <figcaption>fig5</figcaption>
@@ -591,7 +591,7 @@ Absorbed degrees of freedom:
 <p>But why is that? The way treatment was assigned, only the units that were treated earlier have a positive treatment, but those are the ones used as controls later on, receiving negative weights. Thus, TWFE uses that and estimates negative TE.</p>
 <div id="d4d64a26" class="cell" data-execution_count="3">
 <div class="cell-output cell-output-display">
-<div class="img-fluid quarto-figure quarto-figure-center">
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="app_metrics3_files/figure-html/cell-4-output-1.png" class="img-fluid figure-img"></p>
 <figcaption>FWL-Weights</figcaption>

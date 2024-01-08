@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.455">
+<meta name="generator" content="quarto-1.4.537">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -96,6 +96,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -345,7 +346,11 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="bn">legend</span>(<span class="kw">off</span>) <span class="kw">scale</span>(1.1) <span class="co">///                    Set legends off, and scale the plot by 1.1 (fonts) </span></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="bn">xsize</span>(9) <span class="bn">ysize</span>(6) <span class="co">//                          Finally, setting Size of the plot  </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="stataviz5_files/figure-html/cell-5-output-1.png" class="img-fluid quarto-figure-center"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="stataviz5_files/figure-html/cell-5-output-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>But we can also add some additional information to the plot. For example, we can color the points by the species of the penguin. We can change the markers, and finally, add a title and subtitle to the plot.</p>
@@ -360,7 +365,11 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="bn">subtitle</span>(<span class="st">"Flipper lengh and body mass by species"</span>, pos(11) span )  <span class="co">/// Adds a title to the plot             </span></span>
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">scale</span>(1.1) <span class="bn">xsize</span>(9) <span class="bn">ysize</span>(6) <span class="co">//                                 Scales the plot by 1.1 (fonts) </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="stataviz5_files/figure-html/cell-6-output-1.png" class="img-fluid quarto-figure-center"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="stataviz5_files/figure-html/cell-6-output-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Of course, we could also add a regression line to the plot. On top of that, I will change the colors and size of the symbols. For this example, I will use different variables: Bill lenght and Flipper lenght. Changing the colors i will use <code>color_style</code>:</p>
@@ -382,7 +391,11 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="bn">subtitle</span>(<span class="st">"Dimensions by species"</span>, pos(11) span )  <span class="co">/// Adds a title to the plot             </span></span>
 <span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">scale</span>(1.1) <span class="bn">xsize</span>(9) <span class="bn">ysize</span>(6) <span class="co">// </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="stataviz5_files/figure-html/cell-7-output-1.png" class="img-fluid quarto-figure-center"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="stataviz5_files/figure-html/cell-7-output-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -399,7 +412,11 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <pre><code>(bin=18, start=172, width=3.2777778)</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<p><img src="stataviz5_files/figure-html/cell-8-output-2.png" class="img-fluid quarto-figure-center"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="stataviz5_files/figure-html/cell-8-output-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 <p>Now by color. We will need to set width and binwidth to make the plot look better.</p>
@@ -417,7 +434,11 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>    <span class="bn">subtitle</span>(<span class="st">"Distribution of flipper length"</span>, pos(11) span )  <span class="co">/// Adds a title to the plot             </span></span>
 <span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">scale</span>(1.1) <span class="bn">xsize</span>(9) <span class="bn">ysize</span>(6) <span class="co">//                                 Scales the plot by 1.1 </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="stataviz5_files/figure-html/cell-9-output-1.png" class="img-fluid quarto-figure-center"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="stataviz5_files/figure-html/cell-9-output-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -436,7 +457,11 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>    <span class="bn">xtitle</span>(<span class="st">"Flipper lenght (mm)"</span>) <span class="co">///                   Sets the title for the x-axis</span></span>
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">scale</span>(1.1) <span class="bn">xsize</span>(9) <span class="bn">ysize</span>(6) <span class="co">//  </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display">
-<p><img src="stataviz5_files/figure-html/cell-10-output-1.png" class="img-fluid quarto-figure-center"></p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="stataviz5_files/figure-html/cell-10-output-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
 </div>
 </div>
 </section>
@@ -629,38 +654,28 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    const typesetMath = (el) => {
-      if (window.MathJax) {
-        // MathJax Typeset
-        window.MathJax.typeset([el]);
-      } else if (window.katex) {
-        // KaTeX Render
-        var mathElements = el.getElementsByClassName("math");
-        var macros = [];
-        for (var i = 0; i < mathElements.length; i++) {
-          var texText = mathElements[i].firstChild;
-          if (mathElements[i].tagName == "SPAN") {
-            window.katex.render(texText.data, mathElements[i], {
-              displayMode: mathElements[i].classList.contains('display'),
-              throwOnError: false,
-              macros: macros,
-              fleqn: false
-            });
-          }
-        }
-      }
-    }
     if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        for (let i = 0; i < 2; i++) {
-          container.appendChild(note.children[i].cloneNode(true));
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
         }
-        typesetMath(container);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
         return container.innerHTML
       } else {
-        typesetMath(note);
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
         return note.innerHTML;
       }
     } else {
@@ -669,7 +684,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
-      typesetMath(note);
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
       return note.innerHTML;
     }
   }

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.533">
+<meta name="generator" content="quarto-1.4.537">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -410,7 +410,7 @@ Group variable: FF
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>joy_plot f_stat, <span class="kw">by</span>(FF) gap0 <span class="kw">color</span>(%50) alegend <span class="bn">xtitle</span>(<span class="st">"F-stat"</span>) <span class="bn">xline</span>(10 20 100)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div class="img-fluid quarto-figure quarto-figure-center">
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="index_files/figure-html/cell-3-output-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 <figcaption>F-Statistics Distribution</figcaption>
@@ -431,7 +431,7 @@ Group variable: FF
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="kw">graph</span> <span class="kw">export</span> fig2.png, <span class="kw">replace</span> <span class="kw">width</span>(1000) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="fig-fig1" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-pos="center" width="80%">
+<div id="fig-fig1" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-pos="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-fig1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="fig1.png" class="img-fluid figure-img" style="width:80.0%" data-fig-pos="center">
@@ -444,7 +444,7 @@ Figure&nbsp;1: T-Stat distribution by E(F)
 <p>What we see from <a href="#fig-fig1" class="quarto-xref">Figure&nbsp;1</a> is that the distribution of the t-statistic is not consistent with a normal distribution. For and <span class="math inline">\(F\leq 40\)</span>, there is a clear discrepancy between the normal distribution (orange) and the empirical t-stat distribution (blue). As consequence, when coefficients are possitive, it is more likely to reject the null hypothesis, but also under-reject when the coefficients are negative.</p>
 <p>Once we reach an F-statistic of at least 80 and 160, the difference between the normal distribution and the t-statistic empirical distribution dissapears. Lesson, if your F-stat is “low”, perhaps using standard distributions may be innapropriate.</p>
 <p>One problem with the results in <a href="#fig-fig1" class="quarto-xref">Figure&nbsp;1</a> was that when <span class="math inline">\(E(F)\)</span> is low, there are many instances where the F-distribution is less than 10. One may say that is the reason why the distribution is skew in <a href="#fig-fig1" class="quarto-xref">Figure&nbsp;1</a>. A simple way to avoid this is by ploting the same information, but restricting F-statistics to be larger than 10.</p>
-<div id="fig-fig2" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-pos="center" width="80%">
+<div id="fig-fig2" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-pos="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-fig2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="fig2.png" class="img-fluid figure-img" style="width:80.0%" data-fig-pos="center">
@@ -485,7 +485,7 @@ Figure&nbsp;2: T-Stat distribution by E(F) if F&gt;10
 <span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="kw">graph</span> <span class="kw">export</span> fig3.png, <span class="kw">replace</span> <span class="kw">width</span>(1000)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="fig-fig3" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-pos="center" width="80%">
+<div id="fig-fig3" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-pos="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-fig3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="fig3.png" class="img-fluid figure-img" style="width:80.0%" data-fig-pos="center">
@@ -517,7 +517,7 @@ Figure&nbsp;3: T-Stat vs SF-Stat
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-fig4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
-<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-fig4" style="flex-basis: 50.0%;justify-content: flex-start;display: flex;">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-fig4" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div id="fig-fig4a" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-fig4a-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -529,7 +529,7 @@ Figure&nbsp;3: T-Stat vs SF-Stat
 </figure>
 </div>
 </div>
-<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-fig4" style="flex-basis: 50.0%;justify-content: flex-start;display: flex;">
+<div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-fig4" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div id="fig-fig4b" class="quarto-figure quarto-figure-center quarto-float anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-fig4b-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
