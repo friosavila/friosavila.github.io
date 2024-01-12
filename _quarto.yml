@@ -31,13 +31,13 @@ website:
 
 
   sidebar:
-  - style: "docked"
-  - search: true
+
   - title: "Stata Viz"
     logo: WeeMee.jpg
     contents:
       - "stataviz/index.qmd"
       - auto: "stataviz/stataviz*.qmd"
+      
       #- joy_plot.qmd
       #- sanekey_plot.qmd
       #- mscatter.qmd
