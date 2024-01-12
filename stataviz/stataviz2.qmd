@@ -36,6 +36,7 @@ ssc install color_style, replace
 
 And, for the data, we will use a very small dataset, available from Stata datasets examples:
 
+
 ```{stata}
 clear all
 webuse womenwk, clear
