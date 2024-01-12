@@ -31,6 +31,8 @@ website:
 
 
   sidebar:
+  - style: "docked"
+  - search: true
   - title: "Stata Viz"
     logo: WeeMee.jpg
     contents:
