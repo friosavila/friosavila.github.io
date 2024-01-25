@@ -9,8 +9,373 @@
 <link>https://friosavila.github.io/chatgpt.html</link>
 <atom:link href="https://friosavila.github.io/chatgpt.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.4.537</generator>
-<lastBuildDate>Thu, 24 Aug 2023 04:00:00 GMT</lastBuildDate>
+<generator>quarto-1.4.549</generator>
+<lastBuildDate>Thu, 25 Jan 2024 05:00:00 GMT</lastBuildDate>
+<item>
+  <title>Quarto 1.4</title>
+  <dc:creator>Fernando Rios-Avila</dc:creator>
+  <link>https://friosavila.github.io/chatgpt/quar_01_25_2024/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Quarto 1.4 is out! Over the last few weeks, they have been pushing quite few updates, and finally they have released version 1.4.</p>
+<p>What is quite interesting to me is that this version includes a new feature that I have been waiting for a while: Multi source cross-referencing!</p>
+<p>I have been using Quarto for some time now, and one of the things I noticed is that it was very easy to add titles and cross-references to tables as long as they were formated as markdown tables.</p>
+<p>However, as you may now, markdown tables are not very flexible. Better options include HTML tables, and even better, LaTeX tables. Unfortunately, there was no easy way to reference those kinds of tables using the <code>@ref</code> syntax. Looking at other people’s questions and solutions, they all seemed a bit complicated to me. (specially those that involved using LaTeX commands).</p>
+<p>But now, with version 1.4, it seems very easy to reference tables that are not markdown tables!</p>
+<p>Let’s see how it works!</p>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<p>To do this, I will produce a simple regression using <code>Stata</code>, and export it as markdown, HTML, and LaTeX tables using <code>esttab</code><sup>1</sup>.</p>
+<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1">*| code-fold: false</span>
+<span id="cb1-2">*| echo: true</span>
+<span id="cb1-3">frause oaxaca, <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">clear</span></span>
+<span id="cb1-4"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">qui</span>:<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">reg</span>  lnwage educ exper tenure female</span>
+<span id="cb1-5"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">est</span> sto m1</span>
+<span id="cb1-6"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">qui</span>:<span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">reg</span>  lnwage educ exper tenure female age agesq married divorced</span>
+<span id="cb1-7"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">est</span> sto m2</span>
+<span id="cb1-8"></span>
+<span id="cb1-9">esttab m1 m2 <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">using</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"reg_md"</span>, <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">wide</span> se <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">replace</span> md</span>
+<span id="cb1-10">esttab m1 m2 <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">using</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"reg_html"</span>, <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">wide</span> se <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">replace</span> htm</span>
+<span id="cb1-11">esttab m1 m2 <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">using</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"reg_tex"</span>, <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">wide</span> se <span class="kw" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">replace</span> tex</span></code></pre></div>
+<p>The output of the code is not usable right away, as it has some minor issues. For example, the markdown table has an extra line that needs to be removed.</p>
+</section>
+<section id="markdown-table" class="level2">
+<h2 class="anchored" data-anchor-id="markdown-table">Markdown table</h2>
+<p>For the next I will make it simple, using what I think is the easiest cross reference the tables:</p>
+<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1">::: {#tbl-table1}</span>
+<span id="cb2-2">{{&lt; include reg_md.md &gt;}}</span>
+<span id="cb2-3">Table made with markdown</span>
+<span id="cb2-4">:::</span></code></pre></div>
+<p>General syntax:</p>
+<ul>
+<li>line 1 indicates we will be creating table that could be referenced using <code>@tbl-table1</code> code.</li>
+<li>line 2 request to “include” the markdown table file.</li>
+<li>line 3 is the title of this table</li>
+</ul>
+<p>The result is the following table:</p>
+<div id="tbl-table1" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-table1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Table made with markdown
+</figcaption>
+<div aria-describedby="tbl-table1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="table">
+<colgroup>
+<col style="width: 12%">
+<col style="width: 30%">
+<col style="width: 12%">
+<col style="width: 30%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: center;">(1)</th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;">(2)</th>
+<th style="text-align: center;"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>educ</td>
+<td style="text-align: center;">0.0848<sup>***</sup></td>
+<td style="text-align: center;">(0.00519)</td>
+<td style="text-align: center;">0.0644<sup>***</sup></td>
+<td style="text-align: center;">(0.00508)</td>
+</tr>
+<tr class="even">
+<td>exper</td>
+<td style="text-align: center;">0.0111<sup>***</sup></td>
+<td style="text-align: center;">(0.00154)</td>
+<td style="text-align: center;">-0.000311</td>
+<td style="text-align: center;">(0.00181)</td>
+</tr>
+<tr class="odd">
+<td>tenure</td>
+<td style="text-align: center;">0.00771<sup>***</sup></td>
+<td style="text-align: center;">(0.00188)</td>
+<td style="text-align: center;">0.00672<sup>***</sup></td>
+<td style="text-align: center;">(0.00190)</td>
+</tr>
+<tr class="even">
+<td>female</td>
+<td style="text-align: center;">-0.0841<sup>***</sup></td>
+<td style="text-align: center;">(0.0251)</td>
+<td style="text-align: center;">-0.160<sup>***</sup></td>
+<td style="text-align: center;">(0.0243)</td>
+</tr>
+<tr class="odd">
+<td>age</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">0.113<sup>***</sup></td>
+<td style="text-align: center;">(0.00814)</td>
+</tr>
+<tr class="even">
+<td>agesq</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">-0.00126<sup>***</sup></td>
+<td style="text-align: center;">(0.0000976)</td>
+</tr>
+<tr class="odd">
+<td>married</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">-0.0224</td>
+<td style="text-align: center;">(0.0294)</td>
+</tr>
+<tr class="even">
+<td>divorced</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">0.0719</td>
+<td style="text-align: center;">(0.0412)</td>
+</tr>
+<tr class="odd">
+<td>_cons</td>
+<td style="text-align: center;">2.213<sup>***</sup></td>
+<td style="text-align: center;">(0.0683)</td>
+<td style="text-align: center;">0.311<sup>*</sup></td>
+<td style="text-align: center;">(0.149)</td>
+</tr>
+<tr class="even">
+<td><em>N</em></td>
+<td style="text-align: center;">1434</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">1434</td>
+<td style="text-align: center;"></td>
+</tr>
+</tbody>
+</table>
+<p>Standard errors in parentheses<br> <sup>*</sup> <em>p</em> &lt; 0.05, <sup>**</sup> <em>p</em> &lt; 0.01, <sup>***</sup> <em>p</em> &lt; 0.001</p>
+</div>
+</figure>
+</div>
+<p>This one was already feasible before however.</p>
+</section>
+<section id="html-table" class="level2">
+<h2 class="anchored" data-anchor-id="html-table">HTML table</h2>
+<p>Now, let’s try with an HTML table. The syntax is very similar:</p>
+<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><span class="in" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">    ::: {#tbl-table2}</span></span>
+<span id="cb3-2"><span class="in" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">    ````{=html}</span></span>
+<span id="cb3-3"><span class="in" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">    {{&lt; include reg_html.html &gt;}}</span></span>
+<span id="cb3-4"><span class="in" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">    ````</span></span>
+<span id="cb3-5"><span class="in" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">    Table made with markdown</span></span>
+<span id="cb3-6"><span class="in" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">    :::</span></span></code></pre></div>
+<p>with the following result:</p>
+<div id="tbl-table2" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-table2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Table made with HTML
+</figcaption>
+<div aria-describedby="tbl-table2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table data-quarto-postprocess="true" data-border="0" width="*" class="table">
+<colgroup>
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+<col style="width: 20%">
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>(1)</th>
+<th></th>
+<th>(2)</th>
+<th></th>
+</tr>
+<tr class="odd">
+<th></th>
+<th>lnwage</th>
+<th></th>
+<th>lnwage</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>educ</td>
+<td>0.0848<sup>***</sup></td>
+<td>(0.00519)</td>
+<td>0.0644<sup>***</sup></td>
+<td>(0.00508)</td>
+</tr>
+<tr class="even">
+<td>exper</td>
+<td>0.0111<sup>***</sup></td>
+<td>(0.00154)</td>
+<td>-0.000311</td>
+<td>(0.00181)</td>
+</tr>
+<tr class="odd">
+<td>tenure</td>
+<td>0.00771<sup>***</sup></td>
+<td>(0.00188)</td>
+<td>0.00672<sup>***</sup></td>
+<td>(0.00190)</td>
+</tr>
+<tr class="even">
+<td>female</td>
+<td>-0.0841<sup>***</sup></td>
+<td>(0.0251)</td>
+<td>-0.160<sup>***</sup></td>
+<td>(0.0243)</td>
+</tr>
+<tr class="odd">
+<td>age</td>
+<td></td>
+<td></td>
+<td>0.113<sup>***</sup></td>
+<td>(0.00814)</td>
+</tr>
+<tr class="even">
+<td>agesq</td>
+<td></td>
+<td></td>
+<td>-0.00126<sup>***</sup></td>
+<td>(0.0000976)</td>
+</tr>
+<tr class="odd">
+<td>married</td>
+<td></td>
+<td></td>
+<td>-0.0224</td>
+<td>(0.0294)</td>
+</tr>
+<tr class="even">
+<td>divorced</td>
+<td></td>
+<td></td>
+<td>0.0719</td>
+<td>(0.0412)</td>
+</tr>
+<tr class="odd">
+<td>_cons</td>
+<td>2.213<sup>***</sup></td>
+<td>(0.0683)</td>
+<td>0.311<sup>*</sup></td>
+<td>(0.149)</td>
+</tr>
+</tbody>
+<tbody>
+<tr class="odd">
+<td><em>N</em></td>
+<td>1434</td>
+<td></td>
+<td>1434</td>
+<td></td>
+</tr>
+<tr class="even">
+<td colspan="5">Standard errors in parentheses<br>
+<sup>*</sup> <em>p</em> &lt; 0.05, <sup>**</sup> <em>p</em> &lt; 0.01, <sup>***</sup> <em>p</em> &lt; 0.001</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</figure>
+</div>
+<p>Now, there is a small difference in the produced table because how <code>esttab</code> produces the HTML table. Neverthless, the table creation and naming works!</p>
+<p>Also, notice that I’m adding a code chunk <code>=html</code>, so the information can be read correctly.</p>
+</section>
+<section id="latex-table" class="level2">
+<h2 class="anchored" data-anchor-id="latex-table">LaTeX table</h2>
+<p>Finally, let’s try with a LaTeX table. The syntax is very similar:</p>
+<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1">::: {#tbl-table3}</span>
+<span id="cb4-2">{{&lt; include reg_tex.tex &gt;}}</span>
+<span id="cb4-3">Table made with Latex</span>
+<span id="cb4-4">:::</span></code></pre></div>
+<p>with the following result:</p>
+<div id="tbl-table3" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-table3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3: Table made with Latex
+</figcaption>
+<div aria-describedby="tbl-table3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+
+</div>
+</figure>
+</div>
+<p>Ahh! seems this is not working as HTML! The reason is that Latex tables do not render in html. However if you look into the <a href="reg1.pdf">pdf version</a>, you will see that the table is there, and it is correctly named!</p>
+</section>
+<section id="cross-referencing" class="level2">
+<h2 class="anchored" data-anchor-id="cross-referencing">Cross-referencing</h2>
+<p>As you can see Table&nbsp;1 was done with md, Table&nbsp;2 with html and Table&nbsp;3 with LaTeX.</p>
+
+
+<!-- -->
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p><code>esttab</code> is part of <code>estout</code> package by Ben Jann.↩︎</p></li>
+</ol>
+</section></div> ]]></description>
+  <category>Quarto</category>
+  <guid>https://friosavila.github.io/chatgpt/quar_01_25_2024/</guid>
+  <pubDate>Thu, 25 Jan 2024 05:00:00 GMT</pubDate>
+</item>
 <item>
   <title>Keynes vs Hayek: The Rap battle</title>
   <dc:creator>ChatGPT and Fernando Rios-Avila</dc:creator>
