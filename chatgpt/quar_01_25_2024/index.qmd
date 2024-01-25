@@ -113,7 +113,7 @@ with the following result:
 Table made with Latex
 :::
 
-Ahh! seems this is not working as HTML! The reason is that Latex tables do not render in html. However if you look into the [pdf version](reg1.pdf), you will see that the table is there, and it is correctly named!
+Ahh! seems this is not working as HTML! The reason is that Latex tables do not render in html. However if you look into the [pdf version](index.pdf), you will see that the table is there, and it is correctly named!
 
  
 ## Cross-referencing

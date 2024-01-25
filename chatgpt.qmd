@@ -2,7 +2,8 @@
 title: "Odds and Ends + ChatGPT"
 subtitle: "Just some extra tips, and short stories"
 listing:
-  contents: chatgpt #This should match the post Directory
+  contents: 
+    chatgpt/*/index.qmd
   sort: "date desc"
   type: default
   image-align: right
