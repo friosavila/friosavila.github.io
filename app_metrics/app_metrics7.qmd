@@ -218,7 +218,7 @@ This assumption is also quite strong. People, for example, are interconnected th
 The good news is that 2-way cluster standard errors, or M-way, does allow for this more complex scenario. Specifically, if two individuals are part of at least 1 common group, then we will assume the correlation of unobserved factors is different from zero. Unfortunately, we cannot differentiate which **connection** is the one that is driven that correlation.
 
 To show this mathematically, let me define the function $g_h()$, which indicates the group, among the set $h$ (cluster variable), that a unit belongs to, and $gg(i,j)$ which takes the value of zero if $i$ and $j$ are not connected to each other in any way (based on the cluster variables), and 1 otherwise. 
-  $$
+$$
 \begin{aligned}
 gg(i,j)&=0 \text{  if  } \forall h:g_h(i)\neq  g_h(j) \\
 &\text{ and 1 otherwise}
@@ -228,8 +228,7 @@ $$
 If this is the case, $\sigma_{ij}=0$ is assumed zero if $gg(i,j)=0$, but allow to vary otherwise.
 
 The implications that it has on the $\Omega$ matrix is that it will no longer be block diagonal, because elements outside the main diagonal (and block diagonal) will be different from zero.
-$$
-\Omega_3 =
+$$\Omega_3 =
 \left(
 \begin{matrix}
 \sigma_1^2     & \sigma_{1,2} & 0         & ...  &  \sigma_{1,n} \\
@@ -240,7 +239,8 @@ $$
 \end{matrix}\right)
 $$
 
-Visually, its perhaps easier to show this visually:
+Its perhaps easier to show this visually:
+
 
 ```{stata}
 *| echo: true
@@ -251,8 +251,7 @@ Visually, its perhaps easier to show this visually:
 *|   - 1-way cluster
 *|   - 2nd 1-way cluster
 *|   - 2-way cluster
-*| layout-ncol: 3
-*| column: page
+*| fig-align: center
 
 two (scatter rr11 rr12 if rr13==1,  ms(s) msize(2.1))  ///
 	, aspect(1) legend(off)  xtitle("") ytitle("") yscale(off) xscale(off) name(m1, replace) 

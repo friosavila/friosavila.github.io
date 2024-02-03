@@ -349,7 +349,7 @@ window.Quarto = {
 </nav>
     </div>
 <!-- main -->
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../app_metrics/app_metrics1.html">App Metrics</a></li><li class="breadcrumb-item"><a href="../app_metrics/app_metrics7.html">Linear Regressions, OLS and Standard Errors</a></li></ol></nav>
 <div class="quarto-title">
@@ -504,7 +504,7 @@ Var(\hat\beta_{OLS}) = \color{brown}{(X'X)^{-1}} \color{green}{X'} \color{red} \
 \end{matrix}\right)
 \]</span></p>
 <p>Visually, this would look like the following</p>
-<div id="f518e625" class="cell" data-execution_count="1">
+<div id="a591d85e" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">clear</span></span>
@@ -554,7 +554,7 @@ Var(\hat\beta_{OLS}) = \color{brown}{(X'X)^{-1}} \color{green}{X'} \color{red} \
 </div>
 <p>In this figure, the blue blocks shows that we are allowing for some non-zero correlation among observations that belong to the same group or <strong>cluster</strong>. Implicily, we are also allowing for all elements of the main diagonal (in black) to be different from zero, which is why Cluster standard errors are also robust to heteroskedasticity.</p>
 </section>
-<section id="way-cluster-standard-errors-1" class="level2 page-columns page-full">
+<section id="way-cluster-standard-errors-1" class="level2">
 <h2 class="anchored" data-anchor-id="way-cluster-standard-errors-1">2-way Cluster Standard Errors</h2>
 <p>What about 2-way, or for even M-way, clustered standard errors?</p>
 <p>As I mentioned above, 1-way clustered standard errors allows for individuals unobserved errors to be correlated across each other, but only if they belong to the same group. If they are from different groups, then no correlation should exists. 1-Way cluster standard errors also assumes that there is only one set of groups that people can be connected through.</p>
@@ -567,8 +567,7 @@ gg(i,j)&amp;=0 \text{  if  } \forall h:g_h(i)\neq  g_h(j) \\
 \end{aligned}
 \]</span></p>
 <p>If this is the case, <span class="math inline">\(\sigma_{ij}=0\)</span> is assumed zero if <span class="math inline">\(gg(i,j)=0\)</span>, but allow to vary otherwise.</p>
-<p>The implications that it has on the <span class="math inline">\(\Omega\)</span> matrix is that it will no longer be block diagonal, because elements outside the main diagonal (and block diagonal) will be different from zero. <span class="math display">\[
-\Omega_3 =
+<p>The implications that it has on the <span class="math inline">\(\Omega\)</span> matrix is that it will no longer be block diagonal, because elements outside the main diagonal (and block diagonal) will be different from zero. <span class="math display">\[\Omega_3 =
 \left(
 \begin{matrix}
 \sigma_1^2     &amp; \sigma_{1,2} &amp; 0         &amp; ...  &amp;  \sigma_{1,n} \\
@@ -578,7 +577,8 @@ gg(i,j)&amp;=0 \text{  if  } \forall h:g_h(i)\neq  g_h(j) \\
 \sigma_{1,n} &amp; 0            &amp; \sigma_{3,n}     &amp; ...  &amp; \sigma_n^2 \\
 \end{matrix}\right)
 \]</span></p>
-<p>Visually, its perhaps easier to show this visually:</p>
+<p>Its perhaps easier to show this visually:</p>
+<div class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">two</span> (<span class="kw">scatter</span> rr11 rr12 <span class="kw">if</span> rr13==1,  ms(<span class="fu">s</span>) msize(2.1))  <span class="co">///</span></span>
@@ -590,15 +590,14 @@ gg(i,j)&amp;=0 \text{  if  } \forall h:g_h(i)\neq  g_h(j) \\
 <span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="kw">two</span> (<span class="kw">scatter</span> rr11 rr12 <span class="kw">if</span> rr14==1 | rr13==1,  ms(<span class="fu">s</span>) msize(2.1))  <span class="co">///</span></span>
 <span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    , aspect(1) <span class="bn">legend</span>(<span class="kw">off</span>)  <span class="bn">xtitle</span>(<span class="st">""</span>) <span class="bn">ytitle</span>(<span class="st">""</span>) <span class="bn">yscale</span>(<span class="kw">off</span>) <span class="bn">xscale</span>(<span class="kw">off</span>) <span class="bn">name</span>(m3, <span class="kw">replace</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div id="fig-corr" class="quarto-layout-panel page-columns page-full">
-<figure class="quarto-float quarto-float-fig figure page-columns page-full">
-<div aria-describedby="fig-corr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
-<div class="quarto-layout-row page-columns page-full">
-<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-corr" style="flex-basis: 33.3%;justify-content: flex-start;">
-<div id="fig-corr-1" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
-<figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
-<div aria-describedby="fig-corr-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
-<img src="app_metrics7_files/figure-html/fig-corr-output-1.png" class="img-fluid figure-img column-page" data-ref-parent="fig-corr">
+<div id="fig-corr" class="cell quarto-figure quarto-figure-center quarto-float anchored" data-execution_count="2">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-corr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display">
+<div id="fig-corr-1" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-corr-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="app_metrics7_files/figure-html/fig-corr-output-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" data-ref-parent="fig-corr">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-corr-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) 1-way cluster
@@ -606,11 +605,11 @@ gg(i,j)&amp;=0 \text{  if  } \forall h:g_h(i)\neq  g_h(j) \\
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-corr" style="flex-basis: 33.3%;justify-content: flex-start;">
-<div id="fig-corr-2" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
-<figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
-<div aria-describedby="fig-corr-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
-<img src="app_metrics7_files/figure-html/fig-corr-output-2.png" class="img-fluid figure-img column-page" data-ref-parent="fig-corr">
+<div class="cell-output cell-output-display">
+<div id="fig-corr-2" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-corr-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="app_metrics7_files/figure-html/fig-corr-output-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" data-ref-parent="fig-corr">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-corr-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) 2nd 1-way cluster
@@ -618,11 +617,11 @@ gg(i,j)&amp;=0 \text{  if  } \forall h:g_h(i)\neq  g_h(j) \\
 </figure>
 </div>
 </div>
-<div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-corr" style="flex-basis: 33.3%;justify-content: flex-start;">
-<div id="fig-corr-3" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
-<figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
-<div aria-describedby="fig-corr-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
-<img src="app_metrics7_files/figure-html/fig-corr-output-3.png" class="img-fluid figure-img column-page" data-ref-parent="fig-corr">
+<div class="cell-output cell-output-display">
+<div id="fig-corr-3" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-corr-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="app_metrics7_files/figure-html/fig-corr-output-3.png" class="img-fluid quarto-figure quarto-figure-center figure-img" data-ref-parent="fig-corr">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-corr-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (c) 2-way cluster
@@ -631,11 +630,11 @@ gg(i,j)&amp;=0 \text{  if  } \forall h:g_h(i)\neq  g_h(j) \\
 </div>
 </div>
 </div>
-</div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-corr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;1: Correlation matrix <span class="math inline">\(\Omega\)</span>
 </figcaption>
 </figure>
+</div>
 </div>
 <p><a href="#fig-corr" class="quarto-xref">Figure&nbsp;1</a> shows the correlation structure we would observe considering the 2 clustered variables. <a href="#fig-corr-1" class="quarto-xref">Figure&nbsp;1 (a)</a> and <a href="#fig-corr-2" class="quarto-xref">Figure&nbsp;1 (b)</a> show the interconnections based on a first and a second cluster variables, whereas <a href="#fig-corr-3" class="quarto-xref">Figure&nbsp;1 (c)</a> considers the combination of both. To estimate Standard errors we need to allow the <em>blue</em> cells to be different from zero, impossing the zero condition only on the “unconnected” pairs.</p>
 </section>
@@ -656,7 +655,7 @@ Figure&nbsp;1: Correlation matrix <span class="math inline">\(\Omega\)</span>
 <section id="stata-example" class="level2">
 <h2 class="anchored" data-anchor-id="stata-example"><code>Stata</code> Example</h2>
 <p>Here I will work on a small example that would implement the 4 approaches to estimating standard errors. Because I will use the unrestrict <span class="math inline">\(\hat\Omega\)</span> matrix, I will work with a very small dataset: `auto’. The next contains lots of code, so feel free to skip it.</p>
-<div id="e1248815" class="cell" data-execution_count="3">
+<div id="7ecef941" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>** Load Data, create clusters and a constant</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">sysuse</span> auto, <span class="kw">clear</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> <span class="dv">seed</span> 1</span>
@@ -677,7 +676,7 @@ variable price was int now float
 </div>
 </div>
 <p>Homoskedastic errors:</p>
-<div id="2132c724" class="cell" data-execution_count="4">
+<div id="5462198f" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: omega_0 = <span class="fu">I</span>(74)*<span class="kw">mean</span>(<span class="fu">e</span>:^2)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: vcv_0   = ixx * x' * omega_0 * x * ixx</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: svcv_0  = diagonal(vcv_0):^.5;svcv_0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -690,7 +689,7 @@ variable price was int now float
 </div>
 </div>
 <p>Robust Standard errors</p>
-<div id="5f1f3929" class="cell" data-execution_count="5">
+<div id="e90f2897" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: omega_1 = (<span class="fu">e</span>*e'):*<span class="fu">I</span>(74)</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: vcv_1   = ixx * x' * omega_1 * x * ixx</span>
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: svcv_1  = diagonal(vcv_1):^.5;svcv_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -703,7 +702,7 @@ variable price was int now float
 </div>
 </div>
 <p>1-way Cluster Standard errors:</p>
-<div id="d508be75" class="cell" data-execution_count="6">
+<div id="0ebb1c93" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: <span class="kw">cc</span> = st_data(.,<span class="st">"c1 c2"</span>)</span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: i1 = <span class="fu">J</span>(1,74,<span class="kw">cc</span>[,1]):==<span class="fu">J</span>(74,1,<span class="kw">cc</span>[,1]') </span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: i2 = <span class="fu">J</span>(1,74,<span class="kw">cc</span>[,2]):==<span class="fu">J</span>(74,1,<span class="kw">cc</span>[,2]') </span>
@@ -722,7 +721,7 @@ variable price was int now float
 </div>
 </div>
 <p>2-way Cluster Standard errors</p>
-<div id="aa819020" class="cell" data-execution_count="7">
+<div id="9c1326e2" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: i3 = i1:|i2</span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: omega_3 = (<span class="fu">e</span>*e'):*i3</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: vcv_3   = ixx * x' * omega_3 * x * ixx</span>
@@ -736,7 +735,7 @@ variable price was int now float
 </div>
 </div>
 <p>But for the 2-way Cluster Standard errors you also have the more commonly used formula:</p>
-<div id="7afdc30c" class="cell" data-execution_count="8">
+<div id="82c74bbd" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>** First we need to create a <span class="kw">variable</span> that combines both clusters</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: i4 = i1:&amp;i2</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: omega_4 = (<span class="fu">e</span>*e'):*i4</span>
@@ -1453,7 +1452,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb16-220"><a href="#cb16-220" aria-hidden="true" tabindex="-1"></a>The good news is that 2-way cluster standard errors, or M-way, does allow for this more complex scenario. Specifically, if two individuals are part of at least 1 common group, then we will assume the correlation of unobserved factors is different from zero. Unfortunately, we cannot differentiate which **connection** is the one that is driven that correlation.</span>
 <span id="cb16-221"><a href="#cb16-221" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-222"><a href="#cb16-222" aria-hidden="true" tabindex="-1"></a>To show this mathematically, let me define the function $g_h()$, which indicates the group, among the set $h$ (cluster variable), that a unit belongs to, and $gg(i,j)$ which takes the value of zero if $i$ and $j$ are not connected to each other in any way (based on the cluster variables), and 1 otherwise. </span>
-<span id="cb16-223"><a href="#cb16-223" aria-hidden="true" tabindex="-1"></a>  $$</span>
+<span id="cb16-223"><a href="#cb16-223" aria-hidden="true" tabindex="-1"></a>$$</span>
 <span id="cb16-224"><a href="#cb16-224" aria-hidden="true" tabindex="-1"></a>\begin{aligned}</span>
 <span id="cb16-225"><a href="#cb16-225" aria-hidden="true" tabindex="-1"></a>gg(i,j)&amp;=0 \text{  if  } \forall h:g_h(i)\neq  g_h(j) <span class="sc">\\</span></span>
 <span id="cb16-226"><a href="#cb16-226" aria-hidden="true" tabindex="-1"></a>&amp;\text{ and 1 otherwise}</span>
@@ -1463,19 +1462,19 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb16-230"><a href="#cb16-230" aria-hidden="true" tabindex="-1"></a>If this is the case, $\sigma_{ij}=0$ is assumed zero if $gg(i,j)=0$, but allow to vary otherwise.</span>
 <span id="cb16-231"><a href="#cb16-231" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-232"><a href="#cb16-232" aria-hidden="true" tabindex="-1"></a>The implications that it has on the $\Omega$ matrix is that it will no longer be block diagonal, because elements outside the main diagonal (and block diagonal) will be different from zero.</span>
-<span id="cb16-233"><a href="#cb16-233" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-234"><a href="#cb16-234" aria-hidden="true" tabindex="-1"></a>\Omega_3 =</span>
-<span id="cb16-235"><a href="#cb16-235" aria-hidden="true" tabindex="-1"></a>\left(</span>
-<span id="cb16-236"><a href="#cb16-236" aria-hidden="true" tabindex="-1"></a>\begin{matrix}</span>
-<span id="cb16-237"><a href="#cb16-237" aria-hidden="true" tabindex="-1"></a>\sigma_1^2     &amp; \sigma_{1,2} &amp; 0         &amp; ...  &amp;  \sigma_{1,n} <span class="sc">\\</span></span>
-<span id="cb16-238"><a href="#cb16-238" aria-hidden="true" tabindex="-1"></a>\sigma_{1,2} &amp; \sigma_2^2     &amp; \sigma_{2,3}         &amp; ...  &amp;  0 <span class="sc">\\</span></span>
-<span id="cb16-239"><a href="#cb16-239" aria-hidden="true" tabindex="-1"></a>0            &amp; \sigma_{2,3}   &amp; \sigma_3^2  &amp; ...  &amp; \sigma_{3,n} <span class="sc">\\</span></span>
-<span id="cb16-240"><a href="#cb16-240" aria-hidden="true" tabindex="-1"></a>...          &amp; ...            &amp; ...       &amp; ...  &amp; ...  <span class="sc">\\</span></span>
-<span id="cb16-241"><a href="#cb16-241" aria-hidden="true" tabindex="-1"></a>\sigma_{1,n} &amp; 0            &amp; \sigma_{3,n}     &amp; ...  &amp; \sigma_n^2 <span class="sc">\\</span></span>
-<span id="cb16-242"><a href="#cb16-242" aria-hidden="true" tabindex="-1"></a>\end{matrix}\right)</span>
-<span id="cb16-243"><a href="#cb16-243" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-244"><a href="#cb16-244" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-245"><a href="#cb16-245" aria-hidden="true" tabindex="-1"></a>Visually, its perhaps easier to show this visually:</span>
+<span id="cb16-233"><a href="#cb16-233" aria-hidden="true" tabindex="-1"></a>$$\Omega_3 =</span>
+<span id="cb16-234"><a href="#cb16-234" aria-hidden="true" tabindex="-1"></a>\left(</span>
+<span id="cb16-235"><a href="#cb16-235" aria-hidden="true" tabindex="-1"></a>\begin{matrix}</span>
+<span id="cb16-236"><a href="#cb16-236" aria-hidden="true" tabindex="-1"></a>\sigma_1^2     &amp; \sigma_{1,2} &amp; 0         &amp; ...  &amp;  \sigma_{1,n} <span class="sc">\\</span></span>
+<span id="cb16-237"><a href="#cb16-237" aria-hidden="true" tabindex="-1"></a>\sigma_{1,2} &amp; \sigma_2^2     &amp; \sigma_{2,3}         &amp; ...  &amp;  0 <span class="sc">\\</span></span>
+<span id="cb16-238"><a href="#cb16-238" aria-hidden="true" tabindex="-1"></a>0            &amp; \sigma_{2,3}   &amp; \sigma_3^2  &amp; ...  &amp; \sigma_{3,n} <span class="sc">\\</span></span>
+<span id="cb16-239"><a href="#cb16-239" aria-hidden="true" tabindex="-1"></a>...          &amp; ...            &amp; ...       &amp; ...  &amp; ...  <span class="sc">\\</span></span>
+<span id="cb16-240"><a href="#cb16-240" aria-hidden="true" tabindex="-1"></a>\sigma_{1,n} &amp; 0            &amp; \sigma_{3,n}     &amp; ...  &amp; \sigma_n^2 <span class="sc">\\</span></span>
+<span id="cb16-241"><a href="#cb16-241" aria-hidden="true" tabindex="-1"></a>\end{matrix}\right)</span>
+<span id="cb16-242"><a href="#cb16-242" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-243"><a href="#cb16-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-244"><a href="#cb16-244" aria-hidden="true" tabindex="-1"></a>Its perhaps easier to show this visually:</span>
+<span id="cb16-245"><a href="#cb16-245" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-246"><a href="#cb16-246" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-249"><a href="#cb16-249" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
 <span id="cb16-250"><a href="#cb16-250" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo: true</span></span>
@@ -1486,133 +1485,132 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb16-255"><a href="#cb16-255" aria-hidden="true" tabindex="-1"></a><span class="in">*|   - 1-way cluster</span></span>
 <span id="cb16-256"><a href="#cb16-256" aria-hidden="true" tabindex="-1"></a><span class="in">*|   - 2nd 1-way cluster</span></span>
 <span id="cb16-257"><a href="#cb16-257" aria-hidden="true" tabindex="-1"></a><span class="in">*|   - 2-way cluster</span></span>
-<span id="cb16-258"><a href="#cb16-258" aria-hidden="true" tabindex="-1"></a><span class="in">*| layout-ncol: 3</span></span>
-<span id="cb16-259"><a href="#cb16-259" aria-hidden="true" tabindex="-1"></a><span class="in">*| column: page</span></span>
-<span id="cb16-260"><a href="#cb16-260" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-261"><a href="#cb16-261" aria-hidden="true" tabindex="-1"></a><span class="in">two (scatter rr11 rr12 if rr13==1,  ms(s) msize(2.1))  ///</span></span>
-<span id="cb16-262"><a href="#cb16-262" aria-hidden="true" tabindex="-1"></a><span class="in">    , aspect(1) legend(off)  xtitle("") ytitle("") yscale(off) xscale(off) name(m1, replace) </span></span>
-<span id="cb16-263"><a href="#cb16-263" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-264"><a href="#cb16-264" aria-hidden="true" tabindex="-1"></a><span class="in">two (scatter rr11 rr12 if rr14==1,  ms(s) msize(2.1))  ///</span></span>
-<span id="cb16-265"><a href="#cb16-265" aria-hidden="true" tabindex="-1"></a><span class="in">    , aspect(1) legend(off)  xtitle("") ytitle("") yscale(off) xscale(off) name(m2, replace)    </span></span>
-<span id="cb16-266"><a href="#cb16-266" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-267"><a href="#cb16-267" aria-hidden="true" tabindex="-1"></a><span class="in">two (scatter rr11 rr12 if rr14==1 | rr13==1,  ms(s) msize(2.1))  ///</span></span>
-<span id="cb16-268"><a href="#cb16-268" aria-hidden="true" tabindex="-1"></a><span class="in">    , aspect(1) legend(off)  xtitle("") ytitle("") yscale(off) xscale(off) name(m3, replace)</span></span>
-<span id="cb16-269"><a href="#cb16-269" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb16-270"><a href="#cb16-270" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-271"><a href="#cb16-271" aria-hidden="true" tabindex="-1"></a>@fig-corr shows the correlation structure we would observe considering the 2 clustered variables. @fig-corr-1 and @fig-corr-2 show the interconnections based on a first and a second cluster variables, whereas @fig-corr-3 considers the combination of both. To estimate Standard errors we need to allow the *blue* cells to be different from zero, impossing the zero condition only on the "unconnected" pairs.</span>
-<span id="cb16-272"><a href="#cb16-272" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-273"><a href="#cb16-273" aria-hidden="true" tabindex="-1"></a><span class="fu">## How to estimate $\sigma_{ij}$?</span></span>
-<span id="cb16-274"><a href="#cb16-274" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-275"><a href="#cb16-275" aria-hidden="true" tabindex="-1"></a>Up to this point, I have shown how one should think about the estimation of Standard errors. But you may also be interested in the practical approach. Specifically, how do we come up with estimates for $\sigma_i^2$ and $\sigma_{ij}$.?</span>
-<span id="cb16-276"><a href="#cb16-276" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-277"><a href="#cb16-277" aria-hidden="true" tabindex="-1"></a>This is actually straight forward!. Since we only see each unit once in crossection, our best estimation of terms is given by:</span>
-<span id="cb16-278"><a href="#cb16-278" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-279"><a href="#cb16-279" aria-hidden="true" tabindex="-1"></a>\hat \sigma_{ij} = \varepsilon_i*\varepsilon_j</span>
-<span id="cb16-280"><a href="#cb16-280" aria-hidden="true" tabindex="-1"></a>$$</span>
-<span id="cb16-281"><a href="#cb16-281" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-282"><a href="#cb16-282" aria-hidden="true" tabindex="-1"></a>where $\varepsilon_i$ is the unit specific unobserved component. So that is pretty much it! once you have $\hat \sigma_{ij}$ you simply need to define which assumption you want to use (homoskedastic errors, heteroskedastic, or clustered), identify which elements you will assume to be zero, and voila!...</span>
-<span id="cb16-283"><a href="#cb16-283" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-284"><a href="#cb16-284" aria-hidden="true" tabindex="-1"></a>Or almost. While what I describe here is technically correct, there are two limitations to its application compared to how is it done in most software.</span>
-<span id="cb16-285"><a href="#cb16-285" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-286"><a href="#cb16-286" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>I'm disregarding completely the role of degrees of freedom and corresponding corrections. </span>
-<span id="cb16-287"><a href="#cb16-287" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>The estimation of $\hat\Omega$ as described here is only feasible for small datasets, because it suggest creating a $N\times N$ matrix. This would easily consume all the resources of your computer.</span>
-<span id="cb16-288"><a href="#cb16-288" aria-hidden="true" tabindex="-1"></a>   </span>
-<span id="cb16-289"><a href="#cb16-289" aria-hidden="true" tabindex="-1"></a>Regarding point 2. While there are other ways to simply the math, thinking in terms of the unrestricted $\Omega$ is useful to understand the role of clustering and two way clustering in the data.</span>
-<span id="cb16-290"><a href="#cb16-290" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-291"><a href="#cb16-291" aria-hidden="true" tabindex="-1"></a><span class="fu">## `Stata` Example</span></span>
-<span id="cb16-292"><a href="#cb16-292" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-293"><a href="#cb16-293" aria-hidden="true" tabindex="-1"></a>Here I will work on a small example that would implement the 4 approaches to estimating standard errors. Because I will use the unrestrict $\hat\Omega$ matrix, I will work with a very small dataset: `auto'. The next contains lots of code, so feel free to skip it.</span>
-<span id="cb16-294"><a href="#cb16-294" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-297"><a href="#cb16-297" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
-<span id="cb16-298"><a href="#cb16-298" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo: true</span></span>
-<span id="cb16-299"><a href="#cb16-299" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
-<span id="cb16-300"><a href="#cb16-300" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-301"><a href="#cb16-301" aria-hidden="true" tabindex="-1"></a><span class="in">** Load Data, create clusters and a constant</span></span>
-<span id="cb16-302"><a href="#cb16-302" aria-hidden="true" tabindex="-1"></a><span class="in">sysuse auto, clear</span></span>
-<span id="cb16-303"><a href="#cb16-303" aria-hidden="true" tabindex="-1"></a><span class="in">set seed 1</span></span>
-<span id="cb16-304"><a href="#cb16-304" aria-hidden="true" tabindex="-1"></a><span class="in">replace price = price / 1000</span></span>
-<span id="cb16-305"><a href="#cb16-305" aria-hidden="true" tabindex="-1"></a><span class="in">gen one = 1</span></span>
-<span id="cb16-306"><a href="#cb16-306" aria-hidden="true" tabindex="-1"></a><span class="in">gen c1  = runiformint(1,5)</span></span>
-<span id="cb16-307"><a href="#cb16-307" aria-hidden="true" tabindex="-1"></a><span class="in">gen c2  = runiformint(1,5)</span></span>
-<span id="cb16-308"><a href="#cb16-308" aria-hidden="true" tabindex="-1"></a><span class="in">** Load Data to Mata to easy manipulation</span></span>
-<span id="cb16-309"><a href="#cb16-309" aria-hidden="true" tabindex="-1"></a><span class="in">mata: y = st_data(.,"price")</span></span>
-<span id="cb16-310"><a href="#cb16-310" aria-hidden="true" tabindex="-1"></a><span class="in">mata: x = st_data(.,"mpg one")</span></span>
-<span id="cb16-311"><a href="#cb16-311" aria-hidden="true" tabindex="-1"></a><span class="in">** estimate betas, ixx, and erros</span></span>
-<span id="cb16-312"><a href="#cb16-312" aria-hidden="true" tabindex="-1"></a><span class="in">mata: xx = cross(x,x); ixx = invsym(xx);xy=cross(x,y)</span></span>
-<span id="cb16-313"><a href="#cb16-313" aria-hidden="true" tabindex="-1"></a><span class="in">mata: b  = ixx * xy ;  e   = y:-x*b</span></span>
-<span id="cb16-314"><a href="#cb16-314" aria-hidden="true" tabindex="-1"></a><span class="in"> </span></span>
-<span id="cb16-315"><a href="#cb16-315" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb16-316"><a href="#cb16-316" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-317"><a href="#cb16-317" aria-hidden="true" tabindex="-1"></a>Homoskedastic errors: </span>
-<span id="cb16-318"><a href="#cb16-318" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-321"><a href="#cb16-321" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
-<span id="cb16-322"><a href="#cb16-322" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo: true</span></span>
-<span id="cb16-323"><a href="#cb16-323" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
-<span id="cb16-324"><a href="#cb16-324" aria-hidden="true" tabindex="-1"></a><span class="in">mata: omega_0 = I(74)*mean(e:^2)</span></span>
-<span id="cb16-325"><a href="#cb16-325" aria-hidden="true" tabindex="-1"></a><span class="in">mata: vcv_0   = ixx * x' * omega_0 * x * ixx</span></span>
-<span id="cb16-326"><a href="#cb16-326" aria-hidden="true" tabindex="-1"></a><span class="in">mata: svcv_0  = diagonal(vcv_0):^.5;svcv_0</span></span>
-<span id="cb16-327"><a href="#cb16-327" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb16-328"><a href="#cb16-328" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-329"><a href="#cb16-329" aria-hidden="true" tabindex="-1"></a>Robust Standard errors</span>
-<span id="cb16-332"><a href="#cb16-332" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
-<span id="cb16-333"><a href="#cb16-333" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo: true</span></span>
-<span id="cb16-334"><a href="#cb16-334" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
-<span id="cb16-335"><a href="#cb16-335" aria-hidden="true" tabindex="-1"></a><span class="in">mata: omega_1 = (e*e'):*I(74)</span></span>
-<span id="cb16-336"><a href="#cb16-336" aria-hidden="true" tabindex="-1"></a><span class="in">mata: vcv_1   = ixx * x' * omega_1 * x * ixx</span></span>
-<span id="cb16-337"><a href="#cb16-337" aria-hidden="true" tabindex="-1"></a><span class="in">mata: svcv_1  = diagonal(vcv_1):^.5;svcv_1</span></span>
-<span id="cb16-338"><a href="#cb16-338" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb16-339"><a href="#cb16-339" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-340"><a href="#cb16-340" aria-hidden="true" tabindex="-1"></a>1-way Cluster Standard errors:</span>
-<span id="cb16-343"><a href="#cb16-343" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
-<span id="cb16-344"><a href="#cb16-344" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo: true</span></span>
-<span id="cb16-345"><a href="#cb16-345" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
-<span id="cb16-346"><a href="#cb16-346" aria-hidden="true" tabindex="-1"></a><span class="in">mata: cc = st_data(.,"c1 c2")</span></span>
-<span id="cb16-347"><a href="#cb16-347" aria-hidden="true" tabindex="-1"></a><span class="in">mata: i1 = J(1,74,cc[,1]):==J(74,1,cc[,1]') </span></span>
-<span id="cb16-348"><a href="#cb16-348" aria-hidden="true" tabindex="-1"></a><span class="in">mata: i2 = J(1,74,cc[,2]):==J(74,1,cc[,2]') </span></span>
-<span id="cb16-349"><a href="#cb16-349" aria-hidden="true" tabindex="-1"></a><span class="in">mata: omega_2a = (e*e'):*i1; omega_2b = (e*e'):*i2</span></span>
-<span id="cb16-350"><a href="#cb16-350" aria-hidden="true" tabindex="-1"></a><span class="in">mata: vcv_2a   = ixx * x' * omega_2a * x * ixx</span></span>
-<span id="cb16-351"><a href="#cb16-351" aria-hidden="true" tabindex="-1"></a><span class="in">mata: vcv_2b   = ixx * x' * omega_2b * x * ixx</span></span>
-<span id="cb16-352"><a href="#cb16-352" aria-hidden="true" tabindex="-1"></a><span class="in">mata: svcv_2a  = diagonal(vcv_2a):^.5</span></span>
-<span id="cb16-353"><a href="#cb16-353" aria-hidden="true" tabindex="-1"></a><span class="in">mata: svcv_2b  = diagonal(vcv_2b):^.5</span></span>
-<span id="cb16-354"><a href="#cb16-354" aria-hidden="true" tabindex="-1"></a><span class="in">mata: svcv_2a, svcv_2b </span></span>
-<span id="cb16-355"><a href="#cb16-355" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb16-356"><a href="#cb16-356" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-357"><a href="#cb16-357" aria-hidden="true" tabindex="-1"></a>2-way Cluster Standard errors</span>
-<span id="cb16-360"><a href="#cb16-360" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
-<span id="cb16-361"><a href="#cb16-361" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo: true</span></span>
-<span id="cb16-362"><a href="#cb16-362" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
-<span id="cb16-363"><a href="#cb16-363" aria-hidden="true" tabindex="-1"></a><span class="in">mata: i3 = i1:|i2</span></span>
-<span id="cb16-364"><a href="#cb16-364" aria-hidden="true" tabindex="-1"></a><span class="in">mata: omega_3 = (e*e'):*i3</span></span>
-<span id="cb16-365"><a href="#cb16-365" aria-hidden="true" tabindex="-1"></a><span class="in">mata: vcv_3   = ixx * x' * omega_3 * x * ixx</span></span>
-<span id="cb16-366"><a href="#cb16-366" aria-hidden="true" tabindex="-1"></a><span class="in">mata: svcv_3  = diagonal(vcv_3):^.5; svcv_3</span></span>
-<span id="cb16-367"><a href="#cb16-367" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb16-368"><a href="#cb16-368" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-369"><a href="#cb16-369" aria-hidden="true" tabindex="-1"></a>But for the 2-way Cluster Standard errors you also have the more commonly used formula:</span>
-<span id="cb16-370"><a href="#cb16-370" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-373"><a href="#cb16-373" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
-<span id="cb16-374"><a href="#cb16-374" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo: true</span></span>
-<span id="cb16-375"><a href="#cb16-375" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
-<span id="cb16-376"><a href="#cb16-376" aria-hidden="true" tabindex="-1"></a><span class="in">** First we need to create a variable that combines both clusters</span></span>
-<span id="cb16-377"><a href="#cb16-377" aria-hidden="true" tabindex="-1"></a><span class="in">mata: i4 = i1:&amp;i2</span></span>
-<span id="cb16-378"><a href="#cb16-378" aria-hidden="true" tabindex="-1"></a><span class="in">mata: omega_4 = (e*e'):*i4</span></span>
-<span id="cb16-379"><a href="#cb16-379" aria-hidden="true" tabindex="-1"></a><span class="in">mata: vcv_aux   = ixx * x' * omega_4 * x * ixx</span></span>
-<span id="cb16-380"><a href="#cb16-380" aria-hidden="true" tabindex="-1"></a><span class="in">mata: vcv_4 = vcv_2a + vcv_2b - vcv_aux</span></span>
-<span id="cb16-381"><a href="#cb16-381" aria-hidden="true" tabindex="-1"></a><span class="in">mata: svcv_4  = diagonal(vcv_4):^.5; svcv_4</span></span>
-<span id="cb16-382"><a href="#cb16-382" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-258"><a href="#cb16-258" aria-hidden="true" tabindex="-1"></a><span class="in">*| fig-align: center</span></span>
+<span id="cb16-259"><a href="#cb16-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-260"><a href="#cb16-260" aria-hidden="true" tabindex="-1"></a><span class="in">two (scatter rr11 rr12 if rr13==1,  ms(s) msize(2.1))  ///</span></span>
+<span id="cb16-261"><a href="#cb16-261" aria-hidden="true" tabindex="-1"></a><span class="in">    , aspect(1) legend(off)  xtitle("") ytitle("") yscale(off) xscale(off) name(m1, replace) </span></span>
+<span id="cb16-262"><a href="#cb16-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-263"><a href="#cb16-263" aria-hidden="true" tabindex="-1"></a><span class="in">two (scatter rr11 rr12 if rr14==1,  ms(s) msize(2.1))  ///</span></span>
+<span id="cb16-264"><a href="#cb16-264" aria-hidden="true" tabindex="-1"></a><span class="in">    , aspect(1) legend(off)  xtitle("") ytitle("") yscale(off) xscale(off) name(m2, replace)    </span></span>
+<span id="cb16-265"><a href="#cb16-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-266"><a href="#cb16-266" aria-hidden="true" tabindex="-1"></a><span class="in">two (scatter rr11 rr12 if rr14==1 | rr13==1,  ms(s) msize(2.1))  ///</span></span>
+<span id="cb16-267"><a href="#cb16-267" aria-hidden="true" tabindex="-1"></a><span class="in">    , aspect(1) legend(off)  xtitle("") ytitle("") yscale(off) xscale(off) name(m3, replace)</span></span>
+<span id="cb16-268"><a href="#cb16-268" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-269"><a href="#cb16-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-270"><a href="#cb16-270" aria-hidden="true" tabindex="-1"></a>@fig-corr shows the correlation structure we would observe considering the 2 clustered variables. @fig-corr-1 and @fig-corr-2 show the interconnections based on a first and a second cluster variables, whereas @fig-corr-3 considers the combination of both. To estimate Standard errors we need to allow the *blue* cells to be different from zero, impossing the zero condition only on the "unconnected" pairs.</span>
+<span id="cb16-271"><a href="#cb16-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-272"><a href="#cb16-272" aria-hidden="true" tabindex="-1"></a><span class="fu">## How to estimate $\sigma_{ij}$?</span></span>
+<span id="cb16-273"><a href="#cb16-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-274"><a href="#cb16-274" aria-hidden="true" tabindex="-1"></a>Up to this point, I have shown how one should think about the estimation of Standard errors. But you may also be interested in the practical approach. Specifically, how do we come up with estimates for $\sigma_i^2$ and $\sigma_{ij}$.?</span>
+<span id="cb16-275"><a href="#cb16-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-276"><a href="#cb16-276" aria-hidden="true" tabindex="-1"></a>This is actually straight forward!. Since we only see each unit once in crossection, our best estimation of terms is given by:</span>
+<span id="cb16-277"><a href="#cb16-277" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-278"><a href="#cb16-278" aria-hidden="true" tabindex="-1"></a>\hat \sigma_{ij} = \varepsilon_i*\varepsilon_j</span>
+<span id="cb16-279"><a href="#cb16-279" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-280"><a href="#cb16-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-281"><a href="#cb16-281" aria-hidden="true" tabindex="-1"></a>where $\varepsilon_i$ is the unit specific unobserved component. So that is pretty much it! once you have $\hat \sigma_{ij}$ you simply need to define which assumption you want to use (homoskedastic errors, heteroskedastic, or clustered), identify which elements you will assume to be zero, and voila!...</span>
+<span id="cb16-282"><a href="#cb16-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-283"><a href="#cb16-283" aria-hidden="true" tabindex="-1"></a>Or almost. While what I describe here is technically correct, there are two limitations to its application compared to how is it done in most software.</span>
+<span id="cb16-284"><a href="#cb16-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-285"><a href="#cb16-285" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>I'm disregarding completely the role of degrees of freedom and corresponding corrections. </span>
+<span id="cb16-286"><a href="#cb16-286" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>The estimation of $\hat\Omega$ as described here is only feasible for small datasets, because it suggest creating a $N\times N$ matrix. This would easily consume all the resources of your computer.</span>
+<span id="cb16-287"><a href="#cb16-287" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb16-288"><a href="#cb16-288" aria-hidden="true" tabindex="-1"></a>Regarding point 2. While there are other ways to simply the math, thinking in terms of the unrestricted $\Omega$ is useful to understand the role of clustering and two way clustering in the data.</span>
+<span id="cb16-289"><a href="#cb16-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-290"><a href="#cb16-290" aria-hidden="true" tabindex="-1"></a><span class="fu">## `Stata` Example</span></span>
+<span id="cb16-291"><a href="#cb16-291" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-292"><a href="#cb16-292" aria-hidden="true" tabindex="-1"></a>Here I will work on a small example that would implement the 4 approaches to estimating standard errors. Because I will use the unrestrict $\hat\Omega$ matrix, I will work with a very small dataset: `auto'. The next contains lots of code, so feel free to skip it.</span>
+<span id="cb16-293"><a href="#cb16-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-296"><a href="#cb16-296" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb16-297"><a href="#cb16-297" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo: true</span></span>
+<span id="cb16-298"><a href="#cb16-298" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
+<span id="cb16-299"><a href="#cb16-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-300"><a href="#cb16-300" aria-hidden="true" tabindex="-1"></a><span class="in">** Load Data, create clusters and a constant</span></span>
+<span id="cb16-301"><a href="#cb16-301" aria-hidden="true" tabindex="-1"></a><span class="in">sysuse auto, clear</span></span>
+<span id="cb16-302"><a href="#cb16-302" aria-hidden="true" tabindex="-1"></a><span class="in">set seed 1</span></span>
+<span id="cb16-303"><a href="#cb16-303" aria-hidden="true" tabindex="-1"></a><span class="in">replace price = price / 1000</span></span>
+<span id="cb16-304"><a href="#cb16-304" aria-hidden="true" tabindex="-1"></a><span class="in">gen one = 1</span></span>
+<span id="cb16-305"><a href="#cb16-305" aria-hidden="true" tabindex="-1"></a><span class="in">gen c1  = runiformint(1,5)</span></span>
+<span id="cb16-306"><a href="#cb16-306" aria-hidden="true" tabindex="-1"></a><span class="in">gen c2  = runiformint(1,5)</span></span>
+<span id="cb16-307"><a href="#cb16-307" aria-hidden="true" tabindex="-1"></a><span class="in">** Load Data to Mata to easy manipulation</span></span>
+<span id="cb16-308"><a href="#cb16-308" aria-hidden="true" tabindex="-1"></a><span class="in">mata: y = st_data(.,"price")</span></span>
+<span id="cb16-309"><a href="#cb16-309" aria-hidden="true" tabindex="-1"></a><span class="in">mata: x = st_data(.,"mpg one")</span></span>
+<span id="cb16-310"><a href="#cb16-310" aria-hidden="true" tabindex="-1"></a><span class="in">** estimate betas, ixx, and erros</span></span>
+<span id="cb16-311"><a href="#cb16-311" aria-hidden="true" tabindex="-1"></a><span class="in">mata: xx = cross(x,x); ixx = invsym(xx);xy=cross(x,y)</span></span>
+<span id="cb16-312"><a href="#cb16-312" aria-hidden="true" tabindex="-1"></a><span class="in">mata: b  = ixx * xy ;  e   = y:-x*b</span></span>
+<span id="cb16-313"><a href="#cb16-313" aria-hidden="true" tabindex="-1"></a><span class="in"> </span></span>
+<span id="cb16-314"><a href="#cb16-314" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-315"><a href="#cb16-315" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-316"><a href="#cb16-316" aria-hidden="true" tabindex="-1"></a>Homoskedastic errors: </span>
+<span id="cb16-317"><a href="#cb16-317" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-320"><a href="#cb16-320" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb16-321"><a href="#cb16-321" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo: true</span></span>
+<span id="cb16-322"><a href="#cb16-322" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
+<span id="cb16-323"><a href="#cb16-323" aria-hidden="true" tabindex="-1"></a><span class="in">mata: omega_0 = I(74)*mean(e:^2)</span></span>
+<span id="cb16-324"><a href="#cb16-324" aria-hidden="true" tabindex="-1"></a><span class="in">mata: vcv_0   = ixx * x' * omega_0 * x * ixx</span></span>
+<span id="cb16-325"><a href="#cb16-325" aria-hidden="true" tabindex="-1"></a><span class="in">mata: svcv_0  = diagonal(vcv_0):^.5;svcv_0</span></span>
+<span id="cb16-326"><a href="#cb16-326" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-327"><a href="#cb16-327" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-328"><a href="#cb16-328" aria-hidden="true" tabindex="-1"></a>Robust Standard errors</span>
+<span id="cb16-331"><a href="#cb16-331" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb16-332"><a href="#cb16-332" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo: true</span></span>
+<span id="cb16-333"><a href="#cb16-333" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
+<span id="cb16-334"><a href="#cb16-334" aria-hidden="true" tabindex="-1"></a><span class="in">mata: omega_1 = (e*e'):*I(74)</span></span>
+<span id="cb16-335"><a href="#cb16-335" aria-hidden="true" tabindex="-1"></a><span class="in">mata: vcv_1   = ixx * x' * omega_1 * x * ixx</span></span>
+<span id="cb16-336"><a href="#cb16-336" aria-hidden="true" tabindex="-1"></a><span class="in">mata: svcv_1  = diagonal(vcv_1):^.5;svcv_1</span></span>
+<span id="cb16-337"><a href="#cb16-337" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-338"><a href="#cb16-338" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-339"><a href="#cb16-339" aria-hidden="true" tabindex="-1"></a>1-way Cluster Standard errors:</span>
+<span id="cb16-342"><a href="#cb16-342" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb16-343"><a href="#cb16-343" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo: true</span></span>
+<span id="cb16-344"><a href="#cb16-344" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
+<span id="cb16-345"><a href="#cb16-345" aria-hidden="true" tabindex="-1"></a><span class="in">mata: cc = st_data(.,"c1 c2")</span></span>
+<span id="cb16-346"><a href="#cb16-346" aria-hidden="true" tabindex="-1"></a><span class="in">mata: i1 = J(1,74,cc[,1]):==J(74,1,cc[,1]') </span></span>
+<span id="cb16-347"><a href="#cb16-347" aria-hidden="true" tabindex="-1"></a><span class="in">mata: i2 = J(1,74,cc[,2]):==J(74,1,cc[,2]') </span></span>
+<span id="cb16-348"><a href="#cb16-348" aria-hidden="true" tabindex="-1"></a><span class="in">mata: omega_2a = (e*e'):*i1; omega_2b = (e*e'):*i2</span></span>
+<span id="cb16-349"><a href="#cb16-349" aria-hidden="true" tabindex="-1"></a><span class="in">mata: vcv_2a   = ixx * x' * omega_2a * x * ixx</span></span>
+<span id="cb16-350"><a href="#cb16-350" aria-hidden="true" tabindex="-1"></a><span class="in">mata: vcv_2b   = ixx * x' * omega_2b * x * ixx</span></span>
+<span id="cb16-351"><a href="#cb16-351" aria-hidden="true" tabindex="-1"></a><span class="in">mata: svcv_2a  = diagonal(vcv_2a):^.5</span></span>
+<span id="cb16-352"><a href="#cb16-352" aria-hidden="true" tabindex="-1"></a><span class="in">mata: svcv_2b  = diagonal(vcv_2b):^.5</span></span>
+<span id="cb16-353"><a href="#cb16-353" aria-hidden="true" tabindex="-1"></a><span class="in">mata: svcv_2a, svcv_2b </span></span>
+<span id="cb16-354"><a href="#cb16-354" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-355"><a href="#cb16-355" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-356"><a href="#cb16-356" aria-hidden="true" tabindex="-1"></a>2-way Cluster Standard errors</span>
+<span id="cb16-359"><a href="#cb16-359" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb16-360"><a href="#cb16-360" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo: true</span></span>
+<span id="cb16-361"><a href="#cb16-361" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
+<span id="cb16-362"><a href="#cb16-362" aria-hidden="true" tabindex="-1"></a><span class="in">mata: i3 = i1:|i2</span></span>
+<span id="cb16-363"><a href="#cb16-363" aria-hidden="true" tabindex="-1"></a><span class="in">mata: omega_3 = (e*e'):*i3</span></span>
+<span id="cb16-364"><a href="#cb16-364" aria-hidden="true" tabindex="-1"></a><span class="in">mata: vcv_3   = ixx * x' * omega_3 * x * ixx</span></span>
+<span id="cb16-365"><a href="#cb16-365" aria-hidden="true" tabindex="-1"></a><span class="in">mata: svcv_3  = diagonal(vcv_3):^.5; svcv_3</span></span>
+<span id="cb16-366"><a href="#cb16-366" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-367"><a href="#cb16-367" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-368"><a href="#cb16-368" aria-hidden="true" tabindex="-1"></a>But for the 2-way Cluster Standard errors you also have the more commonly used formula:</span>
+<span id="cb16-369"><a href="#cb16-369" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-372"><a href="#cb16-372" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb16-373"><a href="#cb16-373" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo: true</span></span>
+<span id="cb16-374"><a href="#cb16-374" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
+<span id="cb16-375"><a href="#cb16-375" aria-hidden="true" tabindex="-1"></a><span class="in">** First we need to create a variable that combines both clusters</span></span>
+<span id="cb16-376"><a href="#cb16-376" aria-hidden="true" tabindex="-1"></a><span class="in">mata: i4 = i1:&amp;i2</span></span>
+<span id="cb16-377"><a href="#cb16-377" aria-hidden="true" tabindex="-1"></a><span class="in">mata: omega_4 = (e*e'):*i4</span></span>
+<span id="cb16-378"><a href="#cb16-378" aria-hidden="true" tabindex="-1"></a><span class="in">mata: vcv_aux   = ixx * x' * omega_4 * x * ixx</span></span>
+<span id="cb16-379"><a href="#cb16-379" aria-hidden="true" tabindex="-1"></a><span class="in">mata: vcv_4 = vcv_2a + vcv_2b - vcv_aux</span></span>
+<span id="cb16-380"><a href="#cb16-380" aria-hidden="true" tabindex="-1"></a><span class="in">mata: svcv_4  = diagonal(vcv_4):^.5; svcv_4</span></span>
+<span id="cb16-381"><a href="#cb16-381" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-382"><a href="#cb16-382" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-383"><a href="#cb16-383" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-384"><a href="#cb16-384" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-385"><a href="#cb16-385" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-386"><a href="#cb16-386" aria-hidden="true" tabindex="-1"></a><span class="fu">## Conclusions</span></span>
-<span id="cb16-387"><a href="#cb16-387" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-388"><a href="#cb16-388" aria-hidden="true" tabindex="-1"></a>In this note, I provide a walkthrough the estimation of different types of standard errors from a linear regression model.</span>
-<span id="cb16-389"><a href="#cb16-389" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-390"><a href="#cb16-390" aria-hidden="true" tabindex="-1"></a>While most textbooks already cover the basics of standard errors under homoskedasticity, heteroskedasticity, and oneway clustered errors, I have not seen an intuitive approach to understanding w-way clustered standard errors. </span>
-<span id="cb16-391"><a href="#cb16-391" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-392"><a href="#cb16-392" aria-hidden="true" tabindex="-1"></a>As I shown here, the idea of 2-way, or M-way, clustered standard errors is to allow arbitrary correlations across individuals, if they have to at least one common group (one cluster variable). </span>
-<span id="cb16-393"><a href="#cb16-393" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-394"><a href="#cb16-394" aria-hidden="true" tabindex="-1"></a>Now, one may be tempted to try and use this approach to allow for unconstrained correlation across all units. After all we are all connected to some way. However, because we do not see the true unobserved variance-covariance matrix, the variance of $\beta$ would not be identified without impossing restrictions on $\Omega$.</span>
-<span id="cb16-395"><a href="#cb16-395" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-396"><a href="#cb16-396" aria-hidden="true" tabindex="-1"></a>If you are interested in learning more about this topic, I would recommend you to read @cameron_robust_2011, @mackinnon_cluster-robust_2023 and @abadie_when_2022.</span>
+<span id="cb16-385"><a href="#cb16-385" aria-hidden="true" tabindex="-1"></a><span class="fu">## Conclusions</span></span>
+<span id="cb16-386"><a href="#cb16-386" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-387"><a href="#cb16-387" aria-hidden="true" tabindex="-1"></a>In this note, I provide a walkthrough the estimation of different types of standard errors from a linear regression model.</span>
+<span id="cb16-388"><a href="#cb16-388" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-389"><a href="#cb16-389" aria-hidden="true" tabindex="-1"></a>While most textbooks already cover the basics of standard errors under homoskedasticity, heteroskedasticity, and oneway clustered errors, I have not seen an intuitive approach to understanding w-way clustered standard errors. </span>
+<span id="cb16-390"><a href="#cb16-390" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-391"><a href="#cb16-391" aria-hidden="true" tabindex="-1"></a>As I shown here, the idea of 2-way, or M-way, clustered standard errors is to allow arbitrary correlations across individuals, if they have to at least one common group (one cluster variable). </span>
+<span id="cb16-392"><a href="#cb16-392" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-393"><a href="#cb16-393" aria-hidden="true" tabindex="-1"></a>Now, one may be tempted to try and use this approach to allow for unconstrained correlation across all units. After all we are all connected to some way. However, because we do not see the true unobserved variance-covariance matrix, the variance of $\beta$ would not be identified without impossing restrictions on $\Omega$.</span>
+<span id="cb16-394"><a href="#cb16-394" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-395"><a href="#cb16-395" aria-hidden="true" tabindex="-1"></a>If you are interested in learning more about this topic, I would recommend you to read @cameron_robust_2011, @mackinnon_cluster-robust_2023 and @abadie_when_2022.</span>
 </code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
