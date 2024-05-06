@@ -9,7 +9,7 @@
 <link>https://friosavila.github.io/chatgpt.html</link>
 <atom:link href="https://friosavila.github.io/chatgpt.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.4.549</generator>
+<generator>quarto-1.4.553</generator>
 <lastBuildDate>Thu, 25 Jan 2024 05:00:00 GMT</lastBuildDate>
 <item>
   <title>Quarto 1.4</title>
@@ -225,6 +225,7 @@ font-style: inherit;">    :::</span></span></code></pre></div>
 Table&nbsp;2: Table made with HTML
 </figcaption>
 <div aria-describedby="tbl-table2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
 <table data-quarto-postprocess="true" data-border="0" width="*" class="table">
 <colgroup>
 <col style="width: 20%">
@@ -330,6 +331,7 @@ Table&nbsp;2: Table made with HTML
 </table>
 
 
+</div>
 </div>
 </figure>
 </div>
@@ -834,7 +836,7 @@ font-style: inherit;">xline</span>(10 20 100)</span></code></pre></div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://friosavila.github.io/chatgpt/weakiv_08_15_2023/index_files/figure-html/cell-3-output-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://friosavila.github.io/chatgpt/weakiv_08_15_2023/index_files/figure-html/cell-3-output-1.png" class="img-fluid figure-img"></p>
 <figcaption>F-Statistics Distribution</figcaption>
 </figure>
 </div>
@@ -2354,7 +2356,7 @@ font-style: inherit;">ylabel</span>(0(5)25)</span></code></pre></div>
 <div id="fig-sc1" class="quarto-layout-panel page-columns page-full">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
 <div aria-describedby="fig-sc1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
-<div class="quarto-layout-row page-columns page-full">
+<div class="quarto-layout-row page-full">
 <div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc1" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div id="fig-sc1-1" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
 <figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
@@ -2380,7 +2382,7 @@ font-style: inherit;">ylabel</span>(0(5)25)</span></code></pre></div>
 </div>
 </div>
 </div>
-<div class="quarto-layout-row page-columns page-full">
+<div class="quarto-layout-row page-full">
 <div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc1" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div id="fig-sc1-3" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
 <figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
@@ -2504,7 +2506,7 @@ font-style: inherit;">ylabel</span>(0(5)25)</span></code></pre></div>
 <div id="fig-sc2" class="quarto-layout-panel page-columns page-full">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
 <div aria-describedby="fig-sc2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
-<div class="quarto-layout-row page-columns page-full">
+<div class="quarto-layout-row page-full">
 <div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc2" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div id="fig-sc2-1" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
 <figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
@@ -2530,7 +2532,7 @@ font-style: inherit;">ylabel</span>(0(5)25)</span></code></pre></div>
 </div>
 </div>
 </div>
-<div class="quarto-layout-row page-columns page-full">
+<div class="quarto-layout-row page-full">
 <div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc2" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div id="fig-sc2-3" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
 <figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
@@ -2654,7 +2656,7 @@ font-style: inherit;">ylabel</span>(0(5)25)</span></code></pre></div>
 <div id="fig-sc3" class="quarto-layout-panel page-columns page-full">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
 <div aria-describedby="fig-sc3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
-<div class="quarto-layout-row page-columns page-full">
+<div class="quarto-layout-row page-full">
 <div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc3" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div id="fig-sc3-1" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
 <figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
@@ -2680,7 +2682,7 @@ font-style: inherit;">ylabel</span>(0(5)25)</span></code></pre></div>
 </div>
 </div>
 </div>
-<div class="quarto-layout-row page-columns page-full">
+<div class="quarto-layout-row page-full">
 <div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc3" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div id="fig-sc3-3" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
 <figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
@@ -2805,7 +2807,7 @@ font-style: inherit;">ylabel</span>(0(5)25)</span>
 <div id="fig-sc4" class="quarto-layout-panel page-columns page-full">
 <figure class="quarto-float quarto-float-fig figure page-columns page-full">
 <div aria-describedby="fig-sc4-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca" class="page-columns page-full">
-<div class="quarto-layout-row page-columns page-full">
+<div class="quarto-layout-row page-full">
 <div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc4" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div id="fig-sc4-1" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
 <figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
@@ -2831,7 +2833,7 @@ font-style: inherit;">ylabel</span>(0(5)25)</span>
 </div>
 </div>
 </div>
-<div class="quarto-layout-row page-columns page-full">
+<div class="quarto-layout-row page-full">
 <div class="cell-output cell-output-display quarto-layout-cell-subref quarto-layout-cell page-columns page-full" data-ref-parent="fig-sc4" style="flex-basis: 50.0%;justify-content: flex-start;">
 <div id="fig-sc4-3" class="quarto-figure quarto-figure-center quarto-float anchored page-columns page-full">
 <figure class="quarto-float quarto-subfloat-fig figure page-columns page-full">
