@@ -1,0 +1,126 @@
+---
+title: "Fernando Rios-Avila"
+format:
+  html:
+    css: styles.css
+    page-layout: full
+  pdf:
+    documentclass: moderncv
+    papersize: letter
+    geometry:
+      - top=20mm
+      - left=20mm
+      - right=20mm
+      - bottom=20mm
+    mainfont: Arial
+    sansfont: Arial
+bibliography: reference.bib
+nocite: |
+  @*
+csl: apa-cv.csl
+---
+
+## Contact Information
+
+64 Oak Streat • Rensselear, NY, 12144 • (404) 924-5176 • friosa@gmail.com
+
+## Research Interests
+
+Labor Economics, Applied Microeconomics, Applied Econometrics, Poverty and Inequality
+
+## Education
+
+**PhD in Economics** | Georgia State University | 2008-2013
+Dissertation: "Essays on Unions, Wages, and Performance: Evidence from Latin America"
+
+**Advanced Studies (M.Sc) International Economics** | Kiel University - Germany | 2007-2008
+
+**Licenciatura en Economia** (5 yr program, BS equivalent) | Universidad Católica Boliviana | 2000-2004
+*Honored Distinguished*
+
+## Professional Experience
+
+**Research Scholar** | Levy Economics Institute of Bard College | August 2013 – Present
+
+**Research Assistant** | Federal Reserve Bank of Atlanta | August 2010 – June 2013
+
+**Graduate Research Assistant** | Georgia State University | August 2008 – December 2013
+
+**Consultant (UNICEF Project)** | Economic and Social Policy Analysis Unit (UDAPE) | July 2005 – June 2007
+
+**Internship** | Superintendence of Hydrocarbon, Financial and Economic Analysis-Department | January 2004 – July 2004
+
+## Teaching Experience
+
+**Levy Economics Institute**
+
+- Intersecting Inequalities: Labor Market Institutions (Graduate Level) | March 2018
+- Intersecting Inequalities: Decompositions Methods in Economics (Graduate Level) | February 2017
+- Econometrics of Poverty, Inequality and Social Science Research (Graduate Level) | August 2015- Present
+- Research Methods: Econometrics I (Graduate Level) | August 2018- Present
+
+## Publications
+
+### Refereed Publications
+
+::: {#refs}
+:::
+
+### Non-refereed Publications
+
+1. Zacharias, A., T. Masterson, F. Rios-Avila, K. Kim, and T. Khitarishvili. 2018. "The Measurement of Time and Consumption Poverty in Ghana and Tanzania." Research Project Report, August. Annandale-on-Hudson, NY: Levy Economics Institute of Bard College.
+
+2. Rios Avila, F. (2016) "Losing Ground: Demographic Trends in US Labor Force Participation". Policy Note 2015-7. Levy Economics Institute of Bard College
+
+3. Rios-Avila, F. (2015) "A Decade of Declining Wages: From Bad to Worse". Policy Note 2015-3. Levy Economics Institute of Bard College
+
+## Thesis Advisor
+
+- María Aristizábal-Ramírez (Undergraduate Thesis)
+- Ian Bowen (Master Thesis)
+- Alejandra Montoya (Master Thesis)
+- Daniella Medina (Master Thesis)
+- Rhett Maiorama (Master Thesis)
+- Esteban Rivera (Master Thesis)
+
+## Languages and Software
+
+**Statistical software with programming experience:**
+- Advanced: Stata, R
+- Intermediate: Eviews, Python
+
+**Languages:** 
+- Spanish (Native)
+- English (Fluent)
+
+I've reviewed your CV, and it's quite impressive with a strong academic background and extensive research experience. Here are some suggestions to potentially improve it:
+
+1. Summary Statement: Consider adding a brief professional summary at the beginning. This can quickly highlight your key strengths, research focus, and career objectives.
+
+2. Research Impact: If available, include metrics like citation counts or h-index to demonstrate the impact of your research.
+
+3. Skills Section: Add a dedicated skills section to highlight your technical skills, especially your proficiency in statistical software and programming languages.
+
+4. Awards and Honors: If you've received any notable awards or honors during your academic or professional career, consider adding a separate section for these.
+
+5. Grants and Funding: If you've secured any research grants or funding, highlight these in a separate section.
+
+6. Professional Memberships: Include any relevant professional associations or academic societies you're a member of.
+
+7. Formatting: Consider using bullet points for easier readability, especially in the Publications and Research section.
+
+8. Teaching Experience: Expand on your teaching experience by briefly mentioning teaching methodologies or any positive student feedback.
+
+9. Chronological Order: Ensure all sections are in reverse chronological order (most recent first) for consistency.
+
+10. Peer Review Activities: If you've served as a peer reviewer for journals, mention this to show your standing in the academic community.
+
+11. Conference Presentations: If you've presented at conferences, consider adding a section for these.
+
+12. Professional Development: Include any relevant workshops, seminars, or additional training you've completed.
+
+13. Collaboration Highlights: If you've worked on notable collaborative projects or with prominent researchers, consider highlighting these.
+
+14. Research Interests: Consider expanding on your research interests to give a more detailed picture of your academic focus.
+
+These suggestions aim to make your CV more comprehensive and highlight your strengths even further. Remember to tailor your CV to the specific purpose or institution you're applying to, emphasizing the most relevant aspects of your experience and expertise.
