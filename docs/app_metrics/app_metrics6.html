@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.553">
+<meta name="generator" content="quarto-1.5.45">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -10,7 +10,7 @@
 <meta name="author" content="Gustavo Canavire-Bacarreza">
 <meta name="author" content="Flavia Sacco Capurro">
 
-<title>Playing With Stata - Making better use of interval-censored data</title>
+<title>Making better use of interval-censored data – Playing With Stata</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -36,7 +36,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -150,7 +150,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -189,7 +189,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
@@ -200,11 +200,11 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
     </nav>
   <nav class="quarto-secondary-nav">
     <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
         <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../app_metrics/app_metrics1.html">App Metrics</a></li><li class="breadcrumb-item"><a href="../app_metrics/app_metrics6.html">Making better use of interval-censored data</a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
   </nav>
@@ -228,9 +228,9 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
-            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true">
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
  <span class="menu-text">App Metrics</span></a>
-          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="true" aria-label="Toggle section">
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
       </div>
@@ -366,7 +366,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <div aria-describedby="fig-corr1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-corr1" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div id="fig-corr1-1" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-corr1-1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-corr1-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="intreg_mi1.png" class="img-fluid figure-img" data-ref-parent="fig-corr1">
@@ -378,7 +378,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 </div>
 </div>
 <div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="fig-corr1" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div id="fig-corr1-2" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-corr1-2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-fig figure">
 <div aria-describedby="fig-corr1-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="intreg_mi2.png" class="img-fluid figure-img" data-ref-parent="fig-corr1">
@@ -399,7 +399,7 @@ Figure&nbsp;1: Wages vs Education, Age and Tenure
 <p><a href="#fig-corr1" class="quarto-xref">Figure&nbsp;1</a> presents information on the visual correlations between wages and three of the varialbes of interest. <a href="#fig-corr1-1" class="quarto-xref">Figure&nbsp;1 (a)</a> provides scatter plots of the fully observed wages agains the explanatory variables, whereas <a href="#fig-corr1-2" class="quarto-xref">Figure&nbsp;1 (b)</a> does the same, but using the bracket censored data.</p>
 <p>If one is interested in analyzing other moments, such as conditional quantiles, current methods would not allow for it, since they are mostly focused on explaining conditional means. However, that is where our approach comes into place. We start by using the <code>intreg, het()</code> command to model both the conditional mean and conditional variance. The latter is important because it allows us to explicitly model relationships between the dependent and independent variables that vary across the distribution. After we estimate the parameters for the conditional distribution, we can use it to generate multiple syntethic datasets (multiple imputation) with our command <code>intreg_mi</code>. This multiple imputed data can later be analyzed using standard econometric tools.</p>
 <p>We use this strategy with the data from <a href="#fig-corr1-2" class="quarto-xref">Figure&nbsp;1 (b)</a>, and generate multiple synthetic datasets to reconstruct the censored data. For completeness, we impute directly <strong>wages</strong> as well as <strong>log(wages)</strong>. To inspect how well the imputed data replicates the original data, we plot their density functions in <a href="#fig-den" class="quarto-xref">Figure&nbsp;2</a>. The yellow line representing the true wage distribution, and the blue lines corresponding to the imputed data. And of this scenario, it seems that imputed log(wages), or wages directly has little effect in the replicating the wage distribution.</p>
-<div id="fig-den" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-den" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-den-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="intreg_mi3.png" class="img-fluid figure-img">
@@ -410,7 +410,7 @@ Figure&nbsp;2: Observed vs Imputed Wages
 </figure>
 </div>
 <p>After creating the multiple-imputed synthethic datasets, they can be analyzed applying standard aggregation rules. In <code>Stata</code>, this can be done using <code>mi</code> commands. Because multiple imputation would provide no added value to the estimation of conditional means (linear regression), we compare esitmates using conditional quantile regressions.</p>
-<div id="fig-qret" class="quarto-figure quarto-figure-center quarto-float anchored">
+<div id="fig-qret" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-qret-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="intreg_mi4.png" class="img-fluid figure-img">
@@ -430,13 +430,13 @@ Table&nbsp;1: Inequality Statistics by Gender
 <div aria-describedby="tbl-ineq-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="quarto-layout-row">
 <div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="tbl-ineq" style="flex-basis: 50.0%;justify-content: center;">
-<div id="tbl-ineq1" class="quarto-float anchored">
+<div id="tbl-ineq1" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-ineq1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (a) Men
 </figcaption>
 <div aria-describedby="tbl-ineq1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table class="table">
+<table class="caption-top table">
 <thead>
 <tr class="header">
 <th style="text-align: left;"></th>
@@ -513,13 +513,13 @@ Table&nbsp;1: Inequality Statistics by Gender
 </div>
 </div>
 <div class="quarto-layout-cell-subref quarto-layout-cell" data-ref-parent="tbl-ineq" style="flex-basis: 50.0%;justify-content: center;">
-<div id="tbl-ineq2" class="quarto-float anchored">
+<div id="tbl-ineq2" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-subfloat-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-subfloat-caption quarto-subfloat-tbl" id="tbl-ineq2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 (b) Women
 </figcaption>
 <div aria-describedby="tbl-ineq2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table class="table">
+<table class="caption-top table">
 <thead>
 <tr class="header">
 <th style="text-align: left;"></th>
@@ -683,18 +683,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -726,7 +715,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
   const viewSource = window.document.getElementById('quarto-view-source') ||
                      window.document.getElementById('quarto-code-tools-source');
   if (viewSource) {
@@ -785,7 +796,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -1239,7 +1250,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a><span class="fu">## Software </span></span>
 <span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a>The excercise presented here was produce using <span class="in">`Stata`</span>. The modeling was done using the official commands <span class="in">`intreg`</span>. The imputed values were generated our command <span class="co">[</span><span class="ot">`intreg_mi`</span><span class="co">](https://github.com/friosavila/stpackages/tree/main/intreg_mi)</span>. The analysis of the data was performed using <span class="in">`mi`</span>, <span class="in">`qreg`</span> and <span class="in">`rifhdreg`</span>. </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a>The excercise presented here was produce using <span class="in">`Stata`</span>. The modeling was done using the official commands <span class="in">`intreg`</span>. The imputed values were generated our command <span class="co">[</span><span class="ot">`intreg_mi`</span><span class="co">](https://github.com/friosavila/stpackages/tree/main/intreg_mi)</span>. The analysis of the data was performed using <span class="in">`mi`</span>, <span class="in">`qreg`</span> and <span class="in">`rifhdreg`</span>. </span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
