@@ -1,0 +1,73 @@
+---
+title: "How to write your own Installer"
+description: "I provide a small description on how to use `net` to program an easy installer for your own repository"
+author: "Fernando Rios-Avila"
+date: "3/30/2023"
+categories: 
+    - Stata
+    - Tips
+    - Programming
+format:
+  html:
+    code-line-numbers: true
+draft: false
+---
+
+If you are an avid Stata user, you know that **THE** place to search and access user-written, now community-contributed, programs is via `SSC`. 
+
+`SSC` is a command that allows you to install community-contributed programs from the ***Boston College Statistical Software Components***, provided by http://repec.org. This archive has become the "official" place to store all "unofficial" programs. 
+
+While not official, most `SSC` programs are ment to be well documented, hard tested, and maintained set or programs that are of general interest. However, what if you want to share programs that are do not meet all this requirements. Say, you are writting small rutines for your own work, as well as your collegues.
+
+For those cases, there is `net`. This program is what operates behind `ssc` to bring forward, and allows you to install programs from the internet, and why not, your own repository.
+
+So here is where today's post is about. How to write a wrapper around `net` that would easily install other programs from your personal repository.
+
+## Structure of the program
+
+To write your wrapping program you need two things:
+
+- name for the program. I find this the hardest part, as you want something simple, memorable, that will connect to your research in general. In my case, I just decided to call it `fra`
+- the address for your repository. If you are archeving your programs online (outside of `ssc`) you already have this. In my case, it will be my `stpackage` repository.
+
+With these two elements lets write the wrapper:
+
+```stata
+program fra
+	syntax anything, [all replace force]
+	local from "https://friosavila.github.io/stpackages"
+	tokenize `anything'
+
+    if "`1'`2'"==""  net from `from' 
+    else if !inlist("`1'","describe", "install", "get") {
+        display as error "`1' invalid subcommand"
+    }
+    else {
+        net `1' `2', `all' `replace' from(`from')
+    }
+    qui:net from http://www.stata.com/
+end
+```
+
+As you can see, this is a minimal program. It will only use 3 options:
+
+- all : the all the package contents are downloaded (in addition to the ado and helpfiles)
+- replace: to replace the currently available program in your computer
+- force: To force any action.
+  
+Line 3 is equally important, because is where your repository address will go. That way, users won't have to modify "from" everytime they want to get your packages.
+
+Lines 6-12 will do the installing for you (or packages description).
+
+Lastly, to be nice, line 13 will restore `net` to the default addres: Stata
+
+The last step, of course, is to save this file with the name `fra.ado`. Excecute it once, and start redistributing your packages.
+
+If you are doing this I would suggest trying the following:
+
+```stata
+fra install fra, replace
+```
+
+That way, it will store the information in the right place, and you wont have to worry about it anymore!
+

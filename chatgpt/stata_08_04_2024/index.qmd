@@ -1,0 +1,206 @@
+---
+title: "Stata Crash Course: Publication Ready Tables"
+description: "Producing tables for publication using Stata"
+author: "Fernando Rios-Avila"
+date: "8/4/2024"
+categories: 
+    - Stata
+    - Basics
+cache: true
+draft: false
+---
+
+Continuing this quick series of guides with Stata. Something we all need. Tables! Tables are a fundamental part of presenting research results, and there is a community-contributed command that makes it easy to create publication-ready tables in Stata: `estout/esttab/estpost`. These command come to you thanks to **Ben Jann**. They allow you to generate tables from estimation results, matrices, in a format suitable for publication, including HTML, LaTeX and Markdown.
+
+Of course, for this you need a quick setup:
+
+```stata
+// Install estout package
+ssc install estout
+```
+
+#  Summary Statistics 
+
+One of the most common tasks in data analysis is to generate summary statistics. We all know that the easiest way to do this is to use the `summarize` command. However, making statics tables from the command is not straightforward. However, with `estpost`, you can easily generate summary statistics tables.
+
+Let's start with creating a table of summary statistics. For this example, we will use the `auto` dataset that comes with Stata, and output the tables in markdown format. The output you will see is based on that format.
+
+```{stata}
+*| code-fold: false
+*| output: false
+// Load sample data
+sysuse auto, clear
+
+// Create summary statistics table
+estpost summarize price mpg weight length
+est sto summary_stats
+esttab summary_stats using summary_stats.txt, ///
+    cells("mean(fmt(2)) sd(fmt(2)) min max") ///
+    nomtitle nonumber md replace label
+```
+
+:::{#tbl-summary-stats}
+
+{{< include summary_stats.txt >}}
+
+Data source: Auto dataset
+
+Table 1: Summary Statistics
+:::
+
+So how does this work?
+
+`estpost` catches the output of the `summarize` command and stores into many e() matrices, all part of a new "summary_stats".
+
+Then `esttab` formats the content to create a nice table. The `cells()` option specifies the contents of each table. It should use the "matrices" saved by `estpost`. The `nomtitle` option removes the title of the table. The `nonumber` option removes the row numbers. The `md` option specifies that the output format is markdown, but other options are possible. The `replace` option overwrites the file if it already exists. The `label` option uses variable labels instead of names. Within the `cells()` option, `name(fmt(???))` specifies the format of the cell content.
+
+Notice that if "statistic" are specified within quotes, they will be posted side by side. If they are not, they will be posted one below the other.
+
+## Advanced Summary Statistics
+
+You can also generate more advanced summary statistics tables, including grouped statistics and custom formatting. Here's an example:
+
+```{stata}
+*| code-fold: false
+*| output: false
+// Load sample data
+webuse nlsw88, clear
+
+// Calculate summary statistics by occupation category
+estpost tabstat wage age tenure, by(race) statistics(mean sd min max n) columns(statistics)
+est sto advanced_summary
+// Create advanced summary statistics table
+esttab advanced_summary using advanced_summary.txt, ///
+    cells("mean(fmt(2)) sd(fmt(2)) min(fmt(1)) max(fmt(1)) count(fmt(0))") ///
+    noobs nonumber nomtitle     ///
+    collabels("Mean" "Std. Dev." "Min" "Max" "N") ///
+    eqlabels("White" "Black" "Other") ///
+    varlabels(wage "&nbsp;&nbsp;Hourly Wage" age "&nbsp;&nbsp;Age" tenure "&nbsp;&nbsp;Job Tenure") ///
+    alignment(r) width(20) ///
+    replace noline md
+```
+
+:::{#tbl-asummary-stats}
+
+{{< include advanced_summary.txt >}}
+
+Data source: NLSW 1988
+
+Advanced Summary Statistics by Race
+
+:::
+
+In this example, notice that I use varlabels to provide custom labels for the variables. Because I want to use markdown for the output, I use `&nbsp;` to add spaces, and add some hierarchy on the tables.  I also use eqlabels to provide custom labels for the equation names (in this case, race categories). The alignment(r) option right-aligns all cells, althought it does not have an effect on md. The noline option removes the horizontal lines between rows.
+
+## Regression Table
+
+Next is the most common excercise we would do in Stata: regression analysis. Here's how you can create a table with regression results:
+
+```{stata}
+*| code-fold: false
+*| output: false
+// Load sample data
+sysuse auto, clear
+regress price weight mpg
+estimates store model1
+regress price weight mpg foreign
+estimates store model2
+
+// Create regression table
+esttab model1 model2 using regression_results.txt, ///
+    b(3) se(3) star(* 0.10 ** 0.05 *** 0.01) ///
+    r2 ar2 nonumber replace note("") noline md ///
+    mtitle("Model 1" "Model 2")
+```
+
+:::{#tbl-regression}
+
+{{< include regression_results.txt >}}
+
+Data source: Auto, Standard errors in parentheses, * p<0.10, ** p<0.05, *** p<0.01
+
+Regression Results
+
+:::
+
+This code is more straight forward. After the regressions are estimated, and stored with `est sto`, the `esttab` command is used to create the table. The `b(3)` and `se(3)` options specify that the coefficients and standard errors should be displayed with 3 decimal places. The `star()` option specifies the significance levels for the stars. The `r2 ar2` options include the R-squared and adjusted R-squared statistics. The `nonumber` option removes the row numbers. This is necessary for `markdown` tables, because markdown only allows for a single title row.
+
+## Correlation Matrix
+
+Correlation matrices are also common in data analysis. They are easy enough to create with `correlate`. Making them into a table can also be easy:
+
+```{stata}
+*| code-fold: false
+*| output: false
+// Generate correlation matrix
+estpost correlate price mpg weight length, matrix
+est sto corr_matrix
+// Create correlation table
+esttab corr_matrix using correlation_matrix.txt, ///
+    cell("rho(fmt(3))") replace nonumber collabels(none) ///
+    nomtitle noline unstack label md
+```
+
+
+:::{#tbl-corr}
+
+{{< include correlation_matrix.txt >}}
+
+Data source: Auto
+
+Correlation matrix
+
+:::
+
+This creates a correlation matrix with formatted coefficients. In contrast with `correlate`, if using `estatpost`, its necessary to also use the option `matrix`.
+
+In case of `esttab`, it is necessary to use `unstuck`. But other than that, obtaining the tables is quite straightforward.
+
+## Regressions with Fixed Effects 
+
+Now something that is very common in regression analysis: fixed effects models. A usual question is how to create tables that signal the inclusion of fixed effects. Here's an example:
+
+```{stata}
+*| code-fold: false
+*| output: false
+// Load panel data and set as panel
+webuse nlswork, clear
+xtset idcode year
+// ssc install reghdfe
+
+// Run regressions
+reghdfe ln_wage tenure c.age##c.age 
+est sto no_fe
+
+reghdfe ln_wage tenure c.age##c.age , absorb(idcode)
+est sto id_fe
+estadd local id_fe "X"
+
+reghdfe ln_wage tenure c.age##c.age , absorb(idcode year)
+est sto idyr_fe
+estadd local id_fe "X"
+estadd local yr_fe "X"
+
+// Create table
+ 
+esttab no_fe  id_fe idyr_fe using mreg.txt, ///
+scalar("id_fe Individual FE" "yr_fe Yr FE") ///
+noline  md  nonotes nomtitle  replace
+ 
+```
+
+:::{#tbl-corr}
+
+{{< include mreg.txt >}}
+
+Data source: NLSW 1988, <sup>\*</sup> *p* < 0.05, <sup>\*\*</sup> *p* < 0.01, <sup>\*\*\*</sup> *p* < 0.001
+
+Regression Results with FE
+
+:::
+
+This example shows how to use `estadd` to include additional information to a regression. This information can be later used in the table. In this case, the fixed effects are included in the table. The `scalar` option is used to include the extra information.
+
+## Conclusion
+
+I think these are the most basic tables you can create with `esttab`. There are many more options available, and you can customize the tables to your needs. Using Quarto, something I am doing more often, is to create the tables in Stata, modify the latex code, and then include them in the final document. This is a great way to create reproducible research.

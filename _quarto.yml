@@ -1,0 +1,94 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Playing With Stata"
+  google-analytics:  "G-GNMLZDYJ2P"    
+  reader-mode: true
+  page-navigation: true
+  site-url: https://friosavila.github.io/
+  navbar: 
+    
+    search: true
+    right:
+    - text: "Home"      
+      file: index.qmd
+    - text: "my CV and Research"      
+      file: cv.qmd 
+    - text: "Software"      
+      file: software.qmd        
+    - text: "Stata Viz"
+      file: "stataviz/index.qmd"  
+    - text: "Stata Do's Ado's"
+      file: "stata_do/index.qmd"
+    - text: "Applied econometrics"  
+      file: "app_metrics/index.qmd"
+    - text: "Odds and Ends"      
+      file: chatgpt.qmd
+    - text: "about"      
+      file: about.qmd
+
+
+  sidebar:
+
+  - title: "Stata Viz"
+    logo: WeeMee.jpg
+    contents:
+      - "stataviz/index.qmd"
+      - auto: "stataviz/stataviz*.qmd"
+      
+      #- joy_plot.qmd
+      #- sanekey_plot.qmd
+      #- mscatter.qmd
+      #- waffle_plot.qmd
+      #- qregplot.qmd
+      #- spirograph.qmd
+
+  - title: "Stata Do's Ado's"
+    contents:
+      #- stata_do.qmd     
+      - "stata_do/index.qmd"    
+      - auto: "stata_do/stata_do*.qmd"      
+      #- probit_ml.qmd
+      
+  #- title: "Stata Programs"
+    #contents: 
+      #- stata_ado.qmd
+      #- auto: "stata_ado*.qmd"
+      #- ky_fit.qmd   
+      #- vc_reg.qmd
+      #- intregmi.qmd
+
+  - title: "Applied econometrics"
+    contents:
+      - "app_metrics/index.qmd"
+      - auto: "app_metrics/app_metrics*.qmd"
+      #- wls_ols.qmd
+      #- cqr_simulation.qmd
+      #- qreg_1.qmd
+      #- qreg_2.qmd
+      #- jwdid.qmd
+      #- csdid.qmd
+      #- csdid2.qmd
+      #- twfe_sim.qmd        
+
+format:
+  html:
+    theme: cosmo
+    code-overflow: scroll
+    code-fold: true
+    code-tools: true
+    highlight-style: github
+    grid:
+      sidebar-width: 300px
+      body-width: 950px
+      margin-width: 300px
+      gutter-width: 1.5rem
+    toc: true
+    fontsize: 1.1em
+execute:
+  freeze: auto
+  
+jupyter: nbstata
+  

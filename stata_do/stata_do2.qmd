@@ -1,0 +1,283 @@
+---
+title: "How to Bootstrap"
+subtitle: "When Sandwitch is not enough"
+format: html
+---
+
+## Introduction: What is Bootstrapping
+
+One of the primary concerns of econometricians and economists is estimating point estimates with precision. However, as point estimates contain errors, we need to estimate the precision of those estimates to determine how reliable they are. This precision is typically expressed as standard errors, which reflect the level of uncertainty in the estimates given the information we have in hand, i.e., the sample.
+
+In most introductory econometrics courses, we learn that we can estimate the precision of these estimates by drawing multiple samples, estimating the model of interest for each new sample, and summarizing the estimated coefficients. The standard deviations of the estimated coefficients are the coefficient standard errors, which reflect the variation in the coefficients due to sampling error.
+
+However, collecting multiple samples from the same population is technically impossible (expensive), and we need to rely on other approaches to estimate the standard errors. Two common approaches are typically used:
+
+- Asymptotic approximations: where we make use of some of the properties of the estimators (deep knowledge of how those are constructed) 
+- Empirical approximations: Or what we can call Bootstrapping.
+
+## But What is Bootstrapping?
+
+As a non-native speaker, I initially thought that bootstrapping was merely a statistical technique for obtaining empirical standard errors. However, after a few years in grad school, I heard the expression:
+
+> pull yourself up by your own bootstraps
+
+a few times, which describes what bootstrapping does. Since we don't have access to other samples, we repeatedly use and reuse the same sample in various ways to estimate standard errors for our estimates.
+
+The differences in how we reuse the sample information determine the type of bootstrapping method we're using.
+
+## Types of Bootstrapping.
+
+There are many approaches to obtaining bootstrap standard errors, depending on the assumptions we're willing to impose on the data, and not all of them can be applied in every scenario. For simplicity, I'll refer to the ones that can be used for linear regressions.
+
+Suppose you're interested in a linear regression model with the following functional form:
+
+$$
+y_i=X_i\beta+e_i
+$$
+
+## Setup and Asymptotic SE
+
+To get started with bootstrapping, we will estimate a very simple linear regression model using the `auto.dta` dataset.
+
+```{stata}
+set linesize 255
+program drop _all
+sysuse auto, clear
+reg price mpg foreign
+```
+
+This estimation provides the asymptotic estimation of standard errors under homoskedasticity using the well-known formula:
+
+$$
+Var(\hat \beta) = \frac{\sum \hat e ^2}{n-k-1} (X'X)^{-1}
+$$
+
+Let's see how this standard errors compare to different types of Bootstrap Standard errors:
+
+### Parametric Bootstrap
+
+As the name suggest, parametric bootstrap requires imposing some parametric assumptions on the source of the error in the model: $e$. We will learn those characteristics from the estimated errors in the original sample. 
+
+Say, for example, that we assume $e$ follows some normal distribution, with variance equal to the variance of the observed error $\sigma^2_e=Var(\hat e)$. Parametric bootstrapping would require to draw/create different samples using the following rule:
+$$
+\tilde y_i = X_i \hat \beta + \tilde e_i \ where \ \tilde e_i \sim N(0,var(\hat e))
+$$
+
+In this case, all $X's$ are fixed, but the *new* samples are created by resampling the error, and constructing $\tilde y's$. This differs only because of the draws of the errors $\tilde e$.
+
+Once you get multiple of samples, and coefficients for each, you can simply Report the associated Standard Errors.
+
+How to do it in `Stata`? Here I will cheat a bit, and use `Mata`, because it will be faster. Note that you will need to copy the whole code into a dofile and run all of it, or type each line individualy in the command window (once you activate `Mata`):
+
+```{stata}
+*| output: false
+set seed 10
+// First we start mata
+mata:
+    // load all data
+    y = st_data(.,"price")
+    // You load X's and the constant
+    x = st_data(.,"mpg foreign"),J(rows(y),1,1)
+    // Estimate Betas:
+    b = invsym(x'*x)*x'y
+    // Estimate errors:
+    e = y:-x*b
+    // Estimate STD of errors
+    std_e=sqrt(sum(e:^2)/73)
+	// Now we can do the bootstrap:
+	// We first create somewhere to store the different betas
+	bb = J(1000,3,.)
+	// and start a loop
+	for(i=1;i<=1000;i++){
+		// each time we draw a different value for y..say ys
+		ys = x*b+rnormal(74,1,0,std_e)
+		// and estimate the new beta, storing it into bb
+		bb[i,]=(invsym(x'*x)*x'ys)'
+	}
+end
+```
+
+If everythings goes well, it should give you the following
+
+```{stata}
+mata: b,diagonal(sqrt(variance(bb)))
+```
+
+Notice that we are explicitly impossing the assumption of homoskedasticity and normality on the errors. This explain why this standard errors are almost identical to the simple asymptotic standard errors.
+
+### Residual Bootstrap
+
+Residual bootstrap is very similar to the parametric bootstrap I described above. The main difference is that we no longer impose assumptions on the errors distributions, and instead use the empirical distribution.
+
+What does this mean? Well, In the above example, we have 74 different values for the error $e$, thus resampling means that you create a new $\tilde y$ by drawing 74 errors from this bag of errors, where all have the same probability of being choosen.
+$$
+\tilde y_i  =  X_i \hat \beta  + \tilde e_i \ where  \ \tilde e \sim [\hat e_1, \hat e_2,...,\hat e_N]
+$$
+
+Lets implement it:
+
+```{stata}
+*| output: false
+set seed 10
+mata:
+    // This remains the same as before
+    y = st_data(.,"price")
+    x = st_data(.,"mpg foreign"),J(rows(y),1,1)
+    b = invsym(x'*x)*x'y
+    e = y:-x*b
+    bb = J(1000,3,.)
+    // Now we need to know how many observations we have
+    nobs=rows(y)
+    	for(i=1;i<=1000;i++){
+		// Here is where we "draw" a different error everytime, 
+        // runiformint(nobs,1,1,nobs) <- This says Choose a randome number between 1 to K
+        // and use that value to assing as the new error to create ys
+		ys = x*b+e[runiformint(nobs,1,1,nobs)]
+		bb[i,]=(invsym(x'*x)*x'ys)'
+	}	
+end
+```
+
+```{stata}
+mata: b,diagonal(sqrt(variance(bb)))
+```
+
+Once again, this method keeps $X's$ fixed, and assumes errors are fully homoskedastic, thus interchangable. It does allow for the possiblity errors do not follow a normal distribution.
+
+### Wild-Bootstrap/multiplicative bootstrap
+
+The wild bootstrap is another variant of residual bootstrapping. To implement it, we start by estimating the original model and obtaining the model errors. Instead of shuffling or making assumptions about the distribution of the errors, we reuse the error after adding noise to it. Mathematically, this can be expressed as:
+$$
+\tilde y_i=X_i \hat \beta + \hat e_i * v_i
+$$
+
+Here, $v$ is the source of the noise that we add to the model. Technically, we can use any distribution for $v$, as long as $E(v)=0$ and $Var(v)=1$. The most common distribution used in wild bootstrap implementations is the "mammen" distribution, but for simplicity, we will use a normal distribution.
+
+```{stata}
+*| output: false
+set seed 10
+mata:
+    y = st_data(.,"price")
+    x = st_data(.,"mpg foreign"),J(rows(y),1,1)
+    b = invsym(x'*x)*x'y
+    e = y:-x*b
+    nobs=rows(y)
+    bb = J(1000,3,.)
+	for(i=1;i<=1000;i++){
+		// Here is where we "draw" a different error multiplying the original error by v ~ N(0,1)
+		ys = x*b+e:*rnormal(nobs,1,0,1)
+		bb[i,]=(invsym(x'*x)*x'ys)'
+	}
+end
+```
+
+```{stata}
+mata: b,diagonal(sqrt(variance(bb)))
+```
+
+Surprisingly, this approach allows us to control for heteroskedasticity, which is why the standard errors obtained using the wild bootstrap method are quite similar to the ones obtained using `reg, robust`.
+
+Another advantage of this method is that we do not necessarily need to obtain an estimate of the error itself. Instead, we can obtain the Influence Functions of the estimated parameters and disturb those to obtain standard errors. This makes the method feasible for a larger set of estimators, assuming that we can derive the corresponding Influence Functions.
+
+### Paired bootstrap/Nonparametric bootstrap
+
+Paired bootstrap is perhaps the most commonly used method in applied econometrics, although it can also be computationally intensive. 
+
+The basic idea is to use the original sample to draw subsamples with replacement that are of the same size. Then, you estimate the parameters
+ of interest for each subsample and summarize the results. What sets this approach apart from others is that the entire set of observations
+  and characteristics are used in the resampling, not just the residuals. This makes it robust to heteroskedasticity and relatively easy to implement for complex model estimators. Stata has a module dedicated to making the implementation of paired bootstrap easy, but it can also be implemented in Mata.
+
+```{stata}
+*| output: false
+set seed 10
+mata:
+    y = st_data(.,"price")
+    x = st_data(.,"mpg foreign"),J(rows(y),1,1)
+    b = invsym(x'*x)*x'y
+    e = y:-x*b
+    nobs=rows(y)
+    bb = J(1000,3,.)
+	for(i=1;i<=1000;i++){
+		// What I do here is get a vector that will identify the resampling.
+		r_smp = runiformint(nobs,1,1,nobs)
+		// then use this resampling vector to reestimate the betas
+		brs = invsym(x[r_smp,]'*x[r_smp,])*x[r_smp,]'y[r_smp,]
+		bb[i,]=brs'
+	}	
+end
+```
+
+```{stata}
+mata: b,diagonal(sqrt(variance(bb)))
+```
+
+### Easier Paired bootstrap
+Assuming you do not like to do this with Mata, or that your estimator is a bit more complex than a simple OLS, a better approach for implementing paired bootstrap in `Stata` is simply using the bootstrap prefix:
+
+For example:
+```stata
+bootstrap, seed(10) reps(1000):reg price mpg foreign
+```
+
+And of course, this approach can implement to bootstrap any 1 line command, although it may be faster for some methods than others.:
+
+```stata
+bootstrap, seed(10) reps(1000):qreg price mpg foreign
+bootstrap, seed(10) reps(1000):poisson price mpg foreign
+```
+
+### Bootstrapping a two-step regression
+
+Often, however, you may want to "bootstrap" something more complex. For example a two/three/...K step estimator. You can still use bootstrap, but it requires a bit more programming. So lets go with a simple 2-step heckman estimator. My recommendation, first implement the estimator for 1 run:
+
+```{stata}
+*| output: false
+webuse womenwk, clear
+** data prep
+gen dwage=wage!=.
+** estimation
+probit dwage married children educ age
+predict mill, score
+reg wage educ age mill
+** delete the variable that was created as intermediate step
+drop mill
+```
+
+Notice that `mill` was dropped at the end. This is important, because by bootstraping the program, it will beed to be created all over again.
+Finally, we write our little bootstrap program:
+
+```{stata}
+** I like to add eclass properties here
+program two_heckman, eclass
+	capture drop  mill  
+    ** you implement your estimator:
+    tempvar smp
+    probit dwage married children educ age
+    predict mill, score
+    ** save the "sample" from probit
+    gen byte `smp'=e(sample)
+    reg wage educ age mill
+    ** Delete all variables that were created 
+    ** Finally, you will Store all the coefficients into a matrix
+    matrix b=e(b)
+    ** and "post" them into e() so they can be read as an estimation output
+    ereturn post b, esample(`smp')
+end
+```
+
+And apply the `bootsrap` prefix to it:
+
+```{stata}
+bootstrap, reps(250) nodots:two_heckman
+```
+
+## Conclusions
+
+This post provides an overview of how bootstrap operates and how to implement it using Stata. 
+
+Remember, not all techniques are suitable for all circumstances. Furthermore, to accurately estimate standard errors while
+ taking into account clustering and weights, resampling methods need to also account for the original sampling structure, or how the data was gathered.
+ 
+Accounting for clustering is often straightforward, but handling weights and Strata may require additional attention. 
+
+I hope you found this information beneficial, and please don't hesitate to reach out with any questions or feedback via email or comments.

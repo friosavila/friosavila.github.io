@@ -1,0 +1,53 @@
+---
+title: "A Poem for Abby's Teeth"
+description: "Chat-GPT writes a small poem about babies first teeth"
+author: "ChatGPT and Fernando Rios-Avila"
+date: "4/19/2023"
+categories: 
+    - ChatGPT
+    - Poem
+draft: false
+---
+
+:::{.callout-note}
+ChatGPT was requested to write a poem about Abigail's first tooth. The first one was a horror one, but I like this second one better
+:::
+
+Abigail's first teeth, oh so small
+
+Pearly white, they barely show at all
+
+But they bring joy to all who see
+
+This precious little one, so full of glee
+
+\
+
+Abigail drools and chews with delight
+
+Her first teeth, such a wonderful sight
+
+She smiles and giggles with every sound
+
+As she explores the world all around
+
+\ 
+
+Her first teeth, a milestone so sweet
+
+A sign of growth and development complete
+
+They mark the start of her journey ahead
+
+As Abigail grows, learns and is fed
+
+\
+
+So let's celebrate Abigail's first teeth
+
+And all the joy and wonder they bequeath
+
+For they are a precious part of life's start
+
+And a sign of the love in our hearts.
+

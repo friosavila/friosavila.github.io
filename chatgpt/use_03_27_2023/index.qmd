@@ -1,0 +1,42 @@
+---
+title: "Loading Large Datasets"
+description: "`use in` vs `use if`"
+author: "Fernando Rios-Avila"
+date: "3/27/2023"
+categories: 
+    - Stata
+    - Tips
+draft: false
+---
+
+If you ever wanted to work with very large datasets, you will find that doing may be difficult, if not impossible, due to memory limitations, or at the very least time costly.
+
+One option you may want to try when doing this, however, is to use the options `if` `in` and/or using `varlists`.
+
+For example, say that you want to work with the dataset `oaxaxa` which is located in your working directory. You can load only a subset of the data typing:
+
+```{stata}
+*| echo: false
+cd c:\ado\personal
+```
+```{stata}
+*| code-fold: false
+use oaxaca if female ==1, clear
+sum female age
+```
+
+you could alternatively load only few variables in the dataset:
+```{stata}
+*| code-fold: false
+use female age educ using oaxaca , clear
+sum *
+```
+
+or use a combination of both. Now, if your dataset is really large, i suggest you to use `in`, which will do the task much faster than using `if`. Why? because using `if` you still need to go over every observation of your dataset. However using `in` only goes over the pre-specified number of observations. 
+
+```{stata}
+*| code-fold: false
+use female age educ using oaxaca in 1/10, clear
+list , sep(0)
+```
+

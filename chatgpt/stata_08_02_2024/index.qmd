@@ -1,0 +1,362 @@
+---
+title: "Stata Crash Course: Data management"
+description: "A brief introduction to data management in Stata"
+author: "Fernando Rios-Avila"
+date: "8/2/2024"
+categories: 
+    - Stata
+    - Basics
+draft: false
+---
+
+As you know, my weapon of choice for data analysis is Stata. However, even with my experience, I still find myself going back to the basics, especially when it comes to guiding students through their projects.
+
+So, today, I wanted to take a moment to go over some of the fundamental aspects of data management in Stata, covering some of the fundamental toos on working with data. Even if you're already familiar with Stata, a refresher never hurts!
+
+# Basic Data Operations
+
+- Loading data: `use filename.dta`
+
+Assumes there is either no data in memory, or the one in memory has not been modified since it was loaded. 
+
+Otherwise, you should start with `clear` to remove the existing data from memory. `clear, all` to remove data and programs from memory, or just add the option `,clear` to the `use` command, to clear the data before loading the new one.
+
+- Saving data: `save filename.dta, replace`
+
+This will always overwrite the existing file. If you want to save a new file, just change the name. If `replace` is omitted, Stata will ask for confirmation.
+
+You can also use `saveold` to save the data in the old format (Stata 11 is the oldest if you have Stata 18).
+
+Remember, never replace the original data.
+
+- Viewing data: 
+  - `browse`: opens data browser window, no changes can be made
+  - `edit`: Like `browse`, but allows changes to be made to the data. Use with caution!
+    Each change appears as a new line of command in the command/results window.
+  - `list`: displays data in results window. You may want to specify variables or conditions.
+  
+- Describing data: 
+  - `describe`: shows variable names, labels, and types. Also shows other information from the data.
+  - `summarize`: provides summary statistics for numerical variables. You can also use `summarize, detail` for more detailed statistics.
+
+Example:
+
+```stata
+sysuse "auto.dta", clear
+describe
+summarize price mpg, detail
+save "my_autho.dta", replace
+```
+
+#  Variable Types in Stata
+
+- Numeric:
+  - `byte`: integers -127 to 100
+  - `int`: integers -32,767 to 32,740
+  - `long`: integers -2,147,483,647 to 2,147,483,620
+  - `float`: real numbers with 7 digits precision
+  - `double`: real numbers with 16 digits precision
+
+If trying to save memory, use the smallest type that can hold the data. But if the data cannot be held, Stata will try to upgrade the type (later versions)
+
+- String: `str#` (# is the maximum length)
+
+Best way to store really long ID variables. But use the most space.
+
+- Date and time:
+  - `date`: dates since 1960
+  - `time`: milliseconds since midnight
+
+These are not data formats, but masks for the data. summarize a date, and you will see. 
+
+Example:
+
+```stata
+generate age_group = int(age/10)
+generate name = "John Doe"
+generate survey_date = mdy(6, 15, 2023)
+format %td survey_date
+```
+
+## Creating New Variables
+- `generate` : This is the most basic way to create new variables in Stata. All transformations are done observation by observation.
+  
+    ```stata
+    generate [type] new_var = expression [if in]
+    ```
+- Examples:
+ 
+    ```stata
+    generate bmi = weight / (height/100)^2
+    generate log_income = log(income)
+    generate is_adult = (age >= 18)
+    ```
+
+- Using functions:
+  
+    ```stata
+    generate fullname = strproper(firstname + " " + lastname)
+    generate age_squared = age^2
+    ```
+
+## Modifying Existing Variables
+
+- `replace` : Second most common command in Stata. Works like `generate`, but it modifies existing variables:
+ 
+    ```stata
+    replace var = expression [if condition]
+    ```
+- Examples:
+
+    ```stata
+    replace income = income * 1.1 if year == 2023
+    replace age = . if age < 0  // Set negative ages to missing
+    replace education = "High School" if inlist(education, "HS", "Secondary")
+    ```
+    
+## More on generating variables: `egen` 
+
+- `egen` : This is a powerful command that allows you to generate new variables based on complex conditions by observations or across groups. You can even develop your own functions to use with `egen`. `egen` can work using information across observations, like the mean of a variable. Useful to have `ssc install egenmore` installed.
+  
+    ```stata
+    egen new_var = function(varlist) [if condition], [options]
+    ```
+`egen` can also have their own options. 
+
+- Examples:
+
+    ```stata
+    egen mean_income = mean(income)
+    egen total_sales = total(sales)
+    egen max_age = max(age)
+    egen group_mean_income = mean(income), by(group_var)
+    ```
+
+## Recoding Variables
+
+- `recode` : Useful for transforming values into categories or changing values in categorical variables. The *rules* can include ranges, individual values, or missing values, as well as value labels.
+  
+  ```stata
+  recode var(s) (rule) (rule) ..., generate(new_var)
+  ```
+
+- Examples:
+  ```stata
+  recode age (0/18=1 "Child") (19/65=2 "Adult") (66/max=3 "Senior"), gen(age_group)
+  recode income (0/1000=1) (1001/5000=2) (5001/max=3), gen(income_category)
+  ```
+- `encode` : Useful for converting string variables to numeric codes. It creates a new **numeric** variable that represents the original string variable, which is used as labels. The values are assigned in alphabetical order.
+
+  ```stata
+  encode str_var, gen(num_var)
+  ```
+- `decode` : The reverse of `encode`. It replaces the numeric codes with the label values.
+
+  ```stata
+  decode str_var, gen(num_var)
+  ```
+
+## Conditional Statements
+- `if` condition: Most commands in Stata allow you to specify conditions on the data to be analyzed or modified.
+  ```stata
+  command ... if expression
+  ```
+Examples:
+  ```stata
+  summarize income if gender == "Female"
+  list name age if age > 65 & !missing(income)
+  ```
+**Warning**: When comparing numbers with missing values, remember that "missing" is always the highest value.
+
+- Using logical operators:
+  - `&` (and), `|` (or), `!` (not)
+  They can be combined to create complex conditions. Parentheses can be used to control the order of operations.
+  ```stata
+  generate high_income_male = (income > 100000) & (gender == "Male")
+  ```
+
+## Labeling Variables and Values
+
+- Variable labels: Best way to provide a description of the variable.
+  
+  ```stata
+  label variable var "label"
+  ```
+Labels have a maximum length of 80 characters. If you need more, consider using notes.
+
+- Value labels:
+  ```stata
+  label define label_name #1 "label1" #2 "label2" ... [, modify]
+  label values var label_name
+  ```
+  Once a label is defined, it can be applied to multiple variables. The `modify` option allows you to add new labels to an existing set, or modify existing ones.
+
+- Examples:
+  ```stata
+  label variable bmi "Body Mass Index"
+  label define bmi_cat 1 "Underweight" 2 "Normal" 3 "Overweight" 4 "Obese"
+  label values bmi bmi_cat
+  ```
+- Checking labels:
+  ```stata
+  label list
+  ```
+
+## Working with Missing Values
+
+- Stata's missing value for numerical variables: `.`
+- Extended missing values: `.a` to `.z`
+- Remember `.>.z>...>.a>any number`
+- Identifying missing values:
+  ```stata
+  list if missing(var)
+  count if missing(var)
+  ```
+- Recoding missing values:
+  ```stata
+  replace var = 0 if missing(var)
+  ```
+
+## Renaming Variables
+
+- `rename` : To change the name of a variable. You can rename multiple variables at once.
+  ```stata
+  rename old_name new_name
+  ```
+- Examples:
+  ```stata
+  rename income annual_income
+  rename (var1 var2 var3) (new1 new2 new3)
+  ```
+
+## Reshaping Data
+
+Also known as pivoting data. It involves changing the structure of the data from wide to long or vice versa.
+
+- Wide to Long:
+  ```stata
+  reshape long stub, i(id) j(time)
+  ```
+`stub` is the common prefix of the variables to be reshaped. and `time` the new variable name that will hold the sufix of the variables. `id` is the identifier of the observations.
+
+- Long to Wide: The same as before, but the data is reshaped in the opposite direction.
+  ```stata
+  reshape wide stub, i(id) j(time)
+  ```
+`stub` is the variable that will be reshaped. Data should be uniquely identified by the `i()` and `j()` variables. The values of `j()` will be used to create the new variable names combining the stub.
+
+## Merging Datasets
+
+Useful to work with relational data. You can merge datasets based on common variables (keys). 
+
+When using merge, the **master dataset** is the one currently in memory, and the **using dataset** is the one being added.
+
+There are different types of merges:
+
+- One-to-one merge:
+  ```stata
+  merge 1:1 key using filename
+  ```
+- Many-to-one merge:
+  ```stata
+  merge m:1 key using filename
+  ```
+- One-to-many merge:
+  ```stata
+  merge 1:m key using filename
+  ```  
+They key is the variable that is common to both datasets, and it should be unique in the "1" dataset. Master (1:1 and 1:m) or using (1:1 and m:1) datasets.
+
+- Example:
+  ```stata
+  merge 1:1 id using employee_details.dta
+  merge m:1 state using state_info.dta
+  ```
+- Handling merge results: Unless specified, Stata will create a new variable `_merge` to indicate the merge status. If one exists in the master or using dataset, the merge will fail.
+ 
+  ```stata
+  drop if _merge == 2  // Drop unmatched from using
+  ```
+
+## Appending Datasets
+
+- Adding observations: Useful when you have multiple datasets with the same structure and want to combine them, in the long way.
+ 
+  ```stata
+  append using filename
+  ```
+
+In older versions, you needed to have a dataset already open in memory. Now, you can append without a dataset in memory.
+
+- Example:
+  ```stata
+  use survey2022.dta
+  append using survey2023.dta
+  ```
+Make sure the variables are of the same type. (String and numeric do not mix)
+
+## Sorting Data
+
+- `sort` : Some commands or procedures require the data to be sorted in a specific order. You can sort by multiple variables.
+ 
+  ```stata
+  sort var1 [var2 ...]
+  ```
+When there are ties, Stata will sort records randomly, unless `stable` is specified.
+
+- `gsort` is a variant of `sort` that can sort in ascending or descending order.
+ 
+  ```stata
+  gsort -var  // Sort in descending order
+  ```
+
+- Example:
+  ```stata
+  sort state year
+  gsort -income  // Sort in descending order
+  ```
+- Creating a sorted index:
+  ```stata
+  sort state year
+  gen index = _n
+  ```
+
+## Creating Complex Variables with `by` and `bysort`
+
+- `by` command: Only works if data is already sorted. Operations are performed within groups defined by the variable(s) specified.
+  ```stata
+  by varlist: command
+  ```
+- `bysort` command (combines sorting and by):
+  ```stata
+  bysort varlist: command
+  ```
+- Examples:
+  1. Calculate group means:
+     ```stata
+     bysort state: egen state_avg_income = mean(income)
+     egen state_avg_income = mean(income), by(state)
+     ```
+  2. Create ranking within groups:
+     ```stata
+     bysort industry: egen income_rank = rank(income)
+     ```
+  3. Generate group-specific indicators:
+     ```stata
+     bysort state: gen state_obs = _n
+     bysort state: gen state_total_obs = _N
+     ```
+  4. Create cumulative sums within groups:
+     ```stata
+     sort state date
+     by state: gen cumulative_sales = sum(daily_sales)
+     ```
+  5. Identify first and last observations in each group:
+     ```stata
+     bysort company_id (date): gen first_obs = _n == 1
+     bysort company_id (date): gen last_obs = _n == _N
+     ```
+
+# Conclusion
+
+Data management is a crucial part at the beginning of any data analysis project. Hopefully, this list of commands and examples will help you navigate your data more efficiently. 

@@ -1,0 +1,221 @@
+---
+title: "Linear Regression via MLE"
+subtitle: "Basic MLE-Programming and margins"
+format: html
+---
+
+## Introduction
+
+`Stata` has a very useful command that can be used for the estimation of almost any linear and nonlinear models using maximum likelihood. This command is -ml-.
+
+Properly speaking, this command can be used to obtain M-type estimators, however, I'll concentrate on maximum likelihood models.
+
+In this small tutorial, I'll provide a small example of how to use -ml- in combination with -margins- to estimate marginal effects for a linear model, as long as one identifies the outcome of interest.
+
+## LR as MLE
+
+As I mentioned earlier, the `ml` command in Stata is a powerful tool for obtaining maximum likelihood estimators, although it can be used to find solutions for any m-type estimators. The one limitation I have encountered with this command is that it can be resource-intensive when estimating complex models on large datasets. For instance, If you have a dataset with one million observations but only use 10% of it for modeling, dropping the unused data before estimation can speed up the process. `ml` will not do that for you.
+
+There are several ways to program `ml`, such as using the lf, df0, df1, or df2 options. The main difference among them is that you must define the objective function, its gradient, and its Hessian. However, for most purposes, I find that `lf` is the only one you will ever need.
+
+When using `ml` with the `lf` option, you only need to declare the loglikelihood function contributed by each observation in the sample. To illustrate this concept, let's assume that we want to estimate a simple linear regression using MLE. For this, we need to assume that either the error follows a normal distribution or that the outcome follows a conditionally normal distribution.
+
+$$
+\begin{aligned}
+y_i &= X_i'\beta + e_i \\
+e_i &\sim N(0,\sigma^2) \ or \ y_i \sim N(X_i'\beta,sigma^2)
+\end{aligned}
+$$
+
+This implies that the Likelihood ($L_i$)  and Log-Likelihood ($LL_i$) of a single observation is given by:
+$$
+\begin{aligned}
+L_i &= \frac{1}{\sigma \sqrt{2\pi}} exp\left( -\frac{1}{2} \left(\frac{y_i -X_i'\beta }{\sigma} \right)^2 \right) \\
+LL_i &= -log(\sigma) - \frac{1}{2} log (2\pi) -\frac{1}{2} \left(\frac{y_i -X_i'\beta }{\sigma} \right)^2
+\end{aligned} 
+$$
+
+So we just need to create a program that defines this log-likelihood function. 
+
+```{stata}
+*| echo: false
+clear all
+```
+
+```{stata}
+*| echo: true
+*| code-fold: false
+*| code-line-numbers: true
+program myols_mle
+    args lnf xb lnsigma
+    local sigma exp(`lnsigma')
+    *qui:replace `lnf' = -`lnsigma' - 1/2 * log(2*_pi) - 1/2 *(($ML_y1-`xb')/`sigma')^2
+    qui: replace `lnf' = log(normalden($ML_y1,`xb',`sigma'))
+end
+```
+ 
+Notice that this program has 3 arguments (which come after `args`) (see line 2)
+
+- `lnf`: Will store the log-Likelihood for each observation
+- `xb`: Will store the linear combination of variables and their coefficients
+- `lnsigma`: Will store the $log(\sigma)$. 
+
+We do not estimate $\sigma$ directly, because its numerically more stable to estimate the $log(\sigma)$. Also, we require $\sigma$
+to be strictly positive, which can only be done by using the log transformation.
+
+In line 3, I specifically impose the transformation to obtain $\sigma$. 
+
+In line 4, I leave the comment of how I would write the full Loglikelihood using the formula I provided before, but for simplicilty 
+I use the built-in `normalden` (line 5)
+
+You should also notice that all arguments will be handled internally as `locals`, which is why they need to be written within single quotes: `' . The only exception is `$ML_y1`, which represents the dependent variable.
+
+## Programming for Margins
+
+The second component I'm interested in introducing today is to create a program that will allow you to modify how `margins`, operate.
+
+As some may know, `margins` is a `Stata` built-in program that estimates marginal effects, or marginal means, for any official and unofficial model in `Stata`.
+The way it works is rather simple. Once you estimat you model of interest and call on margins it will:
+
+1. Estimate the predicted outcome for the model. This varies by model, but the default is to use the linear combination of variables and coefficients.
+
+2. Depending on other modeling factors, estimate derivatives, or means, of the outcome with respect to every variable in the model.
+
+3. Calculate standard errors using Delta method, and summarize results.
+
+Steps 2 and 3 above are common to all models. However, step 1 is the one that needs to be modified everytime one changes from one model to another.
+
+What I will do next is to write a program where I will define different types of outcomes that I may be interested in when analyzing Linear regressions. I will call this program `myols_mle_p`, following `Stata` naming standards:
+
+```{stata}
+*| echo: true
+*| code-fold: false
+*| code-line-numbers: true
+program myols_mle_p
+    syntax newvarname [if] [in] , [ mean sigma emean *]
+    if "`mean'`sigma'`emean'" =="" {
+        ml_p `0'
+    }
+    marksample touse, novarlist
+    if "`mean'" !=""  {
+        tempvar xb
+        _predict double `xb' , eq(#1)
+        gen `typlist' `varlist' = `xb' if `touse'
+        label var `varlist' "E(y|X)"
+    }
+    else if "`sigma'" !=""  {
+        tempvar xb
+        _predict double `xb' , eq(#2)
+        gen `typlist' `varlist' = exp(`xb') if `touse'
+        label var `varlist' "E(sigma|X)"
+    }
+    else if "`emean'"!="" {
+        tempvar xb lns
+        _predict double `xb' , eq(#1)
+        _predict double `lns' , eq(#2)
+        local sigma (exp(`lns'))
+        gen `typlist' `varlist' = exp(`xb')*exp(0.5*`sigma'^2) if `touse'
+        label var `varlist' "E(exp(Y)|X)"
+    }
+end
+```
+
+The way I'm defining this program, one could request 3 types of outcomes:
+
+- `mean`: This is the standard outcome. Just looking into the linear combination of X and betas
+- `sigma`: When this option is used, you will obtain the prediction for $\sigma$ instead of $log(\sigma)$. May be useful to compare and test heteroskedasticity directly
+- `emean`: This is something different. This option could be used if your outcome of interest was "wages", but you were modeling "log(wages)". This will be estimated under the assumption of log-normality.
+
+If neither option is used, it will revert to use the default.
+
+## The Estimation
+
+Before we estimate the LR model using MLE, lets start by loading some data: 
+
+```{stata}
+*| echo: true
+*| code-fold: false
+frause oaxaca, clear
+```
+
+Now, to estimate a model using -ml-, we need to use a somewhat complex syntax, that would be better explained in the following code:
+
+```stata
+ml model lf myols_mle /// 
+   (mean:lnwage = educ exper i.female) ///
+   (ln_sigma:  = educ exper i.female) ///
+   , maximize  nolog
+ml display   
+```
+
+Line 1. Indicates you will try and estimate a model using `ml`, where the model will use `lf` option (which only requires the log-likelihood function at individual level to be provided. You also need to provide the name of the program that defines the LL function: `myols_mle`.
+
+Line 2 and 3. As described earlier, the program `myols_mle` requires 3 arguments. The first one is the LL function, so we do not need to be concernd about. The other two arguments refer to `xb` or conditional mean, and `lnsigma` or log of the variance, need to be declared here. They are order specific. Line 2 will always refer to `xb`, independent of the name I provide, and Line 3 will always refer to `lnsigma`. 
+
+In standard models, we assume homoskedasticity, so we do not need to add covariates to `lnsigma`, but we can do it and control for heteroskedasticity directly.
+
+In line 4, I simply request model to be maximized, but could just as well requested clustered standard errors, or use other options allowed in `ml`.
+
+Finally line 5 request displaying the results. So lets see what we get:
+
+```{stata}
+*| output: asis
+*| echo: false
+display "```stata"
+qui:ml model lf myols_mle (mean:lnwage = educ exper i.female) ///
+   (ln_sigma:  = educ exper i.female) , maximize  nolog
+ml display   
+display "```"
+```
+
+You can compare these results with the standard `regress` outcome, or `hetregress` if you want to compare the results allowing for heteroskedastic errors.
+
+
+## `margins` 
+
+Margins can be used here to analyze the effect of covariates on the outcome of interest. The default from -ml- is to use linear combinations of coefficients and covariates. Now, if we want to use our predict command, we need to modify one piece of information in e(). If you type `ereturn list`, after every `Stata` command, you will see there is one local named `e(predict)`. This local has the name of a program that is used to get predictions for a given model. We need to modify it, and change the default name to our program: `myols_mle_p`. 
+
+We will do this with the following program:
+
+```{stata}
+*| code-fold: false
+program adde, eclass
+    ereturn `0'
+end
+adde local predict myols_mle_p
+```
+
+Ok with all of this, we are ready to estimate marginal effects. The next two lines should give you the same result, 
+but I present them here as an example:
+
+```{stata}
+*| code-fold: false
+margins, dydx(*)
+margins, dydx(*) predict(mean)  
+```
+
+What would be more interesting, however, would be to provide outcomes for the predicted standard deviation, or the exponentiated mean:
+
+```{stata}
+*| code-fold: false
+margins, dydx(*) predict(sigma)  
+```
+
+```{stata}
+*| code-fold: false
+margins, dydx(*) predict(emean)  
+```
+
+So how do we interpret the results?. Here one possibility:
+
+Each additional year of education increases wages by 7.4%, however, as education increases the dispersion of wages decreases. In terms of actual dollar change, in average, that additional year of education translates in a 2.17$ per hour increase.
+
+## Conclusions
+
+The purpose of this small article was to walk you through how to use -ml- for the estimation of a simple linear regression. 
+
+In addition, it also introduces you to creating a program that will allow you to use `margins`, when you have a specific outcome in mind, that is not currently available in the command you are interested in using.
+
+Hope you find it useful. 
+
+Comments and question welcome!

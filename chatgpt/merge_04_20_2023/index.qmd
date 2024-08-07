@@ -1,0 +1,203 @@
+---
+title: "Merging Data 1:1, m:1, 1:m and m:m?"
+description: "I describe how to use `merge`, and the meaning of the different types of merging options"
+author: "Fernando Rios-Avila"
+date: "4/20/2023"
+categories: 
+    - Stata
+    - Tips
+    - Programming
+format:
+  html:
+    code-line-numbers: true
+    mermaid:
+      theme: neutral
+draft: false
+---
+
+## Merging 1:1
+
+When you can uniquely identify all observations in each dataset using a common identifier viariable.
+
+```stata
+use file1
+merge 1:1 id using file2
+```
+
+```{mermaid}
+flowchart BT
+    subgraph File2
+    db1-1["id=1"]
+    db1-2["id=2"]
+    db1-3["id=3"]
+    end
+    subgraph File1
+    db2-1["id=1"]
+    db2-2["id=2"]
+    db2-3["id=3"]
+    end
+    
+    db1-1-->db2-1
+    db1-2-->db2-2
+    db1-3-->db2-3
+```
+
+## Merging m:1
+
+When you are trying to transfer *family* level data to each family member. The family member file is uniquely identified 
+
+```stata
+use family_members
+merge m:1 hid using family
+```
+```{mermaid}
+flowchart BT
+    subgraph members ["Family Members"]
+    db1-1["hid=1,pid=1"]
+    db1-2["hid=1,pid=2"]
+    db1-3["hid=2,pid=1"]
+    db1-4["hid=2,pid=2"]
+    db1-5["hid=3,pid=1"]
+    db1-6["hid=3,pid=2"]
+    db1-7["hid=3,pid=3"]
+    end
+    subgraph Family
+    db2-1["hid=1"]
+    db2-2["hid=2"]
+    db2-3["hid=3"]
+    end
+    
+    db2-1-->db1-1
+    db2-1-->db1-2
+    db2-2-->db1-3
+    db2-2-->db1-4
+    db2-3-->db1-5
+    db2-3-->db1-6
+    db2-3-->db1-7
+```
+
+
+
+## Merging 1:m
+
+When you try to merge together data from various family members to a single *family* file. Each member is merged to its family.
+
+```stata
+use family
+merge 1:m hid using family_members
+```
+```{mermaid}
+flowchart BT
+    subgraph members ["Family Members"]
+    db1-1["hid=1,pid=1"]
+    db1-2["hid=1,pid=2"]
+    db1-3["hid=2,pid=1"]
+    db1-4["hid=2,pid=2"]
+    db1-5["hid=3,pid=1"]
+    db1-6["hid=3,pid=2"]
+    db1-7["hid=3,pid=3"]
+    end
+    subgraph Family
+    db2-1["hid=1"]
+    db2-2["hid=2"]
+    db2-3["hid=3"]
+    end
+    
+    db1-1-->db2-1
+    db1-2-->db2-1
+    db1-3-->db2-2
+    db1-4-->db2-2
+    db1-5-->db2-3
+    db1-6-->db2-3
+    db1-7-->db2-3
+```
+
+
+## Merging m:m
+
+Something you **NEVER** want to do. It tries to merge to datasets based on a single set identification variable. This variable does not identify unique observations in either file. The merge is done by "id" based on the order they appear in the data. It will typically provide very odd results.
+
+```stata
+use family_mem1
+merge m:m id using family_mem2
+```
+
+```{mermaid}
+flowchart BT
+    subgraph members ["Family Members 1"]
+    db1-1["hid=1,pid=1"]
+    db1-2["hid=1,pid=2"]
+    db1-3["hid=2,pid=1"]
+    db1-4["hid=2,pid=2"]
+    db1-5["hid=3,pid=1"]
+    db1-6["hid=3,pid=2"]
+    db1-7["hid=3,pid=3"]
+    end
+    subgraph Family ["Family Members 2"]
+    db2-1["hid=1,pid=2"]
+    db2-2["hid=1,pid=3"]
+    db2-3["hid=1,pid=4"]
+    db2-4["hid=2,pid=1"]
+    db2-5["hid=2,pid=3"]
+    db2-6["hid=3,pid=2"]
+    db2-7["hid=3,pid=4"]
+    end
+    
+    db2-1-->db1-1
+    db2-2-->db1-2
+    db2-4-->db1-3
+    db2-5-->db1-4
+    db2-6-->db1-5
+    db2-7-->db1-6
+```
+
+## True Merge m x m
+
+If you were trying `m:m` merge (which is probably wrong), means you want to `joinby`. This means merge both files using all combinations of individuals that have the same id. This will create a very large dataset, unless other restrictions are applied.
+
+```stata
+use family_mem1
+joinby id using family_mem2
+```
+```{mermaid}
+flowchart BT
+    subgraph members ["Family Members 1"]
+    db1-1["hid=1,pid=1"]
+    db1-2["hid=1,pid=2"]
+    db1-3["hid=2,pid=1"]
+    db1-4["hid=2,pid=2"]
+    db1-5["hid=3,pid=1"]
+    db1-6["hid=3,pid=2"]
+    db1-7["hid=3,pid=3"]
+    end
+    subgraph Family ["Family Members 2"]
+    db2-1["hid=1,pid=2"]
+    db2-2["hid=1,pid=3"]
+    db2-3["hid=1,pid=4"]
+    db2-4["hid=2,pid=1"]
+    db2-5["hid=2,pid=3"]
+    db2-6["hid=3,pid=2"]
+    db2-7["hid=3,pid=4"]
+    end
+    
+    db2-1-->db1-1
+    db2-2-->db1-1
+    db2-3-->db1-1
+
+    db2-1-->db1-2
+    db2-2-->db1-2
+    db2-3-->db1-2
+
+    db2-4-->db1-3
+    db2-4-->db1-4
+    db2-5-->db1-4
+    db2-5-->db1-3
+
+    db2-6-->db1-5
+    db2-6-->db1-6
+    db2-6-->db1-7
+    db2-7-->db1-5
+    db2-7-->db1-6
+    db2-7-->db1-7
+```
+

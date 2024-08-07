@@ -1,0 +1,83 @@
+---
+title: "Drop 2.0: Small Stata Programming"
+description: "I describe and introduce the program `drop2`, for more flexible data dropping"
+author: "Fernando Rios-Avila"
+date: "3/25/2023"
+categories: 
+    - Stata
+    - Programming
+draft: false
+---
+
+## `drop2`: Upgrade
+
+If you are an avid `Stata` user, who works extensively either using the command window, or dofiles, and who does lots of data-management, you are probably used to create large number of new variables, as well as delete an equally long lists of variables.
+
+If you are like me, however, you probably get frustrated when the following happens:
+
+- You drop variables by mistake, because they start with the same name as the one you aim to delete.
+
+- A `drop` statement gives you an error, because a variable in the varlist does not exist.
+
+Yes, both scenarios are easy to fix. 
+
+- One can avoid the first problem using `set varabbrev off`.
+
+- The second problem can be partially partially fixed using `capture` in front of `drop`.
+
+Well, today I bring you `drop2`. This small program should fix the problems above, with a very simple code:
+
+```stata
+program drop2
+	novarabbrev {
+		syntax anything 
+		foreach i in `anything' {
+			capture noisily fvexpand `i'			
+			if _rc == 0 {
+				drop `r(varlist)' 
+			}
+		}
+	}
+end
+```
+
+It handles the first problem by forcing you to use full variable names, rather than abreviations. And it handles the second problem by going over your list of variables one by one, dropping only the ones in your dataset, giving you a warning if a variable does not exists.
+
+To use this, you can run this code, create an `ado` file with the name `drop2.ado`, and save it in your personal ado folder^[To see where your personal ado folder is, just type `sysdir`. ], or save it in the `plus\d` folder. You can also download the file from [here](drop2.ado)
+
+So, just for fun, a quick example!. You can run the following code to test the command.
+
+```stata
+
+sysuse auto, clear
+describe, simple
+drop2 p pr mpg
+describe, simple
+drop2 pr* mpg displacement
+describe, simple
+```
+
+And it should produce the following ouput:
+
+```stata
+. sysuse auto, clear
+(1978 automobile data)
+
+. describe, simple
+make          mpg           headroom      weight        turn          gear_ratio
+price         rep78         trunk         length        displacement  foreign
+
+. drop2 p pr mpg
+variable p not found
+variable pr not found
+
+. describe, simple
+make          rep78         trunk         length        displacement  foreign
+price         headroom      weight        turn          gear_ratio
+
+. drop2 pr* mpg displacement
+variable mpg not found
+
+. describe, simple
+make        rep78       headroom    trunk       weight      length      turn        gear_ratio  foreign
+```

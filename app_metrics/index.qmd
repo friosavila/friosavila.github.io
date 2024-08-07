@@ -1,0 +1,11 @@
+---
+title: "Applied Econometrics"
+---
+  
+Welcome to this section of my webpage! As you will read, this section is dedicated to providing techniques and strategies for selected applied  econometrics strategies. Econometrics is the branch of economics that deals with the application of statistical and mathematical methods to analyze economic data, answering real-world questions and make predictions about economic phenomena. My goal here, however, is more humble. I aim to discuss few methodologies (as they come to mind or to work), to deal with tasks on my own research, but questions about other methods are always welcome.
+
+Whether you are a student, researcher, or practitioner, I hope this site provides you with useful insights and tools for conducting empirical research in economics. 
+
+Comments are always welcomed!
+
+Fernando

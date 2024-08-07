@@ -1,0 +1,2252 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.45">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Fernando Rios-Avila">
+
+<title>Nonlinear DID – Playing With Stata</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../app_metrics/app_metrics11.html" rel="next">
+<link href="../app_metrics/app_metrics1.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-GNMLZDYJ2P"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Playing With Stata</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../cv.html"> 
+<span class="menu-text">my CV and Research</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../software.html"> 
+<span class="menu-text">Software</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../stataviz/index.html"> 
+<span class="menu-text">Stata Viz</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../stata_do/index.html"> 
+<span class="menu-text">Stata Do’s Ado’s</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../app_metrics/index.html"> 
+<span class="menu-text">Applied econometrics</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../chatgpt.html"> 
+<span class="menu-text">Odds and Ends</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">about</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../app_metrics/app_metrics1.html">App Metrics</a></li><li class="breadcrumb-item"><a href="../app_metrics/app_metrics10.html">Nonlinear DID</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../WeeMee.jpg" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Applied Econometrics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">App Metrics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Constructing synthetic Datasets</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics10.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Nonlinear DID</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><strong><code>jwdid</code></strong>: A Stata command for the estimation of Difference-in-Differences models using ETWFE</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">DRDID/CSDID in Stata</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">DID: The Fall</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">DID: The Revolution</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2x2 DID: Sant’Anna and Zhao (2020)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Making better use of interval-censored data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear Regressions, OLS and Standard Errors</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">DID: Panel Data &amp; Repeated Crossection</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantile regressions with multiple fixed effects</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  <li><a href="#disclaimer" id="toc-disclaimer" class="nav-link" data-scroll-target="#disclaimer">Disclaimer:</a>
+  <ul class="collapse">
+  <li><a href="#not-andrew-goodman-bacon" id="toc-not-andrew-goodman-bacon" class="nav-link" data-scroll-target="#not-andrew-goodman-bacon">Not Andrew Goodman-Bacon</a></li>
+  <li><a href="#not-pedro-santanna" id="toc-not-pedro-santanna" class="nav-link" data-scroll-target="#not-pedro-santanna">Not Pedro Sant’Anna</a></li>
+  <li><a href="#not-jeffrey-wooldridge" id="toc-not-jeffrey-wooldridge" class="nav-link" data-scroll-target="#not-jeffrey-wooldridge">Not Jeffrey Wooldridge</a></li>
+  <li><a href="#fernando-rios-avila" id="toc-fernando-rios-avila" class="nav-link" data-scroll-target="#fernando-rios-avila">Fernando Rios-Avila</a></li>
+  <li><a href="#basics-2x2-did" id="toc-basics-2x2-did" class="nav-link" data-scroll-target="#basics-2x2-did">Basics: 2x2 DiD</a></li>
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"></a></li>
+  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2"></a></li>
+  <li><a href="#how-to-test-for-pta" id="toc-how-to-test-for-pta" class="nav-link" data-scroll-target="#how-to-test-for-pta">How to test for PTA?</a></li>
+  <li><a href="#how-to-test-for-pta-1" id="toc-how-to-test-for-pta-1" class="nav-link" data-scroll-target="#how-to-test-for-pta-1">How to test for PTA?</a></li>
+  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3"></a></li>
+  <li><a href="#pta-may-hold-for-gbar-y" id="toc-pta-may-hold-for-gbar-y" class="nav-link" data-scroll-target="#pta-may-hold-for-gbar-y">PTA may hold for <span class="math inline">\(G(\bar Y)\)</span></a></li>
+  <li><a href="#how-do-things-change" id="toc-how-do-things-change" class="nav-link" data-scroll-target="#how-do-things-change">How do things Change?</a></li>
+  <li><a href="#extension-i-adding-covariates" id="toc-extension-i-adding-covariates" class="nav-link" data-scroll-target="#extension-i-adding-covariates">Extension I: Adding Covariates</a></li>
+  <li><a href="#extension-ii-gxt-did" id="toc-extension-ii-gxt-did" class="nav-link" data-scroll-target="#extension-ii-gxt-did">Extension II: GxT DiD</a></li>
+  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4"></a>
+  <ul class="collapse">
+  <li><a href="#the-problem" id="toc-the-problem" class="nav-link" data-scroll-target="#the-problem">The Problem</a></li>
+  </ul></li>
+  <li><a href="#section-5" id="toc-section-5" class="nav-link" data-scroll-target="#section-5"></a>
+  <ul class="collapse">
+  <li><a href="#avoiding-the-problem" id="toc-avoiding-the-problem" class="nav-link" data-scroll-target="#avoiding-the-problem">Avoiding the Problem</a></li>
+  </ul></li>
+  <li><a href="#an-added-insight" id="toc-an-added-insight" class="nav-link" data-scroll-target="#an-added-insight">An added Insight</a></li>
+  <li><a href="#implementing-nl-did-the-jw-way" id="toc-implementing-nl-did-the-jw-way" class="nav-link" data-scroll-target="#implementing-nl-did-the-jw-way">Implementing NL-DID the <code>JW</code> way</a></li>
+  <li><a href="#command-syntax" id="toc-command-syntax" class="nav-link" data-scroll-target="#command-syntax">Command Syntax</a></li>
+  <li><a href="#command-main-options" id="toc-command-main-options" class="nav-link" data-scroll-target="#command-main-options">Command Main Options</a></li>
+  <li><a href="#extra-options" id="toc-extra-options" class="nav-link" data-scroll-target="#extra-options">Extra Options</a></li>
+  <li><a href="#example-1-min-wages-on-employment-cs-data" id="toc-example-1-min-wages-on-employment-cs-data" class="nav-link" data-scroll-target="#example-1-min-wages-on-employment-cs-data">Example 1: Min Wages on Employment CS data</a></li>
+  <li><a href="#example-1-aggregations" id="toc-example-1-aggregations" class="nav-link" data-scroll-target="#example-1-aggregations">Example 1: Aggregations</a></li>
+  <li><a href="#example-2-wooldridge-simulation-data" id="toc-example-2-wooldridge-simulation-data" class="nav-link" data-scroll-target="#example-2-wooldridge-simulation-data">Example 2: Wooldridge Simulation data</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../app_metrics/app_metrics1.html">App Metrics</a></li><li class="breadcrumb-item"><a href="../app_metrics/app_metrics10.html">Nonlinear DID</a></li></ol></nav>
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Nonlinear DID</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<p class="subtitle lead">Lessons from Staggered Linear Differences in Differences</p>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Fernando Rios-Avila </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Levy Economics Institute
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<ul>
+<li><strong>Differences in Differences</strong> (DiD) design is one of the most popular methods in applied microeconomics, because it requires relatively few assumptions to identify treatment effects.
+<ul>
+<li>No anticipation,</li>
+<li>Parallel trends,</li>
+<li>No spillovers</li>
+</ul></li>
+<li>The canonical DiD, a 2x2 design, simply compares means (or conditional means) of the outcome variable (before after x treated non-treated) to identify treatment effects.
+<ul>
+<li>Thus it can be used even if outcome is a limited dependent variable (binary, count, etc) (parallel to the linear regression case)</li>
+</ul></li>
+</ul>
+</section>
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section"></h2>
+<ul>
+<li>Because the Canonical design is rather limited, many extensions have been proposed to handle more complex scenarios: Staggered Treatment with <strong>GxT DID</strong>.
+<ul>
+<li>Early Extensions (infamous TWFE) have been shown to be problematic. (negative weights and bad controls)</li>
+<li>but more recent approaches (See <span class="citation" data-cites="roth_whats_2023">Roth et al. (<a href="#ref-roth_whats_2023" role="doc-biblioref">2023</a>)</span>) have shown how can one better use these designs to identify treatment effects, avoiding the simple-TWFE problems.</li>
+</ul></li>
+<li>Linear models, however, have limitations:
+<ul>
+<li>Linear models do a poor job interpolating and predicting LDV outcomes</li>
+<li>Parallel trends assumptions may only be credible under specific functional forms</li>
+</ul></li>
+</ul>
+</section>
+<section id="disclaimer" class="level1">
+<h1>Disclaimer:</h1>
+<p>who am I not?</p>
+<section id="not-andrew-goodman-bacon" class="level2">
+<h2 class="anchored" data-anchor-id="not-andrew-goodman-bacon">Not Andrew Goodman-Bacon</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><img src="images/paste-5.png" class="img-fluid" width="400"></p>
+</div><div class="column" style="width:60%;">
+<ul>
+<li><p>Among others, Andrew showed the problems of using TWFE in the presence of staggered adoption of the treatment.</p></li>
+<li><p>Because of treatment timing, later treated units are compared to <strong>bad</strong> controls (early treated ones), in potential violation of the parallel trends assumption.</p></li>
+<li><p>This also relates to negative weights.</p></li>
+<li><p>See <span class="citation" data-cites="goodmanbacon2021">Goodman-Bacon (<a href="#ref-goodmanbacon2021" role="doc-biblioref">2021</a>)</span></p></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="not-pedro-santanna" class="level2">
+<h2 class="anchored" data-anchor-id="not-pedro-santanna">Not Pedro Sant’Anna</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><img src="images/paste-4.png" class="img-fluid" width="400"></p>
+</div><div class="column" style="width:60%;">
+<ul>
+<li><p>Pedro and Brantly proposed deconstructing the GxT problem. Consider only good 2x2 DD designs to identify Treatment effects in DID.</p></li>
+<li><p>Agregate them as needed to obtain the desired treatment effect (weighted Average). (dynamic, average, across time, across groups, etc)</p></li>
+<li><p>Along with <strong>Jonathan Roth</strong>, discuss the problem of PTA and functional forms. Not all may be valid.</p></li>
+<li><p>see <span class="citation" data-cites="callaway_2021">Callaway and Sant’Anna (<a href="#ref-callaway_2021" role="doc-biblioref">2021</a>)</span> and <span class="citation" data-cites="rothsantanna2023">Roth and Sant’Anna (<a href="#ref-rothsantanna2023" role="doc-biblioref">2023</a>)</span></p></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="not-jeffrey-wooldridge" class="level2">
+<h2 class="anchored" data-anchor-id="not-jeffrey-wooldridge">Not Jeffrey Wooldridge</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><img src="images/paste-1.png" class="img-fluid" width="400"></p>
+</div><div class="column" style="width:60%;">
+<ul>
+<li>Jeff Wooldridge brought back life to the <strong>TWFE</strong>.</li>
+<li>The problem was not the <strong>TWFE</strong> part of the analysis, but the model specification.
+<ul>
+<li>(<span class="math inline">\(post \times treated\)</span> instead of <span class="math inline">\(G \times T\)</span>)</li>
+</ul></li>
+<li>This insights, can be extended to nonlinear cases.</li>
+<li>See <span class="citation" data-cites="wooldridge_2021">Wooldridge (<a href="#ref-wooldridge_2021" role="doc-biblioref">2021</a>)</span> and <span class="citation" data-cites="wooldridge_2023">Wooldridge (<a href="#ref-wooldridge_2023" role="doc-biblioref">2023</a>)</span></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="fernando-rios-avila" class="level2">
+<h2 class="anchored" data-anchor-id="fernando-rios-avila">Fernando Rios-Avila</h2>
+<div class="columns">
+<div class="column" style="width:40%;">
+<p><img src="images/paste-7.png" class="img-fluid" width="400"></p>
+</div><div class="column" style="width:60%;">
+<ul>
+<li>I have followed some of the developments in DID with staggered adoption of the treatment.
+<ul>
+<li>Implemented few things (<code>drdid</code>/<code>csdid</code>/<code>csdid2</code>/<code>jwdid</code>)</li>
+<li>Understood few others (comparison groups, efficiency, negative weights, nonlinear models)</li>
+</ul></li>
+<li>And today, I will be providing some of my insights regarding the empirical analysis of nonlinear DID.
+<ul>
+<li>I will rely heavily on <a href="https://academic.oup.com/ectj/article/26/3/C31/7250479"><span class="citation" data-cites="wooldridge_2023">Wooldridge (<span>2023</span>)</span></a>,</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="basics-2x2-did" class="level2">
+<h2 class="anchored" data-anchor-id="basics-2x2-did">Basics: 2x2 DiD</h2>
+<ul>
+<li><p>In the 2x2 DID design, we have 2 groups:</p>
+<ul>
+<li>Control (<span class="math inline">\(D=0\)</span>) and treated (<span class="math inline">\(D=1\)</span>),</li>
+</ul></li>
+<li><p>Which are observed for two periods of time:</p>
+<ul>
+<li>Before (<span class="math inline">\(T=0\)</span>) and after (<span class="math inline">\(T=1\)</span>) the treatment.</li>
+</ul></li>
+<li><p>For all groups and periods of time, we observe the <em>realized</em> outcome <span class="math inline">\(Y_{i,t}\)</span>, but cannot observe all <em>potential</em> outcomes <span class="math inline">\(Y_{i,t}(D)\)</span>.</p></li>
+<li><p>Realized outcomes are determined by the following equation:</p></li>
+</ul>
+<p><span class="math display">\[Y_{i,t}=D_i Y_{i,t}(1) + (1-D_i) Y_{i,t}(0)
+\]</span></p>
+</section>
+<section id="section-1" class="level2">
+<h2 class="anchored" data-anchor-id="section-1"></h2>
+<p>If treatment occured at some point between T0 and T1, and we could observe all potential outcomes, the estimate of interested, Average Treatment effect, could be estimated as follows:</p>
+<p><span class="math display">\[ATT = E(Y_{i,1}(1) - Y_{i,1}(0)|D_i=1)
+\]</span></p>
+<p>For the treated, we observe <span class="math inline">\(Y_{i,1}(1)\)</span>, but cannot observe <span class="math inline">\(Y_{i,t}(0)\)</span> (counterfactual), thus, to identify Treatment Effects, we need to impose some assumptions.</p>
+<ul>
+<li>PTA:</li>
+</ul>
+<p><span class="math display">\[\begin{aligned}
+E(Y_{i,1}(0) - Y_{i,0}(0)|D_i=1) &amp;= E(Y_{i,1} - Y_{i,0}|D_i=0) \\
+E(Y_{i,1}(0)|D_i=1) &amp;= E(Y_{i,0}(0)|D_i=1) + E(Y_{i,1} - Y_{i,0}|D_i=0)
+\end{aligned}
+\]</span></p>
+<ul>
+<li>No Anticipation: <span class="math display">\[Y_{i,0}(1) =  Y_{i,0}(0)=Y_{i,0}\]</span></li>
+</ul>
+</section>
+<section id="section-2" class="level2">
+<h2 class="anchored" data-anchor-id="section-2"></h2>
+<p>Thus, ATT can be estimated as follows:</p>
+<p><span class="math display">\[\begin{aligned}
+ATT &amp;= E(Y_{i,1}(1)|D_i=1)-E(Y_{i,1}(0)|D_i=1) \\
+&amp;= E(Y_{i,1}|D_i=1)- \Big(E(Y_{i,0}|D_i=1) + E(Y_{i,1} - Y_{i,0}|D_i=0)  \Big) \\
+&amp;= E(Y_{i,1}-Y_{i,0}|D_i=1)- E(Y_{i,1} - Y_{i,0}|D_i=0)  
+\end{aligned}
+\]</span></p>
+<ul>
+<li>And the Same could be done via Regressions:</li>
+</ul>
+<p><span class="math display">\[y_{i,t} = \beta_0 + \beta_1 T + \beta_2 D_i + \theta (D_i \times T) + \epsilon_{i,t}
+\]</span></p>
+<ul>
+<li>ATT identification relies on the Parallel trend assumption.</li>
+</ul>
+</section>
+<section id="how-to-test-for-pta" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-test-for-pta">How to test for PTA?</h2>
+<ul>
+<li><p>PTA is a non-testable assumption, because we do not observe all potential outcomes.</p></li>
+<li><p>However, if we “move”, from the 2x2 design, it may be possible to test if PTA hold Before treatment.</p></li>
+<li><p>Consider a case of T periods of time, and that treatment happen at period G.</p></li>
+<li><p>Say we estimate the ATT comparing periods T and T-1, for any T&lt;G.</p></li>
+</ul>
+<p><span class="math display">\[ATT(T) = E(Y_{i,T} - Y_{i,T-1}|D_i=1) - E(Y_{i,T} - Y_{i,T-1}|D_i=0)
+\]</span></p>
+<ul>
+<li>If there is no anticipation, and Parallel trends hold, then <span class="math inline">\(ATT(T)=0 \text{ if } T&lt;G\)</span>
+<ul>
+<li>This is what <span class="citation" data-cites="callaway_2021">Callaway and Sant’Anna (<a href="#ref-callaway_2021" role="doc-biblioref">2021</a>)</span> uses for PTA testing</li>
+</ul></li>
+</ul>
+</section>
+<section id="how-to-test-for-pta-1" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-test-for-pta-1">How to test for PTA?</h2>
+<ul>
+<li>Alternatively, one could simply estimate all ATT’s using period G-1 as baseline period (<code>long2</code> differences):</li>
+</ul>
+<p><span class="math display">\[ATT^2(T) = E(Y_{i,T} - Y_{i,G-1}|D_i=1) - E(Y_{i,T} - Y_{i,G-1}|D_i=0)
+\]</span></p>
+<ul>
+<li>And use all post-treatment periods to estimate the ATT (<span class="math inline">\(T\geq G\)</span>)</li>
+<li>and use all pre-treatment periods to test for PTA (<span class="math inline">\(T&lt;G\)</span>)</li>
+</ul>
+</section>
+<section id="section-3" class="level2">
+<h2 class="anchored" data-anchor-id="section-3"></h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">What if PTA does not hold?</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">Wage PTA in levels</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Wage PTA in logs</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<ul>
+<li><p>As suggested by <span class="citation" data-cites="wooldridge_2023">Wooldridge (<a href="#ref-wooldridge_2023" role="doc-biblioref">2023</a>)</span>, one of the reasons PTA may not hold is because we may be analyzing the wrong model.</p>
+<ul>
+<li>consider two groups of workers, high and low earners, that experience the same wage growth. (parallel trends in relative terms)</li>
+<li>If we observe wages at levels, parallel trends would be violated</li>
+<li>And Post treatment estimates will be missleading</li>
+</ul></li>
+</ul>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<p><img src="fig1.png" class="img-fluid" width="1000"></p>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<p><img src="fig2.png" class="img-fluid" width="1000"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="pta-may-hold-for-gbar-y" class="level2">
+<h2 class="anchored" data-anchor-id="pta-may-hold-for-gbar-y">PTA may hold for <span class="math inline">\(G(\bar Y)\)</span></h2>
+<p>A similar story could be told about other types of transformations.</p>
+<p>In general, it is possible that PTA hold for some other monotonic transformation of the outcome variable.</p>
+<p><span class="math display">\[G^{-1}\Big( E_1 [Y_{i,1}(0)] \Big) -G^{-1}\Big(E_1[ Y_{i,0}(0) ] \Big)  
+= G^{-1}\Big(E_0[Y_{i,1}]\Big) - G^{-1}\Big(E_0[Y_{i,0}]\Big)
+\]</span></p>
+<p>This is very similar to the PTA assumption explored in Roth and Sant’Anna (2023).</p>
+<p><span class="math display">\[E_1\Big[g(Y_{i,1}(0))\Big] - E_1\Big[g(Y_{i,0}(0))\Big] = E_0\Big[g(Y_{i,1})\Big] - E_0\Big[g(Y_{i,0})\Big]
+\]</span></p>
+<p>Wooldridge idea: It may be possible to identify ATTs using correct functional forms, through the <strong>latent index</strong>.</p>
+</section>
+<section id="how-do-things-change" class="level2">
+<h2 class="anchored" data-anchor-id="how-do-things-change">How do things Change?</h2>
+<ul>
+<li>Using this insight, we can go back to the 2x2 design, and see how things change.</li>
+</ul>
+<p>Before:</p>
+<p><span class="math display">\[E(y_{i,t}|D,T)=\beta_0 + \beta_1 T + \beta_2 D_i + \theta (D_i \times T)
+\]</span></p>
+<p>After:</p>
+<p><span class="math display">\[E(y_{i,t}|D,T)=G\Big(\beta_0 + \beta_1 T + \beta_2 D_i + \theta (D_i \times T)\Big)
+\]</span></p>
+<ul>
+<li>For the practitioner, the extended Nonlinear DID simply requires choosing a functional form that better fits the data.
+<ul>
+<li>Poisson, logit, <del>fractional regression</del>, multinomial model, Linear model, etc</li>
+</ul></li>
+</ul>
+</section>
+<section id="extension-i-adding-covariates" class="level2">
+<h2 class="anchored" data-anchor-id="extension-i-adding-covariates">Extension I: Adding Covariates</h2>
+<ul>
+<li><p>Many papers in the literature consider the use of covariates in the estimation of the ATT.</p></li>
+<li><p>The lessons from <span class="citation" data-cites="santanna_doubly_2020">Sant’Anna and Zhao (<a href="#ref-santanna_doubly_2020" role="doc-biblioref">2020</a>)</span>:</p>
+<ul>
+<li>The choosen covariates should be time fixed, to avoid contamination of the treatment effect.</li>
+<li>Using covariates allows relaxing the parallel trends assumption: PTA hold for specific groups of individuals. (if not for the whole population due to compositional changes)</li>
+</ul></li>
+<li><p>In the 2x2 DID-Regression, covariates can be added with interactions:</p></li>
+</ul>
+<p><span class="math display">\[\begin{aligned}
+y_{i,t} &amp;= \beta_0 + \beta_1 D + \beta_2 T + \theta (D \times T) \\
+&amp;+ X\gamma +  D \times X\gamma_d + T \times X\gamma_T + D \times T (X-\bar X )\lambda + \epsilon_{i,t}
+\end{aligned}
+\]</span></p>
+<ul>
+<li>The same could be done in the nonlinear case</li>
+</ul>
+</section>
+<section id="extension-ii-gxt-did" class="level2">
+<h2 class="anchored" data-anchor-id="extension-ii-gxt-did">Extension II: GxT DiD</h2>
+<ul>
+<li>The 2x2 design is rather limited, because often people have access to multiple periods of time, with differential treatment timing. (staggered adoption of the treatment)
+<ul>
+<li>I call this the GxT design (G groups, T periods of time)</li>
+</ul></li>
+<li>The majority of the papers that analyze this case impose an additional assumption:
+<ul>
+<li>Treatment is not Reversable: Once treated always treated</li>
+</ul></li>
+</ul>
+<p><strong>NOTE</strong>: Because of the interactions required, adding covariates would rapidily “consume” degrees of freedom. (may be a problem with nonlinear models).</p>
+<p>How to see this? <code>--&gt; tab tvar gvar</code></p>
+</section>
+<section id="section-4" class="level2">
+<h2 class="anchored" data-anchor-id="section-4"></h2>
+<section id="the-problem" class="level3">
+<h3 class="anchored" data-anchor-id="the-problem">The Problem</h3>
+<ul>
+<li>Early extensions of the 2x2 design to the GxT design, relied on the <strong>TWFE</strong> estimator. <span class="math display">\[y_{i,t} = \delta_i + \delta_t + \theta^{fe} D_{i,t} + e_{i,t}\]</span></li>
+</ul>
+<p>where <span class="math inline">\(D_{i,t}=1\)</span> only after treatment is in place, and zero otherwise.</p>
+<ul>
+<li>This model has been shown to be problematic, because of How OLS estimates the <span class="math inline">\(\theta^{fe}\)</span> parameter.
+<ul>
+<li><span class="math inline">\(\theta^{fe}\)</span> is a weighted average of all possible 2x2 DID designs. <span class="citation" data-cites="goodmanbacon2021">Goodman-Bacon (<a href="#ref-goodmanbacon2021" role="doc-biblioref">2021</a>)</span></li>
+<li>Some designs use early treated units as controls for late treated units, which might be a violation of the parallel trends assumption.
+<ul>
+<li>(treated units effectively receiving negative weights) <span class="citation" data-cites="goodmanbacon2021">Goodman-Bacon (<a href="#ref-goodmanbacon2021" role="doc-biblioref">2021</a>)</span>, <span class="citation" data-cites="dechaisemartin2020">Chaisemartin and D’Haultfœuille (<a href="#ref-dechaisemartin2020" role="doc-biblioref">2020</a>)</span> and <span class="citation" data-cites="borusyak2023revisiting">Borusyak, Jaravel, and Spiess (<a href="#ref-borusyak2023revisiting" role="doc-biblioref">2023</a>)</span>.</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="section-5" class="level2">
+<h2 class="anchored" data-anchor-id="section-5"></h2>
+<section id="avoiding-the-problem" class="level3">
+<h3 class="anchored" data-anchor-id="avoiding-the-problem">Avoiding the Problem</h3>
+<ul>
+<li><p><span class="citation" data-cites="callaway_2021">Callaway and Sant’Anna (<a href="#ref-callaway_2021" role="doc-biblioref">2021</a>)</span> proposes a simple solution: Deconstruct the problem into smaller pieces (2x2 DIDs), and aggregate them as needed.</p></li>
+<li><p><span class="citation" data-cites="wooldridge_2021">Wooldridge (<a href="#ref-wooldridge_2021" role="doc-biblioref">2021</a>)</span>, however, proposes a different solution: Use the correct functional form to estimate the ATTs.</p></li>
+</ul>
+<p><span class="math display">\[\text{Instead of: }Y_{i,t} = \delta_i + \gamma_t  + \theta^{fe} PT_{i,t} + \epsilon_{i,t}\]</span></p>
+<p><span class="math display">\[\text{Use: }Y_{i,t} = \delta_i + \gamma_t  + \sum_{g \in \mathbb{G}} \sum_{t=g}^T \theta_{g,t} \mathbb{1}(G=g,T=t) + \epsilon_{i,t}\]</span></p>
+<ul>
+<li>Their Message: Embrace heterogeneity across time and cohorts.</li>
+</ul>
+</section>
+</section>
+<section id="an-added-insight" class="level2">
+<h2 class="anchored" data-anchor-id="an-added-insight">An added Insight</h2>
+<ul>
+<li><p>The approach proposed by <span class="citation" data-cites="wooldridge_2021">Wooldridge (<a href="#ref-wooldridge_2021" role="doc-biblioref">2021</a>)</span>, is more efficient than <span class="citation" data-cites="callaway_2021">Callaway and Sant’Anna (<a href="#ref-callaway_2021" role="doc-biblioref">2021</a>)</span>, because it uses all pre-treatment data to estimate the ATTs. (<span class="citation" data-cites="callaway_2021">Callaway and Sant’Anna (<a href="#ref-callaway_2021" role="doc-biblioref">2021</a>)</span> uses only one pre-treatment period)</p></li>
+<li><p>However, doing this doesn’t allow you to test for PTA directly, unless we use an alternative approach:</p></li>
+</ul>
+<p><span class="math display">\[Y_{i,t} = \delta_i + \gamma_t  +
+\sum_{g \in \mathbb{G}} \sum_{t=t_0}^{g-2} \theta_{g,t}^{pre} \mathbb{1}(G=g,T=t) +
+\sum_{g \in \mathbb{G}} \sum_{t=g}^T \theta_{g,t}^{post} \mathbb{1}(G=g,T=t) + \epsilon_{i,t}\]</span></p>
+<ul>
+<li>This specification is equivalent to <span class="citation" data-cites="callaway_2021">Callaway and Sant’Anna (<a href="#ref-callaway_2021" role="doc-biblioref">2021</a>)</span> and to <span class="citation" data-cites="sun_estimating_2021">Sun and Abraham (<a href="#ref-sun_estimating_2021" role="doc-biblioref">2021</a>)</span>.
+<ul>
+<li>Its explicily a regression (Wooldridge)</li>
+<li>and uses actual, instead of relative, time.</li>
+</ul></li>
+</ul>
+</section>
+<section id="implementing-nl-did-the-jw-way" class="level2">
+<h2 class="anchored" data-anchor-id="implementing-nl-did-the-jw-way">Implementing NL-DID the <code>JW</code> way</h2>
+<ul>
+<li>One of the advantages of the approaches proposed by <span class="citation" data-cites="wooldridge_2021">Wooldridge (<a href="#ref-wooldridge_2021" role="doc-biblioref">2021</a>)</span> and <span class="citation" data-cites="wooldridge_2023">Wooldridge (<a href="#ref-wooldridge_2023" role="doc-biblioref">2023</a>)</span>, is that they can be directly estimated using regressions.</li>
+<li>The hard part is to construct all the interactions required for the model to work.</li>
+<li>And a second challenge is to aggregate the results.</li>
+</ul>
+<p><strong><code>jwdid</code></strong></p>
+<ul>
+<li><p><code>jwdid</code> is a simple command that helps with the construction of all required interactions that could be used to implement Wooldridge approach.</p></li>
+<li><p>It is flexible enough, in that it allows you to choose different estimators that would better fit your data.</p></li>
+<li><p>it comes with its own post estimation commands that can help you aggregate the results into simple ATT, dynamics effects, across periods, across years, etc.</p></li>
+<li><p>Lets take it for a spin</p></li>
+</ul>
+</section>
+<section id="command-syntax" class="level2">
+<h2 class="anchored" data-anchor-id="command-syntax">Command Syntax</h2>
+<ul>
+<li><code>jwdid</code> - Command Name. In charge of getting all interactions -right-
+<ul>
+<li><code>depvar</code> <code>[indepvar]</code> - Declare the dependent variables. Independent variables are optional. They should be time fixed.</li>
+<li><code>[if]</code> <code>[in]</code> <code>[weight]</code>, Declares sample and weights. Only <code>PW</code> is allowed.</li>
+</ul></li>
+</ul>
+</section>
+<section id="command-main-options" class="level2">
+<h2 class="anchored" data-anchor-id="command-main-options">Command Main Options</h2>
+<ul>
+<li><code>jwdid</code>: main options
+<ul>
+<li><code>ivar(varname)</code>: Panel indicator. If not declared, command assumes one is using repeated cross sections.</li>
+<li><code>cluster(varname)</code>: Cluster variable. To request a clustered standard error other than at <code>ivar</code> level. Recommended with RC.</li>
+<li><code>tvar(varname)</code> or <code>time(varname)</code>: Required, Time variable. There are two ways to call it for compatability with <code>csdid</code>.</li>
+<li><code>gvar(varname)</code>: Group variable. Indicates the timing of when a unit has ben treated.</li>
+<li><code>trtvar(varname)</code>: If using Panel data, one could instead provide the post-treatment dummy.
+<ul>
+<li>If data is repeated crossection, one requires using <code>trgvar(varname)</code> (Pseudo panel indicator).</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="extra-options" class="level2">
+<h2 class="anchored" data-anchor-id="extra-options">Extra Options</h2>
+<ul>
+<li><code>group</code>: Requests using group fixed effects, instead of individual fixed effects (default)</li>
+<li><code>never</code>: Request to use alternative specification that allows to test for PTA. (default is to use the standard specification)</li>
+<li>Linear and Nonlinear models:
+<ul>
+<li><code>method(command, options)</code>: Request to use a specific method to model the data. Default is using linear regression via <code>reghdfe</code>.</li>
+<li>the option part allows you do include specific options for the method. (e.g.&nbsp;<code>method(glm, link() family())</code>)</li>
+</ul></li>
+</ul>
+</section>
+<section id="example-1-min-wages-on-employment-cs-data" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="example-1-min-wages-on-employment-cs-data">Example 1: Min Wages on Employment CS data</h2>
+<div id="716b7b0a" class="cell larger" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">clear</span> <span class="ot">all</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">qui</span>:<span class="kw">ssc</span> install frause</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">qui</span>:frause mpdta, <span class="kw">clear</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>frause mpdta, <span class="kw">clear</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>jwdid lemp, ivar(county) tvar(<span class="fu">year</span>) gvar(first)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(Written by R.              )
+WARNING: Singleton observations not dropped; statistical significance is biased
+&gt;  (link)
+(MWFE estimator converged in 2 iterations)
+
+HDFE Linear regression                            Number of obs   =      2,500
+Absorbing 2 HDFE groups                           F(   7,    499) =       3.82
+Statistics robust to heteroskedasticity           Prob &gt; F        =     0.0005
+                                                  R-squared       =     0.9933
+                                                  Adj R-squared   =     0.9915
+                                                  Within R-sq.    =     0.0101
+Number of clusters (countyreal) =        500      Root MSE        =     0.1389
+
+                           (Std. err. adjusted for 500 clusters in countyreal)
+------------------------------------------------------------------------------
+             |               Robust
+        lemp | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ first_treat#|
+        year#|
+    c.__tr__ |
+  2004 2004  |  -.0193724   .0223818    -0.87   0.387    -.0633465    .0246018
+  2004 2005  |  -.0783191   .0304878    -2.57   0.010    -.1382195   -.0184187
+  2004 2006  |  -.1360781   .0354555    -3.84   0.000    -.2057386   -.0664177
+  2004 2007  |  -.1047075   .0338743    -3.09   0.002    -.1712613   -.0381536
+  2006 2006  |   .0025139   .0199328     0.13   0.900    -.0366487    .0416765
+  2006 2007  |  -.0391927   .0240087    -1.63   0.103    -.0863634     .007978
+  2007 2007  |   -.043106   .0184311    -2.34   0.020    -.0793182   -.0068938
+             |
+       _cons |    5.77807    .001544  3742.17   0.000     5.775036    5.781103
+------------------------------------------------------------------------------
+
+Absorbed degrees of freedom:
+-----------------------------------------------------+
+ Absorbed FE | Categories  - Redundant  = Num. Coefs |
+-------------+---------------------------------------|
+  countyreal |       500         500           0    *|
+        year |         5           0           5     |
+-----------------------------------------------------+
+* = FE nested within cluster; treated as redundant for DoF computation</code></pre>
+</div>
+</div>
+<div id="834d80b3" class="cell larger" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">gen</span> emp = <span class="fu">exp</span>(lemp)</span>
+<span id="cb3-2"><a href="#cb3-2"></a>jwdid emp, ivar(county) tvar(<span class="fu">year</span>) gvar(first) method(<span class="kw">poisson</span>) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Iteration 0:   log pseudolikelihood = -2980537.4  
+Iteration 1:   log pseudolikelihood = -2980526.5  
+Iteration 2:   log pseudolikelihood = -2980526.5  
+
+Poisson regression                                      Number of obs =  2,500
+                                                        Wald chi2(14) = 225.38
+Log pseudolikelihood = -2980526.5                       Prob &gt; chi2   = 0.0000
+
+                           (Std. err. adjusted for 500 clusters in countyreal)
+------------------------------------------------------------------------------
+             |               Robust
+         emp | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ first_treat#|
+        year#|
+    c.__tr__ |
+  2004 2004  |  -.0080499   .0100858    -0.80   0.425    -.0278177    .0117178
+  2004 2005  |  -.0252131   .0176754    -1.43   0.154    -.0598562    .0094299
+  2004 2006  |   -.051965   .0197745    -2.63   0.009    -.0907222   -.0132077
+  2004 2007  |  -.0672208   .0192207    -3.50   0.000    -.1048926    -.029549
+  2006 2006  |    .055212   .0330023     1.67   0.094    -.0094714    .1198954
+  2006 2007  |   .0109993     .04294     0.26   0.798    -.0731617    .0951602
+  2007 2007  |   -.060675   .0149793    -4.05   0.000    -.0900339   -.0313161
+             |
+ first_treat |
+       2004  |   .4789133   .4347691     1.10   0.271    -.3732184    1.331045
+       2006  |   .6010118   .3248861     1.85   0.064    -.0357532    1.237777
+       2007  |   .1269293   .2472938     0.51   0.608    -.3577576    .6116163
+             |
+        year |
+       2004  |  -.0459369   .0064592    -7.11   0.000    -.0585966   -.0332771
+       2005  |  -.0301284   .0094457    -3.19   0.001    -.0486416   -.0116152
+       2006  |  -.0030985   .0122001    -0.25   0.800    -.0270104    .0208133
+       2007  |   .0350031   .0118264     2.96   0.003     .0118238    .0581824
+             |
+       _cons |    6.84775   .1555219    44.03   0.000     6.542932    7.152567
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<div id="40173c1f" class="cell larger" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1"></a>jwdid emp, ivar(county) tvar(<span class="fu">year</span>) gvar(first) method(<span class="kw">poisson</span>) never</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Iteration 0:   log pseudolikelihood = -2980450.1  
+Iteration 1:   log pseudolikelihood = -2980438.8  
+Iteration 2:   log pseudolikelihood = -2980438.8  
+
+Poisson regression                                      Number of obs =  2,500
+                                                        Wald chi2(19) = 262.50
+Log pseudolikelihood = -2980438.8                       Prob &gt; chi2   = 0.0000
+
+                           (Std. err. adjusted for 500 clusters in countyreal)
+------------------------------------------------------------------------------
+             |               Robust
+         emp | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+ first_treat#|
+        year#|
+    c.__tr__ |
+  2004 2004  |  -.0063802   .0111509    -0.57   0.567    -.0282356    .0154752
+  2004 2005  |   -.027483   .0190781    -1.44   0.150    -.0648753    .0099094
+  2004 2006  |  -.0641446   .0224733    -2.85   0.004    -.1081913   -.0200978
+  2004 2007  |  -.0704859   .0204208    -3.45   0.001    -.1105099   -.0304619
+  2006 2003  |  -.0081647   .0366458    -0.22   0.824     -.079989    .0636597
+  2006 2004  |  -.0289763   .0258763    -1.12   0.263    -.0796929    .0217403
+  2006 2006  |   .0310817   .0186723     1.66   0.096    -.0055153    .0676788
+  2006 2007  |  -.0042165   .0335939    -0.13   0.900    -.0700593    .0616263
+  2007 2003  |   .0358582   .0236868     1.51   0.130    -.0105671    .0822835
+  2007 2004  |   .0517571   .0164417     3.15   0.002      .019532    .0839822
+  2007 2005  |   .0237174   .0112134     2.12   0.034     .0017395    .0456952
+  2007 2007  |  -.0329817    .009941    -3.32   0.001    -.0524657   -.0134976
+             |
+ first_treat |
+       2004  |   .4821784   .4354246     1.11   0.268    -.3712381    1.335595
+       2006  |   .6162276   .3252255     1.89   0.058    -.0212028    1.253658
+       2007  |    .099236    .244468     0.41   0.685    -.3799124    .5783844
+             |
+        year |
+       2004  |  -.0476066   .0080213    -5.94   0.000     -.063328   -.0318852
+       2005  |  -.0278586   .0118649    -2.35   0.019    -.0511134   -.0046038
+       2006  |    .009081    .016213     0.56   0.575    -.0226959     .040858
+       2007  |   .0382682   .0136908     2.80   0.005     .0114347    .0651017
+             |
+       _cons |   6.844485   .1573451    43.50   0.000     6.536094    7.152875
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</section>
+<section id="example-1-aggregations" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="example-1-aggregations">Example 1: Aggregations</h2>
+<div id="367e4899" class="cell larger" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">estat</span> event</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>------------------------------------------------------------------------------
+             |            Delta-method
+             | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+   __event__ |
+         -4  |   37.84578   27.92442     1.36   0.175    -16.88508    92.57665
+         -3  |   36.91665   23.13761     1.60   0.111     -8.43224    82.26554
+         -2  |   7.462364   14.88422     0.50   0.616    -21.71018    36.63491
+         -1  |          0  (omitted)
+          0  |  -13.33389   12.32746    -1.08   0.279    -37.49527    10.82749
+          1  |  -18.42686   40.35552    -0.46   0.648    -97.52222     60.6685
+          2  |   -95.3188   36.54186    -2.61   0.009    -166.9395   -23.69806
+          3  |  -107.5067   44.45653    -2.42   0.016    -194.6399   -20.37347
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<div id="6846ba3f" class="cell larger" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">estat</span> <span class="fu">group</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>------------------------------------------------------------------------------
+             |            Delta-method
+             | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+   __group__ |
+       2004  |  -63.03151   28.14208    -2.24   0.025     -118.189   -7.874052
+       2006  |   23.89072   46.37715     0.52   0.606    -67.00682    114.7883
+       2007  |  -34.94374   13.54265    -2.58   0.010    -61.48686   -8.400625
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<div id="137ace0c" class="cell larger" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">estat</span> calendar</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>------------------------------------------------------------------------------
+             |            Delta-method
+             | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+__calendar__ |
+       2004  |  -9.219455   15.81277    -0.58   0.560    -40.21192    21.77301
+       2005  |  -40.08113   29.74368    -1.35   0.178    -98.37767    18.21541
+       2006  |   5.147843   33.13277     0.16   0.877     -59.7912    70.08689
+       2007  |  -36.81546   16.84608    -2.19   0.029    -69.83316   -3.797752
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<div id="af486748" class="cell larger" data-execution_count="9">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">qui</span>:<span class="kw">estat</span> event, plot</span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="kw">graph</span> <span class="kw">export</span> event.png, <span class="kw">replace</span> <span class="kw">width</span>(1000)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><img src="event.png" class="img-fluid"></p>
+</section>
+<section id="example-2-wooldridge-simulation-data" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="example-2-wooldridge-simulation-data">Example 2: Wooldridge Simulation data</h2>
+<div id="a4d3c068" class="cell larger" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">clear</span> <span class="ot">all</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="kw">use</span> did_common_6_binary, <span class="kw">clear</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="kw">qui</span> {</span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="kw">reg</span> <span class="fu">y</span> i.w#c.d#c.f04 i.w#c.d#c.f05 i.w#c.d#c.f06 <span class="co">///</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a>    i.w#c.d#c.f04#c.x i.w#c.d#c.f05#c.x i.w#c.d#c.f06#c.x <span class="co">///</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a>    f02 f03 f04 f05 f06 <span class="co">///</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a>    c.f02#c.x c.f03#c.x c.f04#c.x c.f05#c.x c.f06#c.x <span class="co">/// </span></span>
+<span id="cb14-8"><a href="#cb14-8"></a>    <span class="kw">d</span> x c.d#c.x, noomitted <span class="kw">vce</span>(<span class="kw">cluster</span> id)</span>
+<span id="cb14-9"><a href="#cb14-9"></a>  <span class="kw">est</span> sto m1</span>
+<span id="cb14-10"><a href="#cb14-10"></a>}  </span>
+<span id="cb14-11"><a href="#cb14-11"></a><span class="kw">qui</span>:margins, <span class="kw">dydx</span>(<span class="fu">w</span>) <span class="fu">at</span>(f02 = 0 f03 = 0 f04 = 1 f05 = 0 f06 = 0) <span class="co">///</span></span>
+<span id="cb14-12"><a href="#cb14-12"></a>    subpop(<span class="kw">if</span> <span class="kw">d</span> == 1) noestimcheck <span class="kw">vce</span>(uncond)  <span class="kw">post</span></span>
+<span id="cb14-13"><a href="#cb14-13"></a><span class="kw">ereturn</span> <span class="kw">display</span>  </span>
+<span id="cb14-14"><a href="#cb14-14"></a><span class="kw">est</span> <span class="kw">restore</span> m1</span>
+<span id="cb14-15"><a href="#cb14-15"></a><span class="kw">qui</span>:margins, <span class="kw">dydx</span>(<span class="fu">w</span>) <span class="fu">at</span>(f02 = 0 f03 = 0 f04 = 0 f05 = 1 f06 = 0) <span class="co">///</span></span>
+<span id="cb14-16"><a href="#cb14-16"></a>    subpop(<span class="kw">if</span> <span class="kw">d</span> == 1) noestimcheck <span class="kw">vce</span>(uncond) <span class="kw">post</span></span>
+<span id="cb14-17"><a href="#cb14-17"></a><span class="kw">ereturn</span> <span class="kw">display</span>  </span>
+<span id="cb14-18"><a href="#cb14-18"></a><span class="kw">est</span> <span class="kw">restore</span> m1</span>
+<span id="cb14-19"><a href="#cb14-19"></a><span class="kw">qui</span>:margins, <span class="kw">dydx</span>(<span class="fu">w</span>) <span class="fu">at</span>(f02 = 0 f03 = 0 f04 = 0 f05 = 0 f06 = 1) <span class="co">///</span></span>
+<span id="cb14-20"><a href="#cb14-20"></a>    subpop(<span class="kw">if</span> <span class="kw">d</span> == 1) noestimcheck <span class="kw">vce</span>(uncond) <span class="kw">post</span></span>
+<span id="cb14-21"><a href="#cb14-21"></a><span class="kw">ereturn</span> <span class="kw">display</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                 (Std. err. adjusted for 1,000 clusters in id)
+------------------------------------------------------------------------------
+             |            Unconditional
+             | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         1.w |   .0462206   .0367939     1.26   0.209    -.0259816    .1184228
+------------------------------------------------------------------------------
+(results m1 are active now)
+                                 (Std. err. adjusted for 1,000 clusters in id)
+------------------------------------------------------------------------------
+             |            Unconditional
+             | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         1.w |   .0755069   .0376124     2.01   0.045     .0016985    .1493153
+------------------------------------------------------------------------------
+(results m1 are active now)
+                                 (Std. err. adjusted for 1,000 clusters in id)
+------------------------------------------------------------------------------
+             |            Unconditional
+             | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         1.w |   .0445457   .0379857     1.17   0.241    -.0299952    .1190866
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>Using <code>jwdid</code>:</p>
+<div id="f7958732" class="cell larger" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw">clear</span> <span class="ot">all</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="kw">use</span> did_common_6_binary, <span class="kw">clear</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="kw">qui</span>: jwdid <span class="fu">y</span> x, ivar(id) tvar(<span class="fu">year</span>) trtvar(<span class="fu">w</span>) method(<span class="kw">regress</span>)</span>
+<span id="cb16-4"><a href="#cb16-4"></a><span class="kw">estat</span> event, <span class="kw">vce</span>(unconditional)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                 (Std. err. adjusted for 1,000 clusters in id)
+------------------------------------------------------------------------------
+             |            Unconditional
+             | Coefficient  std. err.      t    P&gt;|t|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+   __event__ |
+          0  |   .0462206   .0367939     1.26   0.209    -.0259816    .1184228
+          1  |   .0755069   .0376124     2.01   0.045     .0016985    .1493153
+          2  |   .0445457   .0379857     1.17   0.241    -.0299952    .1190866
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p><strong>Using Logit</strong></p>
+<div id="0a162400" class="cell larger" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">clear</span> <span class="ot">all</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="kw">use</span> did_common_6_binary, <span class="kw">clear</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="kw">qui</span> {</span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="kw">logit</span> <span class="fu">y</span> i.w#c.d#c.f04 i.w#c.d#c.f05 i.w#c.d#c.f06 <span class="co">///</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a>    i.w#c.d#c.f04#c.x i.w#c.d#c.f05#c.x i.w#c.d#c.f06#c.x <span class="co">///</span></span>
+<span id="cb18-6"><a href="#cb18-6"></a>    f02 f03 f04 f05 f06 c.f02#c.x c.f03#c.x c.f04#c.x c.f05#c.x c.f06#c.x <span class="co">///</span></span>
+<span id="cb18-7"><a href="#cb18-7"></a>    <span class="kw">d</span> x c.d#c.x, noomitted <span class="kw">vce</span>(<span class="kw">cluster</span> id)</span>
+<span id="cb18-8"><a href="#cb18-8"></a>  <span class="kw">est</span> <span class="kw">store</span> m1</span>
+<span id="cb18-9"><a href="#cb18-9"></a>}  </span>
+<span id="cb18-10"><a href="#cb18-10"></a></span>
+<span id="cb18-11"><a href="#cb18-11"></a><span class="kw">qui</span>:margins, <span class="kw">dydx</span>(<span class="fu">w</span>) <span class="fu">at</span>(f02 = 0 f03 = 0 f04 = 1 f05 = 0 f06 = 0) <span class="co">///</span></span>
+<span id="cb18-12"><a href="#cb18-12"></a>    subpop(<span class="kw">if</span> <span class="kw">d</span> == 1) noestimcheck <span class="kw">vce</span>(uncond)  <span class="kw">post</span></span>
+<span id="cb18-13"><a href="#cb18-13"></a><span class="kw">ereturn</span> <span class="kw">display</span>  </span>
+<span id="cb18-14"><a href="#cb18-14"></a><span class="kw">est</span> <span class="kw">restore</span> m1</span>
+<span id="cb18-15"><a href="#cb18-15"></a><span class="kw">qui</span>:margins, <span class="kw">dydx</span>(<span class="fu">w</span>) <span class="fu">at</span>(f02 = 0 f03 = 0 f04 = 0 f05 = 1 f06 = 0) <span class="co">///</span></span>
+<span id="cb18-16"><a href="#cb18-16"></a>    subpop(<span class="kw">if</span> <span class="kw">d</span> == 1) noestimcheck <span class="kw">vce</span>(uncond) <span class="kw">post</span></span>
+<span id="cb18-17"><a href="#cb18-17"></a><span class="kw">ereturn</span> <span class="kw">display</span>  </span>
+<span id="cb18-18"><a href="#cb18-18"></a><span class="kw">est</span> <span class="kw">restore</span> m1</span>
+<span id="cb18-19"><a href="#cb18-19"></a><span class="kw">qui</span>:margins, <span class="kw">dydx</span>(<span class="fu">w</span>) <span class="fu">at</span>(f02 = 0 f03 = 0 f04 = 0 f05 = 0 f06 = 1) <span class="co">///</span></span>
+<span id="cb18-20"><a href="#cb18-20"></a>    subpop(<span class="kw">if</span> <span class="kw">d</span> == 1) noestimcheck <span class="kw">vce</span>(uncond) <span class="kw">post</span></span>
+<span id="cb18-21"><a href="#cb18-21"></a><span class="kw">ereturn</span> <span class="kw">display</span> </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                 (Std. err. adjusted for 1,000 clusters in id)
+------------------------------------------------------------------------------
+             |            Unconditional
+             | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         1.w |   .0886639   .0326848     2.71   0.007     .0246029    .1527249
+------------------------------------------------------------------------------
+(results m1 are active now)
+                                 (Std. err. adjusted for 1,000 clusters in id)
+------------------------------------------------------------------------------
+             |            Unconditional
+             | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         1.w |   .1217999   .0355845     3.42   0.001     .0520556    .1915441
+------------------------------------------------------------------------------
+(results m1 are active now)
+                                 (Std. err. adjusted for 1,000 clusters in id)
+------------------------------------------------------------------------------
+             |            Unconditional
+             | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+         1.w |   .1073639   .0371242     2.89   0.004     .0346018    .1801261
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+<p>Using <code>jwdid</code>:</p>
+<div id="9257184d" class="cell larger" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource stata number-lines code-with-copy"><code class="sourceCode stata"><span id="cb20-1"><a href="#cb20-1"></a><span class="kw">clear</span> <span class="ot">all</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="kw">use</span> did_common_6_binary, <span class="kw">clear</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="kw">qui</span>: jwdid <span class="fu">y</span> x, ivar(id) tvar(<span class="fu">year</span>) trtvar(<span class="fu">w</span>) method(<span class="kw">logit</span>)</span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="kw">estat</span> event, <span class="kw">vce</span>(unconditional)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                                 (Std. err. adjusted for 1,000 clusters in id)
+------------------------------------------------------------------------------
+             |            Unconditional
+             | Coefficient  std. err.      z    P&gt;|z|     [95% conf. interval]
+-------------+----------------------------------------------------------------
+   __event__ |
+          0  |   .0886639   .0326848     2.71   0.007     .0246029    .1527249
+          1  |   .1217999   .0355845     3.42   0.001     .0520556    .1915441
+          2  |   .1073639   .0371242     2.89   0.004     .0346018    .1801261
+------------------------------------------------------------------------------</code></pre>
+</div>
+</div>
+</section>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<ul>
+<li>DID is a popular method for analyzing policy interventions.</li>
+<li>Thanks to the contributions of Wooldridge, Roth and Sant’Anna among others, we have a better understanding of how to implement DID in more complex scenarios.</li>
+<li>One of this important extensions is the use of nonlinear models to better fit the data, and better estimate treatment effects.</li>
+<li>The <code>jwdid</code> command is a simple tool that can help you implement the Wooldridge approach to nonlinear DID.</li>
+</ul>
+</section>
+<section id="references" class="level2">
+
+
+
+<!-- -->
+
+
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-borusyak2023revisiting" class="csl-entry" role="listitem">
+Borusyak, Kirill, Xavier Jaravel, and Jann Spiess. 2023. <span>“Revisiting Event Study Designs: Robust and Efficient Estimation.”</span> <a href="https://arxiv.org/abs/2108.12419">https://arxiv.org/abs/2108.12419</a>.
+</div>
+<div id="ref-callaway_2021" class="csl-entry" role="listitem">
+Callaway, Brantly, and Pedro H. C. Sant’Anna. 2021. <span>“Difference-in-<span>Differences</span> with Multiple Time Periods.”</span> <em>Journal of Econometrics</em>, Themed <span>Issue</span>: <span>Treatment</span> <span>Effect</span> 1, 225 (2): 200–230. <a href="https://doi.org/10.1016/j.jeconom.2020.12.001">https://doi.org/10.1016/j.jeconom.2020.12.001</a>.
+</div>
+<div id="ref-dechaisemartin2020" class="csl-entry" role="listitem">
+Chaisemartin, Clément de, and Xavier D’Haultfœuille. 2020. <span>“Two-Way Fixed Effects Estimators with Heterogeneous Treatment Effects.”</span> <em>American Economic Review</em> 110 (9): 2964–96. <a href="https://doi.org/10.1257/aer.20181169">https://doi.org/10.1257/aer.20181169</a>.
+</div>
+<div id="ref-goodmanbacon2021" class="csl-entry" role="listitem">
+Goodman-Bacon, Andrew. 2021. <span>“Difference-in-Differences with Variation in Treatment Timing.”</span> <em>Journal of Econometrics</em> 225 (2): 254–77. https://doi.org/<a href="https://doi.org/10.1016/j.jeconom.2021.03.014">https://doi.org/10.1016/j.jeconom.2021.03.014</a>.
+</div>
+<div id="ref-rothsantanna2023" class="csl-entry" role="listitem">
+Roth, Jonathan, and Pedro H. C. Sant’Anna. 2023. <span>“<span class="nocase">When Is Parallel Trends Sensitive to Functional Form?</span>”</span> <em>Econometrica</em> 91 (2): 737–47. <a href="https://doi.org/10.3982/ECTA19402">https://doi.org/10.3982/ECTA19402</a>.
+</div>
+<div id="ref-roth_whats_2023" class="csl-entry" role="listitem">
+Roth, Jonathan, Pedro H. C. Sant’Anna, Alyssa Bilinski, and John Poe. 2023. <span>“What’s Trending in Difference-in-Differences? <span>A</span> Synthesis of the Recent Econometrics Literature.”</span> <em>Journal of Econometrics</em> 235 (2): 2218–44. <a href="https://doi.org/10.1016/j.jeconom.2023.03.008">https://doi.org/10.1016/j.jeconom.2023.03.008</a>.
+</div>
+<div id="ref-santanna_doubly_2020" class="csl-entry" role="listitem">
+Sant’Anna, Pedro H. C., and Jun Zhao. 2020. <span>“Doubly Robust Difference-in-Differences Estimators.”</span> <em>Journal of Econometrics</em> 219 (1): 101–22. <a href="https://doi.org/10.1016/j.jeconom.2020.06.003">https://doi.org/10.1016/j.jeconom.2020.06.003</a>.
+</div>
+<div id="ref-sun_estimating_2021" class="csl-entry" role="listitem">
+Sun, Liyang, and Sarah Abraham. 2021. <span>“Estimating Dynamic Treatment Effects in Event Studies with Heterogeneous Treatment Effects.”</span> <em>Journal of Econometrics</em>, Themed <span>Issue</span>: <span>Treatment</span> <span>Effect</span> 1, 225 (2): 175–99. <a href="https://doi.org/10.1016/j.jeconom.2020.09.006">https://doi.org/10.1016/j.jeconom.2020.09.006</a>.
+</div>
+<div id="ref-wooldridge_2021" class="csl-entry" role="listitem">
+Wooldridge, Jeffrey M. 2021. <span>“Two-<span>Way</span> <span>Fixed</span> <span>Effects</span>, the <span>Two</span>-<span>Way</span> <span>Mundlak</span> <span>Regression</span>, and <span>Difference</span>-in-<span>Differences</span> <span>Estimators</span>.”</span> <em>SSRN Journal</em>. <a href="https://doi.org/10.2139/ssrn.3906345">https://doi.org/10.2139/ssrn.3906345</a>.
+</div>
+<div id="ref-wooldridge_2023" class="csl-entry" role="listitem">
+———. 2023. <span>“Simple Approaches to Nonlinear Difference-in-Differences with Panel Data.”</span> <em>The Econometrics Journal</em> 26 (3): C31–66. <a href="https://doi.org/10.1093/ectj/utad016">https://doi.org/10.1093/ectj/utad016</a>.
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/friosavila\.github\.io\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../app_metrics/app_metrics1.html" class="pagination-link" aria-label="Constructing synthetic Datasets">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Constructing synthetic Datasets</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../app_metrics/app_metrics11.html" class="pagination-link" aria-label="**`jwdid`**: A Stata command for the estimation of Difference-in-Differences models using ETWFE">
+        <span class="nav-page-text"><strong><code>jwdid</code></strong>: A Stata command for the estimation of Difference-in-Differences models using ETWFE</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb22" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Nonlinear DID"</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Lessons from Staggered Linear Differences in Differences"</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> </span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co">  - name: Fernando Rios-Avila</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co">    affiliation: Levy Economics Institute</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> </span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co">    html: </span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co">      highlight-style: github</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="an">bibliography:</span><span class="co"> did_reg.bib        </span></span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a><span class="an">jupyter:</span><span class="co"> nbstata</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introduction</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Differences in Differences** (DiD) design is one of the most popular methods in applied microeconomics, because it requires relatively few assumptions to identify treatment effects.</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>No anticipation,</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Parallel trends,</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>No spillovers</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The canonical DiD, a 2x2 design, simply compares means (or conditional means) of the outcome variable (before after x treated non-treated) to identify treatment effects. </span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Thus it can be used even if outcome is a limited dependent variable (binary, count, etc) (parallel to the linear regression case)</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a><span class="fu">## </span></span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Because the Canonical design is rather limited, many extensions have been proposed to handle more complex scenarios: Staggered Treatment with **GxT DID**.</span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Early Extensions (infamous TWFE) have been shown to be problematic. (negative weights and bad controls)</span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>but more recent approaches (See @roth_whats_2023) have shown how can one better use these designs to identify treatment effects, avoiding the simple-TWFE problems.</span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Linear models, however, have limitations:</span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Linear models do a poor job interpolating and predicting LDV outcomes</span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Parallel trends assumptions may only be credible under specific functional forms</span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a><span class="fu"># Disclaimer:</span></span>
+<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a>who am I not?</span>
+<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a><span class="fu">## Not Andrew Goodman-Bacon </span></span>
+<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a>:::: {.columns}</span>
+<span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a>::: {.column width="40%"}</span>
+<span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/paste-5.png)</span>{width="400"}</span>
+<span id="cb22-42"><a href="#cb22-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-43"><a href="#cb22-43" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb22-44"><a href="#cb22-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-45"><a href="#cb22-45" aria-hidden="true" tabindex="-1"></a>::: {.column width="60%"}</span>
+<span id="cb22-46"><a href="#cb22-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-47"><a href="#cb22-47" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Among others, Andrew showed the problems of using TWFE in the presence of staggered adoption of the treatment.</span>
+<span id="cb22-48"><a href="#cb22-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-49"><a href="#cb22-49" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Because of treatment timing, later treated units are compared to **bad** controls (early treated ones), in potential violation of the parallel trends assumption.</span>
+<span id="cb22-50"><a href="#cb22-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-51"><a href="#cb22-51" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>This also relates to negative weights.</span>
+<span id="cb22-52"><a href="#cb22-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-53"><a href="#cb22-53" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>See @goodmanbacon2021</span>
+<span id="cb22-54"><a href="#cb22-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-55"><a href="#cb22-55" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb22-56"><a href="#cb22-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-57"><a href="#cb22-57" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb22-58"><a href="#cb22-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-59"><a href="#cb22-59" aria-hidden="true" tabindex="-1"></a><span class="fu">## Not Pedro Sant'Anna </span></span>
+<span id="cb22-60"><a href="#cb22-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-61"><a href="#cb22-61" aria-hidden="true" tabindex="-1"></a>:::: {.columns}</span>
+<span id="cb22-62"><a href="#cb22-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-63"><a href="#cb22-63" aria-hidden="true" tabindex="-1"></a>::: {.column width="40%"}</span>
+<span id="cb22-64"><a href="#cb22-64" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/paste-4.png)</span>{width="400"}</span>
+<span id="cb22-65"><a href="#cb22-65" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb22-66"><a href="#cb22-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-67"><a href="#cb22-67" aria-hidden="true" tabindex="-1"></a>::: {.column width="60%"}</span>
+<span id="cb22-68"><a href="#cb22-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-69"><a href="#cb22-69" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Pedro and Brantly proposed deconstructing the GxT problem. Consider only good 2x2 DD designs to identify Treatment effects in DID.</span>
+<span id="cb22-70"><a href="#cb22-70" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Agregate them as needed to obtain the desired treatment effect (weighted Average). (dynamic, average, across time, across groups, etc)</span>
+<span id="cb22-71"><a href="#cb22-71" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb22-72"><a href="#cb22-72" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Along with **Jonathan Roth**, discuss the problem of PTA and functional forms. Not all may be valid.</span>
+<span id="cb22-73"><a href="#cb22-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-74"><a href="#cb22-74" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>see @callaway_2021 and @rothsantanna2023</span>
+<span id="cb22-75"><a href="#cb22-75" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb22-76"><a href="#cb22-76" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb22-77"><a href="#cb22-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-78"><a href="#cb22-78" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb22-79"><a href="#cb22-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-80"><a href="#cb22-80" aria-hidden="true" tabindex="-1"></a><span class="fu">## Not Jeffrey Wooldridge </span></span>
+<span id="cb22-81"><a href="#cb22-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-82"><a href="#cb22-82" aria-hidden="true" tabindex="-1"></a>:::: {.columns}</span>
+<span id="cb22-83"><a href="#cb22-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-84"><a href="#cb22-84" aria-hidden="true" tabindex="-1"></a>::: {.column width="40%"}</span>
+<span id="cb22-85"><a href="#cb22-85" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/paste-1.png)</span>{width="400"}</span>
+<span id="cb22-86"><a href="#cb22-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-87"><a href="#cb22-87" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb22-88"><a href="#cb22-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-89"><a href="#cb22-89" aria-hidden="true" tabindex="-1"></a>::: {.column width="60%"}</span>
+<span id="cb22-90"><a href="#cb22-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-91"><a href="#cb22-91" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Jeff Wooldridge brought back life to the **TWFE**. </span>
+<span id="cb22-92"><a href="#cb22-92" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The problem was not the **TWFE** part of the analysis, but the model specification. </span>
+<span id="cb22-93"><a href="#cb22-93" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>($post \times treated$ instead of $G \times T$)</span>
+<span id="cb22-94"><a href="#cb22-94" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>This insights, can be extended to nonlinear cases.</span>
+<span id="cb22-95"><a href="#cb22-95" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>See @wooldridge_2021 and @wooldridge_2023</span>
+<span id="cb22-96"><a href="#cb22-96" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb22-97"><a href="#cb22-97" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb22-98"><a href="#cb22-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-99"><a href="#cb22-99" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb22-100"><a href="#cb22-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-101"><a href="#cb22-101" aria-hidden="true" tabindex="-1"></a><span class="fu">## Fernando Rios-Avila  </span></span>
+<span id="cb22-102"><a href="#cb22-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-103"><a href="#cb22-103" aria-hidden="true" tabindex="-1"></a>:::: {.columns}</span>
+<span id="cb22-104"><a href="#cb22-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-105"><a href="#cb22-105" aria-hidden="true" tabindex="-1"></a>::: {.column width="40%"}</span>
+<span id="cb22-106"><a href="#cb22-106" aria-hidden="true" tabindex="-1"></a><span class="al">![](images/paste-7.png)</span>{width="400"}</span>
+<span id="cb22-107"><a href="#cb22-107" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-108"><a href="#cb22-108" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb22-109"><a href="#cb22-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-110"><a href="#cb22-110" aria-hidden="true" tabindex="-1"></a>::: {.column width="60%"}</span>
+<span id="cb22-111"><a href="#cb22-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-112"><a href="#cb22-112" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>I have followed some of the developments in DID with staggered adoption of the treatment. </span>
+<span id="cb22-113"><a href="#cb22-113" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Implemented few things (<span class="in">`drdid`</span>/<span class="in">`csdid`</span>/<span class="in">`csdid2`</span>/<span class="in">`jwdid`</span>)</span>
+<span id="cb22-114"><a href="#cb22-114" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Understood few others (comparison groups, efficiency, negative weights, nonlinear models)</span>
+<span id="cb22-115"><a href="#cb22-115" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>And today, I will be providing some of my insights regarding the empirical analysis of nonlinear DID.</span>
+<span id="cb22-116"><a href="#cb22-116" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>I will rely heavily on <span class="co">[</span><span class="ot">@wooldridge_2023</span><span class="co">](https://academic.oup.com/ectj/article/26/3/C31/7250479)</span>, </span>
+<span id="cb22-117"><a href="#cb22-117" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb22-118"><a href="#cb22-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-119"><a href="#cb22-119" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb22-120"><a href="#cb22-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-121"><a href="#cb22-121" aria-hidden="true" tabindex="-1"></a>::::</span>
+<span id="cb22-122"><a href="#cb22-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-123"><a href="#cb22-123" aria-hidden="true" tabindex="-1"></a><span class="fu">## Basics: 2x2 DiD</span></span>
+<span id="cb22-124"><a href="#cb22-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-125"><a href="#cb22-125" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>In the 2x2 DID design, we have 2 groups:</span>
+<span id="cb22-126"><a href="#cb22-126" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Control ($D=0$) and treated ($D=1$), </span>
+<span id="cb22-127"><a href="#cb22-127" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Which are observed for two periods of time:</span>
+<span id="cb22-128"><a href="#cb22-128" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Before ($T=0$) and after ($T=1$) the treatment.</span>
+<span id="cb22-129"><a href="#cb22-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-130"><a href="#cb22-130" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>For all groups and periods of time, we observe the *realized* outcome $Y_{i,t}$, but cannot observe all *potential* outcomes $Y_{i,t}(D)$.</span>
+<span id="cb22-131"><a href="#cb22-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-132"><a href="#cb22-132" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Realized outcomes are determined by the following equation:</span>
+<span id="cb22-133"><a href="#cb22-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-134"><a href="#cb22-134" aria-hidden="true" tabindex="-1"></a>$$Y_{i,t}=D_i Y_{i,t}(1) + (1-D_i) Y_{i,t}(0)</span>
+<span id="cb22-135"><a href="#cb22-135" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb22-136"><a href="#cb22-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-137"><a href="#cb22-137" aria-hidden="true" tabindex="-1"></a><span class="fu">## </span></span>
+<span id="cb22-138"><a href="#cb22-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-139"><a href="#cb22-139" aria-hidden="true" tabindex="-1"></a>If treatment occured at some point between T0 and T1, and we could observe all potential outcomes, the estimate of interested, Average Treatment effect, could be estimated as follows:</span>
+<span id="cb22-140"><a href="#cb22-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-141"><a href="#cb22-141" aria-hidden="true" tabindex="-1"></a>$$ATT = E(Y_{i,1}(1) - Y_{i,1}(0)|D_i=1)</span>
+<span id="cb22-142"><a href="#cb22-142" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb22-143"><a href="#cb22-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-144"><a href="#cb22-144" aria-hidden="true" tabindex="-1"></a>For the treated, we observe $Y_{i,1}(1)$, but cannot observe $Y_{i,t}(0)$ (counterfactual), thus, to identify Treatment Effects, we need to impose some assumptions.</span>
+<span id="cb22-145"><a href="#cb22-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-146"><a href="#cb22-146" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>PTA: </span>
+<span id="cb22-147"><a href="#cb22-147" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb22-148"><a href="#cb22-148" aria-hidden="true" tabindex="-1"></a>$$\begin{aligned}</span>
+<span id="cb22-149"><a href="#cb22-149" aria-hidden="true" tabindex="-1"></a>E(Y_{i,1}(0) - Y_{i,0}(0)|D_i=1) &amp;= E(Y_{i,1} - Y_{i,0}|D_i=0) <span class="sc">\\</span></span>
+<span id="cb22-150"><a href="#cb22-150" aria-hidden="true" tabindex="-1"></a>E(Y_{i,1}(0)|D_i=1) &amp;= E(Y_{i,0}(0)|D_i=1) + E(Y_{i,1} - Y_{i,0}|D_i=0) </span>
+<span id="cb22-151"><a href="#cb22-151" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
+<span id="cb22-152"><a href="#cb22-152" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb22-153"><a href="#cb22-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-154"><a href="#cb22-154" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>No Anticipation: </span>
+<span id="cb22-155"><a href="#cb22-155" aria-hidden="true" tabindex="-1"></a>$$Y_{i,0}(1) =  Y_{i,0}(0)=Y_{i,0}$$</span>
+<span id="cb22-156"><a href="#cb22-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-157"><a href="#cb22-157" aria-hidden="true" tabindex="-1"></a><span class="fu">## </span></span>
+<span id="cb22-158"><a href="#cb22-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-159"><a href="#cb22-159" aria-hidden="true" tabindex="-1"></a>Thus, ATT can be estimated as follows:</span>
+<span id="cb22-160"><a href="#cb22-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-161"><a href="#cb22-161" aria-hidden="true" tabindex="-1"></a>$$\begin{aligned}</span>
+<span id="cb22-162"><a href="#cb22-162" aria-hidden="true" tabindex="-1"></a>ATT &amp;= E(Y_{i,1}(1)|D_i=1)-E(Y_{i,1}(0)|D_i=1) <span class="sc">\\</span></span>
+<span id="cb22-163"><a href="#cb22-163" aria-hidden="true" tabindex="-1"></a>&amp;= E(Y_{i,1}|D_i=1)- \Big(E(Y_{i,0}|D_i=1) + E(Y_{i,1} - Y_{i,0}|D_i=0)  \Big) <span class="sc">\\</span></span>
+<span id="cb22-164"><a href="#cb22-164" aria-hidden="true" tabindex="-1"></a>&amp;= E(Y_{i,1}-Y_{i,0}|D_i=1)- E(Y_{i,1} - Y_{i,0}|D_i=0)  </span>
+<span id="cb22-165"><a href="#cb22-165" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
+<span id="cb22-166"><a href="#cb22-166" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb22-167"><a href="#cb22-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-168"><a href="#cb22-168" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>And the Same could be done via Regressions:</span>
+<span id="cb22-169"><a href="#cb22-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-170"><a href="#cb22-170" aria-hidden="true" tabindex="-1"></a>$$y_{i,t} = \beta_0 + \beta_1 T + \beta_2 D_i + \theta (D_i \times T) + \epsilon_{i,t}</span>
+<span id="cb22-171"><a href="#cb22-171" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb22-172"><a href="#cb22-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-173"><a href="#cb22-173" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>ATT identification relies on the Parallel trend assumption. </span>
+<span id="cb22-174"><a href="#cb22-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-175"><a href="#cb22-175" aria-hidden="true" tabindex="-1"></a><span class="fu">## How to test for PTA?</span></span>
+<span id="cb22-176"><a href="#cb22-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-177"><a href="#cb22-177" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>PTA is a non-testable assumption, because we do not observe all potential outcomes.</span>
+<span id="cb22-178"><a href="#cb22-178" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>However, if we "move", from the 2x2 design, it may be possible to test if PTA hold Before treatment.</span>
+<span id="cb22-179"><a href="#cb22-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-180"><a href="#cb22-180" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Consider a case of T periods of time, and that treatment happen at period G.</span>
+<span id="cb22-181"><a href="#cb22-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-182"><a href="#cb22-182" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Say we estimate the ATT comparing periods T and T-1, for any T&lt;G.</span>
+<span id="cb22-183"><a href="#cb22-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-184"><a href="#cb22-184" aria-hidden="true" tabindex="-1"></a>$$ATT(T) = E(Y_{i,T} - Y_{i,T-1}|D_i=1) - E(Y_{i,T} - Y_{i,T-1}|D_i=0)</span>
+<span id="cb22-185"><a href="#cb22-185" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb22-186"><a href="#cb22-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-187"><a href="#cb22-187" aria-hidden="true" tabindex="-1"></a>- If there is no anticipation, and Parallel trends hold, then $ATT(T)=0 \text{ if } T&lt;G$ </span>
+<span id="cb22-188"><a href="#cb22-188" aria-hidden="true" tabindex="-1"></a>  - This is what @callaway_2021 uses for PTA testing</span>
+<span id="cb22-189"><a href="#cb22-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-190"><a href="#cb22-190" aria-hidden="true" tabindex="-1"></a>## How to test for PTA?</span>
+<span id="cb22-191"><a href="#cb22-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-192"><a href="#cb22-192" aria-hidden="true" tabindex="-1"></a>- Alternatively, one could simply estimate all ATT's using period G-1 as baseline period (`long2` differences):</span>
+<span id="cb22-193"><a href="#cb22-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-194"><a href="#cb22-194" aria-hidden="true" tabindex="-1"></a>$$ATT^2(T) = E(Y_{i,T} - Y_{i,G-1}|D_i=1) - E(Y_{i,T} - Y_{i,G-1}|D_i=0)</span>
+<span id="cb22-195"><a href="#cb22-195" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb22-196"><a href="#cb22-196" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb22-197"><a href="#cb22-197" aria-hidden="true" tabindex="-1"></a>- And use all post-treatment periods to estimate the ATT ($T\geq G$)</span>
+<span id="cb22-198"><a href="#cb22-198" aria-hidden="true" tabindex="-1"></a>- and use all pre-treatment periods to test for PTA ($T&lt;G$)</span>
+<span id="cb22-199"><a href="#cb22-199" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb22-200"><a href="#cb22-200" aria-hidden="true" tabindex="-1"></a>## </span>
+<span id="cb22-201"><a href="#cb22-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-202"><a href="#cb22-202" aria-hidden="true" tabindex="-1"></a>::: {.panel-tabset}</span>
+<span id="cb22-203"><a href="#cb22-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-204"><a href="#cb22-204" aria-hidden="true" tabindex="-1"></a>## What if PTA does not hold?</span>
+<span id="cb22-205"><a href="#cb22-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-206"><a href="#cb22-206" aria-hidden="true" tabindex="-1"></a>- As suggested by @wooldridge_2023, one of the reasons PTA may not hold is because we may be analyzing the wrong model.</span>
+<span id="cb22-207"><a href="#cb22-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-208"><a href="#cb22-208" aria-hidden="true" tabindex="-1"></a>  - consider two groups of workers, high and low earners, that experience the same wage growth. (parallel trends in relative terms)</span>
+<span id="cb22-209"><a href="#cb22-209" aria-hidden="true" tabindex="-1"></a>  - If we observe wages at levels, parallel trends would be violated</span>
+<span id="cb22-210"><a href="#cb22-210" aria-hidden="true" tabindex="-1"></a>  - And Post treatment estimates will be missleading</span>
+<span id="cb22-211"><a href="#cb22-211" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb22-212"><a href="#cb22-212" aria-hidden="true" tabindex="-1"></a>## Wage PTA in levels</span>
+<span id="cb22-213"><a href="#cb22-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-216"><a href="#cb22-216" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb22-217"><a href="#cb22-217" aria-hidden="true" tabindex="-1"></a>*| output: false</span>
+<span id="cb22-218"><a href="#cb22-218" aria-hidden="true" tabindex="-1"></a>*| echo: false</span>
+<span id="cb22-219"><a href="#cb22-219" aria-hidden="true" tabindex="-1"></a>*| fig-align: center</span>
+<span id="cb22-220"><a href="#cb22-220" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb22-221"><a href="#cb22-221" aria-hidden="true" tabindex="-1"></a>set scheme white2</span>
+<span id="cb22-222"><a href="#cb22-222" aria-hidden="true" tabindex="-1"></a>color_style tableau</span>
+<span id="cb22-223"><a href="#cb22-223" aria-hidden="true" tabindex="-1"></a>clear</span>
+<span id="cb22-224"><a href="#cb22-224" aria-hidden="true" tabindex="-1"></a>set obs 20</span>
+<span id="cb22-225"><a href="#cb22-225" aria-hidden="true" tabindex="-1"></a>gen y1 = 10</span>
+<span id="cb22-226"><a href="#cb22-226" aria-hidden="true" tabindex="-1"></a>gen y2 = 30</span>
+<span id="cb22-227"><a href="#cb22-227" aria-hidden="true" tabindex="-1"></a>replace y1 = y1[_n-1]*(1.02 + (_n&gt;11)*0.03) if _n&gt;1</span>
+<span id="cb22-228"><a href="#cb22-228" aria-hidden="true" tabindex="-1"></a>replace y2 = y2<span class="co">[</span><span class="ot">_n-1</span><span class="co">]</span>*1.02 if _n&gt;1</span>
+<span id="cb22-229"><a href="#cb22-229" aria-hidden="true" tabindex="-1"></a>scalar yy1 = y1<span class="co">[</span><span class="ot">11</span><span class="co">]</span></span>
+<span id="cb22-230"><a href="#cb22-230" aria-hidden="true" tabindex="-1"></a>scalar yy2 = y2<span class="co">[</span><span class="ot">11</span><span class="co">]</span></span>
+<span id="cb22-231"><a href="#cb22-231" aria-hidden="true" tabindex="-1"></a>replace y1=y1-yy1</span>
+<span id="cb22-232"><a href="#cb22-232" aria-hidden="true" tabindex="-1"></a>replace y2=y2-yy2</span>
+<span id="cb22-233"><a href="#cb22-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-234"><a href="#cb22-234" aria-hidden="true" tabindex="-1"></a>gen t =_n</span>
+<span id="cb22-235"><a href="#cb22-235" aria-hidden="true" tabindex="-1"></a>gen dy = y1 - y2</span>
+<span id="cb22-236"><a href="#cb22-236" aria-hidden="true" tabindex="-1"></a>scatter y1 y2 dy t, connect(l l l) ///</span>
+<span id="cb22-237"><a href="#cb22-237" aria-hidden="true" tabindex="-1"></a>legend(order(1 "Low earner" 2 "High earner" 3 "DID"))</span>
+<span id="cb22-238"><a href="#cb22-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-239"><a href="#cb22-239" aria-hidden="true" tabindex="-1"></a>graph export fig1.png, replace width(1000)</span>
+<span id="cb22-240"><a href="#cb22-240" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-241"><a href="#cb22-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-242"><a href="#cb22-242" aria-hidden="true" tabindex="-1"></a><span class="in">![](fig1.png){width="1000"}</span></span>
+<span id="cb22-243"><a href="#cb22-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-244"><a href="#cb22-244" aria-hidden="true" tabindex="-1"></a><span class="in">## Wage PTA in logs</span></span>
+<span id="cb22-245"><a href="#cb22-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-248"><a href="#cb22-248" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb22-249"><a href="#cb22-249" aria-hidden="true" tabindex="-1"></a><span class="in">*| output: false</span></span>
+<span id="cb22-250"><a href="#cb22-250" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo: false</span></span>
+<span id="cb22-251"><a href="#cb22-251" aria-hidden="true" tabindex="-1"></a><span class="in">*| fig-align: center</span></span>
+<span id="cb22-252"><a href="#cb22-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-253"><a href="#cb22-253" aria-hidden="true" tabindex="-1"></a><span class="in">gen lny2=ln(y2+yy2) - ln(yy2) </span></span>
+<span id="cb22-254"><a href="#cb22-254" aria-hidden="true" tabindex="-1"></a><span class="in">gen lny1=ln(y1+yy1) - ln(yy1)</span></span>
+<span id="cb22-255"><a href="#cb22-255" aria-hidden="true" tabindex="-1"></a><span class="in">gen dly = lny1 - lny2</span></span>
+<span id="cb22-256"><a href="#cb22-256" aria-hidden="true" tabindex="-1"></a><span class="in">replace  lny2=lny2-0.01</span></span>
+<span id="cb22-257"><a href="#cb22-257" aria-hidden="true" tabindex="-1"></a><span class="in">scatter lny1 lny2 dly t, connect(l l l) ///</span></span>
+<span id="cb22-258"><a href="#cb22-258" aria-hidden="true" tabindex="-1"></a><span class="in">legend(order(1 "Low earner" 2 "High earner" 3 "DID")) ///</span></span>
+<span id="cb22-259"><a href="#cb22-259" aria-hidden="true" tabindex="-1"></a><span class="in">xsize(12) ysize(8)</span></span>
+<span id="cb22-260"><a href="#cb22-260" aria-hidden="true" tabindex="-1"></a><span class="in">graph export fig2.png, replace width(1000)</span></span>
+<span id="cb22-261"><a href="#cb22-261" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-262"><a href="#cb22-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-263"><a href="#cb22-263" aria-hidden="true" tabindex="-1"></a><span class="al">![](fig2.png)</span>{width="1000"}</span>
+<span id="cb22-264"><a href="#cb22-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-265"><a href="#cb22-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-266"><a href="#cb22-266" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb22-267"><a href="#cb22-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-268"><a href="#cb22-268" aria-hidden="true" tabindex="-1"></a><span class="fu">## PTA may hold for $G(\bar Y)$</span></span>
+<span id="cb22-269"><a href="#cb22-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-270"><a href="#cb22-270" aria-hidden="true" tabindex="-1"></a>A similar story could be told about other types of transformations.</span>
+<span id="cb22-271"><a href="#cb22-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-272"><a href="#cb22-272" aria-hidden="true" tabindex="-1"></a>In general, it is possible that PTA hold for some other monotonic transformation of the outcome variable.</span>
+<span id="cb22-273"><a href="#cb22-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-274"><a href="#cb22-274" aria-hidden="true" tabindex="-1"></a>$$G^{-1}\Big( E_1 <span class="co">[</span><span class="ot">Y_{i,1}(0)</span><span class="co">]</span> \Big) -G^{-1}\Big(E_1<span class="co">[</span><span class="ot"> Y_{i,0}(0) </span><span class="co">]</span> \Big)  </span>
+<span id="cb22-275"><a href="#cb22-275" aria-hidden="true" tabindex="-1"></a>= G^{-1}\Big(E_0<span class="co">[</span><span class="ot">Y_{i,1}</span><span class="co">]</span>\Big) - G^{-1}\Big(E_0<span class="co">[</span><span class="ot">Y_{i,0}</span><span class="co">]</span>\Big)</span>
+<span id="cb22-276"><a href="#cb22-276" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb22-277"><a href="#cb22-277" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-278"><a href="#cb22-278" aria-hidden="true" tabindex="-1"></a>This is very similar to the PTA assumption explored in Roth and Sant'Anna (2023).</span>
+<span id="cb22-279"><a href="#cb22-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-280"><a href="#cb22-280" aria-hidden="true" tabindex="-1"></a>$$E_1\Big<span class="co">[</span><span class="ot">g(Y_{i,1}(0))\Big</span><span class="co">]</span> - E_1\Big<span class="co">[</span><span class="ot">g(Y_{i,0}(0))\Big</span><span class="co">]</span> = E_0\Big<span class="co">[</span><span class="ot">g(Y_{i,1})\Big</span><span class="co">]</span> - E_0\Big<span class="co">[</span><span class="ot">g(Y_{i,0})\Big</span><span class="co">]</span></span>
+<span id="cb22-281"><a href="#cb22-281" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb22-282"><a href="#cb22-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-283"><a href="#cb22-283" aria-hidden="true" tabindex="-1"></a>Wooldridge idea: It may be possible to identify ATTs using correct functional forms, through the **latent index**.</span>
+<span id="cb22-284"><a href="#cb22-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-285"><a href="#cb22-285" aria-hidden="true" tabindex="-1"></a><span class="fu">## How do things Change?</span></span>
+<span id="cb22-286"><a href="#cb22-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-287"><a href="#cb22-287" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Using this insight, we can go back to the 2x2 design, and see how things change.</span>
+<span id="cb22-288"><a href="#cb22-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-289"><a href="#cb22-289" aria-hidden="true" tabindex="-1"></a>Before: </span>
+<span id="cb22-290"><a href="#cb22-290" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-291"><a href="#cb22-291" aria-hidden="true" tabindex="-1"></a>$$E(y_{i,t}|D,T)=\beta_0 + \beta_1 T + \beta_2 D_i + \theta (D_i \times T)</span>
+<span id="cb22-292"><a href="#cb22-292" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb22-293"><a href="#cb22-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-294"><a href="#cb22-294" aria-hidden="true" tabindex="-1"></a>After:</span>
+<span id="cb22-295"><a href="#cb22-295" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-296"><a href="#cb22-296" aria-hidden="true" tabindex="-1"></a>$$E(y_{i,t}|D,T)=G\Big(\beta_0 + \beta_1 T + \beta_2 D_i + \theta (D_i \times T)\Big)</span>
+<span id="cb22-297"><a href="#cb22-297" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb22-298"><a href="#cb22-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-299"><a href="#cb22-299" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>For the practitioner, the extended Nonlinear DID simply requires choosing a functional form that better fits the data.</span>
+<span id="cb22-300"><a href="#cb22-300" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Poisson, logit, ~~fractional regression~~, multinomial model, Linear model, etc</span>
+<span id="cb22-301"><a href="#cb22-301" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb22-302"><a href="#cb22-302" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-303"><a href="#cb22-303" aria-hidden="true" tabindex="-1"></a><span class="fu">## Extension I: Adding Covariates</span></span>
+<span id="cb22-304"><a href="#cb22-304" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-305"><a href="#cb22-305" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Many papers in the literature consider the use of covariates in the estimation of the ATT.</span>
+<span id="cb22-306"><a href="#cb22-306" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb22-307"><a href="#cb22-307" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The lessons from @santanna_doubly_2020:</span>
+<span id="cb22-308"><a href="#cb22-308" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>The choosen covariates should be time fixed, to avoid contamination of the treatment effect.</span>
+<span id="cb22-309"><a href="#cb22-309" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Using covariates allows relaxing the parallel trends assumption: PTA hold for specific groups of individuals. (if not for the whole population due to compositional changes)</span>
+<span id="cb22-310"><a href="#cb22-310" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb22-311"><a href="#cb22-311" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>In the 2x2 DID-Regression, covariates can be added with interactions:</span>
+<span id="cb22-312"><a href="#cb22-312" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-313"><a href="#cb22-313" aria-hidden="true" tabindex="-1"></a>$$\begin{aligned}</span>
+<span id="cb22-314"><a href="#cb22-314" aria-hidden="true" tabindex="-1"></a>y_{i,t} &amp;= \beta_0 + \beta_1 D + \beta_2 T + \theta (D \times T) <span class="sc">\\</span></span>
+<span id="cb22-315"><a href="#cb22-315" aria-hidden="true" tabindex="-1"></a>&amp;+ X\gamma +  D \times X\gamma_d + T \times X\gamma_T + D \times T (X-\bar X )\lambda + \epsilon_{i,t}</span>
+<span id="cb22-316"><a href="#cb22-316" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
+<span id="cb22-317"><a href="#cb22-317" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb22-318"><a href="#cb22-318" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-319"><a href="#cb22-319" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The same could be done in the nonlinear case</span>
+<span id="cb22-320"><a href="#cb22-320" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-321"><a href="#cb22-321" aria-hidden="true" tabindex="-1"></a><span class="fu">## Extension II: GxT DiD</span></span>
+<span id="cb22-322"><a href="#cb22-322" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-323"><a href="#cb22-323" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The 2x2 design is rather limited, because often people have access to multiple periods of time, with differential treatment timing. (staggered adoption of the treatment)</span>
+<span id="cb22-324"><a href="#cb22-324" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>I call this the GxT design (G groups, T periods of time) </span>
+<span id="cb22-325"><a href="#cb22-325" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The majority of the papers that analyze this case impose an additional assumption: </span>
+<span id="cb22-326"><a href="#cb22-326" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Treatment is not Reversable: Once treated always treated</span>
+<span id="cb22-327"><a href="#cb22-327" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-328"><a href="#cb22-328" aria-hidden="true" tabindex="-1"></a>**NOTE**: Because of the interactions required, adding covariates would rapidily "consume" degrees of freedom. (may be a problem with nonlinear models).</span>
+<span id="cb22-329"><a href="#cb22-329" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-330"><a href="#cb22-330" aria-hidden="true" tabindex="-1"></a>How to see this? <span class="in">`--&gt; tab tvar gvar`</span></span>
+<span id="cb22-331"><a href="#cb22-331" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-332"><a href="#cb22-332" aria-hidden="true" tabindex="-1"></a>##</span>
+<span id="cb22-333"><a href="#cb22-333" aria-hidden="true" tabindex="-1"></a><span class="fu">### The Problem</span></span>
+<span id="cb22-334"><a href="#cb22-334" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-335"><a href="#cb22-335" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Early extensions of the 2x2 design to the GxT design, relied on the **TWFE** estimator. </span>
+<span id="cb22-336"><a href="#cb22-336" aria-hidden="true" tabindex="-1"></a>$$y_{i,t} = \delta_i + \delta_t + \theta^{fe} D_{i,t} + e_{i,t}$$</span>
+<span id="cb22-337"><a href="#cb22-337" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-338"><a href="#cb22-338" aria-hidden="true" tabindex="-1"></a>where $D_{i,t}=1$ only after treatment is in place, and zero otherwise.</span>
+<span id="cb22-339"><a href="#cb22-339" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-340"><a href="#cb22-340" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>This model has been shown to be problematic, because of How OLS estimates the $\theta^{fe}$ parameter.</span>
+<span id="cb22-341"><a href="#cb22-341" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>$\theta^{fe}$ is a weighted average of all possible 2x2 DID designs. @goodmanbacon2021</span>
+<span id="cb22-342"><a href="#cb22-342" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Some designs use early treated units as controls for late treated units, which might be a violation of the parallel trends assumption. </span>
+<span id="cb22-343"><a href="#cb22-343" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>(treated units effectively receiving negative weights) @goodmanbacon2021, @dechaisemartin2020 and @borusyak2023revisiting. </span>
+<span id="cb22-344"><a href="#cb22-344" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-345"><a href="#cb22-345" aria-hidden="true" tabindex="-1"></a>##</span>
+<span id="cb22-346"><a href="#cb22-346" aria-hidden="true" tabindex="-1"></a><span class="fu">### Avoiding the Problem</span></span>
+<span id="cb22-347"><a href="#cb22-347" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-348"><a href="#cb22-348" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>@callaway_2021 proposes a simple solution: Deconstruct the problem into smaller pieces (2x2 DIDs), and aggregate them as needed.</span>
+<span id="cb22-349"><a href="#cb22-349" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-350"><a href="#cb22-350" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>@wooldridge_2021, however, proposes a different solution: Use the correct functional form to estimate the ATTs.</span>
+<span id="cb22-351"><a href="#cb22-351" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-352"><a href="#cb22-352" aria-hidden="true" tabindex="-1"></a>$$\text{Instead of: }Y_{i,t} = \delta_i + \gamma_t  + \theta^{fe} PT_{i,t} + \epsilon_{i,t}$$</span>
+<span id="cb22-353"><a href="#cb22-353" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-354"><a href="#cb22-354" aria-hidden="true" tabindex="-1"></a>$$\text{Use: }Y_{i,t} = \delta_i + \gamma_t  + \sum_{g \in \mathbb{G}} \sum_{t=g}^T \theta_{g,t} \mathbb{1}(G=g,T=t) + \epsilon_{i,t}$$</span>
+<span id="cb22-355"><a href="#cb22-355" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-356"><a href="#cb22-356" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Their Message: Embrace heterogeneity across time and cohorts.</span>
+<span id="cb22-357"><a href="#cb22-357" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-358"><a href="#cb22-358" aria-hidden="true" tabindex="-1"></a><span class="fu">## An added Insight</span></span>
+<span id="cb22-359"><a href="#cb22-359" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-360"><a href="#cb22-360" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The approach proposed by @wooldridge_2021, is more efficient than @callaway_2021, because it uses all pre-treatment data to estimate the ATTs. (@callaway_2021 uses only one pre-treatment period)</span>
+<span id="cb22-361"><a href="#cb22-361" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-362"><a href="#cb22-362" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>However, doing this doesn't allow you to test for PTA directly, unless we use an alternative approach:</span>
+<span id="cb22-363"><a href="#cb22-363" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-364"><a href="#cb22-364" aria-hidden="true" tabindex="-1"></a>$$Y_{i,t} = \delta_i + \gamma_t  + </span>
+<span id="cb22-365"><a href="#cb22-365" aria-hidden="true" tabindex="-1"></a>\sum_{g \in \mathbb{G}} \sum_{t=t_0}^{g-2} \theta_{g,t}^{pre} \mathbb{1}(G=g,T=t) +</span>
+<span id="cb22-366"><a href="#cb22-366" aria-hidden="true" tabindex="-1"></a>\sum_{g \in \mathbb{G}} \sum_{t=g}^T \theta_{g,t}^{post} \mathbb{1}(G=g,T=t) + \epsilon_{i,t}$$</span>
+<span id="cb22-367"><a href="#cb22-367" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-368"><a href="#cb22-368" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>This specification is equivalent to @callaway_2021 and to @sun_estimating_2021. </span>
+<span id="cb22-369"><a href="#cb22-369" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Its explicily a regression (Wooldridge)</span>
+<span id="cb22-370"><a href="#cb22-370" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>and uses actual, instead of relative, time.</span>
+<span id="cb22-371"><a href="#cb22-371" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb22-372"><a href="#cb22-372" aria-hidden="true" tabindex="-1"></a><span class="fu">## Implementing NL-DID the `JW` way</span></span>
+<span id="cb22-373"><a href="#cb22-373" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-374"><a href="#cb22-374" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>One of the advantages of the approaches proposed by @wooldridge_2021 and @wooldridge_2023, is that they can be directly estimated using regressions.</span>
+<span id="cb22-375"><a href="#cb22-375" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The hard part is to construct all the interactions required for the model to work.</span>
+<span id="cb22-376"><a href="#cb22-376" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>And a second challenge is to aggregate the results.</span>
+<span id="cb22-377"><a href="#cb22-377" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-378"><a href="#cb22-378" aria-hidden="true" tabindex="-1"></a>**`jwdid`**</span>
+<span id="cb22-379"><a href="#cb22-379" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-380"><a href="#cb22-380" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`jwdid`</span> is a simple command that helps with the construction of all required interactions that could be used to implement Wooldridge approach.</span>
+<span id="cb22-381"><a href="#cb22-381" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>It is flexible enough, in that it allows you to choose different estimators that would better fit your data.</span>
+<span id="cb22-382"><a href="#cb22-382" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>it comes with its own post estimation commands that can help you aggregate the results into simple ATT, dynamics effects, across periods, across years, etc.</span>
+<span id="cb22-383"><a href="#cb22-383" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-384"><a href="#cb22-384" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Lets take it for a spin</span>
+<span id="cb22-385"><a href="#cb22-385" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-386"><a href="#cb22-386" aria-hidden="true" tabindex="-1"></a><span class="fu">## Command Syntax</span></span>
+<span id="cb22-387"><a href="#cb22-387" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-388"><a href="#cb22-388" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`jwdid`</span> - Command Name. In charge of getting all interactions -right-</span>
+<span id="cb22-389"><a href="#cb22-389" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span><span class="in">`depvar`</span> <span class="in">`[indepvar]`</span> - Declare the dependent variables. Independent variables are optional. They should be time fixed.</span>
+<span id="cb22-390"><a href="#cb22-390" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span><span class="in">`[if]`</span> <span class="in">`[in]`</span> <span class="in">`[weight]`</span>, Declares sample and weights. Only <span class="in">`PW`</span> is allowed. </span>
+<span id="cb22-391"><a href="#cb22-391" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-392"><a href="#cb22-392" aria-hidden="true" tabindex="-1"></a><span class="fu">## Command Main Options</span></span>
+<span id="cb22-393"><a href="#cb22-393" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-394"><a href="#cb22-394" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`jwdid`</span>: main options</span>
+<span id="cb22-395"><a href="#cb22-395" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span><span class="in">`ivar(varname)`</span>: Panel indicator. If not declared, command assumes one is using repeated cross sections.</span>
+<span id="cb22-396"><a href="#cb22-396" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span><span class="in">`cluster(varname)`</span>: Cluster variable. To request a clustered standard error other than at <span class="in">`ivar`</span> level. Recommended with RC.</span>
+<span id="cb22-397"><a href="#cb22-397" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span><span class="in">`tvar(varname)`</span> or <span class="in">`time(varname)`</span>: Required, Time variable. There are two ways to call it for compatability with <span class="in">`csdid`</span>.</span>
+<span id="cb22-398"><a href="#cb22-398" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span><span class="in">`gvar(varname)`</span>: Group variable. Indicates the timing of when a unit has ben treated.</span>
+<span id="cb22-399"><a href="#cb22-399" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span><span class="in">`trtvar(varname)`</span>: If using Panel data, one could instead provide the post-treatment dummy.</span>
+<span id="cb22-400"><a href="#cb22-400" aria-hidden="true" tabindex="-1"></a><span class="ss">    - </span>If data is repeated crossection, one requires using <span class="in">`trgvar(varname)`</span> (Pseudo panel indicator).</span>
+<span id="cb22-401"><a href="#cb22-401" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-402"><a href="#cb22-402" aria-hidden="true" tabindex="-1"></a><span class="fu">## Extra Options</span></span>
+<span id="cb22-403"><a href="#cb22-403" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-404"><a href="#cb22-404" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`group`</span>: Requests using group fixed effects, instead of individual fixed effects (default)</span>
+<span id="cb22-405"><a href="#cb22-405" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`never`</span>: Request to use alternative specification that allows to test for PTA. (default is to use the standard specification)</span>
+<span id="cb22-406"><a href="#cb22-406" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Linear and Nonlinear models:</span>
+<span id="cb22-407"><a href="#cb22-407" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span><span class="in">`method(command, options)`</span>: Request to use a specific method to model the data. Default is using linear regression via <span class="in">`reghdfe`</span>. </span>
+<span id="cb22-408"><a href="#cb22-408" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>the option part allows you do include specific options for the method. (e.g. <span class="in">`method(glm, link() family())`</span>)</span>
+<span id="cb22-409"><a href="#cb22-409" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-410"><a href="#cb22-410" aria-hidden="true" tabindex="-1"></a><span class="fu">## Example 1: Min Wages on Employment CS data {.scrollable}</span></span>
+<span id="cb22-411"><a href="#cb22-411" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-414"><a href="#cb22-414" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb22-415"><a href="#cb22-415" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo: true</span></span>
+<span id="cb22-416"><a href="#cb22-416" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-line-numbers: true</span></span>
+<span id="cb22-417"><a href="#cb22-417" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
+<span id="cb22-418"><a href="#cb22-418" aria-hidden="true" tabindex="-1"></a><span class="in">*| classes: larger</span></span>
+<span id="cb22-419"><a href="#cb22-419" aria-hidden="true" tabindex="-1"></a><span class="in">clear all</span></span>
+<span id="cb22-420"><a href="#cb22-420" aria-hidden="true" tabindex="-1"></a><span class="in">qui:ssc install frause</span></span>
+<span id="cb22-421"><a href="#cb22-421" aria-hidden="true" tabindex="-1"></a><span class="in">qui:frause mpdta, clear</span></span>
+<span id="cb22-422"><a href="#cb22-422" aria-hidden="true" tabindex="-1"></a><span class="in">frause mpdta, clear</span></span>
+<span id="cb22-423"><a href="#cb22-423" aria-hidden="true" tabindex="-1"></a><span class="in">jwdid lemp, ivar(county) tvar(year) gvar(first)</span></span>
+<span id="cb22-424"><a href="#cb22-424" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-425"><a href="#cb22-425" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-428"><a href="#cb22-428" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb22-429"><a href="#cb22-429" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo: true</span></span>
+<span id="cb22-430"><a href="#cb22-430" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-line-numbers: true</span></span>
+<span id="cb22-431"><a href="#cb22-431" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
+<span id="cb22-432"><a href="#cb22-432" aria-hidden="true" tabindex="-1"></a><span class="in">*| classes: larger</span></span>
+<span id="cb22-433"><a href="#cb22-433" aria-hidden="true" tabindex="-1"></a><span class="in">gen emp = exp(lemp)</span></span>
+<span id="cb22-434"><a href="#cb22-434" aria-hidden="true" tabindex="-1"></a><span class="in">jwdid emp, ivar(county) tvar(year) gvar(first) method(poisson) </span></span>
+<span id="cb22-435"><a href="#cb22-435" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-436"><a href="#cb22-436" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-439"><a href="#cb22-439" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb22-440"><a href="#cb22-440" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo: true</span></span>
+<span id="cb22-441"><a href="#cb22-441" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-line-numbers: true</span></span>
+<span id="cb22-442"><a href="#cb22-442" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
+<span id="cb22-443"><a href="#cb22-443" aria-hidden="true" tabindex="-1"></a><span class="in">*| classes: larger</span></span>
+<span id="cb22-444"><a href="#cb22-444" aria-hidden="true" tabindex="-1"></a><span class="in">jwdid emp, ivar(county) tvar(year) gvar(first) method(poisson) never</span></span>
+<span id="cb22-445"><a href="#cb22-445" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-446"><a href="#cb22-446" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-447"><a href="#cb22-447" aria-hidden="true" tabindex="-1"></a><span class="fu">## Example 1: Aggregations {.scrollable}</span></span>
+<span id="cb22-448"><a href="#cb22-448" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-451"><a href="#cb22-451" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb22-452"><a href="#cb22-452" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo: true</span></span>
+<span id="cb22-453"><a href="#cb22-453" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-line-numbers: true</span></span>
+<span id="cb22-454"><a href="#cb22-454" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
+<span id="cb22-455"><a href="#cb22-455" aria-hidden="true" tabindex="-1"></a><span class="in">*| classes: larger</span></span>
+<span id="cb22-456"><a href="#cb22-456" aria-hidden="true" tabindex="-1"></a><span class="in">estat event</span></span>
+<span id="cb22-457"><a href="#cb22-457" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-458"><a href="#cb22-458" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-461"><a href="#cb22-461" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb22-462"><a href="#cb22-462" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo: true</span></span>
+<span id="cb22-463"><a href="#cb22-463" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-line-numbers: true</span></span>
+<span id="cb22-464"><a href="#cb22-464" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
+<span id="cb22-465"><a href="#cb22-465" aria-hidden="true" tabindex="-1"></a><span class="in">*| classes: larger</span></span>
+<span id="cb22-466"><a href="#cb22-466" aria-hidden="true" tabindex="-1"></a><span class="in">estat group</span></span>
+<span id="cb22-467"><a href="#cb22-467" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-468"><a href="#cb22-468" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-471"><a href="#cb22-471" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb22-472"><a href="#cb22-472" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo: true</span></span>
+<span id="cb22-473"><a href="#cb22-473" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-line-numbers: true</span></span>
+<span id="cb22-474"><a href="#cb22-474" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
+<span id="cb22-475"><a href="#cb22-475" aria-hidden="true" tabindex="-1"></a><span class="in">*| classes: larger</span></span>
+<span id="cb22-476"><a href="#cb22-476" aria-hidden="true" tabindex="-1"></a><span class="in">estat calendar</span></span>
+<span id="cb22-477"><a href="#cb22-477" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-478"><a href="#cb22-478" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-481"><a href="#cb22-481" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb22-482"><a href="#cb22-482" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo: true</span></span>
+<span id="cb22-483"><a href="#cb22-483" aria-hidden="true" tabindex="-1"></a><span class="in">*| output: false</span></span>
+<span id="cb22-484"><a href="#cb22-484" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-line-numbers: true</span></span>
+<span id="cb22-485"><a href="#cb22-485" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
+<span id="cb22-486"><a href="#cb22-486" aria-hidden="true" tabindex="-1"></a><span class="in">*| classes: larger</span></span>
+<span id="cb22-487"><a href="#cb22-487" aria-hidden="true" tabindex="-1"></a><span class="in">qui:estat event, plot</span></span>
+<span id="cb22-488"><a href="#cb22-488" aria-hidden="true" tabindex="-1"></a><span class="in">graph export event.png, replace width(1000)</span></span>
+<span id="cb22-489"><a href="#cb22-489" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-490"><a href="#cb22-490" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-491"><a href="#cb22-491" aria-hidden="true" tabindex="-1"></a><span class="al">![](event.png)</span></span>
+<span id="cb22-492"><a href="#cb22-492" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-493"><a href="#cb22-493" aria-hidden="true" tabindex="-1"></a><span class="fu">## Example 2: Wooldridge Simulation data {.scrollable}</span></span>
+<span id="cb22-494"><a href="#cb22-494" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-497"><a href="#cb22-497" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb22-498"><a href="#cb22-498" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo: true</span></span>
+<span id="cb22-499"><a href="#cb22-499" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-line-numbers: true</span></span>
+<span id="cb22-500"><a href="#cb22-500" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
+<span id="cb22-501"><a href="#cb22-501" aria-hidden="true" tabindex="-1"></a><span class="in">*| classes: larger</span></span>
+<span id="cb22-502"><a href="#cb22-502" aria-hidden="true" tabindex="-1"></a><span class="in">clear all</span></span>
+<span id="cb22-503"><a href="#cb22-503" aria-hidden="true" tabindex="-1"></a><span class="in">use did_common_6_binary, clear</span></span>
+<span id="cb22-504"><a href="#cb22-504" aria-hidden="true" tabindex="-1"></a><span class="in">qui {</span></span>
+<span id="cb22-505"><a href="#cb22-505" aria-hidden="true" tabindex="-1"></a><span class="in">reg y i.w#c.d#c.f04 i.w#c.d#c.f05 i.w#c.d#c.f06 ///</span></span>
+<span id="cb22-506"><a href="#cb22-506" aria-hidden="true" tabindex="-1"></a><span class="in">    i.w#c.d#c.f04#c.x i.w#c.d#c.f05#c.x i.w#c.d#c.f06#c.x ///</span></span>
+<span id="cb22-507"><a href="#cb22-507" aria-hidden="true" tabindex="-1"></a><span class="in">    f02 f03 f04 f05 f06 ///</span></span>
+<span id="cb22-508"><a href="#cb22-508" aria-hidden="true" tabindex="-1"></a><span class="in">    c.f02#c.x c.f03#c.x c.f04#c.x c.f05#c.x c.f06#c.x /// </span></span>
+<span id="cb22-509"><a href="#cb22-509" aria-hidden="true" tabindex="-1"></a><span class="in">    d x c.d#c.x, noomitted vce(cluster id)</span></span>
+<span id="cb22-510"><a href="#cb22-510" aria-hidden="true" tabindex="-1"></a><span class="in">  est sto m1</span></span>
+<span id="cb22-511"><a href="#cb22-511" aria-hidden="true" tabindex="-1"></a><span class="in">}  </span></span>
+<span id="cb22-512"><a href="#cb22-512" aria-hidden="true" tabindex="-1"></a><span class="in">qui:margins, dydx(w) at(f02 = 0 f03 = 0 f04 = 1 f05 = 0 f06 = 0) ///</span></span>
+<span id="cb22-513"><a href="#cb22-513" aria-hidden="true" tabindex="-1"></a><span class="in">    subpop(if d == 1) noestimcheck vce(uncond)  post</span></span>
+<span id="cb22-514"><a href="#cb22-514" aria-hidden="true" tabindex="-1"></a><span class="in">ereturn display  </span></span>
+<span id="cb22-515"><a href="#cb22-515" aria-hidden="true" tabindex="-1"></a><span class="in">est restore m1</span></span>
+<span id="cb22-516"><a href="#cb22-516" aria-hidden="true" tabindex="-1"></a><span class="in">qui:margins, dydx(w) at(f02 = 0 f03 = 0 f04 = 0 f05 = 1 f06 = 0) ///</span></span>
+<span id="cb22-517"><a href="#cb22-517" aria-hidden="true" tabindex="-1"></a><span class="in">    subpop(if d == 1) noestimcheck vce(uncond) post</span></span>
+<span id="cb22-518"><a href="#cb22-518" aria-hidden="true" tabindex="-1"></a><span class="in">ereturn display  </span></span>
+<span id="cb22-519"><a href="#cb22-519" aria-hidden="true" tabindex="-1"></a><span class="in">est restore m1</span></span>
+<span id="cb22-520"><a href="#cb22-520" aria-hidden="true" tabindex="-1"></a><span class="in">qui:margins, dydx(w) at(f02 = 0 f03 = 0 f04 = 0 f05 = 0 f06 = 1) ///</span></span>
+<span id="cb22-521"><a href="#cb22-521" aria-hidden="true" tabindex="-1"></a><span class="in">    subpop(if d == 1) noestimcheck vce(uncond) post</span></span>
+<span id="cb22-522"><a href="#cb22-522" aria-hidden="true" tabindex="-1"></a><span class="in">ereturn display </span></span>
+<span id="cb22-523"><a href="#cb22-523" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-524"><a href="#cb22-524" aria-hidden="true" tabindex="-1"></a>Using <span class="in">`jwdid`</span>:</span>
+<span id="cb22-525"><a href="#cb22-525" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-528"><a href="#cb22-528" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb22-529"><a href="#cb22-529" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo: true</span></span>
+<span id="cb22-530"><a href="#cb22-530" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-line-numbers: true</span></span>
+<span id="cb22-531"><a href="#cb22-531" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
+<span id="cb22-532"><a href="#cb22-532" aria-hidden="true" tabindex="-1"></a><span class="in">*| classes: larger</span></span>
+<span id="cb22-533"><a href="#cb22-533" aria-hidden="true" tabindex="-1"></a><span class="in">clear all</span></span>
+<span id="cb22-534"><a href="#cb22-534" aria-hidden="true" tabindex="-1"></a><span class="in">use did_common_6_binary, clear</span></span>
+<span id="cb22-535"><a href="#cb22-535" aria-hidden="true" tabindex="-1"></a><span class="in">qui: jwdid y x, ivar(id) tvar(year) trtvar(w) method(regress)</span></span>
+<span id="cb22-536"><a href="#cb22-536" aria-hidden="true" tabindex="-1"></a><span class="in">estat event, vce(unconditional)</span></span>
+<span id="cb22-537"><a href="#cb22-537" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-538"><a href="#cb22-538" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-539"><a href="#cb22-539" aria-hidden="true" tabindex="-1"></a>**Using Logit** </span>
+<span id="cb22-540"><a href="#cb22-540" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-543"><a href="#cb22-543" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb22-544"><a href="#cb22-544" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo: true</span></span>
+<span id="cb22-545"><a href="#cb22-545" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-line-numbers: true</span></span>
+<span id="cb22-546"><a href="#cb22-546" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
+<span id="cb22-547"><a href="#cb22-547" aria-hidden="true" tabindex="-1"></a><span class="in">*| classes: larger</span></span>
+<span id="cb22-548"><a href="#cb22-548" aria-hidden="true" tabindex="-1"></a><span class="in">clear all</span></span>
+<span id="cb22-549"><a href="#cb22-549" aria-hidden="true" tabindex="-1"></a><span class="in">use did_common_6_binary, clear</span></span>
+<span id="cb22-550"><a href="#cb22-550" aria-hidden="true" tabindex="-1"></a><span class="in">qui {</span></span>
+<span id="cb22-551"><a href="#cb22-551" aria-hidden="true" tabindex="-1"></a><span class="in">logit y i.w#c.d#c.f04 i.w#c.d#c.f05 i.w#c.d#c.f06 ///</span></span>
+<span id="cb22-552"><a href="#cb22-552" aria-hidden="true" tabindex="-1"></a><span class="in">    i.w#c.d#c.f04#c.x i.w#c.d#c.f05#c.x i.w#c.d#c.f06#c.x ///</span></span>
+<span id="cb22-553"><a href="#cb22-553" aria-hidden="true" tabindex="-1"></a><span class="in">    f02 f03 f04 f05 f06 c.f02#c.x c.f03#c.x c.f04#c.x c.f05#c.x c.f06#c.x ///</span></span>
+<span id="cb22-554"><a href="#cb22-554" aria-hidden="true" tabindex="-1"></a><span class="in">    d x c.d#c.x, noomitted vce(cluster id)</span></span>
+<span id="cb22-555"><a href="#cb22-555" aria-hidden="true" tabindex="-1"></a><span class="in">  est store m1</span></span>
+<span id="cb22-556"><a href="#cb22-556" aria-hidden="true" tabindex="-1"></a><span class="in">}  </span></span>
+<span id="cb22-557"><a href="#cb22-557" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-558"><a href="#cb22-558" aria-hidden="true" tabindex="-1"></a><span class="in">qui:margins, dydx(w) at(f02 = 0 f03 = 0 f04 = 1 f05 = 0 f06 = 0) ///</span></span>
+<span id="cb22-559"><a href="#cb22-559" aria-hidden="true" tabindex="-1"></a><span class="in">    subpop(if d == 1) noestimcheck vce(uncond)  post</span></span>
+<span id="cb22-560"><a href="#cb22-560" aria-hidden="true" tabindex="-1"></a><span class="in">ereturn display  </span></span>
+<span id="cb22-561"><a href="#cb22-561" aria-hidden="true" tabindex="-1"></a><span class="in">est restore m1</span></span>
+<span id="cb22-562"><a href="#cb22-562" aria-hidden="true" tabindex="-1"></a><span class="in">qui:margins, dydx(w) at(f02 = 0 f03 = 0 f04 = 0 f05 = 1 f06 = 0) ///</span></span>
+<span id="cb22-563"><a href="#cb22-563" aria-hidden="true" tabindex="-1"></a><span class="in">    subpop(if d == 1) noestimcheck vce(uncond) post</span></span>
+<span id="cb22-564"><a href="#cb22-564" aria-hidden="true" tabindex="-1"></a><span class="in">ereturn display  </span></span>
+<span id="cb22-565"><a href="#cb22-565" aria-hidden="true" tabindex="-1"></a><span class="in">est restore m1</span></span>
+<span id="cb22-566"><a href="#cb22-566" aria-hidden="true" tabindex="-1"></a><span class="in">qui:margins, dydx(w) at(f02 = 0 f03 = 0 f04 = 0 f05 = 0 f06 = 1) ///</span></span>
+<span id="cb22-567"><a href="#cb22-567" aria-hidden="true" tabindex="-1"></a><span class="in">    subpop(if d == 1) noestimcheck vce(uncond) post</span></span>
+<span id="cb22-568"><a href="#cb22-568" aria-hidden="true" tabindex="-1"></a><span class="in">ereturn display </span></span>
+<span id="cb22-569"><a href="#cb22-569" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-570"><a href="#cb22-570" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-571"><a href="#cb22-571" aria-hidden="true" tabindex="-1"></a>Using <span class="in">`jwdid`</span>:</span>
+<span id="cb22-572"><a href="#cb22-572" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-575"><a href="#cb22-575" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb22-576"><a href="#cb22-576" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo: true</span></span>
+<span id="cb22-577"><a href="#cb22-577" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-line-numbers: true</span></span>
+<span id="cb22-578"><a href="#cb22-578" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
+<span id="cb22-579"><a href="#cb22-579" aria-hidden="true" tabindex="-1"></a><span class="in">*| classes: larger</span></span>
+<span id="cb22-580"><a href="#cb22-580" aria-hidden="true" tabindex="-1"></a><span class="in">clear all</span></span>
+<span id="cb22-581"><a href="#cb22-581" aria-hidden="true" tabindex="-1"></a><span class="in">use did_common_6_binary, clear</span></span>
+<span id="cb22-582"><a href="#cb22-582" aria-hidden="true" tabindex="-1"></a><span class="in">qui: jwdid y x, ivar(id) tvar(year) trtvar(w) method(logit)</span></span>
+<span id="cb22-583"><a href="#cb22-583" aria-hidden="true" tabindex="-1"></a><span class="in">estat event, vce(unconditional)</span></span>
+<span id="cb22-584"><a href="#cb22-584" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb22-585"><a href="#cb22-585" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-586"><a href="#cb22-586" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-587"><a href="#cb22-587" aria-hidden="true" tabindex="-1"></a><span class="fu">## Conclusion</span></span>
+<span id="cb22-588"><a href="#cb22-588" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-589"><a href="#cb22-589" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>DID is a popular method for analyzing policy interventions.</span>
+<span id="cb22-590"><a href="#cb22-590" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Thanks to the contributions of Wooldridge, Roth and Sant'Anna among others, we have a better understanding of how to implement DID in more complex scenarios.</span>
+<span id="cb22-591"><a href="#cb22-591" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>One of this important extensions is the use of nonlinear models to better fit the data, and better estimate treatment effects.</span>
+<span id="cb22-592"><a href="#cb22-592" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The <span class="in">`jwdid`</span> command is a simple tool that can help you implement the Wooldridge approach to nonlinear DID.</span>
+<span id="cb22-593"><a href="#cb22-593" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-594"><a href="#cb22-594" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-595"><a href="#cb22-595" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb22-596"><a href="#cb22-596" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-597"><a href="#cb22-597" aria-hidden="true" tabindex="-1"></a><span class="fu">## References</span></span>
+</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

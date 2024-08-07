@@ -1,0 +1,130 @@
+---
+title: "Constructing synthetic Datasets"
+subtitle: "How to come public, with private data"
+format: html
+bibliography: references.bib
+nocite: |
+  @jenkins_rios_2020, @jenkins_rios_2021
+---
+
+## Introduction 
+
+In my current collaboration with Stephen Jenkins, we are grappling with the challenge of providing a self-contained replication package alongside our paper.
+
+It's relatively easy to share the code for our model estimations, including code developed by other authors. However, many researchers face the same challenge we do: how to distribute data that we're not allowed to share due to privacy or proprietary reasons.
+
+In fact, for this particular project, only Stephen has had access to the data. I've mainly worked on the code that estimates new models (for those interested, see references below).
+
+Now that it's time to publish our "big" paper, we need a strategy to create a synthetic dataset that satisfies privacy protection constraints while still preserving the moments' structure we care about, as well as those that others may find interesting.
+
+To this end, I propose a simple strategy that could work: Multiple Imputation. While it may not be the best method available, I welcome any feedback or suggestions.
+
+To explain how the method works, I'll use the Swiss Labor Market Survey 1998 dataset, which is publicly available and used as an example dataset in the command -oaxaca- [@jann_2008].
+
+## The Problem
+
+Assume you signed a confidentiality agreement to work with Swiss Survey data and are ready to submit your work. However, you are required to provide a replication package with a code to produce the tables and the dataset itself. Since you cannot share the original data, you suggest generating 5 synthetic datasets instead. By doing so, people can apply your code and reach similar conclusions to your main paper, but with the advantage that the data is simulated, thus fulfilling privacy concerns.
+
+Here is a piece of code that can be used for that:
+
+```{stata}
+frame reset
+set linesize 255
+use http://fmwww.bc.edu/RePEc/bocode/o/oaxaca.dta, clear
+misstable summarize
+```
+
+Four variables (Wages, tenure, experience, and ISCO) have missing data when `lfp=0` (people are not working). 
+
+## The solution
+
+The first step is to decide on the size of the synthetic dataset. You could create a dataset with the same number of observations or adjust it to your desired sample size. I will expand the dataset to double the size, tag the new observations and make all variables, except for `lfp`, missing. This is because some data is missing as it's only available for those in the labor force. Alternatively, you could have created `lfp` using a random draw from a Bernoulli distribution with the same probability as the original data.
+
+```{stata}
+expand 2, gen(tag)
+foreach i of varlist lnwage educ exper tenure isco female age single married divorced kids6 kids714 wt {
+  qui:replace `i'=. if tag==1
+}
+```
+
+Next, create multiple imputed datasets using the predictive mean matching strategy. To do this, set the data and register all variables to be imputed. Then, impute all variables using chain `pmm`. Make sure none of the variables are collinear, and variables with structural missing data are specified separately. The only explanatory variable or exogenous variable here is `lfp`.
+
+```{stata}
+mi set wide
+mi register impute lnwage educ exper tenure isco female age single married kids6 kids714 wt
+set seed 101
+qui:mi impute chain (pmm, knn(20))  educ female age single married kids6 kids714 wt (pmm if lfp==1, knn(20) ) lnwage  exper tenure isco  = lfp, add(5)
+```
+
+You now have 5 sets of variables that can be used to create unique synthetic datasets with a similar structure to the original confidential dataset. Let's now put the newly created data into frames, so we can estimate few models and compare them with the original data.
+
+```{stata}
+forvalues i = 1/5 {
+  frame put _`i'_* lfp if tag==1, into(fr`i')
+  frame fr`i':ren _`i'_* *
+}
+use http://fmwww.bc.edu/RePEc/bocode/o/oaxaca.dta, clear
+```
+
+## Comparing Results
+
+You can now estimate 4 models using the original data and the synthetic data. 
+
+```{stata}
+*|echo: false
+  qui:reg lnwage educ exper tenure female
+  est sto m1
+  qui:qreg lnwage educ exper tenure female, q(10)
+  est sto m2
+  qui:qreg lnwage educ exper tenure female, q(90)
+  est sto m3
+  qui:heckman lnwage educ exper tenure female age, selec(lfp =educ     female age single married kids6 kids714) two
+  est sto m4
+forvalues i = 1/5 { 
+  frame fr`i' {
+    qui:reg lnwage educ exper tenure female
+    est sto m1`i'
+    qui:qreg lnwage educ exper tenure female, q(10)
+    est sto m2`i'    
+    qui:qreg lnwage educ exper tenure female, q(90)
+    est sto m3`i'
+    qui:heckman lnwage educ exper tenure female age, selec(lfp =educ     female age single married kids6 kids714) two
+    est sto m4`i'
+  }
+} 
+```
+Now lets compare the models:
+
+```{stata}
+*| echo: false
+*| output: asis
+
+display "**Linear Regression**"
+
+esttab m1 m1?, mtitle(Original Fake1 Fake2 Fake3 Fake4 Fake5) nonum nogaps md se compress b(3)
+
+display "**Quantile Regression 10**"
+
+esttab m2 m2? , mtitle(Original Fake1 Fake2 Fake3 Fake4 Fake5) nonum nogaps md se compress b(3)
+
+display "**Quantile Regression 90**"
+
+esttab m3 m3? , mtitle(Original Fake1 Fake2 Fake3 Fake4 Fake5) nonum nogaps md se compress b(3)
+
+display "**Heckman selection model**"
+
+esttab m4 m4? , mtitle(Original Fake1 Fake2 Fake3 Fake4 Fake5) nonum nogaps md se compress b(3)
+```
+
+I wont spend too much time interpretting the models. However, it is important to notice that they do provide similar outcomes, except for quantile regressions. Still, with this, one could redistribute replication codes that use both the true data and synthetic data, providing transparency to the work.
+
+## Conclusions
+
+As evident from the analysis, the results of the synthetic dataset are not expected to perfectly replicate the original data due to the introduction of random errors. However, by keeping this in mind, we can create synthetic datasets like this one, along with two sets of results - one based on the actual data, and the other based on the synthetic dataset(s).
+
+This should help providing replication packages with code and data, improving the transparency of research when using restricted data.
+
+## References
+
+::: {#refs}
+:::

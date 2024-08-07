@@ -1,0 +1,140 @@
+---
+title: "How to `suest` a HDFE"
+description: "I propose a feasible strategy to compare coefficients across models with high dimensional fixed effects"
+author: "Fernando Rios-Avila"
+date: "7/14/2023"
+categories: 
+    - Stata
+    - Programming
+    - Fixed Effects
+draft: false
+code-fold: false
+execute: 
+  echo: true  
+---
+
+## Introduction
+
+A question I have seen online many...many...many times is how to compare the coefficients of a model that has been estimated using a highdimensional set of fixed effects.
+
+The starting answer has always been...to `suest` the both equations, or *stack* both equations to compare the effects. However, `suest` will not work with `reghdfe` nor `xtreg`. And *stacking* equations is even less intuitive.
+
+Today, however, I will present you an easy way to do this with with a little command of my own creation, but also using some simple syntax.
+
+:::{.callout-note}
+
+## Setup
+
+To use the strategies I will present here you will need `reghdfe` (from `ssc`) and `cre` (from `fra`, my own repository). You will need `frause` from ssc.
+
+:::
+
+## `suest` the problem
+
+Lets start with a simple wage regression model, where we aim to compare the coefficients of men and women. For this, we will use the data set `oaxaca`, and a simple *Mincerian* regression model:
+
+First, lets estimate both models:
+
+```{stata}
+qui:frause oaxaca, clear
+qui:reg lnwage educ exper tenure age if female==0
+est sto male
+qui:reg lnwage educ exper tenure age if female==1
+est sto female
+```
+
+and use `suest` to put them together, and test if coefficients are different from each other or not. For this I will use `lincom` and `test` commands:
+
+```{stata}
+qui: suest male female
+lincom [male_mean]:educ-[female_mean]:educ
+test [male_mean=female_mean]:educ
+test [male_mean=female_mean], common
+```
+
+I could also use more involved methods like creating my own `ml` or `gmm` option, but there is no need in this simplified method.
+
+## Stacking
+
+The next option is do *Stacking*. This sounds difficult, but its nothing different than using the old trick of interactions. we simply need to estimate a model where all covariates are interacted with our sampling indicator (gender):
+
+```{stata}
+qui:reg lnwage i.female##c.(educ exper tenure age), robust
+lincom 1.female#c.educ
+test 1.female#c.educ
+test 1.female#c.educ 1.female#c.exp 1.female#c.tenure 1.female#c.age
+```
+
+Again we will obtain the same results as before. 
+
+But now the hard question. What if we have a HDFE?
+
+## Stacking FE
+
+To simulate the sitution of a high-dimensional FE, I will use `age`. This will allow me to still obtain point estimates using simple regression (and say `suest`), while comparing it to the alternative:
+
+```{stata}
+qui:reg lnwage educ exper tenure i.age if female==0
+est sto male
+qui:reg lnwage educ exper tenure i.age if female==1
+est sto female
+qui:suest male female, cluster(age)
+lincom [male_mean]:educ-[female_mean]:educ
+test [male_mean=female_mean]:educ exper tenure
+```
+
+Now the second method, using `reghdfe`
+
+```{stata}
+egen age_fem = group(age  fem)
+qui:reghdfe lnwage i.female##c.(educ exper tenure), abs(female#age) cluster(age_fem)
+lincom 1.female#c.educ
+test 1.female#c.educ 1.female#c.exp 1.female#c.tenure 
+```
+
+## Using `suest` and correlated random effects model `cre`
+
+Now we use Correlated Random Effects model to estimate the FE models:
+
+```{stata}
+qui:cre, keep prefix(ml) abs(age):reg lnwage educ exper tenure if female==0
+est sto male
+qui:cre, keep prefix(m2) abs(age):reg lnwage educ exper tenure if female==1
+est sto female
+qui:suest male female, cluster(age)
+lincom [male_mean]:educ-[female_mean]:educ
+test [male_mean=female_mean]:educ exper tenure
+```
+
+Which gives me exactly the same result!
+
+## Hard Example:
+
+Lets do this with a harder example, using `nlswork` dataset, comparing of a wage regression coefficients between north and south:
+
+```{stata}
+webuse nlswork, clear
+egen cl = group(idcode south)
+qui: reghdfe ln_wage i.south##c.(age msp  not_smsa c_city union tenure hours) , abs(idcode#south) cluster(cl)
+test 1.south#c.age 1.south#c.msp 1.south#c.union
+```
+
+But also using CRE:
+
+```{stata}
+webuse nlswork, clear
+qui:cre, abs(idcode) keep prefix(m1): regress ln_wage age msp not_smsa c_city union tenure hours if south==0  
+est sto north
+qui:cre, abs(idcode) keep prefix(m2): regress ln_wage age msp not_smsa c_city union tenure hours if south==1  
+est sto south
+qui:suest north south
+test [north_mean=south_mean]: age msp union
+```
+
+## Conclusions
+
+There you have it. Two ways to compare coefficients across two models using interactions or `suest`. 
+
+Both provide the same results, if you cluster variables with the absorbed variable. 
+
+Hope you find it useful

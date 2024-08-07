@@ -1,0 +1,22 @@
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{2}{cc}}
+\hline\hline
+            &\multicolumn{2}{c}{(1)}           &\multicolumn{2}{c}{(2)}           \\
+            &\multicolumn{2}{c}{lnwage}        &\multicolumn{2}{c}{lnwage}        \\
+\hline
+educ        &      0.0848\sym{***}&   (0.00519)&      0.0644\sym{***}&   (0.00508)\\
+exper       &      0.0111\sym{***}&   (0.00154)&   -0.000311         &   (0.00181)\\
+tenure      &     0.00771\sym{***}&   (0.00188)&     0.00672\sym{***}&   (0.00190)\\
+female      &     -0.0841\sym{***}&    (0.0251)&      -0.160\sym{***}&    (0.0243)\\
+age         &                     &            &       0.113\sym{***}&   (0.00814)\\
+agesq       &                     &            &    -0.00126\sym{***}& (0.0000976)\\
+married     &                     &            &     -0.0224         &    (0.0294)\\
+divorced    &                     &            &      0.0719         &    (0.0412)\\
+\_cons      &       2.213\sym{***}&    (0.0683)&       0.311\sym{*}  &     (0.149)\\
+\hline
+\(N\)       &        1434         &            &        1434         &            \\
+\hline\hline
+\multicolumn{5}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{5}{l}{\footnotesize \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}
+

@@ -1,0 +1,10 @@
+{
+  "hash": "6c2e0619fdcc875874d5aec89b3792fe",
+  "result": {
+    "markdown": "---\ntitle: \"About the Site\"\nabout:\n  template: solana\n  image: WeeMee.jpg\n  image-shape: round\n  links:\n    - icon: twitter\n      text: twitter\n      href: https://twitter.com/friosavi\n    - icon: envelope \n      text: Email\n      href: f.rios.a@gmail.com\n---\n\nWelcome, and thanks for joining me. \n\nAs you will read in this site, I will cover series of random topics and questions in applied econometrics using my favorite tool **Stata**!.\n\nThat being said. This website is multipurpose.\n\nI started it to answer random questions of \"how to\" do things in Stata, that I had troubles with at some point. Spread the knowledge if you may. However it will also be used as a teaching tool for some simple and not-so-simple topics and strategies I teach in econometrics class.\n\nFinally, I will also use it as a platform to share my research, whenever possible, and pertinent.\n\nFeel free to drop me a line, comment or question.\n\nPerhaps most interesting of all. This site was rewritten, again, using Quarto! combined with **`Stata`**!\n\nYou can find me at: <friosa@gmail.com>\n\nOr follow me on tweeter: [@friosavila](https://twitter.com/friosavila)\n\nAnd just to start with. A mini Example of what its to come\n\n::: {.cell execution_count=1}\n``` {.stata .cell-code}\nsysuse auto, clear\nset scheme white2\nscatter price mpg\n```\n\n::: {.cell-output .cell-output-display}\n```\n<IPython.core.display.HTML object>\n```\n:::\n\n::: {.cell-output .cell-output-stdout}\n```\n(1978 automobile data)\n```\n:::\n\n::: {.cell-output .cell-output-display}\n![](about_files/figure-docx/cell-2-output-3.png){}\n:::\n:::\n\n\n",
+    "supporting": [
+      "about_files\\figure-docx"
+    ],
+    "filters": []
+  }
+}

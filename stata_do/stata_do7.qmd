@@ -1,0 +1,7 @@
+---
+title: "The Probit: `margins` and `ml`"
+subtitle: "A nonlinear-linear model"
+format: html
+code-fold: false
+bibliography: mywork.bib
+---

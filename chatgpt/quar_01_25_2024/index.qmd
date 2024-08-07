@@ -1,0 +1,124 @@
+---
+title: "Quarto 1.4"
+description: "Some examples for Table cross-referencing!"
+author: "Fernando Rios-Avila"
+date: "01/25/2024"
+categories: 
+    - Quarto
+draft: false
+format:
+    html: default
+    pdf: default
+---
+
+Quarto 1.4 is out! Over the last few weeks, they have been pushing quite few updates, and finally they have released version 1.4. 
+
+What is quite interesting to me is that this version includes a new feature that I have been waiting for a while: Multi source cross-referencing!
+
+I have been using Quarto for some time now, and one of the things I noticed is that it was very easy to add titles and cross-references to tables as long as they were formated as markdown tables. 
+
+However, as you may now, markdown tables are not very flexible. Better options include HTML tables, and even better, LaTeX tables. Unfortunately, there was no easy way to reference those kinds of tables using the `@ref` syntax. Looking at other people's questions and solutions, they all seemed a bit complicated to me. (specially those that involved using LaTeX commands).
+
+But now, with version 1.4, it seems very easy to reference tables that are not markdown tables!
+
+Let's see how it works!
+
+## Setup
+
+To do this, I will produce a simple regression using `Stata`, and export it as markdown, HTML, and LaTeX tables using `esttab`^[`esttab` is part of `estout` package by Ben Jann.]. 
+
+```stata
+*| code-fold: false
+*| echo: true
+frause oaxaca, clear
+qui:reg  lnwage educ exper tenure female
+est sto m1
+qui:reg  lnwage educ exper tenure female age agesq married divorced
+est sto m2
+
+esttab m1 m2 using "reg_md", wide se replace md
+esttab m1 m2 using "reg_html", wide se replace htm
+esttab m1 m2 using "reg_tex", wide se replace tex
+```
+
+The output of the code is not usable right away, as it has some minor issues. For example, the markdown table has an extra line that needs to be removed. 
+
+## Markdown table
+
+For the next I will make it simple, using what I think is the easiest cross reference the tables:
+
+```markdown
+::: {#tbl-table1}
+{{{< include reg_md.md >}}}
+Table made with markdown
+:::
+```
+
+General syntax: 
+
+- line 1 indicates we will be creating table that could be referenced using `@tbl-table1` code.
+- line 2 request to "include"  the markdown table file.
+- line 3 is the title of this table
+
+The result is the following table:
+
+::: {#tbl-table1}
+{{< include reg_md.md >}}
+Table made with markdown
+:::
+
+This one was already feasible before however.
+
+## HTML table
+
+Now, let's try with an HTML table. The syntax is very similar:
+
+```markdown
+    ::: {#tbl-table2}
+    ````{=html}
+    {{{< include reg_html.html >}}}
+    ````
+    Table made with markdown
+    :::
+```
+
+with the following result:
+
+::: {#tbl-table2}
+```{=html}
+{{< include reg_html.html >}}
+```
+Table made with HTML
+:::
+
+Now, there is a small difference in the produced table because how `esttab` produces the HTML table. Neverthless, the table creation and naming works!
+
+Also, notice that I'm adding a code chunk `=html`, so the information can be read correctly.
+
+## LaTeX table
+
+Finally, let's try with a LaTeX table. The syntax is very similar:
+
+```markdown
+::: {#tbl-table3}
+{{{< include reg_tex.tex >}}}
+Table made with Latex
+:::
+```
+
+with the following result:
+
+::: {#tbl-table3}
+{{< include reg_tex.tex >}}
+Table made with Latex
+:::
+
+Ahh! seems this is not working as HTML! The reason is that Latex tables do not render in html. However if you look into the [pdf version](index.pdf), you will see that the table is there, and it is correctly named!
+
+ 
+## Cross-referencing
+
+As you can see @tbl-table1 was done with md, @tbl-table2 with html and @tbl-table3 with LaTeX.
+
+ 
+

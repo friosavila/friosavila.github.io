@@ -1,0 +1,1870 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.45">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Fernando Rios-Avila">
+<meta name="author" content="Gustavo Canavire-Bacarreza">
+<meta name="author" content="Leonardo Siles">
+
+<title>Quantile regressions with multiple fixed effects – Playing With Stata</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../app_metrics/app_metrics8.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-GNMLZDYJ2P"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Playing With Stata</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../cv.html"> 
+<span class="menu-text">my CV and Research</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../software.html"> 
+<span class="menu-text">Software</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../stataviz/index.html"> 
+<span class="menu-text">Stata Viz</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../stata_do/index.html"> 
+<span class="menu-text">Stata Do’s Ado’s</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../app_metrics/index.html"> 
+<span class="menu-text">Applied econometrics</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../chatgpt.html"> 
+<span class="menu-text">Odds and Ends</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">about</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../app_metrics/app_metrics1.html">App Metrics</a></li><li class="breadcrumb-item"><a href="../app_metrics/app_metrics9.html">Quantile regressions with multiple fixed effects</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../WeeMee.jpg" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Applied Econometrics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">App Metrics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Constructing synthetic Datasets</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Nonlinear DID</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><strong><code>jwdid</code></strong>: A Stata command for the estimation of Difference-in-Differences models using ETWFE</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">DRDID/CSDID in Stata</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">DID: The Fall</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">DID: The Revolution</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2x2 DID: Sant’Anna and Zhao (2020)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Making better use of interval-censored data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear Regressions, OLS and Standard Errors</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">DID: Panel Data &amp; Repeated Crossection</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics9.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Quantile regressions with multiple fixed effects</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#what-do-quantile-regressions-do" id="toc-what-do-quantile-regressions-do" class="nav-link" data-scroll-target="#what-do-quantile-regressions-do">What do Quantile Regressions do?</a></li>
+  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
+  <li><a href="#estimation" id="toc-estimation" class="nav-link" data-scroll-target="#estimation">Estimation</a></li>
+  <li><a href="#section-1" id="toc-section-1" class="nav-link" data-scroll-target="#section-1"></a></li>
+  <li><a href="#section-2" id="toc-section-2" class="nav-link" data-scroll-target="#section-2"></a></li>
+  </ul></li>
+  <li><a href="#the-problem" id="toc-the-problem" class="nav-link" data-scroll-target="#the-problem">The Problem</a>
+  <ul class="collapse">
+  <li><a href="#how-to-account-for-fixed-effects" id="toc-how-to-account-for-fixed-effects" class="nav-link" data-scroll-target="#how-to-account-for-fixed-effects">How to account for fixed effects?</a></li>
+  <li><a href="#some-solutions" id="toc-some-solutions" class="nav-link" data-scroll-target="#some-solutions">Some Solutions</a></li>
+  <li><a href="#mss2019" id="toc-mss2019" class="nav-link" data-scroll-target="#mss2019"><span class="citation" data-cites="mss2019">Machado and Santos Silva (2019)</span></a></li>
+  <li><a href="#how-does-simplified-he2019-and-mss2019-works" id="toc-how-does-simplified-he2019-and-mss2019-works" class="nav-link" data-scroll-target="#how-does-simplified-he2019-and-mss2019-works">How does Simplified <span class="citation" data-cites="he2019">He (1997)</span> and <span class="citation" data-cites="mss2019">Machado and Santos Silva (2019)</span> works?</a></li>
+  <li><a href="#extension-multiple-fixed-effects" id="toc-extension-multiple-fixed-effects" class="nav-link" data-scroll-target="#extension-multiple-fixed-effects">Extension: Multiple Fixed effects</a></li>
+  <li><a href="#extension-standard-errors" id="toc-extension-standard-errors" class="nav-link" data-scroll-target="#extension-standard-errors">Extension: Standard Errors</a></li>
+  <li><a href="#location-model" id="toc-location-model" class="nav-link" data-scroll-target="#location-model">Location Model</a></li>
+  <li><a href="#extension-robust-and-clustered-se" id="toc-extension-robust-and-clustered-se" class="nav-link" data-scroll-target="#extension-robust-and-clustered-se">Extension: Robust and Clustered SE</a></li>
+  <li><a href="#section-3" id="toc-section-3" class="nav-link" data-scroll-target="#section-3"></a></li>
+  <li><a href="#command-syntax-mmqreg" id="toc-command-syntax-mmqreg" class="nav-link" data-scroll-target="#command-syntax-mmqreg">Command syntax <code>mmqreg</code></a></li>
+  <li><a href="#example" id="toc-example" class="nav-link" data-scroll-target="#example">Example</a></li>
+  <li><a href="#section-4" id="toc-section-4" class="nav-link" data-scroll-target="#section-4"></a></li>
+  <li><a href="#plotting-qreg-vs-mmqreg" id="toc-plotting-qreg-vs-mmqreg" class="nav-link" data-scroll-target="#plotting-qreg-vs-mmqreg">Plotting: qreg vs mmqreg</a></li>
+  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">Conclusions</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul></li>
+  <li><a href="#extra-correlated-random-effects-model" id="toc-extra-correlated-random-effects-model" class="nav-link" data-scroll-target="#extra-correlated-random-effects-model">Extra: Correlated Random Effects Model</a>
+  <ul class="collapse">
+  <li><a href="#short-intro" id="toc-short-intro" class="nav-link" data-scroll-target="#short-intro">Short intro</a></li>
+  <li><a href="#cre-for-correlated-random-effects-model" id="toc-cre-for-correlated-random-effects-model" class="nav-link" data-scroll-target="#cre-for-correlated-random-effects-model"><code>cre</code>: For Correlated Random Effects Model</a></li>
+  <li><a href="#comparing-methods" id="toc-comparing-methods" class="nav-link" data-scroll-target="#comparing-methods">Comparing Methods</a></li>
+  </ul></li>
+  <li><a href="#thank-you" id="toc-thank-you" class="nav-link" data-scroll-target="#thank-you">Thank you!</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../app_metrics/app_metrics1.html">App Metrics</a></li><li class="breadcrumb-item"><a href="../app_metrics/app_metrics9.html">Quantile regressions with multiple fixed effects</a></li></ol></nav>
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Quantile regressions with multiple fixed effects</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+<p class="subtitle lead">A Method of Moments Approach</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Authors</div>
+    <div class="quarto-title-meta-contents">
+             <p>Fernando Rios-Avila </p>
+             <p>Gustavo Canavire-Bacarreza </p>
+             <p>Leonardo Siles </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<section id="what-do-quantile-regressions-do" class="level2">
+<h2 class="anchored" data-anchor-id="what-do-quantile-regressions-do">What do Quantile Regressions do?</h2>
+<ul>
+<li><p>Quantile Regressions are an alternative to standard linear regressions that help us to better understand the relationship between the distribution of <span class="math inline">\(Y\)</span> and <span class="math inline">\(X's\)</span>.</p></li>
+<li><p>In constrast with Linear regression models, where one focuses on explaining <span class="math inline">\(E(y|X)\)</span> as a function of <span class="math inline">\(X\)</span>, quantile regressions aim to assess the relationship between <span class="math inline">\(Q_\tau(y|X)\)</span> with respect to <span class="math inline">\(X\)</span>.</p>
+<ul>
+<li>This means that to interpret Q-regressions properly, one needs to “condition” on <span class="math inline">\(X\)</span> but also on <span class="math inline">\(\tau\)</span>.</li>
+</ul></li>
+<li><p>Quantile Regressions are nonlinear-models, that “look” and can be interpreted as linear ones.</p></li>
+</ul>
+</section>
+<section id="section" class="level2">
+<h2 class="anchored" data-anchor-id="section"></h2>
+<div id="a8fd98b8" class="cell" data-execution_count="1">
+<div class="cell-output cell-output-display">
+<style>div.jp-Notebook .datagrid-container {min-height: 448px; }</style>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Number of observations (_N) was 0, now 250.</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="app_metrics9_files/figure-html/cell-2-output-3.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="estimation" class="level2">
+<h2 class="anchored" data-anchor-id="estimation">Estimation</h2>
+<ul>
+<li>A Generalization of Quantile regression data generating function can be written as follows:</li>
+</ul>
+<p><span class="math display">\[y_i = \beta_0(\tau)+\beta_1(\tau) X_{i,1}+\beta_2(\tau) X_{i,2}+...+\beta_k(\tau) X_{i,k}
+\]</span></p>
+<ul>
+<li><p>Base on this specification, few characteristics should be considered:</p>
+<ol type="1">
+<li>Slopes <span class="math inline">\(\beta_k(\tau)\)</span> will vary across quantiles only if the model is Heteroskedastic.</li>
+<li>Qreg can be considered as a semi-parametric-varying coefficient model, with unobserved running variable (<span class="math inline">\(\tau\)</span>).</li>
+<li>Coefficients are percentile specific, but functional forms can be used for more efficient estimation.</li>
+<li>It is possible to separate location effects (mean) from scale effect (deviation from the mean)</li>
+</ol></li>
+</ul>
+</section>
+<section id="section-1" class="level2">
+<h2 class="anchored" data-anchor-id="section-1"></h2>
+<p><strong>Standard</strong></p>
+<p><span class="math display">\[\beta(\tau) \leftarrow \frac 1 n \sum \left[ I(x_i\beta(\tau) \geq y_i) - \tau \right] =0
+\]</span></p>
+<p><strong>Semiparamatric</strong> (<span class="citation" data-cites="kaplan2022">Kaplan (<a href="#ref-kaplan2022" role="doc-biblioref">2022</a>)</span>)</p>
+<p><span class="math display">\[\beta(\tau) \leftarrow \frac 1 n \sum \left[ F\left(\frac{x_i\beta(\tau)-y_i}{bw} \right) - \tau \right] =0
+\]</span></p>
+<p><strong>Functional</strong> (<span class="citation" data-cites="bottai2019">Bottai and Orsini (<a href="#ref-bottai2019" role="doc-biblioref">2019</a>)</span>)</p>
+<p><span class="math display">\[\beta(\tau) = \theta_0 + \theta_1 \tau + \theta_2 \tau^2 +...
+\]</span></p>
+<p><strong>Location-Scale</strong> <span class="math display">\[\beta(\tau) = \beta + \gamma(\tau)
+\]</span></p>
+</section>
+<section id="section-2" class="level2">
+<h2 class="anchored" data-anchor-id="section-2"></h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">qreg</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">sivqr</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" role="tab" aria-controls="tabset-1-3" aria-selected="false">Location-Scale</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig91.png" class="img-fluid quarto-figure quarto-figure-center figure-img" data-heigth="100%"></p>
+</figure>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig92.png" class="img-fluid quarto-figure quarto-figure-center figure-img" data-heigth="100%"></p>
+</figure>
+</div>
+</div>
+<div id="tabset-1-3" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-3-tab">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig93.png" class="img-fluid quarto-figure quarto-figure-center figure-img" data-heigth="100%"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="the-problem" class="level1">
+<h1>The Problem</h1>
+<section id="how-to-account-for-fixed-effects" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-account-for-fixed-effects">How to account for fixed effects?</h2>
+<ul>
+<li>As said before, quantile regresions are nonlinear models. Thus, one cannot just add Dummies to address group fixed effects</li>
+</ul>
+<p><span class="math display">\[Q_\tau(y|x) = \beta_0(\tau) + \beta_1 X(\tau) + \sum \delta(\tau)_g
+\]</span></p>
+<p>This creates an incidental parameter problem. Neither <span class="math inline">\(\delta(\tau)'s\)</span> nor <span class="math inline">\(\beta's\)</span> would be consistently estimated.</p>
+<ul>
+<li>But then how to solve it?</li>
+</ul>
+</section>
+<section id="some-solutions" class="level2">
+<h2 class="anchored" data-anchor-id="some-solutions">Some Solutions</h2>
+<p><strong><span class="citation" data-cites="koenker2004">Koenker (<a href="#ref-koenker2004" role="doc-biblioref">2004</a>)</span></strong>: Assume Fixed effects only have an impact on Location, and Shrink invidual effects (LASSO) <span class="math display">\[y_i = \beta(\tau)X + \delta_g
+\]</span></p>
+<p><strong><span class="citation" data-cites="canay2011">Canay (<a href="#ref-canay2011" role="doc-biblioref">2011</a>)</span></strong>: Similar to <span class="citation" data-cites="koenker2004">Koenker (<a href="#ref-koenker2004" role="doc-biblioref">2004</a>)</span>, but “eliminate them” before running Qreg</p>
+<p><span class="math display">\[\begin{aligned}
+y = \beta X + \delta_g + e \\
+Q_\tau(y - \delta_g|X) = \beta(\tau)X
+\end{aligned}
+\]</span></p>
+<p><strong><span class="citation" data-cites="Abrevaya2008">Abrevaya and Dahl (<a href="#ref-Abrevaya2008" role="doc-biblioref">2008</a>)</span></strong>: Correlated Random effects Model <span class="math display">\[Q_\tau(y|X) = \beta(\tau)X + \gamma(\tau) E(X|g)\]</span></p>
+</section>
+<section id="mss2019" class="level2">
+<h2 class="anchored" data-anchor-id="mss2019"><span class="citation" data-cites="mss2019">Machado and Santos Silva (<a href="#ref-mss2019" role="doc-biblioref">2019</a>)</span></h2>
+<ul>
+<li><p>This method was developed (and implemented using <code>xtqreg</code>) to incorporate individual fixed effects (Useful when considering panel data)</p></li>
+<li><p>In principle its an extension of <span class="citation" data-cites="he2019">He (<a href="#ref-he2019" role="doc-biblioref">1997</a>)</span>, who proposed an strategy to estimate Qreg coefficients using a restricted location-scale model, assuming the following structure: <span class="math display">\[y_i = X_i\beta + \varepsilon X_i\gamma
+\]</span></p></li>
+</ul>
+<p>Thus, Quantile regression model is given by:</p>
+<p><span class="math display">\[Q_\tau(y|X)=X\left(\beta + F^{-1}_\varepsilon(\tau) \gamma \right) = X \beta(\tau)
+\]</span></p>
+<ul>
+<li><p>Instead of requiring <span class="math inline">\(K\times M\)</span> coefficients to identify the whole conditional distribution, it only requires <span class="math inline">\(2\times K + M\)</span>.</p></li>
+<li><p>Also, Quantile curves will not cross!</p></li>
+</ul>
+</section>
+<section id="how-does-simplified-he2019-and-mss2019-works" class="level2">
+<h2 class="anchored" data-anchor-id="how-does-simplified-he2019-and-mss2019-works">How does Simplified <span class="citation" data-cites="he2019">He (<a href="#ref-he2019" role="doc-biblioref">1997</a>)</span> and <span class="citation" data-cites="mss2019">Machado and Santos Silva (<a href="#ref-mss2019" role="doc-biblioref">2019</a>)</span> works?</h2>
+<p><span class="math display">\[y_i = x_i \beta + \varepsilon x_i \gamma \rightarrow Q_\tau(y|X)=X\beta + X\gamma F_\varepsilon^{-1}(\tau)
+\]</span></p>
+<section id="step-1-location-model-exy-xbeta0" class="level4">
+<h4 class="anchored" data-anchor-id="step-1-location-model-exy-xbeta0">Step 1: Location model <span class="math inline">\(E(X'(y-X\beta))=0\)</span></h4>
+</section>
+<section id="step-2-scale-model-exy-xbeta-xgamma0" class="level4">
+<h4 class="anchored" data-anchor-id="step-2-scale-model-exy-xbeta-xgamma0">Step 2: Scale model <span class="math inline">\(E(X'(|y-X\beta|-X\gamma))=0\)</span></h4>
+</section>
+<section id="step-3-standardized-quantile-eleft-ileft-fracy-xbetaxgamma-geq-q_tau-right--tau-right0" class="level4">
+<h4 class="anchored" data-anchor-id="step-3-standardized-quantile-eleft-ileft-fracy-xbetaxgamma-geq-q_tau-right--tau-right0">Step 3: Standardized Quantile <span class="math inline">\(E\left[ I\left( \frac{y-X\beta}{X\gamma} \geq q_\tau \right) -\tau  \right]=0\)</span></h4>
+</section>
+<section id="step-4-aggregate-betatau-beta-q_tau-gamma" class="level4">
+<h4 class="anchored" data-anchor-id="step-4-aggregate-betatau-beta-q_tau-gamma">Step 4: Aggregate <span class="math inline">\(\beta(\tau) = \beta + q_\tau \gamma\)</span></h4>
+</section>
+</section>
+<section id="extension-multiple-fixed-effects" class="level2">
+<h2 class="anchored" data-anchor-id="extension-multiple-fixed-effects">Extension: Multiple Fixed effects</h2>
+<p><span class="citation" data-cites="mss2019">Machado and Santos Silva (<a href="#ref-mss2019" role="doc-biblioref">2019</a>)</span> propose an extension: To add a single set of fixed effect (panel) apply Frisch–Waugh–Lovell theorem.</p>
+<p>This can be extended to controlling for multiple fixed effects:</p>
+<p><span class="math display">\[\tilde w_i = w_i +\bar w - \delta^w_{g1} - \delta^w_{g2} - ... - \delta^w_{gk} \ \forall \  w \in y,x
+\]</span></p>
+<p>And use almost the same moments as before:</p>
+<p><span class="math display">\[\begin{aligned}
+E(\tilde X(\tilde y-\tilde X\beta)) &amp; =0 \\
+E(\tilde X(|\tilde y- \tilde X\beta|-\tilde X\gamma)) &amp;=0 \\
+X\gamma + \delta's &amp;= y - (\tilde y- \tilde X\gamma) \\
+E\left[ I\left( \frac{\tilde y- \tilde X\beta}{X\gamma+ \delta's } \geq q_\tau \right) -\tau  \right] &amp;=0
+\end{aligned}
+\]</span></p>
+</section>
+<section id="extension-standard-errors" class="level2">
+<h2 class="anchored" data-anchor-id="extension-standard-errors">Extension: Standard Errors</h2>
+<ul>
+<li><p>Along with the modified algorithm that allows for Panel Fixed effects, <span class="citation" data-cites="mss2019">Machado and Santos Silva (<a href="#ref-mss2019" role="doc-biblioref">2019</a>)</span> proposed a GLS type variance estimator.</p>
+<ul>
+<li>The model assumes the existance of Heteroskedasticity.</li>
+<li>Based on Law of Iterated Expectations, and assuming Heteroskedasticity is correctly specified, its possible to construct a GLS type Variance Estimator.</li>
+</ul></li>
+<li><p>How does this work?</p></li>
+</ul>
+</section>
+<section id="location-model" class="level2">
+<h2 class="anchored" data-anchor-id="location-model">Location Model</h2>
+<ul>
+<li><p>Consider the location model: <span class="math inline">\(y_i = x_i \beta +  \varepsilon_i x_i \gamma\)</span></p></li>
+<li><p>Which has known heteroskedasticity: <span class="math inline">\(Var(y_i - x_i\beta)=(x_i\gamma)^2 \sigma^2_\varepsilon\)</span></p></li>
+<li><p><span class="citation" data-cites="mss2019">Machado and Santos Silva (<a href="#ref-mss2019" role="doc-biblioref">2019</a>)</span> GLS Variance would be: <span class="math display">\[\begin{aligned}
+e &amp;= y_i - X\beta = \varepsilon_i x_i \gamma\\
+Var(\hat\beta) &amp;= (X'X)^{-1}\sum x_i x_i' \color{red}{e_i^2} (X'X)^{-1} \\
+&amp;=\color{red}{\sigma_\varepsilon^2} (X'X)^{-1} \sum x_i x_i' \color{red}{(x_i'\gamma)^2} (X'X)^{-1}
+\end{aligned}
+\]</span></p></li>
+</ul>
+<p>However, this can be sensitive to the modeling of the Scale function.</p>
+<p>But one can almost always Bootstrap…</p>
+</section>
+<section id="extension-robust-and-clustered-se" class="level2">
+<h2 class="anchored" data-anchor-id="extension-robust-and-clustered-se">Extension: Robust and Clustered SE</h2>
+<p>An extension offered in my implementation makes full use of the moment conditions, and the implicit Influence functions: <span class="math display">\[\begin{aligned}
+IF'_{i,\beta} &amp;= N(X'X)^{-1} x_i R_i    \\
+IF'_{i,\gamma} &amp;= N(X'X)^{-1} x_i \Big( \tilde R_i  -x_i'\gamma \Big) \\
+\color{blue}{IF_{i, q(\tau)}} &amp;= \frac{\tau -I(q_\tau \geq \varepsilon_i) }{f_\varepsilon(q_\tau)}
+- \frac{R_i}{\bar x'\gamma}
+- q_\tau \frac{\tilde R_i -x_i'\gamma}{\bar x'\gamma}\\
+R_i &amp;= y_i-x_i'\beta \\
+\tilde R_i &amp; =2 R_i \big[1(R_i \geq 0) - E(1(R_i \geq 0)) \big]
+\end{aligned}
+\]</span></p>
+<p>So we just stack Influence functions to obtain Robust and Clustered Standard errors:</p>
+</section>
+<section id="section-3" class="level2">
+<h2 class="anchored" data-anchor-id="section-3"></h2>
+<p>Robust SE <span class="math display">\[Var_r(\beta,\gamma,q_\tau) = \frac{1}{N^2}
+\left[ \begin{matrix}
+IF_\beta &amp; IF_\gamma &amp; IF_{q_\tau}
+\end{matrix}
+\right]'\left[ \begin{matrix}
+IF_\beta &amp; IF_\gamma &amp; IF_{q_\tau}
+\end{matrix}
+\right]
+\]</span></p>
+<p>Cluster SE</p>
+<p><span class="math display">\[Var_c(\beta,\gamma,q_\tau) = \frac{1}{N^2}
+\left[ \begin{matrix}
+SIF_\beta &amp; SIF_\gamma &amp; SIF_{q_\tau}
+\end{matrix}
+\right]'\left[ \begin{matrix}
+SIF_\beta &amp; SIF_\gamma &amp; SIF_{q_\tau}
+\end{matrix}
+\right]
+\]</span> <span class="math display">\[SIF_{w} = \left[ \begin{matrix}
+SIF_{g=1,w} \\
+SIF_{g=2,w}  \\ ... \\\
+SIF_{g=G,w}  
+\end{matrix}\right] \&amp; SIF_{g=k, \ w} = \sum_{i \in g=k} IF_{i,w}
+\]</span></p>
+<p>Easily allows for simultaneous Qregressions and weights</p>
+</section>
+<section id="command-syntax-mmqreg" class="level2">
+<h2 class="anchored" data-anchor-id="command-syntax-mmqreg">Command syntax <code>mmqreg</code></h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>mmqreg depvar indepvar <span class="co">[</span><span class="ot">if in</span><span class="co">] [pw]</span> , <span class="co">[</span><span class="ot">Options</span><span class="co">]</span> &lt;-- Standard Syntax</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>** Variance Options</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>   Default: MSS(2019) GLS SE</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  -robust-: Robust Standard errors, no DOF Correction (GMM)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  -cluster(varname)-: Clustered Standard errors, no DOF Correction (GMM)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  -dfadj-: Simple Adjustment (n-k-1)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>** Output</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>q(numlist): List of Quantiles to be estimated (default q=50)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>ls        : Request Providing Location Scale coefficient models</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>There will be some differences with <code>xtqreg</code> because of couple of differences in the math and programming.</p>
+</section>
+<section id="example" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="example">Example</h2>
+<div id="276ce91d" class="cell larger" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode stata code-overflow-wrap code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">webuse</span> nlswork, <span class="kw">clear</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:mmqreg ln_w age ttl_exp tenure not_smsa south, <span class="co">///</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">abs</span>(idcode) </span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">est</span> sto m1</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:mmqreg ln_w age ttl_exp tenure not_smsa south, <span class="co">///</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">abs</span>(idcode) <span class="kw">robust</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="kw">est</span> sto m2</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:mmqreg ln_w age ttl_exp tenure not_smsa south, <span class="co">///</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">abs</span>(idcode) <span class="kw">cluster</span>(idcode)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="kw">est</span> sto m3</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:mmqreg ln_w ttl_exp tenure not_smsa south, <span class="co">///</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">abs</span>(idcode age) <span class="kw">cluster</span>(idcode)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="kw">est</span> sto m4</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>esttab m1 m2 m3 m4, se  nomtitle nogap </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(National Longitudinal Survey of Young Women, 14-24 years old in 1968)
+
+----------------------------------------------------------------------------
+                      (1)             (2)             (3)             (4)   
+----------------------------------------------------------------------------
+qtile                                                                       
+age              -0.00270**      -0.00270**      -0.00270*                  
+               (0.000868)      (0.000890)       (0.00127)                   
+ttl_exp            0.0292***       0.0292***       0.0292***       0.0341***
+                (0.00178)       (0.00153)       (0.00225)       (0.00229)   
+tenure             0.0108***       0.0108***       0.0108***       0.0102***
+                (0.00191)      (0.000989)       (0.00145)       (0.00144)   
+not_smsa          -0.0925***      -0.0925***      -0.0925***      -0.0880***
+                (0.00974)        (0.0104)        (0.0140)        (0.0138)   
+south             -0.0640***      -0.0640***      -0.0640***      -0.0599***
+                 (0.0116)        (0.0121)        (0.0167)        (0.0167)   
+_cons               1.611***        1.611***        1.611***        1.490***
+                 (0.0564)        (0.0194)        (0.0276)        (0.0146)   
+----------------------------------------------------------------------------
+N                   28093           28093           28093           28093   
+----------------------------------------------------------------------------
+Standard errors in parentheses
+* p&lt;0.05, ** p&lt;0.01, *** p&lt;0.001</code></pre>
+</div>
+</div>
+</section>
+<section id="section-4" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="section-4"></h2>
+<div id="bd87c547" class="cell larger" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode stata code-overflow-wrap code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">sysuse</span> auto, <span class="kw">clear</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:mmqreg price mpg trunk  , </span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="kw">est</span> sto m1</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:mmqreg price mpg trunk  , <span class="kw">robust</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="kw">est</span> sto m2</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:<span class="kw">bootstrap</span>, reps(250):mmqreg price mpg trunk</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="kw">est</span> sto m3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(1978 automobile data)</code></pre>
+</div>
+</div>
+<div id="e9e12dfa" class="cell larger" data-execution_count="5">
+<div class="cell-output cell-output-stdout">
+<pre><code>
+------------------------------------------------------------
+                      (1)             (2)             (3)   
+                  default          Robust       Bootstrap   
+------------------------------------------------------------
+qtile                                                       
+mpg                -172.7          -172.7***       -172.7*  
+                (38416.1)         (44.85)         (71.63)   
+trunk               33.67           33.67           33.67   
+                (50437.7)         (49.04)         (56.11)   
+_cons              8457.3          8457.3***       8457.3***
+              (1454004.1)        (1617.9)        (2303.5)   
+------------------------------------------------------------
+N                      74              74              74   
+------------------------------------------------------------
+Standard errors in parentheses
+* p&lt;0.05, ** p&lt;0.01, *** p&lt;0.001</code></pre>
+</div>
+</div>
+</section>
+<section id="plotting-qreg-vs-mmqreg" class="level2">
+<h2 class="anchored" data-anchor-id="plotting-qreg-vs-mmqreg">Plotting: qreg vs mmqreg</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true"><code>qreg</code></a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false"><code>mmqreg</code></a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<p><img src="fig94.png" class="img-fluid"></p>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<p><img src="fig95.png" class="img-fluid"></p>
+</div>
+</div>
+</div>
+</section>
+<section id="conclusions" class="level2">
+<h2 class="anchored" data-anchor-id="conclusions">Conclusions</h2>
+<ul>
+<li><p>In this presentation I present a quick review of quantile regressions, with emphasis on solutions for adding fixed effects.</p></li>
+<li><p>The Location and Scale model help with the problem because it reduces the number of coefficients to needed to be estimated for consistent estimates.</p>
+<ul>
+<li>In MSS2019, inconsistencies are still observed with Small T. (get long data)</li>
+<li>In my context, this may be less biding, because is more likely to have many obs per Fixed characteristic.</li>
+</ul></li>
+<li><p>While the model may be restrictive (multiplicative heteroskedasticity) it may still be useful for exploration, and analysis when other methodologies are not feasible.</p></li>
+</ul>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-Abrevaya2008" class="csl-entry" role="listitem">
+Abrevaya, Jason, and Christian M Dahl. 2008. <span>“The Effects of Birth Inputs on Birthweight.”</span> <em>Journal of Business &amp; Economic Statistics</em> 26 (4): 379–97. <a href="https://doi.org/10.1198/073500107000000269">https://doi.org/10.1198/073500107000000269</a>.
+</div>
+<div id="ref-bottai2019" class="csl-entry" role="listitem">
+Bottai, Matteo, and Nicola Orsini. 2019. <span>“Qmodel: A Command for Fitting Parametric Quantile Models.”</span> <em>The Stata Journal</em> 19 (2): 261–93. <a href="https://doi.org/10.1177/1536867X19854002">https://doi.org/10.1177/1536867X19854002</a>.
+</div>
+<div id="ref-canay2011" class="csl-entry" role="listitem">
+Canay, Ivan A. 2011. <span>“A Simple Approach to Quantile Regression for Panel Data.”</span> <em>The Econometrics Journal</em> 14 (3): 368–86. https://doi.org/<a href="https://doi.org/10.1111/j.1368-423X.2011.00349.x">https://doi.org/10.1111/j.1368-423X.2011.00349.x</a>.
+</div>
+<div id="ref-he2019" class="csl-entry" role="listitem">
+He, Xuming. 1997. <span>“Quantile Curves Without Crossing.”</span> <em>The American Statistician</em> 51 (2): 186–92. <a href="https://doi.org/10.1080/00031305.1997.10473959">https://doi.org/10.1080/00031305.1997.10473959</a>.
+</div>
+<div id="ref-kaplan2022" class="csl-entry" role="listitem">
+Kaplan, David M. 2022. <span>“Smoothed Instrumental Variables Quantile Regression.”</span> <em>The Stata Journal</em> 22 (2): 379–403. <a href="https://doi.org/10.1177/1536867X221106404">https://doi.org/10.1177/1536867X221106404</a>.
+</div>
+<div id="ref-koenker2004" class="csl-entry" role="listitem">
+Koenker, Roger. 2004. <span>“Quantile Regression for Longitudinal Data.”</span> <em>Journal of Multivariate Analysis</em> 91 (1): 74–89. https://doi.org/<a href="https://doi.org/10.1016/j.jmva.2004.05.006">https://doi.org/10.1016/j.jmva.2004.05.006</a>.
+</div>
+<div id="ref-mss2019" class="csl-entry" role="listitem">
+Machado, José A. F., and J. M. C. Santos Silva. 2019. <span>“Quantiles via Moments.”</span> <em>Journal of Econometrics</em> 213 (1): 145–73. https://doi.org/<a href="https://doi.org/10.1016/j.jeconom.2019.04.009">https://doi.org/10.1016/j.jeconom.2019.04.009</a>.
+</div>
+</div>
+</section>
+</section>
+<section id="extra-correlated-random-effects-model" class="level1">
+<h1>Extra: Correlated Random Effects Model</h1>
+<section id="short-intro" class="level2">
+<h2 class="anchored" data-anchor-id="short-intro">Short intro</h2>
+<ul>
+<li>Correlated Random Effects model can also be applied for the estimation of Q-regressions with large set of fixed effects.
+<ul>
+<li>In Linear models, point estimates are identical to panel FE (or Dummy inclusion appraoch)</li>
+</ul></li>
+<li>Estimating Standard errors, however, can be tricky.
+<ul>
+<li>If only 1 set of FE is used, clustered SE by the Fixed effects will give identical results. But equivalances dissapear with 2 or more sets of fixed effects</li>
+</ul></li>
+<li>May not work with <strong>Qreg</strong> if FE are not a function of conditional means of all other explanatory variables. (compound error will not be related to <span class="math inline">\(\tau\)</span> of the original ranking)</li>
+<li>But may still be a good approximation !</li>
+</ul>
+</section>
+<section id="cre-for-correlated-random-effects-model" class="level2">
+<h2 class="anchored" data-anchor-id="cre-for-correlated-random-effects-model"><code>cre</code>: For Correlated Random Effects Model</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>from -fra install-</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>syntax: </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  cre, abs(varlist) <span class="co">[</span><span class="ot">keep compact</span><span class="co">]</span>: <span class="co">[</span><span class="ot">regression command</span><span class="co">]</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>a prefix command. Gathers all controls and obtains conditional means</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  based on FE groups</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Adds them to model specification, and estimates the model.</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>SE should be accounted for in the command.</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>** Example</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>cre, abs(idcode):qreg ln_w age ttl_exp tenure not_smsa south, ///</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>    cluster(idcode)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="comparing-methods" class="level2 scrollable">
+<h2 class="scrollable anchored" data-anchor-id="comparing-methods">Comparing Methods</h2>
+<div id="57009c06" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">clear</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> <span class="dv">seed</span> 101</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> <span class="kw">obs</span> 5000</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> g = runiformint(1,250)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> rnd1 = rchi2(4)/4</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> rnd2 = rchi2(4)/4</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> rnd3 = rchi2(4)/4 - 1</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="kw">bysort</span> g:<span class="kw">gen</span> <span class="kw">fe</span> = rnd1[1]</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="kw">bysort</span> g:<span class="kw">gen</span> fe2 = rnd1[2] + <span class="kw">fe</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="kw">bysort</span> g:<span class="kw">gen</span> x1  =2 - <span class="kw">fe</span> + rchi2(4)/4</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="kw">bysort</span> g:<span class="kw">gen</span> <span class="kw">x2</span>  = <span class="kw">fe</span> + rnd2[1] </span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> tau = runiform()</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> <span class="fu">y</span> = 2+ tau + <span class="fu">log</span>(tau) + tau^2 * x1 - <span class="fu">log</span>(tau) * <span class="kw">x2</span> + 2*tau*fe2</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a><span class="kw">qreg</span> <span class="fu">y</span> x1 <span class="kw">x2</span> fe2</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>qregplot x1, <span class="bn">name</span>(m1, <span class="kw">replace</span>) <span class="bn">title</span>(Benchmark) graphregion( <span class="bn">margin</span>(<span class="fu">r</span>=5)) estore(ss)</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a><span class="kw">est</span> <span class="kw">restore</span> ss</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a><span class="fu">matrix</span> qq=<span class="fu">e</span>(qq)</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a><span class="fu">matrix</span> bb=<span class="fu">e</span>(<span class="kw">bs</span>)</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a><span class="fu">matrix</span> ll=<span class="fu">e</span>(ll)</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a><span class="fu">matrix</span> uu=<span class="fu">e</span>(ul)</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a><span class="kw">svmat</span> qq</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a><span class="kw">svmat</span> bb</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a><span class="kw">svmat</span> ll</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a><span class="kw">svmat</span> uu</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>cre , <span class="fu">abs</span>(g) <span class="kw">keep</span>: <span class="kw">qreg</span> <span class="fu">y</span> x1 <span class="kw">x2</span> </span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>qregplot x1, <span class="bn">name</span>(m2, <span class="kw">replace</span>) <span class="bn">title</span>(CRE) graphregion( <span class="bn">margin</span>(<span class="fu">r</span>=5))</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a><span class="bn">addplot</span> : rarea ll1 uu1 qq1, <span class="kw">color</span>(%30) lcolor(%0) pstyle(p4) || <span class="kw">line</span> bb1 qq1 , <span class="kw">color</span>(%40)  pstyle(p4)</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>mmqreg <span class="fu">y</span> x1 <span class="kw">x2</span>, <span class="fu">abs</span>(g)</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>qregplot x1, <span class="bn">name</span>(m3, <span class="kw">replace</span>) <span class="bn">title</span>(mmqreg) graphregion( <span class="bn">margin</span>(<span class="fu">r</span>=5))</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a><span class="bn">addplot</span> : rarea ll1 uu1 qq1, <span class="kw">color</span>(%30) lcolor(%0) pstyle(p4) || <span class="kw">line</span> bb1 qq1 , <span class="kw">color</span>(%40)  pstyle(p4)</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a> reghdfe <span class="fu">y</span> x1 <span class="kw">x2</span>, <span class="fu">abs</span>(fex=g)</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> y2 = <span class="fu">y</span>-fex</span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a><span class="kw">qreg</span> y2 x1 <span class="kw">x2</span></span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a>qregplot x1, <span class="bn">name</span>(m4, <span class="kw">replace</span>) <span class="bn">title</span>(Canay2011) graphregion( <span class="bn">margin</span>(<span class="fu">r</span>=5))</span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="bn">addplot</span> : rarea ll1 uu1 qq1, <span class="kw">color</span>(%30) lcolor(%0) pstyle(p4) || <span class="kw">line</span> bb1 qq1 , <span class="kw">color</span>(%40)  pstyle(p4)</span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a><span class="kw">qreg</span> <span class="fu">y</span> x1 <span class="kw">x2</span> fex</span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a>qregplot x1, <span class="bn">name</span>(m5, <span class="kw">replace</span>) <span class="bn">title</span>(M-Canay2011) graphregion( <span class="bn">margin</span>(<span class="fu">r</span>=5))</span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a><span class="bn">addplot</span> : rarea ll1 uu1 qq1, <span class="kw">color</span>(%30) lcolor(%0) pstyle(p4) || <span class="kw">line</span> bb1 qq1 , <span class="kw">color</span>(%40)  pstyle(p4)</span>
+<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a><span class="kw">qreg</span> <span class="fu">y</span> x1 <span class="kw">x2</span></span>
+<span id="cb9-48"><a href="#cb9-48" aria-hidden="true" tabindex="-1"></a>qregplot x1, <span class="bn">name</span>(m6, <span class="kw">replace</span>) <span class="bn">title</span>(<span class="kw">qreg</span> no FE) graphregion( <span class="bn">margin</span>(<span class="fu">r</span>=5))</span>
+<span id="cb9-49"><a href="#cb9-49" aria-hidden="true" tabindex="-1"></a><span class="bn">addplot</span> : rarea ll1 uu1 qq1, <span class="kw">color</span>(%30) lcolor(%0) pstyle(p4) || <span class="kw">line</span> bb1 qq1 , <span class="kw">color</span>(%40)  pstyle(p4)</span>
+<span id="cb9-50"><a href="#cb9-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-51"><a href="#cb9-51" aria-hidden="true" tabindex="-1"></a><span class="kw">graph</span> <span class="bn">combine</span> m1 m2 m3 m4 m5 m6, col(3) <span class="bn">ycommon</span> nocopies </span>
+<span id="cb9-52"><a href="#cb9-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-53"><a href="#cb9-53" aria-hidden="true" tabindex="-1"></a><span class="kw">graph</span> <span class="kw">export</span> fig99.png, <span class="kw">width</span>(2000) <span class="kw">replace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="fig99.png" class="img-fluid quarto-figure quarto-figure-center figure-img" data-heigth="100%"></p>
+</figure>
+</div>
+</section>
+</section>
+<section id="thank-you" class="level1">
+<h1>Thank you!</h1>
+
+
+<!-- -->
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/friosavila\.github\.io\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../app_metrics/app_metrics8.html" class="pagination-link" aria-label="DID: Panel Data &amp; Repeated Crossection">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">DID: Panel Data &amp; Repeated Crossection</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb10" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Quantile regressions with multiple fixed effects"</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "A Method of Moments Approach"</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> </span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">    - Fernando Rios-Avila</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">    - Gustavo Canavire-Bacarreza</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">    - Leonardo Siles</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> </span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">  html: </span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co">    code-fold: true</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co">    code-overflow: wrap</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co">    echo: false</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co">    css: styles.css </span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co">    highlight-style: github</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="co"> </span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="an">bibliography:</span><span class="co"> refer.bib    </span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="an">jupyter:</span><span class="co"> nbstata</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="fu"># Introduction</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="fu">## What do Quantile Regressions do?</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Quantile Regressions are an alternative to standard linear regressions that help us to better understand the relationship between the distribution of $Y$ and $X's$.</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>In constrast with Linear regression models, where one focuses on explaining $E(y|X)$ as a function of $X$, quantile regressions aim to assess the relationship between $Q_\tau(y|X)$ with respect to $X$.</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>This means that to interpret Q-regressions properly, one needs to "condition" on $X$ but also on $\tau$.</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Quantile Regressions are nonlinear-models, that "look" and can be interpreted as linear ones.</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a>##</span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a><span class="in">clear</span></span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a><span class="in">set obs 250</span></span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a><span class="in">gen x = runiform(0,5)</span></span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a><span class="in">gen p = runiform()</span></span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a><span class="in">gen y = 2*p + (3+invnormal(p)) *x + (0.5*invnormal(p)) *x ^2</span></span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a><span class="in">set scheme white2</span></span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a><span class="in">color_style bay</span></span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a><span class="in">local p 0.1</span></span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a><span class="in">gen yq1 = 2*`p' + (3+invnormal(`p')) *x +(0.5*invnormal(`p')) *x ^2</span></span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a><span class="in">local p 0.5</span></span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a><span class="in">gen yq5 = 2*`p' + (3+invnormal(`p')) *x +(0.5*invnormal(`p')) *x ^2</span></span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a><span class="in">local p 0.9</span></span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a><span class="in">gen yq9 = 2*`p' + (3+invnormal(`p')) *x +(0.5*invnormal(`p')) *x ^2</span></span>
+<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a><span class="in">two (scatter y x, msize(3) mcolor(%30) ) ( line yq1 yq5 yq9 x, sort pstyle(p2 p3 p4) lw(1 1 1)), ///</span></span>
+<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a><span class="in">legend(order( 2 "10th Q" 3 "E(Y|X)" 4 "90th Q"))</span></span>
+<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a><span class="fu">## Estimation </span></span>
+<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A Generalization of Quantile regression data generating function can be written as follows:</span>
+<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-61"><a href="#cb10-61" aria-hidden="true" tabindex="-1"></a>$$y_i = \beta_0(\tau)+\beta_1(\tau) X_{i,1}+\beta_2(\tau) X_{i,2}+...+\beta_k(\tau) X_{i,k}</span>
+<span id="cb10-62"><a href="#cb10-62" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb10-63"><a href="#cb10-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-64"><a href="#cb10-64" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Base on this specification, few characteristics should be considered:</span>
+<span id="cb10-65"><a href="#cb10-65" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-66"><a href="#cb10-66" aria-hidden="true" tabindex="-1"></a><span class="ss">  1. </span>Slopes $\beta_k(\tau)$ will vary across quantiles only if the model is Heteroskedastic.</span>
+<span id="cb10-67"><a href="#cb10-67" aria-hidden="true" tabindex="-1"></a><span class="ss">  2. </span>Qreg can be considered as a semi-parametric-varying coefficient model, with unobserved running variable ($\tau$).</span>
+<span id="cb10-68"><a href="#cb10-68" aria-hidden="true" tabindex="-1"></a><span class="ss">  3. </span>Coefficients are percentile specific, but functional forms can be used for more efficient estimation.</span>
+<span id="cb10-69"><a href="#cb10-69" aria-hidden="true" tabindex="-1"></a><span class="ss">  4. </span>It is possible to separate location effects (mean) from scale effect (deviation from the mean)</span>
+<span id="cb10-70"><a href="#cb10-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-71"><a href="#cb10-71" aria-hidden="true" tabindex="-1"></a><span class="fu">## </span></span>
+<span id="cb10-72"><a href="#cb10-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-73"><a href="#cb10-73" aria-hidden="true" tabindex="-1"></a>**Standard** </span>
+<span id="cb10-74"><a href="#cb10-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-75"><a href="#cb10-75" aria-hidden="true" tabindex="-1"></a>$$\beta(\tau) \leftarrow \frac 1 n \sum \left<span class="co">[</span><span class="ot"> I(x_i\beta(\tau) \geq y_i) - \tau \right</span><span class="co">]</span> =0 </span>
+<span id="cb10-76"><a href="#cb10-76" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb10-77"><a href="#cb10-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-78"><a href="#cb10-78" aria-hidden="true" tabindex="-1"></a>**Semiparamatric** (@kaplan2022)</span>
+<span id="cb10-79"><a href="#cb10-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-80"><a href="#cb10-80" aria-hidden="true" tabindex="-1"></a>$$\beta(\tau) \leftarrow \frac 1 n \sum \left<span class="co">[</span><span class="ot"> F\left(\frac{x_i\beta(\tau)-y_i}{bw} \right) - \tau \right</span><span class="co">]</span> =0</span>
+<span id="cb10-81"><a href="#cb10-81" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb10-82"><a href="#cb10-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-83"><a href="#cb10-83" aria-hidden="true" tabindex="-1"></a>**Functional** (@bottai2019)</span>
+<span id="cb10-84"><a href="#cb10-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-85"><a href="#cb10-85" aria-hidden="true" tabindex="-1"></a>$$\beta(\tau) = \theta_0 + \theta_1 \tau + \theta_2 \tau^2 +...</span>
+<span id="cb10-86"><a href="#cb10-86" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb10-87"><a href="#cb10-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-88"><a href="#cb10-88" aria-hidden="true" tabindex="-1"></a>**Location-Scale**</span>
+<span id="cb10-89"><a href="#cb10-89" aria-hidden="true" tabindex="-1"></a>$$\beta(\tau) = \beta + \gamma(\tau)</span>
+<span id="cb10-90"><a href="#cb10-90" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb10-91"><a href="#cb10-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-92"><a href="#cb10-92" aria-hidden="true" tabindex="-1"></a><span class="fu">## </span></span>
+<span id="cb10-93"><a href="#cb10-93" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-96"><a href="#cb10-96" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb10-97"><a href="#cb10-97" aria-hidden="true" tabindex="-1"></a><span class="in">*| output: false</span></span>
+<span id="cb10-98"><a href="#cb10-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-99"><a href="#cb10-99" aria-hidden="true" tabindex="-1"></a><span class="in">qui:qreg y x</span></span>
+<span id="cb10-100"><a href="#cb10-100" aria-hidden="true" tabindex="-1"></a><span class="in">qregplot, ylabel(-6 (3) 10)</span></span>
+<span id="cb10-101"><a href="#cb10-101" aria-hidden="true" tabindex="-1"></a><span class="in">graph export fig91.png, replace width(1000)</span></span>
+<span id="cb10-102"><a href="#cb10-102" aria-hidden="true" tabindex="-1"></a><span class="in">qui:sivqr y x, q(50)</span></span>
+<span id="cb10-103"><a href="#cb10-103" aria-hidden="true" tabindex="-1"></a><span class="in">qregplot, ylabel(-6 (3) 10)</span></span>
+<span id="cb10-104"><a href="#cb10-104" aria-hidden="true" tabindex="-1"></a><span class="in">graph export fig92.png, replace width(1000)</span></span>
+<span id="cb10-105"><a href="#cb10-105" aria-hidden="true" tabindex="-1"></a><span class="in">qui:reg y x </span></span>
+<span id="cb10-106"><a href="#cb10-106" aria-hidden="true" tabindex="-1"></a><span class="in">qui:predict yh</span></span>
+<span id="cb10-107"><a href="#cb10-107" aria-hidden="true" tabindex="-1"></a><span class="in">qui:gen dy = y - yh</span></span>
+<span id="cb10-108"><a href="#cb10-108" aria-hidden="true" tabindex="-1"></a><span class="in">qui:qreg dy x</span></span>
+<span id="cb10-109"><a href="#cb10-109" aria-hidden="true" tabindex="-1"></a><span class="in">qregplot, ylabel(-6 (3) 10)</span></span>
+<span id="cb10-110"><a href="#cb10-110" aria-hidden="true" tabindex="-1"></a><span class="in">graph export fig93.png, replace width(1000)</span></span>
+<span id="cb10-111"><a href="#cb10-111" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-112"><a href="#cb10-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-113"><a href="#cb10-113" aria-hidden="true" tabindex="-1"></a>:::{.panel-tabset}</span>
+<span id="cb10-114"><a href="#cb10-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-115"><a href="#cb10-115" aria-hidden="true" tabindex="-1"></a><span class="fu">## qreg</span></span>
+<span id="cb10-116"><a href="#cb10-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-117"><a href="#cb10-117" aria-hidden="true" tabindex="-1"></a><span class="al">![](fig91.png)</span>{heigth=100% fig-align=center}</span>
+<span id="cb10-118"><a href="#cb10-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-119"><a href="#cb10-119" aria-hidden="true" tabindex="-1"></a><span class="fu">## sivqr</span></span>
+<span id="cb10-120"><a href="#cb10-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-121"><a href="#cb10-121" aria-hidden="true" tabindex="-1"></a><span class="al">![](fig92.png)</span>{heigth=100% fig-align=center}</span>
+<span id="cb10-122"><a href="#cb10-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-123"><a href="#cb10-123" aria-hidden="true" tabindex="-1"></a><span class="fu">## Location-Scale</span></span>
+<span id="cb10-124"><a href="#cb10-124" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-125"><a href="#cb10-125" aria-hidden="true" tabindex="-1"></a><span class="al">![](fig93.png)</span>{heigth=100% fig-align=center}</span>
+<span id="cb10-126"><a href="#cb10-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-127"><a href="#cb10-127" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb10-128"><a href="#cb10-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-129"><a href="#cb10-129" aria-hidden="true" tabindex="-1"></a><span class="fu"># The Problem</span></span>
+<span id="cb10-130"><a href="#cb10-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-131"><a href="#cb10-131" aria-hidden="true" tabindex="-1"></a><span class="fu">## How to account for  fixed effects?</span></span>
+<span id="cb10-132"><a href="#cb10-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-133"><a href="#cb10-133" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>As said before, quantile regresions are nonlinear models. Thus, one cannot just add Dummies to address group fixed effects</span>
+<span id="cb10-134"><a href="#cb10-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-135"><a href="#cb10-135" aria-hidden="true" tabindex="-1"></a>$$Q_\tau(y|x) = \beta_0(\tau) + \beta_1 X(\tau) + \sum \delta(\tau)_g</span>
+<span id="cb10-136"><a href="#cb10-136" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb10-137"><a href="#cb10-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-138"><a href="#cb10-138" aria-hidden="true" tabindex="-1"></a>This creates an  incidental parameter problem. Neither $\delta(\tau)'s$ nor $\beta's$ would be consistently estimated.</span>
+<span id="cb10-139"><a href="#cb10-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-140"><a href="#cb10-140" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>But then how to solve it?</span>
+<span id="cb10-141"><a href="#cb10-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-142"><a href="#cb10-142" aria-hidden="true" tabindex="-1"></a><span class="fu">## Some Solutions </span></span>
+<span id="cb10-143"><a href="#cb10-143" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-144"><a href="#cb10-144" aria-hidden="true" tabindex="-1"></a>**@koenker2004**: Assume Fixed effects only have an impact on Location, and Shrink invidual effects (LASSO)</span>
+<span id="cb10-145"><a href="#cb10-145" aria-hidden="true" tabindex="-1"></a>$$y_i = \beta(\tau)X + \delta_g </span>
+<span id="cb10-146"><a href="#cb10-146" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb10-147"><a href="#cb10-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-148"><a href="#cb10-148" aria-hidden="true" tabindex="-1"></a>**@canay2011**: Similar to @koenker2004, but "eliminate them" before running Qreg</span>
+<span id="cb10-149"><a href="#cb10-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-150"><a href="#cb10-150" aria-hidden="true" tabindex="-1"></a>$$\begin{aligned}</span>
+<span id="cb10-151"><a href="#cb10-151" aria-hidden="true" tabindex="-1"></a>y = \beta X + \delta_g + e <span class="sc">\\</span></span>
+<span id="cb10-152"><a href="#cb10-152" aria-hidden="true" tabindex="-1"></a>Q_\tau(y - \delta_g|X) = \beta(\tau)X </span>
+<span id="cb10-153"><a href="#cb10-153" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
+<span id="cb10-154"><a href="#cb10-154" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb10-155"><a href="#cb10-155" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-156"><a href="#cb10-156" aria-hidden="true" tabindex="-1"></a>**@Abrevaya2008**: Correlated Random effects Model</span>
+<span id="cb10-157"><a href="#cb10-157" aria-hidden="true" tabindex="-1"></a>$$Q_\tau(y|X) = \beta(\tau)X + \gamma(\tau) E(X|g)$$</span>
+<span id="cb10-158"><a href="#cb10-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-159"><a href="#cb10-159" aria-hidden="true" tabindex="-1"></a><span class="fu">## @mss2019</span></span>
+<span id="cb10-160"><a href="#cb10-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-161"><a href="#cb10-161" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>This method was developed  (and implemented using <span class="in">`xtqreg`</span>) to incorporate individual fixed effects (Useful when considering panel data)</span>
+<span id="cb10-162"><a href="#cb10-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-163"><a href="#cb10-163" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>In principle its an extension of @he2019, who proposed an strategy to estimate Qreg coefficients using a restricted location-scale model, assuming the following structure:</span>
+<span id="cb10-164"><a href="#cb10-164" aria-hidden="true" tabindex="-1"></a>$$y_i = X_i\beta + \varepsilon X_i\gamma</span>
+<span id="cb10-165"><a href="#cb10-165" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb10-166"><a href="#cb10-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-167"><a href="#cb10-167" aria-hidden="true" tabindex="-1"></a>Thus, Quantile regression model is given by:</span>
+<span id="cb10-168"><a href="#cb10-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-169"><a href="#cb10-169" aria-hidden="true" tabindex="-1"></a>$$Q_\tau(y|X)=X\left(\beta + F^{-1}_\varepsilon(\tau) \gamma \right) = X \beta(\tau)</span>
+<span id="cb10-170"><a href="#cb10-170" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb10-171"><a href="#cb10-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-172"><a href="#cb10-172" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Instead of requiring $K\times M$ coefficients to identify the whole conditional distribution, it only requires $2\times K + M$.</span>
+<span id="cb10-173"><a href="#cb10-173" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-174"><a href="#cb10-174" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Also, Quantile curves will not cross!</span>
+<span id="cb10-175"><a href="#cb10-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-176"><a href="#cb10-176" aria-hidden="true" tabindex="-1"></a><span class="fu">## How does Simplified @he2019 and @mss2019 works?</span></span>
+<span id="cb10-177"><a href="#cb10-177" aria-hidden="true" tabindex="-1"></a>$$y_i = x_i \beta + \varepsilon x_i \gamma \rightarrow Q_\tau(y|X)=X\beta + X\gamma F_\varepsilon^{-1}(\tau)</span>
+<span id="cb10-178"><a href="#cb10-178" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb10-179"><a href="#cb10-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-180"><a href="#cb10-180" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Step 1: Location model $E(X'(y-X\beta))=0$</span></span>
+<span id="cb10-181"><a href="#cb10-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-182"><a href="#cb10-182" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Step 2: Scale model $E(X'(|y-X\beta|-X\gamma))=0$</span></span>
+<span id="cb10-183"><a href="#cb10-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-184"><a href="#cb10-184" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Step 3: Standardized Quantile $E\left[ I\left( \frac{y-X\beta}{X\gamma} \geq q_\tau \right) -\tau  \right]=0$</span></span>
+<span id="cb10-185"><a href="#cb10-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-186"><a href="#cb10-186" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Step 4: Aggregate $\beta(\tau) = \beta + q_\tau \gamma$</span></span>
+<span id="cb10-187"><a href="#cb10-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-188"><a href="#cb10-188" aria-hidden="true" tabindex="-1"></a><span class="fu">## Extension: Multiple Fixed effects </span></span>
+<span id="cb10-189"><a href="#cb10-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-190"><a href="#cb10-190" aria-hidden="true" tabindex="-1"></a>@mss2019 propose an extension: To add a single set of fixed effect (panel) apply Frisch–Waugh–Lovell theorem.</span>
+<span id="cb10-191"><a href="#cb10-191" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-192"><a href="#cb10-192" aria-hidden="true" tabindex="-1"></a>This can be extended to controlling for multiple fixed effects:</span>
+<span id="cb10-193"><a href="#cb10-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-194"><a href="#cb10-194" aria-hidden="true" tabindex="-1"></a>$$\tilde w_i = w_i +\bar w - \delta^w_{g1} - \delta^w_{g2} - ... - \delta^w_{gk} \ \forall \  w \in y,x</span>
+<span id="cb10-195"><a href="#cb10-195" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb10-196"><a href="#cb10-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-197"><a href="#cb10-197" aria-hidden="true" tabindex="-1"></a>And use almost the same moments as before:</span>
+<span id="cb10-198"><a href="#cb10-198" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-199"><a href="#cb10-199" aria-hidden="true" tabindex="-1"></a>$$\begin{aligned}</span>
+<span id="cb10-200"><a href="#cb10-200" aria-hidden="true" tabindex="-1"></a> E(\tilde X(\tilde y-\tilde X\beta)) &amp; =0 <span class="sc">\\</span></span>
+<span id="cb10-201"><a href="#cb10-201" aria-hidden="true" tabindex="-1"></a> E(\tilde X(|\tilde y- \tilde X\beta|-\tilde X\gamma)) &amp;=0 <span class="sc">\\</span></span>
+<span id="cb10-202"><a href="#cb10-202" aria-hidden="true" tabindex="-1"></a> X\gamma + \delta's &amp;= y - (\tilde y- \tilde X\gamma) <span class="sc">\\</span></span>
+<span id="cb10-203"><a href="#cb10-203" aria-hidden="true" tabindex="-1"></a> E\left<span class="co">[</span><span class="ot"> I\left( \frac{\tilde y- \tilde X\beta}{X\gamma+ \delta's } \geq q_\tau \right) -\tau  \right</span><span class="co">]</span> &amp;=0</span>
+<span id="cb10-204"><a href="#cb10-204" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
+<span id="cb10-205"><a href="#cb10-205" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb10-206"><a href="#cb10-206" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-207"><a href="#cb10-207" aria-hidden="true" tabindex="-1"></a><span class="fu">## Extension: Standard Errors</span></span>
+<span id="cb10-208"><a href="#cb10-208" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-209"><a href="#cb10-209" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Along with the modified algorithm that allows for Panel Fixed effects, @mss2019 proposed a GLS type variance estimator.</span>
+<span id="cb10-210"><a href="#cb10-210" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-211"><a href="#cb10-211" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>The model assumes the existance of Heteroskedasticity.</span>
+<span id="cb10-212"><a href="#cb10-212" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>Based on Law of Iterated Expectations, and assuming Heteroskedasticity is correctly specified, its possible to construct a GLS type Variance Estimator. </span>
+<span id="cb10-213"><a href="#cb10-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-214"><a href="#cb10-214" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>How does this work? </span>
+<span id="cb10-215"><a href="#cb10-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-216"><a href="#cb10-216" aria-hidden="true" tabindex="-1"></a><span class="fu">## Location Model</span></span>
+<span id="cb10-217"><a href="#cb10-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-218"><a href="#cb10-218" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Consider the location model: $y_i = x_i \beta +  \varepsilon_i x_i \gamma$</span>
+<span id="cb10-219"><a href="#cb10-219" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Which has known heteroskedasticity: $Var(y_i - x_i\beta)=(x_i\gamma)^2 \sigma^2_\varepsilon$</span>
+<span id="cb10-220"><a href="#cb10-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-221"><a href="#cb10-221" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>@mss2019 GLS Variance would be:</span>
+<span id="cb10-222"><a href="#cb10-222" aria-hidden="true" tabindex="-1"></a>$$\begin{aligned}</span>
+<span id="cb10-223"><a href="#cb10-223" aria-hidden="true" tabindex="-1"></a>e &amp;= y_i - X\beta = \varepsilon_i x_i \gamma<span class="sc">\\</span></span>
+<span id="cb10-224"><a href="#cb10-224" aria-hidden="true" tabindex="-1"></a>Var(\hat\beta) &amp;= (X'X)^{-1}\sum x_i x_i' \color{red}{e_i^2} (X'X)^{-1} <span class="sc">\\</span></span>
+<span id="cb10-225"><a href="#cb10-225" aria-hidden="true" tabindex="-1"></a>&amp;=\color{red}{\sigma_\varepsilon^2} (X'X)^{-1} \sum x_i x_i' \color{red}{(x_i'\gamma)^2} (X'X)^{-1}</span>
+<span id="cb10-226"><a href="#cb10-226" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
+<span id="cb10-227"><a href="#cb10-227" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb10-228"><a href="#cb10-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-229"><a href="#cb10-229" aria-hidden="true" tabindex="-1"></a>However, this can be sensitive to the modeling of the Scale function.</span>
+<span id="cb10-230"><a href="#cb10-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-231"><a href="#cb10-231" aria-hidden="true" tabindex="-1"></a>But one can almost always Bootstrap...</span>
+<span id="cb10-232"><a href="#cb10-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-233"><a href="#cb10-233" aria-hidden="true" tabindex="-1"></a><span class="fu">## Extension: Robust and Clustered SE</span></span>
+<span id="cb10-234"><a href="#cb10-234" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-235"><a href="#cb10-235" aria-hidden="true" tabindex="-1"></a>An extension offered in my implementation makes full use of the moment conditions, and the implicit  Influence functions:</span>
+<span id="cb10-236"><a href="#cb10-236" aria-hidden="true" tabindex="-1"></a>$$\begin{aligned}</span>
+<span id="cb10-237"><a href="#cb10-237" aria-hidden="true" tabindex="-1"></a>IF'_{i,\beta} &amp;= N(X'X)^{-1} x_i R_i    <span class="sc">\\</span></span>
+<span id="cb10-238"><a href="#cb10-238" aria-hidden="true" tabindex="-1"></a>IF'_{i,\gamma} &amp;= N(X'X)^{-1} x_i \Big( \tilde R_i  -x_i'\gamma \Big) <span class="sc">\\</span></span>
+<span id="cb10-239"><a href="#cb10-239" aria-hidden="true" tabindex="-1"></a>\color{blue}{IF_{i, q(\tau)}} &amp;= \frac{\tau -I(q_\tau \geq \varepsilon_i) }{f_\varepsilon(q_\tau)} </span>
+<span id="cb10-240"><a href="#cb10-240" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>\frac{R_i}{\bar x'\gamma} </span>
+<span id="cb10-241"><a href="#cb10-241" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>q_\tau \frac{\tilde R_i -x_i'\gamma}{\bar x'\gamma}<span class="sc">\\</span></span>
+<span id="cb10-242"><a href="#cb10-242" aria-hidden="true" tabindex="-1"></a>R_i &amp;= y_i-x_i'\beta <span class="sc">\\</span></span>
+<span id="cb10-243"><a href="#cb10-243" aria-hidden="true" tabindex="-1"></a>\tilde R_i &amp; =2 R_i \big<span class="co">[</span><span class="ot">1(R_i \geq 0) - E(1(R_i \geq 0)) \big</span><span class="co">]</span></span>
+<span id="cb10-244"><a href="#cb10-244" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
+<span id="cb10-245"><a href="#cb10-245" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb10-246"><a href="#cb10-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-247"><a href="#cb10-247" aria-hidden="true" tabindex="-1"></a>So we just stack Influence functions to obtain Robust and Clustered Standard errors:</span>
+<span id="cb10-248"><a href="#cb10-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-249"><a href="#cb10-249" aria-hidden="true" tabindex="-1"></a><span class="fu">## </span></span>
+<span id="cb10-250"><a href="#cb10-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-251"><a href="#cb10-251" aria-hidden="true" tabindex="-1"></a>Robust SE</span>
+<span id="cb10-252"><a href="#cb10-252" aria-hidden="true" tabindex="-1"></a>$$Var_r(\beta,\gamma,q_\tau) = \frac{1}{N^2}</span>
+<span id="cb10-253"><a href="#cb10-253" aria-hidden="true" tabindex="-1"></a>\left[ \begin{matrix}</span>
+<span id="cb10-254"><a href="#cb10-254" aria-hidden="true" tabindex="-1"></a>IF_\beta &amp; IF_\gamma &amp; IF_{q_\tau}</span>
+<span id="cb10-255"><a href="#cb10-255" aria-hidden="true" tabindex="-1"></a>\end{matrix}</span>
+<span id="cb10-256"><a href="#cb10-256" aria-hidden="true" tabindex="-1"></a>\right]'\left[ \begin{matrix}</span>
+<span id="cb10-257"><a href="#cb10-257" aria-hidden="true" tabindex="-1"></a>IF_\beta &amp; IF_\gamma &amp; IF_{q_\tau}</span>
+<span id="cb10-258"><a href="#cb10-258" aria-hidden="true" tabindex="-1"></a>\end{matrix}</span>
+<span id="cb10-259"><a href="#cb10-259" aria-hidden="true" tabindex="-1"></a>\right]</span>
+<span id="cb10-260"><a href="#cb10-260" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb10-261"><a href="#cb10-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-262"><a href="#cb10-262" aria-hidden="true" tabindex="-1"></a>Cluster SE</span>
+<span id="cb10-263"><a href="#cb10-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-264"><a href="#cb10-264" aria-hidden="true" tabindex="-1"></a>$$Var_c(\beta,\gamma,q_\tau) = \frac{1}{N^2}</span>
+<span id="cb10-265"><a href="#cb10-265" aria-hidden="true" tabindex="-1"></a>\left[ \begin{matrix}</span>
+<span id="cb10-266"><a href="#cb10-266" aria-hidden="true" tabindex="-1"></a>SIF_\beta &amp; SIF_\gamma &amp; SIF_{q_\tau}</span>
+<span id="cb10-267"><a href="#cb10-267" aria-hidden="true" tabindex="-1"></a>\end{matrix}</span>
+<span id="cb10-268"><a href="#cb10-268" aria-hidden="true" tabindex="-1"></a>\right]'\left[ \begin{matrix}</span>
+<span id="cb10-269"><a href="#cb10-269" aria-hidden="true" tabindex="-1"></a>SIF_\beta &amp; SIF_\gamma &amp; SIF_{q_\tau}</span>
+<span id="cb10-270"><a href="#cb10-270" aria-hidden="true" tabindex="-1"></a>\end{matrix}</span>
+<span id="cb10-271"><a href="#cb10-271" aria-hidden="true" tabindex="-1"></a>\right]</span>
+<span id="cb10-272"><a href="#cb10-272" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb10-273"><a href="#cb10-273" aria-hidden="true" tabindex="-1"></a>$$SIF_{w} = \left[ \begin{matrix}</span>
+<span id="cb10-274"><a href="#cb10-274" aria-hidden="true" tabindex="-1"></a>SIF_{g=1,w} <span class="sc">\\</span></span>
+<span id="cb10-275"><a href="#cb10-275" aria-hidden="true" tabindex="-1"></a>SIF_{g=2,w}  <span class="sc">\\</span> ... <span class="sc">\\</span>\</span>
+<span id="cb10-276"><a href="#cb10-276" aria-hidden="true" tabindex="-1"></a>SIF_{g=G,w}  </span>
+<span id="cb10-277"><a href="#cb10-277" aria-hidden="true" tabindex="-1"></a>\end{matrix}\right] <span class="sc">\&amp;</span> SIF_{g=k, \ w} = \sum_{i \in g=k} IF_{i,w}</span>
+<span id="cb10-278"><a href="#cb10-278" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb10-279"><a href="#cb10-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-280"><a href="#cb10-280" aria-hidden="true" tabindex="-1"></a>Easily allows for simultaneous Qregressions and weights</span>
+<span id="cb10-281"><a href="#cb10-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-282"><a href="#cb10-282" aria-hidden="true" tabindex="-1"></a><span class="fu">## Command syntax `mmqreg` </span></span>
+<span id="cb10-283"><a href="#cb10-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-284"><a href="#cb10-284" aria-hidden="true" tabindex="-1"></a><span class="in">```markdown</span></span>
+<span id="cb10-285"><a href="#cb10-285" aria-hidden="true" tabindex="-1"></a>mmqreg depvar indepvar <span class="co">[</span><span class="ot">if in</span><span class="co">] [pw]</span> , <span class="co">[</span><span class="ot">Options</span><span class="co">]</span> &lt;-- Standard Syntax</span>
+<span id="cb10-286"><a href="#cb10-286" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-287"><a href="#cb10-287" aria-hidden="true" tabindex="-1"></a>** Variance Options</span>
+<span id="cb10-288"><a href="#cb10-288" aria-hidden="true" tabindex="-1"></a>   Default: MSS(2019) GLS SE</span>
+<span id="cb10-289"><a href="#cb10-289" aria-hidden="true" tabindex="-1"></a>  -robust-: Robust Standard errors, no DOF Correction (GMM)</span>
+<span id="cb10-290"><a href="#cb10-290" aria-hidden="true" tabindex="-1"></a>  -cluster(varname)-: Clustered Standard errors, no DOF Correction (GMM)</span>
+<span id="cb10-291"><a href="#cb10-291" aria-hidden="true" tabindex="-1"></a>  -dfadj-: Simple Adjustment (n-k-1)</span>
+<span id="cb10-292"><a href="#cb10-292" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-293"><a href="#cb10-293" aria-hidden="true" tabindex="-1"></a>** Output</span>
+<span id="cb10-294"><a href="#cb10-294" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>q(numlist): List of Quantiles to be estimated (default q=50)</span>
+<span id="cb10-295"><a href="#cb10-295" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>ls        : Request Providing Location Scale coefficient models</span>
+<span id="cb10-296"><a href="#cb10-296" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-297"><a href="#cb10-297" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-298"><a href="#cb10-298" aria-hidden="true" tabindex="-1"></a><span class="in">There will be some differences with `xtqreg` because of couple of differences in the math and programming.</span></span>
+<span id="cb10-299"><a href="#cb10-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-300"><a href="#cb10-300" aria-hidden="true" tabindex="-1"></a><span class="in">## Example {.scrollable}</span></span>
+<span id="cb10-301"><a href="#cb10-301" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-304"><a href="#cb10-304" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb10-305"><a href="#cb10-305" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo: true</span></span>
+<span id="cb10-306"><a href="#cb10-306" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
+<span id="cb10-307"><a href="#cb10-307" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-overflow: wrap</span></span>
+<span id="cb10-308"><a href="#cb10-308" aria-hidden="true" tabindex="-1"></a><span class="in">*| classes: larger</span></span>
+<span id="cb10-309"><a href="#cb10-309" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-310"><a href="#cb10-310" aria-hidden="true" tabindex="-1"></a><span class="in">webuse nlswork, clear</span></span>
+<span id="cb10-311"><a href="#cb10-311" aria-hidden="true" tabindex="-1"></a><span class="in">qui:mmqreg ln_w age ttl_exp tenure not_smsa south, ///</span></span>
+<span id="cb10-312"><a href="#cb10-312" aria-hidden="true" tabindex="-1"></a><span class="in">    abs(idcode) </span></span>
+<span id="cb10-313"><a href="#cb10-313" aria-hidden="true" tabindex="-1"></a><span class="in">est sto m1</span></span>
+<span id="cb10-314"><a href="#cb10-314" aria-hidden="true" tabindex="-1"></a><span class="in">qui:mmqreg ln_w age ttl_exp tenure not_smsa south, ///</span></span>
+<span id="cb10-315"><a href="#cb10-315" aria-hidden="true" tabindex="-1"></a><span class="in">    abs(idcode) robust</span></span>
+<span id="cb10-316"><a href="#cb10-316" aria-hidden="true" tabindex="-1"></a><span class="in">est sto m2</span></span>
+<span id="cb10-317"><a href="#cb10-317" aria-hidden="true" tabindex="-1"></a><span class="in">qui:mmqreg ln_w age ttl_exp tenure not_smsa south, ///</span></span>
+<span id="cb10-318"><a href="#cb10-318" aria-hidden="true" tabindex="-1"></a><span class="in">    abs(idcode) cluster(idcode)</span></span>
+<span id="cb10-319"><a href="#cb10-319" aria-hidden="true" tabindex="-1"></a><span class="in">est sto m3</span></span>
+<span id="cb10-320"><a href="#cb10-320" aria-hidden="true" tabindex="-1"></a><span class="in">qui:mmqreg ln_w ttl_exp tenure not_smsa south, ///</span></span>
+<span id="cb10-321"><a href="#cb10-321" aria-hidden="true" tabindex="-1"></a><span class="in">    abs(idcode age) cluster(idcode)</span></span>
+<span id="cb10-322"><a href="#cb10-322" aria-hidden="true" tabindex="-1"></a><span class="in">est sto m4</span></span>
+<span id="cb10-323"><a href="#cb10-323" aria-hidden="true" tabindex="-1"></a><span class="in">esttab m1 m2 m3 m4, se  nomtitle nogap </span></span>
+<span id="cb10-324"><a href="#cb10-324" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-325"><a href="#cb10-325" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-326"><a href="#cb10-326" aria-hidden="true" tabindex="-1"></a><span class="fu">## {.scrollable}</span></span>
+<span id="cb10-327"><a href="#cb10-327" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-330"><a href="#cb10-330" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb10-331"><a href="#cb10-331" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo: true</span></span>
+<span id="cb10-332"><a href="#cb10-332" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
+<span id="cb10-333"><a href="#cb10-333" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-overflow: wrap</span></span>
+<span id="cb10-334"><a href="#cb10-334" aria-hidden="true" tabindex="-1"></a><span class="in">*| classes: larger</span></span>
+<span id="cb10-335"><a href="#cb10-335" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-336"><a href="#cb10-336" aria-hidden="true" tabindex="-1"></a><span class="in">sysuse auto, clear</span></span>
+<span id="cb10-337"><a href="#cb10-337" aria-hidden="true" tabindex="-1"></a><span class="in">qui:mmqreg price mpg trunk  , </span></span>
+<span id="cb10-338"><a href="#cb10-338" aria-hidden="true" tabindex="-1"></a><span class="in">est sto m1</span></span>
+<span id="cb10-339"><a href="#cb10-339" aria-hidden="true" tabindex="-1"></a><span class="in">qui:mmqreg price mpg trunk  , robust</span></span>
+<span id="cb10-340"><a href="#cb10-340" aria-hidden="true" tabindex="-1"></a><span class="in">est sto m2</span></span>
+<span id="cb10-341"><a href="#cb10-341" aria-hidden="true" tabindex="-1"></a><span class="in">qui:bootstrap, reps(250):mmqreg price mpg trunk</span></span>
+<span id="cb10-342"><a href="#cb10-342" aria-hidden="true" tabindex="-1"></a><span class="in">est sto m3</span></span>
+<span id="cb10-343"><a href="#cb10-343" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-344"><a href="#cb10-344" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-345"><a href="#cb10-345" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-348"><a href="#cb10-348" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb10-349"><a href="#cb10-349" aria-hidden="true" tabindex="-1"></a><span class="in">*| classes: larger</span></span>
+<span id="cb10-350"><a href="#cb10-350" aria-hidden="true" tabindex="-1"></a><span class="in">esttab m1 m2 m3 , se  mtitle(default Robust Bootstrap) nogap </span></span>
+<span id="cb10-351"><a href="#cb10-351" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-352"><a href="#cb10-352" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-353"><a href="#cb10-353" aria-hidden="true" tabindex="-1"></a><span class="fu">## Plotting: qreg vs mmqreg</span></span>
+<span id="cb10-354"><a href="#cb10-354" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-357"><a href="#cb10-357" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb10-358"><a href="#cb10-358" aria-hidden="true" tabindex="-1"></a><span class="in">*| output: false</span></span>
+<span id="cb10-359"><a href="#cb10-359" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo: false</span></span>
+<span id="cb10-360"><a href="#cb10-360" aria-hidden="true" tabindex="-1"></a><span class="in">*ssc install frause</span></span>
+<span id="cb10-361"><a href="#cb10-361" aria-hidden="true" tabindex="-1"></a><span class="in">frause oaxaca, clear</span></span>
+<span id="cb10-362"><a href="#cb10-362" aria-hidden="true" tabindex="-1"></a><span class="in">qreg lnwage educ exper tenure age</span></span>
+<span id="cb10-363"><a href="#cb10-363" aria-hidden="true" tabindex="-1"></a><span class="in">qregplot educ exper tenure age</span></span>
+<span id="cb10-364"><a href="#cb10-364" aria-hidden="true" tabindex="-1"></a><span class="in">graph export fig94.png, replace width(1000)</span></span>
+<span id="cb10-365"><a href="#cb10-365" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-366"><a href="#cb10-366" aria-hidden="true" tabindex="-1"></a><span class="in">mmqreg lnwage educ exper tenure age, robust</span></span>
+<span id="cb10-367"><a href="#cb10-367" aria-hidden="true" tabindex="-1"></a><span class="in">qregplot educ exper tenure age</span></span>
+<span id="cb10-368"><a href="#cb10-368" aria-hidden="true" tabindex="-1"></a><span class="in">graph export fig95.png, replace width(1000)</span></span>
+<span id="cb10-369"><a href="#cb10-369" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-370"><a href="#cb10-370" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-371"><a href="#cb10-371" aria-hidden="true" tabindex="-1"></a>:::{.panel-tabset}</span>
+<span id="cb10-372"><a href="#cb10-372" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-373"><a href="#cb10-373" aria-hidden="true" tabindex="-1"></a><span class="fu">## `qreg`</span></span>
+<span id="cb10-374"><a href="#cb10-374" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-375"><a href="#cb10-375" aria-hidden="true" tabindex="-1"></a><span class="al">![](fig94.png)</span></span>
+<span id="cb10-376"><a href="#cb10-376" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-377"><a href="#cb10-377" aria-hidden="true" tabindex="-1"></a><span class="fu">## `mmqreg`</span></span>
+<span id="cb10-378"><a href="#cb10-378" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-379"><a href="#cb10-379" aria-hidden="true" tabindex="-1"></a><span class="al">![](fig95.png)</span></span>
+<span id="cb10-380"><a href="#cb10-380" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-381"><a href="#cb10-381" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb10-382"><a href="#cb10-382" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-383"><a href="#cb10-383" aria-hidden="true" tabindex="-1"></a><span class="fu">## Conclusions</span></span>
+<span id="cb10-384"><a href="#cb10-384" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-385"><a href="#cb10-385" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>In this presentation I present a quick review of quantile regressions, with emphasis on solutions for adding fixed effects.</span>
+<span id="cb10-386"><a href="#cb10-386" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-387"><a href="#cb10-387" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>The Location and Scale model help with the problem because it reduces the number of coefficients to needed to be estimated for consistent estimates. </span>
+<span id="cb10-388"><a href="#cb10-388" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>In MSS2019, inconsistencies are still observed with Small T. (get long data)</span>
+<span id="cb10-389"><a href="#cb10-389" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>In my context, this may be less biding, because is more likely to have many obs per Fixed characteristic. </span>
+<span id="cb10-390"><a href="#cb10-390" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-391"><a href="#cb10-391" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>While the model may be restrictive (multiplicative heteroskedasticity) it may still be useful for exploration, and analysis when other methodologies are not feasible. </span>
+<span id="cb10-392"><a href="#cb10-392" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-393"><a href="#cb10-393" aria-hidden="true" tabindex="-1"></a><span class="fu">## References </span></span>
+<span id="cb10-394"><a href="#cb10-394" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-395"><a href="#cb10-395" aria-hidden="true" tabindex="-1"></a>::: {#refs}</span>
+<span id="cb10-396"><a href="#cb10-396" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb10-397"><a href="#cb10-397" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-398"><a href="#cb10-398" aria-hidden="true" tabindex="-1"></a><span class="fu"># Extra: Correlated Random Effects Model</span></span>
+<span id="cb10-399"><a href="#cb10-399" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-400"><a href="#cb10-400" aria-hidden="true" tabindex="-1"></a><span class="fu">## Short intro</span></span>
+<span id="cb10-401"><a href="#cb10-401" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-402"><a href="#cb10-402" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Correlated Random Effects model can also be applied for the estimation of Q-regressions with large set of fixed effects.</span>
+<span id="cb10-403"><a href="#cb10-403" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>In Linear models, point estimates are identical to panel FE (or Dummy inclusion appraoch)</span>
+<span id="cb10-404"><a href="#cb10-404" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Estimating Standard errors, however, can be tricky.</span>
+<span id="cb10-405"><a href="#cb10-405" aria-hidden="true" tabindex="-1"></a><span class="ss">  - </span>If only 1 set of FE is used, clustered SE by the Fixed effects will give identical results.</span>
+<span id="cb10-406"><a href="#cb10-406" aria-hidden="true" tabindex="-1"></a>    But equivalances dissapear with 2 or more sets of fixed effects</span>
+<span id="cb10-407"><a href="#cb10-407" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>May not work with **Qreg** if FE are not a function of conditional means of all other explanatory variables. (compound error will not be related to $\tau$ of the original ranking)</span>
+<span id="cb10-408"><a href="#cb10-408" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>But may still be a good approximation !</span>
+<span id="cb10-409"><a href="#cb10-409" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-410"><a href="#cb10-410" aria-hidden="true" tabindex="-1"></a><span class="fu">## `cre`: For Correlated Random Effects Model</span></span>
+<span id="cb10-411"><a href="#cb10-411" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-412"><a href="#cb10-412" aria-hidden="true" tabindex="-1"></a><span class="in">```markdown</span></span>
+<span id="cb10-413"><a href="#cb10-413" aria-hidden="true" tabindex="-1"></a>from -fra install-</span>
+<span id="cb10-414"><a href="#cb10-414" aria-hidden="true" tabindex="-1"></a>syntax: </span>
+<span id="cb10-415"><a href="#cb10-415" aria-hidden="true" tabindex="-1"></a>  cre, abs(varlist) <span class="co">[</span><span class="ot">keep compact</span><span class="co">]</span>: <span class="co">[</span><span class="ot">regression command</span><span class="co">]</span></span>
+<span id="cb10-416"><a href="#cb10-416" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>a prefix command. Gathers all controls and obtains conditional means</span>
+<span id="cb10-417"><a href="#cb10-417" aria-hidden="true" tabindex="-1"></a>  based on FE groups</span>
+<span id="cb10-418"><a href="#cb10-418" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Adds them to model specification, and estimates the model.</span>
+<span id="cb10-419"><a href="#cb10-419" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>SE should be accounted for in the command.</span>
+<span id="cb10-420"><a href="#cb10-420" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-421"><a href="#cb10-421" aria-hidden="true" tabindex="-1"></a>** Example</span>
+<span id="cb10-422"><a href="#cb10-422" aria-hidden="true" tabindex="-1"></a>cre, abs(idcode):qreg ln_w age ttl_exp tenure not_smsa south, ///</span>
+<span id="cb10-423"><a href="#cb10-423" aria-hidden="true" tabindex="-1"></a>    cluster(idcode)</span>
+<span id="cb10-424"><a href="#cb10-424" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-425"><a href="#cb10-425" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-426"><a href="#cb10-426" aria-hidden="true" tabindex="-1"></a><span class="fu">## Comparing Methods {.scrollable}</span></span>
+<span id="cb10-427"><a href="#cb10-427" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-430"><a href="#cb10-430" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb10-431"><a href="#cb10-431" aria-hidden="true" tabindex="-1"></a><span class="in">*| output: false</span></span>
+<span id="cb10-432"><a href="#cb10-432" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo: true</span></span>
+<span id="cb10-433"><a href="#cb10-433" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: true</span></span>
+<span id="cb10-434"><a href="#cb10-434" aria-hidden="true" tabindex="-1"></a><span class="in">clear</span></span>
+<span id="cb10-435"><a href="#cb10-435" aria-hidden="true" tabindex="-1"></a><span class="in">set seed 101</span></span>
+<span id="cb10-436"><a href="#cb10-436" aria-hidden="true" tabindex="-1"></a><span class="in">set obs 5000</span></span>
+<span id="cb10-437"><a href="#cb10-437" aria-hidden="true" tabindex="-1"></a><span class="in">gen g = runiformint(1,250)</span></span>
+<span id="cb10-438"><a href="#cb10-438" aria-hidden="true" tabindex="-1"></a><span class="in">gen rnd1 = rchi2(4)/4</span></span>
+<span id="cb10-439"><a href="#cb10-439" aria-hidden="true" tabindex="-1"></a><span class="in">gen rnd2 = rchi2(4)/4</span></span>
+<span id="cb10-440"><a href="#cb10-440" aria-hidden="true" tabindex="-1"></a><span class="in">gen rnd3 = rchi2(4)/4 - 1</span></span>
+<span id="cb10-441"><a href="#cb10-441" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-442"><a href="#cb10-442" aria-hidden="true" tabindex="-1"></a><span class="in">bysort g:gen fe = rnd1[1]</span></span>
+<span id="cb10-443"><a href="#cb10-443" aria-hidden="true" tabindex="-1"></a><span class="in">bysort g:gen fe2 = rnd1[2] + fe</span></span>
+<span id="cb10-444"><a href="#cb10-444" aria-hidden="true" tabindex="-1"></a><span class="in">bysort g:gen x1  =2 - fe + rchi2(4)/4</span></span>
+<span id="cb10-445"><a href="#cb10-445" aria-hidden="true" tabindex="-1"></a><span class="in">bysort g:gen x2  = fe + rnd2[1] </span></span>
+<span id="cb10-446"><a href="#cb10-446" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-447"><a href="#cb10-447" aria-hidden="true" tabindex="-1"></a><span class="in">gen tau = runiform()</span></span>
+<span id="cb10-448"><a href="#cb10-448" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-449"><a href="#cb10-449" aria-hidden="true" tabindex="-1"></a><span class="in">gen y = 2+ tau + log(tau) + tau^2 * x1 - log(tau) * x2 + 2*tau*fe2</span></span>
+<span id="cb10-450"><a href="#cb10-450" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-451"><a href="#cb10-451" aria-hidden="true" tabindex="-1"></a><span class="in">qreg y x1 x2 fe2</span></span>
+<span id="cb10-452"><a href="#cb10-452" aria-hidden="true" tabindex="-1"></a><span class="in">qregplot x1, name(m1, replace) title(Benchmark) graphregion( margin(r=5)) estore(ss)</span></span>
+<span id="cb10-453"><a href="#cb10-453" aria-hidden="true" tabindex="-1"></a><span class="in">est restore ss</span></span>
+<span id="cb10-454"><a href="#cb10-454" aria-hidden="true" tabindex="-1"></a><span class="in">matrix qq=e(qq)</span></span>
+<span id="cb10-455"><a href="#cb10-455" aria-hidden="true" tabindex="-1"></a><span class="in">matrix bb=e(bs)</span></span>
+<span id="cb10-456"><a href="#cb10-456" aria-hidden="true" tabindex="-1"></a><span class="in">matrix ll=e(ll)</span></span>
+<span id="cb10-457"><a href="#cb10-457" aria-hidden="true" tabindex="-1"></a><span class="in">matrix uu=e(ul)</span></span>
+<span id="cb10-458"><a href="#cb10-458" aria-hidden="true" tabindex="-1"></a><span class="in">svmat qq</span></span>
+<span id="cb10-459"><a href="#cb10-459" aria-hidden="true" tabindex="-1"></a><span class="in">svmat bb</span></span>
+<span id="cb10-460"><a href="#cb10-460" aria-hidden="true" tabindex="-1"></a><span class="in">svmat ll</span></span>
+<span id="cb10-461"><a href="#cb10-461" aria-hidden="true" tabindex="-1"></a><span class="in">svmat uu</span></span>
+<span id="cb10-462"><a href="#cb10-462" aria-hidden="true" tabindex="-1"></a><span class="in">cre , abs(g) keep: qreg y x1 x2 </span></span>
+<span id="cb10-463"><a href="#cb10-463" aria-hidden="true" tabindex="-1"></a><span class="in">qregplot x1, name(m2, replace) title(CRE) graphregion( margin(r=5))</span></span>
+<span id="cb10-464"><a href="#cb10-464" aria-hidden="true" tabindex="-1"></a><span class="in">addplot : rarea ll1 uu1 qq1, color(%30) lcolor(%0) pstyle(p4) || line bb1 qq1 , color(%40)  pstyle(p4)</span></span>
+<span id="cb10-465"><a href="#cb10-465" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-466"><a href="#cb10-466" aria-hidden="true" tabindex="-1"></a><span class="in">mmqreg y x1 x2, abs(g)</span></span>
+<span id="cb10-467"><a href="#cb10-467" aria-hidden="true" tabindex="-1"></a><span class="in">qregplot x1, name(m3, replace) title(mmqreg) graphregion( margin(r=5))</span></span>
+<span id="cb10-468"><a href="#cb10-468" aria-hidden="true" tabindex="-1"></a><span class="in">addplot : rarea ll1 uu1 qq1, color(%30) lcolor(%0) pstyle(p4) || line bb1 qq1 , color(%40)  pstyle(p4)</span></span>
+<span id="cb10-469"><a href="#cb10-469" aria-hidden="true" tabindex="-1"></a><span class="in"> </span></span>
+<span id="cb10-470"><a href="#cb10-470" aria-hidden="true" tabindex="-1"></a><span class="in"> reghdfe y x1 x2, abs(fex=g)</span></span>
+<span id="cb10-471"><a href="#cb10-471" aria-hidden="true" tabindex="-1"></a><span class="in">gen y2 = y-fex</span></span>
+<span id="cb10-472"><a href="#cb10-472" aria-hidden="true" tabindex="-1"></a><span class="in">qreg y2 x1 x2</span></span>
+<span id="cb10-473"><a href="#cb10-473" aria-hidden="true" tabindex="-1"></a><span class="in">qregplot x1, name(m4, replace) title(Canay2011) graphregion( margin(r=5))</span></span>
+<span id="cb10-474"><a href="#cb10-474" aria-hidden="true" tabindex="-1"></a><span class="in">addplot : rarea ll1 uu1 qq1, color(%30) lcolor(%0) pstyle(p4) || line bb1 qq1 , color(%40)  pstyle(p4)</span></span>
+<span id="cb10-475"><a href="#cb10-475" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-476"><a href="#cb10-476" aria-hidden="true" tabindex="-1"></a><span class="in">qreg y x1 x2 fex</span></span>
+<span id="cb10-477"><a href="#cb10-477" aria-hidden="true" tabindex="-1"></a><span class="in">qregplot x1, name(m5, replace) title(M-Canay2011) graphregion( margin(r=5))</span></span>
+<span id="cb10-478"><a href="#cb10-478" aria-hidden="true" tabindex="-1"></a><span class="in">addplot : rarea ll1 uu1 qq1, color(%30) lcolor(%0) pstyle(p4) || line bb1 qq1 , color(%40)  pstyle(p4)</span></span>
+<span id="cb10-479"><a href="#cb10-479" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-480"><a href="#cb10-480" aria-hidden="true" tabindex="-1"></a><span class="in">qreg y x1 x2</span></span>
+<span id="cb10-481"><a href="#cb10-481" aria-hidden="true" tabindex="-1"></a><span class="in">qregplot x1, name(m6, replace) title(qreg no FE) graphregion( margin(r=5))</span></span>
+<span id="cb10-482"><a href="#cb10-482" aria-hidden="true" tabindex="-1"></a><span class="in">addplot : rarea ll1 uu1 qq1, color(%30) lcolor(%0) pstyle(p4) || line bb1 qq1 , color(%40)  pstyle(p4)</span></span>
+<span id="cb10-483"><a href="#cb10-483" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-484"><a href="#cb10-484" aria-hidden="true" tabindex="-1"></a><span class="in">graph combine m1 m2 m3 m4 m5 m6, col(3) ycommon nocopies </span></span>
+<span id="cb10-485"><a href="#cb10-485" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-486"><a href="#cb10-486" aria-hidden="true" tabindex="-1"></a><span class="in">graph export fig99.png, width(2000) replace</span></span>
+<span id="cb10-487"><a href="#cb10-487" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb10-488"><a href="#cb10-488" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-489"><a href="#cb10-489" aria-hidden="true" tabindex="-1"></a><span class="al">![](fig99.png)</span>{heigth=100% fig-align=center}</span>
+<span id="cb10-490"><a href="#cb10-490" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-491"><a href="#cb10-491" aria-hidden="true" tabindex="-1"></a><span class="fu"># Thank you!</span></span>
+</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

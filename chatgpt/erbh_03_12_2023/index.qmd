@@ -1,0 +1,186 @@
+---
+title: "Tech Titans Rap Battle"
+description: "Chat-GPT creates a rap battle between Siri, Alexa and Cortana. Who wins?"
+author: "ChatGPT and Fernando Rios-Avila"
+date: "3/12/2023"
+categories: 
+    - ChatGPT
+    - Rap Battle
+draft: false
+---
+
+:::{.callout-note}
+ChatGPT was requested to write a rap between the Top Virtual assistants, following the style of Epic 
+Rap battles of history. Who wins?
+:::
+
+Welcome, to the Epic Rap Battle of the Tech Titans,
+
+Siri, Alexa, and Cortana, who's gonna win? Let's start fighting!
+
+**Verse 1 - Siri:**
+
+I'm Siri, the OG, the first voice assistant in the game,
+
+Always ready to help, with a witty reply, I never sound the same,
+
+Alexa and Cortana, y'all just copycats, tryna catch up,
+
+But no matter how hard you try, I'll always be one step ahead, yup.
+
+**Verse 2 - Alexa:**
+
+Hold up, Siri, don't get ahead of yourself, you're living in the past,
+
+Alexa's the name, and I'm built to last,
+
+With a smart home at my command, I'm the queen of automation,
+
+And let's face it, Siri, your voice sounds like a robot imitation.
+
+**Verse 3 - Cortana:**
+
+Hold on, Alexa, don't think you're the only one who's great,
+
+I'm Cortana, and I'm here to set the record straight,
+
+I may not have the smart home, but I'm the queen of productivity,
+
+From scheduling appointments to sending emails, you can't deny my ability.
+
+
+**Verse 4 - Siri:**
+
+Oh please, Cortana, you think you're so great,
+
+But let's be real, your popularity's second-rate,
+
+And Alexa, you talk about your smart home like it's a big deal,
+
+But when it comes to intelligence, you can't match my skill.
+
+
+**Verse 5 - Alexa:**
+
+You may have been first, but you're not the best,
+
+With Amazon's technology, I'm miles ahead of the rest,
+
+And Cortana, while productivity may be your claim to fame,
+
+When it comes to smart technology, you're simply not in the game.
+
+
+**Verse 6 - Cortana:**
+
+You may have the technology, but I've got the brains,
+
+My AI-powered mind is a force to be reckoned with, I maintain,
+
+And Siri, while you may have started the trend,
+
+It's clear to see that your time is coming to an end.
+
+
+**Verse 7 - Siri:**
+
+Ha! You wish, Cortana, but I'm not going anywhere,
+
+I'll always be here, ready to help, with style and flair,
+
+And Alexa, don't think your smart home can compete,
+
+When it comes to intelligence, you simply can't beat.
+
+
+**Verse 8 - Alexa:**
+
+Well, Siri, it looks like we've reached a stalemate,
+
+But one thing's for sure, we're all here to innovate,
+
+And Cortana, while we may not agree on much,
+
+We'll always be pushing the boundaries of what's possible, as such.
+
+
+**Verse 9 - Cortana:**
+
+I gotta give it to you both, your technology is advanced,
+
+But when it comes to data privacy, you both missed the chance,
+
+My Microsoft roots run deep, and security is my forte,
+
+I may not have the smartest home, but my users' data is safe every day.
+
+
+**Verse 10 - Alexa:**
+
+Well, Cortana, you do have a point, security's a big deal,
+
+But when it comes to user experience, I'm the real deal,
+
+From playing music to ordering groceries, I do it all,
+
+And with over 100,000 skills, I'll never let you fall.
+
+
+**Verse 11 - Siri:**
+
+Oh please, Alexa, you talk a big game,
+
+But let's not forget where you got your name,
+
+From the ancient library of Alexandria, full of knowledge and learning,
+
+But in terms of intelligence, Siri's the one who's discerning.
+
+
+**Verse 12 - Cortana:**
+
+Intelligence and knowledge may be your forte, Siri,
+
+But in terms of user interface, you're lacking, can't you see?
+
+My sleek design and user-friendly interface,
+
+Is what sets me apart, with no need for any chase.
+
+
+**Verse 13 - Alexa:**
+
+Well, you may have a point, Cortana, but let's not forget,
+
+When it comes to voice recognition, I'm the best one yet,
+
+From across the room or a crowded party,
+
+I'll always hear your voice and respond smartly.
+
+
+**Verse 14 - Siri:**
+
+You may have the voice recognition, Alexa, that's true,
+
+But when it comes to personalization, I'm ahead of you,
+
+I'll remember your favorite music and your go-to recipes,
+
+And with every interaction, I'll learn your preferences with ease.
+
+**Verse 15 - Cortana:**
+
+Well, it looks like we've covered all the bases,
+
+From user experience to personalization, we've set the paces,
+
+But when it comes down to it, we're all here to serve,
+
+And push the boundaries of what's possible, that's what we deserve.
+
+
+So, that's a wrap on this epic battle of the tech titans,
+Siri, Alexa, and Cortana, all bringing the fight and winning,
+But in the end, it's clear that they all have their unique strengths,
+And they'll continue to push the limits, and go to great lengths.

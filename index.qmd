@@ -1,0 +1,44 @@
+---
+title: "Fernando Rios-Avila"
+about:
+  template: trestles
+  image: profile.jpg
+  image-shape: rounded
+  image-width: 16em
+  links:
+    - icon: twitter
+      text: twitter
+      href: https://twitter.com/friosavila
+    - icon: envelope 
+      text: Email
+      href: f.rios.a@gmail.com
+format:
+  html:
+    code-tools: false  
+---
+
+#### Hi, my name is Fernando. I am a Research Scholar at the Levy Economics Institute, who works on a variarety of applied microeconomic topics. 
+#### When not working on data, papers, or programming in Stata, I enjoy spending time drawing, coloring and painting, while sharing adventures with my wife and little daugther.
+
+----
+
+## Education
+
+#### <i class="bi bi-mortarboard-fill"></i>  **PhD in Economics**, 2013
+Georgia State University
+
+#### <i class="bi bi-mortarboard-fill"></i> **ASP in International Economics**
+Kiel University, Germany
+
+#### <i class="bi bi-mortarboard-fill"></i> **BS in Economics (Licenciatura)**
+Universidad Catolica Boliviana, La Paz, Bolivia
+
+---- 
+
+## Experience
+
+### <i class="bi bi-pc-display"></i>   <i class="bi bi-chalkboard-teacher"></i> **Research Scholar**, 2013 - Present
+Levy Economics Institute of Bard College
+
+### <i class="bi bi-pc-display"></i> **Consultant**, 2022 - Present
+The World Bank 

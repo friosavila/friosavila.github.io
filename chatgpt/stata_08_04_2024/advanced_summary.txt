@@ -1,0 +1,20 @@
+
+|              |         Mean |    Std. Dev. |          Min |          Max |            N |
+| ------------ | :----------: | :----------: | :----------: | :----------: | :----------: |
+| White        |              |              |              |              |              |
+| &nbsp;&nbsp;Hourly Wage |         8.08 |         5.96 |          1.0 |         40.2 |         1637 |
+| &nbsp;&nbsp;Age |        39.27 |         3.08 |         34.0 |         46.0 |         1637 |
+| &nbsp;&nbsp;Job Tenure |         5.81 |         5.46 |          0.0 |         25.9 |         1627 |
+| Black        |              |              |              |              |              |
+| &nbsp;&nbsp;Hourly Wage |         6.84 |         5.08 |          1.2 |         40.7 |          583 |
+| &nbsp;&nbsp;Age |        38.81 |         2.98 |         34.0 |         45.0 |          583 |
+| &nbsp;&nbsp;Job Tenure |         6.50 |         5.62 |          0.0 |         24.8 |          578 |
+| Other        |              |              |              |              |              |
+| &nbsp;&nbsp;Hourly Wage |         8.55 |         5.21 |          1.8 |         25.8 |           26 |
+| &nbsp;&nbsp;Age |        39.31 |         3.25 |         34.0 |         44.0 |           26 |
+| &nbsp;&nbsp;Job Tenure |         4.95 |         5.24 |          0.2 |         21.2 |           26 |
+| Total        |              |              |              |              |              |
+| &nbsp;&nbsp;Hourly Wage |         7.77 |         5.76 |          1.0 |         40.7 |         2246 |
+| &nbsp;&nbsp;Age |        39.15 |         3.06 |         34.0 |         46.0 |         2246 |
+| &nbsp;&nbsp;Job Tenure |         5.98 |         5.51 |          0.0 |         25.9 |         2231 |
+

@@ -1,0 +1,160 @@
+---
+title: Using Quarto for Stata dynamic documents
+format: html
+---
+
+## Introduction
+
+This article is a simple example of how to use `Quarto` to create dynamic documents using `Stata`. Which is possible using the Stata kernel `nbstata` thanks to [Tim Huegerich](https://github.com/hugetim), who put this incredible tool together.
+
+To use this, you will need:
+
+-   Stata 17 or higher
+-   python
+-   [nbstata](https://github.com/hugetim/nbstata)
+
+## Installation
+
+For now lets assume that you have Stata and Python installed, and working together, so that you can use Stata from Python. If this is working, installing `nbstata` is as simple as typing the following from the command window:
+
+``` powershell
+pip install nbstata
+python -m nbstata.install 
+
+# or to update 
+pip install nbstata --upgrade
+```
+
+You probably do not need `--conf-file`, but if you want to apply other options to Stata output, you may beed to create the config file, and modified as needed.
+
+## Quarto Setup
+
+While this page is being rendered as a quarto website project, you can also use the following YAML heading, once you installed `Python` and `nbstata` in your computer. You will also need Quarto (if using say VSC) or one of the latests iterations of Rstudio.
+
+``` yaml
+---
+title: Using Quarto for Stata dynamic documents
+format: html
+jupyter: nbstata
+---
+```
+
+This request using the `nbstata` as the `kernel`, allowing Quarto to use Python to call on Stata.
+
+## Lets do this:
+
+Let us consider an example where we study the **mpg** and **weight** variables in **auto.dta**. In this example, all code used to construct the desired output will be displayed as fenced block code, followed by the output it produces. This is done using the option `*|echo: fenced`.
+
+We first use the **sysuse** command to load the dataset and then describe the data using the **describe** command.
+
+```{stata}
+*| echo: fenced
+sysuse auto, clear
+describe
+```
+
+Now, we want to check if **mpg** is always greater than 0 and less than 100. We use the **assert** command to perform the check. In this case, we do not want to include any output in the target HTML file, so we use the **quietly** attribute to modify the behavior of the **dd_do** Stata dynamic tag.
+
+```{stata}
+*| echo: fenced
+ assert mpg > 0 & mpg < 100
+```
+
+If the data do not satisfy the conditions, **quatro** will fail with an error message, which will occur if we run the same **assert** command in a do-file.
+
+Next, we want to summarize the **weight** variable:
+
+```{stata}
+*| echo: fenced
+summarize weight
+```
+
+We want to use the minimum and maximum values of **weight** in a sentence. Instead of copying and pasting the numbers from the **summarize** output, we can use the **`display`** Stata to show **r(min)** and **r(max)** stored results. We will also use the options `*| output: asis` to obtain text that follows markdown formatting.
+
+```{stata}
+*| echo: fenced
+*| output: asis
+display "The variable weight has minimum value "  %4.2f `r(min)' " and " ///
+         "has maximum value "   %4.2f `r(max)' "."
+```
+
+In other words, if one wants to use dynamic tags, its possible to do so by simply using display, with the corresponding locals, so Stata evaluates the expressions as normal. `*| output: asis` is used so the output can still be interpreted using markdown syntax.
+
+As with **`dyndoc`**, display can also be used as a calculator. For example, if we want to include the $range = max - min$ in a sentence, instead of calculating the number and then copying and pasting it, we can use
+
+```{stata}
+*| echo: fenced
+*| output: asis
+display "The variable weight has range "  %4.2f `r(max)'-`r(min)' "."
+```
+
+Now, we want to graph **mpg** and **weight** using a scatterplot. There are at least two ways to do this.
+
+First, one can simply create the scatterplot using the same procedure as before:
+
+```{stata}
+*| echo: fenced
+scatter mpg weight, mcolor(blue%50)
+```
+
+which generates a scatterplot of **mpg** and **weight** with 50% opacity color markers.
+
+Now, we want to export the graph to a file and include an image link to the file.
+
+```{stata}
+*| echo: fenced
+qui:graph export fig1.png, width(1600) replace
+```
+
+This produces a graph of 1600 pixels width.
+
+![scatter](fig1.png)
+
+It is possible, however, to combine figure creation using quatro tags and directives. Here, however, you need to make sure all figures are named:
+
+```{stata}
+*| label: fig-cost
+*| fig-cap: Price vs MPG
+*| fig-subcap:
+*|   - "Foreign Cars"
+*|   - "Domestic Cars"
+*| layout-ncol: 2
+*| column: page  
+*| echo: fenced
+
+scatter price mpg if foreign==1, name(m1, replace) ylabel(0(4000)16000)
+qui:graph export fig2a.png, width(1600) replace
+scatter price mpg if foreign==0, name(m2, replace) ylabel(0(4000)16000)
+qui:graph export fig2b.png, width(1600) replace
+```
+
+And of course, we can now the figure tags to link it to the text:
+
+@fig-cost provides a simple scatter between prices and MPG for foreign and domestic cars. While there seems to be a strong negative relationship between these variables among foreign cars (see @fig-cost-1), the relationship among domestic cars is much weaker, when looking at cars with a fuel efficiency larger than 15mpg (see @fig-cost-2).
+
+The last approach, however, may not work with PDF format, or jupyter-notebook format, unless the figures are saved. But does seem to work with HTML and docx.
+
+Nevertheless, one could also do the following:
+
+``` markdown
+::: {#fig-mpgprice layout-ncol=2 .column-page }
+![foreign](fig2a.png){#fig-mpgprice-1}
+![domestic](fig2b.png){#fig-mpgprice-2}
+Price vs MPG
+:::
+```
+
+to produce
+
+::: {#fig-mpgprice .column-page layout-ncol="2"}
+
+![foreign](fig2a.png){#fig-mpgprice-1}
+
+![domestic](fig2b.png){#fig-mpgprice-2}
+
+Price vs MPG
+:::
+
+As plot in @fig-mpgprice provides a simple scatter between prices and MPG for foreign and domestic cars. While there seems to be a strong negative relationship between these variables among foreign cars (see @fig-mpgprice-1), the relationship among domestic cars is much weaker, when looking at cars with a fuel efficiency larger than 15mpg (see @fig-mpgprice-2).
+
+If using VScode, to render all formats at once, you need to type `quarto render filename.qmd` in the terminal.

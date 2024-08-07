@@ -1,0 +1,99 @@
+---
+title: "Adding info to e() and r()"
+description: "I describe and introduce the programs `adde` and `addr`. They allow you to add and modify information to some Stata Objects"
+author: "Fernando Rios-Avila"
+date: "3/26/2023"
+categories: 
+    - Stata
+    - Programming
+draft: false
+---
+
+## First the basics
+
+```{stata}
+*| echo: false
+set linesize 155
+clear all
+sysuse auto, clear
+```
+
+As you may know, whenever `Stata` runs calculations, it stores the information created in *elements* that can be easily accessed in subsequent commands. 
+
+While most standard users will not require to know how to manipulate this information, if you are trying to advances your programming skills, it will be necessary for you to learn what type of information can be contained in this elements, and how to modify them. A good place to start learning about them is by typing `help return`.
+
+Overall, there are three types of elements:
+
+r-class: These elements are produced by non-estimation commands. For example, after `summarize`, you can see what information is stored by the command by typing `return list`. They can store locals, scalars and matrices.
+
+```stata
+*| code-fold: false 
+summarize mpg
+return list
+```
+
+e-class: These elements are typically produced after estimation commands. At the minimum, it will contain information of estimated coefficients, variance covariance matrix, and the estimation command that was used. To see the information left behind, you just need to type `ereturn list`. They can store locals, scalars and matrices.
+
+```stata
+*| code-fold: false 
+qui:reg price mpg
+ereturn list
+```
+
+s-class: These elements are used to help with parsing. They can only store locals.
+
+## Adding elements to e() and r()
+
+While creating and modifying this information from within your own programs is easy, some times, you may want to add additional information to your summary statistics, or your regression results. You may also want to create a set of results from scracth, but being able to store it in equation form.
+
+Well, to do this, you can use the programs [`adde`](adde.ado) and [`addr`](addr.ado). Both programs have the goal of adding or modifying information to e() and r(). They structures are rather simple:
+
+```{stata}
+*| code-fold: false 
+*| code-line-numbers: true
+program adde, eclass
+    ereturn `0'
+end
+
+program addr, rclass
+	syntax anything(equalok), [new copy]
+	if "`new'"=="" {
+		return add
+		if "`copy'"!=""	local 0 `anything', copy
+		else 			local 0 `anything'
+	}
+	else {
+	    if "`copy'"!=""	local 0 `anything', copy
+		else 			local 0 `anything'
+	}
+	return `0'
+end
+```
+Because examples are usally better than words, here a very small example:
+
+First using `adde`:
+```{stata}
+*| code-fold: false 
+qui:reg price mpg
+adde local note "Regression MPG vs Price"
+adde local data "auto.dta"
+ereturn list
+```
+But also with `addr`:
+```{stata}
+*| code-fold: false 
+qui:sum price 
+addr local note "Summary of Price"
+addr scalar magic = 1
+return list
+```
+
+## Installation
+
+To install these programs, simply create ado files with the names `addr.ado` and `adde.ado`, and save them in your personal ado folder. Otherwise, just copy the versions I provide you here: [`adde`](adde.ado) and [`addr`](addr.ado)
+
+
+
+
+
+

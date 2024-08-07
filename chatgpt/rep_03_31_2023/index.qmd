@@ -1,0 +1,26 @@
+---
+title: "Why are my estimates changing every time I run my `do-files`?!"
+description: "I describe the main suspects one should look for when wondering of lack of replicability on a dofile"
+author: "Fernando Rios-Avila"
+date: "3/31/2023"
+categories: 
+    - Stata
+    - Tips
+draft: false
+---
+
+I have read this problem quite a few times in `Statalist` as well as other forums to like `Stackoverflow`. You try to do the right thing. Write and document a `do-file`, to produce your results the same way every time, but, for some reason they key changing. The question is always **Why?**
+
+Of course, there could be a large number of reasons you this is happening, but I will narrow them to the most common causes:
+
+1. **randomness**
+   The first one is the most obvious. You may be trying to introduce in your program a procedure that relies on some random process. **Bootstrap** standard errors or creating of simulated data are the most common couses for this. Solution: `set seed`. 
+2. **sort**
+   The second most common problem is because you have some statement in your `dofile` that relies on sorting data with ties. When this happens, the default solution in `Stata` is to randomly assign an order to observations with the same value, which may affect procedures that are order dependent (matching). This is not a problem when you are sorting fully identified data. But if ties exists, it may kick in. Solution: `set sortseed`. Although one should be careful in analyzing if this is the true cause of replicability, or rather the next option
+3. **merging**
+   Most merging procedures in `Stata` are well defined, and won't cause any problem: 1:m, m:1 and 1:1 will not create much of a problem. However, there is the infamous `m:m`. As many other people may have said this before...you **NEVER-EVER** do `merge m:m`. If you think you need to do it, think of `jointby`, because `merge m:m` is always wrong. 
+   In fact, this may trigger a problem that may "seem" caused and solved as mentionted before, so be mindful.
+4. **Multicolinearity**
+   Something that occurs less often are problems related to multicolinearity. When two variables are collinear, and you are trying to estimate a linear or linear like model, `Stata` will try to fix the problem by dropping some observations before the estimation occurs. Most of the time, the excluded variable is the first one, but more often than not, the excluded variable would be at random. Solution: Revise your model specification.
+
+If you have other reasons you have found to cause problems replicating your results, let me know, and we can add them to the list.

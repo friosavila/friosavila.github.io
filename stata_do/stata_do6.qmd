@@ -1,0 +1,344 @@
+---
+title: "Marginal effects with nonlinear transformations: `f_able`"
+subtitle: "Featuring @rios-avila_estimation_2021"
+code-fold: false
+bibliography: mywork.bib
+---
+
+## Introduction
+
+:::{.callout-note}
+
+If you are interested only on the program `f_able`, please jump to the last section
+
+:::
+
+In both classroom discussions and online forums like [`statalist`](https://www.statalist.org/forums/forum/general-stata-discussion/general), a recurring question revolves around the estimation of marginal effects within models that incorporate nonlinear transformations of key variables.
+
+This question is challenging because we, the analalists, are more familiar with model specifications that exclusively involve variables in their original forms. Few of us dare to explore the inclusion of quadratic or cubic terms, or the introduction of interactions among continuous variables. In the past, calculating marginal effects under such circumstances required additional effort: computing partial derivatives, and obtaining both point estimates and standard errors.
+
+For linear models, things are simple, as marginal effects are constant and equal to their coefficients. Even in non-linear models, where the effect varies based on characteristics, estimating marginal effects remains relatively easy, either manually or with the help of most software tools.
+
+Starting from version 14, `Stata` is able to compute marginal effects when interactions and polynomials are present, using the `margins` command, as long as the formulations are expressed in a manner that `Stata` can understand. Virtually all official commands, as well as numerous community-contributed ones, offer this functionality. However, when dealing with more complex transformations, like fractional polynomials or spline bases, manual derivation of these effects are still necessary.
+
+But surely, there's a more efficient way!
+
+In @rios-avila_estimation_2021, I introduced a user-friendly command designed to simplify the estimation of marginal effects, regardless of the specific functional forms applied to the data, that can be used with most commands. In the following sections, I'll provide an overview of the correct approach to estimating marginal effects, describe how the margins command operates, and explain how you can employ `f_able` to calculate marginal effects for models that might otherwise pose challenges.
+
+## Marginal effects: Analytical approach
+
+Lets start with a simple linear model:
+
+$$\begin{aligned}
+y &=\beta_0+\beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3 + e \\
+E(y|x) &= \beta_0+\beta_1 x_1 + \beta_2 x_2 + \beta_3 x_3 
+\end{aligned}
+$${#eq-eq1}
+
+In this model, marginal effects are directly given by the model coefficients:
+
+$$\frac{\partial E(y|x)}{\partial x_k} = \beta_k
+$$
+
+Which greatly simplifies the analysis.
+
+If the model has interactions or polynomials, marginal effects are somewhat more challenging:
+
+$$\begin{aligned}
+E(y|x) = \beta_0+\beta_1 x_1 + \beta_2 x_2 + \beta_3 x_1 \times x_2  + \beta_4 x_2^2
+\end{aligned}
+$${#eq-eq3}
+
+where the marginal effects would be given by:
+
+$$\begin{aligned}
+\frac{\partial E(y|x)}{\partial x_1} &= \beta_1 + \beta_3 x_2 \\
+\frac{\partial E(y|x)}{\partial x_2} &= \beta_2 + \beta_3 x_1 + 2 \beta_4 x_2
+\end{aligned}
+$$
+
+These effects are not constant. They vary based on values of $x_1$ and $x_2$. Knowing some calculus, however, its rather straight forward to determine the marginal effects, and apply that to our work. 
+
+So lets see an example of this. First the setup:
+
+```{stata}
+*| code-fold: false
+*| echo: true
+*| output: false
+clear
+set linesize 255
+set seed 1
+set obs 1000           // Create a sample of 100 obs
+gen x1 = runiform(0,4) // Create two variables with mean 2
+gen x2 = runiform(0,4) //
+// create auxiliary variables
+gen x1x2=x1*x2
+gen x2sqr=x2^2
+// and set up the coefficient values
+scalar b0 = 2
+scalar b1 = 1
+scalar b2 = 1
+scalar b3 = 1
+scalar b4 = 1
+gen y = b0 + b1 * x1 + b2 * x2 + b3 * x1x2 + b4 * x2sqr + rnormal()
+```
+
+Now, we can estimate the model and obtain marginal effects based on the analytical solution:
+
+```{stata}
+*| code-fold: false
+*| echo: true
+*| output: asis
+qui:reg y x1 x2 x1x2 x2sqr
+```
+
+which gives us the following
+
+```{stata}
+*| code-fold: false
+*| echo: false
+*| output: asis
+display "$$"
+model_display
+display "$$"
+```
+
+From where we can estimate marginal effects using the analytical formulas we derived.
+
+```{stata}
+*| code-fold: false
+*| echo: true
+
+margins, expression(_b[x2]+_b[x1x2]*x1+2*_b[x2sqr]*x2)
+```
+
+Noticed I used margins `expression`, to allow me estimate average marginal effects using the analytical solutions. Technically, what we see is the average prediction of the expression we provided. We, of course, know they are right, because we know calculus.
+
+You could use a similar approach to estimate marginal effects based on any transformation (as long as you know the how to obtain the partial derivative)
+
+## Marginal effects: `margins`
+
+As mentioned earlier, `Stata` command `margins` allows you to estimate marginal effects of almost any model, as long as it understands the inter-relationships among variables. So lets see what would have happend if I use it in my previous model:
+
+```{stata}
+*| code-fold: false
+*| echo: true
+margins, dydx(x1 x2)
+```
+
+We get something that is wrong. Instead of estimating the correct marginal effects, it is only showing the coefficients for $x_1$ and $x_2$. The reason for this is that `margins` has no way to know that the variables $x1x2$ and $x2sqr$ are in fact functions of $x_1$ and $x_2$. Not at least we use the correct syntax.
+
+In `Stata`, interactions and polynomials can be added to the model specification using "#", and indicating the type of variable one is using. In this case, I use "**c.**" because $x_1$ and $x_2$ are continuous variables. See `help fvvarlist`, for more information.
+
+```{stata}
+*| code-fold: false
+*| echo: true
+qui:reg y c.x1 c.x2 c.x1#c.x2 c.x2#c.x2
+margins, dydx(x1 x2)
+```
+
+Now we get the same result as earlier because `Stata` understands that $x_2^2$ or `c.x2#c.x2` is a new variable that depends on $x_2$. Similar for $x_1$.
+
+The key, then, is to ***teach*** `Stata` that certain variables are indeed function of others. Here is where `f_able` enters into play.
+
+## How does `margins` work? and why `f_able`?
+
+@fig-fig1 provies an sketch of how `margins` work when estimating a model.
+
+1. Get the data, with correct model specifications.
+2. Estimate the model, which creates the `e(b)` and `e(V)`, which contains all the data necessairy to estimate the marginal effects.
+3. `margins` makes a small change in $x's$ to obtain numerical derivatives.
+4. Calls on `predict` to get the predicted values of interest
+5. Calculates marginal effects, and reports them.
+ 
+![How `margins` work?](Diag_1.png){#fig-fig1}
+
+The problem with using data that we create before the model has to do with step 3. 
+
+The change induced on $x$ will not be reflected in $GX$, because there is nothing to tie them together.
+
+![Why `margins` fails?](Diag_2.png){#fig-fig2}
+
+@fig-fig3 shows how `f_able` helps solving this problems.
+
+1. When creating the data with `fgen`, additional information will be added to show how that data was generated. 
+2. After estimating the model, `f_able` will add information to the `e()` so it nows what variables depend on others (those created with `fgen`).
+3. Finally, `f_able_p` acts as an intermediary to update all "created variables" during the numerical differentiation process.
+
+![How does `f_able` helps?](Diag_3.png){#fig-fig3}
+
+## Using `f_able` to estimate margins for any transformation.
+
+### Setup
+
+You can download `f_able` from SSC. However, the latest version will be avaible from my repository. To do so, type:
+
+```stata
+* Opt 1. Get Fra installer
+net install fra, replace from(https://friosavila.github.io/stpackages)
+fra install f_able, replace
+ 
+* Opt 2. Install it from here directly
+net install f_able, replace from(https://friosavila.github.io/stpackages)
+
+* Opt 3. Use SSC
+ssc install f_able
+```
+
+### Re-doing the example
+
+So, lets retake the previous example. We know that the "offending" variables were  `x1x2` and  `x2sqr`. So lets recreate them using `fgen`.
+
+```{stata}
+*| echo: true
+*| code-fold: false
+drop x1x2 x2sqr
+fgen x1x2  = x1*x2
+fgen x2sqr = x2*x2
+```
+
+Now, lets estimate the model of interest, but adding a line indicating what variables are "created" variables:
+
+```{stata}
+*| echo: true
+*| code-fold: false
+qui:reg y x1 x2 x1x2 x2sqr
+** This line is necessary
+f_able x1x2 x2sqr, auto
+** option Auto, makes some of the processing easier
+```
+
+Finally, lets estimate the marginal effects again
+
+```{stata}
+*| echo: true
+*| code-fold: false
+margins, dydx(*)
+```
+
+### What if $x$ is no longer in the main model
+
+There are a few other cases that may be of interest. Consider the previous model, and assume we are only interested in adding the quadratic term in the model, not the linear one.
+
+Using factor notation, one could do the following:
+
+```{stata}
+*| echo: true
+*| code-fold: false
+qui:reg y c.x2#c.x2
+margins, dydx(*)
+```
+
+Using `f_able`, however, you still need to include the original variable in the model. This can be done using the "o." prefix, so that the variable is ommitted, from calculations, but remain in the model.
+
+```{stata}
+*| echo: true
+*| code-fold: false
+qui:reg y x2sqr o.x2
+f_able x2sqr, auto
+margins, dydx(*)
+```
+
+Alright, these are very simple examples that you could already do with margins. So lets try something different. Estimate a model using $x$ and $\sqrt x$ as explanatory variables:
+
+```{stata}
+*| echo: true
+*| code-fold: false
+fgen rx1=x1^.5
+qui:reg y x1 rx1
+f_able rx1, auto
+margins, dydx(*)
+```
+
+How do we know is correct? We can replicate the results using `nl`!. Technically, it works in a similar way as `f_able` does.
+
+```{stata}
+*| echo: true
+*| code-fold: false
+qui:nl (y={b0}+{b1}*x1+{b2}*x1^0.5), variable(x1)
+margins, dydx(*)
+```
+
+Something even harder? What about a poisson regression:
+
+```{stata}
+*| echo: true
+*| code-fold: false
+qui:poisson y x1 x2 x1x2 x2sqr
+qui:f_able x1x2 x2sqr, auto
+margins, dydx(*)
+```
+
+Another implementation some people usually ask for is the estimation of marginal effects when using
+splines, either regular polynomial splines, or restricted cubic splines.
+
+Because splines are messy to code, instead of using `fgen`, we can use `f_spline` or `f_rcspline`. Let's use both:
+
+```{stata}
+*| echo: true
+*| code-fold: false
+webuse dui, clear
+* model citation=f(fines)+e
+* Cubic polynomial spline with 1 knot
+f_spline spfine=fines, degree(3) nknots(1)
+* Restricted Cubic polynomial with 5 knots 
+f_rcspline cspfine=fines,  nknots(5) replace
+* Different from other commands,
+* f_spline and  f_rcspline use
+* the original variable as part of the splines
+```
+
+Now lets estimate both models:
+
+
+```{stata}
+*| echo: true
+*| code-fold: false
+*| output: asis
+qui:reg citations fines spfine2 spfine3 spfine4
+qui:f_able spfine2 spfine3 spfine4, auto
+qui:emargins , dydx(fines) estore(m1)
+qui:reg citations fines cspfine2 cspfine3 cspfine4
+qui:f_able cspfine2 cspfine3 cspfine4, auto
+qui:emargins , dydx(fines) estore(m2)
+qui:reg citations fines
+qui:emargins , dydx(fines) estore(m3)
+display "#### Contrasting Models"
+esttab m1 m2 m3, nonum mtitle("Cubic Spline" "RCubic Spline" "LM") md se note("Contrasting effects")
+```
+
+Of course, when using splines, it may be far more interesting plotting the effects across values of $fines$. 
+
+```{stata}
+*| echo: true
+*| code-fold: false
+*| label: fig-dui
+*| fig-cap: Predictive mean vs Marginal efects
+*| fig-subcap:
+*|   - Predicted mean
+*|   - Marginal effect
+*| layout-ncol: 2
+
+set scheme white2
+color_style tableau
+qui:reg citations fines spfine2 spfine3 spfine4
+qui:f_able spfine2 spfine3 spfine4, auto
+qui:emargins , at(fines=(8(0.125)12)) 
+qui:marginsplot, name(m1, replace)
+qui:emargins , dydx(fines) at(fines=(8(0.125)12))  
+qui:marginsplot, name(m2, replace)
+```
+
+## Conclusions
+
+`f_able` is a relatively simple program that allows you to estimate marginal effects of unconventional variable transformations. 
+
+While I have tried to make `f_able` as flexible as possible, couple of challenges remain. 
+
+1. `f_able` relies on numerical differentiation, which can be very time consuming in some models. 
+2. When the model is fairly complex, think about interactions of splines and other variables, margins may have problems producing results, because the model itself may fail to fullfill certain estimation criterias.
+   When that happens, one option is to add `noestimcheck` and/or `force` option. 
+3. Some models rely on analytical solutions based on the chainrule. While this may not be a problem in the latest `f_able` update (auto option), it could still linger for some models. When this happens, try option `nochainrule`.
+4. Some times, no results will be shown because the variance covariance matrix is not symetric. This happens because of the small discrepancies produced by the numerical differentiation. If something like that appears, there are two utilities `f_symev` and `f_symrv`, that will fix it before you produce the necessary results again.
+
+Hope you find it useful.

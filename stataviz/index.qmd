@@ -1,0 +1,14 @@
+---
+title: "Stata Vizualizations"
+---
+
+Welcome to the data visualization section, where I explore the power of data visualization in Stata. Effective data visualization is essential for conveying insights and communicating results to diverse audiences. 
+
+While Stata is a statistical software first, graphics software second, it does offer sufficient flexiblity, tools and options for creating informative data visualizations, although not without extra work.
+
+On this webpage, I will compile a collection Stata programs that I have written for data visualization that will help you create visually appealing graphics for your research projects. I hope you will find these codes helpful in creating informative charts, histograms, scatterplots, and more.
+
+As a data visualization enthusiast and Stata user, I am passionate about sharing my knowledge and skills with others. I believe that effective data visualization is crucial in conveying research findings and engaging audiences, but most importantly, programming them allows me to sharpen my skills!
+
+Comments and suggestions are welcome!
+ 

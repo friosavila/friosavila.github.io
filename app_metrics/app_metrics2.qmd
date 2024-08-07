@@ -1,0 +1,12 @@
+---
+title: "DRDID/CSDID in Stata"
+subtitle: "The Beamer"
+---
+
+ 
+
+<iframe  id="iframe-adobe-dc-view" 
+style="width: 100%; height: 85%; border: none; display: block;"
+ src="drdid_csdid_sj.pdf"></iframe>	
+
+

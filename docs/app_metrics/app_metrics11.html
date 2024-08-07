@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.45">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Fernando Rios-Avila">
+
+<title>jwdid: A Stata command for the estimation of Difference-in-Differences models using ETWFE – Playing With Stata</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../app_metrics/app_metrics2.html" rel="next">
+<link href="../app_metrics/app_metrics10.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-GNMLZDYJ2P"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Playing With Stata</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../cv.html"> 
+<span class="menu-text">my CV and Research</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../software.html"> 
+<span class="menu-text">Software</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../stataviz/index.html"> 
+<span class="menu-text">Stata Viz</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../stata_do/index.html"> 
+<span class="menu-text">Stata Do’s Ado’s</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../app_metrics/index.html"> 
+<span class="menu-text">Applied econometrics</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../chatgpt.html"> 
+<span class="menu-text">Odds and Ends</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">about</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../app_metrics/app_metrics1.html">App Metrics</a></li><li class="breadcrumb-item"><a href="../app_metrics/app_metrics11.html"><strong><code>jwdid</code></strong>: A Stata command for the estimation of Difference-in-Differences models using ETWFE</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../WeeMee.jpg" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Applied Econometrics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">App Metrics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Constructing synthetic Datasets</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Nonlinear DID</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics11.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><strong><code>jwdid</code></strong>: A Stata command for the estimation of Difference-in-Differences models using ETWFE</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">DRDID/CSDID in Stata</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">DID: The Fall</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">DID: The Revolution</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2x2 DID: Sant’Anna and Zhao (2020)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Making better use of interval-censored data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Linear Regressions, OLS and Standard Errors</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">DID: Panel Data &amp; Repeated Crossection</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantile regressions with multiple fixed effects</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#estimation-of-did-models-using-etwfe" id="toc-estimation-of-did-models-using-etwfe" class="nav-link active" data-scroll-target="#estimation-of-did-models-using-etwfe">Estimation of DID models using ETWFE</a>
+  <ul class="collapse">
+  <li><a href="#base-line-model" id="toc-base-line-model" class="nav-link" data-scroll-target="#base-line-model">Base line model</a></li>
+  <li><a href="#extensions-nonlinear-models" id="toc-extensions-nonlinear-models" class="nav-link" data-scroll-target="#extensions-nonlinear-models">Extensions: Nonlinear models</a></li>
+  <li><a href="#sec-cov" id="toc-sec-cov" class="nav-link" data-scroll-target="#sec-cov">Extensions: Covariates</a></li>
+  <li><a href="#sec-het" id="toc-sec-het" class="nav-link" data-scroll-target="#sec-het">Extensions: Treatment Heterogeneity</a></li>
+  <li><a href="#extensions-other-options" id="toc-extensions-other-options" class="nav-link" data-scroll-target="#extensions-other-options">Extensions: Other Options</a></li>
+  </ul></li>
+  <li><a href="#sec-agg" id="toc-sec-agg" class="nav-link" data-scroll-target="#sec-agg">Post estimation: Aggregated treatment effects</a></li>
+  <li><a href="#post-estimation-other-options" id="toc-post-estimation-other-options" class="nav-link" data-scroll-target="#post-estimation-other-options">Post estimation: Other options</a>
+  <ul class="collapse">
+  <li><a href="#weights" id="toc-weights" class="nav-link" data-scroll-target="#weights">Weights</a></li>
+  <li><a href="#standard-errors" id="toc-standard-errors" class="nav-link" data-scroll-target="#standard-errors">Standard Errors</a></li>
+  <li><a href="#other-aggregation-restrictions" id="toc-other-aggregation-restrictions" class="nav-link" data-scroll-target="#other-aggregation-restrictions">Other Aggregation restrictions</a></li>
+  <li><a href="#storing-and-saving-results" id="toc-storing-and-saving-results" class="nav-link" data-scroll-target="#storing-and-saving-results">Storing, and saving results</a></li>
+  <li><a href="#plotting" id="toc-plotting" class="nav-link" data-scroll-target="#plotting">Plotting</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../app_metrics/app_metrics1.html">App Metrics</a></li><li class="breadcrumb-item"><a href="../app_metrics/app_metrics11.html"><strong><code>jwdid</code></strong>: A Stata command for the estimation of Difference-in-Differences models using ETWFE</a></li></ol></nav>
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title"><strong><code>jwdid</code></strong>: A Stata command for the estimation of Difference-in-Differences models using ETWFE</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<p class="subtitle lead">Gravity models and trade analysis</p>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Fernando Rios-Avila </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Levy Economics Institute
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="estimation-of-did-models-using-etwfe" class="level2">
+<h2 class="anchored" data-anchor-id="estimation-of-did-models-using-etwfe">Estimation of DID models using ETWFE</h2>
+<p>As I have presented elsewhere, over the last 5 years, there has been a large development of methodologies for the estimation of Average treatment effects in Difference-in-Differences (DID) models, that would avoid the problems of bad controls and negative weights that have been identified in the literature. In this note, I describe the Stata command <code>jwdid</code> that implements the estimation of DID models using the ETWFE estimator proposed by <span class="citation" data-cites="wooldridge2021">Wooldridge (<a href="#ref-wooldridge2021" role="doc-biblioref">2021</a>)</span>. One of the main advantages this aproach is that by being a simple extension of the standard FE estimator, it can be easily modified and implemented and allow for other non-linear models. As described in <span class="citation" data-cites="wooldridge2023">Wooldridge (<a href="#ref-wooldridge2023" role="doc-biblioref">2023</a>)</span>, the ETWFE estimator could be used, for example, to model cases where the dependent variable is binary (logit) or count data (poisson). A second advantage of the ETWFE estimator is that the estimation of the baseline model, is transparent as it does not require the use of specialized software, except for the estimation of fixed effects models. This is in contrast with other DID estimators like the ones proposed by <span class="citation" data-cites="callaway2021">Callaway and Sant’Anna (<a href="#ref-callaway2021" role="doc-biblioref">2021</a>)</span>, <span class="citation" data-cites="dechaisemartin2020">De Chaisemartin and D’Haultfœuille (<a href="#ref-dechaisemartin2020" role="doc-biblioref">2020</a>)</span>, or <span class="citation" data-cites="borusyak2023">Borusyak, Jaravel, and Spiess (<a href="#ref-borusyak2023" role="doc-biblioref">2024</a>)</span>, where the bulk of the model estimation is done in the background, with the user having less control and understanding on what is being estimated.</p>
+<p>Thanks to this transparency in model specification, <span class="citation" data-cites="negengast2024">Nagengast and Yotov (<a href="#ref-negengast2024" role="doc-biblioref">forthcoming</a>)</span> propose a large set of recommendations for the analysis of DID models in the context of international trade and Gravity models. On this regard, I present the command <code>jwdid</code> as a flexible command in Stata that allows to consider <span class="citation" data-cites="negengast2024">Nagengast and Yotov (<a href="#ref-negengast2024" role="doc-biblioref">forthcoming</a>)</span> and <span class="citation" data-cites="negengast2024b">Nagengast, Rios-Avila, and Yotov (<a href="#ref-negengast2024b" role="doc-biblioref">2024</a>)</span> recommendations for the estimation of DID models, in the framework of trade models. However, many of the features we have developed for this context can also be applied in different contexts. For more information, see <span class="citation" data-cites="negengast2024b">Nagengast, Rios-Avila, and Yotov (<a href="#ref-negengast2024b" role="doc-biblioref">2024</a>)</span> and the working paper that can be downloaded <a href="https://friosavila.github.io/app_metrics/eu_etwfe.pdf">here</a>.</p>
+<p>In the rest of this note, I will focus on describing what the command does, and what exactly is the model that is being estimated. I will also describe the post estimation commands that are available for the user to estimate aggregated treatment effects.</p>
+<section id="base-line-model" class="level3">
+<h3 class="anchored" data-anchor-id="base-line-model">Base line model</h3>
+<p>As described in <span class="citation" data-cites="wooldridge2021">Wooldridge (<a href="#ref-wooldridge2021" role="doc-biblioref">2021</a>)</span>, the baseline model for the estimation of the DID model using the ETWFE estimator is the following:</p>
+<p><span id="eq-b0"><span class="math display">\[Y_{i,t} = \alpha + \sum_{g \in G} \sum_{t=g}^{T} \theta_{g,t} D_{i,g,t} + \xi_i + \xi_t + \varepsilon_{i,t}
+\tag{1}\]</span></span></p>
+<p>where <span class="math inline">\(Y_{i,t}\)</span> is the dependent variable, <span class="math inline">\(D_{i,g,t}\)</span> is a dummy that takes the value of 1 if the observation is in the treatment group <span class="math inline">\(g\)</span>, on period <span class="math inline">\(t\)</span> and 0 otherwise. <span class="math inline">\(G\)</span> is a set that indicates at what time treatment started for all observations, and <span class="math inline">\(T\)</span> is the last period of the analysis.</p>
+<p><span class="math inline">\(\xi_i\)</span> and <span class="math inline">\(\xi_t\)</span> are sets of fixed effects for the individual and time dimensions, respectively.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> In this setup, the <span class="math inline">\(\theta_{g,t}\)</span> coefficients represent the average treatment effect that the treatment group <span class="math inline">\(g\)</span> experiences at time <span class="math inline">\(t\)</span> (<span class="math inline">\(ATT(g,t)\)</span>). As described in <span class="citation" data-cites="wooldridge2021">Wooldridge (<a href="#ref-wooldridge2021" role="doc-biblioref">2021</a>)</span>, allowing for a flexible specification of the <span class="math inline">\(\theta_{g,t}\)</span> avoids the problem of bad controls and negative weights that have been identified in the literature as potential problems in the estimation of DID models using traditional TWFE estimators.</p>
+<p>This command can be directly estimated with <code>jwdid</code> using the following syntax:</p>
+<p><code>jwdid y, ivar(i) tvar(t) gvar(g)</code></p>
+<p>Where <code>y</code> is the dependent variable, <code>ivar(i)</code> is used to identify the individual panel data dimension, <code>tvar(t)</code> identifies the time dimension, and <code>gvar(g)</code> identifies the treatment group. Specifically, for observation <span class="math inline">\(i\)</span>, <span class="math inline">\(g\)</span> would take the value of zero if the panel observation is never treated (within the window of the analysis), and would take a value different from zero to indicate the year that treatment started for unit <span class="math inline">\(i\)</span>. Following standard assumptions, this specification assumes that the treatment is an absorbing status, meaning that once a unit is treated, it remains treated for the rest of the analysis.</p>
+<p>By default, <code>jwdid</code> will estimate the baseline model <a href="#eq-b0" class="quarto-xref">Equation&nbsp;1</a> using the <code>reghdfe</code> command <span class="citation" data-cites="correira2016">(<a href="#ref-correira2016" role="doc-biblioref">Correia 2016</a>)</span>, assuming clustered standard errors at <code>i</code> level. If other level is desired, the user can specify the <code>cluster(cvar)</code> option. While the command does not impose the assumption that the data is a panel, the methodology is designed to work with panel data. In case of repeated crossection, one should instead use the following syntax:</p>
+<p><code>jwdid y, tvar(t) gvar(g) [cluster(cvar)]</code></p>
+<p>By excluding <code>ivar(i)</code>, the command assumes data is a repeated crossection, proceeding to include group fixed effects only. The <code>cluster(cvar)</code> option is not required, but can be used to request Standard errors to be clusted at the level <code>cvar</code>.</p>
+<p>Specifically, this command will estimate the following model:</p>
+<p><span id="eq-b1"><span class="math display">\[Y_{i,t} = \alpha + \sum_{g \in G} \sum_{t=g}^{T} \theta_{g,t} D_{i,g,t} + \xi_g + \xi_t + \varepsilon_{i,t}
+\tag{2}\]</span></span></p>
+<p>This model specification makes the implicit assumption that Parallel trends are satisfied, using all never treated and not-yet treated observations as controls (not included category) for the identification of treatment effects.</p>
+<p>If one instead wants to relax this assumption, the user can specify the option <code>never</code>:</p>
+<p><code>jwdid y, ivar(i) tvar(t) gvar(g) never</code></p>
+<p>Which will estimate the following model:</p>
+<p><span id="eq-b2"><span class="math display">\[Y_{i,t} = \alpha +  \sum_{g \in G} \sum_{t=t_0}^{g-1} \theta^{pre}_{g,t} D_{i,g,t}+ \sum_{g \in G} \sum_{t=g}^{T} \theta^{post}_{g,t} D_{i,g,t} + \xi_i + \xi_t + \varepsilon_{i,t}
+\tag{3}\]</span></span></p>
+<p>This is in principle the same as strategy as the one proposed by <span class="citation" data-cites="sunabraham2021">Sun and Abraham (<a href="#ref-sunabraham2021" role="doc-biblioref">2021</a>)</span>, allowing for full heterogeneity across all groups and all relative periods. This specification is also numerically identical to the one proposed by <span class="citation" data-cites="callaway2021">Callaway and Sant’Anna (<a href="#ref-callaway2021" role="doc-biblioref">2021</a>)</span>, for the case where there are no covariates. In this case, the only observations that are used as controls are the ones that were never treated. In this specification, all <span class="math inline">\(\theta^{pre}_{g,t}\)</span> can be used to test for the parallel trends assumption, and all <span class="math inline">\(\theta^{post}_{g,t}\)</span> can be used to estimate the treatment effects.</p>
+</section>
+<section id="extensions-nonlinear-models" class="level3">
+<h3 class="anchored" data-anchor-id="extensions-nonlinear-models">Extensions: Nonlinear models</h3>
+<p>As described in <span class="citation" data-cites="wooldridge2023">Wooldridge (<a href="#ref-wooldridge2023" role="doc-biblioref">2023</a>)</span>, the standard ETWFE model described in <a href="#eq-b0" class="quarto-xref">Equation&nbsp;1</a> or <a href="#eq-b1" class="quarto-xref">Equation&nbsp;2</a> identifies the average treatment effect imposing a linear parallel trends assumption. However, such assumption may not be valid in cases, such as when the dependent variable follows some limited distribution. <span class="citation" data-cites="rothsantana2023">Roth and Sant’Anna (<a href="#ref-rothsantana2023" role="doc-biblioref">2023</a>)</span> discusses a similar problem, stating that the choice of transformation of the dependent variable is crucial for the identification of the average treatment effect, and only under certain conditions would the ATT be identified for any transformation.</p>
+<p>In this regard, <span class="citation" data-cites="wooldridge2023">Wooldridge (<a href="#ref-wooldridge2023" role="doc-biblioref">2023</a>)</span> proposes that the linear ETWFE models can be adapted to allow for non-linear models, by simply imposing the linear PTA assumption only on the latent variable of the model, but not the outcome itself.</p>
+<p>Consider the following transformation of the model defined by <a href="#eq-b2" class="quarto-xref">Equation&nbsp;3</a>:</p>
+<p><span id="eq-e1"><span class="math display">\[E(Y_{i,t}|X,\xi_i,\xi_t) = H\left(\alpha +  \sum_{g \in G} \sum_{t=t_0}^{g-1} \theta^{pre}_{g,t} D_{i,g,t}+ \sum_{g \in G} \sum_{t=g}^{T} \theta^{post}_{g,t} D_{i,g,t} + \xi_i + \xi_t \right)
+\tag{4}\]</span></span></p>
+<p>This specification focuses on identifying the conditional expected value of the outcome of interest as function of the treatment status, and the individual and time fixed effects. If we assume the <span class="math inline">\(H()\)</span> is the identify function, we would be back to the linear model described by <a href="#eq-b2" class="quarto-xref">Equation&nbsp;3</a>. However, if we assume that <span class="math inline">\(H()\)</span> is a non-linear function, like exponetial for poisson, or logistic for logit models, we could estimate the average treatment effect under different assumptions, imposing only linear PTA on the latent variable of the model.</p>
+<p>The <code>jwdid</code> command allows the user to specify the <code>method()</code> option to estimate models described by <a href="#eq-e1" class="quarto-xref">Equation&nbsp;4</a>, where one would specificy the regression model to be estimated, followed by the options associated with that model. For example, if we would be interested in estimating a poisson model, we would use the following syntax:</p>
+<p><code>jwdid y, ivar(i) tvar(t) gvar(g) never method(poisson)</code></p>
+<p>There is no restrictions on the type <code>method</code> one can use with the <code>jwdid</code> command, but it has not been tested with all possible models. The user should be aware that the <code>method()</code> option is passed directly for the model estimation step, and the user should be familiar with the syntax of the model being estimated.</p>
+<p>It should be noted that when estimating non-linear models with a large number of fixed effects, one may face an incidental parameters problem. This is not generally a problem for the linear case, because the parameters of interest can be identified without explicitly estimating the fixed effects, using, for example the within transformation. However, with the exception of poisson models, fixed effects are generally estimated raising the possibility of incidental parameters. To reduce the impact of this problem, whenver <code>method()</code> is specified <code>jwdid</code> will incorporate <em>group</em> fixed effects, instead of <em>individual</em> fixed effects.</p>
+<p>For the linear case with balanced data, using <em>group</em> instead of <em>individual</em> fixed effects provides numerically identical results. If panel is unbalanced the results will not be identical. In such cases, the option <code>corr</code> will create additional variables that address the difference. In the case of non-linear models, the best solution is to use <em>group</em> fixed effects. However, if one is interested in poisson models, the alterantive to group fixed effects is to use <code>ppmlhdfe</code> (<span class="citation" data-cites="correia2020">Correia, Guimarães, and Zylkin (<a href="#ref-correia2020" role="doc-biblioref">2020</a>)</span>).<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> This is the state-of-the-art estimator for poisson models with fixed effects, and it is the recommended estimator for trade analysis.</p>
+</section>
+<section id="sec-cov" class="level3">
+<h3 class="anchored" data-anchor-id="sec-cov">Extensions: Covariates</h3>
+<p>As described in <span class="citation" data-cites="wooldridge2021">Wooldridge (<a href="#ref-wooldridge2021" role="doc-biblioref">2021</a>)</span>, it is possible to include covariates in the model, by simply adding corrections that enable to easily identify the average treatment effect. However, following the literature on DID models, the implicit assumption is that covariates are time-invariant. <code>jwdid</code> does not impose any assumption on the covariates, but the user should be aware of the implications.</p>
+<p>In general, when covariates are considered, the model of interest is similar to <a href="#eq-b2" class="quarto-xref">Equation&nbsp;3</a>, but adjusted for covariates:</p>
+<p><span id="eq-e2"><span class="math display">\[
+\begin{aligned}
+Y_{i,t} &amp;= \alpha +  \sum_{g \in G} \sum_{t=t_0}^{g-1} \theta^{pre}_{g,t} D_{i,g,t}+
+\sum_{g \in G} \sum_{t=g}^{T} \theta^{post}_{g,t} D_{i,g,t} + \sum_{g \in G} \sum_{t=t_0}^{g-1} D_{i,g,t} \tilde x_{i}'\beta^{pre}_{g,t} +
+\sum_{g \in G} \sum_{t=g}^{T} D_{i,g,t} \tilde x_{i}'\beta^{post}_{g,t} \\
+&amp;+ x_{i}'\beta + \sum_{t=t_0}^{T} D_{i,t} x_{i}'\beta_t + \sum_{g\in G} D_{i,g} x_{i}'\beta_g
+\xi_i + \xi_t + \varepsilon_{i,t}
+\end{aligned} \tag{5}\]</span></span></p>
+<p>Where <span class="math inline">\(D_{i,t}\)</span> is a dummy variable that is equal to 1 if period is equal to <span class="math inline">\(t\)</span>, and <span class="math inline">\(D_{i,g}\)</span> is a dummmy variable that is equal to 1 if the group membership is equal to <span class="math inline">\(g\)</span>, and zero otherwise. <span class="math inline">\(\tilde x_{i}\)</span> are the within cohort and period demeaned variables. When using <code>reghdfe</code> or <code>ppmlhdfe</code> the term <span class="math inline">\(\sum_{g\in G} D_{i,g} x_{i}'\beta_g\)</span> is ommitted if all covariates are time constant.</p>
+<p>Using <span class="math inline">\(\tilde x\)</span>, default option, is not necessarity for the estimation of treatment effects. However, if one uses that specification, the parameters <span class="math inline">\(\theta^{pre}_{g,t}\)</span> and <span class="math inline">\(\theta^{post}_{g,t}\)</span> still identify the average treatment effect for group <span class="math inline">\(g\)</span> at time <span class="math inline">\(t\)</span>. One could also use the untransformed covariates in <a href="#eq-e2" class="quarto-xref">Equation&nbsp;5</a>, and still be able to obtained the same group/time specific treatment effects with the post estimation commands.</p>
+<p>From the user persective, <code>jwdid</code> would simply need to be called as follows:</p>
+<p><code>jwdid y x, ivar(i) tvar(t) gvar(g) never [xasis]</code></p>
+<p>Where <code>x</code> are all covariates of interest. If one uses the option <code>xasis</code>, the command will use the covariates without demeaning them, which may save some computation time.</p>
+</section>
+<section id="sec-het" class="level3">
+<h3 class="anchored" data-anchor-id="sec-het">Extensions: Treatment Heterogeneity</h3>
+<p>As it may be aparent from <a href="#eq-e2" class="quarto-xref">Equation&nbsp;5</a>, the number of estimated parameters can grow quickly with the number groups/cohorts, periods of analysis, and covariates. This could lead to increasing computational burden of the estimation. An alternative, which is already implemented via <code>xthdidregress</code> and <code>hdidregress</code> in Stata 18, is to estimate the model that reduces the heterogeneity of the treatment effects. Specifically, it allows treatment effects to vary across cohorts, across absolute time, or across relative time.</p>
+<p>For the case without covariates, the specification of <a href="#eq-b2" class="quarto-xref">Equation&nbsp;3</a> can be modified to impose the heterogeneity restrictions as follows:</p>
+<p>Time heterogeneity:</p>
+<p><span id="eq-ht1"><span class="math display">\[Y_{i,t} = \alpha +  \sum_{t=t_0}^T \theta^{pre}_{t} D_{i,t,pre} + \sum_{t=t_0}^T \theta^{post}_{t}  D_{i,t,post}+ \xi_i + \xi_t + \varepsilon_{i,t}
+\tag{6}\]</span></span></p>
+<p>Cohort heterogeneity:</p>
+<p><span id="eq-ht2"><span class="math display">\[Y_{i,t} = \alpha +  \sum_{g\in G} \theta^{pre}_{g}  D_{i,g,pre}+ \sum_{g\in G} \theta^{post}_{g} D_{i,g,post} + \xi_i + \xi_t+\varepsilon_{i,t}
+\tag{7}\]</span></span></p>
+<p>Event (Relative Time) heterogeneity:</p>
+<p><span id="eq-ht3"><span class="math display">\[Y_{i,t} = \alpha +  \sum_{e = E_{min}}^{-2} \theta_{e} D_{i,e}+ \sum_{e = 0}^{E_{max}} \theta_{e} D_{i,e} + \xi_i + \xi_t+\varepsilon_{i,t}
+\tag{8}\]</span></span></p>
+<p>Where <span class="math inline">\(D_{i,t,pre}\)</span> and <span class="math inline">\(D_{i,t,post}\)</span> are dummies that take the value of 1 if observation <span class="math inline">\(i\)</span>, which is part of an eventually treated group, is not yet treated or is already treated at time <span class="math inline">\(t\)</span>, respectively. <span class="math inline">\(D_{i,g,pre}\)</span> and <span class="math inline">\(D_{i,g,post}\)</span> are dummies that take the value of 1 if observation <span class="math inline">\(i\)</span> belongs to group <span class="math inline">\(g\)</span> and is not yet treated or is already treated at time <span class="math inline">\(t\)</span>, respectively. <span class="math inline">\(D_{i,e}\)</span> is a dummy that takes the value of 1 if observation <span class="math inline">\(i\)</span> is <span class="math inline">\(e\)</span> periods relative to when treatment started. <span class="math inline">\(E_{min}\)</span> and <span class="math inline">\(E_{max}\)</span> are the minimum and maximum event periods, possible. The <em>pre</em> coefficients are only considered when the <code>never</code> option is used.</p>
+<p>The <code>jwdid</code> command allows the user to specify each one of these restrictions using the <code>hettype()</code> option.</p>
+<p><code>jwdid y, ivar(i) tvar(t) gvar(g) hettype(option)</code></p>
+<p>Where <code>option</code> can be <code>time</code>, <code>cohort</code>, or <code>event</code>. If no option is selected, the command will estimate the model described by <a href="#eq-b2" class="quarto-xref">Equation&nbsp;3</a> which is the equivalent to allowing for full Cohort-time heterogeneity.</p>
+</section>
+<section id="extensions-other-options" class="level3">
+<h3 class="anchored" data-anchor-id="extensions-other-options">Extensions: Other Options</h3>
+<p>As described in <a href="#sec-cov" class="quarto-xref">Section&nbsp;1.3</a>, when covariates are considered in the model, the default option is to interact all covariates (or the demeaned transformations) with the same level of covariate heterogeneity. Some times, however, one may not be interested in estimating the same level of heterogeneity for all covariates. It may be possible, for example, to consider separate sets of covariates that could be interacted only with the time or the group dimensions.</p>
+<p>Specifically, assume there are no variables we wish to consider for the treatment heterogeneity, but instead consider three sets of covariates: <span class="math inline">\(x^{EX}\)</span> or variables we wish to incorporate without further interactions, <span class="math inline">\(x^{T}\)</span> or variables that would be interacted with the Time variables only, and <span class="math inline">\(x^{G}\)</span> or variables that would be interacted with group indicators only. In this case the setup would be:</p>
+<p><span id="eq-op1"><span class="math display">\[\begin{aligned}
+Y_{i,t} &amp;= \alpha +  \sum_{g \in G} \sum_{t=t_0}^{g-1} \theta^{pre}_{g,t} D_{i,g,t}+
+\sum_{g \in G} \sum_{t=g}^{T} \theta^{post}_{g,t} D_{i,g,t} \\
+&amp;+ x'^{EX}_{i}\beta + \sum_{t=t_0}^{T} D_{i,t} x'^{T}_{i}\beta_t + \sum_{g\in G} D_{i,g} x'^{G}_{i}\beta_g
+\xi_i + \xi_t + \varepsilon_{i,t}
+\end{aligned}
+\tag{9}\]</span></span></p>
+<p>This specification can be estimated using the following syntax:</p>
+<p><code>jwdid y , ivar(i) tvar(t) gvar(g) never exogvar(x_ex) xtvar(x_t) xgvar(x_g)</code></p>
+<p>If covariates are included after <code>y</code>, they would still be treated following the specification of <a href="#eq-e2" class="quarto-xref">Equation&nbsp;5</a>, or following any of the heterogeneity restrictions described in <a href="#sec-het" class="quarto-xref">Section&nbsp;1.4</a>.</p>
+<p>An advanced version of this option is the inclusion of high order fixed effects (and interactions with fixed effects) that are different from the individual and time fixed effects. It is possible to request the inclusion of those types of fixed effects using the option <code>fevar()</code>, which is only valid if one is using the default estimator method <code>reghdfe</code> or <code>ppmlhdfe</code>. In both cases, the additional fixed effects (or interactions) are included in the estimation of the model without further interactions.</p>
+</section>
+</section>
+<section id="sec-agg" class="level2">
+<h2 class="anchored" data-anchor-id="sec-agg">Post estimation: Aggregated treatment effects</h2>
+<p>After the estimation of the model, under the default options, one can use the coefficients <span class="math inline">\(\theta^{post}_{g,t}\)</span> as direct estimates of the group and time specific average tretment effects on the treated. However, one may also be interested in estimating aggregated ATTs for the overall data, across groups or periods, or dynamic effects. Furthermore, when the underlying method is a non-linear model, these coefficients cannot be directly interpreted as the average treatment effect on the outcome, but only on the latent variable.</p>
+<p><code>jwdid</code> comes along with the post estimation command <code>jwdid_estat</code> that can be used for that purpose. Internally, it uses the <code>margins</code> command to identify average treatment effects under the following algorithm:</p>
+<ol type="1">
+<li>Using the model estimates, predict the outcome of interest for all observations given the observed covariates and fixed effects. Call this <span class="math inline">\(\hat Y(obs)\)</span> or predicted outcome under the observed covariates. The model prediction could be the linear prediction, or the predicted probability in the case of logit models, or the predicted count in the case of poisson models.</li>
+<li>Consider the specification <a href="#eq-e2" class="quarto-xref">Equation&nbsp;5</a>, and assume that all <span class="math inline">\(\theta^{post}_{g,t}\)</span> (and <span class="math inline">\(\theta^{pre}_{g,t}\)</span> if <code>never</code> is used), as well as all <span class="math inline">\(\beta^{post}\)</span> and <span class="math inline">\(\beta^{pre}\)</span> are zero, and predict the outcome of interest. Call this <span class="math inline">\(\hat Y(0)\)</span> or predicted outcome under the counterfactual scenario of no treatment.</li>
+</ol>
+<p>In this case, the predicted Average Treatment Effect on the Treated for observation <span class="math inline">\(i\)</span> is given by:</p>
+<p><span class="math display">\[\widehat{ATT}_i = \hat Y(obs) - \hat Y(0)\]</span></p>
+<p>This is zero for observations that were never treated, and nonzero for the treated-post treatment observations.<a href="#fn3" class="footnote-ref" id="fnref3" role="doc-noteref"><sup>3</sup></a></p>
+<p>From here, any aggregated average treatment effects can be calculated as follows:</p>
+<p><span class="math display">\[AGGTE_r =  \frac{ \sum_i^N\widehat{ATT}_i \times w_{i,t} \times R_{i,t}}{ \sum_i^N  w_{i,t} \times R_{i,t}}  
+\]</span></p>
+<p>where <span class="math inline">\(R_{i,t}\)</span> takes the value of one whenever observation <span class="math inline">\(i\)</span> fullfills the required conditions, and <span class="math inline">\(w_{i,t}\)</span> is the weight of the observation <span class="math inline">\(i\)</span> at time <span class="math inline">\(t\)</span> used in for the estimation model. <a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>. <span class="math inline">\(AGGTE\)</span> is the aggregated average treatment effect on the treated given the conditions <span class="math inline">\(R\)</span>.</p>
+<p>In general, there are four types of aggregations that are implemented in the <code>jwdid_estat/estat</code> command:</p>
+<ol type="1">
+<li><code>estat simple</code>: This option calculates the average treatment effect on the treated for all observations that were treated at some point in time. The condition <span class="math inline">\(R\)</span> is defined as:</li>
+</ol>
+<p><span class="math display">\[\begin{aligned}
+R_{i,t} &amp;= 1 \text{ if } t \geq g \text{ for observation } i \in g&gt;0 \\
+R_{i,t} &amp;= 0 \text{ otherwise}
+\end{aligned}
+\]</span></p>
+<ol start="2" type="1">
+<li><code>estat group</code>: This option calculates the average treatment effect for observations that were treated at time <span class="math inline">\(g_c\)</span>. The condition <span class="math inline">\(R\)</span> is defined as:</li>
+</ol>
+<p><span class="math display">\[\begin{aligned}
+R_{i,t} &amp;= 1 \text{ if } t \geq g_c ~ \&amp; ~ g_c&gt;0 \\
+R_{i,t} &amp;= 0 \text{ otherwise}
+\end{aligned}
+\]</span></p>
+<p>where <span class="math inline">\(g_c\)</span> is a particular group/cohort of interest. <code>estat group</code> estimates this for all groups <span class="math inline">\(g\)</span> in <span class="math inline">\(G\)</span>.</p>
+<ol start="3" type="1">
+<li><code>estat time</code>: This option calculates the average treatment effect at time <span class="math inline">\(t\)</span> for all observations that were effectively treated at that point. The condition <span class="math inline">\(R\)</span> is defined as:</li>
+</ol>
+<p><span class="math display">\[\begin{aligned}
+R_{i,t} &amp;= 1 \text{ if } t_c \geq g ~ \&amp; ~ g&gt;0 \\
+R_{i,t} &amp;= 0 \text{ otherwise}
+\end{aligned}
+\]</span></p>
+<p>where <span class="math inline">\(t_c\)</span> is a particular time of interest. <code>estat time</code> estimates this for all times <span class="math inline">\(t\)</span> in <span class="math inline">\(T\)</span> that has at least one unit that was treated.</p>
+<ol start="4" type="1">
+<li><code>estat event</code>: This option calculates dynamic treatment effects, also known as event studies, using the period before treatment as the reference. When the condition `never’ is used, this approach can be used to estimate pre-treatment ATT’s, which could be used for testing PTA. The condition <span class="math inline">\(R\)</span> is defined as:</li>
+</ol>
+<p><span class="math display">\[\begin{aligned}
+R_{i,t} &amp;= 1 \text{ if } t-g = e_c \text{ \&amp; } e \neq -1 \\
+R_{i,t} &amp;= 0 \text{ otherwise}
+\end{aligned}
+\]</span></p>
+<p>where <span class="math inline">\(e_c\)</span> is a particular event of interest. In contrast with the previous aggregations, if option <code>never</code> was used for estimation, one could also add the option <code>pretrend</code> to run a simple PTA test with the following null hypothesis:</p>
+<p><span class="math display">\[H_0: AGGTE_e = 0 \text{ for all } e &lt; -1 \text{ vs }H_1: AGGTE_e \neq 0 \text{ for some } e &lt; -1\]</span></p>
+<p>Failure to reject this hypothesis is evidence in support of parallel trends assumption. Otherwise, one can use <code>test</code> command to test for the significance of specific pre-treatment ATT’s.<a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a></p>
+</section>
+<section id="post-estimation-other-options" class="level2">
+<h2 class="anchored" data-anchor-id="post-estimation-other-options">Post estimation: Other options</h2>
+<p>The <code>jwdid_estat</code>/<code>estat</code> command allows for further options that may be of interest for the user. In this section we provide a brief description of those options:</p>
+<section id="weights" class="level3">
+<h3 class="anchored" data-anchor-id="weights">Weights</h3>
+<p>The default option for the estimation of the aggregated ATTs is to use the weights <span class="math inline">\(w_{i,t}\)</span> that were used in the estimation of the model. However, if the user wants to use different weights, it is possible to do using the following syntax:</p>
+<p><code>estat [aggregation] [pw = weight]</code></p>
+</section>
+<section id="standard-errors" class="level3">
+<h3 class="anchored" data-anchor-id="standard-errors">Standard Errors</h3>
+<p><span class="citation" data-cites="wooldridge2021">Wooldridge (<a href="#ref-wooldridge2021" role="doc-biblioref">2021</a>)</span> suggests than when one estimates standard errors for the aggregated ATTs, one should use <code>vce(unconditional)</code> option in <code>Stata</code>, to allow for uncertainty in the explanatory variables. <code>jwdid_estat</code>/<code>estat</code> does not use this approach by default, because it requires that the underlying command is able to produce Scores for the estimated model. For example, if the model was estimated using <code>method(regress)</code>, the Scores will be available, and unconditional Standard errors for the aggregated ATTs can be estimated as follows:</p>
+<p><code>estat [aggregation], [vce(unconditional)]</code></p>
+<p>This is not possible if one uses the default methodology <code>reghdfe</code>, nor with <code>ppmlhdfe</code>.</p>
+</section>
+<section id="other-aggregation-restrictions" class="level3">
+<h3 class="anchored" data-anchor-id="other-aggregation-restrictions">Other Aggregation restrictions</h3>
+<p>As described in <a href="#sec-agg" class="quarto-xref">Section&nbsp;2</a>, the default aggregation considers all observations treated observations, impossing restrictions only in terms of time, group or event dimensions. However, one may be interested in imposing further restrictions that could leverage on the use of covariates in the model specification. For example, say that one estimates a DID model with covariates using the following syntax:</p>
+<p><code>jwdid y i.dx, ivar(i) tvar(t) gvar(g) never</code></p>
+<p>As usual, one could request the estimation of the aggregated ATTs for the whole sample as follows:</p>
+<p><code>estat [aggregation]</code></p>
+<p>However, one would also be able to make the same estimation imposing the added restriction that the covariate <code>dx</code> is zero or one, using the option <code>orestriction()</code>:</p>
+<p><code>estat [aggregation], orestriction(dx==0)</code></p>
+<p><code>estat [aggregation], orestriction(dx==1)</code></p>
+<p>The expression inside the parenthesis should be a valid Stata expression that is used when calculating the aggregated ATTs.</p>
+</section>
+<section id="storing-and-saving-results" class="level3">
+<h3 class="anchored" data-anchor-id="storing-and-saving-results">Storing, and saving results</h3>
+<p>After aggregate effects have been estimated, the user may want to store the results for further analysis or reporting. Because <code>estat</code> uses <code>margins</code> in the background, the default option is to store the results in memory as <code>r()</code> elements. Alternatively, <code>jwdid_estat</code>/<code>estat</code> allows the user to store the output of the command using three different options:</p>
+<ol type="1">
+<li><code>estat [aggregation], post</code>: As with margins, option <code>post</code> will “post” the results of the command to be the current estimations in memory <code>e()</code>, which can be saved as usual for further analysis.</li>
+<li><code>estat [aggregation], estore(name)</code>: This option stores the results from the aggregation in memory as <code>name</code>. This is similar to using <code>estimation store name</code> after a regression command. The previously estimated results from <code>jwdid</code> are not overwritten.</li>
+<li><code>estat [aggregation], esave(filename)</code>: This option saves the results from the aggregation in a file <code>filename</code>, as a <code>ster</code> file, which can be used at a later point.</li>
+</ol>
+</section>
+<section id="plotting" class="level3">
+<h3 class="anchored" data-anchor-id="plotting">Plotting</h3>
+<p>After <strong>time</strong>, <strong>group</strong> or <strong>event</strong> aggregations are estimated, it is possible to request plotting those results using <code>estat plot</code>. The basic syntax is to type it after the aggregation command, with only minimal command specific options:</p>
+<ol type="1">
+<li><p><code>estat plot, style(style)</code>: The option <code>style</code> allows the user to select the style of the plot. The default is using a <code>rspike</code> style, but <code>rarea</code>, <code>rcap</code> and <code>rbar</code> are also available. See <code>help twoway</code> for more information on the styles.</p></li>
+<li><p><code>estat plot,  pstyle1(str) color1(str) pstyle2(str) color2(str) lwidth1(str) lwidth2(str) barwidth1(str) barwidth2(str)</code>: The options <code>pstyle#</code>, <code>color#</code>, <code>lwidth#</code> and <code>barwidth#</code> can be used to alter the color and style of the lines in the plot for the pre and post treatment periods. Only <code>event</code> aggregation allows for <code>#2</code> options.</p></li>
+<li><p><code>estat plot, twoway_options</code>: Most other <code>twoway</code> graph option can be used after the <code>estat plot</code> command.</p></li>
+<li><p><code>estat plot, tight</code>: If using cohort, group or event aggregations, the option <code>tight</code> will recode the x-axis values starting from 1, instead of the original values. This will avoid blank spaces in the plot.</p></li>
+</ol>
+<div class="references">
+
+</div>
+
+
+<!-- -->
+
+
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-borusyak2023" class="csl-entry" role="listitem">
+Borusyak, Kirill, Xavier Jaravel, and Jann Spiess. 2024. <span>“<span class="nocase">Revisiting Event-Study Designs: Robust and Efficient Estimation</span>.”</span> <em>The Review of Economic Studies</em>, February, rdae007. <a href="https://doi.org/10.1093/restud/rdae007">https://doi.org/10.1093/restud/rdae007</a>.
+</div>
+<div id="ref-callaway2021" class="csl-entry" role="listitem">
+Callaway, Brantly, and Pedro H. C. Sant’Anna. 2021. <span>“Difference-in-<span>Differences</span> with Multiple Time Periods.”</span> <em>Journal of Econometrics</em>, Themed <span>Issue</span>: <span>Treatment</span> <span>Effect</span> 1, 225 (2): 200–230. <a href="https://doi.org/10.1016/j.jeconom.2020.12.001">https://doi.org/10.1016/j.jeconom.2020.12.001</a>.
+</div>
+<div id="ref-correira2016" class="csl-entry" role="listitem">
+Correia, Sergio. 2016. <span>“A <span>Feasible</span> <span>Estimator</span> for <span>Linear</span> <span>Models</span> with <span>Multi</span>-<span>Way</span> <span>Fixed</span> <span>Effects</span>.”</span>
+</div>
+<div id="ref-correia2020" class="csl-entry" role="listitem">
+Correia, Sergio, Paulo Guimarães, and Tom Zylkin. 2020. <span>“Fast <span>Poisson</span> Estimation with High-Dimensional Fixed Effects.”</span> <em>The Stata Journal</em> 20 (1): 95–115. <a href="https://doi.org/10.1177/1536867X20909691">https://doi.org/10.1177/1536867X20909691</a>.
+</div>
+<div id="ref-dechaisemartin2020" class="csl-entry" role="listitem">
+De Chaisemartin, Clément, and Xavier D’Haultfœuille. 2020. <span>“Two-<span>Way</span> <span>Fixed</span> <span>Effects</span> <span>Estimators</span> with <span>Heterogeneous</span> <span>Treatment</span> <span>Effects</span>.”</span> <em>American Economic Review</em> 110 (9): 2964–96. <a href="https://doi.org/10.1257/aer.20181169">https://doi.org/10.1257/aer.20181169</a>.
+</div>
+<div id="ref-negengast2024b" class="csl-entry" role="listitem">
+Nagengast, Arne J., Fernando Rios-Avila, and Yoto V. Yotov. 2024. <span>“The European Single Market and Intra-EU Trade: An Assessment with Heterogeneity-Robust Difference-in-Differences Methods.”</span> <em>Working Paper</em>.
+</div>
+<div id="ref-negengast2024" class="csl-entry" role="listitem">
+Nagengast, Arne J., and Yoto V. Yotov. forthcoming. <span>“Staggered Difference-in-Differences in Gravity Settings: Revisiting the Effects of Trade Agreements.”</span> <em>American Economic Journal: Applied Economics</em>, forthcoming.
+</div>
+<div id="ref-rothsantana2023" class="csl-entry" role="listitem">
+Roth, Jonathan, and Pedro H. C. Sant’Anna. 2023. <span>“When <span>Is</span> <span>Parallel</span> <span>Trends</span> <span>Sensitive</span> to <span>Functional</span> <span>Form</span>?”</span> <em>Econometrica</em> 91 (2): 737–47. <a href="https://doi.org/10.3982/ECTA19402">https://doi.org/10.3982/ECTA19402</a>.
+</div>
+<div id="ref-sunabraham2021" class="csl-entry" role="listitem">
+Sun, Liyang, and Sarah Abraham. 2021. <span>“Estimating Dynamic Treatment Effects in Event Studies with Heterogeneous Treatment Effects.”</span> <em>Journal of Econometrics</em>, Themed <span>Issue</span>: <span>Treatment</span> <span>Effect</span> 1, 225 (2): 175–99. <a href="https://doi.org/10.1016/j.jeconom.2020.09.006">https://doi.org/10.1016/j.jeconom.2020.09.006</a>.
+</div>
+<div id="ref-wooldridge2021" class="csl-entry" role="listitem">
+Wooldridge, Jeffrey M. 2021. <span>“Two-<span>Way</span> <span>Fixed</span> <span>Effects</span>, the <span>Two</span>-<span>Way</span> <span>Mundlak</span> <span>Regression</span>, and <span>Difference</span>-in-<span>Differences</span> <span>Estimators</span>.”</span> {SSRN} {Scholarly} {Paper}. Rochester, NY. <a href="https://doi.org/10.2139/ssrn.3906345">https://doi.org/10.2139/ssrn.3906345</a>.
+</div>
+<div id="ref-wooldridge2023" class="csl-entry" role="listitem">
+———. 2023. <span>“Simple Approaches to Nonlinear Difference-in-Differences with Panel Data.”</span> <em>The Econometrics Journal</em> 26 (3): C31–66. <a href="https://doi.org/10.1093/ectj/utad016">https://doi.org/10.1093/ectj/utad016</a>.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Often, one can use group fixed effects instead of individual fixed effects, and would still obtain numerically identical results in the linear model case.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p> The correction implemented with <code>corr</code> is not useful to recover the coefficients from <code>ppmlhdfe</code> using <code>poisson</code> command <a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>The case of pre-treatment treated observations may be assumed to be zero if the <code>never</code> option is not used. When <code>never</code> is used, pre-treatment ATTs can be used for testing the parallel trends assumption.<a href="#fnref3" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn4"><p>While this is the default option, <code>estat</code> command also allow you to provide other weights for aggregation<a href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>It should be noticed that this test is different from the test proposed by <span class="citation" data-cites="callaway2021">Callaway and Sant’Anna (<a href="#ref-callaway2021" role="doc-biblioref">2021</a>)</span>, which is based on testing <em>all</em> group/time specific ATT’s, instead of the event aggregated ones.<a href="#fnref5" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/friosavila\.github\.io\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../app_metrics/app_metrics10.html" class="pagination-link" aria-label="Nonlinear DID">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Nonlinear DID</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../app_metrics/app_metrics2.html" class="pagination-link" aria-label="DRDID/CSDID in Stata">
+        <span class="nav-page-text">DRDID/CSDID in Stata</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "**`jwdid`**: A Stata command for the estimation of Difference-in-Differences models using ETWFE"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Gravity models and trade analysis"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">author:</span><span class="co"> </span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">  - name: Fernando Rios-Avila</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">    affiliation: Levy Economics Institute</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> </span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">    html:</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">        highlight-style: github</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="an">bibliography:</span><span class="co"> refdid.bib</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">## Estimation of DID models using ETWFE </span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>As I have presented elsewhere, over the last 5 years, there has been a large development of methodologies for the estimation of Average treatment effects in Difference-in-Differences (DID) models, that would avoid the problems of bad controls and negative weights that have been identified in the literature. In this note, I describe the Stata command <span class="in">`jwdid`</span> that implements the estimation of DID models using the ETWFE estimator proposed by @wooldridge2021. One of the main advantages this aproach is that by being a simple extension of the standard FE estimator, it can be easily modified and implemented and allow for other non-linear models. As described in @wooldridge2023, the ETWFE estimator could be used, for example, to model cases where the dependent variable is binary (logit) or count data (poisson). A second advantage of the ETWFE estimator is that the estimation of the baseline model, is transparent as it does not require the use of specialized software, except for the estimation of fixed effects models. This is in contrast with other DID estimators like the ones proposed by @callaway2021, @dechaisemartin2020, or @borusyak2023, where the bulk of the model estimation is done in the background, with the user having less control and understanding on what is being estimated.</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>Thanks to this transparency in model specification, @negengast2024 propose a large set of recommendations for the analysis of DID models in the context of international trade and Gravity models. On this regard, I present the command <span class="in">`jwdid`</span> as a flexible command in Stata that allows to consider @negengast2024 and @negengast2024b recommendations for the estimation of DID models, in the framework of trade models. However, many of the features we have developed for this context can also be applied in different contexts. For more information, see @negengast2024b and the working paper that can be downloaded <span class="co">[</span><span class="ot">here</span><span class="co">](https://friosavila.github.io/app_metrics/eu_etwfe.pdf)</span>.</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>In the rest of this note, I will focus on describing what the command does, and what exactly is the model that is being estimated. I will also describe the post estimation commands that are available for the user to estimate aggregated treatment effects.</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">### Base line model</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>As described in @wooldridge2021, the baseline model for the estimation of the DID model using the ETWFE estimator is the following:</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>$$Y_{i,t} = \alpha + \sum_{g \in G} \sum_{t=g}^{T} \theta_{g,t} D_{i,g,t} + \xi_i + \xi_t + \varepsilon_{i,t}</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>$${#eq-b0}</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>where $Y_{i,t}$ is the dependent variable, $D_{i,g,t}$ is a dummy that takes the value of 1 if the observation is in the treatment group $g$, on period $t$ and 0 otherwise. $G$ is a set that indicates at what time treatment started for all observations, and $T$ is the last period of the analysis. </span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>$\xi_i$ and $\xi_t$ are sets of fixed effects for the individual and time dimensions, respectively.^<span class="co">[</span><span class="ot">Often, one can use group fixed effects instead of individual fixed effects, and would still obtain numerically identical results in the linear model case.</span><span class="co">]</span> In this setup, the $\theta_{g,t}$ coefficients represent the average treatment effect that the treatment group $g$ experiences at time $t$ ($ATT(g,t)$). </span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>As described in @wooldridge2021, allowing for a flexible specification of the $\theta_{g,t}$ avoids the problem of bad controls and negative weights that have been identified in the literature as potential problems in the estimation of DID models using traditional TWFE estimators.</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>This command can be directly estimated with <span class="in">`jwdid`</span> using the following syntax:</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="in">`jwdid y, ivar(i) tvar(t) gvar(g)`</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>Where <span class="in">`y`</span> is the dependent variable, <span class="in">`ivar(i)`</span> is used to identify the individual panel data dimension, <span class="in">`tvar(t)`</span> identifies the time dimension, and <span class="in">`gvar(g)`</span> identifies the treatment group. Specifically, for observation $i$, $g$ would take the value of zero if the panel observation is never treated (within the window of the analysis), and would take a value different from zero to indicate the year that treatment started for unit $i$. Following standard assumptions, this specification assumes that the treatment is an absorbing status, meaning that once a unit is treated, it remains treated for the rest of the analysis. </span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>By default, <span class="in">`jwdid`</span> will estimate the baseline model @eq-b0 using the <span class="in">`reghdfe`</span> command <span class="co">[</span><span class="ot">@correira2016</span><span class="co">]</span>, assuming clustered standard errors at <span class="in">`i`</span> level. If other level is desired, the user can specify the <span class="in">`cluster(cvar)`</span> option. While the command does not impose the assumption that the data is a panel, the methodology is designed to work with panel data. In case of repeated crossection, one should instead use the following syntax:</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="in">`jwdid y, tvar(t) gvar(g) [cluster(cvar)]`</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>By excluding <span class="in">`ivar(i)`</span>, the command assumes data is a repeated crossection, proceeding to include group fixed effects only. The <span class="in">`cluster(cvar)`</span> option is not required, but can be used to request Standard errors to be clusted at the level <span class="in">`cvar`</span>. </span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>Specifically, this command will estimate the following model:</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>$$Y_{i,t} = \alpha + \sum_{g \in G} \sum_{t=g}^{T} \theta_{g,t} D_{i,g,t} + \xi_g + \xi_t + \varepsilon_{i,t}</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>$${#eq-b1}</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>This model specification makes the implicit assumption that Parallel trends are satisfied, using all never treated and not-yet treated observations as controls (not included category) for the identification of treatment effects.</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>If one instead wants to relax this assumption, the user can specify the option <span class="in">`never`</span>:</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="in">`jwdid y, ivar(i) tvar(t) gvar(g) never`</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>Which will estimate the following model:</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>$$Y_{i,t} = \alpha +  \sum_{g \in G} \sum_{t=t_0}^{g-1} \theta^{pre}_{g,t} D_{i,g,t}+ \sum_{g \in G} \sum_{t=g}^{T} \theta^{post}_{g,t} D_{i,g,t} + \xi_i + \xi_t + \varepsilon_{i,t}</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>$${#eq-b2}</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>This is in principle the same as strategy as the one proposed by @sunabraham2021, allowing for full heterogeneity across all groups and all relative periods. This specification is also numerically identical to the one proposed by @callaway2021, for the case where there are no covariates. In this case, the only observations that are used as controls are the ones that were never treated. In this specification, all $\theta^{pre}_{g,t}$ can be used to test for the parallel trends assumption, and all $\theta^{post}_{g,t}$ can be used to estimate the treatment effects.</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="fu">### Extensions: Nonlinear models</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>As described in  @wooldridge2023, the standard ETWFE model described in @eq-b0 or @eq-b1 identifies the average treatment effect imposing a linear parallel trends assumption. However, such assumption may not be valid in cases, such as when the dependent variable follows some limited distribution. @rothsantana2023 discusses a similar problem, stating that the choice of transformation of the dependent variable is crucial for the identification of the average treatment effect, and only under certain conditions would the ATT be identified for any transformation. </span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>In this regard, @wooldridge2023 proposes that the linear ETWFE models can be adapted to allow for non-linear models, by simply imposing the linear PTA assumption only on the latent variable of the model, but not the outcome itself.</span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>Consider the following transformation of the model defined by @eq-b2:</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>$$E(Y_{i,t}|X,\xi_i,\xi_t) = H\left(\alpha +  \sum_{g \in G} \sum_{t=t_0}^{g-1} \theta^{pre}_{g,t} D_{i,g,t}+ \sum_{g \in G} \sum_{t=g}^{T} \theta^{post}_{g,t} D_{i,g,t} + \xi_i + \xi_t \right)</span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>$${#eq-e1}</span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>This specification focuses on identifying the conditional expected value of the outcome of interest as function of the treatment status, and the individual and time fixed effects. If we assume the $H()$ is the identify function, we would be back to the linear model described by @eq-b2. However, if we assume that $H()$ is a non-linear function, like exponetial for poisson, or logistic for logit models, we could estimate the average treatment effect under different assumptions, imposing only linear PTA on the latent variable of the model.</span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>The <span class="in">`jwdid`</span> command allows the user to specify the <span class="in">`method()`</span> option to estimate models described by @eq-e1, where one would specificy the regression model to be estimated, followed by the options associated with that model. For example, if we would be interested in estimating a poisson model, we would use the following syntax:</span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a><span class="in">`jwdid y, ivar(i) tvar(t) gvar(g) never method(poisson)`</span></span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>There is no restrictions on the type <span class="in">`method`</span> one can use with the <span class="in">`jwdid`</span> command, but it has not been tested with all possible models. The user should be aware that the <span class="in">`method()`</span> option is passed directly for the model estimation step, and the user should be familiar with the syntax of the model being estimated. </span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>It should be noted that when estimating non-linear models with a large number of fixed effects, one may face an incidental parameters problem. This is not generally a problem for the linear case, because the parameters of interest can be identified without explicitly estimating the fixed effects, using, for example the within transformation. However, with the exception of poisson models, fixed effects are generally estimated raising the possibility of incidental parameters. To reduce the impact of this problem, whenver <span class="in">`method()`</span> is specified <span class="in">`jwdid`</span> will incorporate _group_ fixed effects, instead of _individual_ fixed effects. </span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>For the linear case with balanced data, using _group_ instead of _individual_ fixed effects provides numerically identical results. If panel is unbalanced the results will not be identical. In such cases, the option `corr` will create additional variables that address the difference. In the case of non-linear models, the best solution is to use _group_ fixed effects. However, if one is interested in poisson models, the alterantive to group fixed effects is to use <span class="in">`ppmlhdfe`</span> (@correia2020).^<span class="co">[</span><span class="ot"> The correction implemented with `corr` is not useful to recover the coefficients from `ppmlhdfe` using `poisson` command </span><span class="co">]</span> This is the state-of-the-art estimator for poisson models with fixed effects, and it is the recommended estimator for trade analysis.</span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a><span class="fu">### Extensions: Covariates {#sec-cov}</span></span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>As described in @wooldridge2021, it is possible to include covariates in the model, by simply adding corrections that enable to easily identify the average treatment effect. However, following the literature on DID models, the implicit assumption is that covariates are time-invariant. <span class="in">`jwdid`</span> does not impose any assumption on the covariates, but the user should be aware of the implications. </span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a>In general, when covariates are considered, the model of interest is similar to @eq-b2, but adjusted for covariates:</span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>\begin{aligned}</span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a>Y_{i,t} &amp;= \alpha +  \sum_{g \in G} \sum_{t=t_0}^{g-1} \theta^{pre}_{g,t} D_{i,g,t}+</span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>\sum_{g \in G} \sum_{t=g}^{T} \theta^{post}_{g,t} D_{i,g,t} + \sum_{g \in G} \sum_{t=t_0}^{g-1} D_{i,g,t} \tilde x_{i}'\beta^{pre}_{g,t} + </span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a>\sum_{g \in G} \sum_{t=g}^{T} D_{i,g,t} \tilde x_{i}'\beta^{post}_{g,t} <span class="sc">\\</span></span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a>&amp;+ x_{i}'\beta + \sum_{t=t_0}^{T} D_{i,t} x_{i}'\beta_t + \sum_{g\in G} D_{i,g} x_{i}'\beta_g</span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>\xi_i + \xi_t + \varepsilon_{i,t}</span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a>\end{aligned}$${#eq-e2}</span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a>Where $D_{i,t}$ is a dummy variable that is equal to 1 if period is equal to $t$, and $D_{i,g}$ is a dummmy variable that is equal to 1 if the group membership is equal to $g$, and zero otherwise. $\tilde x_{i}$ are the within cohort and period demeaned variables. When using <span class="in">`reghdfe`</span> or <span class="in">`ppmlhdfe`</span> the term $\sum_{g\in G} D_{i,g} x_{i}'\beta_g$ is ommitted if all covariates are time constant. </span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a>Using $\tilde x$, default option, is not necessarity for the estimation of treatment effects. However, if one uses that specification, the parameters $\theta^{pre}_{g,t}$ and $\theta^{post}_{g,t}$ still identify the average treatment effect for group $g$ at time $t$. One could also use the untransformed covariates in @eq-e2, and still be able to obtained the same group/time specific treatment effects with the post estimation commands. </span>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a>From the user persective, <span class="in">`jwdid`</span> would simply need to be called as follows:</span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a><span class="in">`jwdid y x, ivar(i) tvar(t) gvar(g) never [xasis]`</span></span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a>Where <span class="in">`x`</span> are all covariates of interest. If one uses the option <span class="in">`xasis`</span>, the command will use the covariates without demeaning them, which may save some computation time. </span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a><span class="fu">### Extensions: Treatment Heterogeneity {#sec-het}</span></span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>As it may be aparent from @eq-e2, the number of estimated parameters can grow quickly with the number groups/cohorts, periods of analysis, and covariates. This could lead to increasing computational burden of the estimation. An alternative, which is already implemented via <span class="in">`xthdidregress`</span> and <span class="in">`hdidregress`</span> in Stata 18, is to estimate the model that reduces the heterogeneity of the treatment effects. Specifically, it allows treatment effects to vary across cohorts, across absolute time, or across relative time. </span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a>For the case without covariates, the specification of @eq-b2 can be modified to impose the heterogeneity restrictions as follows:</span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a>Time heterogeneity:</span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a>$$Y_{i,t} = \alpha +  \sum_{t=t_0}^T \theta^{pre}_{t} D_{i,t,pre} + \sum_{t=t_0}^T \theta^{post}_{t}  D_{i,t,post}+ \xi_i + \xi_t + \varepsilon_{i,t}</span>
+<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a>$${#eq-ht1}</span>
+<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a>Cohort heterogeneity:</span>
+<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a>$$Y_{i,t} = \alpha +  \sum_{g\in G} \theta^{pre}_{g}  D_{i,g,pre}+ \sum_{g\in G} \theta^{post}_{g} D_{i,g,post} + \xi_i + \xi_t+\varepsilon_{i,t}</span>
+<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a>$${#eq-ht2}</span>
+<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a>Event (Relative Time) heterogeneity:</span>
+<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a>$$Y_{i,t} = \alpha +  \sum_{e = E_{min}}^{-2} \theta_{e} D_{i,e}+ \sum_{e = 0}^{E_{max}} \theta_{e} D_{i,e} + \xi_i + \xi_t+\varepsilon_{i,t}</span>
+<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a>$${#eq-ht3}</span>
+<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a>Where $D_{i,t,pre}$ and $D_{i,t,post}$ are dummies that take the value of 1 if observation $i$, which is part of an eventually treated group, is not yet treated or is already treated at time $t$, respectively. $D_{i,g,pre}$ and $D_{i,g,post}$ are dummies that take the value of 1</span>
+<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a>if observation $i$ belongs to group $g$ and is not yet treated or is already treated at time $t$, respectively. $D_{i,e}$ is a dummy that takes the value of 1 if observation $i$ is $e$ periods relative to when treatment started. $E_{min}$ and $E_{max}$ are the minimum and maximum event periods, possible. The _pre_ coefficients are only considered when the <span class="in">`never`</span> option is used. </span>
+<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a>The <span class="in">`jwdid`</span> command allows the user to specify each one of these restrictions using the <span class="in">`hettype()`</span> option. </span>
+<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a><span class="in">`jwdid y, ivar(i) tvar(t) gvar(g) hettype(option)`</span></span>
+<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a>Where <span class="in">`option`</span> can be <span class="in">`time`</span>, <span class="in">`cohort`</span>, or <span class="in">`event`</span>. If no option is selected, the command will estimate the model described by @eq-b2 which is the equivalent to allowing for full Cohort-time heterogeneity.</span>
+<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a><span class="fu">### Extensions: Other Options</span></span>
+<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a>As described in @sec-cov, when covariates are considered in the model, the default option is to interact all covariates (or the demeaned transformations) with the same level of covariate heterogeneity. Some times, however, one may not be interested in estimating the same level of heterogeneity for all covariates. It may be possible, for example, to consider separate sets of covariates that could be interacted only with the time or the group dimensions. </span>
+<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a>Specifically, assume there are no variables we wish to consider for the treatment heterogeneity, but instead consider three sets of covariates: $x^{EX}$ or variables we wish to incorporate without further interactions, $x^{T}$ or variables that would be interacted with the Time variables only, and $x^{G}$ or variables that would be interacted with group indicators only. In this case the setup would be:</span>
+<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a>$$\begin{aligned}</span>
+<span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a>Y_{i,t} &amp;= \alpha +  \sum_{g \in G} \sum_{t=t_0}^{g-1} \theta^{pre}_{g,t} D_{i,g,t}+</span>
+<span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a>\sum_{g \in G} \sum_{t=g}^{T} \theta^{post}_{g,t} D_{i,g,t} <span class="sc">\\</span></span>
+<span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a>&amp;+ x'^{EX}_{i}\beta + \sum_{t=t_0}^{T} D_{i,t} x'^{T}_{i}\beta_t + \sum_{g\in G} D_{i,g} x'^{G}_{i}\beta_g</span>
+<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a>\xi_i + \xi_t + \varepsilon_{i,t}</span>
+<span id="cb1-152"><a href="#cb1-152" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
+<span id="cb1-153"><a href="#cb1-153" aria-hidden="true" tabindex="-1"></a>$${#eq-op1}</span>
+<span id="cb1-154"><a href="#cb1-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-155"><a href="#cb1-155" aria-hidden="true" tabindex="-1"></a>This specification can be estimated using the following syntax:</span>
+<span id="cb1-156"><a href="#cb1-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-157"><a href="#cb1-157" aria-hidden="true" tabindex="-1"></a><span class="in">`jwdid y , ivar(i) tvar(t) gvar(g) never exogvar(x_ex) xtvar(x_t) xgvar(x_g)`</span></span>
+<span id="cb1-158"><a href="#cb1-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-159"><a href="#cb1-159" aria-hidden="true" tabindex="-1"></a>If covariates are included after <span class="in">`y`</span>, they would still be treated following the specification of @eq-e2, or following any of the heterogeneity restrictions described in @sec-het.</span>
+<span id="cb1-160"><a href="#cb1-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-161"><a href="#cb1-161" aria-hidden="true" tabindex="-1"></a>An advanced version of this option is the inclusion of high order fixed effects (and interactions with fixed effects) that are different from the individual and time fixed effects. It is possible to request the inclusion of those types of fixed effects using the option <span class="in">`fevar()`</span>, which is only valid if one is using the default estimator method <span class="in">`reghdfe`</span> or <span class="in">`ppmlhdfe`</span>. In both cases, the additional fixed effects (or interactions) are included in the estimation of the model without further interactions.</span>
+<span id="cb1-162"><a href="#cb1-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-163"><a href="#cb1-163" aria-hidden="true" tabindex="-1"></a><span class="fu">## Post estimation: Aggregated treatment effects {#sec-agg}</span></span>
+<span id="cb1-164"><a href="#cb1-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-165"><a href="#cb1-165" aria-hidden="true" tabindex="-1"></a>After the estimation of the model, under the default options, one can use the coefficients $\theta^{post}_{g,t}$ as direct estimates of the group and time specific average tretment effects on the treated. However, one may also be interested in estimating aggregated ATTs for the overall data, across groups or periods, or dynamic effects. Furthermore, when the underlying method is a non-linear model, these coefficients cannot be directly interpreted as the average treatment effect on the outcome, but only on the latent variable.</span>
+<span id="cb1-166"><a href="#cb1-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-167"><a href="#cb1-167" aria-hidden="true" tabindex="-1"></a><span class="in">`jwdid`</span> comes along with the post estimation command <span class="in">`jwdid_estat`</span> that can be used for that purpose. Internally, it uses the <span class="in">`margins`</span> command to identify average treatment effects under the following algorithm:</span>
+<span id="cb1-168"><a href="#cb1-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-169"><a href="#cb1-169" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Using the model estimates, predict the outcome of interest for all observations given the observed covariates and fixed effects. Call this $\hat Y(obs)$ or predicted outcome under the observed covariates. </span>
+<span id="cb1-170"><a href="#cb1-170" aria-hidden="true" tabindex="-1"></a>   The model prediction could be the linear prediction, or the predicted probability in the case of logit models, or the predicted count in the case of poisson models.</span>
+<span id="cb1-171"><a href="#cb1-171" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Consider the specification @eq-e2, and assume that all $\theta^{post}_{g,t}$ (and $\theta^{pre}_{g,t}$ if <span class="in">`never`</span> is used), as well as all $\beta^{post}$ and $\beta^{pre}$ are zero, and predict the outcome of interest. Call this $\hat Y(0)$ or predicted outcome under the counterfactual scenario of no treatment. </span>
+<span id="cb1-172"><a href="#cb1-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-173"><a href="#cb1-173" aria-hidden="true" tabindex="-1"></a>In this case, the predicted Average Treatment Effect on the Treated for observation $i$ is given by:</span>
+<span id="cb1-174"><a href="#cb1-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-175"><a href="#cb1-175" aria-hidden="true" tabindex="-1"></a>$$\widehat{ATT}_i = \hat Y(obs) - \hat Y(0)$$</span>
+<span id="cb1-176"><a href="#cb1-176" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-177"><a href="#cb1-177" aria-hidden="true" tabindex="-1"></a>This is zero for observations that were never treated, and  nonzero for the treated-post treatment observations.^<span class="co">[</span><span class="ot">The case of pre-treatment treated observations may be assumed to be zero if the `never` option is not used. When `never` is used, pre-treatment ATTs can be used for testing the parallel trends assumption.</span><span class="co">]</span> </span>
+<span id="cb1-178"><a href="#cb1-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-179"><a href="#cb1-179" aria-hidden="true" tabindex="-1"></a>From here, any aggregated average treatment effects can be calculated as follows:</span>
+<span id="cb1-180"><a href="#cb1-180" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-181"><a href="#cb1-181" aria-hidden="true" tabindex="-1"></a>$$AGGTE_r =  \frac{ \sum_i^N\widehat{ATT}_i \times w_{i,t} \times R_{i,t}}{ \sum_i^N  w_{i,t} \times R_{i,t}}  </span>
+<span id="cb1-182"><a href="#cb1-182" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-183"><a href="#cb1-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-184"><a href="#cb1-184" aria-hidden="true" tabindex="-1"></a>where $R_{i,t}$ takes the value of one whenever observation $i$ fullfills the required conditions, and $w_{i,t}$ is the weight of the observation $i$ at time $t$ used in for the estimation model. ^<span class="co">[</span><span class="ot">While this is the default option, `estat` command also allow you to provide other weights for aggregation</span><span class="co">]</span>. $AGGTE$ is the aggregated average treatment effect on the treated given the conditions $R$.</span>
+<span id="cb1-185"><a href="#cb1-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-186"><a href="#cb1-186" aria-hidden="true" tabindex="-1"></a>In general, there are four types of aggregations that are implemented in the <span class="in">`jwdid_estat/estat`</span> command:</span>
+<span id="cb1-187"><a href="#cb1-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-188"><a href="#cb1-188" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`estat simple`</span>: This option calculates the average treatment effect on the treated for all observations that were treated at some point in time. The condition $R$ is defined as:</span>
+<span id="cb1-189"><a href="#cb1-189" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-190"><a href="#cb1-190" aria-hidden="true" tabindex="-1"></a>$$\begin{aligned}</span>
+<span id="cb1-191"><a href="#cb1-191" aria-hidden="true" tabindex="-1"></a>R_{i,t} &amp;= 1 \text{ if } t \geq g \text{ for observation } i \in g&gt;0 <span class="sc">\\</span></span>
+<span id="cb1-192"><a href="#cb1-192" aria-hidden="true" tabindex="-1"></a>R_{i,t} &amp;= 0 \text{ otherwise}</span>
+<span id="cb1-193"><a href="#cb1-193" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
+<span id="cb1-194"><a href="#cb1-194" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-195"><a href="#cb1-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-196"><a href="#cb1-196" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span><span class="in">`estat group`</span>: This option calculates the average treatment effect for observations that were treated at time $g_c$. The condition $R$ is defined as:</span>
+<span id="cb1-197"><a href="#cb1-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-198"><a href="#cb1-198" aria-hidden="true" tabindex="-1"></a>$$\begin{aligned}</span>
+<span id="cb1-199"><a href="#cb1-199" aria-hidden="true" tabindex="-1"></a>R_{i,t} &amp;= 1 \text{ if } t \geq g_c ~ <span class="sc">\&amp;</span> ~ g_c&gt;0 <span class="sc">\\</span></span>
+<span id="cb1-200"><a href="#cb1-200" aria-hidden="true" tabindex="-1"></a>R_{i,t} &amp;= 0 \text{ otherwise}</span>
+<span id="cb1-201"><a href="#cb1-201" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
+<span id="cb1-202"><a href="#cb1-202" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-203"><a href="#cb1-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-204"><a href="#cb1-204" aria-hidden="true" tabindex="-1"></a>where $g_c$ is a particular group/cohort of interest. <span class="in">`estat group`</span> estimates this for all groups $g$ in $G$.</span>
+<span id="cb1-205"><a href="#cb1-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-206"><a href="#cb1-206" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span><span class="in">`estat time`</span>: This option calculates the average treatment effect at time $t$ for all observations that were effectively treated at that point. The condition $R$ is defined as:</span>
+<span id="cb1-207"><a href="#cb1-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-208"><a href="#cb1-208" aria-hidden="true" tabindex="-1"></a>$$\begin{aligned}</span>
+<span id="cb1-209"><a href="#cb1-209" aria-hidden="true" tabindex="-1"></a>R_{i,t} &amp;= 1 \text{ if } t_c \geq g ~ <span class="sc">\&amp;</span> ~ g&gt;0 <span class="sc">\\</span></span>
+<span id="cb1-210"><a href="#cb1-210" aria-hidden="true" tabindex="-1"></a>R_{i,t} &amp;= 0 \text{ otherwise}</span>
+<span id="cb1-211"><a href="#cb1-211" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
+<span id="cb1-212"><a href="#cb1-212" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-213"><a href="#cb1-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-214"><a href="#cb1-214" aria-hidden="true" tabindex="-1"></a>where $t_c$ is a particular time of interest. <span class="in">`estat time`</span> estimates this for all times $t$ in $T$ that has at least one unit that was treated.</span>
+<span id="cb1-215"><a href="#cb1-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-216"><a href="#cb1-216" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span><span class="in">`estat event`</span>: This option calculates dynamic treatment effects, also known as event studies, using the period before treatment as the reference. When the condition `never' is used, this approach can be used to estimate pre-treatment ATT's, which could be used for testing PTA. The condition $R$ is defined as: </span>
+<span id="cb1-217"><a href="#cb1-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-218"><a href="#cb1-218" aria-hidden="true" tabindex="-1"></a>$$\begin{aligned}</span>
+<span id="cb1-219"><a href="#cb1-219" aria-hidden="true" tabindex="-1"></a>R_{i,t} &amp;= 1 \text{ if } t-g = e_c \text{ <span class="sc">\&amp;</span> } e \neq -1 <span class="sc">\\</span></span>
+<span id="cb1-220"><a href="#cb1-220" aria-hidden="true" tabindex="-1"></a>R_{i,t} &amp;= 0 \text{ otherwise}</span>
+<span id="cb1-221"><a href="#cb1-221" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
+<span id="cb1-222"><a href="#cb1-222" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb1-223"><a href="#cb1-223" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-224"><a href="#cb1-224" aria-hidden="true" tabindex="-1"></a>where $e_c$ is a particular event of interest. In contrast with the previous aggregations, if option <span class="in">`never`</span> was used for estimation, one could also add the option <span class="in">`pretrend`</span> to run a simple PTA test with the following null hypothesis:</span>
+<span id="cb1-225"><a href="#cb1-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-226"><a href="#cb1-226" aria-hidden="true" tabindex="-1"></a>$$H_0: AGGTE_e = 0 \text{ for all } e &lt; -1 \text{ vs }H_1: AGGTE_e \neq 0 \text{ for some } e &lt; -1$$</span>
+<span id="cb1-227"><a href="#cb1-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-228"><a href="#cb1-228" aria-hidden="true" tabindex="-1"></a>Failure to reject this hypothesis is evidence in support of parallel trends assumption. Otherwise, one can use <span class="in">`test`</span> command to test for the significance of specific pre-treatment ATT's.^<span class="co">[</span><span class="ot">It should be noticed that this test is different from the test proposed by @callaway2021, which is based on testing _all_ group/time specific ATT's, instead of the event aggregated ones.</span><span class="co">]</span></span>
+<span id="cb1-229"><a href="#cb1-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-230"><a href="#cb1-230" aria-hidden="true" tabindex="-1"></a><span class="fu">## Post estimation: Other options</span></span>
+<span id="cb1-231"><a href="#cb1-231" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-232"><a href="#cb1-232" aria-hidden="true" tabindex="-1"></a>The <span class="in">`jwdid_estat`</span>/<span class="in">`estat`</span> command  allows for further options that may be of interest for the user. In this section we provide a brief description of those options:</span>
+<span id="cb1-233"><a href="#cb1-233" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-234"><a href="#cb1-234" aria-hidden="true" tabindex="-1"></a><span class="fu">### Weights</span></span>
+<span id="cb1-235"><a href="#cb1-235" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-236"><a href="#cb1-236" aria-hidden="true" tabindex="-1"></a>The default option for the estimation of the aggregated ATTs is to use the weights $w_{i,t}$ that were used in the estimation of the model. However, if the user wants to use different weights, it is possible to do using the following syntax:</span>
+<span id="cb1-237"><a href="#cb1-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-238"><a href="#cb1-238" aria-hidden="true" tabindex="-1"></a><span class="in">`estat [aggregation] [pw = weight]`</span></span>
+<span id="cb1-239"><a href="#cb1-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-240"><a href="#cb1-240" aria-hidden="true" tabindex="-1"></a><span class="fu">### Standard Errors</span></span>
+<span id="cb1-241"><a href="#cb1-241" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-242"><a href="#cb1-242" aria-hidden="true" tabindex="-1"></a>@wooldridge2021 suggests than when one estimates standard errors for the aggregated ATTs, one should use <span class="in">`vce(unconditional)`</span> option in <span class="in">`Stata`</span>, to allow for uncertainty in the explanatory variables. <span class="in">`jwdid_estat`</span>/<span class="in">`estat`</span> does not use this approach by default, because it requires that the underlying command is able to produce Scores for the estimated model. For example, if the model was estimated using <span class="in">`method(regress)`</span>, the Scores will be available, and unconditional Standard errors for the aggregated ATTs can be estimated as follows:</span>
+<span id="cb1-243"><a href="#cb1-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-244"><a href="#cb1-244" aria-hidden="true" tabindex="-1"></a><span class="in">`estat [aggregation], [vce(unconditional)]`</span></span>
+<span id="cb1-245"><a href="#cb1-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-246"><a href="#cb1-246" aria-hidden="true" tabindex="-1"></a>This is not possible if one uses the default methodology <span class="in">`reghdfe`</span>, nor with <span class="in">`ppmlhdfe`</span>.</span>
+<span id="cb1-247"><a href="#cb1-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-248"><a href="#cb1-248" aria-hidden="true" tabindex="-1"></a><span class="fu">### Other Aggregation restrictions</span></span>
+<span id="cb1-249"><a href="#cb1-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-250"><a href="#cb1-250" aria-hidden="true" tabindex="-1"></a>As described in @sec-agg, the default aggregation considers all observations treated observations, impossing restrictions only in terms of time, group or event dimensions. However, one may be interested in imposing further restrictions that could leverage on the use of covariates in the model specification. For example, say that one estimates a DID model with covariates using the following syntax:</span>
+<span id="cb1-251"><a href="#cb1-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-252"><a href="#cb1-252" aria-hidden="true" tabindex="-1"></a><span class="in">`jwdid y i.dx, ivar(i) tvar(t) gvar(g) never`</span></span>
+<span id="cb1-253"><a href="#cb1-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-254"><a href="#cb1-254" aria-hidden="true" tabindex="-1"></a>As usual, one could request the estimation of the aggregated ATTs for the whole sample as follows:</span>
+<span id="cb1-255"><a href="#cb1-255" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-256"><a href="#cb1-256" aria-hidden="true" tabindex="-1"></a><span class="in">`estat [aggregation]`</span></span>
+<span id="cb1-257"><a href="#cb1-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-258"><a href="#cb1-258" aria-hidden="true" tabindex="-1"></a>However, one would also be able to make the same estimation imposing the added restriction that the covariate <span class="in">`dx`</span> is zero or one, using the option <span class="in">`orestriction()`</span>:</span>
+<span id="cb1-259"><a href="#cb1-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-260"><a href="#cb1-260" aria-hidden="true" tabindex="-1"></a><span class="in">`estat [aggregation], orestriction(dx==0)`</span></span>
+<span id="cb1-261"><a href="#cb1-261" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-262"><a href="#cb1-262" aria-hidden="true" tabindex="-1"></a><span class="in">`estat [aggregation], orestriction(dx==1)`</span></span>
+<span id="cb1-263"><a href="#cb1-263" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-264"><a href="#cb1-264" aria-hidden="true" tabindex="-1"></a>The expression inside the parenthesis should be a valid Stata expression that is used when calculating the aggregated ATTs.</span>
+<span id="cb1-265"><a href="#cb1-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-266"><a href="#cb1-266" aria-hidden="true" tabindex="-1"></a><span class="fu">### Storing, and saving results</span></span>
+<span id="cb1-267"><a href="#cb1-267" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-268"><a href="#cb1-268" aria-hidden="true" tabindex="-1"></a>After aggregate effects have been estimated, the user may want to store the results for further analysis or reporting. Because <span class="in">`estat`</span> uses <span class="in">`margins`</span> in the background, the default option is to store the results in memory as <span class="in">`r()`</span> elements. Alternatively, <span class="in">`jwdid_estat`</span>/<span class="in">`estat`</span> allows the user to store the output of the command using three different options:</span>
+<span id="cb1-269"><a href="#cb1-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-270"><a href="#cb1-270" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`estat [aggregation], post`</span>: As with margins, option <span class="in">`post`</span> will "post" the results of the command to be the current estimations in memory <span class="in">`e()`</span>, which can be saved as usual for further analysis. </span>
+<span id="cb1-271"><a href="#cb1-271" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span><span class="in">`estat [aggregation], estore(name)`</span>: This option stores the results from the aggregation in memory as <span class="in">`name`</span>. This is similar to using <span class="in">`estimation store name`</span> after a regression command. The previously estimated results from <span class="in">`jwdid`</span> are not overwritten.</span>
+<span id="cb1-272"><a href="#cb1-272" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span><span class="in">`estat [aggregation], esave(filename)`</span>: This option saves the results from the aggregation in a file <span class="in">`filename`</span>, as a <span class="in">`ster`</span> file, which can be used at a later point.  </span>
+<span id="cb1-273"><a href="#cb1-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-274"><a href="#cb1-274" aria-hidden="true" tabindex="-1"></a><span class="fu">### Plotting</span></span>
+<span id="cb1-275"><a href="#cb1-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-276"><a href="#cb1-276" aria-hidden="true" tabindex="-1"></a>After **time**, **group** or **event** aggregations are estimated, it is possible to request plotting those results using <span class="in">`estat plot`</span>. The basic syntax is to type it after the aggregation command, with only minimal command specific options:</span>
+<span id="cb1-277"><a href="#cb1-277" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-278"><a href="#cb1-278" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span><span class="in">`estat plot, style(style)`</span>: The option <span class="in">`style`</span> allows the user to select the style of the plot. The default is using a <span class="in">`rspike`</span> style, but <span class="in">`rarea`</span>, <span class="in">`rcap`</span> and <span class="in">`rbar`</span> are also available. See <span class="in">`help twoway`</span> for more information on the styles.</span>
+<span id="cb1-279"><a href="#cb1-279" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-280"><a href="#cb1-280" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span><span class="in">`estat plot,  pstyle1(str) color1(str) pstyle2(str) color2(str) lwidth1(str) lwidth2(str) barwidth1(str) barwidth2(str)`</span>: The options <span class="in">`pstyle#`</span>, <span class="in">`color#`</span>, <span class="in">`lwidth#`</span> and <span class="in">`barwidth#`</span> can be used to alter the color and style of the lines in the plot for the pre and post treatment periods. Only <span class="in">`event`</span> aggregation allows for <span class="in">`#2`</span> options.</span>
+<span id="cb1-281"><a href="#cb1-281" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-282"><a href="#cb1-282" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span><span class="in">`estat plot, twoway_options`</span>: Most other <span class="in">`twoway`</span> graph option can be used after the <span class="in">`estat plot`</span> command.</span>
+<span id="cb1-283"><a href="#cb1-283" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-284"><a href="#cb1-284" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span><span class="in">`estat plot, tight`</span>: If using cohort, group or event aggregations, the option <span class="in">`tight`</span> will recode the x-axis values starting from 1, instead of the original values. This will avoid blank spaces in the plot.</span>
+<span id="cb1-285"><a href="#cb1-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-286"><a href="#cb1-286" aria-hidden="true" tabindex="-1"></a>:::{.references}</span>
+<span id="cb1-287"><a href="#cb1-287" aria-hidden="true" tabindex="-1"></a>:::</span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

@@ -1,0 +1,16 @@
+---
+title: "Fernando Rios-Avila"
+format:
+  html:
+    css: styles.css
+    page-layout: full
+
+bibliography: 
+  - refx2.bib
+nocite: |
+  @*
+csl: apa-cv.csl
+---
+FAS
+::: {#refs}
+:::

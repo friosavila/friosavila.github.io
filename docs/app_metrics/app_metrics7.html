@@ -1,0 +1,1663 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.45">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Linear Regressions, OLS and Standard Errors – Playing With Stata</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<link href="../app_metrics/app_metrics8.html" rel="next">
+<link href="../app_metrics/app_metrics6.html" rel="prev">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-GNMLZDYJ2P"></script>
+
+<script type="text/javascript">
+
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Playing With Stata</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link active" href="../index.html" aria-current="page"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../cv.html"> 
+<span class="menu-text">my CV and Research</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../software.html"> 
+<span class="menu-text">Software</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../stataviz/index.html"> 
+<span class="menu-text">Stata Viz</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../stata_do/index.html"> 
+<span class="menu-text">Stata Do’s Ado’s</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../app_metrics/index.html"> 
+<span class="menu-text">Applied econometrics</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../chatgpt.html"> 
+<span class="menu-text">Odds and Ends</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="../about.html"> 
+<span class="menu-text">about</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
+  <div class="quarto-reader-toggle-btn">
+  <i class="bi"></i>
+  </div>
+</a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../app_metrics/app_metrics1.html">App Metrics</a></li><li class="breadcrumb-item"><a href="../app_metrics/app_metrics7.html">Linear Regressions, OLS and Standard Errors</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../index.html" class="sidebar-logo-link">
+      <img src="../WeeMee.jpg" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Applied Econometrics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">App Metrics</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Constructing synthetic Datasets</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Nonlinear DID</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><strong><code>jwdid</code></strong>: A Stata command for the estimation of Difference-in-Differences models using ETWFE</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">DRDID/CSDID in Stata</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">DID: The Fall</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">DID: The Revolution</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">2x2 DID: Sant’Anna and Zhao (2020)</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Making better use of interval-censored data</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics7.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Linear Regressions, OLS and Standard Errors</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">DID: Panel Data &amp; Repeated Crossection</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../app_metrics/app_metrics9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quantile regressions with multiple fixed effects</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#how-precise-are-our-estimates" id="toc-how-precise-are-our-estimates" class="nav-link" data-scroll-target="#how-precise-are-our-estimates">How precise are our estimates?</a></li>
+  <li><a href="#homoskedastic-standard-errors" id="toc-homoskedastic-standard-errors" class="nav-link" data-scroll-target="#homoskedastic-standard-errors">Homoskedastic Standard errors</a></li>
+  <li><a href="#robust-standard-errors" id="toc-robust-standard-errors" class="nav-link" data-scroll-target="#robust-standard-errors">Robust Standard errors</a></li>
+  <li><a href="#way-cluster-standard-errors" id="toc-way-cluster-standard-errors" class="nav-link" data-scroll-target="#way-cluster-standard-errors">1-way Cluster Standard errors</a></li>
+  <li><a href="#way-cluster-standard-errors-1" id="toc-way-cluster-standard-errors-1" class="nav-link" data-scroll-target="#way-cluster-standard-errors-1">2-way Cluster Standard Errors</a></li>
+  <li><a href="#how-to-estimate-sigma_ij" id="toc-how-to-estimate-sigma_ij" class="nav-link" data-scroll-target="#how-to-estimate-sigma_ij">How to estimate <span class="math inline">\(\sigma_{ij}\)</span>?</a></li>
+  <li><a href="#stata-example" id="toc-stata-example" class="nav-link" data-scroll-target="#stata-example"><code>Stata</code> Example</a></li>
+  <li><a href="#conclusions" id="toc-conclusions" class="nav-link" data-scroll-target="#conclusions">Conclusions</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../app_metrics/app_metrics1.html">App Metrics</a></li><li class="breadcrumb-item"><a href="../app_metrics/app_metrics7.html">Linear Regressions, OLS and Standard Errors</a></li></ol></nav>
+<div class="quarto-title">
+<div class="quarto-title-block"><div><h1 class="title">Linear Regressions, OLS and Standard Errors</h1><button type="button" class="btn code-tools-button dropdown-toggle" id="quarto-code-tools-menu" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi"></i> Code</button><ul class="dropdown-menu dropdown-menu-end" aria-labelelledby="quarto-code-tools-menu"><li><a id="quarto-show-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Show All Code</a></li><li><a id="quarto-hide-all-code" class="dropdown-item" href="javascript:void(0)" role="button">Hide All Code</a></li><li><hr class="dropdown-divider"></li><li><a id="quarto-view-source" class="dropdown-item" href="javascript:void(0)" role="button">View Source</a></li></ul></div></div>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>Linear regressions (<strong>LR</strong>) are a fundamental tool for economists to analyze data. Among the various methods for estimating the corresponding parameters, the most commonly used is Ordinary Least Squares (<strong>OLS</strong>). When certain assumptions are met<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> , OLS can provide unbiased and consistent estimates of how changes in independent variables (<span class="math inline">\(X's\)</span>) affect the dependent variable (<span class="math inline">\(y\)</span>), assuming that all other factors remain constant. One advantage of OLS is that it is easy to apply and provides a straightforward solution.</p>
+<p>Consider the following linear model (in matrix form), and assume all Classical LR assumtions hold:</p>
+<p><span class="math display">\[y =X  \beta  + e
+\]</span></p>
+<p>If that is the case, the OLS estimator for <span class="math inline">\(\beta's\)</span> is simply given by:</p>
+<p><span class="math display">\[
+\hat \beta_{OLS}=(X'X)^{-1}X'y
+\]</span></p>
+<p>Which is one of those formulas you probably know by memory by know. Something else you can derive from here is the relationship between the estimate <span class="math inline">\(\hat\beta\)</span> and the true <span class="math inline">\(\beta\)</span>:</p>
+<p><span class="math display">\[
+\begin{aligned}
+\hat \beta_{OLS}&amp;=(X'X)^{-1}X'(X\beta + e) \\
+&amp;=(X'X)^{-1}X'X\beta  + (X'X)^{-1}X'e \\
+&amp;= \beta + (X'X)^{-1}X'e
+\end{aligned}
+\]</span></p>
+<p>Which simply states that <span class="math inline">\(\hat\beta\)</span> will be unbiased if <span class="math inline">\(E((X'X)^{-1}X'e)=0\)</span>. But other wise, when using samples, there will be <em>small</em> differences because of the sampling error.</p>
+</section>
+<section id="how-precise-are-our-estimates" class="level2">
+<h2 class="anchored" data-anchor-id="how-precise-are-our-estimates">How precise are our estimates?</h2>
+<p>The last expression has an additional value. It shows that the estimated coefficient <span class="math inline">\(\hat\beta\)</span> can vary across samples, it also provides us a clue of how to measure the precision of that estimate.</p>
+<p>Specifically, if we apply <span class="math inline">\(Var()\)</span> to both sides of the equation, we will have:</p>
+<p><span class="math display">\[
+\begin{aligned}
+Var(\hat\beta_{OLS})=Var(\beta + (X'X)^{-1}X'e) \\
+Var(\hat\beta_{OLS})=Var(\beta) +Var((X'X)^{-1}X'e)  
+\end{aligned}
+\]</span></p>
+<p>Assuming that <span class="math inline">\(X's\)</span> are fixed, we can rewrite this equation into the Variance covariance matrix we are accostume to: <span class="math display">\[Var(\hat\beta_{OLS})=Var(\beta) +(X'X)^{-1}X' Var(e) X (X'X)^{-1}
+\]</span></p>
+<p>Where <span class="math inline">\(Var(e)\)</span> is not necessarity the ovarall variance of <span class="math inline">\(e_i\)</span>. Instead is the <span class="math inline">\(N\times N\)</span> variance convariance matrix that combines the information of all observations in a sample.</p>
+<p><span class="math display">\[
+Var(e) = \left(
+\begin{matrix}
+\sigma^2_1 &amp; \sigma_{1,2} &amp; \sigma_{1,3} &amp; ... &amp;  \sigma_{1,n} \\
+\sigma_{1,2} &amp; \sigma_2^2 &amp; \sigma_{2,3} &amp; ... &amp;  \sigma_{2,n} \\
+\sigma_{1,3} &amp; \sigma_{2,3} &amp; \sigma^2_{3} &amp; ...  &amp; \sigma_{3,n} \\
+... &amp; ... &amp; ... &amp; ...&amp; ...  \\
+\sigma_{1,n} &amp; \sigma_{n,2} &amp; \sigma_{n,3} &amp; ...  &amp; \sigma^2_{n} \\
+\end{matrix}\right)
+\]</span></p>
+<p>This may be somewhat less intuive, and will require a bit of an stretch. In a crossectional sample, we only observe a unit once, but in theory, what we observe is just one of many possible states that unit could have been at. At each one of those, that unit may have received a different <span class="math inline">\(e_i\)</span>. Thus, if we could see all those states, it would be possible to obtain units own unobservable variance <span class="math inline">\(\sigma^2_i\)</span>, and its correlation with other units <span class="math inline">\(\sigma_{ij}\)</span>.</p>
+<p>But let me make one last change and substitute <span class="math inline">\(Var(e)\)</span> with <span class="math inline">\(\Omega\)</span>, so we have the more traditional formula: <span class="math display">\[
+Var(\hat\beta_{OLS}) = \color{brown}{(X'X)^{-1}} \color{green}{X'} \color{red} \Omega \color{green}{X}\color{brown}{(X'X)^{-1}}
+\]</span></p>
+<p>Which is usually described as the <strong>Sandwich</strong> formula. Because of this, I color coded the components.</p>
+<ul>
+<li><span class="math inline">\(\color{brown}{(X'X)^{-1}}\)</span>: Is the Bread</li>
+<li><span class="math inline">\(\color{green}{X'}\)</span>: Is the Lettuce</li>
+<li><span class="math inline">\(\color{red} \Omega\)</span>: The best part of the <strong>Sandwich</strong>, the meat! And Of course, depending on the kind of <strong>meat</strong> we use, we would have different kind of sandwiches, or in this case different types of Standard errors.</li>
+</ul>
+<p>So let us go ahead and revise the different types of Standard erros we can get from this expression. In what follows, however, I will omit any degrees of freedom correction, to simplify some of the expressions</p>
+</section>
+<section id="homoskedastic-standard-errors" class="level2">
+<h2 class="anchored" data-anchor-id="homoskedastic-standard-errors">Homoskedastic Standard errors</h2>
+<p>The first type of Standard errors we learn in Econometrics 101, is the one based on the assumption of homoskedasticity and no cross-units correlation. This means that:</p>
+<ul>
+<li>Unobservables <span class="math inline">\(e\)</span> that affect unit <span class="math inline">\(i\)</span> are completely independent from the unobservables that affect unit <span class="math inline">\(j\)</span>.</li>
+<li>And that the magnitud or variance of the unobservables is the same across all individuals.</li>
+</ul>
+<p>Mathematically this means: <span class="math display">\[
+\begin{aligned}
+\sigma_i^2 &amp;=\sigma_j^2 = \sigma^2 \\
+\sigma_{ij} &amp;=0 \ \forall \ i\neq j
+\end{aligned}
+\]</span></p>
+<p>Which simplifies greatly the <span class="math inline">\(\Omega\)</span> matrix: <span class="math display">\[
+\Omega_0 =
+\left(
+\begin{matrix}
+\sigma^2 &amp; 0 &amp; 0 &amp; ... &amp;  0 \\
+0 &amp; \sigma^2 &amp; 0 &amp; ... &amp;  0 \\
+0 &amp; 0 &amp; \sigma^2 &amp; ...  &amp; 0 \\
+... &amp; ... &amp; ... &amp; ...&amp; ...  \\
+0 &amp; 0 &amp; 0 &amp; ...  &amp; \sigma^2 \\
+\end{matrix}\right)= \sigma^2 I(N)
+\]</span></p>
+<p>And of course simplyfies the Variance-covariance of the <span class="math inline">\(\beta\)</span> coefficients to:</p>
+<p><span class="math display">\[Var(\hat\beta_{OLS})_0 = (X'X)^{-1} X'\sigma^2 I(N) X (X'X)^{-1}=\sigma^2 (X'X)^{-1}
+\]</span></p>
+</section>
+<section id="robust-standard-errors" class="level2">
+<h2 class="anchored" data-anchor-id="robust-standard-errors">Robust Standard errors</h2>
+<p>Now, Robust standard errors, also known as Huber-White Robust standard errors, lifts one of the assumptions compared to the previous case. It explicitly allows for the variance of the errors to be different across individuals, while still imposing no correlation across individuals. <span class="math display">\[
+\begin{aligned}
+\sigma_{ij} &amp;=0 \ \forall \ i\neq j \\
+\exists i,j &amp;:\sigma^2_{i}\neq \sigma^2_{j}
+\end{aligned}
+\]</span></p>
+<p>This does not mean that the variance will always be different when comparing two units, just that they <em>could</em> be different. With this conditions, we can partially simply the <span class="math inline">\(\Omega\)</span> matrix. However, I will not show any further simplications for the variance of <span class="math inline">\(\beta's\)</span> <span class="math display">\[
+\Omega_1 =
+\left(
+\begin{matrix}
+\sigma_1^2 &amp; 0 &amp; 0 &amp; ... &amp;  0 \\
+0 &amp; \sigma_2^2 &amp; 0 &amp; ... &amp;  0 \\
+0 &amp; 0 &amp; \sigma_3^2 &amp; ...  &amp; 0 \\
+... &amp; ... &amp; ... &amp; ...&amp; ...  \\
+0 &amp; 0 &amp; 0 &amp; ...  &amp; \sigma_n^2 \\
+\end{matrix}\right)
+\]</span></p>
+</section>
+<section id="way-cluster-standard-errors" class="level2">
+<h2 class="anchored" data-anchor-id="way-cluster-standard-errors">1-way Cluster Standard errors</h2>
+<p>Cluster standard errors lifts an additional assumption to how the variance covariance matrix should be estimated. In contrast with robust standard errors, cluster standard errors assumes that the unobservables are not necessarily independent across units.</p>
+<p>For example, people within the same family will share similar experiences, thus their unobservables will be correlated. Same for students in the same classrooms, because they share the same “teacher exprience”, or workers in the same firm, because they face the same work enviroment.</p>
+<p>We, of course, still need to impose some restrictions on the data.</p>
+<ul>
+<li>First, as most software was imposing until few years ago, we assume that there is only 1 dimension that individuals could be related to each other.</li>
+<li>Second, we still need to assume that if individuals do not belong to the same “group”, their errors are still independent.</li>
+</ul>
+<p>To show this mathematically, let me define the function <span class="math inline">\(g()\)</span>, which gives me the group membership of unit <span class="math inline">\(i\)</span>. In other words, if unit <span class="math inline">\(i\)</span> belongs to family <span class="math inline">\(k\)</span>, then <span class="math inline">\(g(i)=k\)</span>. With this function, we can define the correlations across individuals to be defined as: <span class="math display">\[
+\begin{aligned}
+\sigma_{i,j} \neq 0 \text{  if  } g(i)=g(j)
+\end{aligned}
+\]</span></p>
+<p>In this case, the <span class="math inline">\(\Omega\)</span> matrix will look very similar to the one we use for robust standard errors. It will still be block diagonal, with the main diagonal having <strong>block</strong> elements different from zero (<span class="math inline">\(\Sigma_j\)</span>), and all other elements outside the diagonal to be zero: <span class="math display">\[
+\Omega_2 =
+\left(
+\begin{matrix}
+\sigma_1^2     &amp; \sigma_{1,2} &amp; 0         &amp; ...  &amp;  0 \\
+\sigma_{1,2} &amp; \sigma_2^2     &amp; 0         &amp; ...  &amp;  0 \\
+0            &amp; 0            &amp; \sigma_3^2  &amp; ...  &amp; \sigma_{3,n} \\
+...          &amp; ...          &amp; ...       &amp; ...  &amp; ...  \\
+0            &amp; 0            &amp; \sigma_{3,n}     &amp; ...  &amp; \sigma_n^2 \\
+\end{matrix}\right) =
+\left(
+\begin{matrix}
+\Sigma_1     &amp; 0            \\
+0            &amp; \Sigma_2      \\
+\end{matrix}\right)
+\]</span></p>
+<p>Visually, this would look like the following</p>
+<div id="a591d85e" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">clear</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> <span class="dv">scheme</span> white2</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>color_style tableau</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> <span class="dv">seed</span> 1</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> <span class="kw">obs</span> 50</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> r1=runiformint(1,4)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> r2=runiformint(1,4)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> id=<span class="dt">_n</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="kw">sort</span> r1  r2</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="kw">qui</span>:<span class="kw">mata</span>:</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>r1=st_data(.,<span class="st">"r1"</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>r2=st_data(.,<span class="st">"r2"</span>)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>rr1=<span class="fu">J</span>(<span class="bn">rows</span>(r1)*<span class="bn">rows</span>(r2),4,0)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="kw">k</span>=0</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="kw">for</span>(i=1;i&lt;=50;i++){</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">for</span>(j=1;j&lt;=50;j++){</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>        <span class="kw">if</span> ((r1[i]==r1[j]) | (r2[i]==r2[j])) {</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>            <span class="kw">k</span>++</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>            rr1[<span class="kw">k</span>,]=(51-i,j,(r1[i]==r1[j]),(r2[i]==r2[j]) )         </span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    }   </span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>rr1=rr1[1..<span class="kw">k</span>,]</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>getmata rr1*=rr1, <span class="kw">replace</span> <span class="kw">force</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="kw">two</span> (<span class="kw">scatter</span> rr11 rr12 <span class="kw">if</span> rr13==1,  ms(<span class="fu">s</span>) msize(2.1))  <span class="co">///</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    (<span class="kw">scatter</span> rr11 rr12 <span class="kw">if</span> 51-rr11 == rr12, ms(<span class="fu">s</span>) msize(2.1) <span class="kw">color</span>(gs1)  ) <span class="co">///</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    , aspect(1) <span class="bn">legend</span>(<span class="kw">off</span>)  <span class="bn">xtitle</span>(<span class="st">""</span>) <span class="bn">ytitle</span>(<span class="st">""</span>) <span class="bn">yscale</span>(<span class="kw">off</span>) <span class="bn">xscale</span>(<span class="kw">off</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<style>div.jp-Notebook .datagrid-container {min-height: 448px; }</style>
+<p>Correlation matrix <span class="math inline">\(\Omega\)</span></p>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code></code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="app_metrics7_files/figure-html/cell-2-output-3.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>In this figure, the blue blocks shows that we are allowing for some non-zero correlation among observations that belong to the same group or <strong>cluster</strong>. Implicily, we are also allowing for all elements of the main diagonal (in black) to be different from zero, which is why Cluster standard errors are also robust to heteroskedasticity.</p>
+</section>
+<section id="way-cluster-standard-errors-1" class="level2">
+<h2 class="anchored" data-anchor-id="way-cluster-standard-errors-1">2-way Cluster Standard Errors</h2>
+<p>What about 2-way, or for even M-way, clustered standard errors?</p>
+<p>As I mentioned above, 1-way clustered standard errors allows for individuals unobserved errors to be correlated across each other, but only if they belong to the same group. If they are from different groups, then no correlation should exists. 1-Way cluster standard errors also assumes that there is only one set of groups that people can be connected through.</p>
+<p>This assumption is also quite strong. People, for example, are interconnected through many chanels. My unobserved factors are likely to be related to my wife’s and daughter’s unobservables, because we belong to the same household. However, they may also be related to my co-workers, because we all have the same workplace, thus share similar experience. I cannot discard my grad-school peers, since we have shared experiences (and thus correlated unobservables). Some of this connections would be new and unique, but some others may overlap.</p>
+<p>The good news is that 2-way cluster standard errors, or M-way, does allow for this more complex scenario. Specifically, if two individuals are part of at least 1 common group, then we will assume the correlation of unobserved factors is different from zero. Unfortunately, we cannot differentiate which <strong>connection</strong> is the one that is driven that correlation.</p>
+<p>To show this mathematically, let me define the function <span class="math inline">\(g_h()\)</span>, which indicates the group, among the set <span class="math inline">\(h\)</span> (cluster variable), that a unit belongs to, and <span class="math inline">\(gg(i,j)\)</span> which takes the value of zero if <span class="math inline">\(i\)</span> and <span class="math inline">\(j\)</span> are not connected to each other in any way (based on the cluster variables), and 1 otherwise. <span class="math display">\[
+\begin{aligned}
+gg(i,j)&amp;=0 \text{  if  } \forall h:g_h(i)\neq  g_h(j) \\
+&amp;\text{ and 1 otherwise}
+\end{aligned}
+\]</span></p>
+<p>If this is the case, <span class="math inline">\(\sigma_{ij}=0\)</span> is assumed zero if <span class="math inline">\(gg(i,j)=0\)</span>, but allow to vary otherwise.</p>
+<p>The implications that it has on the <span class="math inline">\(\Omega\)</span> matrix is that it will no longer be block diagonal, because elements outside the main diagonal (and block diagonal) will be different from zero. <span class="math display">\[\Omega_3 =
+\left(
+\begin{matrix}
+\sigma_1^2     &amp; \sigma_{1,2} &amp; 0         &amp; ...  &amp;  \sigma_{1,n} \\
+\sigma_{1,2} &amp; \sigma_2^2     &amp; \sigma_{2,3}         &amp; ...  &amp;  0 \\
+0            &amp; \sigma_{2,3}   &amp; \sigma_3^2  &amp; ...  &amp; \sigma_{3,n} \\
+...          &amp; ...            &amp; ...       &amp; ...  &amp; ...  \\
+\sigma_{1,n} &amp; 0            &amp; \sigma_{3,n}     &amp; ...  &amp; \sigma_n^2 \\
+\end{matrix}\right)
+\]</span></p>
+<p>Its perhaps easier to show this visually:</p>
+<div class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">two</span> (<span class="kw">scatter</span> rr11 rr12 <span class="kw">if</span> rr13==1,  ms(<span class="fu">s</span>) msize(2.1))  <span class="co">///</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    , aspect(1) <span class="bn">legend</span>(<span class="kw">off</span>)  <span class="bn">xtitle</span>(<span class="st">""</span>) <span class="bn">ytitle</span>(<span class="st">""</span>) <span class="bn">yscale</span>(<span class="kw">off</span>) <span class="bn">xscale</span>(<span class="kw">off</span>) <span class="bn">name</span>(m1, <span class="kw">replace</span>) </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">two</span> (<span class="kw">scatter</span> rr11 rr12 <span class="kw">if</span> rr14==1,  ms(<span class="fu">s</span>) msize(2.1))  <span class="co">///</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    , aspect(1) <span class="bn">legend</span>(<span class="kw">off</span>)  <span class="bn">xtitle</span>(<span class="st">""</span>) <span class="bn">ytitle</span>(<span class="st">""</span>) <span class="bn">yscale</span>(<span class="kw">off</span>) <span class="bn">xscale</span>(<span class="kw">off</span>) <span class="bn">name</span>(m2, <span class="kw">replace</span>)    </span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="kw">two</span> (<span class="kw">scatter</span> rr11 rr12 <span class="kw">if</span> rr14==1 | rr13==1,  ms(<span class="fu">s</span>) msize(2.1))  <span class="co">///</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    , aspect(1) <span class="bn">legend</span>(<span class="kw">off</span>)  <span class="bn">xtitle</span>(<span class="st">""</span>) <span class="bn">ytitle</span>(<span class="st">""</span>) <span class="bn">yscale</span>(<span class="kw">off</span>) <span class="bn">xscale</span>(<span class="kw">off</span>) <span class="bn">name</span>(m3, <span class="kw">replace</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div id="fig-corr" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="2">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-corr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output cell-output-display">
+<div id="fig-corr-1" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-corr-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="app_metrics7_files/figure-html/fig-corr-output-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" data-ref-parent="fig-corr">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-corr-1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(a) 1-way cluster
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="fig-corr-2" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-corr-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="app_metrics7_files/figure-html/fig-corr-output-2.png" class="img-fluid quarto-figure quarto-figure-center figure-img" data-ref-parent="fig-corr">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-corr-2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(b) 2nd 1-way cluster
+</figcaption>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="fig-corr-3" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-subfloat-fig figure">
+<div aria-describedby="fig-corr-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="app_metrics7_files/figure-html/fig-corr-output-3.png" class="img-fluid quarto-figure quarto-figure-center figure-img" data-ref-parent="fig-corr">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-subfloat-caption quarto-subfloat-fig" id="fig-corr-3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+(c) 2-way cluster
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-corr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Correlation matrix <span class="math inline">\(\Omega\)</span>
+</figcaption>
+</figure>
+</div>
+</div>
+<p><a href="#fig-corr" class="quarto-xref">Figure&nbsp;1</a> shows the correlation structure we would observe considering the 2 clustered variables. <a href="#fig-corr-1" class="quarto-xref">Figure&nbsp;1 (a)</a> and <a href="#fig-corr-2" class="quarto-xref">Figure&nbsp;1 (b)</a> show the interconnections based on a first and a second cluster variables, whereas <a href="#fig-corr-3" class="quarto-xref">Figure&nbsp;1 (c)</a> considers the combination of both. To estimate Standard errors we need to allow the <em>blue</em> cells to be different from zero, impossing the zero condition only on the “unconnected” pairs.</p>
+</section>
+<section id="how-to-estimate-sigma_ij" class="level2">
+<h2 class="anchored" data-anchor-id="how-to-estimate-sigma_ij">How to estimate <span class="math inline">\(\sigma_{ij}\)</span>?</h2>
+<p>Up to this point, I have shown how one should think about the estimation of Standard errors. But you may also be interested in the practical approach. Specifically, how do we come up with estimates for <span class="math inline">\(\sigma_i^2\)</span> and <span class="math inline">\(\sigma_{ij}\)</span>.?</p>
+<p>This is actually straight forward!. Since we only see each unit once in crossection, our best estimation of terms is given by: <span class="math display">\[
+\hat \sigma_{ij} = \varepsilon_i*\varepsilon_j
+\]</span></p>
+<p>where <span class="math inline">\(\varepsilon_i\)</span> is the unit specific unobserved component. So that is pretty much it! once you have <span class="math inline">\(\hat \sigma_{ij}\)</span> you simply need to define which assumption you want to use (homoskedastic errors, heteroskedastic, or clustered), identify which elements you will assume to be zero, and voila!…</p>
+<p>Or almost. While what I describe here is technically correct, there are two limitations to its application compared to how is it done in most software.</p>
+<ol type="1">
+<li>I’m disregarding completely the role of degrees of freedom and corresponding corrections.</li>
+<li>The estimation of <span class="math inline">\(\hat\Omega\)</span> as described here is only feasible for small datasets, because it suggest creating a <span class="math inline">\(N\times N\)</span> matrix. This would easily consume all the resources of your computer.</li>
+</ol>
+<p>Regarding point 2. While there are other ways to simply the math, thinking in terms of the unrestricted <span class="math inline">\(\Omega\)</span> is useful to understand the role of clustering and two way clustering in the data.</p>
+</section>
+<section id="stata-example" class="level2">
+<h2 class="anchored" data-anchor-id="stata-example"><code>Stata</code> Example</h2>
+<p>Here I will work on a small example that would implement the 4 approaches to estimating standard errors. Because I will use the unrestrict <span class="math inline">\(\hat\Omega\)</span> matrix, I will work with a very small dataset: `auto’. The next contains lots of code, so feel free to skip it.</p>
+<div id="7ecef941" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>** Load Data, create clusters and a constant</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="kw">sysuse</span> auto, <span class="kw">clear</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">set</span> <span class="dv">seed</span> 1</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="kw">replace</span> price = price / 1000</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> one = 1</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> c1  = runiformint(1,5)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="kw">gen</span> c2  = runiformint(1,5)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>** Load Data to Mata to easy manipulation</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: <span class="fu">y</span> = st_data(.,<span class="st">"price"</span>)</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: x = st_data(.,<span class="st">"mpg one"</span>)</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>** estimate betas, ixx, and erros</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: xx = <span class="kw">cross</span>(x,x); ixx = <span class="fu">invsym</span>(xx);xy=<span class="kw">cross</span>(x,<span class="fu">y</span>)</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: b  = ixx * xy ;  <span class="fu">e</span>   = <span class="fu">y</span>:-x*b</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>(1978 automobile data)
+variable price was int now float
+(74 real changes made)</code></pre>
+</div>
+</div>
+<p>Homoskedastic errors:</p>
+<div id="5462198f" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: omega_0 = <span class="fu">I</span>(74)*<span class="kw">mean</span>(<span class="fu">e</span>:^2)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: vcv_0   = ixx * x' * omega_0 * x * ixx</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: svcv_0  = diagonal(vcv_0):^.5;svcv_0</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 1
+    +---------------+
+  1 |  .0523545211  |
+  2 |  1.154882583  |
+    +---------------+</code></pre>
+</div>
+</div>
+<p>Robust Standard errors</p>
+<div id="e90f2897" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: omega_1 = (<span class="fu">e</span>*e'):*<span class="fu">I</span>(74)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: vcv_1   = ixx * x' * omega_1 * x * ixx</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: svcv_1  = diagonal(vcv_1):^.5;svcv_1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 1
+    +---------------+
+  1 |  .0566949707  |
+  2 |   1.35766526  |
+    +---------------+</code></pre>
+</div>
+</div>
+<p>1-way Cluster Standard errors:</p>
+<div id="0ebb1c93" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: <span class="kw">cc</span> = st_data(.,<span class="st">"c1 c2"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: i1 = <span class="fu">J</span>(1,74,<span class="kw">cc</span>[,1]):==<span class="fu">J</span>(74,1,<span class="kw">cc</span>[,1]') </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: i2 = <span class="fu">J</span>(1,74,<span class="kw">cc</span>[,2]):==<span class="fu">J</span>(74,1,<span class="kw">cc</span>[,2]') </span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: omega_2a = (<span class="fu">e</span>*e'):*i1; omega_2b = (<span class="fu">e</span>*e'):*i2</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: vcv_2a   = ixx * x' * omega_2a * x * ixx</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: vcv_2b   = ixx * x' * omega_2b * x * ixx</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: svcv_2a  = diagonal(vcv_2a):^.5</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: svcv_2b  = diagonal(vcv_2b):^.5</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: svcv_2a, svcv_2b </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 1             2
+    +-----------------------------+
+  1 |  .0816625514   .0293288459  |
+  2 |  2.010064686   .6935766918  |
+    +-----------------------------+</code></pre>
+</div>
+</div>
+<p>2-way Cluster Standard errors</p>
+<div id="9c1326e2" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: i3 = i1:|i2</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: omega_3 = (<span class="fu">e</span>*e'):*i3</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: vcv_3   = ixx * x' * omega_3 * x * ixx</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: svcv_3  = diagonal(vcv_3):^.5; svcv_3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 1
+    +---------------+
+  1 |  .0595359543  |
+  2 |  1.523244536  |
+    +---------------+</code></pre>
+</div>
+</div>
+<p>But for the 2-way Cluster Standard errors you also have the more commonly used formula:</p>
+<div id="82c74bbd" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>** First we need to create a <span class="kw">variable</span> that combines both clusters</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: i4 = i1:&amp;i2</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: omega_4 = (<span class="fu">e</span>*e'):*i4</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: vcv_aux   = ixx * x' * omega_4 * x * ixx</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: vcv_4 = vcv_2a + vcv_2b - vcv_aux</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="kw">mata</span>: svcv_4  = diagonal(vcv_4):^.5; svcv_4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                 1
+    +---------------+
+  1 |  .0595359543  |
+  2 |  1.523244536  |
+    +---------------+</code></pre>
+</div>
+</div>
+</section>
+<section id="conclusions" class="level2">
+<h2 class="anchored" data-anchor-id="conclusions">Conclusions</h2>
+<p>In this note, I provide a walkthrough the estimation of different types of standard errors from a linear regression model.</p>
+<p>While most textbooks already cover the basics of standard errors under homoskedasticity, heteroskedasticity, and oneway clustered errors, I have not seen an intuitive approach to understanding w-way clustered standard errors.</p>
+<p>As I shown here, the idea of 2-way, or M-way, clustered standard errors is to allow arbitrary correlations across individuals, if they have to at least one common group (one cluster variable).</p>
+<p>Now, one may be tempted to try and use this approach to allow for unconstrained correlation across all units. After all we are all connected to some way. However, because we do not see the true unobserved variance-covariance matrix, the variance of <span class="math inline">\(\beta\)</span> would not be identified without impossing restrictions on <span class="math inline">\(\Omega\)</span>.</p>
+<p>If you are interested in learning more about this topic, I would recommend you to read <span class="citation" data-cites="cameron_robust_2011">Cameron, Gelbach, and Miller (<a href="#ref-cameron_robust_2011" role="doc-biblioref">2011</a>)</span>, <span class="citation" data-cites="mackinnon_cluster-robust_2023">MacKinnon, Nielsen, and Webb (<a href="#ref-mackinnon_cluster-robust_2023" role="doc-biblioref">2023</a>)</span> and <span class="citation" data-cites="abadie_when_2022">Abadie et al. (<a href="#ref-abadie_when_2022" role="doc-biblioref">2022</a>)</span>.</p>
+
+
+<!-- -->
+
+
+</section>
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-abadie_when_2022" class="csl-entry" role="listitem">
+Abadie, Alberto, Susan Athey, Guido W Imbens, and Jeffrey M Wooldridge. 2022. <span>“When <span>Should</span> <span>You</span> <span>Adjust</span> <span>Standard</span> <span>Errors</span> for <span>Clustering</span>?”</span> <em>The Quarterly Journal of Economics</em> 138 (1): 1–35. <a href="https://doi.org/10.1093/qje/qjac038">https://doi.org/10.1093/qje/qjac038</a>.
+</div>
+<div id="ref-cameron_robust_2011" class="csl-entry" role="listitem">
+Cameron, A. Colin, Jonah B. Gelbach, and Douglas L. Miller. 2011. <span>“Robust <span>Inference</span> <span>With</span> <span>Multiway</span> <span>Clustering</span>.”</span> <em>Journal of Business &amp; Economic Statistics</em> 29 (2): 238–49. <a href="https://doi.org/10.1198/jbes.2010.07136">https://doi.org/10.1198/jbes.2010.07136</a>.
+</div>
+<div id="ref-mackinnon_cluster-robust_2023" class="csl-entry" role="listitem">
+MacKinnon, James G., Morten Ørregaard Nielsen, and Matthew D. Webb. 2023. <span>“Cluster-Robust Inference: <span>A</span> Guide to Empirical Practice.”</span> <em>Journal of Econometrics</em> 232 (2): 272–99. <a href="https://doi.org/10.1016/j.jeconom.2022.04.001">https://doi.org/10.1016/j.jeconom.2022.04.001</a>.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>See for example Introductory Econometrics: A Modern Approach by Jeffery Wooldridge<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+  const viewSource = window.document.getElementById('quarto-view-source') ||
+                     window.document.getElementById('quarto-code-tools-source');
+  if (viewSource) {
+    const sourceUrl = viewSource.getAttribute("data-quarto-source-url");
+    viewSource.addEventListener("click", function(e) {
+      if (sourceUrl) {
+        // rstudio viewer pane
+        if (/\bcapabilities=\b/.test(window.location)) {
+          window.open(sourceUrl);
+        } else {
+          window.location.href = sourceUrl;
+        }
+      } else {
+        const modal = new bootstrap.Modal(document.getElementById('quarto-embedded-source-code-modal'));
+        modal.show();
+      }
+      return false;
+    });
+  }
+  function toggleCodeHandler(show) {
+    return function(e) {
+      const detailsSrc = window.document.querySelectorAll(".cell > details > .sourceCode");
+      for (let i=0; i<detailsSrc.length; i++) {
+        const details = detailsSrc[i].parentElement;
+        if (show) {
+          details.open = true;
+        } else {
+          details.removeAttribute("open");
+        }
+      }
+      const cellCodeDivs = window.document.querySelectorAll(".cell > .sourceCode");
+      const fromCls = show ? "hidden" : "unhidden";
+      const toCls = show ? "unhidden" : "hidden";
+      for (let i=0; i<cellCodeDivs.length; i++) {
+        const codeDiv = cellCodeDivs[i];
+        if (codeDiv.classList.contains(fromCls)) {
+          codeDiv.classList.remove(fromCls);
+          codeDiv.classList.add(toCls);
+        } 
+      }
+      return false;
+    }
+  }
+  const hideAllCode = window.document.getElementById("quarto-hide-all-code");
+  if (hideAllCode) {
+    hideAllCode.addEventListener("click", toggleCodeHandler(false));
+  }
+  const showAllCode = window.document.getElementById("quarto-show-all-code");
+  if (showAllCode) {
+    showAllCode.addEventListener("click", toggleCodeHandler(true));
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/friosavila\.github\.io\/");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../app_metrics/app_metrics6.html" class="pagination-link" aria-label="Making better use of interval-censored data">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Making better use of interval-censored data</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../app_metrics/app_metrics8.html" class="pagination-link" aria-label="DID: Panel Data &amp; Repeated Crossection">
+        <span class="nav-page-text">DID: Panel Data &amp; Repeated Crossection</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
+<div class="sourceCode" id="cb16" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Linear Regressions, OLS and Standard Errors"</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span><span class="co"> html</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="an">bibliography:</span><span class="co"> references.bib</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introduction</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>Linear regressions (**LR**) are a fundamental tool for economists to analyze data. Among the various methods for estimating the corresponding parameters, the most commonly used is Ordinary Least Squares (**OLS**). When certain assumptions are met^<span class="co">[</span><span class="ot">See for example Introductory Econometrics: A Modern Approach by Jeffery Wooldridge</span><span class="co">]</span> , OLS can provide unbiased and consistent estimates of how changes in independent variables ($X's$) affect the dependent variable ($y$), assuming that all other factors remain constant. One advantage of OLS is that it is easy to apply and provides a straightforward solution. </span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>Consider the following linear model (in matrix form), and assume all Classical LR assumtions hold:</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>$$y =X  \beta  + e</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>If that is the case, the OLS estimator for $\beta's$ is simply given by:</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>\hat \beta_{OLS}=(X'X)^{-1}X'y</span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>Which is one of those formulas you probably know by memory by know. Something else you can derive from here is the relationship between the estimate $\hat\beta$ and the true $\beta$:</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>\begin{aligned}</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>\hat \beta_{OLS}&amp;=(X'X)^{-1}X'(X\beta + e) <span class="sc">\\</span></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a> &amp;=(X'X)^{-1}X'X\beta  + (X'X)^{-1}X'e <span class="sc">\\</span></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a> &amp;= \beta + (X'X)^{-1}X'e</span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>Which simply states that $\hat\beta$ will be unbiased if $E((X'X)^{-1}X'e)=0$. But other wise, when using samples, there will  be *small* differences because of the sampling error. </span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a><span class="fu">## How precise are our estimates?</span></span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>The last expression has an additional value. It shows that the estimated coefficient $\hat\beta$ can vary across samples, it also provides us a clue of how to measure the precision of that estimate.</span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true" tabindex="-1"></a>Specifically, if we apply $Var()$ to both sides of the equation, we will have:</span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true" tabindex="-1"></a>\begin{aligned}</span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true" tabindex="-1"></a>Var(\hat\beta_{OLS})=Var(\beta + (X'X)^{-1}X'e) <span class="sc">\\</span></span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true" tabindex="-1"></a>Var(\hat\beta_{OLS})=Var(\beta) +Var((X'X)^{-1}X'e)  </span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true" tabindex="-1"></a>Assuming that $X's$ are fixed, we can rewrite this equation into the Variance covariance matrix we are accostume to:</span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true" tabindex="-1"></a>$$Var(\hat\beta_{OLS})=Var(\beta) +(X'X)^{-1}X' Var(e) X (X'X)^{-1}</span>
+<span id="cb16-49"><a href="#cb16-49" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-50"><a href="#cb16-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-51"><a href="#cb16-51" aria-hidden="true" tabindex="-1"></a>Where $Var(e)$ is not necessarity the ovarall variance of $e_i$. Instead is the $N\times N$ variance convariance matrix that combines the information of all observations in a sample.</span>
+<span id="cb16-52"><a href="#cb16-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-53"><a href="#cb16-53" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-54"><a href="#cb16-54" aria-hidden="true" tabindex="-1"></a>Var(e) = \left(</span>
+<span id="cb16-55"><a href="#cb16-55" aria-hidden="true" tabindex="-1"></a>\begin{matrix}</span>
+<span id="cb16-56"><a href="#cb16-56" aria-hidden="true" tabindex="-1"></a>\sigma^2_1 &amp; \sigma_{1,2} &amp; \sigma_{1,3} &amp; ... &amp;  \sigma_{1,n} <span class="sc">\\</span></span>
+<span id="cb16-57"><a href="#cb16-57" aria-hidden="true" tabindex="-1"></a>\sigma_{1,2} &amp; \sigma_2^2 &amp; \sigma_{2,3} &amp; ... &amp;  \sigma_{2,n} <span class="sc">\\</span></span>
+<span id="cb16-58"><a href="#cb16-58" aria-hidden="true" tabindex="-1"></a>\sigma_{1,3} &amp; \sigma_{2,3} &amp; \sigma^2_{3} &amp; ...  &amp; \sigma_{3,n} <span class="sc">\\</span></span>
+<span id="cb16-59"><a href="#cb16-59" aria-hidden="true" tabindex="-1"></a>... &amp; ... &amp; ... &amp; ...&amp; ...  <span class="sc">\\</span></span>
+<span id="cb16-60"><a href="#cb16-60" aria-hidden="true" tabindex="-1"></a>\sigma_{1,n} &amp; \sigma_{n,2} &amp; \sigma_{n,3} &amp; ...  &amp; \sigma^2_{n} <span class="sc">\\</span></span>
+<span id="cb16-61"><a href="#cb16-61" aria-hidden="true" tabindex="-1"></a>\end{matrix}\right)</span>
+<span id="cb16-62"><a href="#cb16-62" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-63"><a href="#cb16-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-64"><a href="#cb16-64" aria-hidden="true" tabindex="-1"></a>This may be somewhat less intuive, and will require a bit of an stretch. In a crossectional sample, we only observe a unit once, but in theory, what we observe is just one of many possible states that unit could have been at. At each one of those, that unit may have received a different $e_i$. Thus, if we could see all those states, it would be possible to obtain units own unobservable variance $\sigma^2_i$, and its correlation with other units $\sigma_{ij}$.</span>
+<span id="cb16-65"><a href="#cb16-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-66"><a href="#cb16-66" aria-hidden="true" tabindex="-1"></a>But let me make one last change and substitute $Var(e)$ with $\Omega$, so we have the more traditional formula:</span>
+<span id="cb16-67"><a href="#cb16-67" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-68"><a href="#cb16-68" aria-hidden="true" tabindex="-1"></a>Var(\hat\beta_{OLS}) = \color{brown}{(X'X)^{-1}} \color{green}{X'} \color{red} \Omega \color{green}{X}\color{brown}{(X'X)^{-1}}</span>
+<span id="cb16-69"><a href="#cb16-69" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-70"><a href="#cb16-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-71"><a href="#cb16-71" aria-hidden="true" tabindex="-1"></a>Which is usually described as the **Sandwich** formula. Because of this, I color coded the components.</span>
+<span id="cb16-72"><a href="#cb16-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-73"><a href="#cb16-73" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$\color{brown}{(X'X)^{-1}}$: Is the Bread</span>
+<span id="cb16-74"><a href="#cb16-74" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$\color{green}{X'}$: Is the Lettuce </span>
+<span id="cb16-75"><a href="#cb16-75" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>$\color{red} \Omega$: The best part of the **Sandwich**, the meat! And Of course, depending on the kind of **meat** we use, we would have different kind of sandwiches, or in this case different types of Standard errors.</span>
+<span id="cb16-76"><a href="#cb16-76" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-77"><a href="#cb16-77" aria-hidden="true" tabindex="-1"></a>So let us go ahead and revise the different types of Standard erros we can get from this expression. In what follows, however, I will omit any degrees of freedom correction, to simplify some of the expressions</span>
+<span id="cb16-78"><a href="#cb16-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-79"><a href="#cb16-79" aria-hidden="true" tabindex="-1"></a><span class="fu">## Homoskedastic Standard errors</span></span>
+<span id="cb16-80"><a href="#cb16-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-81"><a href="#cb16-81" aria-hidden="true" tabindex="-1"></a>The first type of Standard errors we learn in Econometrics 101, is the one based on the assumption of homoskedasticity and no cross-units correlation. This means that:</span>
+<span id="cb16-82"><a href="#cb16-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-83"><a href="#cb16-83" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Unobservables $e$ that affect unit $i$ are completely independent from the unobservables that affect unit $j$.</span>
+<span id="cb16-84"><a href="#cb16-84" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>And that the magnitud or variance of the unobservables is the same across all individuals.</span>
+<span id="cb16-85"><a href="#cb16-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-86"><a href="#cb16-86" aria-hidden="true" tabindex="-1"></a>Mathematically this means:</span>
+<span id="cb16-87"><a href="#cb16-87" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-88"><a href="#cb16-88" aria-hidden="true" tabindex="-1"></a>\begin{aligned}</span>
+<span id="cb16-89"><a href="#cb16-89" aria-hidden="true" tabindex="-1"></a>\sigma_i^2 &amp;=\sigma_j^2 = \sigma^2 <span class="sc">\\</span></span>
+<span id="cb16-90"><a href="#cb16-90" aria-hidden="true" tabindex="-1"></a>\sigma_{ij} &amp;=0 \ \forall \ i\neq j</span>
+<span id="cb16-91"><a href="#cb16-91" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
+<span id="cb16-92"><a href="#cb16-92" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-93"><a href="#cb16-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-94"><a href="#cb16-94" aria-hidden="true" tabindex="-1"></a>Which simplifies greatly the $\Omega$ matrix:</span>
+<span id="cb16-95"><a href="#cb16-95" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-96"><a href="#cb16-96" aria-hidden="true" tabindex="-1"></a>\Omega_0 = </span>
+<span id="cb16-97"><a href="#cb16-97" aria-hidden="true" tabindex="-1"></a>\left(</span>
+<span id="cb16-98"><a href="#cb16-98" aria-hidden="true" tabindex="-1"></a>\begin{matrix}</span>
+<span id="cb16-99"><a href="#cb16-99" aria-hidden="true" tabindex="-1"></a>\sigma^2 &amp; 0 &amp; 0 &amp; ... &amp;  0 <span class="sc">\\</span></span>
+<span id="cb16-100"><a href="#cb16-100" aria-hidden="true" tabindex="-1"></a>0 &amp; \sigma^2 &amp; 0 &amp; ... &amp;  0 <span class="sc">\\</span></span>
+<span id="cb16-101"><a href="#cb16-101" aria-hidden="true" tabindex="-1"></a>0 &amp; 0 &amp; \sigma^2 &amp; ...  &amp; 0 <span class="sc">\\</span></span>
+<span id="cb16-102"><a href="#cb16-102" aria-hidden="true" tabindex="-1"></a>... &amp; ... &amp; ... &amp; ...&amp; ...  <span class="sc">\\</span></span>
+<span id="cb16-103"><a href="#cb16-103" aria-hidden="true" tabindex="-1"></a>0 &amp; 0 &amp; 0 &amp; ...  &amp; \sigma^2 <span class="sc">\\</span></span>
+<span id="cb16-104"><a href="#cb16-104" aria-hidden="true" tabindex="-1"></a>\end{matrix}\right)= \sigma^2 I(N) </span>
+<span id="cb16-105"><a href="#cb16-105" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-106"><a href="#cb16-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-107"><a href="#cb16-107" aria-hidden="true" tabindex="-1"></a>And of course simplyfies the Variance-covariance of the $\beta$ coefficients to:</span>
+<span id="cb16-108"><a href="#cb16-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-109"><a href="#cb16-109" aria-hidden="true" tabindex="-1"></a>$$Var(\hat\beta_{OLS})_0 = (X'X)^{-1} X'\sigma^2 I(N) X (X'X)^{-1}=\sigma^2 (X'X)^{-1}</span>
+<span id="cb16-110"><a href="#cb16-110" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-111"><a href="#cb16-111" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-112"><a href="#cb16-112" aria-hidden="true" tabindex="-1"></a><span class="fu">## Robust Standard errors</span></span>
+<span id="cb16-113"><a href="#cb16-113" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-114"><a href="#cb16-114" aria-hidden="true" tabindex="-1"></a>Now, Robust standard errors, also known as Huber-White Robust standard errors, lifts one of the assumptions compared to the previous case. It explicitly allows for the variance of the errors to be different across individuals, while still imposing no correlation across individuals.</span>
+<span id="cb16-115"><a href="#cb16-115" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-116"><a href="#cb16-116" aria-hidden="true" tabindex="-1"></a>\begin{aligned}</span>
+<span id="cb16-117"><a href="#cb16-117" aria-hidden="true" tabindex="-1"></a>\sigma_{ij} &amp;=0 \ \forall \ i\neq j <span class="sc">\\</span></span>
+<span id="cb16-118"><a href="#cb16-118" aria-hidden="true" tabindex="-1"></a>\exists i,j &amp;:\sigma^2_{i}\neq \sigma^2_{j}</span>
+<span id="cb16-119"><a href="#cb16-119" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
+<span id="cb16-120"><a href="#cb16-120" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-121"><a href="#cb16-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-122"><a href="#cb16-122" aria-hidden="true" tabindex="-1"></a>This does not mean that the variance will always be different when comparing two units, just that they *could* be different. With this conditions, we can partially simply the $\Omega$ matrix. However, I will not show any further simplications for the variance of $\beta's$</span>
+<span id="cb16-123"><a href="#cb16-123" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-124"><a href="#cb16-124" aria-hidden="true" tabindex="-1"></a>\Omega_1 =</span>
+<span id="cb16-125"><a href="#cb16-125" aria-hidden="true" tabindex="-1"></a>\left(</span>
+<span id="cb16-126"><a href="#cb16-126" aria-hidden="true" tabindex="-1"></a>\begin{matrix}</span>
+<span id="cb16-127"><a href="#cb16-127" aria-hidden="true" tabindex="-1"></a>\sigma_1^2 &amp; 0 &amp; 0 &amp; ... &amp;  0 <span class="sc">\\</span></span>
+<span id="cb16-128"><a href="#cb16-128" aria-hidden="true" tabindex="-1"></a>0 &amp; \sigma_2^2 &amp; 0 &amp; ... &amp;  0 <span class="sc">\\</span></span>
+<span id="cb16-129"><a href="#cb16-129" aria-hidden="true" tabindex="-1"></a>0 &amp; 0 &amp; \sigma_3^2 &amp; ...  &amp; 0 <span class="sc">\\</span></span>
+<span id="cb16-130"><a href="#cb16-130" aria-hidden="true" tabindex="-1"></a>... &amp; ... &amp; ... &amp; ...&amp; ...  <span class="sc">\\</span></span>
+<span id="cb16-131"><a href="#cb16-131" aria-hidden="true" tabindex="-1"></a>0 &amp; 0 &amp; 0 &amp; ...  &amp; \sigma_n^2 <span class="sc">\\</span></span>
+<span id="cb16-132"><a href="#cb16-132" aria-hidden="true" tabindex="-1"></a>\end{matrix}\right)</span>
+<span id="cb16-133"><a href="#cb16-133" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-134"><a href="#cb16-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-135"><a href="#cb16-135" aria-hidden="true" tabindex="-1"></a><span class="fu">## 1-way Cluster Standard errors</span></span>
+<span id="cb16-136"><a href="#cb16-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-137"><a href="#cb16-137" aria-hidden="true" tabindex="-1"></a>Cluster standard errors lifts an additional assumption to how the variance covariance matrix should be estimated. In contrast with robust standard errors, cluster standard errors assumes that the unobservables are not necessarily independent across units.</span>
+<span id="cb16-138"><a href="#cb16-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-139"><a href="#cb16-139" aria-hidden="true" tabindex="-1"></a>For example, people within the same family will share similar experiences, thus their unobservables will be correlated. Same for students in the same classrooms, because they share the same "teacher exprience", or workers in the same firm, because they face the same work enviroment. </span>
+<span id="cb16-140"><a href="#cb16-140" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-141"><a href="#cb16-141" aria-hidden="true" tabindex="-1"></a>We, of course, still need to impose some restrictions on the data.</span>
+<span id="cb16-142"><a href="#cb16-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-143"><a href="#cb16-143" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>First, as most software was imposing until few years ago, we assume that there is only 1 dimension that individuals could be related to each other. </span>
+<span id="cb16-144"><a href="#cb16-144" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Second, we still need to assume that if individuals do not belong to the same "group", their errors are still independent.</span>
+<span id="cb16-145"><a href="#cb16-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-146"><a href="#cb16-146" aria-hidden="true" tabindex="-1"></a>To show this mathematically, let me define the function $g()$, which gives me the group membership of unit $i$. In other words, if unit $i$ belongs to family $k$, then $g(i)=k$. With this function, we can define the correlations across individuals to be defined as:</span>
+<span id="cb16-147"><a href="#cb16-147" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-148"><a href="#cb16-148" aria-hidden="true" tabindex="-1"></a>\begin{aligned}</span>
+<span id="cb16-149"><a href="#cb16-149" aria-hidden="true" tabindex="-1"></a>\sigma_{i,j} \neq 0 \text{  if  } g(i)=g(j)</span>
+<span id="cb16-150"><a href="#cb16-150" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
+<span id="cb16-151"><a href="#cb16-151" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-152"><a href="#cb16-152" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-153"><a href="#cb16-153" aria-hidden="true" tabindex="-1"></a>In this case, the $\Omega$ matrix will look very similar to the one we use for robust standard errors. It will still be block diagonal, with the main diagonal having **block** elements different from zero ($\Sigma_j$), and all other elements outside the diagonal to be zero:</span>
+<span id="cb16-154"><a href="#cb16-154" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-155"><a href="#cb16-155" aria-hidden="true" tabindex="-1"></a>\Omega_2 =</span>
+<span id="cb16-156"><a href="#cb16-156" aria-hidden="true" tabindex="-1"></a>\left(</span>
+<span id="cb16-157"><a href="#cb16-157" aria-hidden="true" tabindex="-1"></a>\begin{matrix}</span>
+<span id="cb16-158"><a href="#cb16-158" aria-hidden="true" tabindex="-1"></a>\sigma_1^2     &amp; \sigma_{1,2} &amp; 0         &amp; ...  &amp;  0 <span class="sc">\\</span></span>
+<span id="cb16-159"><a href="#cb16-159" aria-hidden="true" tabindex="-1"></a>\sigma_{1,2} &amp; \sigma_2^2     &amp; 0         &amp; ...  &amp;  0 <span class="sc">\\</span></span>
+<span id="cb16-160"><a href="#cb16-160" aria-hidden="true" tabindex="-1"></a>0            &amp; 0            &amp; \sigma_3^2  &amp; ...  &amp; \sigma_{3,n} <span class="sc">\\</span></span>
+<span id="cb16-161"><a href="#cb16-161" aria-hidden="true" tabindex="-1"></a>...          &amp; ...          &amp; ...       &amp; ...  &amp; ...  <span class="sc">\\</span></span>
+<span id="cb16-162"><a href="#cb16-162" aria-hidden="true" tabindex="-1"></a>0            &amp; 0            &amp; \sigma_{3,n}     &amp; ...  &amp; \sigma_n^2 <span class="sc">\\</span></span>
+<span id="cb16-163"><a href="#cb16-163" aria-hidden="true" tabindex="-1"></a>\end{matrix}\right) =</span>
+<span id="cb16-164"><a href="#cb16-164" aria-hidden="true" tabindex="-1"></a>\left(</span>
+<span id="cb16-165"><a href="#cb16-165" aria-hidden="true" tabindex="-1"></a>\begin{matrix}</span>
+<span id="cb16-166"><a href="#cb16-166" aria-hidden="true" tabindex="-1"></a>\Sigma_1     &amp; 0            <span class="sc">\\</span></span>
+<span id="cb16-167"><a href="#cb16-167" aria-hidden="true" tabindex="-1"></a>0            &amp; \Sigma_2      <span class="sc">\\</span></span>
+<span id="cb16-168"><a href="#cb16-168" aria-hidden="true" tabindex="-1"></a>\end{matrix}\right)</span>
+<span id="cb16-169"><a href="#cb16-169" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-170"><a href="#cb16-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-171"><a href="#cb16-171" aria-hidden="true" tabindex="-1"></a>Visually, this would look like the following</span>
+<span id="cb16-172"><a href="#cb16-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-175"><a href="#cb16-175" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb16-176"><a href="#cb16-176" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo: true</span></span>
+<span id="cb16-177"><a href="#cb16-177" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: true</span></span>
+<span id="cb16-178"><a href="#cb16-178" aria-hidden="true" tabindex="-1"></a><span class="in">*| fig-cap: Correlation matrix $\Omega$</span></span>
+<span id="cb16-179"><a href="#cb16-179" aria-hidden="true" tabindex="-1"></a><span class="in">clear</span></span>
+<span id="cb16-180"><a href="#cb16-180" aria-hidden="true" tabindex="-1"></a><span class="in">set scheme white2</span></span>
+<span id="cb16-181"><a href="#cb16-181" aria-hidden="true" tabindex="-1"></a><span class="in">color_style tableau</span></span>
+<span id="cb16-182"><a href="#cb16-182" aria-hidden="true" tabindex="-1"></a><span class="in">set seed 1</span></span>
+<span id="cb16-183"><a href="#cb16-183" aria-hidden="true" tabindex="-1"></a><span class="in">set obs 50</span></span>
+<span id="cb16-184"><a href="#cb16-184" aria-hidden="true" tabindex="-1"></a><span class="in">gen r1=runiformint(1,4)</span></span>
+<span id="cb16-185"><a href="#cb16-185" aria-hidden="true" tabindex="-1"></a><span class="in">gen r2=runiformint(1,4)</span></span>
+<span id="cb16-186"><a href="#cb16-186" aria-hidden="true" tabindex="-1"></a><span class="in">gen id=_n</span></span>
+<span id="cb16-187"><a href="#cb16-187" aria-hidden="true" tabindex="-1"></a><span class="in">sort r1  r2</span></span>
+<span id="cb16-188"><a href="#cb16-188" aria-hidden="true" tabindex="-1"></a><span class="in">qui:mata:</span></span>
+<span id="cb16-189"><a href="#cb16-189" aria-hidden="true" tabindex="-1"></a><span class="in">r1=st_data(.,"r1")</span></span>
+<span id="cb16-190"><a href="#cb16-190" aria-hidden="true" tabindex="-1"></a><span class="in">r2=st_data(.,"r2")</span></span>
+<span id="cb16-191"><a href="#cb16-191" aria-hidden="true" tabindex="-1"></a><span class="in">rr1=J(rows(r1)*rows(r2),4,0)</span></span>
+<span id="cb16-192"><a href="#cb16-192" aria-hidden="true" tabindex="-1"></a><span class="in">k=0</span></span>
+<span id="cb16-193"><a href="#cb16-193" aria-hidden="true" tabindex="-1"></a><span class="in">for(i=1;i&lt;=50;i++){</span></span>
+<span id="cb16-194"><a href="#cb16-194" aria-hidden="true" tabindex="-1"></a><span class="in">    for(j=1;j&lt;=50;j++){</span></span>
+<span id="cb16-195"><a href="#cb16-195" aria-hidden="true" tabindex="-1"></a><span class="in">        if ((r1[i]==r1[j]) | (r2[i]==r2[j])) {</span></span>
+<span id="cb16-196"><a href="#cb16-196" aria-hidden="true" tabindex="-1"></a><span class="in">            k++</span></span>
+<span id="cb16-197"><a href="#cb16-197" aria-hidden="true" tabindex="-1"></a><span class="in">            rr1[k,]=(51-i,j,(r1[i]==r1[j]),(r2[i]==r2[j]) )         </span></span>
+<span id="cb16-198"><a href="#cb16-198" aria-hidden="true" tabindex="-1"></a><span class="in">        }</span></span>
+<span id="cb16-199"><a href="#cb16-199" aria-hidden="true" tabindex="-1"></a><span class="in">    }   </span></span>
+<span id="cb16-200"><a href="#cb16-200" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb16-201"><a href="#cb16-201" aria-hidden="true" tabindex="-1"></a><span class="in">rr1=rr1[1..k,]</span></span>
+<span id="cb16-202"><a href="#cb16-202" aria-hidden="true" tabindex="-1"></a><span class="in">end</span></span>
+<span id="cb16-203"><a href="#cb16-203" aria-hidden="true" tabindex="-1"></a><span class="in">getmata rr1*=rr1, replace force</span></span>
+<span id="cb16-204"><a href="#cb16-204" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-205"><a href="#cb16-205" aria-hidden="true" tabindex="-1"></a><span class="in">two (scatter rr11 rr12 if rr13==1,  ms(s) msize(2.1))  ///</span></span>
+<span id="cb16-206"><a href="#cb16-206" aria-hidden="true" tabindex="-1"></a><span class="in">    (scatter rr11 rr12 if 51-rr11 == rr12, ms(s) msize(2.1) color(gs1)  ) ///</span></span>
+<span id="cb16-207"><a href="#cb16-207" aria-hidden="true" tabindex="-1"></a><span class="in">    , aspect(1) legend(off)  xtitle("") ytitle("") yscale(off) xscale(off)</span></span>
+<span id="cb16-208"><a href="#cb16-208" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-209"><a href="#cb16-209" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-210"><a href="#cb16-210" aria-hidden="true" tabindex="-1"></a>In this figure, the blue blocks shows that we are allowing for some non-zero correlation among observations that belong to the same group or **cluster**. Implicily, we are also allowing for all elements of the main diagonal (in black) to be different from zero, which is why Cluster standard errors are also robust to heteroskedasticity.</span>
+<span id="cb16-211"><a href="#cb16-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-212"><a href="#cb16-212" aria-hidden="true" tabindex="-1"></a><span class="fu">## 2-way Cluster Standard Errors</span></span>
+<span id="cb16-213"><a href="#cb16-213" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-214"><a href="#cb16-214" aria-hidden="true" tabindex="-1"></a>What about 2-way, or for even M-way, clustered standard errors?</span>
+<span id="cb16-215"><a href="#cb16-215" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-216"><a href="#cb16-216" aria-hidden="true" tabindex="-1"></a>As I mentioned above, 1-way clustered standard errors allows for individuals unobserved errors to be correlated across each other, but only if they belong to the same group. If they are from different groups, then no correlation should exists. 1-Way cluster standard errors also assumes that there is only one set of groups that people can be connected through. </span>
+<span id="cb16-217"><a href="#cb16-217" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-218"><a href="#cb16-218" aria-hidden="true" tabindex="-1"></a>This assumption is also quite strong. People, for example, are interconnected through many chanels. My unobserved factors are likely to be related to my wife's and daughter's unobservables, because we belong to the same household. However, they may also be related to my co-workers, because we all have the same workplace, thus share similar experience. I cannot discard my grad-school peers, since we have shared experiences (and thus correlated unobservables). Some of this connections would be new and unique, but some others may overlap. </span>
+<span id="cb16-219"><a href="#cb16-219" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-220"><a href="#cb16-220" aria-hidden="true" tabindex="-1"></a>The good news is that 2-way cluster standard errors, or M-way, does allow for this more complex scenario. Specifically, if two individuals are part of at least 1 common group, then we will assume the correlation of unobserved factors is different from zero. Unfortunately, we cannot differentiate which **connection** is the one that is driven that correlation.</span>
+<span id="cb16-221"><a href="#cb16-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-222"><a href="#cb16-222" aria-hidden="true" tabindex="-1"></a>To show this mathematically, let me define the function $g_h()$, which indicates the group, among the set $h$ (cluster variable), that a unit belongs to, and $gg(i,j)$ which takes the value of zero if $i$ and $j$ are not connected to each other in any way (based on the cluster variables), and 1 otherwise. </span>
+<span id="cb16-223"><a href="#cb16-223" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-224"><a href="#cb16-224" aria-hidden="true" tabindex="-1"></a>\begin{aligned}</span>
+<span id="cb16-225"><a href="#cb16-225" aria-hidden="true" tabindex="-1"></a>gg(i,j)&amp;=0 \text{  if  } \forall h:g_h(i)\neq  g_h(j) <span class="sc">\\</span></span>
+<span id="cb16-226"><a href="#cb16-226" aria-hidden="true" tabindex="-1"></a>&amp;\text{ and 1 otherwise}</span>
+<span id="cb16-227"><a href="#cb16-227" aria-hidden="true" tabindex="-1"></a>\end{aligned}</span>
+<span id="cb16-228"><a href="#cb16-228" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-229"><a href="#cb16-229" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-230"><a href="#cb16-230" aria-hidden="true" tabindex="-1"></a>If this is the case, $\sigma_{ij}=0$ is assumed zero if $gg(i,j)=0$, but allow to vary otherwise.</span>
+<span id="cb16-231"><a href="#cb16-231" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-232"><a href="#cb16-232" aria-hidden="true" tabindex="-1"></a>The implications that it has on the $\Omega$ matrix is that it will no longer be block diagonal, because elements outside the main diagonal (and block diagonal) will be different from zero.</span>
+<span id="cb16-233"><a href="#cb16-233" aria-hidden="true" tabindex="-1"></a>$$\Omega_3 =</span>
+<span id="cb16-234"><a href="#cb16-234" aria-hidden="true" tabindex="-1"></a>\left(</span>
+<span id="cb16-235"><a href="#cb16-235" aria-hidden="true" tabindex="-1"></a>\begin{matrix}</span>
+<span id="cb16-236"><a href="#cb16-236" aria-hidden="true" tabindex="-1"></a>\sigma_1^2     &amp; \sigma_{1,2} &amp; 0         &amp; ...  &amp;  \sigma_{1,n} <span class="sc">\\</span></span>
+<span id="cb16-237"><a href="#cb16-237" aria-hidden="true" tabindex="-1"></a>\sigma_{1,2} &amp; \sigma_2^2     &amp; \sigma_{2,3}         &amp; ...  &amp;  0 <span class="sc">\\</span></span>
+<span id="cb16-238"><a href="#cb16-238" aria-hidden="true" tabindex="-1"></a>0            &amp; \sigma_{2,3}   &amp; \sigma_3^2  &amp; ...  &amp; \sigma_{3,n} <span class="sc">\\</span></span>
+<span id="cb16-239"><a href="#cb16-239" aria-hidden="true" tabindex="-1"></a>...          &amp; ...            &amp; ...       &amp; ...  &amp; ...  <span class="sc">\\</span></span>
+<span id="cb16-240"><a href="#cb16-240" aria-hidden="true" tabindex="-1"></a>\sigma_{1,n} &amp; 0            &amp; \sigma_{3,n}     &amp; ...  &amp; \sigma_n^2 <span class="sc">\\</span></span>
+<span id="cb16-241"><a href="#cb16-241" aria-hidden="true" tabindex="-1"></a>\end{matrix}\right)</span>
+<span id="cb16-242"><a href="#cb16-242" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-243"><a href="#cb16-243" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-244"><a href="#cb16-244" aria-hidden="true" tabindex="-1"></a>Its perhaps easier to show this visually:</span>
+<span id="cb16-245"><a href="#cb16-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-246"><a href="#cb16-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-249"><a href="#cb16-249" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb16-250"><a href="#cb16-250" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo: true</span></span>
+<span id="cb16-251"><a href="#cb16-251" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: true</span></span>
+<span id="cb16-252"><a href="#cb16-252" aria-hidden="true" tabindex="-1"></a><span class="in">*| label: fig-corr</span></span>
+<span id="cb16-253"><a href="#cb16-253" aria-hidden="true" tabindex="-1"></a><span class="in">*| fig-cap: Correlation matrix $\Omega$</span></span>
+<span id="cb16-254"><a href="#cb16-254" aria-hidden="true" tabindex="-1"></a><span class="in">*| fig-subcap:</span></span>
+<span id="cb16-255"><a href="#cb16-255" aria-hidden="true" tabindex="-1"></a><span class="in">*|   - 1-way cluster</span></span>
+<span id="cb16-256"><a href="#cb16-256" aria-hidden="true" tabindex="-1"></a><span class="in">*|   - 2nd 1-way cluster</span></span>
+<span id="cb16-257"><a href="#cb16-257" aria-hidden="true" tabindex="-1"></a><span class="in">*|   - 2-way cluster</span></span>
+<span id="cb16-258"><a href="#cb16-258" aria-hidden="true" tabindex="-1"></a><span class="in">*| fig-align: center</span></span>
+<span id="cb16-259"><a href="#cb16-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-260"><a href="#cb16-260" aria-hidden="true" tabindex="-1"></a><span class="in">two (scatter rr11 rr12 if rr13==1,  ms(s) msize(2.1))  ///</span></span>
+<span id="cb16-261"><a href="#cb16-261" aria-hidden="true" tabindex="-1"></a><span class="in">    , aspect(1) legend(off)  xtitle("") ytitle("") yscale(off) xscale(off) name(m1, replace) </span></span>
+<span id="cb16-262"><a href="#cb16-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-263"><a href="#cb16-263" aria-hidden="true" tabindex="-1"></a><span class="in">two (scatter rr11 rr12 if rr14==1,  ms(s) msize(2.1))  ///</span></span>
+<span id="cb16-264"><a href="#cb16-264" aria-hidden="true" tabindex="-1"></a><span class="in">    , aspect(1) legend(off)  xtitle("") ytitle("") yscale(off) xscale(off) name(m2, replace)    </span></span>
+<span id="cb16-265"><a href="#cb16-265" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-266"><a href="#cb16-266" aria-hidden="true" tabindex="-1"></a><span class="in">two (scatter rr11 rr12 if rr14==1 | rr13==1,  ms(s) msize(2.1))  ///</span></span>
+<span id="cb16-267"><a href="#cb16-267" aria-hidden="true" tabindex="-1"></a><span class="in">    , aspect(1) legend(off)  xtitle("") ytitle("") yscale(off) xscale(off) name(m3, replace)</span></span>
+<span id="cb16-268"><a href="#cb16-268" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-269"><a href="#cb16-269" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-270"><a href="#cb16-270" aria-hidden="true" tabindex="-1"></a>@fig-corr shows the correlation structure we would observe considering the 2 clustered variables. @fig-corr-1 and @fig-corr-2 show the interconnections based on a first and a second cluster variables, whereas @fig-corr-3 considers the combination of both. To estimate Standard errors we need to allow the *blue* cells to be different from zero, impossing the zero condition only on the "unconnected" pairs.</span>
+<span id="cb16-271"><a href="#cb16-271" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-272"><a href="#cb16-272" aria-hidden="true" tabindex="-1"></a><span class="fu">## How to estimate $\sigma_{ij}$?</span></span>
+<span id="cb16-273"><a href="#cb16-273" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-274"><a href="#cb16-274" aria-hidden="true" tabindex="-1"></a>Up to this point, I have shown how one should think about the estimation of Standard errors. But you may also be interested in the practical approach. Specifically, how do we come up with estimates for $\sigma_i^2$ and $\sigma_{ij}$.?</span>
+<span id="cb16-275"><a href="#cb16-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-276"><a href="#cb16-276" aria-hidden="true" tabindex="-1"></a>This is actually straight forward!. Since we only see each unit once in crossection, our best estimation of terms is given by:</span>
+<span id="cb16-277"><a href="#cb16-277" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-278"><a href="#cb16-278" aria-hidden="true" tabindex="-1"></a>\hat \sigma_{ij} = \varepsilon_i*\varepsilon_j</span>
+<span id="cb16-279"><a href="#cb16-279" aria-hidden="true" tabindex="-1"></a>$$</span>
+<span id="cb16-280"><a href="#cb16-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-281"><a href="#cb16-281" aria-hidden="true" tabindex="-1"></a>where $\varepsilon_i$ is the unit specific unobserved component. So that is pretty much it! once you have $\hat \sigma_{ij}$ you simply need to define which assumption you want to use (homoskedastic errors, heteroskedastic, or clustered), identify which elements you will assume to be zero, and voila!...</span>
+<span id="cb16-282"><a href="#cb16-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-283"><a href="#cb16-283" aria-hidden="true" tabindex="-1"></a>Or almost. While what I describe here is technically correct, there are two limitations to its application compared to how is it done in most software.</span>
+<span id="cb16-284"><a href="#cb16-284" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-285"><a href="#cb16-285" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>I'm disregarding completely the role of degrees of freedom and corresponding corrections. </span>
+<span id="cb16-286"><a href="#cb16-286" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>The estimation of $\hat\Omega$ as described here is only feasible for small datasets, because it suggest creating a $N\times N$ matrix. This would easily consume all the resources of your computer.</span>
+<span id="cb16-287"><a href="#cb16-287" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb16-288"><a href="#cb16-288" aria-hidden="true" tabindex="-1"></a>Regarding point 2. While there are other ways to simply the math, thinking in terms of the unrestricted $\Omega$ is useful to understand the role of clustering and two way clustering in the data.</span>
+<span id="cb16-289"><a href="#cb16-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-290"><a href="#cb16-290" aria-hidden="true" tabindex="-1"></a><span class="fu">## `Stata` Example</span></span>
+<span id="cb16-291"><a href="#cb16-291" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-292"><a href="#cb16-292" aria-hidden="true" tabindex="-1"></a>Here I will work on a small example that would implement the 4 approaches to estimating standard errors. Because I will use the unrestrict $\hat\Omega$ matrix, I will work with a very small dataset: `auto'. The next contains lots of code, so feel free to skip it.</span>
+<span id="cb16-293"><a href="#cb16-293" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-296"><a href="#cb16-296" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb16-297"><a href="#cb16-297" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo: true</span></span>
+<span id="cb16-298"><a href="#cb16-298" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
+<span id="cb16-299"><a href="#cb16-299" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-300"><a href="#cb16-300" aria-hidden="true" tabindex="-1"></a><span class="in">** Load Data, create clusters and a constant</span></span>
+<span id="cb16-301"><a href="#cb16-301" aria-hidden="true" tabindex="-1"></a><span class="in">sysuse auto, clear</span></span>
+<span id="cb16-302"><a href="#cb16-302" aria-hidden="true" tabindex="-1"></a><span class="in">set seed 1</span></span>
+<span id="cb16-303"><a href="#cb16-303" aria-hidden="true" tabindex="-1"></a><span class="in">replace price = price / 1000</span></span>
+<span id="cb16-304"><a href="#cb16-304" aria-hidden="true" tabindex="-1"></a><span class="in">gen one = 1</span></span>
+<span id="cb16-305"><a href="#cb16-305" aria-hidden="true" tabindex="-1"></a><span class="in">gen c1  = runiformint(1,5)</span></span>
+<span id="cb16-306"><a href="#cb16-306" aria-hidden="true" tabindex="-1"></a><span class="in">gen c2  = runiformint(1,5)</span></span>
+<span id="cb16-307"><a href="#cb16-307" aria-hidden="true" tabindex="-1"></a><span class="in">** Load Data to Mata to easy manipulation</span></span>
+<span id="cb16-308"><a href="#cb16-308" aria-hidden="true" tabindex="-1"></a><span class="in">mata: y = st_data(.,"price")</span></span>
+<span id="cb16-309"><a href="#cb16-309" aria-hidden="true" tabindex="-1"></a><span class="in">mata: x = st_data(.,"mpg one")</span></span>
+<span id="cb16-310"><a href="#cb16-310" aria-hidden="true" tabindex="-1"></a><span class="in">** estimate betas, ixx, and erros</span></span>
+<span id="cb16-311"><a href="#cb16-311" aria-hidden="true" tabindex="-1"></a><span class="in">mata: xx = cross(x,x); ixx = invsym(xx);xy=cross(x,y)</span></span>
+<span id="cb16-312"><a href="#cb16-312" aria-hidden="true" tabindex="-1"></a><span class="in">mata: b  = ixx * xy ;  e   = y:-x*b</span></span>
+<span id="cb16-313"><a href="#cb16-313" aria-hidden="true" tabindex="-1"></a><span class="in"> </span></span>
+<span id="cb16-314"><a href="#cb16-314" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-315"><a href="#cb16-315" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-316"><a href="#cb16-316" aria-hidden="true" tabindex="-1"></a>Homoskedastic errors: </span>
+<span id="cb16-317"><a href="#cb16-317" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-320"><a href="#cb16-320" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb16-321"><a href="#cb16-321" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo: true</span></span>
+<span id="cb16-322"><a href="#cb16-322" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
+<span id="cb16-323"><a href="#cb16-323" aria-hidden="true" tabindex="-1"></a><span class="in">mata: omega_0 = I(74)*mean(e:^2)</span></span>
+<span id="cb16-324"><a href="#cb16-324" aria-hidden="true" tabindex="-1"></a><span class="in">mata: vcv_0   = ixx * x' * omega_0 * x * ixx</span></span>
+<span id="cb16-325"><a href="#cb16-325" aria-hidden="true" tabindex="-1"></a><span class="in">mata: svcv_0  = diagonal(vcv_0):^.5;svcv_0</span></span>
+<span id="cb16-326"><a href="#cb16-326" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-327"><a href="#cb16-327" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-328"><a href="#cb16-328" aria-hidden="true" tabindex="-1"></a>Robust Standard errors</span>
+<span id="cb16-331"><a href="#cb16-331" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb16-332"><a href="#cb16-332" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo: true</span></span>
+<span id="cb16-333"><a href="#cb16-333" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
+<span id="cb16-334"><a href="#cb16-334" aria-hidden="true" tabindex="-1"></a><span class="in">mata: omega_1 = (e*e'):*I(74)</span></span>
+<span id="cb16-335"><a href="#cb16-335" aria-hidden="true" tabindex="-1"></a><span class="in">mata: vcv_1   = ixx * x' * omega_1 * x * ixx</span></span>
+<span id="cb16-336"><a href="#cb16-336" aria-hidden="true" tabindex="-1"></a><span class="in">mata: svcv_1  = diagonal(vcv_1):^.5;svcv_1</span></span>
+<span id="cb16-337"><a href="#cb16-337" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-338"><a href="#cb16-338" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-339"><a href="#cb16-339" aria-hidden="true" tabindex="-1"></a>1-way Cluster Standard errors:</span>
+<span id="cb16-342"><a href="#cb16-342" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb16-343"><a href="#cb16-343" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo: true</span></span>
+<span id="cb16-344"><a href="#cb16-344" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
+<span id="cb16-345"><a href="#cb16-345" aria-hidden="true" tabindex="-1"></a><span class="in">mata: cc = st_data(.,"c1 c2")</span></span>
+<span id="cb16-346"><a href="#cb16-346" aria-hidden="true" tabindex="-1"></a><span class="in">mata: i1 = J(1,74,cc[,1]):==J(74,1,cc[,1]') </span></span>
+<span id="cb16-347"><a href="#cb16-347" aria-hidden="true" tabindex="-1"></a><span class="in">mata: i2 = J(1,74,cc[,2]):==J(74,1,cc[,2]') </span></span>
+<span id="cb16-348"><a href="#cb16-348" aria-hidden="true" tabindex="-1"></a><span class="in">mata: omega_2a = (e*e'):*i1; omega_2b = (e*e'):*i2</span></span>
+<span id="cb16-349"><a href="#cb16-349" aria-hidden="true" tabindex="-1"></a><span class="in">mata: vcv_2a   = ixx * x' * omega_2a * x * ixx</span></span>
+<span id="cb16-350"><a href="#cb16-350" aria-hidden="true" tabindex="-1"></a><span class="in">mata: vcv_2b   = ixx * x' * omega_2b * x * ixx</span></span>
+<span id="cb16-351"><a href="#cb16-351" aria-hidden="true" tabindex="-1"></a><span class="in">mata: svcv_2a  = diagonal(vcv_2a):^.5</span></span>
+<span id="cb16-352"><a href="#cb16-352" aria-hidden="true" tabindex="-1"></a><span class="in">mata: svcv_2b  = diagonal(vcv_2b):^.5</span></span>
+<span id="cb16-353"><a href="#cb16-353" aria-hidden="true" tabindex="-1"></a><span class="in">mata: svcv_2a, svcv_2b </span></span>
+<span id="cb16-354"><a href="#cb16-354" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-355"><a href="#cb16-355" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-356"><a href="#cb16-356" aria-hidden="true" tabindex="-1"></a>2-way Cluster Standard errors</span>
+<span id="cb16-359"><a href="#cb16-359" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb16-360"><a href="#cb16-360" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo: true</span></span>
+<span id="cb16-361"><a href="#cb16-361" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
+<span id="cb16-362"><a href="#cb16-362" aria-hidden="true" tabindex="-1"></a><span class="in">mata: i3 = i1:|i2</span></span>
+<span id="cb16-363"><a href="#cb16-363" aria-hidden="true" tabindex="-1"></a><span class="in">mata: omega_3 = (e*e'):*i3</span></span>
+<span id="cb16-364"><a href="#cb16-364" aria-hidden="true" tabindex="-1"></a><span class="in">mata: vcv_3   = ixx * x' * omega_3 * x * ixx</span></span>
+<span id="cb16-365"><a href="#cb16-365" aria-hidden="true" tabindex="-1"></a><span class="in">mata: svcv_3  = diagonal(vcv_3):^.5; svcv_3</span></span>
+<span id="cb16-366"><a href="#cb16-366" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-367"><a href="#cb16-367" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-368"><a href="#cb16-368" aria-hidden="true" tabindex="-1"></a>But for the 2-way Cluster Standard errors you also have the more commonly used formula:</span>
+<span id="cb16-369"><a href="#cb16-369" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-372"><a href="#cb16-372" aria-hidden="true" tabindex="-1"></a><span class="in">```{stata}</span></span>
+<span id="cb16-373"><a href="#cb16-373" aria-hidden="true" tabindex="-1"></a><span class="in">*| echo: true</span></span>
+<span id="cb16-374"><a href="#cb16-374" aria-hidden="true" tabindex="-1"></a><span class="in">*| code-fold: false</span></span>
+<span id="cb16-375"><a href="#cb16-375" aria-hidden="true" tabindex="-1"></a><span class="in">** First we need to create a variable that combines both clusters</span></span>
+<span id="cb16-376"><a href="#cb16-376" aria-hidden="true" tabindex="-1"></a><span class="in">mata: i4 = i1:&amp;i2</span></span>
+<span id="cb16-377"><a href="#cb16-377" aria-hidden="true" tabindex="-1"></a><span class="in">mata: omega_4 = (e*e'):*i4</span></span>
+<span id="cb16-378"><a href="#cb16-378" aria-hidden="true" tabindex="-1"></a><span class="in">mata: vcv_aux   = ixx * x' * omega_4 * x * ixx</span></span>
+<span id="cb16-379"><a href="#cb16-379" aria-hidden="true" tabindex="-1"></a><span class="in">mata: vcv_4 = vcv_2a + vcv_2b - vcv_aux</span></span>
+<span id="cb16-380"><a href="#cb16-380" aria-hidden="true" tabindex="-1"></a><span class="in">mata: svcv_4  = diagonal(vcv_4):^.5; svcv_4</span></span>
+<span id="cb16-381"><a href="#cb16-381" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb16-382"><a href="#cb16-382" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-383"><a href="#cb16-383" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-384"><a href="#cb16-384" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-385"><a href="#cb16-385" aria-hidden="true" tabindex="-1"></a><span class="fu">## Conclusions</span></span>
+<span id="cb16-386"><a href="#cb16-386" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-387"><a href="#cb16-387" aria-hidden="true" tabindex="-1"></a>In this note, I provide a walkthrough the estimation of different types of standard errors from a linear regression model.</span>
+<span id="cb16-388"><a href="#cb16-388" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-389"><a href="#cb16-389" aria-hidden="true" tabindex="-1"></a>While most textbooks already cover the basics of standard errors under homoskedasticity, heteroskedasticity, and oneway clustered errors, I have not seen an intuitive approach to understanding w-way clustered standard errors. </span>
+<span id="cb16-390"><a href="#cb16-390" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-391"><a href="#cb16-391" aria-hidden="true" tabindex="-1"></a>As I shown here, the idea of 2-way, or M-way, clustered standard errors is to allow arbitrary correlations across individuals, if they have to at least one common group (one cluster variable). </span>
+<span id="cb16-392"><a href="#cb16-392" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-393"><a href="#cb16-393" aria-hidden="true" tabindex="-1"></a>Now, one may be tempted to try and use this approach to allow for unconstrained correlation across all units. After all we are all connected to some way. However, because we do not see the true unobserved variance-covariance matrix, the variance of $\beta$ would not be identified without impossing restrictions on $\Omega$.</span>
+<span id="cb16-394"><a href="#cb16-394" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-395"><a href="#cb16-395" aria-hidden="true" tabindex="-1"></a>If you are interested in learning more about this topic, I would recommend you to read @cameron_robust_2011, @mackinnon_cluster-robust_2023 and @abadie_when_2022.</span>
+</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
+</div></div></div></div></div>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

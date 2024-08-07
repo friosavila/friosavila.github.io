@@ -1,0 +1,247 @@
+---
+title: "DID: The Revolution"
+subtitle: "How to right the wrongs"
+bibliography: references.bib
+---
+
+## Introduction
+
+If you have been keeping up with the advancements and revolution in Difference-in-Differences (DID), you may be aware of the issues associated with using the simple Two-Way Fixed Effects (TWFE) method for identifying treatment effects. If you haven't, you can refer to my previous post titled **DID: The fall** where I have explained the problem.
+
+The issue can be summarized as follows:
+
+When multiple periods and groups are available, and the treatment has been implemented over several periods, the standard TWFE method is unlikely to identify the average treatment effects. This is because it tends to use inadequate controls, gives negative weights to treated units, and generally suffers from contamination that leads to biased estimates.
+
+As far as I know, the following model can only estimate average treatment effects if treatment effects remain constant over time:
+$$
+y_{it} = a_i + a_t + \delta D_{it} + e_{it}
+$$
+
+where $D_{it}=1$ if a unit is effectively treated, $a_i$ represents the unit fixed effects, and $a_t$ time fixed effects.
+
+## Solutions
+
+Despite the challenges previously discussed, there is still hope for the successful implementation of DID. Numerous scholars have proposed various strategies that specifically address the issues at hand, as hinted in **DID: the Fall.**
+
+In this context, I will provide a brief overview of three such solutions, two of which I am actively involved in, and one that is relatively straightforward to comprehend and articulate.
+
+### Setup
+
+Let us establish some fundamental nomenclature before we delve into the solution. This terminology will help understand and implement the solutions we will cover next.
+
+Before we start discussing the solution, lets stablish some basic nomenclature that may help us understand and implement the solutions we will be discussing later on.
+
+1. For simplicity,  we will focus on the case of balanced panel data. All units $i$ will be observed for $T$ periods, from $t=1$ to $t=T$.
+
+2. At any given time, individual outcomes are defined as follows:
+$$
+y_{it} = a_i + a_t + \delta_{it}*D_{it} +e_{it}
+$$
+
+where $a_i$ is the individual fixed effect, $a_t$ is a time fixed effect, and $e_{it}$ is an individual level iid error. 
+$D_{it}$ is a dummy variable that takes the value of 1 after a unit is treated. 
+
+Notice that here, the treatment effect fully heterogeneous. 
+
+3. Once a unit has been treated, it remains so, even if the effect eventually fades away. (if $D_{it}=1 \rightarrow D_{is}=1 \ \forall \ s>t$)
+
+4. There is variation in treatment timing, and as a result, the treatment dummy is not activated for everyone at the same time.
+
+5. Assume there are no controls.
+
+Under this conditions, lets simulate a simple dataset with this characteristics:
+
+```{stata}
+*| code-fold: false
+clear
+set linesize 250
+set seed     111
+set sortseed 111
+set obs 100  // <- 100 units
+gen id = _n
+gen ai = rchi2(2)
+// determines When would units receive treatment
+gen     g = runiformint(2,10)
+replace g = 0 if g>9   // never treated       
+expand 10   // <-T=10
+bysort id:gen t=_n 
+gen event = max(0,t-g)
+gen aux = runiform()*2
+bysort t:gen at = aux[1] // Determines Time fixed effect
+gen te = (1-g/10)+(1-event/10)  
+// Treatment effect but vanishes with time
+gen eit= rnormal()
+gen trt  = (t>=g)*(g>0)
+gen teff = te * trt 
+gen y = ai + at + te * trt + eit
+```
+
+The simulated data will follow 100 units over a span of 10 periods. Each unit is assigned to receive treatment at some point between periods 2 and 9, while 1/10 of the sample is not treated at all.
+
+The impact of the treatment depends on two factors: the timing of treatment and the duration of treatment. The treatment effect becomes smaller the later a unit is treated, and as a unit is treated for longer durations.
+
+### Two-Steps DID
+#### @gardner_two-stage_2022 `did2s` &  @borusyak_revisiting_2022 `did_imputation`
+
+Let's start by desribing one of the solutions solutions: the two-step DID, also referred to as the imputation approach. This strategy is explained and explored by two notable papers: @gardner_two-stage_2022 and @borusyak_revisiting_2022.
+
+As the name implies, this approach aims to estimate treatment effects in a design with multiple groups treated at various points in time by imputing the values of what would have occurred to those units if they were never subjected to treatment. To accomplish this, the authors suggest breaking down the identification problem into two steps to avoid the erroneous use of already treated units as controls.
+
+In the first step, one should only use units that have never been treated or have not yet been treated to model potential outcomes under the no-treatment scenario.
+
+$$
+y_{it} = a_i + a_t + e_{it} \ if \ t<g
+$$
+
+Doing this, the fixed effects $a_i$ and $a_t$ would not be contaminated by the treatment, because non of the units in the sample are treated. 
+
+In the second step, individual-level treatment effects predictions can be obtained by simply computing the difference between the observed outcome under treatment and the prediction of the  first step ($\hat y_{it} = \hat a_i + \hat a _t$), which represent the potential outcomes of those units if no treatment occured.
+
+$$
+\delta_{it} = y_{it}-\hat a_i - \hat a_t
+$$
+
+Because unit level treatment effects are not useful for statistical inference, one can use aggregations to obtain standard errors or aggregates we are more familiar with: Average treatment effect on treated, dynamic effects, etc.
+
+To correctly estimate standard errors, both steps should be estimated simulatenously, so that the estimation error from the first stage can propagate to the second stage. While you can use `did2s` or `did_imputation`, I will show you the code using `gmm`, so you can see how the whole system would work.
+
+In the following code line (1) identifies the individual and time FE using only notyet treated units (trt=0). Line 2 uses tha to substract from $y$ and identify the treatment effect (ATT). Lines 3 and 4  provides information to gmm to estimate the model and standard errors:
+
+```{stata}
+gmm ((y-{a0}-{a_i:i.g}-{a_t:i.t})*(trt==0))     /// 
+    ((y-{a0}-{a_i:}   -{a_t:}    -{att:trt})) , /// 
+    winitial(identity)  instruments(1:i.g i.t) instruments(2: trt) /// 
+    onestep quickderivatives vce(cluster i)  
+```
+You can compare this to the true effect:
+```{stata}
+sum teff if trt==1
+```
+One advantage of this approach is that you could model the second stage to allow other types of aggregations:
+
+```stata
+gen g0=g*trt	
+gen t0=t*trt
+gmm ((y-{a0}-{a_i:i.g}-{a_t:i.t})*(trt==0)) ///
+	((y-{a0}-{a_i:}   -{a_t:}    -{att:i.g0})) , ///
+	winitial(identity)  instruments(1:i.g i.t) instruments(1: i.g0) ///
+	onestep quickderivatives vce(cluster i) 
+gmm ((y-{a0}-{a_i:i.g}-{a_t:i.t})*(trt==0)) ///
+	((y-{a0}-{a_i:}   -{a_t:}    -{att:i.t0})) , ///
+	winitial(identity)  instruments(1:i.g i.t) instruments(2: i.t0) ///
+	onestep quickderivatives vce(cluster i)  	     	
+```    
+
+### You don't messup with OLS
+#### @wooldridge_twoway_2021 `jwdid` and @sun_estimating_2021
+
+In the article **DID: the fall**, it was pointed out that the conventional TWFE approach has faced significant backlash due to its limited ability to detect treatment effects, because it cannot distinguish between good and bad variation when estimating treatment effects. Despite this criticism, Professor Wooldridge came in defense and revitalized the approach by emphasizing its simplicity and versatility, enabling extensions to go beyond linear models.
+
+The message was simple:
+
+> Although the conventional TWFE method has several shortcomings, if it is implemented correctly, it can overcome the issue of utilizing inadequate controls in estimation. As a result, it can estimate treatment effects efficiently, with results similar to @borusyak_revisiting_2022 and @gardner_two-stage_2022.
+
+So what were we missing? Heterogeneity!
+
+Both @wooldridge_twoway_2021 and @sun_estimating_2021 have proposed similar solutions to the problem at hand, albeit from different viewpoints. @sun_estimating_2021 argued that utilizing event studies with leads and lags may lead to contaminated coefficients, thus hampering proper identification of dynamic treatment effects. As a potential solution, the authors suggests using a specification that estimates dynamic effects for each cohort before making aggregations.
+
+On the other hand, @wooldridge_twoway_2021 focused on identifying treatment effects. He recommends allowing all treatment effects to vary by cohort and time. In other words, instead of employing a single dummy variable to identify treated units, he suggests using a set of dummies representing the interaction of cohorts and periods.
+
+Specifically, @wooldridge_twoway_2021 proposes estimating a model with the following specification:
+
+$$
+y_{it} = a_i + a_t + \sum_{g=g_0}^G \sum_{t=g}^T \delta_{gt} * 1(g,t)+e_{it}
+$$
+
+What Wooldridge suggests, at least for the case without covariates, is to estimate a model where, in addition to the individual (or cohort) and time fixed effects, we saturate **all** possible combinations of cohorts and times ($1(g,t)$), if that combination corresponds to an effectively treated unit ($t\geq g$). This specification essentially uses all not-yet treated units as controls, similar to the two-step approach.
+
+This specification, however, could also be extended to a case where only those never treated are used as controls. In this case, one should use all cohort and time interactions, including the cases before units were treated. Following convention, one should exclude from the list of interactions the period before treatment took place:
+
+$$
+y_{it} = a_i + a_t + \sum_{g=g_0}^G \sum_{t\neq g-1} \delta_{gt} * 1(g,t)+e_{it}
+$$
+
+By saturating the model this way, each $\delta_{gt}$ represents a treatment effect for group G at time T, which can be later aggregated to obtain dynamic, group, or average treatment effects. Also interesting to note that this second specification is essentially the same @sun_estimating_2021 propose for dynamic effects, and produces results that are identical to the methodology proposed by @callaway_santanna_2021.
+
+Now for the application, I will use `jwdid` for both specifications. Because by default `jwdid` produces the fully saturated model, I will omit those results, showing only the average treatment effect.
+
+First the one using not-yet treated units as controls (default), which produces exactly the same results as the two-step approach:
+
+```{stata}
+*| code-fold: false
+*ssc install jwdid
+qui: jwdid y, ivar(i) tvar(t) gvar(g)
+estat simple
+```
+
+Second the one with never treated units as controls:
+
+```{stata}
+*| code-fold: false
+qui: jwdid y, ivar(i) tvar(t) gvar(g) never
+estat simple
+```
+
+### 2x2 on Steroids
+#### @callaway_santanna_2021 `csdid` & `csdid2`
+
+The third option is the most computing intensive, but at the same time simpler to understand, if you break it down to the basics. This is why I call this 2x2 in Steroids: @callaway_santanna_2021.
+
+The literature on the 2x2 DID design has been extensively explored and extended, and it appears that most of the criticisms of the TWFE method do not apply to this simple design. Although there are a few technical details to consider while estimating ATT's, most of the information required can be found in @santanna_doubly_2020. In this work, the authors provide several options for obtaining the best estimate from a simple 2x2 DID design.
+
+Assuming that we know how to execute 2x2 DID correctly (which can be achieved using `drdid` in Stata), @callaway_santanna_2021 propose that we focus on estimating all the good and useful 2x2 DID designs from our data while avoiding incorrect comparisons. These are the building blocks of the methodology, the ATTGTs. This are the average treatment effects on the treated for units treated for the first time in period G, but measured at period T.
+
+This process, however, could be time-consuming and computationally intensive if done manually, as the number of 2x2 designs increases with the number of cohorts and periods available in the data. For example, estimating 50 different ATTs would be necessary with 5 cohorts and 10 periods, and up to 5 separate models need to be estimated for each ATT. 
+
+Borrowing from the nomenclature in @callaway_santanna_2021, this ATTGT's are defined as follows:
+$$
+\begin{aligned}
+    ATT(g,t) &= E(Y_{i,t}|i\in g) - E(Y_{i,g-1}|i\in g) \\
+             & -\Big[ E(Y_{i,t}|i\in C) - E(Y_{i,g-1}|i\in C) \Big]
+\end{aligned}
+$$
+
+Which has the same structure as the simple 2x2 DID, with the difference that the control group $C$ will be formed by never treated units only, or include those not yet treated ( $i \in g_i, g_i>t, \And \  g_i>g$).^[There are two other options, but I will leave them for a different post]
+
+Once all individual ATTGT's have been identified and estimated, providing summary measures we are more familiar with is as easy as obtaining weighted averages:
+
+$$
+SATT = \sum \left( \frac{w_{gt} }{\sum w_{gt}}ATT(g,t) \right)
+$$
+
+where the weights $w_{gt}$ will change based on the type of aggregation one is interested in. 
+
+This multiple stage process may seem challening, but there are tools that allow you to implement them quite easily: `csdid` and `csdid2`. 
+The first one, was written as a wrapper around `drdid`, to do all the heavy lifting for you. However, for large projects, it can be slow due to overhead. The alternative `csdid2` is self contained, still under development, but much faster than the predecesor. See [`csdid2`](https://github.com/friosavila/csdid2) if interested. Here I will use `csdid`, which you can get from SSC.
+
+As with `jwdid`. The default option is for `csdid` to produce all ATTGT's. So, for the excercise, I'll omit that ouput, and estimate the aggregate effects with the post estimation command. The default is to use the never treated as controls. I will also add the option `long2` to obtain the pre-treatment ATTGT's as describe above, even though they won't affect our point estimates:
+```{stata}
+*| code-fold: false
+qui: ssc install drdid, replace
+qui: ssc install csdid, replace
+qui: csdid y, ivar(i) time(t) gvar(g) long2
+estat simple 
+```
+I will also use the not yet treated, to compare results.
+```{stata}
+*| code-fold: false
+qui: csdid y, ivar(i) time(t) gvar(g) notyet long2
+estat simple 
+```
+
+## Conclusions
+
+On this occasion, I have shared with you three solutions from the literature that aim to overcome the limitations of TWFE. Although there are other solutions available, I personally find these three to be the most intuitive and have worked on them. Granted, I have some bias on the matter.
+
+Despite their apparent differences, these solutions actually converge towards similar outcomes, with discrepancies arising from variations in assumptions regarding control groups or covariate management.
+
+|command | eq command|
+|---|---|
+|`jwdid` | `did2s` & `did_imputation`|
+|`jwdid, never` | `eventstudyinteract`|
+|`jwdid, never` | `csdid, long2` or `csdid2, long`  |
+
+## References
+
+::: {#refs}
+:::

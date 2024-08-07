@@ -1,0 +1,23 @@
+---
+title: "Making `spirograph` & `harmograph`!"
+subtitle: "Taking Line graphs for a spin"
+code-fold: false
+---
+
+## What are Spirographs? 
+
+I believe the correct term for them is Guilloche patterns. From a programming perspective these are figures created by drawing circles, connected to circles, connected to more circles, so on and so forth. The subsequent circles build up on each other, and with the right parameters, and sufficient flexibility, one could potentially use the principle of Spirographs to draw anything using very complex functions.
+
+> So how does this work?
+
+First, we need to change the perspective from a cartesian coordinates $(x,y)$, to one with polar coordinates, where every point in space is determined by a distance to the origin ($r$), and the angle of a line that connects it to the origin, with respect to the horizon. However, for drawing them, we need to transform them back to the cartesian coordinates:
+
+$$
+\begin{aligned}
+y = r \times sin (\theta) \\
+x = r \times cos (\theta)
+\end{aligned}
+$$
+
+So, if we fix $r$ to be the same and change $\theta$ from 0 to $2\pi$, we could draw a simple circle:
+

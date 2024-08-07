@@ -1,0 +1,29 @@
+---
+title: "Stata: Contributed packages"
+about:
+  template: trestles
+  image: WeeMee.jpg
+  image-shape: rounded
+  image-width: 16em
+  links:
+    - icon: twitter
+      text: twitter
+      href: https://twitter.com/friosavi
+    - icon: envelope 
+      text: Email
+      href: f.rios.a@gmail.com
+format:
+  html:
+    code-tools: false  
+---
+
+Hi, I can see you are interested in some of the programs I have written over the years.
+I have quite a few that are available from SSC. However, I recently open my own repository
+
+<https://github.com/friosavila/stpackages>
+
+It will contain the most uptodate versions of my packages, that come with its own installer!
+
+See [how to write your own installer](https://friosavila.github.io/chatgpt/fra_03_30_2023/)
+
+If you encounter any problems. Let me know.
