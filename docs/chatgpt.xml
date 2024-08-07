@@ -2654,13 +2654,13 @@ background-color: null;
 font-weight: bold;
 font-style: inherit;">label</span></span></code></pre></div>
 </div>
-<div id="tbl-summary-stats" class="quarto-float anchored">
+<div id="tbl-summary-stats" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-summary-stats-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;1: Table 1: Summary Statistics
 </figcaption>
 <div aria-describedby="tbl-summary-stats-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table class="table">
+<table class="caption-top table">
 <colgroup>
 <col style="width: 29%">
 <col style="width: 17%">
@@ -2834,13 +2834,13 @@ background-color: null;
 font-weight: bold;
 font-style: inherit;">replace</span> noline md</span></code></pre></div>
 </div>
-<div id="tbl-asummary-stats" class="quarto-float anchored">
+<div id="tbl-asummary-stats" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-asummary-stats-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;2: Advanced Summary Statistics by Race
 </figcaption>
 <div aria-describedby="tbl-asummary-stats-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table class="table">
+<table class="caption-top table">
 <colgroup>
 <col style="width: 16%">
 <col style="width: 16%">
@@ -3071,13 +3071,13 @@ font-style: inherit;">"Model 1"</span> <span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Model 2"</span>)</span></code></pre></div>
 </div>
-<div id="tbl-regression" class="quarto-float anchored">
+<div id="tbl-regression" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-regression-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;3: Regression Results
 </figcaption>
 <div aria-describedby="tbl-regression-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table class="table">
+<table class="caption-top table">
 <thead>
 <tr class="header">
 <th></th>
@@ -3194,13 +3194,13 @@ background-color: null;
 font-weight: bold;
 font-style: inherit;">label</span> md</span></code></pre></div>
 </div>
-<div id="tbl-corr" class="quarto-float anchored">
+<div id="tbl-corr" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-corr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;4: Correlation matrix
 </figcaption>
 <div aria-describedby="tbl-corr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table class="table">
+<table class="caption-top table">
 <colgroup>
 <col style="width: 29%">
 <col style="width: 17%">
@@ -3351,13 +3351,13 @@ background-color: null;
 font-weight: bold;
 font-style: inherit;">replace</span></span></code></pre></div>
 </div>
-<div id="tbl-corr" class="quarto-float anchored">
+<div id="tbl-corr" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-corr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;5: Regression Results with FE
 </figcaption>
 <div aria-describedby="tbl-corr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table class="table">
+<table class="caption-top table">
 <colgroup>
 <col style="width: 12%">
 <col style="width: 29%">

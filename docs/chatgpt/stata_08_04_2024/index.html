@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.553">
+<meta name="generator" content="quarto-1.5.56">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2024-08-04">
 <meta name="description" content="Producing tables for publication using Stata">
 
-<title>Playing With Stata - Stata Crash Course: Publication Ready Tables</title>
+<title>Stata Crash Course: Publication Ready Tables – Playing With Stata</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -36,7 +36,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -114,7 +114,10 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
 
+
+
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
 
 
 </head>
@@ -131,7 +134,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -170,7 +173,7 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
   <a href="" class="quarto-reader-toggle quarto-navigation-tool px-1" onclick="window.quartoToggleReader(); return false;" title="Toggle reader mode">
   <div class="quarto-reader-toggle-btn">
   <i class="bi"></i>
@@ -263,13 +266,13 @@ gtag('config', 'G-GNMLZDYJ2P', { 'anonymize_ip': true});
 <span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    cells(<span class="st">"mean(fmt(2)) sd(fmt(2)) min max"</span>) <span class="co">///</span></span>
 <span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    nomtitle nonumber md <span class="kw">replace</span> <span class="kw">label</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="tbl-summary-stats" class="quarto-float anchored">
+<div id="tbl-summary-stats" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-summary-stats-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;1: Table 1: Summary Statistics
 </figcaption>
 <div aria-describedby="tbl-summary-stats-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table class="table">
+<table class="caption-top table">
 <colgroup>
 <col style="width: 29%">
 <col style="width: 17%">
@@ -352,13 +355,13 @@ Table&nbsp;1: Table 1: Summary Statistics
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    alignment(<span class="fu">r</span>) <span class="kw">width</span>(20) <span class="co">///</span></span>
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="kw">replace</span> noline md</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="tbl-asummary-stats" class="quarto-float anchored">
+<div id="tbl-asummary-stats" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-asummary-stats-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;2: Advanced Summary Statistics by Race
 </figcaption>
 <div aria-describedby="tbl-asummary-stats-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table class="table">
+<table class="caption-top table">
 <colgroup>
 <col style="width: 16%">
 <col style="width: 16%">
@@ -531,13 +534,13 @@ Table&nbsp;2: Advanced Summary Statistics by Race
 <span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>    r2 ar2 nonumber <span class="kw">replace</span> <span class="kw">note</span>(<span class="st">""</span>) noline md <span class="co">///</span></span>
 <span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    mtitle(<span class="st">"Model 1"</span> <span class="st">"Model 2"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="tbl-regression" class="quarto-float anchored">
+<div id="tbl-regression" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-regression-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;3: Regression Results
 </figcaption>
 <div aria-describedby="tbl-regression-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table class="table">
+<table class="caption-top table">
 <thead>
 <tr class="header">
 <th></th>
@@ -622,13 +625,13 @@ Table&nbsp;3: Regression Results
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    cell(<span class="st">"rho(fmt(3))"</span>) <span class="kw">replace</span> nonumber collabels(<span class="kw">none</span>) <span class="co">///</span></span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    nomtitle noline unstack <span class="kw">label</span> md</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="tbl-corr" class="quarto-float anchored">
+<div id="tbl-corr" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-corr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;4: Correlation matrix
 </figcaption>
 <div aria-describedby="tbl-corr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table class="table">
+<table class="caption-top table">
 <colgroup>
 <col style="width: 29%">
 <col style="width: 17%">
@@ -718,13 +721,13 @@ Table&nbsp;4: Correlation matrix
 <span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="fu">scalar</span>(<span class="st">"id_fe Individual FE"</span> <span class="st">"yr_fe Yr FE"</span>) <span class="co">///</span></span>
 <span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>noline  md  <span class="kw">nonotes</span> nomtitle  <span class="kw">replace</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="tbl-corr" class="quarto-float anchored">
+<div id="tbl-corr" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-corr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Table&nbsp;5: Regression Results with FE
 </figcaption>
 <div aria-describedby="tbl-corr-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<table class="table">
+<table class="caption-top table">
 <colgroup>
 <col style="width: 12%">
 <col style="width: 29%">
@@ -860,18 +863,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -903,7 +895,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
   const viewSource = window.document.getElementById('quarto-view-source') ||
                      window.document.getElementById('quarto-code-tools-source');
   if (viewSource) {
@@ -962,7 +976,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
@@ -1491,7 +1505,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb7-214"><a href="#cb7-214" aria-hidden="true" tabindex="-1"></a><span class="fu">## Conclusion</span></span>
 <span id="cb7-215"><a href="#cb7-215" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-216"><a href="#cb7-216" aria-hidden="true" tabindex="-1"></a>I think these are the most basic tables you can create with <span class="in">`esttab`</span>. There are many more options available, and you can customize the tables to your needs. Using Quarto, something I am doing more often, is to create the tables in Stata, modify the latex code, and then include them in the final document. This is a great way to create reproducible research.</span>
-</code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
