@@ -5,7 +5,7 @@ format:
     documentclass: article
     pagesize: lettersize
     geometry: margin=1in
-    fontsize: 12pt
+    fontsize: 11pt
   html: default
 bibliography: 
   - reference.bib

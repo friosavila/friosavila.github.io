@@ -1,0 +1,69 @@
+---
+title: "Fernando Rios-Avila"
+format: 
+  pdf:
+    documentclass: article
+    geometry:
+      - top=20mm
+      - left=20mm
+      - right=20mm
+      - bottom=20mm
+    fontsize: 11pt
+---
+
+64 Oak Street, Rensselaer NY 12144 | (404) 924-5176 | friosa@gmail.com
+
+## Professional Summary
+
+Experienced data scientist and economist with over a decade of research experience, specializing in data analysis, statistical modeling, and programming. Proven track record in developing methodological and social research, identifying data patterns, and communicating complex findings to diverse audiences.
+
+## Relevant Skills
+
+- Data Visualization: Advanced proficiency in creating insightful visualizations using Stata, with experience with R, and Python
+- Statistical Modeling: Expertise in developing and implementing complex statistical models and data mining tools
+- Programming: Proficient in Stata, with adaptability with R, and Python; experience in creating custom functions and applications for data analysis
+- Data Analysis: Strong background in analyzing large datasets, including survey and administrative data
+- Process Improvement: Experience in optimizing data delivery and automating manual processes
+- Communication: Skilled in producing written reports and presenting findings to both technical and non-technical audiences
+
+## Professional Experience
+
+**Research Scholar** | Levy Economics Institute of Bard College | August 2013 – Present
+
+- Develop and apply econometric models for analysis of time use, consumption, and labor market data
+- Maintain and update the Levy Institute Measure of Income and Wealth (LIMEW) and the Levy Institute Measure of Time and Income Poverty (LIMTIP)
+- Collaborate with subject matter experts to define technical requirements and project scope for research projects
+- Implement process improvements to optimize data delivery and analysis workflows
+- Produce research reports and present findings to stakeholders and academic audiences
+
+**Consultant** | World Bank | 2022 - Present
+
+- Conduct analysis on labor and development economics topics in Latin America
+- Develop and apply econometric models for analysis of income and consumption data
+- Collaborate with international teams to produce policy-relevant research
+
+## Education
+
+**Ph.D. in Economics** | Georgia State University | 2013
+
+**Advanced Studies (M.Sc) International Economics** | Kiel University - Germany | 2008
+
+## Selected Publications
+
+1. Rios-Avila, F. (2020). Recentered influence functions (RIF) in Stata: RIF regression and RIF decomposition. *Stata Journal*, 20(1), 51–94.
+
+2. Jenkins, S. P., & Rios-Avila, F. (2023). Finite mixture model for linked survey and administrative data: Estimation and post estimation. *The Stata Journal*, 23(1), 53–85.
+
+3. Rios-Avila, F. (2020). Smooth varying coefficient models in Stata. *The Stata Journal*, 20(3), 647–679.
+
+## Teaching Experience
+
+**Instructor** | Levy Economics Institute | 2015 - Present
+
+- Teach graduate-level courses in econometrics, research methods, and applied microeconomics
+- Develop curriculum and course materials for data analysis and statistical modeling
+
+## Awards
+
+- The Stata Journal, Editors' Prize, 2023
+- Journal of Economic Issues, Editor's Prize, 2019
