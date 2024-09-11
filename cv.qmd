@@ -1,10 +1,11 @@
 ---
+title: Fernando Rios-Avila
 format:
   pdf: 
     documentclass: article
     pagesize: lettersize
     geometry: margin=1in
-    fontsize: 12pt
+    fontsize: 11pt
   html:
     theme: cosmo   
     page-layout: article
@@ -15,7 +16,6 @@ nocite: |
 csl: apa-cv-nm.csl
 ---
 
-# **Fernando Rios-Avila**
 
 ## Contact Information
 
