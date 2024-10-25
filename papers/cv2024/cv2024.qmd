@@ -16,7 +16,7 @@ csl: apa-cv-nm.csl
 
 ## Contact Information
 
-64 Oak Streat • Rensselear, NY, 12144 • (404) 924-5176 • friosa@gmail.com
+64 Oak Street • Rensselaer, NY, 12144 • (404) 924-5176 • friosa@gmail.com
 
 ## Summary
 
@@ -24,59 +24,52 @@ PhD economist with over a decade of research experience at the Levy Economics In
 
 ## Research Interests
 
-- Applied Econometrics: Causal inference, decomposition methods, non-parametric methods
-- Applied Microeconomics: Policy evaluation, consumer behavior
-- Labor Economics: Wage dynamics, union impacts, labor market institutions
-- Poverty and Inequality: Measurement techniques, intersectionality
+- Applied Econometrics: Causal inference, decomposition methods, non-parametric methods.
+- Applied Microeconomics: Policy evaluation, consumer behavior.
+- Labor Economics: Wage dynamics, union impacts, labor market institutions.
+- Poverty and Inequality: Measurement techniques, intersectionality.
 
 ## Education
 
-**PhD in Economics** 
+**PhD in Economics** | Georgia State University | 2008–2013
+- Dissertation: "Essays on Unions, Wages, and Performance: Evidence from Latin America"
 
-  - Georgia State University | 2008-2013
-  - Dissertation: "Essays on Unions, Wages, and Performance: Evidence from Latin America"
+**Advanced Studies (M.Sc) International Economics** | Kiel University - Germany | 2007–2008
 
-**Advanced Studies (M.Sc) International Economics** 
-
-  - Kiel University - Germany | 2007-2008
-
-**Licenciatura en Economia** (5 yr program, BS equivalent) 
-
-  - Universidad Católica Boliviana | 2000-2004
- 
+**Licenciatura en Economía** (5 yr program, BS equivalent) | Universidad Católica Boliviana | 2000–2004
 
 ## Professional Experience
 
-**Research Scholar** | Levy Economics Institute of Bard College | August 2013 – Present
+**Research Scholar** | Levy Economics Institute of Bard College | August 2013–Present
 
-- Worked on research projects on labor market dynamics, inequality, and time and income poverty
+- Worked on research projects on labor market dynamics, inequality, and time and income poverty.
 - Developed and applied econometric models for the analysis of time use and consumption data.
-- Mantained and updated the Levy Institute Measure of Income and Wealth (LIMEW) and the Levy Institute Measure of Time and Income Poverty (LIMTIP)
+- Maintained and updated the Levy Institute Measure of Income and Wealth (LIMEW) and the Levy Institute Measure of Time and Income Poverty (LIMTIP).
 - Primary instructor for econometric courses at the Levy Institute's Master of Science in Economic Theory and Policy program.
 
-**Consultant** | World Bank | 2022 - Present
+**Consultant** | World Bank | 2022–Present
 
 - Conducted analysis in labor and development economics topics in Latin America.
 - Developed and applied econometric models for analysis of income and consumption data.
 
-**Research Assistant** | Federal Reserve Bank of Atlanta | August 2010 – June 2013
+**Research Assistant** | Federal Reserve Bank of Atlanta | August 2010–June 2013
 
-**Graduate Research Assistant** | Georgia State University | August 2008 – December 2013
+**Graduate Research Assistant** | Georgia State University | August 2008–December 2013
 
-**Consultant (UNICEF Project)** | Economic and Social Policy Analysis Unit (UDAPE) | July 2005 – June 2007
+**Consultant (UNICEF Project)** | Economic and Social Policy Analysis Unit (UDAPE) | July 2005–June 2007
 
-**Internship** | Superintendence of Hydrocarbon, Financial and Economic Analysis-Department | January 2004 – July 2004
+**Internship** | Superintendence of Hydrocarbon, Financial and Economic Analysis-Department | January 2004–July 2004
 
 ## Teaching Experience
 
 **Levy Economics Institute**
 
-- Econometrics of Poverty, Inequality and Social Science Research  |  2015- 2021
-- Research Methods I: Econometrics | 2018- Present
-- Applied Econometric Methods for Empirical Research & Policy Evaluation | 2023 - Present
-- Research Methods II: Applied Methods in Microeconomics (Shared Course) | 2024- Present
-- Intersecting Inequalities (Shared Course): Labor Market Institutions  |  2018
-- Intersecting Inequalities (Shared Course): Decompositions Methods in Economics  |  2017
+- Econometrics of Poverty, Inequality and Social Science Research | 2015–2021
+- Research Methods I: Econometrics | 2018–Present
+- Applied Econometric Methods for Empirical Research & Policy Evaluation | 2023–Present
+- Research Methods II: Applied Methods in Microeconomics (Shared Course) | 2024–Present
+- Intersecting Inequalities (Shared Course): Labor Market Institutions | 2018
+- Intersecting Inequalities (Shared Course): Decompositions Methods in Economics | 2017
 
 ## Publications
 
@@ -87,8 +80,8 @@ PhD economist with over a decade of research experience at the Levy Economics In
 
 ## Awards and Honors
 
-- Journal of Economic Issues, Editor's Prize, 2019
-- The Stata Journal, Editors' Prize, 2023
+- Journal of Economic Issues, Editor's Prize, 2019 - Recognition for outstanding contribution to institutional economics
+- The Stata Journal, Editors' Prize, 2023 - Excellence in statistical software development and documentation
 
 ## Thesis Advisor
 
@@ -101,17 +94,16 @@ PhD economist with over a decade of research experience at the Levy Economics In
 - Brandon Istenes (Master Thesis)
 - Masooma Hassan (Master Thesis)
 
-## Languages and Software
+## Technical Skills
 
-**Statistical software with programming experience:**
+**Statistical Software**
 
-- Stata: Advanced proficiency, developed and maintained various user-written programs
-- R: Intermediate proficiency, used software for Econometrics classes
-- Python: Intermediate proficiency for programming and basic econometric analysis
-- Basic knowledge of Julia and SQL
+- Stata: Advanced proficiency, developed and maintained various user-written programs.
+- R: Intermediate proficiency, used software for Econometrics classes.
+- Python: Intermediate proficiency for programming and basic econometric analysis.
+- Basic knowledge of Julia and SQL.
   
-**Languages:** 
+**Languages**
 
 - Spanish (Native)
 - English (Fluent)
-

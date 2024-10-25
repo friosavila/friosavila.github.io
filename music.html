@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playlist Player</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+
+        .playlist-group {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .playlist-title {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .song {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+        }
+
+        .song:hover {
+            background: #f0f0f0;
+        }
+
+        .song.playing {
+            background: #e3f2fd;
+        }
+
+        .play-button {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #1976d2;
+            color: white;
+            border: none;
+            margin-right: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .song-title {
+            flex-grow: 1;
+        }
+
+        .now-playing {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 15px;
+            box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        audio {
+            flex-grow: 1;
+        }
+    </style>
+</head>
+ <body>
+    <!-- Playlist Group 1 -->
+    <div class="playlist-group">
+        <h2 class="playlist-title">Gabriel's Birthday</h2>
+        <div class="song" data-src="https://github.com/friosavila/GabosBirthday/raw/refs/heads/main/audio/Happy-Birthday-Anime1.mp3">
+            <button class="play-button">▶</button>
+            <span class="song-title">Happy Birthday Anime 1</span>
+        </div>
+        <div class="song" data-src="https://github.com/friosavila/GabosBirthday/raw/refs/heads/main/audio/Happy-Birthday-Anime2.mp3">
+            <button class="play-button">▶</button>
+            <span class="song-title">Happy Birthday Anime 2</span>
+        </div>
+        <div class="song" data-src="https://github.com/friosavila/GabosBirthday/raw/refs/heads/main/audio/Happy-Birthday-Brshop.mp3">
+            <button class="play-button">▶</button>
+            <span class="song-title">Happy Birthday Brshop</span>
+        </div>
+        <div class="song" data-src="https://github.com/friosavila/GabosBirthday/raw/refs/heads/main/audio/Happy-Birthday-Epic.mp3">
+            <button class="play-button">▶</button>
+            <span class="song-title">Happy Birthday Epic</span>
+        </div>
+        <div class="song" data-src="https://github.com/friosavila/GabosBirthday/raw/refs/heads/main/audio/Happy-Birthday-Epic2.mp3">
+            <button class="play-button">▶</button>
+            <span class="song-title">Happy Birthday Epic 2</span>
+        </div>
+        <div class="song" data-src="https://github.com/friosavila/GabosBirthday/raw/refs/heads/main/audio/Happy-Birthday-JPOP.mp3">
+            <button class="play-button">▶</button>
+            <span class="song-title">Happy Birthday JPOP</span>
+        </div>
+        <div class="song" data-src="https://github.com/friosavila/GabosBirthday/raw/refs/heads/main/audio/Happy-Birthday-pop.mp3">
+            <button class="play-button">▶</button>
+            <span class="song-title">Happy Birthday Pop</span>
+        </div>
+        <div class="song" data-src="https://github.com/friosavila/GabosBirthday/raw/refs/heads/main/audio/Happy-Birthday-rap.mp3">
+            <button class="play-button">▶</button>
+            <span class="song-title">Happy Birthday Rap</span>
+        </div>
+        <div class="song" data-src="https://github.com/friosavila/GabosBirthday/raw/refs/heads/main/audio/Happy-Birthday-rock.mp3">
+            <button class="play-button">▶</button>
+            <span class="song-title">Happy Birthday Rock</span>
+        </div>
+        <div class="song" data-src="https://github.com/friosavila/GabosBirthday/raw/refs/heads/main/audio/Happy-Birthday-Tango.mp3">
+            <button class="play-button">▶</button>
+            <span class="song-title">Happy Birthday Tango</span>
+        </div>
+    </div>
+
+    <!-- Playlist Group 2 -->
+    <div class="playlist-group">
+        <h2 class="playlist-title">Jazz Favorites</h2>
+        <div class="song" data-src="path/to/your/song3.mp3">
+            <button class="play-button">▶</button>
+            <span class="song-title">Take Five</span>
+        </div>
+        <div class="song" data-src="path/to/your/song4.mp3">
+            <button class="play-button">▶</button>
+            <span class="song-title">So What</span>
+        </div>
+    </div>
+
+    <!-- Now Playing Bar -->
+    <div class="now-playing">
+        <span id="current-song">Select a song to play</span>
+        <audio id="audio-player" controls></audio>
+    </div>
+
+    <script>
+        const audioPlayer = document.getElementById('audio-player');
+        const currentSongDisplay = document.getElementById('current-song');
+        let currentlyPlaying = null;
+
+        document.querySelectorAll('.song').forEach(song => {
+            song.addEventListener('click', function() {
+                const songSrc = this.dataset.src;
+                const songTitle = this.querySelector('.song-title').textContent;
+
+                if (currentlyPlaying) {
+                    currentlyPlaying.classList.remove('playing');
+                }
+
+                this.classList.add('playing');
+                currentlyPlaying = this;
+                
+                audioPlayer.src = songSrc;
+                currentSongDisplay.textContent = `Now Playing: ${songTitle}`;
+                audioPlayer.play();
+            });
+        });
+
+        audioPlayer.addEventListener('ended', function() {
+            if (currentlyPlaying) {
+                const nextSong = currentlyPlaying.nextElementSibling;
+                if (nextSong && nextSong.classList.contains('song')) {
+                    nextSong.click();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
