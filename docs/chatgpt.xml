@@ -9,7 +9,7 @@
 <link>https://friosavila.github.io/chatgpt.html</link>
 <atom:link href="https://friosavila.github.io/chatgpt.xml" rel="self" type="application/rss+xml"/>
 <description></description>
-<generator>quarto-1.5.56</generator>
+<generator>quarto-1.6.39</generator>
 <lastBuildDate>Tue, 06 Aug 2024 04:00:00 GMT</lastBuildDate>
 <item>
   <title>Stata Crash Course: Graphs and EDA</title>
@@ -4522,7 +4522,7 @@ Table&nbsp;2: Table made with HTML
 <th>(2)</th>
 <th></th>
 </tr>
-<tr class="odd">
+<tr class="even">
 <th></th>
 <th>lnwage</th>
 <th></th>

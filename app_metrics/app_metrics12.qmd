@@ -1,0 +1,224 @@
+---
+title: "Avg Treatment Effect Heterogeneity in Stata: Basic Commands vs. New CATE Tools"
+author: "Fernando Rios-Avila"
+date: "April 11, 2025"
+format: 
+  html:
+    code-fold: show
+    toc: true
+    highlight-style: github
+---
+
+## Prologue
+
+Its been a while since I last posted. Last year it was classes and research and new family member, this year was a new job, new challenges, and new skills to get. However, While my Python-fu is getting better, my weapon of choice is still Stata. Today I dediced to vibe-write a post about the new `cate` command in Stata 19. I just got my hands on it, and I am excited to share my thoughts. What is the twist?
+
+Not everyone can have Stata 19, for one reason or another. So, I will show you how to do similar things with two basic commands: `reg` and `margins`. This comes with a plus, with regress, you can easily get `CATE`, but also `CATT`!! (Conditional Average Treatment on the Treated). So lets do it!
+
+## Introduction
+
+Treatment effect heterogeneity is a critical concept in modern causal inference. Stata 19, just lunched last week, has introduced specialized commands for estimating Conditional Average Treatment Effects (CATE), with doubly robust, machine learning methods. This is very powerful, and going over the command, there is a lot behind the command, it cannot fit in a single blog post entry. 
+
+What is quite interesting, and I shared my thoughts way back with some developers at Stata, is that one could already get similar results using tools Stata already provided. Of course, comparable results can be obtained using basic regression commands with careful implementation. This post demonstrates how powerful Stata can be when you understand its fundamentals, while also exploring the convenience of the new specialized tools.
+
+## The Math Behind Treatment Effects
+
+Before diving into implementation, let's review the key mathematical concepts:
+
+### Potential Outcomes Framework
+
+In the potential outcomes framework, we define:
+- $y_i(1)$ as the potential outcome if unit $i$ is treated
+- $y_i(0)$ as the potential outcome if unit $i$ is not treated
+- $x_i$ as a vector of characteristics for unit $i$
+
+The **Average Treatment Effect (ATE)** is:
+
+$$ATE \equiv E[y_i(1) - y_i(0)]$$
+
+The **Conditional Average Treatment Effect (CATE)** is:
+
+$$CATE \equiv \tau(x) = E[y_i(1) - y_i(0) | x_i = x]$$
+
+This represents the expected treatment effect for units with characteristics $x$.
+
+In the same line $CATT$ or **Conditional Average Treatment on the Treated** can be defined as:
+
+$$CATT \equiv \tau(x) = E[y_i(1) - y_i(0) | x_i = x, TrT= 1]$$
+
+## Implementation in Stata
+
+The new `CATE` command in Stata 19 provides a streamlined way to estimate CATEs using advanced machine learning methods. My first look at the command ouput shows me that it applieds a partialing out estimator, with potential of other doubly robust methods. Interestingly, the core of CATE can be achieved using standard regression techniques with interactions. 
+
+Let's examine two approaches to estimate CATEs in Stata: using the new `cate` command and using standard regression with interactions.
+
+### Data Context: 401(k) Eligibility Effect on Net Financial Wealth
+
+We'll analyze the effect of 401(k) program eligibility on net financial assets, examining whether this effect varies across income categories.
+
+### Approach 1: Using the New `cate` Command
+
+Stata 19's new `cate` command implements sophisticated methods for CATE estimation:
+
+```stata
+webuse assets3
+global catecovars age educ i.(incomecat pension married twoearn ira ownhome)
+cate po (assets $catecovars) (e401k), group(incomecat) nolog
+```
+
+Results:
+
+```stata
+Conditional average treatment effects     Number of observations       = 9,913
+Estimator:       Partialing out           Number of folds in cross-fit =    10
+Outcome model:   Linear lasso             Number of outcome controls   =    17
+Treatment model: Logit lasso              Number of treatment controls =    17
+CATE model:      Random forest            Number of CATE variables     =    17
+
+---------------------------------------------------------------------------------------------
+                            |               Robust
+                     assets | Coefficient  std. err.      z    P>|z|     [95% conf. interval]
+----------------------------+----------------------------------------------------------------
+GATE                        |
+                  incomecat |
+                         0  |   4133.402   990.7697     4.17   0.000     2191.529    6075.275
+                         1  |   1499.306   1651.826     0.91   0.364    -1738.214    4736.827
+                         2  |   5094.275   1348.127     3.78   0.000     2451.996    7736.555
+                         3  |   8663.574   2286.673     3.79   0.000     4181.778    13145.37
+                         4  |   20509.95   4698.348     4.37   0.000     11301.36    29718.55
+----------------------------+----------------------------------------------------------------
+ATE                         |
+                      e401k |
+(Eligible vs Not eligible)  |   7980.516   1148.136     6.95   0.000      5730.21    10230.82
+----------------------------+----------------------------------------------------------------
+```
+
+The `cate po` command uses the Partialing Out estimator with machine learning methods (random forest and lasso) to estimate both the ATE and Group Average Treatment Effects (GATEs).
+
+### Approach 2: Using Standard Regression with Interactions
+
+We can achieve comparable results using standard regression with full interactions:
+
+```stata
+* you do not want to see all interactions.
+qui:reg assets i.incomecat##i.e401k##c.($catecovars), robust
+
+* Average Treatment Effect (ATE)
+margins, at(e401k=(0 1)) noestimcheck contrast(atcontrast(r))
+
+* Group Average Treatment Effects (GATEs)
+margins, at(e401k=(0 1)) noestimcheck contrast(atcontrast(r)) over(incomecat)
+```
+
+Results for ATE:
+```
+--------------------------------------------------------------
+             |            Delta-method
+             |   Contrast   std. err.     [95% conf. interval]
+-------------+------------------------------------------------
+         _at |
+   (2 vs 1)  |   7642.407   1142.797      5402.291    9882.524
+--------------------------------------------------------------
+```
+
+Results for GATEs:
+```
+---------------------------------------------------------------
+              |            Delta-method
+              |   Contrast   std. err.     [95% conf. interval]
+--------------+------------------------------------------------
+_at@incomecat |
+  (2 vs 1) 0  |   3594.182   896.3298      1837.191    5351.172
+  (2 vs 1) 1  |     1283.3   1565.151     -1784.718    4351.317
+  (2 vs 1) 2  |   5056.144   1262.728      2580.938     7531.35
+  (2 vs 1) 3  |   8610.622   2320.156      4062.641     13158.6
+  (2 vs 1) 4  |   19665.61   4733.551      10386.88    28944.34
+---------------------------------------------------------------
+```
+
+### Bonus: CATT Estimation
+
+Because we have full control of `margins`, we can also estimate Treatment Effects on the Treated!
+
+```stata
+* you do not want to see all interactions.
+qui:reg assets i.incomecat##i.e401k##c.($catecovars), robust
+
+* Average Treatment Effect (ATE)
+margins,  subpop(if e401k==1 ) at(e401k=(0 1)) noestimcheck contrast(atcontrast(r))
+
+* Group Average Treatment Effects (GATEs)
+margins,  subpop(if e401k==1 ) at(e401k=(0 1)) noestimcheck contrast(atcontrast(r)) over(incomecat)
+```
+
+Results for ATE:
+```
+--------------------------------------------------------------
+             |            Delta-method
+             |   Contrast   std. err.     [95% conf. interval]
+-------------+------------------------------------------------
+         _at |
+   (2 vs 1)  |   10420.85   1618.697      7247.875    13593.83
+--------------------------------------------------------------
+```
+
+Results for GATEs:
+```
+---------------------------------------------------------------
+              |            Delta-method
+              |   Contrast   std. err.     [95% conf. interval]
+--------------+------------------------------------------------
+_at@incomecat |
+  (2 vs 1) 0  |   3666.243   1113.918      1482.736    5849.751
+  (2 vs 1) 1  |   2118.117   1437.205     -699.1003    4935.334
+  (2 vs 1) 2  |   5224.821   1229.951      2813.864    7635.778
+  (2 vs 1) 3  |   8780.722   2238.042        4393.7    13167.74
+  (2 vs 1) 4  |   20408.31   4633.656       11325.4    29491.23
+---------------------------------------------------------------
+```
+
+## Comparing the Two Approaches
+
+Let's compare the ATE and GATE estimates from both methods:
+
+| Income Category | CATE Command | Basic Regression |
+|-----------------|--------------|------------------|
+| Overall ATE     | 7,980.52     | 7,642.41         |
+| Income Cat 0    | 4,133.40     | 3,594.18         |
+| Income Cat 1    | 1,499.31     | 1,283.30         |
+| Income Cat 2    | 5,094.28     | 5,056.14         |
+| Income Cat 3    | 8,663.57     | 8,610.62         |
+| Income Cat 4    | 20,509.95    | 19,665.61        |
+
+The estimates are remarkably similar! Both approaches reveal substantial heterogeneity in treatment effects across income categories, with the highest income group (category 4) experiencing treatment effects nearly 4-5 times larger than the lowest income groups.
+
+## The Power of Stata's Fundamentals
+
+While the new `cate` command offers sophisticated machine learning techniques, our traditional regression approach using `margins` yields comparable results. This demonstrates several important points:
+
+1. **Conceptual understanding matters**: When you understand the underlying causal framework, you can implement sophisticated analyses using fundamental tools.
+
+2. **Flexibility of regression with interactions**: Full interaction models can capture complex heterogeneity patterns.
+
+3. **Power of margins**: Stata's `margins` command is incredibly versatile, allowing for the calculation of various treatment effects with proper standard errors.
+
+4. **Transparency**: The regression approach makes the modeling assumptions explicit and transparent.
+
+
+## Conclusion
+
+Stata's power lies not just in its specialized commands but in the flexibility and depth of its fundamental tools. While the new `cate` command provides a streamlined approach to modern causal inference techniques, understanding how to implement these concepts with basic commands gives you greater control and insight into your analysis.
+
+Whether you choose the specialized `cate` command or build your analysis with regression and `margins` depends on your specific needs, the dimensionality of your data, and your comfort with different estimation approaches. Either way, Stata provides powerful tools for uncovering treatment effect heterogeneity and informing policy decisions.
+
+## Appendix: The Math Behind Margins
+
+When using `margins` after our interaction model, Stata is computing:
+
+$$E[Y_i | X_i = x, D_i = 1] - E[Y_i | X_i = x, D_i = 0]$$
+
+For each subgroup defined by `incomecat`. This is equivalent to estimating:
+
+$$\tau(x) = E[Y_i(1) - Y_i(0) | X_i = x]$$
+
+Under the conditional independence assumption. The `margins` command handles the complex delta-method calculations for standard errors automatically, accounting for the full covariance structure of the coefficient estimates.
