@@ -2,17 +2,17 @@
 title: "Odds and Ends + ChatGPT"
 subtitle: "Just some extra tips, and short stories"
 listing:
-  contents: 
-    chatgpt/*/index.qmd
+  contents: chatgpt
   sort: "date desc"
-  type: default
+  type: grid
   image-align: right
   max-description-length: 175
   date-format: medium
   categories: true
-  feed: true  
+  sort-ui: true
+  filter-ui: false
 page-layout: full
-title-block-banner: false
+title-block-banner: true
 #    - "date desc"
 #    - "title desc"
 ---

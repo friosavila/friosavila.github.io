@@ -18,7 +18,7 @@ format:
 ---
 
 #### Hi, my name is Fernando. I am a Research Scholar at the Levy Economics Institute, who works on a variarety of applied microeconomic topics. 
-#### When not working on data, papers, or programming in Stata, I enjoy spending time drawing, coloring and painting, while sharing adventures with my wife and little daugther.
+#### When not working on data, papers, or programming in Stata, I enjoy spending time drawing, coloring and painting, while sharing adventures with my wife and little daugthers.
 
 ----
 

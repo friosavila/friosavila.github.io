@@ -112,9 +112,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     }
 
     const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
+      valueNames: ['listing-title','listing-author','listing-date','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      page: 18,
+    pagination: { item: "<li class='page-item'><a class='page page-link' href='#'></a></li>" },
+      searchColumns: ["listing-title","listing-author","listing-date","listing-image","listing-description","listing-categories"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
@@ -171,12 +172,12 @@ window.Quarto = {
 };
 </script>
 
-<link rel="alternate" type="application/rss+xml" title="Playing With Stata" href="chatgpt.xml" data-external="1"></head>
+</head>
 
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
@@ -235,33 +236,34 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-page-left">
+      <div class="quarto-title-block"><div><h1 class="title">Odds and Ends + ChatGPT</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+            <p class="subtitle lead">Just some extra tips, and short stories</p>
+                      </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta column-page-left">
+
+      
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(18)</span></div><div class="category" data-category="QmFzaWNz">Basics <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Q2F1c2FsJTIwZWZmZWN0cw==">Causal effects <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q2hhdEdQVA==">ChatGPT <span class="quarto-category-count">(4)</span></div><div class="category" data-category="RWNvbm9tZXRyaWNz">Econometrics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Rml4ZWQlMjBFZmZlY3Rz">Fixed Effects <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UG9lbQ==">Poem <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UHJvZ3JhbW1pbmc=">Programming <span class="quarto-category-count">(7)</span></div><div class="category" data-category="UXVhcnRv">Quarto <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UmFwJTIwQmF0dGxl">Rap Battle <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UmFwJTIwQmF0dGxlcw==">Rap Battles <span class="quarto-category-count">(1)</span></div><div class="category" data-category="U3RhdGE=">Stata <span class="quarto-category-count">(13)</span></div><div class="category" data-category="U3Rvcmllcw==">Stories <span class="quarto-category-count">(1)</span></div><div class="category" data-category="VGlwcw==">Tips <span class="quarto-category-count">(5)</span></div><div class="category" data-category="V2VhayUyMElW">Weak IV <span class="quarto-category-count">(1)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(19)</span></div><div class="category" data-category="QmFzaWNz">Basics <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Q2F1c2FsJTIwZWZmZWN0cw==">Causal effects <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q2hhdEdQVA==">ChatGPT <span class="quarto-category-count">(4)</span></div><div class="category" data-category="RWNvbm9tZXRyaWNz">Econometrics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Rml4ZWQlMjBFZmZlY3Rz">Fixed Effects <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UG9lbQ==">Poem <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UHJvZ3JhbW1pbmc=">Programming <span class="quarto-category-count">(7)</span></div><div class="category" data-category="UXVhcnRv">Quarto <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UmFwJTIwQmF0dGxl">Rap Battle <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UmFwJTIwQmF0dGxlcw==">Rap Battles <span class="quarto-category-count">(1)</span></div><div class="category" data-category="U3RhdGE=">Stata <span class="quarto-category-count">(13)</span></div><div class="category" data-category="U3Rvcmllcw==">Stories <span class="quarto-category-count">(1)</span></div><div class="category" data-category="VGlwcw==">Tips <span class="quarto-category-count">(5)</span></div><div class="category" data-category="V2VhayUyMElW">Weak IV <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Odds and Ends + ChatGPT</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
-<p class="subtitle lead">Just some extra tips, and short stories</p>
-</div>
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
 
 
-<div class="quarto-title-meta column-page-left">
-
-    
-  
-    
-  </div>
-  
-
-
-</header>
 
 
 
@@ -270,21 +272,33 @@ window.Quarto = {
 <!-- -->
 
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="U3RhdGElMkNCYXNpY3M=" data-listing-date-sort="1722916800000" data-listing-file-modified-sort="1744423934277" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="25" data-listing-word-count-sort="4870">
-<div class="thumbnail">
-<p><a href="./chatgpt/stata_08_06_2024/index.html" class="no-external"></a></p><a href="./chatgpt/stata_08_06_2024/index.html" class="no-external">
-<p class="card-img-top"><img src="chatgpt\stata_08_06_2024\index_files\figure-html\cell-3-output-2.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./chatgpt/stata_08_06_2024/index.html" class="no-external"></a></p>
+<div class="quarto-listing quarto-listing-container-grid" id="listing-listing">
+<div class="list grid quarto-listing-cols-3">
+<div class="g-col-1" data-index="0" data-listing-file-modified-sort="1744422111584" data-listing-reading-time-sort="4" data-listing-word-count-sort="708">
+<a href="./chatgpt/quar_01_25_2024/reg_md.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<div class="card-text listing-description">
+Standard errors in parentheses<br> <sup>*</sup> <em>p</em> &lt; 0.05, <sup>**</sup> <em>p</em> &lt; 0.01, <sup>***</sup> <em>p</em> &lt; 0.001
 </div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./chatgpt/stata_08_06_2024/index.html" class="no-external">Stata Crash Course: Graphs and EDA</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./chatgpt/stata_08_06_2024/index.html" class="no-external"></a>
+<div class="card-attribution card-text-small start">
+<div class="listing-author">
+
 </div>
+</div>
+</div>
+</div>
+</a>
+</div>
+<div class="g-col-1" data-index="1" data-categories="U3RhdGElMkNCYXNpY3M=" data-listing-date-sort="1722916800000" data-listing-file-modified-sort="1744423934277" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="25" data-listing-word-count-sort="4870">
+<a href="./chatgpt/stata_08_06_2024/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top"><img src="chatgpt\stata_08_06_2024\index_files\figure-html\cell-3-output-2.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Stata Crash Course: Graphs and EDA
+</h5>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('U3RhdGE='); return false;">
 Stata
@@ -293,34 +307,29 @@ Stata
 Basics
 </div>
 </div>
-<div class="listing-description">
-<a href="./chatgpt/stata_08_06_2024/index.html" class="no-external">A brief introduction to Graphs production in Stata</a>
+<div class="card-text listing-description">
+A brief introduction to Graphs production in Stata
 </div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Fernando Rios-Avila
 </div>
-<div class="metadata">
-<a href="./chatgpt/stata_08_06_2024/index.html" class="no-external">
 <div class="listing-date">
 Aug 6, 2024
 </div>
-<div class="listing-author">
-Fernando Rios-Avila
+</div>
+</div>
 </div>
 </a>
 </div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="U3RhdGElMkNCYXNpY3M=" data-listing-date-sort="1722744000000" data-listing-file-modified-sort="1744422111586" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1092">
-<div class="thumbnail">
-<p><a href="./chatgpt/stata_08_04_2024/index.html" class="no-external"></a></p><a href="./chatgpt/stata_08_04_2024/index.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./chatgpt/stata_08_04_2024/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./chatgpt/stata_08_04_2024/index.html" class="no-external">Stata Crash Course: Publication Ready Tables</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./chatgpt/stata_08_04_2024/index.html" class="no-external"></a>
-</div>
+<div class="g-col-1" data-index="2" data-categories="U3RhdGElMkNCYXNpY3M=" data-listing-date-sort="1722744000000" data-listing-file-modified-sort="1744422111586" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1092">
+<a href="./chatgpt/stata_08_04_2024/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Stata Crash Course: Publication Ready Tables
+</h5>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('U3RhdGE='); return false;">
 Stata
@@ -329,34 +338,29 @@ Stata
 Basics
 </div>
 </div>
-<div class="listing-description">
-<a href="./chatgpt/stata_08_04_2024/index.html" class="no-external">Producing tables for publication using Stata</a>
+<div class="card-text listing-description">
+Producing tables for publication using Stata
 </div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Fernando Rios-Avila
 </div>
-<div class="metadata">
-<a href="./chatgpt/stata_08_04_2024/index.html" class="no-external">
 <div class="listing-date">
 Aug 4, 2024
 </div>
-<div class="listing-author">
-Fernando Rios-Avila
+</div>
+</div>
 </div>
 </a>
 </div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="U3RhdGElMkNCYXNpY3M=" data-listing-date-sort="1722571200000" data-listing-file-modified-sort="1744422111585" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1982">
-<div class="thumbnail">
-<p><a href="./chatgpt/stata_08_02_2024/index.html" class="no-external"></a></p><a href="./chatgpt/stata_08_02_2024/index.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./chatgpt/stata_08_02_2024/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./chatgpt/stata_08_02_2024/index.html" class="no-external">Stata Crash Course: Data management</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./chatgpt/stata_08_02_2024/index.html" class="no-external"></a>
-</div>
+<div class="g-col-1" data-index="3" data-categories="U3RhdGElMkNCYXNpY3M=" data-listing-date-sort="1722571200000" data-listing-file-modified-sort="1744422111585" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="10" data-listing-word-count-sort="1982">
+<a href="./chatgpt/stata_08_02_2024/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Stata Crash Course: Data management
+</h5>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('U3RhdGE='); return false;">
 Stata
@@ -365,67 +369,57 @@ Stata
 Basics
 </div>
 </div>
-<div class="listing-description">
-<a href="./chatgpt/stata_08_02_2024/index.html" class="no-external">A brief introduction to data management in Stata</a>
+<div class="card-text listing-description">
+A brief introduction to data management in Stata
 </div>
-</div>
-<div class="metadata">
-<a href="./chatgpt/stata_08_02_2024/index.html" class="no-external">
-<div class="listing-date">
-Aug 2, 2024
-</div>
+<div class="card-attribution card-text-small justify">
 <div class="listing-author">
 Fernando Rios-Avila
 </div>
+<div class="listing-date">
+Aug 2, 2024
+</div>
+</div>
+</div>
+</div>
 </a>
 </div>
-</div>
-<div class="quarto-post image-right" data-index="3" data-categories="UXVhcnRv" data-listing-date-sort="1706158800000" data-listing-file-modified-sort="1744422111584" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="533">
-<div class="thumbnail">
-<p><a href="./chatgpt/quar_01_25_2024/index.html" class="no-external"></a></p><a href="./chatgpt/quar_01_25_2024/index.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./chatgpt/quar_01_25_2024/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./chatgpt/quar_01_25_2024/index.html" class="no-external">Quarto 1.4</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./chatgpt/quar_01_25_2024/index.html" class="no-external"></a>
-</div>
+<div class="g-col-1" data-index="4" data-categories="UXVhcnRv" data-listing-date-sort="1706158800000" data-listing-file-modified-sort="1744422111584" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="533">
+<a href="./chatgpt/quar_01_25_2024/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Quarto 1.4
+</h5>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('UXVhcnRv'); return false;">
 Quarto
 </div>
 </div>
-<div class="listing-description">
-<a href="./chatgpt/quar_01_25_2024/index.html" class="no-external">Some examples for Table cross-referencing!</a>
+<div class="card-text listing-description">
+Some examples for Table cross-referencing!
 </div>
-</div>
-<div class="metadata">
-<a href="./chatgpt/quar_01_25_2024/index.html" class="no-external">
-<div class="listing-date">
-Jan 25, 2024
-</div>
+<div class="card-attribution card-text-small justify">
 <div class="listing-author">
 Fernando Rios-Avila
 </div>
+<div class="listing-date">
+Jan 25, 2024
+</div>
+</div>
+</div>
+</div>
 </a>
 </div>
-</div>
-<div class="quarto-post image-right" data-index="4" data-categories="Q2hhdEdQVCUyQ1JhcCUyMEJhdHRsZXM=" data-listing-date-sort="1692849600000" data-listing-file-modified-sort="1744422111583" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="870">
-<div class="thumbnail">
-<p><a href="./chatgpt/ky_hy_08_24_2023/index.html" class="no-external"></a></p><a href="./chatgpt/ky_hy_08_24_2023/index.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./chatgpt/ky_hy_08_24_2023/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./chatgpt/ky_hy_08_24_2023/index.html" class="no-external">Keynes vs Hayek: The Rap battle</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./chatgpt/ky_hy_08_24_2023/index.html" class="no-external"></a>
-</div>
+<div class="g-col-1" data-index="5" data-categories="Q2hhdEdQVCUyQ1JhcCUyMEJhdHRsZXM=" data-listing-date-sort="1692849600000" data-listing-file-modified-sort="1744422111583" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="870">
+<a href="./chatgpt/ky_hy_08_24_2023/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Keynes vs Hayek: The Rap battle
+</h5>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Q2hhdEdQVA=='); return false;">
 ChatGPT
@@ -434,34 +428,29 @@ ChatGPT
 Rap Battles
 </div>
 </div>
-<div class="listing-description">
-<a href="./chatgpt/ky_hy_08_24_2023/index.html" class="no-external">Chat-GPT creates various version of Rap Battle between Keynes and Hayek. All with different levels of <em>similarity</em> to Epic Rap battles of History (self-rated)</a>
+<div class="card-text listing-description">
+Chat-GPT creates various version of Rap Battle between Keynes and Hayek. All with different levels of <em>similarity</em> to Epic Rap battles of History (self-rated)
 </div>
-</div>
-<div class="metadata">
-<a href="./chatgpt/ky_hy_08_24_2023/index.html" class="no-external">
-<div class="listing-date">
-Aug 24, 2023
-</div>
+<div class="card-attribution card-text-small justify">
 <div class="listing-author">
 ChatGPT and Fernando Rios-Avila
 </div>
+<div class="listing-date">
+Aug 24, 2023
+</div>
+</div>
+</div>
+</div>
 </a>
 </div>
-</div>
-<div class="quarto-post image-right" data-index="5" data-categories="U3RhdGElMkNQcm9ncmFtbWluZyUyQ0Vjb25vbWV0cmljcyUyQ1dlYWslMjBJVg==" data-listing-date-sort="1692072000000" data-listing-file-modified-sort="1744422111604" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1771">
-<div class="thumbnail">
-<p><a href="./chatgpt/weakiv_08_15_2023/index.html" class="no-external"></a></p><a href="./chatgpt/weakiv_08_15_2023/index.html" class="no-external">
-<p class="card-img-top"><img src="chatgpt\weakiv_08_15_2023\index_files\figure-html\cell-3-output-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./chatgpt/weakiv_08_15_2023/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./chatgpt/weakiv_08_15_2023/index.html" class="no-external">Weak IV: And the problem of Inference</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./chatgpt/weakiv_08_15_2023/index.html" class="no-external"></a>
-</div>
+<div class="g-col-1" data-index="6" data-categories="U3RhdGElMkNQcm9ncmFtbWluZyUyQ0Vjb25vbWV0cmljcyUyQ1dlYWslMjBJVg==" data-listing-date-sort="1692072000000" data-listing-file-modified-sort="1744422111604" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="9" data-listing-word-count-sort="1771">
+<a href="./chatgpt/weakiv_08_15_2023/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top"><img src="chatgpt\weakiv_08_15_2023\index_files\figure-html\cell-3-output-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Weak IV: And the problem of Inference
+</h5>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('U3RhdGE='); return false;">
 Stata
@@ -476,34 +465,29 @@ Econometrics
 Weak IV
 </div>
 </div>
-<div class="listing-description">
-<a href="./chatgpt/weakiv_08_15_2023/index.html" class="no-external">Using a Small Simulation, and based on current research, I ilustrate why F=10, is not enough for inference. </a>
+<div class="card-text listing-description">
+Using a Small Simulation, and based on current research, I ilustrate why F=10, is not enough for inference.
 </div>
-</div>
-<div class="metadata">
-<a href="./chatgpt/weakiv_08_15_2023/index.html" class="no-external">
-<div class="listing-date">
-Aug 15, 2023
-</div>
+<div class="card-attribution card-text-small justify">
 <div class="listing-author">
 Fernando Rios-Avila
 </div>
+<div class="listing-date">
+Aug 15, 2023
+</div>
+</div>
+</div>
+</div>
 </a>
 </div>
-</div>
-<div class="quarto-post image-right" data-index="6" data-categories="U3RhdGElMkNQcm9ncmFtbWluZyUyQ0ZpeGVkJTIwRWZmZWN0cw==" data-listing-date-sort="1689307200000" data-listing-file-modified-sort="1744422111599" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="556">
-<div class="thumbnail">
-<p><a href="./chatgpt/suregfe_07_14_2023/index.html" class="no-external"></a></p><a href="./chatgpt/suregfe_07_14_2023/index.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./chatgpt/suregfe_07_14_2023/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./chatgpt/suregfe_07_14_2023/index.html" class="no-external">How to <code>suest</code> a HDFE</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./chatgpt/suregfe_07_14_2023/index.html" class="no-external"></a>
-</div>
+<div class="g-col-1" data-index="7" data-categories="U3RhdGElMkNQcm9ncmFtbWluZyUyQ0ZpeGVkJTIwRWZmZWN0cw==" data-listing-date-sort="1689307200000" data-listing-file-modified-sort="1744422111599" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="556">
+<a href="./chatgpt/suregfe_07_14_2023/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+How to <code>suest</code> a HDFE
+</h5>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('U3RhdGE='); return false;">
 Stata
@@ -515,34 +499,29 @@ Programming
 Fixed Effects
 </div>
 </div>
-<div class="listing-description">
-<a href="./chatgpt/suregfe_07_14_2023/index.html" class="no-external">I propose a feasible strategy to compare coefficients across models with high dimensional fixed effects</a>
+<div class="card-text listing-description">
+I propose a feasible strategy to compare coefficients across models with high dimensional fixed effects
 </div>
-</div>
-<div class="metadata">
-<a href="./chatgpt/suregfe_07_14_2023/index.html" class="no-external">
-<div class="listing-date">
-Jul 14, 2023
-</div>
+<div class="card-attribution card-text-small justify">
 <div class="listing-author">
 Fernando Rios-Avila
 </div>
+<div class="listing-date">
+Jul 14, 2023
+</div>
+</div>
+</div>
+</div>
 </a>
 </div>
-</div>
-<div class="quarto-post image-right" data-index="7" data-categories="U3RhdGElMkNUaXBz" data-listing-date-sort="1685678400000" data-listing-file-modified-sort="1744422111584" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="353">
-<div class="thumbnail">
-<p><a href="./chatgpt/ren_06_02_2023/index.html" class="no-external"></a></p><a href="./chatgpt/ren_06_02_2023/index.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./chatgpt/ren_06_02_2023/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./chatgpt/ren_06_02_2023/index.html" class="no-external">Renaming variables in Bulk</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./chatgpt/ren_06_02_2023/index.html" class="no-external"></a>
-</div>
+<div class="g-col-1" data-index="8" data-categories="U3RhdGElMkNUaXBz" data-listing-date-sort="1685678400000" data-listing-file-modified-sort="1744422111584" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="353">
+<a href="./chatgpt/ren_06_02_2023/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Renaming variables in Bulk
+</h5>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('U3RhdGE='); return false;">
 Stata
@@ -551,34 +530,29 @@ Stata
 Tips
 </div>
 </div>
-<div class="listing-description">
-<a href="./chatgpt/ren_06_02_2023/index.html" class="no-external">I describe an extended option from rename to easily rename your variabes</a>
+<div class="card-text listing-description">
+I describe an extended option from rename to easily rename your variabes
 </div>
-</div>
-<div class="metadata">
-<a href="./chatgpt/ren_06_02_2023/index.html" class="no-external">
-<div class="listing-date">
-Jun 2, 2023
-</div>
+<div class="card-attribution card-text-small justify">
 <div class="listing-author">
 Fernando Rios-Avila and Fahad Mirza
 </div>
+<div class="listing-date">
+Jun 2, 2023
+</div>
+</div>
+</div>
+</div>
 </a>
 </div>
-</div>
-<div class="quarto-post image-right" data-index="8" data-categories="U3RhdGElMkNQcm9ncmFtbWluZyUyQ0NhdXNhbCUyMGVmZmVjdHM=" data-listing-date-sort="1683604800000" data-listing-file-modified-sort="1744422111599" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="14" data-listing-word-count-sort="2638">
-<div class="thumbnail">
-<p><a href="./chatgpt/synth_05_09_2023/index.html" class="no-external"></a></p><a href="./chatgpt/synth_05_09_2023/index.html" class="no-external">
-<p class="card-img-top"><img src="chatgpt\synth_05_09_2023\index_files\figure-html\fig-sc1-output-1.png"  class="thumbnail-image card-img"/></p>
-</a><p><a href="./chatgpt/synth_05_09_2023/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./chatgpt/synth_05_09_2023/index.html" class="no-external">Synthetic Control: Role of rescaling</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./chatgpt/synth_05_09_2023/index.html" class="no-external"></a>
-</div>
+<div class="g-col-1" data-index="9" data-categories="U3RhdGElMkNQcm9ncmFtbWluZyUyQ0NhdXNhbCUyMGVmZmVjdHM=" data-listing-date-sort="1683604800000" data-listing-file-modified-sort="1744422111599" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="14" data-listing-word-count-sort="2638">
+<a href="./chatgpt/synth_05_09_2023/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<p class="card-img-top"><img src="chatgpt\synth_05_09_2023\index_files\figure-html\fig-sc1-output-1.png" style="height: 150px;"  class="thumbnail-image card-img"/></p>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Synthetic Control: Role of rescaling
+</h5>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('U3RhdGE='); return false;">
 Stata
@@ -590,34 +564,29 @@ Programming
 Causal effects
 </div>
 </div>
-<div class="listing-description">
-<a href="./chatgpt/synth_05_09_2023/index.html" class="no-external">I discuss the role of variable transformations on the use of Synthetic control for Causal Analysis</a>
+<div class="card-text listing-description">
+I discuss the role of variable transformations on the use of Synthetic control for Causal Analysis
 </div>
-</div>
-<div class="metadata">
-<a href="./chatgpt/synth_05_09_2023/index.html" class="no-external">
-<div class="listing-date">
-May 9, 2023
-</div>
+<div class="card-attribution card-text-small justify">
 <div class="listing-author">
 Fernando Rios-Avila
 </div>
+<div class="listing-date">
+May 9, 2023
+</div>
+</div>
+</div>
+</div>
 </a>
 </div>
-</div>
-<div class="quarto-post image-right" data-index="9" data-categories="U3RhdGElMkNUaXBzJTJDUHJvZ3JhbW1pbmc=" data-listing-date-sort="1681963200000" data-listing-file-modified-sort="1744422111583" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="686">
-<div class="thumbnail">
-<p><a href="./chatgpt/merge_04_20_2023/index.html" class="no-external"></a></p><a href="./chatgpt/merge_04_20_2023/index.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./chatgpt/merge_04_20_2023/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./chatgpt/merge_04_20_2023/index.html" class="no-external">Merging Data 1:1, m:1, 1:m and m:m?</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./chatgpt/merge_04_20_2023/index.html" class="no-external"></a>
-</div>
+<div class="g-col-1" data-index="10" data-categories="U3RhdGElMkNUaXBzJTJDUHJvZ3JhbW1pbmc=" data-listing-date-sort="1681963200000" data-listing-file-modified-sort="1744422111583" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="686">
+<a href="./chatgpt/merge_04_20_2023/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Merging Data 1:1, m:1, 1:m and m:m?
+</h5>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('U3RhdGE='); return false;">
 Stata
@@ -629,34 +598,29 @@ Tips
 Programming
 </div>
 </div>
-<div class="listing-description">
-<a href="./chatgpt/merge_04_20_2023/index.html" class="no-external">I describe how to use <code>merge</code>, and the meaning of the different types of merging options</a>
+<div class="card-text listing-description">
+I describe how to use <code>merge</code>, and the meaning of the different types of merging options
 </div>
-</div>
-<div class="metadata">
-<a href="./chatgpt/merge_04_20_2023/index.html" class="no-external">
-<div class="listing-date">
-Apr 20, 2023
-</div>
+<div class="card-attribution card-text-small justify">
 <div class="listing-author">
 Fernando Rios-Avila
 </div>
+<div class="listing-date">
+Apr 20, 2023
+</div>
+</div>
+</div>
+</div>
 </a>
 </div>
-</div>
-<div class="quarto-post image-right" data-index="10" data-categories="Q2hhdEdQVCUyQ1BvZW0=" data-listing-date-sort="1681876800000" data-listing-file-modified-sort="1744422111599" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="127">
-<div class="thumbnail">
-<p><a href="./chatgpt/teeth_04_19_2023/index.html" class="no-external"></a></p><a href="./chatgpt/teeth_04_19_2023/index.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./chatgpt/teeth_04_19_2023/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./chatgpt/teeth_04_19_2023/index.html" class="no-external">A Poem for Abby’s Teeth</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./chatgpt/teeth_04_19_2023/index.html" class="no-external"></a>
-</div>
+<div class="g-col-1" data-index="11" data-categories="Q2hhdEdQVCUyQ1BvZW0=" data-listing-date-sort="1681876800000" data-listing-file-modified-sort="1744422111599" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="127">
+<a href="./chatgpt/teeth_04_19_2023/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+A Poem for Abby’s Teeth
+</h5>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Q2hhdEdQVA=='); return false;">
 ChatGPT
@@ -665,34 +629,29 @@ ChatGPT
 Poem
 </div>
 </div>
-<div class="listing-description">
-<a href="./chatgpt/teeth_04_19_2023/index.html" class="no-external">Chat-GPT writes a small poem about babies first teeth</a>
+<div class="card-text listing-description">
+Chat-GPT writes a small poem about babies first teeth
 </div>
-</div>
-<div class="metadata">
-<a href="./chatgpt/teeth_04_19_2023/index.html" class="no-external">
-<div class="listing-date">
-Apr 19, 2023
-</div>
+<div class="card-attribution card-text-small justify">
 <div class="listing-author">
 ChatGPT and Fernando Rios-Avila
 </div>
+<div class="listing-date">
+Apr 19, 2023
+</div>
+</div>
+</div>
+</div>
 </a>
 </div>
-</div>
-<div class="quarto-post image-right" data-index="11" data-categories="U3RhdGElMkNUaXBz" data-listing-date-sort="1680235200000" data-listing-file-modified-sort="1744422111585" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="399">
-<div class="thumbnail">
-<p><a href="./chatgpt/rep_03_31_2023/index.html" class="no-external"></a></p><a href="./chatgpt/rep_03_31_2023/index.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./chatgpt/rep_03_31_2023/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./chatgpt/rep_03_31_2023/index.html" class="no-external">Why are my estimates changing every time I run my <code>do-files</code>?!</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./chatgpt/rep_03_31_2023/index.html" class="no-external"></a>
-</div>
+<div class="g-col-1" data-index="12" data-categories="U3RhdGElMkNUaXBz" data-listing-date-sort="1680235200000" data-listing-file-modified-sort="1744422111585" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="399">
+<a href="./chatgpt/rep_03_31_2023/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Why are my estimates changing every time I run my <code>do-files</code>?!
+</h5>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('U3RhdGE='); return false;">
 Stata
@@ -701,34 +660,29 @@ Stata
 Tips
 </div>
 </div>
-<div class="listing-description">
-<a href="./chatgpt/rep_03_31_2023/index.html" class="no-external">I describe the main suspects one should look for when wondering of lack of replicability on a dofile</a>
+<div class="card-text listing-description">
+I describe the main suspects one should look for when wondering of lack of replicability on a dofile
 </div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Fernando Rios-Avila
 </div>
-<div class="metadata">
-<a href="./chatgpt/rep_03_31_2023/index.html" class="no-external">
 <div class="listing-date">
 Mar 31, 2023
 </div>
-<div class="listing-author">
-Fernando Rios-Avila
+</div>
+</div>
 </div>
 </a>
 </div>
-</div>
-<div class="quarto-post image-right" data-index="12" data-categories="U3RhdGElMkNUaXBzJTJDUHJvZ3JhbW1pbmc=" data-listing-date-sort="1680148800000" data-listing-file-modified-sort="1744422111582" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="464">
-<div class="thumbnail">
-<p><a href="./chatgpt/fra_03_30_2023/index.html" class="no-external"></a></p><a href="./chatgpt/fra_03_30_2023/index.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./chatgpt/fra_03_30_2023/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./chatgpt/fra_03_30_2023/index.html" class="no-external">How to write your own Installer</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./chatgpt/fra_03_30_2023/index.html" class="no-external"></a>
-</div>
+<div class="g-col-1" data-index="13" data-categories="U3RhdGElMkNUaXBzJTJDUHJvZ3JhbW1pbmc=" data-listing-date-sort="1680148800000" data-listing-file-modified-sort="1744422111582" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="464">
+<a href="./chatgpt/fra_03_30_2023/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+How to write your own Installer
+</h5>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('U3RhdGE='); return false;">
 Stata
@@ -740,34 +694,29 @@ Tips
 Programming
 </div>
 </div>
-<div class="listing-description">
-<a href="./chatgpt/fra_03_30_2023/index.html" class="no-external">I provide a small description on how to use <code>net</code> to program an easy installer for your own repository</a>
+<div class="card-text listing-description">
+I provide a small description on how to use <code>net</code> to program an easy installer for your own repository
 </div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Fernando Rios-Avila
 </div>
-<div class="metadata">
-<a href="./chatgpt/fra_03_30_2023/index.html" class="no-external">
 <div class="listing-date">
 Mar 30, 2023
 </div>
-<div class="listing-author">
-Fernando Rios-Avila
+</div>
+</div>
 </div>
 </a>
 </div>
-</div>
-<div class="quarto-post image-right" data-index="13" data-categories="U3RhdGElMkNUaXBz" data-listing-date-sort="1679889600000" data-listing-file-modified-sort="1744422111599" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="178">
-<div class="thumbnail">
-<p><a href="./chatgpt/use_03_27_2023/index.html" class="no-external"></a></p><a href="./chatgpt/use_03_27_2023/index.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./chatgpt/use_03_27_2023/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./chatgpt/use_03_27_2023/index.html" class="no-external">Loading Large Datasets</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./chatgpt/use_03_27_2023/index.html" class="no-external"></a>
-</div>
+<div class="g-col-1" data-index="14" data-categories="U3RhdGElMkNUaXBz" data-listing-date-sort="1679889600000" data-listing-file-modified-sort="1744422111599" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="178">
+<a href="./chatgpt/use_03_27_2023/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Loading Large Datasets
+</h5>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('U3RhdGE='); return false;">
 Stata
@@ -776,34 +725,29 @@ Stata
 Tips
 </div>
 </div>
-<div class="listing-description">
-<a href="./chatgpt/use_03_27_2023/index.html" class="no-external"><code>use in</code> vs <code>use if</code></a>
+<div class="card-text listing-description">
+<code>use in</code> vs <code>use if</code>
 </div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Fernando Rios-Avila
 </div>
-<div class="metadata">
-<a href="./chatgpt/use_03_27_2023/index.html" class="no-external">
 <div class="listing-date">
 Mar 27, 2023
 </div>
-<div class="listing-author">
-Fernando Rios-Avila
+</div>
+</div>
 </div>
 </a>
 </div>
-</div>
-<div class="quarto-post image-right" data-index="14" data-categories="U3RhdGElMkNQcm9ncmFtbWluZw==" data-listing-date-sort="1679803200000" data-listing-file-modified-sort="1744422111581" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="405">
-<div class="thumbnail">
-<p><a href="./chatgpt/addx_03_26_2023/index.html" class="no-external"></a></p><a href="./chatgpt/addx_03_26_2023/index.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./chatgpt/addx_03_26_2023/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./chatgpt/addx_03_26_2023/index.html" class="no-external">Adding info to e() and r()</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./chatgpt/addx_03_26_2023/index.html" class="no-external"></a>
-</div>
+<div class="g-col-1" data-index="15" data-categories="U3RhdGElMkNQcm9ncmFtbWluZw==" data-listing-date-sort="1679803200000" data-listing-file-modified-sort="1744422111581" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="405">
+<a href="./chatgpt/addx_03_26_2023/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Adding info to e() and r()
+</h5>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('U3RhdGE='); return false;">
 Stata
@@ -812,34 +756,29 @@ Stata
 Programming
 </div>
 </div>
-<div class="listing-description">
-<a href="./chatgpt/addx_03_26_2023/index.html" class="no-external">I describe and introduce the programs <code>adde</code> and <code>addr</code>. They allow you to add and modify information to some Stata Objects</a>
+<div class="card-text listing-description">
+I describe and introduce the programs <code>adde</code> and <code>addr</code>. They allow you to add and modify information to some Stata Objects
 </div>
+<div class="card-attribution card-text-small justify">
+<div class="listing-author">
+Fernando Rios-Avila
 </div>
-<div class="metadata">
-<a href="./chatgpt/addx_03_26_2023/index.html" class="no-external">
 <div class="listing-date">
 Mar 26, 2023
 </div>
-<div class="listing-author">
-Fernando Rios-Avila
+</div>
+</div>
 </div>
 </a>
 </div>
-</div>
-<div class="quarto-post image-right" data-index="15" data-categories="U3RhdGElMkNQcm9ncmFtbWluZw==" data-listing-date-sort="1679716800000" data-listing-file-modified-sort="1744422111582" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="517">
-<div class="thumbnail">
-<p><a href="./chatgpt/drop_03_25_2023/index.html" class="no-external"></a></p><a href="./chatgpt/drop_03_25_2023/index.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./chatgpt/drop_03_25_2023/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./chatgpt/drop_03_25_2023/index.html" class="no-external">Drop 2.0: Small Stata Programming</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./chatgpt/drop_03_25_2023/index.html" class="no-external"></a>
-</div>
+<div class="g-col-1" data-index="16" data-categories="U3RhdGElMkNQcm9ncmFtbWluZw==" data-listing-date-sort="1679716800000" data-listing-file-modified-sort="1744422111582" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="517">
+<a href="./chatgpt/drop_03_25_2023/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Drop 2.0: Small Stata Programming
+</h5>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('U3RhdGE='); return false;">
 Stata
@@ -848,34 +787,29 @@ Stata
 Programming
 </div>
 </div>
-<div class="listing-description">
-<a href="./chatgpt/drop_03_25_2023/index.html" class="no-external">I describe and introduce the program <code>drop2</code>, for more flexible data dropping</a>
+<div class="card-text listing-description">
+I describe and introduce the program <code>drop2</code>, for more flexible data dropping
 </div>
-</div>
-<div class="metadata">
-<a href="./chatgpt/drop_03_25_2023/index.html" class="no-external">
-<div class="listing-date">
-Mar 25, 2023
-</div>
+<div class="card-attribution card-text-small justify">
 <div class="listing-author">
 Fernando Rios-Avila
 </div>
+<div class="listing-date">
+Mar 25, 2023
+</div>
+</div>
+</div>
+</div>
 </a>
 </div>
-</div>
-<div class="quarto-post image-right" data-index="16" data-categories="Q2hhdEdQVCUyQ1N0b3JpZXM=" data-listing-date-sort="1679112000000" data-listing-file-modified-sort="1744422111581" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="585">
-<div class="thumbnail">
-<p><a href="./chatgpt/R_vs_Stata_3_18_2023/index.html" class="no-external"></a></p><a href="./chatgpt/R_vs_Stata_3_18_2023/index.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./chatgpt/R_vs_Stata_3_18_2023/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./chatgpt/R_vs_Stata_3_18_2023/index.html" class="no-external">Stata vs R: The battle</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./chatgpt/R_vs_Stata_3_18_2023/index.html" class="no-external"></a>
-</div>
+<div class="g-col-1" data-index="17" data-categories="Q2hhdEdQVCUyQ1N0b3JpZXM=" data-listing-date-sort="1679112000000" data-listing-file-modified-sort="1744422111581" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="3" data-listing-word-count-sort="585">
+<a href="./chatgpt/R_vs_Stata_3_18_2023/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Stata vs R: The battle
+</h5>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Q2hhdEdQVA=='); return false;">
 ChatGPT
@@ -884,34 +818,29 @@ ChatGPT
 Stories
 </div>
 </div>
-<div class="listing-description">
-<a href="./chatgpt/R_vs_Stata_3_18_2023/index.html" class="no-external">Chat-GPT creates a high fantasy battle between this titans</a>
+<div class="card-text listing-description">
+Chat-GPT creates a high fantasy battle between this titans
 </div>
-</div>
-<div class="metadata">
-<a href="./chatgpt/R_vs_Stata_3_18_2023/index.html" class="no-external">
-<div class="listing-date">
-Mar 18, 2023
-</div>
+<div class="card-attribution card-text-small justify">
 <div class="listing-author">
 ChatGPT and Fernando Rios-Avila
 </div>
+<div class="listing-date">
+Mar 18, 2023
+</div>
+</div>
+</div>
+</div>
 </a>
 </div>
-</div>
-<div class="quarto-post image-right" data-index="17" data-categories="Q2hhdEdQVCUyQ1JhcCUyMEJhdHRsZQ==" data-listing-date-sort="1678597200000" data-listing-file-modified-sort="1744422111582" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="687">
-<div class="thumbnail">
-<p><a href="./chatgpt/erbh_03_12_2023/index.html" class="no-external"></a></p><a href="./chatgpt/erbh_03_12_2023/index.html" class="no-external">
-<div class="listing-item-img-placeholder card-img-top" >&nbsp;</div>
-</a><p><a href="./chatgpt/erbh_03_12_2023/index.html" class="no-external"></a></p>
-</div>
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./chatgpt/erbh_03_12_2023/index.html" class="no-external">Tech Titans Rap Battle</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./chatgpt/erbh_03_12_2023/index.html" class="no-external"></a>
-</div>
+<div class="g-col-1" data-index="18" data-categories="Q2hhdEdQVCUyQ1JhcCUyMEJhdHRsZQ==" data-listing-date-sort="1678597200000" data-listing-file-modified-sort="1744422111582" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="687">
+<a href="./chatgpt/erbh_03_12_2023/index.html" class="quarto-grid-link">
+<div class="quarto-grid-item card h-100 card-left">
+<div class="listing-item-img-placeholder card-img-top" style="height: 150px;">&nbsp;</div>
+<div class="card-body post-contents">
+<h5 class="no-anchor card-title listing-title">
+Tech Titans Rap Battle
+</h5>
 <div class="listing-categories">
 <div class="listing-category" onclick="window.quartoListingCategory('Q2hhdEdQVA=='); return false;">
 ChatGPT
@@ -920,25 +849,28 @@ ChatGPT
 Rap Battle
 </div>
 </div>
-<div class="listing-description">
-<a href="./chatgpt/erbh_03_12_2023/index.html" class="no-external">Chat-GPT creates a rap battle between Siri, Alexa and Cortana. Who wins?</a>
+<div class="card-text listing-description">
+Chat-GPT creates a rap battle between Siri, Alexa and Cortana. Who wins?
 </div>
-</div>
-<div class="metadata">
-<a href="./chatgpt/erbh_03_12_2023/index.html" class="no-external">
-<div class="listing-date">
-Mar 12, 2023
-</div>
+<div class="card-attribution card-text-small justify">
 <div class="listing-author">
 ChatGPT and Fernando Rios-Avila
 </div>
-</a>
+<div class="listing-date">
+Mar 12, 2023
 </div>
+</div>
+</div>
+</div>
+</a>
 </div>
 </div>
 <div class="listing-no-matching d-none">
 No matching items
 </div>
+<nav id="listing-pagination" class="listing-pagination" aria-label="Page Navigation">
+  <ul class="pagination"></ul>
+</nav>
 </div></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -1412,17 +1344,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Odds and Ends + ChatGPT"</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Just some extra tips, and short stories"</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">listing:</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">  contents: </span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">    chatgpt/*/index.qmd</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  sort: "date desc"</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">  type: default</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">  image-align: right</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">  max-description-length: 175</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">  date-format: medium</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">  categories: true</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">  feed: true  </span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">  contents: chatgpt</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">  sort: "date desc"</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">  type: grid</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">  image-align: right</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">  max-description-length: 175</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">  date-format: medium</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">  categories: true</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">  sort-ui: true</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">  filter-ui: false</span></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="an">page-layout:</span><span class="co"> full</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="an">title-block-banner:</span><span class="co"> false</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="an">title-block-banner:</span><span class="co"> true</span></span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">#    - "date desc"</span></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">#    - "title desc"</span></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></pre></div>
