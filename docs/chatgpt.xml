@@ -48,7 +48,7 @@ font-weight: bold;
 font-style: inherit;">ssc</span> install color_style</span></code></pre></div>
 <p><code>palette</code> and <code>colrspace</code>, both by Ben Jann, are packages that allow you to easily create colors that can be used as part of your scheme. <code>grstyle</code>, also by Ben Jann, is another small tool that is very useful to make changes in the scheme files.</p>
 <p>Finally, a small wrapper of my own design: <code>color_style</code>. This package uses the previous ones for one main purpose. Change the color palettes used in the current scheme. That way, you do not need to make changes manually, and can easily change colors as needed. Now a quick setup:</p>
-<div id="78ae9ffd" class="cell" data-outcome="false" data-execution_count="2">
+<div id="7e079999" class="cell" data-outcome="false" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb2-1"><span class="kw" style="color: #003B4F;
@@ -61,6 +61,11 @@ font-style: inherit;">scheme</span> white2</span>
 </details>
 <div class="cell-output cell-output-display">
 <style>div.jp-Notebook .datagrid-container {min-height: 448px; }</style>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>PERSONAL directory (see personal) does not exist; will create directory
+C:\Users\frios\ado\personal/
+press any key to continue, or Break to abort</code></pre>
 </div>
 </div>
 <section id="why-data-visualization-matters" class="level2">
@@ -80,7 +85,7 @@ font-style: inherit;">scheme</span> white2</span>
 <section id="statas-graph-syntax" class="level3">
 <h3 class="anchored" data-anchor-id="statas-graph-syntax">Stata’s Graph Syntax</h3>
 <p>Most Stata graph commands follow a similar structure:</p>
-<div class="sourceCode" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb3-1">graph_type y_variable(<span class="fu" style="color: #4758AB;
+<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb4-1">graph_type y_variable(<span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">s</span>) [x_variable] [<span class="kw" style="color: #003B4F;
 background-color: null;
@@ -100,56 +105,7 @@ font-style: inherit;">weight</span>] [, options]</span></code></pre></div>
 <section id="your-first-stata-graph" class="level2">
 <h2 class="anchored" data-anchor-id="your-first-stata-graph">Your First Stata Graph</h2>
 <p>Let’s create a simple scatter plot to get started. We’ll use the built-in “auto” dataset:</p>
-<div class="sourceCode" id="cb4" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb4-1"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">sysuse</span> auto, <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">clear</span></span>
-<span id="cb4-2"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">scatter</span> mpg <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">weight</span></span>
-<span id="cb4-3"></span>
-<span id="cb4-4"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">scatter</span> mpg <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">weight</span>, <span class="bn" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">title</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Miles per Gallon vs. Weight"</span>) <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/// Adds a title</span></span>
-<span id="cb4-5">                    <span class="bn" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">xtitle</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Weight (lbs)"</span>) <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">/// label to the x-axis</span></span>
-<span id="cb4-6">                    <span class="bn" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">ytitle</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Miles per Gallon"</span>) <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">// and y-axis </span></span></code></pre></div>
-<p>Done!</p>
-<p>Now some points to consider. <code>title</code> is important, but often you may want to add a title in your editor, not the figure. Same if you add a note. Otherwise, the above code is a good start.</p>
-<p>Also noticed that because of my setup using <code>white2</code> scheme, the background is white, and minimalistic. The colors, from <code>tableau</code> are generally a good choice for most graphs.</p>
-<p>Wait, but how does this look like? Let’s see:</p>
-<div id="fd50c8a7" class="cell" data-execution_count="3">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><span class="kw" style="color: #003B4F;
+<div class="sourceCode" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb5-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">sysuse</span> auto, <span class="kw" style="color: #003B4F;
@@ -162,6 +118,14 @@ font-weight: bold;
 font-style: inherit;">scatter</span> mpg <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
+font-style: inherit;">weight</span></span>
+<span id="cb5-3"></span>
+<span id="cb5-4"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">scatter</span> mpg <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
 font-style: inherit;">weight</span>, <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">title</span>(<span class="st" style="color: #20794D;
@@ -169,21 +133,62 @@ background-color: null;
 font-style: inherit;">"Miles per Gallon vs. Weight"</span>) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">/// Adds a title</span></span>
-<span id="cb5-3">                    <span class="bn" style="color: #AD0000;
+<span id="cb5-5">                    <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">xtitle</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Weight (lbs)"</span>) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">/// label to the x-axis</span></span>
-<span id="cb5-4">                    <span class="bn" style="color: #AD0000;
+<span id="cb5-6">                    <span class="bn" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">ytitle</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Miles per Gallon"</span>) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">// and y-axis </span></span></code></pre></div>
+<p>Done!</p>
+<p>Now some points to consider. <code>title</code> is important, but often you may want to add a title in your editor, not the figure. Same if you add a note. Otherwise, the above code is a good start.</p>
+<p>Also noticed that because of my setup using <code>white2</code> scheme, the background is white, and minimalistic. The colors, from <code>tableau</code> are generally a good choice for most graphs.</p>
+<p>Wait, but how does this look like? Let’s see:</p>
+<div id="862be875" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb6-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">sysuse</span> auto, <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">clear</span></span>
+<span id="cb6-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">scatter</span> mpg <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">weight</span>, <span class="bn" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">title</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Miles per Gallon vs. Weight"</span>) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/// Adds a title</span></span>
+<span id="cb6-3">                    <span class="bn" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">xtitle</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Weight (lbs)"</span>) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">/// label to the x-axis</span></span>
+<span id="cb6-4">                    <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">ytitle</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Miles per Gallon"</span>) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">/// and y-axis </span></span>
-<span id="cb5-5">                    <span class="kw" style="color: #003B4F;
+<span id="cb6-5">                    <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">scale</span>(1.5)</span></code></pre></div>
@@ -208,7 +213,7 @@ font-style: inherit;">scale</span>(1.5)</span></code></pre></div>
 <h2 class="anchored" data-anchor-id="scatter-plots">Scatter Plots</h2>
 <p>Scatter plots, what we just did, its perhaps the most basic plot you will use. They are excellent for visualizing the relationship between two <strong>continuous</strong> variables. They can reveal patterns, correlations, and outliers in your data.</p>
 <p>The basic syntax for a scatter plot is:</p>
-<div class="sourceCode" id="cb7" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb7-1"><span class="kw" style="color: #003B4F;
+<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">scatter</span> [<span class="kw" style="color: #003B4F;
@@ -228,7 +233,7 @@ font-weight: bold;
 font-style: inherit;">weight</span>] [, options]</span></code></pre></div>
 <p>As you may expect, <code>varlist y</code> can be a list of variables, all which will be plotted against <code>xvar</code>. However, I would recommend you to use only one variable at a time.</p>
 <p>If multiple variables are required, you can use <code>twoway</code> to overlay them.</p>
-<div class="sourceCode" id="cb8" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb8-1"><span class="kw" style="color: #003B4F;
+<div class="sourceCode" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">twoway</span> (<span class="kw" style="color: #003B4F;
@@ -246,7 +251,7 @@ font-weight: bold;
 font-style: inherit;">weight</span>] [, options]) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">/// &lt;-first</span></span>
-<span id="cb8-2">       (<span class="kw" style="color: #003B4F;
+<span id="cb9-2">       (<span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">scatter</span> [yvar2] [xvar] [<span class="kw" style="color: #003B4F;
@@ -263,17 +268,17 @@ background-color: null;
 font-style: inherit;">// &lt;-second</span></span></code></pre></div>
 <p>Each scatter plot can have its own options, colors, and labels.</p>
 <p>For example:</p>
-<div id="4c1039ab" class="cell" data-execution_count="4">
+<div id="e673bdb2" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb9" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb9-1"><span class="kw" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb10" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb10-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">sysuse</span> auto, <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">clear</span></span>
-<span id="cb9-2"><span class="kw" style="color: #003B4F;
+<span id="cb10-2"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">twoway</span> (<span class="kw" style="color: #003B4F;
@@ -288,7 +293,7 @@ font-weight: bold;
 font-style: inherit;">if</span> foreign==0) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb9-3">       (<span class="kw" style="color: #003B4F;
+<span id="cb10-3">       (<span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">scatter</span> mpg <span class="kw" style="color: #003B4F;
@@ -300,34 +305,34 @@ font-weight: bold;
 font-style: inherit;">if</span> foreign==1) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb9-4">        , <span class="bn" style="color: #AD0000;
+<span id="cb10-4">        , <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">title</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Miles per Gallon vs. Weight: By foreign"</span>) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb9-5">          <span class="bn" style="color: #AD0000;
+<span id="cb10-5">          <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">xtitle</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Weight (lbs)"</span>) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb9-6">          <span class="bn" style="color: #AD0000;
+<span id="cb10-6">          <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">ytitle</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Miles per Gallon"</span>) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb9-7">          <span class="kw" style="color: #003B4F;
+<span id="cb10-7">          <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">scale</span>(1.5) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb9-8">          <span class="bn" style="color: #AD0000;
+<span id="cb10-8">          <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">legend</span>(<span class="kw" style="color: #003B4F;
 background-color: null;
@@ -355,7 +360,7 @@ font-style: inherit;">"Foreign"</span>) )</span></code></pre></div>
 <li><code>legend</code> adds a legend to the graph, specifying the order of the labels. In <code>white2</code> scheme, the legend is at the left of the graph.<br>
 If you would like to change the position of the legend, you can use <code>position(#)</code>, where <code>#</code> is a number from 1 to 12. You may also want to use <code>cols(#)</code> or <code>rows()</code> to change the layout of the legend.</li>
 </ul>
-<div class="sourceCode" id="cb11" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb11-1"><span class="bn" style="color: #AD0000;
+<div class="sourceCode" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">legend</span>(<span class="kw" style="color: #003B4F;
 background-color: null;
@@ -372,17 +377,17 @@ font-style: inherit;">cols</span>(1))</span></code></pre></div>
 <section id="customizing-markers" class="level3">
 <h3 class="anchored" data-anchor-id="customizing-markers">Customizing Markers</h3>
 <p>You can change the appearance of the markers using various options, like <code>mcolor()</code>, <code>msymbol()</code>, or <code>msize()</code>. From all of these, I prefer using <code>pstyle()</code> to change the colors, and other options for the size of shape, because <code>pstyle()</code> is connected to the color scheme you are using, and <code>mcolor()</code> for added options like transparency. Lets try this with the previous example:</p>
-<div id="14b6dfa1" class="cell" data-execution_count="5">
+<div id="1e5c0ea3" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb12" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb12-1"><span class="kw" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb13" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb13-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">sysuse</span> auto, <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">clear</span></span>
-<span id="cb12-2"><span class="kw" style="color: #003B4F;
+<span id="cb13-2"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">twoway</span> (<span class="kw" style="color: #003B4F;
@@ -397,7 +402,7 @@ font-weight: bold;
 font-style: inherit;">if</span> foreign==0, pstyle(p3) msize(2)) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb12-3">       (<span class="kw" style="color: #003B4F;
+<span id="cb13-3">       (<span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">scatter</span> mpg <span class="kw" style="color: #003B4F;
@@ -409,34 +414,34 @@ font-weight: bold;
 font-style: inherit;">if</span> foreign==1, pstyle(p5) mcolor(%50)) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb12-4">        , <span class="bn" style="color: #AD0000;
+<span id="cb13-4">        , <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">title</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Miles per Gallon vs. Weight: By foreign"</span>) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb12-5">          <span class="bn" style="color: #AD0000;
+<span id="cb13-5">          <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">xtitle</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Weight (lbs)"</span>) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb12-6">          <span class="bn" style="color: #AD0000;
+<span id="cb13-6">          <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">ytitle</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Miles per Gallon"</span>) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb12-7">          <span class="kw" style="color: #003B4F;
+<span id="cb13-7">          <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">scale</span>(1.5) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb12-8">          <span class="bn" style="color: #AD0000;
+<span id="cb13-8">          <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">legend</span>(<span class="kw" style="color: #003B4F;
 background-color: null;
@@ -462,7 +467,7 @@ font-style: inherit;">"Foreign"</span>) )</span></code></pre></div>
 <section id="other-interesting-options" class="level3">
 <h3 class="anchored" data-anchor-id="other-interesting-options">Other interesting options</h3>
 <p>There are other options you may want to try. For example, <code>mlabel()</code> and <code>mlabsize()</code> to add labels to the points. Just be careful with the size of the labels, as the figure could become very busy. If you try the code below, you will see that the figure is not very informative.</p>
-<div class="sourceCode" id="cb14" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb14-1"><span class="kw" style="color: #003B4F;
+<div class="sourceCode" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb15-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">scatter</span> mpg <span class="kw" style="color: #003B4F;
@@ -473,7 +478,7 @@ background-color: null;
 font-style: inherit;">mlabel</span>(make) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb14-2">                    <span class="bn" style="color: #AD0000;
+<span id="cb15-2">                    <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">mlabsize</span>(tiny)</span></code></pre></div>
 <p>This adds the car make as a label to each point.</p>
@@ -481,10 +486,10 @@ font-style: inherit;">mlabsize</span>(tiny)</span></code></pre></div>
 <section id="advanced-scatter-plot" class="level3">
 <h3 class="anchored" data-anchor-id="advanced-scatter-plot">Advanced Scatter Plot</h3>
 <p>Let’s combine several elements to create a more informative scatter plot:</p>
-<div id="f041dddc" class="cell" data-execution_count="6">
+<div id="56e72fcb" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb15" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb15-1"><span class="kw" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">two</span> (<span class="kw" style="color: #003B4F;
@@ -496,7 +501,7 @@ font-weight: bold;
 font-style: inherit;">weight</span>, mcolor(%30) msize(5) ) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb15-2">    (<span class="kw" style="color: #003B4F;
+<span id="cb16-2">    (<span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">scatter</span> mpg <span class="kw" style="color: #003B4F;
@@ -512,21 +517,21 @@ background-color: null;
 font-style: inherit;">mlabsize</span>(small) ), <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb15-3">                    <span class="bn" style="color: #AD0000;
+<span id="cb16-3">                    <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">title</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"MPG vs. Weight"</span>) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb15-4">                    <span class="bn" style="color: #AD0000;
+<span id="cb16-4">                    <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">subtitle</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"1978 Automobile Data"</span>) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb15-5">                    <span class="bn" style="color: #AD0000;
+<span id="cb16-5">                    <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">xtitle</span>(<span class="st" style="color: #20794D;
 background-color: null;
@@ -537,7 +542,7 @@ background-color: null;
 font-style: inherit;">"Miles per Gallon"</span>) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb15-6">                    <span class="kw" style="color: #003B4F;
+<span id="cb16-6">                    <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">note</span>(<span class="st" style="color: #20794D;
@@ -545,7 +550,7 @@ background-color: null;
 font-style: inherit;">"Source: Auto dataset"</span>) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb15-7">                    <span class="bn" style="color: #AD0000;
+<span id="cb16-7">                    <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">legend</span>(<span class="kw" style="color: #003B4F;
 background-color: null;
@@ -568,7 +573,7 @@ font-style: inherit;">scale</span>(1.4)</span></code></pre></div>
 <section id="a-different-type-of-scatter-plot" class="level3">
 <h3 class="anchored" data-anchor-id="a-different-type-of-scatter-plot">A Different type of scatter Plot</h3>
 <p>While you can always use scatter plot for plotting multiple multiple variables, any now and then you will need a more “brute force approach”, where a large set of variables are plotted at aonce. If you are interested in this, you can use a scatter plot matrix. It has the following syntax:</p>
-<div class="sourceCode" id="cb16" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb16-1"><span class="kw" style="color: #003B4F;
+<div class="sourceCode" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb17-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">graph</span> <span class="fu" style="color: #4758AB;
@@ -578,10 +583,10 @@ background-color: null;
 font-weight: bold;
 font-style: inherit;">varlist</span>], [half]</span></code></pre></div>
 <p>Where <code>varlist</code> is a list of variables to be plotted. This will make a matrix of scatter plots for all pairs of the specified variables. The <code>half</code> option will only plot the lower half of the matrix. Of course, such a plot can be very busy, so be careful with the number of variables you include. Here an example:</p>
-<div id="4fac8904" class="cell" data-execution_count="7">
+<div id="51628331" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb17" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb17-1"><span class="kw" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">graph</span> <span class="fu" style="color: #4758AB;
@@ -594,7 +599,7 @@ background-color: null;
 font-style: inherit;">length</span>, half <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb17-2">  <span class="bn" style="color: #AD0000;
+<span id="cb18-2">  <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">xsize</span>(12) <span class="bn" style="color: #AD0000;
 background-color: null;
@@ -624,17 +629,17 @@ font-style: inherit;">"Scatter Plot Matrix"</span>)</span></code></pre></div>
 <section id="basic-line-plot" class="level3">
 <h3 class="anchored" data-anchor-id="basic-line-plot">Basic Line Plot</h3>
 <p>Similar to scatter plots, you can use multiple variables in a line plot, to be plotted against a single variable.</p>
-<div id="e0eaf1b9" class="cell" data-execution_count="8">
+<div id="b0278c10" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb18" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb18-1"><span class="kw" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb19" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb19-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">sysuse</span> uslifeexp, <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">clear</span></span>
-<span id="cb18-2"><span class="kw" style="color: #003B4F;
+<span id="cb19-2"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">line</span> le_w le_m <span class="fu" style="color: #4758AB;
@@ -642,7 +647,7 @@ background-color: null;
 font-style: inherit;">year</span>, <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb18-3">  <span class="bn" style="color: #AD0000;
+<span id="cb19-3">  <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">title</span>(Life expectancy <span class="kw" style="color: #003B4F;
 background-color: null;
@@ -652,7 +657,7 @@ background-color: null;
 font-style: inherit;">over</span> time)</span></code></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>(U.S. life expectancy, 1900-1999)</code></pre>
+<pre><code>(US life expectancy, 1900–1999)</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -663,21 +668,21 @@ font-style: inherit;">over</span> time)</span></code></pre></div>
 </div>
 </div>
 <p>Which works well, because the data was ordered by year. If i were to order it by Life expectancy, the plot would be very different, bordering non-sensical.</p>
-<div id="4d7ef987" class="cell" data-execution_count="9">
+<div id="a82cee92" class="cell" data-execution_count="8">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb20" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb20-1"><span class="kw" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb21" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb21-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">sysuse</span> uslifeexp, <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">clear</span></span>
-<span id="cb20-2"><span class="kw" style="color: #003B4F;
+<span id="cb21-2"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">sort</span> le_w</span>
-<span id="cb20-3"><span class="kw" style="color: #003B4F;
+<span id="cb21-3"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">line</span> le_w le_m <span class="fu" style="color: #4758AB;
@@ -685,7 +690,7 @@ background-color: null;
 font-style: inherit;">year</span>, <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb20-4">  <span class="bn" style="color: #AD0000;
+<span id="cb21-4">  <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">title</span>(Life expectancy <span class="kw" style="color: #003B4F;
 background-color: null;
@@ -695,7 +700,7 @@ background-color: null;
 font-style: inherit;">over</span> time)</span></code></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>(U.S. life expectancy, 1900-1999)</code></pre>
+<pre><code>(US life expectancy, 1900–1999)</code></pre>
 </div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
@@ -709,16 +714,16 @@ font-style: inherit;">over</span> time)</span></code></pre></div>
 <section id="customizing-line-styles" class="level3">
 <h3 class="anchored" data-anchor-id="customizing-line-styles">Customizing Line Styles</h3>
 <p>This plot allows for a few customizations. For example, you can change the line style, color, and width:</p>
-<div id="ee29b67e" class="cell" data-execution_count="10">
+<div id="edf9d10f" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb22" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb22-1"><span class="kw" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb23" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb23-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">sort</span> <span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">year</span></span>
-<span id="cb22-2"><span class="kw" style="color: #003B4F;
+<span id="cb23-2"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">line</span> le_w le_m <span class="fu" style="color: #4758AB;
@@ -729,18 +734,18 @@ font-weight: bold;
 font-style: inherit;">dash</span>) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb22-3">            pstyle(p2 p3) <span class="co" style="color: #5E5E5E;
+<span id="cb23-3">            pstyle(p2 p3) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb22-4">            lwidth(thick medium) <span class="co" style="color: #5E5E5E;
+<span id="cb23-4">            lwidth(thick medium) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb22-5">            <span class="bn" style="color: #AD0000;
+<span id="cb23-5">            <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">xline</span>(1930/1936, lw(2) lp(solid) lcolor(gs12)) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb22-6">            <span class="bn" style="color: #AD0000;
+<span id="cb23-6">            <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">title</span>(Life expectancy <span class="kw" style="color: #003B4F;
 background-color: null;
@@ -762,10 +767,10 @@ font-style: inherit;">over</span> time)</span></code></pre></div>
 <section id="advanced-customization" class="level3">
 <h3 class="anchored" data-anchor-id="advanced-customization">Advanced Customization</h3>
 <p>As with Scatter plot, and infact most two-way plots, you can customize the plot in many ways.</p>
-<div id="ec4a086c" class="cell" data-execution_count="11">
+<div id="0b71377b" class="cell" data-execution_count="10">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb23" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb23-1"><span class="kw" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb24-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">line</span> le_w le_m <span class="fu" style="color: #4758AB;
@@ -776,7 +781,7 @@ font-weight: bold;
 font-style: inherit;">dash</span>) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb23-2">                     lcolor(<span class="kw" style="color: #003B4F;
+<span id="cb24-2">                     lcolor(<span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">red</span> <span class="bn" style="color: #AD0000;
@@ -784,26 +789,26 @@ background-color: null;
 font-style: inherit;">blue</span>) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb23-3">                     lwidth(<span class="bn" style="color: #AD0000;
+<span id="cb24-3">                     lwidth(<span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">medthick</span> medium) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb23-4">                     <span class="bn" style="color: #AD0000;
+<span id="cb24-4">                     <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">title</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Life Expectancy Trends"</span>) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb23-5">                     <span class="bn" style="color: #AD0000;
+<span id="cb24-5">                     <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">subtitle</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"United States, 1900-2000"</span>) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb23-6">                     <span class="bn" style="color: #AD0000;
+<span id="cb24-6">                     <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">xtitle</span>(<span class="st" style="color: #20794D;
 background-color: null;
@@ -814,19 +819,19 @@ background-color: null;
 font-style: inherit;">"Life Expectancy (years)"</span>) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb23-7">                     <span class="kw" style="color: #003B4F;
+<span id="cb24-7">                     <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">ylabel</span>(40(10)80, angle(0)) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb23-8">                     <span class="kw" style="color: #003B4F;
+<span id="cb24-8">                     <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">xlabel</span>(1900(20)2000) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb23-9">                     <span class="bn" style="color: #AD0000;
+<span id="cb24-9">                     <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">legend</span>(<span class="kw" style="color: #003B4F;
 background-color: null;
@@ -838,7 +843,7 @@ background-color: null;
 font-style: inherit;">"Men"</span>)) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb23-10">                     <span class="kw" style="color: #003B4F;
+<span id="cb24-10">                     <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">note</span>(<span class="st" style="color: #20794D;
@@ -863,17 +868,17 @@ font-style: inherit;">"Source: US Life Expectancy dataset"</span>)</span></code>
 <ul class="nav nav-tabs"><li class="nav-item"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" aria-controls="tabset-1-1" aria-selected="true">Linear Fit</a></li><li class="nav-item"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" aria-controls="tabset-1-2" aria-selected="false">Quadratic Fit</a></li><li class="nav-item"><a class="nav-link" id="tabset-1-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-3" aria-controls="tabset-1-3" aria-selected="false">NonParametric Fit</a></li></ul>
 <div class="tab-content">
 <div id="tabset-1-1" class="tab-pane active" aria-labelledby="tabset-1-1-tab">
-<div id="8774ac51" class="cell" data-outcome="false" data-execution_count="12">
+<div id="35d2ea0a" class="cell" data-outcome="false" data-execution_count="11">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb24" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb24-1"><span class="kw" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb25" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb25-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">webuse</span> dui, <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">clear</span></span>
-<span id="cb24-2"><span class="kw" style="color: #003B4F;
+<span id="cb25-2"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">two</span> (<span class="kw" style="color: #003B4F;
@@ -882,10 +887,10 @@ font-weight: bold;
 font-style: inherit;">scatter</span> citations fines) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb24-3">    (lfitci citations fines,  fcolor(%40)) , <span class="co" style="color: #5E5E5E;
+<span id="cb25-3">    (lfitci citations fines,  fcolor(%40)) , <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb24-4">    <span class="bn" style="color: #AD0000;
+<span id="cb25-4">    <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">legend</span>(<span class="kw" style="color: #003B4F;
 background-color: null;
@@ -896,7 +901,7 @@ font-weight: bold;
 font-style: inherit;">scale</span>(1.4) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb24-5">    <span class="bn" style="color: #AD0000;
+<span id="cb25-5">    <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">ytitle</span>(<span class="st" style="color: #20794D;
 background-color: null;
@@ -919,17 +924,17 @@ font-style: inherit;">"Fines in 000$"</span>)</span></code></pre></div>
 </div>
 </div>
 <div id="tabset-1-2" class="tab-pane" aria-labelledby="tabset-1-2-tab">
-<div id="7fb6a64d" class="cell" data-outcome="false" data-execution_count="13">
+<div id="739a9f92" class="cell" data-outcome="false" data-execution_count="12">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb26" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb26-1"><span class="kw" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb27" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb27-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">webuse</span> dui, <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">clear</span></span>
-<span id="cb26-2"><span class="kw" style="color: #003B4F;
+<span id="cb27-2"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">two</span> (<span class="kw" style="color: #003B4F;
@@ -938,10 +943,10 @@ font-weight: bold;
 font-style: inherit;">scatter</span> citations fines) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb26-3">    (qfitci citations fines,  fcolor(%40)) , <span class="co" style="color: #5E5E5E;
+<span id="cb27-3">    (qfitci citations fines,  fcolor(%40)) , <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb26-4">    <span class="bn" style="color: #AD0000;
+<span id="cb27-4">    <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">legend</span>(<span class="kw" style="color: #003B4F;
 background-color: null;
@@ -952,7 +957,7 @@ font-weight: bold;
 font-style: inherit;">scale</span>(1.4) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb26-5">    <span class="bn" style="color: #AD0000;
+<span id="cb27-5">    <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">ytitle</span>(<span class="st" style="color: #20794D;
 background-color: null;
@@ -975,17 +980,17 @@ font-style: inherit;">"Fines in 000$"</span>)</span></code></pre></div>
 </div>
 </div>
 <div id="tabset-1-3" class="tab-pane" aria-labelledby="tabset-1-3-tab">
-<div id="ebf20d53" class="cell" data-outcome="false" data-execution_count="14">
+<div id="3a814ed4" class="cell" data-outcome="false" data-execution_count="13">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb28" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb28-1"><span class="kw" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb29" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb29-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">webuse</span> dui, <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">clear</span></span>
-<span id="cb28-2"><span class="kw" style="color: #003B4F;
+<span id="cb29-2"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">two</span> (<span class="kw" style="color: #003B4F;
@@ -994,10 +999,10 @@ font-weight: bold;
 font-style: inherit;">scatter</span> citations fines) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb28-3">    (lpolyci citations fines,  fcolor(%40)) , <span class="co" style="color: #5E5E5E;
+<span id="cb29-3">    (lpolyci citations fines,  fcolor(%40)) , <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb28-4">    <span class="bn" style="color: #AD0000;
+<span id="cb29-4">    <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">legend</span>(<span class="kw" style="color: #003B4F;
 background-color: null;
@@ -1008,7 +1013,7 @@ font-weight: bold;
 font-style: inherit;">scale</span>(1.4) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb28-5">    <span class="bn" style="color: #AD0000;
+<span id="cb29-5">    <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">ytitle</span>(<span class="st" style="color: #20794D;
 background-color: null;
@@ -1042,7 +1047,7 @@ font-style: inherit;">"Fines in 000$"</span>)</span></code></pre></div>
 <p>The first command we will see is the <code>histogram</code> command. This command is used to create histograms, which are bar charts that show the frequency distribution of a single variable.</p>
 <p>In contrast with frequency tables, where you need to define the bins width or number of bins, histograms will do this for you. Not always in the best way, but it will do it.</p>
 <p>The basic syntax for a histogram is:</p>
-<div class="sourceCode" id="cb30" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb30-1"><span class="kw" style="color: #003B4F;
+<div class="sourceCode" id="cb31" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb31-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">histogram</span> [varname] [<span class="kw" style="color: #003B4F;
@@ -1062,31 +1067,31 @@ font-style: inherit;">weight</span>] [, options]</span></code></pre></div>
 <h3 class="anchored" data-anchor-id="basic-histogram">Basic Histogram</h3>
 <p>The basic histogram plot will try to produce densities on the y-axis. It usually labels it correctly.</p>
 <p>You can, however, request <code>frequency</code> or <code>percent</code> on the y-axis.</p>
-<div id="a8eaa820" class="cell" data-execution_count="15">
+<div id="07be873e" class="cell" data-execution_count="14">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb31" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb31-1"><span class="kw" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb32" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb32-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">webuse</span> dui, <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">clear</span></span>
-<span id="cb31-2"></span>
-<span id="cb31-3"><span class="kw" style="color: #003B4F;
+<span id="cb32-2"></span>
+<span id="cb32-3"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">histogram</span> fines, <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb31-4">  <span class="bn" style="color: #AD0000;
+<span id="cb32-4">  <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">title</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Histogram of Fines"</span>) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb31-5">  <span class="bn" style="color: #AD0000;
+<span id="cb32-5">  <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">xtitle</span>(<span class="st" style="color: #20794D;
 background-color: null;
@@ -1109,23 +1114,23 @@ font-style: inherit;">"Fines in 000$"</span>) </span></code></pre></div>
 <ul class="nav nav-tabs"><li class="nav-item"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" aria-controls="tabset-2-1" aria-selected="true">Wider Width()</a></li><li class="nav-item"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" aria-controls="tabset-2-2" aria-selected="false">Narrower Width()</a></li></ul>
 <div class="tab-content">
 <div id="tabset-2-1" class="tab-pane active" aria-labelledby="tabset-2-1-tab">
-<div id="0eb8780e" class="cell" data-execution_count="16">
+<div id="d75863cf" class="cell" data-execution_count="15">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb33" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb33-1"><span class="kw" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb34" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb34-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">histogram</span> fines, <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb33-2">  <span class="bn" style="color: #AD0000;
+<span id="cb34-2">  <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">title</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Histogram of Fines"</span>) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb33-3">  <span class="bn" style="color: #AD0000;
+<span id="cb34-3">  <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">xtitle</span>(<span class="st" style="color: #20794D;
 background-color: null;
@@ -1147,23 +1152,23 @@ font-style: inherit;">width</span>(.4)</span></code></pre></div>
 </div>
 </div>
 <div id="tabset-2-2" class="tab-pane" aria-labelledby="tabset-2-2-tab">
-<div id="8d715ed3" class="cell" data-execution_count="17">
+<div id="93af59ef" class="cell" data-execution_count="16">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb35" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb35-1"><span class="kw" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb36" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb36-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">histogram</span> fines, <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb35-2">  <span class="bn" style="color: #AD0000;
+<span id="cb36-2">  <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">title</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Histogram of Fines"</span>) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb35-3">  <span class="bn" style="color: #AD0000;
+<span id="cb36-3">  <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">xtitle</span>(<span class="st" style="color: #20794D;
 background-color: null;
@@ -1197,84 +1202,7 @@ font-style: inherit;">width</span>(.1)</span></code></pre></div>
 <ul class="nav nav-tabs"><li class="nav-item"><a class="nav-link active" id="tabset-3-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-1" aria-controls="tabset-3-1" aria-selected="true">Simple Overlap</a></li><li class="nav-item"><a class="nav-link" id="tabset-3-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-2" aria-controls="tabset-3-2" aria-selected="false">With Transparency</a></li><li class="nav-item"><a class="nav-link" id="tabset-3-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-3-3" aria-controls="tabset-3-3" aria-selected="false">Fixing widths</a></li></ul>
 <div class="tab-content">
 <div id="tabset-3-1" class="tab-pane active" aria-labelledby="tabset-3-1-tab">
-<div id="ab0176e4" class="cell" data-execution_count="18">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb37" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb37-1"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">two</span> (<span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">histogram</span> citations <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">if</span> csize==1, pstyle(p1)) <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">///</span></span>
-<span id="cb37-2">    (<span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">histogram</span> citations <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">if</span> csize==2, pstyle(p2)) <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">///</span></span>
-<span id="cb37-3">    (<span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">histogram</span> citations <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">if</span> csize==3, pstyle(p3)) , <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">///</span></span>
-<span id="cb37-4">    <span class="bn" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">title</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Histogram of citations"</span>) <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">///</span></span>
-<span id="cb37-5">    <span class="bn" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">subtitle</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"By city Size"</span>) <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">///</span></span>
-<span id="cb37-6">    <span class="bn" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">xtitle</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Fines in 000$"</span>) <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">///</span></span>
-<span id="cb37-7">    <span class="bn" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">legend</span>(<span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">order</span>(1 <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Small"</span> 2 <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Medium"</span> 3 <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Large"</span>))</span></code></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://friosavila.github.io/chatgpt/stata_08_06_2024/index_files/figure-html/cell-18-output-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div id="tabset-3-2" class="tab-pane" aria-labelledby="tabset-3-2-tab">
-<div id="7e6b6d46" class="cell" data-execution_count="19">
+<div id="61890f3a" class="cell" data-execution_count="17">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb38" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb38-1"><span class="kw" style="color: #003B4F;
@@ -1286,10 +1214,7 @@ font-weight: bold;
 font-style: inherit;">histogram</span> citations <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">if</span> csize==1, pstyle(p1) <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">color</span>(%75)) <span class="co" style="color: #5E5E5E;
+font-style: inherit;">if</span> csize==1, pstyle(p1)) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
 <span id="cb38-2">    (<span class="kw" style="color: #003B4F;
@@ -1298,10 +1223,7 @@ font-weight: bold;
 font-style: inherit;">histogram</span> citations <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">if</span> csize==2, pstyle(p2) <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">color</span>(%75)) <span class="co" style="color: #5E5E5E;
+font-style: inherit;">if</span> csize==2, pstyle(p2)) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
 <span id="cb38-3">    (<span class="kw" style="color: #003B4F;
@@ -1310,10 +1232,7 @@ font-weight: bold;
 font-style: inherit;">histogram</span> citations <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">if</span> csize==3, pstyle(p3) <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">color</span>(%75)), <span class="co" style="color: #5E5E5E;
+font-style: inherit;">if</span> csize==3, pstyle(p3)) , <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
 <span id="cb38-4">    <span class="bn" style="color: #AD0000;
@@ -1353,6 +1272,92 @@ font-style: inherit;">"Large"</span>))</span></code></pre></div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
+<p><img src="https://friosavila.github.io/chatgpt/stata_08_06_2024/index_files/figure-html/cell-18-output-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-3-2" class="tab-pane" aria-labelledby="tabset-3-2-tab">
+<div id="5afcce97" class="cell" data-execution_count="18">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb39" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb39-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">two</span> (<span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">histogram</span> citations <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> csize==1, pstyle(p1) <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">color</span>(%75)) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">///</span></span>
+<span id="cb39-2">    (<span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">histogram</span> citations <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> csize==2, pstyle(p2) <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">color</span>(%75)) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">///</span></span>
+<span id="cb39-3">    (<span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">histogram</span> citations <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> csize==3, pstyle(p3) <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">color</span>(%75)), <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">///</span></span>
+<span id="cb39-4">    <span class="bn" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">title</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Histogram of citations"</span>) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">///</span></span>
+<span id="cb39-5">    <span class="bn" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">subtitle</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"By city Size"</span>) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">///</span></span>
+<span id="cb39-6">    <span class="bn" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">xtitle</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Fines in 000$"</span>) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">///</span></span>
+<span id="cb39-7">    <span class="bn" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">legend</span>(<span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">order</span>(1 <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Small"</span> 2 <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Medium"</span> 3 <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Large"</span>))</span></code></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="https://friosavila.github.io/chatgpt/stata_08_06_2024/index_files/figure-html/cell-19-output-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
@@ -1360,10 +1365,10 @@ font-style: inherit;">"Large"</span>))</span></code></pre></div>
 </div>
 </div>
 <div id="tabset-3-3" class="tab-pane" aria-labelledby="tabset-3-3-tab">
-<div id="3cabfd2f" class="cell" data-execution_count="20">
+<div id="8bcb112f" class="cell" data-execution_count="19">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb39" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb39-1"><span class="kw" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb40" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb40-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">global</span> options <span class="kw" style="color: #003B4F;
@@ -1375,7 +1380,7 @@ font-style: inherit;">start</span>(0) <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">color</span>(%55)</span>
-<span id="cb39-2"><span class="kw" style="color: #003B4F;
+<span id="cb40-2"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">two</span> (<span class="kw" style="color: #003B4F;
@@ -1389,7 +1394,7 @@ background-color: null;
 font-style: inherit;">$options</span>) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb39-3">    (<span class="kw" style="color: #003B4F;
+<span id="cb40-3">    (<span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">histogram</span> citations <span class="kw" style="color: #003B4F;
@@ -1400,7 +1405,7 @@ background-color: null;
 font-style: inherit;">$options</span>) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb39-4">    (<span class="kw" style="color: #003B4F;
+<span id="cb40-4">    (<span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">histogram</span> citations <span class="kw" style="color: #003B4F;
@@ -1411,28 +1416,28 @@ background-color: null;
 font-style: inherit;">$options</span>), <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb39-5">    <span class="bn" style="color: #AD0000;
+<span id="cb40-5">    <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">title</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Histogram of citations"</span>) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb39-6">    <span class="bn" style="color: #AD0000;
+<span id="cb40-6">    <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">subtitle</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"By city Size"</span>) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb39-7">    <span class="bn" style="color: #AD0000;
+<span id="cb40-7">    <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">xtitle</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Fines in 000$"</span>) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb39-8">    <span class="bn" style="color: #AD0000;
+<span id="cb40-8">    <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">legend</span>(<span class="kw" style="color: #003B4F;
 background-color: null;
@@ -1465,7 +1470,7 @@ font-style: inherit;">"Large"</span>))</span></code></pre></div>
 <p>There is, however, another option. Kernel Density Plots. These plots provide a smooth estimate of the probability density function of a variable. As with Histograms, they can be very sensitive to the choice of bandwidth (how smooth or rugged the plot is).</p>
 <p>One should also note that Kernel density plots cannot be used to plot distributions of discrete variables, and may provide misleading results if used with data that have constraints, or very relevant modes.</p>
 <p>The basic syntax for a kernel density plot is:</p>
-<div class="sourceCode" id="cb40" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb40-1"><span class="kw" style="color: #003B4F;
+<div class="sourceCode" id="cb41" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb41-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">kdensity</span> [varname] [<span class="kw" style="color: #003B4F;
@@ -1482,37 +1487,37 @@ font-style: inherit;">weight</span>] [, options]</span></code></pre></div>
 <section id="basic-kernel-density-plot" class="level3">
 <h3 class="anchored" data-anchor-id="basic-kernel-density-plot">Basic Kernel Density Plot</h3>
 <p>Lets see how this works with the <code>dui</code> dataset.</p>
-<div id="7161ad7c" class="cell" data-execution_count="21">
+<div id="04befef5" class="cell" data-execution_count="20">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb41" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb41-1"><span class="kw" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb42" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb42-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">webuse</span> dui, <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">clear</span></span>
-<span id="cb41-2"><span class="kw" style="color: #003B4F;
+<span id="cb42-2"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">kdensity</span> citation, <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb41-3">  <span class="bn" style="color: #AD0000;
+<span id="cb42-3">  <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">title</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Kernel Density Estimate of Citations"</span>) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb41-4">  <span class="bn" style="color: #AD0000;
+<span id="cb42-4">  <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">xtitle</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"# of Citations"</span>) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb41-5">  <span class="bn" style="color: #AD0000;
+<span id="cb42-5">  <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">ytitle</span>(<span class="st" style="color: #20794D;
 background-color: null;
@@ -1541,37 +1546,37 @@ font-style: inherit;">scale</span>(1.5) </span></code></pre></div>
 <ul class="nav nav-tabs"><li class="nav-item"><a class="nav-link active" id="tabset-4-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-1" aria-controls="tabset-4-1" aria-selected="true">Smaller Bandwidth</a></li><li class="nav-item"><a class="nav-link" id="tabset-4-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-4-2" aria-controls="tabset-4-2" aria-selected="false">Larger Bandwidth</a></li></ul>
 <div class="tab-content">
 <div id="tabset-4-1" class="tab-pane active" aria-labelledby="tabset-4-1-tab">
-<div id="5dafd4f2" class="cell" data-execution_count="22">
+<div id="6dea5809" class="cell" data-execution_count="21">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb43" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb43-1"><span class="kw" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb44" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb44-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">webuse</span> dui, <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">clear</span></span>
-<span id="cb43-2"><span class="kw" style="color: #003B4F;
+<span id="cb44-2"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">kdensity</span> citation, <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb43-3">  <span class="bn" style="color: #AD0000;
+<span id="cb44-3">  <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">title</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Kernel Density Estimate of Citations"</span>) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb43-4">  <span class="bn" style="color: #AD0000;
+<span id="cb44-4">  <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">xtitle</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"# of Citations"</span>) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb43-5">  <span class="bn" style="color: #AD0000;
+<span id="cb44-5">  <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">ytitle</span>(<span class="st" style="color: #20794D;
 background-color: null;
@@ -1593,37 +1598,37 @@ font-style: inherit;">scale</span>(1.5) bw(1)</span></code></pre></div>
 </div>
 </div>
 <div id="tabset-4-2" class="tab-pane" aria-labelledby="tabset-4-2-tab">
-<div id="9012add7" class="cell" data-execution_count="23">
+<div id="57456b92" class="cell" data-execution_count="22">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb45" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb45-1"><span class="kw" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb46" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb46-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">webuse</span> dui, <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">clear</span></span>
-<span id="cb45-2"><span class="kw" style="color: #003B4F;
+<span id="cb46-2"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">kdensity</span> citation, <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb45-3">  <span class="bn" style="color: #AD0000;
+<span id="cb46-3">  <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">title</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Kernel Density Estimate of Citations"</span>) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb45-4">  <span class="bn" style="color: #AD0000;
+<span id="cb46-4">  <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">xtitle</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"# of Citations"</span>) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb45-5">  <span class="bn" style="color: #AD0000;
+<span id="cb46-5">  <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">ytitle</span>(<span class="st" style="color: #20794D;
 background-color: null;
@@ -1651,37 +1656,37 @@ font-style: inherit;">scale</span>(1.5) bw(4)</span></code></pre></div>
 <section id="curves-areas-and-overlays" class="level3">
 <h3 class="anchored" data-anchor-id="curves-areas-and-overlays">Curves, Areas, and Overlays</h3>
 <p>Many of the options you can use with histograms, scatterplots or line plots can also be used with Kernel Density plots. However, I will introduce one that some may find useful: <code>recast</code>. This option allows you to change the plot type from a line to something else. For example, you can use <code>recast(area)</code> to fill the area under the curve.</p>
-<div id="65a16c22" class="cell" data-execution_count="24">
+<div id="baead26d" class="cell" data-execution_count="23">
 <details class="code-fold">
 <summary>Code</summary>
-<div class="sourceCode cell-code" id="cb47" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb47-1"><span class="kw" style="color: #003B4F;
+<div class="sourceCode cell-code" id="cb48" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb48-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">webuse</span> dui, <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">clear</span></span>
-<span id="cb47-2"><span class="kw" style="color: #003B4F;
+<span id="cb48-2"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">kdensity</span> citation, <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb47-3">  <span class="bn" style="color: #AD0000;
+<span id="cb48-3">  <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">title</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Kernel Density Estimate of Citations"</span>) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb47-4">  <span class="bn" style="color: #AD0000;
+<span id="cb48-4">  <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">xtitle</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"# of Citations"</span>) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb47-5">  <span class="bn" style="color: #AD0000;
+<span id="cb48-5">  <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">ytitle</span>(<span class="st" style="color: #20794D;
 background-color: null;
@@ -1691,7 +1696,7 @@ font-weight: bold;
 font-style: inherit;">scale</span>(1.5) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb47-6">  <span class="kw" style="color: #003B4F;
+<span id="cb48-6">  <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">recast</span>(area) </span></code></pre></div>
@@ -1713,103 +1718,13 @@ font-style: inherit;">recast</span>(area) </span></code></pre></div>
 <ul class="nav nav-tabs"><li class="nav-item"><a class="nav-link active" id="tabset-5-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-1" aria-controls="tabset-5-1" aria-selected="true">Simple Overlap</a></li><li class="nav-item"><a class="nav-link" id="tabset-5-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-2" aria-controls="tabset-5-2" aria-selected="false">As an Area</a></li><li class="nav-item"><a class="nav-link" id="tabset-5-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-5-3" aria-controls="tabset-5-3" aria-selected="false">Adding transparency</a></li></ul>
 <div class="tab-content">
 <div id="tabset-5-1" class="tab-pane active" aria-labelledby="tabset-5-1-tab">
-<div id="7a322208" class="cell" data-execution_count="25">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb49" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb49-1"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">global</span> options bw(3)</span>
-<span id="cb49-2"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">two</span> (<span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">kdensity</span> citations <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">if</span> csize==1, <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">$options</span> ) <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">///</span></span>
-<span id="cb49-3">    (<span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">kdensity</span> citations <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">if</span> csize==2, <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">$options</span> ) <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">///</span></span>
-<span id="cb49-4">    (<span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">kdensity</span> citations <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">if</span> csize==3, <span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">$options</span> ) , <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">///</span></span>
-<span id="cb49-5">    <span class="bn" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">title</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"kdensity of citations"</span>) <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">///</span></span>
-<span id="cb49-6">    <span class="bn" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">subtitle</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"By city Size"</span>) <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">///</span></span>
-<span id="cb49-7">    <span class="bn" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">xtitle</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Fines in 000$"</span>) <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">///</span></span>
-<span id="cb49-8">    <span class="bn" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">legend</span>(<span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">order</span>(1 <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Small"</span> 2 <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Medium"</span> 3 <span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Large"</span>))</span></code></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://friosavila.github.io/chatgpt/stata_08_06_2024/index_files/figure-html/cell-25-output-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div id="tabset-5-2" class="tab-pane" aria-labelledby="tabset-5-2-tab">
-<div id="44363258" class="cell" data-execution_count="26">
+<div id="7b540e40" class="cell" data-execution_count="24">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb50" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb50-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">global</span> options bw(3) <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">recast</span>(area  )</span>
+font-style: inherit;">global</span> options bw(3)</span>
 <span id="cb50-2"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -1883,14 +1798,14 @@ font-style: inherit;">"Large"</span>))</span></code></pre></div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://friosavila.github.io/chatgpt/stata_08_06_2024/index_files/figure-html/cell-26-output-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://friosavila.github.io/chatgpt/stata_08_06_2024/index_files/figure-html/cell-25-output-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div id="tabset-5-3" class="tab-pane" aria-labelledby="tabset-5-3-tab">
-<div id="42d36e49" class="cell" data-execution_count="27">
+<div id="tabset-5-2" class="tab-pane" aria-labelledby="tabset-5-2-tab">
+<div id="fead4064" class="cell" data-execution_count="25">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb51" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb51-1"><span class="kw" style="color: #003B4F;
@@ -1899,10 +1814,7 @@ font-weight: bold;
 font-style: inherit;">global</span> options bw(3) <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">recast</span>(area) <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">color</span>(%50)</span>
+font-style: inherit;">recast</span>(area  )</span>
 <span id="cb51-2"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
@@ -1976,6 +1888,99 @@ font-style: inherit;">"Large"</span>))</span></code></pre></div>
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
+<p><img src="https://friosavila.github.io/chatgpt/stata_08_06_2024/index_files/figure-html/cell-26-output-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-5-3" class="tab-pane" aria-labelledby="tabset-5-3-tab">
+<div id="b06fd386" class="cell" data-execution_count="26">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb52" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb52-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">global</span> options bw(3) <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">recast</span>(area) <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">color</span>(%50)</span>
+<span id="cb52-2"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">two</span> (<span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">kdensity</span> citations <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> csize==1, <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">$options</span> ) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">///</span></span>
+<span id="cb52-3">    (<span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">kdensity</span> citations <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> csize==2, <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">$options</span> ) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">///</span></span>
+<span id="cb52-4">    (<span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">kdensity</span> citations <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> csize==3, <span class="ot" style="color: #003B4F;
+background-color: null;
+font-style: inherit;">$options</span> ) , <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">///</span></span>
+<span id="cb52-5">    <span class="bn" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">title</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"kdensity of citations"</span>) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">///</span></span>
+<span id="cb52-6">    <span class="bn" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">subtitle</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"By city Size"</span>) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">///</span></span>
+<span id="cb52-7">    <span class="bn" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">xtitle</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Fines in 000$"</span>) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">///</span></span>
+<span id="cb52-8">    <span class="bn" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">legend</span>(<span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">order</span>(1 <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Small"</span> 2 <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Medium"</span> 3 <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Large"</span>))</span></code></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
 <p><img src="https://friosavila.github.io/chatgpt/stata_08_06_2024/index_files/figure-html/cell-27-output-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
@@ -1996,7 +2001,7 @@ font-style: inherit;">"Large"</span>))</span></code></pre></div>
 <h2 class="anchored" data-anchor-id="range-plots">Range plots</h2>
 <p>There is a fairly large list of plots that fall under this category. Range plots are mostly used to show, as the name implies, a particular range of values. Perhaps the most common of these would be to show confidence intervals.</p>
 <p>They all have a similar syntax:</p>
-<div class="sourceCode" id="cb52" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb52-1"><span class="kw" style="color: #003B4F;
+<div class="sourceCode" id="cb53" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb53-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">two</span> range_plot y_lower y_higher x_variable [<span class="kw" style="color: #003B4F;
@@ -2009,31 +2014,31 @@ font-style: inherit;">if</span>] , [options]</span></code></pre></div>
 <section id="ranges-galore" class="level3">
 <h3 class="anchored" data-anchor-id="ranges-galore">Ranges Galore</h3>
 <p>To show how this type of plots work, I will use the dataset <code>cattaneo2</code>. This dataset contains data for childrens weight at birth, in addition to other relevant information. I will do some data manipulation to create the data I need for the plots</p>
-<div id="4a21c2f5" class="cell" data-outcome="false" data-execution_count="28">
-<div class="sourceCode cell-code" id="cb53" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb53-1"><span class="kw" style="color: #003B4F;
+<div id="4c16766f" class="cell" data-outcome="false" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb54" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb54-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">webuse</span> cattaneo2, <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">clear</span></span>
-<span id="cb53-2"><span class="co" style="color: #5E5E5E;
+<span id="cb54-2"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">// Constrain age of mother</span></span>
-<span id="cb53-3"><span class="kw" style="color: #003B4F;
+<span id="cb54-3"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">drop</span> <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">if</span> mage&lt;18 | mage&gt;35</span>
-<span id="cb53-4"><span class="co" style="color: #5E5E5E;
+<span id="cb54-4"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">// Get summary for  Weight at birth</span></span>
-<span id="cb53-5"><span class="co" style="color: #5E5E5E;
+<span id="cb54-5"><span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">// mean and p25 and p75 by age and smoking</span></span>
-<span id="cb53-6"><span class="kw" style="color: #003B4F;
+<span id="cb54-6"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">collapse</span> (<span class="kw" style="color: #003B4F;
@@ -2042,10 +2047,10 @@ font-weight: bold;
 font-style: inherit;">mean</span>) mean_bweight=bweight <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb53-7">         (p25) p25_bweight=bweight <span class="co" style="color: #5E5E5E;
+<span id="cb54-7">         (p25) p25_bweight=bweight <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb53-8">         (p75) p75_bweight=bweight, <span class="kw" style="color: #003B4F;
+<span id="cb54-8">         (p75) p75_bweight=bweight, <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">by</span>(mage mbsmoke)</span></code></pre></div>
@@ -2059,91 +2064,13 @@ font-style: inherit;">by</span>(mage mbsmoke)</span></code></pre></div>
 <ul class="nav nav-tabs"><li class="nav-item"><a class="nav-link active" id="tabset-6-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-1" aria-controls="tabset-6-1" aria-selected="true">Area</a></li><li class="nav-item"><a class="nav-link" id="tabset-6-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-2" aria-controls="tabset-6-2" aria-selected="false">Bar</a></li><li class="nav-item"><a class="nav-link" id="tabset-6-3-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-3" aria-controls="tabset-6-3" aria-selected="false">Spike</a></li><li class="nav-item"><a class="nav-link" id="tabset-6-4-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-4" aria-controls="tabset-6-4" aria-selected="false">Cap</a></li><li class="nav-item"><a class="nav-link" id="tabset-6-5-tab" data-bs-toggle="tab" data-bs-target="#tabset-6-5" aria-controls="tabset-6-5" aria-selected="false">CapSym</a></li></ul>
 <div class="tab-content">
 <div id="tabset-6-1" class="tab-pane active" aria-labelledby="tabset-6-1-tab">
-<div id="865631d6" class="cell" data-execution_count="29">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb55" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb55-1"><span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">two</span> (rarea p25_bweight p75_bweight mage <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">if</span> mbsmoke==0, <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">color</span>(%50)) <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">///</span></span>
-<span id="cb55-2">    (<span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">scatter</span> mean_bweight mage <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">if</span> mbsmoke==0, pstyle(p1) <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">connect</span>(<span class="ot" style="color: #003B4F;
-background-color: null;
-font-style: inherit;">l</span>)) , <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">///</span></span>
-<span id="cb55-3">    <span class="bn" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">title</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Range of Birth Weight by Mother's Age"</span>) <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">///</span></span>
-<span id="cb55-4">    <span class="bn" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">xtitle</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Mother's Age"</span>) <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">///</span></span>
-<span id="cb55-5">    <span class="bn" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">ytitle</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Birth Weight (lbs)"</span>) <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">///</span></span>
-<span id="cb55-6">    <span class="bn" style="color: #AD0000;
-background-color: null;
-font-style: inherit;">legend</span>(<span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">off</span>) <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">scale</span>(1.4) <span class="co" style="color: #5E5E5E;
-background-color: null;
-font-style: inherit;">///</span></span>
-<span id="cb55-7">    <span class="kw" style="color: #003B4F;
-background-color: null;
-font-weight: bold;
-font-style: inherit;">note</span>(<span class="st" style="color: #20794D;
-background-color: null;
-font-style: inherit;">"Note: The shaded area represents the 25th to 75th percentile range"</span>)</span></code></pre></div>
-</details>
-<div class="cell-output cell-output-display">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="https://friosavila.github.io/chatgpt/stata_08_06_2024/index_files/figure-html/cell-29-output-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<div id="tabset-6-2" class="tab-pane" aria-labelledby="tabset-6-2-tab">
-<div id="b8d8bb0d" class="cell" data-execution_count="30">
+<div id="79971c27" class="cell" data-execution_count="28">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb56" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb56-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">two</span> (rbar p25_bweight p75_bweight mage <span class="kw" style="color: #003B4F;
+font-style: inherit;">two</span> (rarea p25_bweight p75_bweight mage <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">if</span> mbsmoke==0, <span class="kw" style="color: #003B4F;
@@ -2208,20 +2135,20 @@ font-style: inherit;">"Note: The shaded area represents the 25th to 75th percent
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://friosavila.github.io/chatgpt/stata_08_06_2024/index_files/figure-html/cell-30-output-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://friosavila.github.io/chatgpt/stata_08_06_2024/index_files/figure-html/cell-29-output-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div id="tabset-6-3" class="tab-pane" aria-labelledby="tabset-6-3-tab">
-<div id="30f2916c" class="cell" data-execution_count="31">
+<div id="tabset-6-2" class="tab-pane" aria-labelledby="tabset-6-2-tab">
+<div id="b5aa2b2e" class="cell" data-execution_count="29">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb57" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb57-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">two</span> (rspike p25_bweight p75_bweight mage <span class="kw" style="color: #003B4F;
+font-style: inherit;">two</span> (rbar p25_bweight p75_bweight mage <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">if</span> mbsmoke==0, <span class="kw" style="color: #003B4F;
@@ -2286,20 +2213,20 @@ font-style: inherit;">"Note: The shaded area represents the 25th to 75th percent
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://friosavila.github.io/chatgpt/stata_08_06_2024/index_files/figure-html/cell-31-output-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://friosavila.github.io/chatgpt/stata_08_06_2024/index_files/figure-html/cell-30-output-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div id="tabset-6-4" class="tab-pane" aria-labelledby="tabset-6-4-tab">
-<div id="a3c8d801" class="cell" data-execution_count="32">
+<div id="tabset-6-3" class="tab-pane" aria-labelledby="tabset-6-3-tab">
+<div id="da3fedf8" class="cell" data-execution_count="30">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb58" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb58-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">two</span> (rcap p25_bweight p75_bweight mage <span class="kw" style="color: #003B4F;
+font-style: inherit;">two</span> (rspike p25_bweight p75_bweight mage <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">if</span> mbsmoke==0, <span class="kw" style="color: #003B4F;
@@ -2364,20 +2291,20 @@ font-style: inherit;">"Note: The shaded area represents the 25th to 75th percent
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://friosavila.github.io/chatgpt/stata_08_06_2024/index_files/figure-html/cell-32-output-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://friosavila.github.io/chatgpt/stata_08_06_2024/index_files/figure-html/cell-31-output-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
-<div id="tabset-6-5" class="tab-pane" aria-labelledby="tabset-6-5-tab">
-<div id="c74a66b8" class="cell" data-execution_count="33">
+<div id="tabset-6-4" class="tab-pane" aria-labelledby="tabset-6-4-tab">
+<div id="4e5da791" class="cell" data-execution_count="31">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb59" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb59-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">two</span> (rcapsym p25_bweight p75_bweight mage <span class="kw" style="color: #003B4F;
+font-style: inherit;">two</span> (rcap p25_bweight p75_bweight mage <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">if</span> mbsmoke==0, <span class="kw" style="color: #003B4F;
@@ -2442,27 +2369,23 @@ font-style: inherit;">"Note: The shaded area represents the 25th to 75th percent
 <div class="cell-output cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://friosavila.github.io/chatgpt/stata_08_06_2024/index_files/figure-html/cell-33-output-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+<p><img src="https://friosavila.github.io/chatgpt/stata_08_06_2024/index_files/figure-html/cell-32-output-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
 </figure>
 </div>
 </div>
 </div>
 </div>
-</div>
-</div>
-<p>:::</p>
-<p>The rest (rscatter, rline and rconnected) are not very useful, as they are just a scatter plot, line plots, or both.</p>
-<p>And of course, you can combine them!</p>
-<div id="e650436b" class="cell" data-execution_count="34">
+<div id="tabset-6-5" class="tab-pane" aria-labelledby="tabset-6-5-tab">
+<div id="f37be9a6" class="cell" data-execution_count="32">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb60" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb60-1"><span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">two</span> (rarea p25_bweight p75_bweight mage <span class="kw" style="color: #003B4F;
+font-style: inherit;">two</span> (rcapsym p25_bweight p75_bweight mage <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
-font-style: inherit;">if</span> mbsmoke==0, pstyle(p1) <span class="kw" style="color: #003B4F;
+font-style: inherit;">if</span> mbsmoke==0, <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">color</span>(%50)) <span class="co" style="color: #5E5E5E;
@@ -2479,10 +2402,91 @@ background-color: null;
 font-weight: bold;
 font-style: inherit;">connect</span>(<span class="ot" style="color: #003B4F;
 background-color: null;
+font-style: inherit;">l</span>)) , <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">///</span></span>
+<span id="cb60-3">    <span class="bn" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">title</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Range of Birth Weight by Mother's Age"</span>) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">///</span></span>
+<span id="cb60-4">    <span class="bn" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">xtitle</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Mother's Age"</span>) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">///</span></span>
+<span id="cb60-5">    <span class="bn" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">ytitle</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Birth Weight (lbs)"</span>) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">///</span></span>
+<span id="cb60-6">    <span class="bn" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">legend</span>(<span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">off</span>) <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">scale</span>(1.4) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">///</span></span>
+<span id="cb60-7">    <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">note</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"Note: The shaded area represents the 25th to 75th percentile range"</span>)</span></code></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://friosavila.github.io/chatgpt/stata_08_06_2024/index_files/figure-html/cell-33-output-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<p>The rest (rscatter, rline and rconnected) are not very useful, as they are just a scatter plot, line plots, or both.</p>
+<p>And of course, you can combine them!</p>
+<div id="313be8f5" class="cell" data-execution_count="33">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb61" style="background: #f1f3f5;"><pre class="sourceCode stata code-with-copy"><code class="sourceCode stata"><span id="cb61-1"><span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">two</span> (rarea p25_bweight p75_bweight mage <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> mbsmoke==0, pstyle(p1) <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">color</span>(%50)) <span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">///</span></span>
+<span id="cb61-2">    (<span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">scatter</span> mean_bweight mage <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> mbsmoke==0, pstyle(p1) <span class="kw" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">connect</span>(<span class="ot" style="color: #003B4F;
+background-color: null;
 font-style: inherit;">l</span>)) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb60-3">    (rarea p25_bweight p75_bweight mage <span class="kw" style="color: #003B4F;
+<span id="cb61-3">    (rarea p25_bweight p75_bweight mage <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">if</span> mbsmoke==1, pstyle(p2) <span class="kw" style="color: #003B4F;
@@ -2491,7 +2495,7 @@ font-weight: bold;
 font-style: inherit;">color</span>(%50)) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb60-4">    (<span class="kw" style="color: #003B4F;
+<span id="cb61-4">    (<span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">scatter</span> mean_bweight mage <span class="kw" style="color: #003B4F;
@@ -2505,28 +2509,28 @@ background-color: null;
 font-style: inherit;">l</span>)) , <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb60-5">    <span class="bn" style="color: #AD0000;
+<span id="cb61-5">    <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">title</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Range of Birth Weight by Mother's Age"</span>) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb60-6">    <span class="bn" style="color: #AD0000;
+<span id="cb61-6">    <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">xtitle</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Mother's Age"</span>) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb60-7">    <span class="bn" style="color: #AD0000;
+<span id="cb61-7">    <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">ytitle</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"Birth Weight (lbs)"</span>) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb60-8">    <span class="bn" style="color: #AD0000;
+<span id="cb61-8">    <span class="bn" style="color: #AD0000;
 background-color: null;
 font-style: inherit;">legend</span>(<span class="kw" style="color: #003B4F;
 background-color: null;
@@ -2538,13 +2542,13 @@ background-color: null;
 font-style: inherit;">"Smokers"</span>)) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb60-9">    <span class="kw" style="color: #003B4F;
+<span id="cb61-9">    <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">scale</span>(1.4) <span class="co" style="color: #5E5E5E;
 background-color: null;
 font-style: inherit;">///</span></span>
-<span id="cb60-10">    <span class="kw" style="color: #003B4F;
+<span id="cb61-10">    <span class="kw" style="color: #003B4F;
 background-color: null;
 font-weight: bold;
 font-style: inherit;">note</span>(<span class="st" style="color: #20794D;

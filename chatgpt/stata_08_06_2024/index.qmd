@@ -312,7 +312,7 @@ Lets use the `dui` dataset and produce a combination of scatter plot with a line
 
 Lets see how they look like:
 
-:::{.panel-tabset}
+::: {.panel-tabset}
 
 ## Linear Fit
 ```{stata}
@@ -395,7 +395,7 @@ histogram fines, ///
 
 By default, histogram will calculate the number of bins for you. However, you can specify the number of bins using the `bin()` option. Alternatively, you can use `width()` instead, making it either more or less granular.
 
-:::{.panel-tabset}
+::: {.panel-tabset}
 
 ## Wider Width()
 
@@ -433,7 +433,7 @@ You may want to use transparency to make the plot more readable. and even use ot
 
 For the last example, I will also use a `global` to pass options that are common to all subplots.
 
-:::{.panel-tabset}
+::: {.panel-tabset}
 
 ## Simple Overlap
 ```{stata}
@@ -525,7 +525,7 @@ Noticed how smooth the plot is. The `bwidth` was set to 2.31, which is construct
 
 As mentioned before, the bandwidth is a very important parameter. You can set it manually, with the understanding that a smaller bandwidth will make the plot more rugged, and a larger bandwidth will make it smoother. At the limit (infinite bandwidth), the plot will be a horizontal line, and on the other end, it would look like a histogram (each value its own curve)
 
-:::{.panel-tabset}
+::: {.panel-tabset}
 
 ## Smaller Bandwidth 
 
@@ -580,7 +580,7 @@ This is not the most effective way of changing the plot type, but does the work 
 
 What about overlaying? We can do that as well, as we did with histograms. Ohh, and in contrast with histograms, you do not need to specify colors, as you did with histograms.
 
-:::{.panel-tabset}
+::: {.panel-tabset}
 
 ## Simple Overlap
 ```{stata}
@@ -676,8 +676,7 @@ collapse (mean) mean_bweight=bweight ///
 
 Now that we have the data, lets create the plot(s). Each one will show the range of weights at birth for different groups of mothers. To add additional information, I will also add the mean "weight at birth" as a scatter plot.
 
-:::{.panel-tabset}
-
+::: {.panel-tabset}
 
 ## Area
 
@@ -758,8 +757,6 @@ two (rcapsym p25_bweight p75_bweight mage if mbsmoke==0, color(%50)) ///
     legend(off) scale(1.4) ///
     note("Note: The shaded area represents the 25th to 75th percentile range")
 ```
-:::
-
 
 :::
 
